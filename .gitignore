@@ -1,0 +1,28 @@
+# API 키 · 시크릿 (절대 커밋 금지)
+.env
+.env.local
+.env.*.local
+
+# 생성된 데이터 파일
+# dashboard_data.js는 GitHub Actions가 자동 커밋하므로 추적함
+_sheet_overview.txt
+*.log
+scan_log.txt
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.venv/
+venv/
+.pytest_cache/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+.DS_Store
+
+# 캐시
+.cache/
+cache/

@@ -1,0 +1,857 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="0">
+<title>AI 3-Month Stock Finder v5 · 11-Agent Consensus Dashboard</title>
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Malgun Gothic', sans-serif;
+    background: #0a0e1a;
+    color: #e4e8f0;
+    min-height: 100vh;
+    padding: 20px;
+  }
+  .container { max-width: 1600px; margin: 0 auto; }
+
+  /* Header */
+  .header {
+    background: linear-gradient(135deg, #1a1f35 0%, #12172a 100%);
+    border: 1px solid #2a3450;
+    border-radius: 12px;
+    padding: 24px 32px;
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+  .header h1 {
+    font-size: 24px;
+    font-weight: 700;
+    background: linear-gradient(90deg, #4ade80, #22d3ee);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .header .subtitle {
+    font-size: 12px;
+    color: #7a8199;
+    margin-top: 4px;
+  }
+  .status-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 12px;
+    background: rgba(74, 222, 128, 0.1);
+    border: 1px solid #4ade80;
+    border-radius: 20px;
+    font-size: 12px;
+    color: #4ade80;
+  }
+  .status-dot { width: 8px; height: 8px; border-radius: 50%; background:#4ade80; animation: pulse 2s infinite; }
+  @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.4} }
+
+  /* KPI Grid */
+  .kpi-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 16px;
+    margin-bottom: 20px;
+  }
+  .kpi-card {
+    background: #131829;
+    border: 1px solid #2a3450;
+    border-radius: 10px;
+    padding: 18px 20px;
+    position: relative;
+    overflow: hidden;
+  }
+  .kpi-card::before {
+    content:'';
+    position:absolute; top:0; left:0; right:0; height:3px;
+    background: var(--accent, #22d3ee);
+  }
+  .kpi-label { font-size: 11px; color: #7a8199; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; }
+  .kpi-value { font-size: 26px; font-weight: 700; color: #fff; }
+  .kpi-sub { font-size: 12px; color: #4ade80; margin-top: 4px; }
+  .kpi-sub.neg { color: #f87171; }
+
+  /* Macro Bar */
+  .macro-bar {
+    background: #131829;
+    border: 1px solid #2a3450;
+    border-radius: 10px;
+    padding: 14px 20px;
+    margin-bottom: 20px;
+    display: flex;
+    gap: 24px;
+    flex-wrap: wrap;
+    align-items: center;
+    font-size: 13px;
+  }
+  .macro-item { display: flex; align-items: center; gap: 8px; }
+  .macro-item .label { color: #7a8199; }
+  .macro-item .val { color: #fff; font-weight: 600; }
+  .regime-pill {
+    padding: 4px 10px; border-radius: 12px; font-size: 11px; font-weight: 600;
+  }
+  .regime-RISK_ON { background: rgba(74,222,128,.15); color:#4ade80; border:1px solid #4ade80; }
+  .regime-NEUTRAL { background: rgba(250,204,21,.15); color:#facc15; border:1px solid #facc15; }
+  .regime-RISK_OFF { background: rgba(248,113,113,.15); color:#f87171; border:1px solid #f87171; }
+
+  /* Filters */
+  .filter-bar {
+    background: #131829;
+    border: 1px solid #2a3450;
+    border-radius: 10px;
+    padding: 16px 20px;
+    margin-bottom: 20px;
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+  .filter-group { display:flex; align-items:center; gap:8px; }
+  .filter-group label { font-size:12px; color:#7a8199; }
+  select, input[type="number"], input[type="text"] {
+    background:#0a0e1a; border:1px solid #2a3450; color:#e4e8f0;
+    padding:6px 10px; border-radius:6px; font-size:13px; font-family:inherit;
+  }
+  select:focus, input:focus { outline:none; border-color:#22d3ee; }
+  .btn {
+    background: linear-gradient(135deg, #22d3ee, #4ade80);
+    color: #0a0e1a; border: none; padding: 8px 16px;
+    border-radius: 6px; font-weight: 600; cursor: pointer;
+    font-size: 13px;
+  }
+  .btn:hover { opacity: 0.85; }
+  .btn-ghost { background:transparent; border:1px solid #2a3450; color:#e4e8f0; }
+
+  /* Table */
+  .table-wrap {
+    background: #131829;
+    border: 1px solid #2a3450;
+    border-radius: 10px;
+    overflow: hidden;
+    margin-bottom: 20px;
+  }
+  .table-header {
+    padding: 16px 20px;
+    border-bottom: 1px solid #2a3450;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .table-header h2 { font-size: 16px; }
+  .count-badge { background:#2a3450; padding:4px 10px; border-radius:12px; font-size:11px; color:#22d3ee; }
+
+  table { width: 100%; border-collapse: collapse; }
+  .table-scroll {
+    max-height: 65vh;
+    overflow-y: auto;
+    overflow-x: auto;
+  }
+  .table-scroll::-webkit-scrollbar { width: 10px; height: 10px; }
+  .table-scroll::-webkit-scrollbar-track { background: #0a0e1a; }
+  .table-scroll::-webkit-scrollbar-thumb { background: #2a3450; border-radius: 5px; }
+  .table-scroll::-webkit-scrollbar-thumb:hover { background: #3a4460; }
+
+  th {
+    text-align:left; padding:12px 16px; font-size:11px; color:#7a8199;
+    text-transform:uppercase; letter-spacing:0.5px; border-bottom:1px solid #2a3450;
+    cursor:pointer; user-select:none;
+    position: sticky; top: 0; z-index: 10;
+    background: #131829;
+    box-shadow: 0 1px 0 #2a3450;
+  }
+  th:hover { color:#22d3ee; }
+  th.sort-active { color:#22d3ee; }
+  td {
+    padding: 14px 16px; font-size: 13px; border-bottom: 1px solid #1a2036;
+  }
+  tr { transition: background 0.15s; cursor:pointer; }
+  tr:hover td { background:#1a2036; }
+  tr.hitl td { background: rgba(250,204,21,.05); }
+
+  .ticker { font-weight:700; color:#fff; font-size:14px; }
+  .ticker-sub { font-size:11px; color:#7a8199; margin-top:2px; }
+  .sector-tag { padding:2px 8px; border-radius:10px; font-size:10px; background:#2a3450; color:#a3aac0; }
+
+  /* Score bar */
+  .score-cell { display:flex; align-items:center; gap:10px; }
+  .score-num { font-weight:700; font-size:14px; min-width:34px; text-align:right; }
+  .score-num.hi { color:#4ade80; }
+  .score-num.mid { color:#facc15; }
+  .score-num.lo { color:#f87171; }
+  .mini-bar { flex:1; height:6px; background:#0a0e1a; border-radius:3px; overflow:hidden; max-width:80px; }
+  .mini-bar-fill { height:100%; border-radius:3px; }
+  .mini-bar-fill.hi { background: linear-gradient(90deg,#22d3ee,#4ade80); }
+  .mini-bar-fill.mid { background: linear-gradient(90deg,#facc15,#fb923c); }
+  .mini-bar-fill.lo { background: linear-gradient(90deg,#f87171,#dc2626); }
+
+  /* Signal pill */
+  .signal-pill {
+    padding: 4px 10px; border-radius: 12px; font-size: 11px; font-weight: 700;
+    display: inline-block; letter-spacing:0.5px;
+  }
+  .signal-STRONG_BUY { background:rgba(74,222,128,.2); color:#4ade80; border:1px solid #4ade80; }
+  .signal-BUY { background:rgba(34,211,238,.15); color:#22d3ee; border:1px solid #22d3ee; }
+  .signal-WATCH { background:rgba(250,204,21,.15); color:#facc15; border:1px solid #facc15; }
+  .signal-HOLD { background:rgba(163,170,192,.1); color:#a3aac0; border:1px solid #4a5570; }
+  .signal-AVOID { background:rgba(248,113,113,.15); color:#f87171; border:1px solid #f87171; }
+
+  .hitl-badge {
+    display:inline-block; margin-left:6px; padding:2px 6px; border-radius:8px;
+    font-size:9px; font-weight:700; background:#facc15; color:#0a0e1a;
+  }
+
+  /* Consensus dots */
+  .consensus { display:flex; gap:3px; }
+  .cdot { width:10px; height:10px; border-radius:50%; background:#2a3450; }
+  .cdot.on { background:#4ade80; box-shadow:0 0 6px rgba(74,222,128,.6); }
+
+  /* Modal */
+  .modal-overlay {
+    position:fixed; top:0; left:0; right:0; bottom:0;
+    background: rgba(0,0,0,0.7); backdrop-filter:blur(4px);
+    z-index:1000; display:none; align-items:center; justify-content:center;
+    padding:20px;
+  }
+  .modal-overlay.show { display:flex; }
+  .modal {
+    background:#131829; border:1px solid #2a3450; border-radius:14px;
+    max-width:900px; width:100%; max-height:90vh; overflow-y:auto;
+  }
+  .modal-head {
+    padding:20px 24px; border-bottom:1px solid #2a3450;
+    display:flex; justify-content:space-between; align-items:center;
+    position:sticky; top:0; background:#131829; z-index:1;
+  }
+  .modal-head h2 { font-size:20px; }
+  .modal-close { background:none; border:none; color:#7a8199; font-size:24px; cursor:pointer; }
+  .modal-body { padding:24px; }
+  .detail-grid { display:grid; grid-template-columns:repeat(auto-fit, minmax(200px,1fr)); gap:16px; margin-bottom:24px; }
+  .detail-card { background:#0a0e1a; border:1px solid #2a3450; border-radius:8px; padding:14px 16px; }
+  .detail-card .lbl { font-size:11px; color:#7a8199; text-transform:uppercase; margin-bottom:6px; }
+  .detail-card .val { font-size:16px; font-weight:600; color:#fff; }
+
+  .agent-section { margin-bottom:20px; }
+  .agent-section h3 {
+    font-size:13px; color:#22d3ee; margin-bottom:10px;
+    padding-bottom:6px; border-bottom:1px solid #2a3450;
+    display:flex; justify-content:space-between; align-items:center;
+  }
+  .agent-list { list-style:none; }
+  .agent-list li {
+    padding:8px 12px; background:#0a0e1a; border-radius:6px; margin-bottom:6px;
+    font-size:13px; display:flex; align-items:flex-start; gap:10px;
+  }
+  .bullet { color:#4ade80; font-weight:700; }
+  .bullet.neg { color:#f87171; }
+  .bullet.neu { color:#facc15; }
+
+  .footer {
+    text-align:center; color:#4a5570; font-size:11px; margin-top:20px; padding:16px;
+  }
+  .disclaimer {
+    background:rgba(248,113,113,.05); border:1px solid rgba(248,113,113,.2);
+    border-radius:8px; padding:12px 16px; margin-top:20px; font-size:12px; color:#a3aac0;
+  }
+
+  @media (max-width: 768px) {
+    .header { flex-direction:column; align-items:flex-start; }
+    th:nth-child(n+5), td:nth-child(n+5) { display:none; }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <!-- Header -->
+  <div class="header">
+    <div>
+      <h1>AI 3-Month Stock Finder v5</h1>
+      <div class="subtitle">11-Agent Consensus · Market · Macro · SEC Filings · Valuation</div>
+    </div>
+    <div>
+      <span class="status-badge">
+        <span class="status-dot"></span>
+        <span id="cycleTime">사이클 활성</span>
+      </span>
+    </div>
+  </div>
+
+  <!-- Macro Regime Bar -->
+  <div class="macro-bar">
+    <div class="macro-item">
+      <span class="label">시장 국면:</span>
+      <span id="regimePill" class="regime-pill regime-RISK_ON">RISK_ON</span>
+    </div>
+    <div class="macro-item"><span class="label">VIX:</span> <span class="val" id="vixVal">14.8</span></div>
+    <div class="macro-item"><span class="label">US 10Y:</span> <span class="val" id="us10yVal">4.18%</span></div>
+    <div class="macro-item"><span class="label">DXY:</span> <span class="val" id="dxyVal">103.5</span></div>
+    <div class="macro-item"><span class="label">다음 이벤트:</span> <span class="val" id="nextEvent">FOMC 2026-09-17 (D-48)</span></div>
+    <div class="macro-item"><span class="label">이벤트 창:</span> <span class="val" style="color:#4ade80">진입 허용</span></div>
+  </div>
+
+  <!-- KPI Cards -->
+  <div class="kpi-grid">
+    <div class="kpi-card" style="--accent:#4ade80">
+      <div class="kpi-label">스캔 종목</div>
+      <div class="kpi-value" id="kpiTotal">0</div>
+      <div class="kpi-sub">S&P 500 + KOSPI 200 대상</div>
+    </div>
+    <div class="kpi-card" style="--accent:#22d3ee">
+      <div class="kpi-label">STRONG BUY 시그널</div>
+      <div class="kpi-value" id="kpiStrong">0</div>
+      <div class="kpi-sub">4/4 컨센서스 통과</div>
+    </div>
+    <div class="kpi-card" style="--accent:#facc15">
+      <div class="kpi-label">HITL 승인 대기</div>
+      <div class="kpi-value" id="kpiHitl">0</div>
+      <div class="kpi-sub">신규 종목 · 대형 포지션</div>
+    </div>
+    <div class="kpi-card" style="--accent:#f87171">
+      <div class="kpi-label">Auditor BLOCK</div>
+      <div class="kpi-value" id="kpiBlock">0</div>
+      <div class="kpi-sub">과최적화 · 미래데이터 감지</div>
+    </div>
+    <div class="kpi-card" style="--accent:#a855f7">
+      <div class="kpi-label">평균 EV (R)</div>
+      <div class="kpi-value" id="kpiEV">0.00</div>
+      <div class="kpi-sub">기대수익 (R = 리스크 단위)</div>
+    </div>
+  </div>
+
+  <!-- Filter Bar -->
+  <div class="filter-bar">
+    <div class="filter-group">
+      <label>최소 종합점수:</label>
+      <input type="number" id="minScore" value="60" min="0" max="100" style="width:70px">
+    </div>
+    <div class="filter-group">
+      <label>시장:</label>
+      <select id="marketFilter">
+        <option value="ALL">전체</option>
+        <option value="US">미국</option>
+        <option value="KR">한국</option>
+      </select>
+    </div>
+    <div class="filter-group">
+      <label>섹터:</label>
+      <select id="sectorFilter">
+        <option value="ALL">전체</option>
+      </select>
+    </div>
+    <div class="filter-group">
+      <label>시그널:</label>
+      <select id="signalFilter">
+        <option value="ALL">전체</option>
+        <option value="STRONG_BUY">STRONG BUY</option>
+        <option value="BUY">BUY</option>
+        <option value="WATCH">WATCH</option>
+      </select>
+    </div>
+    <div class="filter-group">
+      <label>검색:</label>
+      <input type="text" id="searchInput" placeholder="티커 or 종목명" style="width:150px">
+    </div>
+    <button class="btn" onclick="applyFilters()">필터 적용</button>
+    <button class="btn btn-ghost" onclick="resetFilters()">초기화</button>
+  </div>
+
+  <!-- Main Table -->
+  <div class="table-wrap">
+    <div class="table-header">
+      <h2>파인더 결과 (3개월 상승 후보)</h2>
+      <span class="count-badge" id="resultCount">0 종목</span>
+    </div>
+    <div class="table-scroll">
+      <table>
+        <thead>
+          <tr>
+            <th data-sort="rank">#</th>
+            <th data-sort="ticker">종목</th>
+            <th data-sort="signal">시그널</th>
+            <th data-sort="total" class="sort-active">종합점수 ↓</th>
+            <th data-sort="tech">기술적</th>
+            <th data-sort="macro">거시</th>
+            <th data-sort="filing">공시</th>
+            <th data-sort="value">밸류에이션</th>
+            <th data-sort="consensus">컨센서스</th>
+            <th data-sort="ev">EV (R)</th>
+            <th data-sort="target">목표가 상승률</th>
+          </tr>
+        </thead>
+        <tbody id="tbody"></tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Disclaimer -->
+  <div class="disclaimer">
+    ⚠️ <strong>Disclaimer:</strong> 본 대시보드는 xlsx v5 문서의 11-에이전트 스코어링 로직을 데모 데이터로 시연한 것입니다.
+    실제 매매 전에는 반드시 Risk Manager, AI Auditor 검증과 HITL 승인 절차를 거쳐야 하며, 이 도구만으로 투자 결정을 내려서는 안됩니다.
+    데이터를 실시간으로 갱신하려면 yfinance + FMP + DART API 연동이 필요합니다.
+  </div>
+
+  <div class="footer">
+    v5.0 · 11-Agent LangGraph Consensus · Score = 0.35×Tech + 0.20×Macro + 0.30×Filing + 0.15×Value
+  </div>
+</div>
+
+<!-- Live data (optional - generated by stock_finder.py) -->
+<script src="dashboard_data.js" onerror="console.log('[정보] dashboard_data.js 없음 - 데모 데이터 사용. python stock_finder.py 로 실제 데이터 생성 가능')"></script>
+
+<!-- Detail Modal -->
+<div class="modal-overlay" id="modal" onclick="if(event.target===this) closeModal()">
+  <div class="modal">
+    <div class="modal-head">
+      <div>
+        <h2 id="modalTitle">종목 상세</h2>
+        <div class="subtitle" id="modalSub" style="color:#7a8199; font-size:12px; margin-top:4px;"></div>
+      </div>
+      <button class="modal-close" onclick="closeModal()">✕</button>
+    </div>
+    <div class="modal-body" id="modalBody"></div>
+  </div>
+</div>
+
+<script>
+// ─── DEMO DATA (dashboard_data.js가 있으면 LIVE_STOCKS로 자동 교체) ────
+// 4축 스코어: xlsx v5 로직 반영
+//  - tech: MACD/RSI/이동평균/Bollinger/거래량 (0-100)
+//  - macro: RISK_ON 정합성, VIX 안전지대, 섹터 로테이션 (0-100)
+//  - filing: 13F 컨센서스, Form 4, 자사주, 실적 서프라이즈 (0-100)
+//  - value: PER/PBR/PEG/FCF Yield (0-100)
+const DEMO_STOCKS = [
+  // 미국 대형주
+  {t:"NVDA", n:"NVIDIA", m:"US", sec:"AI/반도체", tech:92, macro:88, filing:95, value:52, ev:1.85, target:22, hitl:false,
+    reasons:{tech:["MACD 강한 골든크로스 · 히스토그램 3봉 연속 확장","일봉 이치모쿠 구름 상단 돌파","RSI 68 · 강세 다이버전스 유지"],
+             macro:["RISK_ON 국면 · AI 섹터 로테이션 진입","VIX 14.8 안전지대","DXY 하락 → 성장주 유리"],
+             filing:["13F: 상위 20 헤지펀드 중 14곳 신규/증량 (STRONG_CONSENSUS)","Form 4: CFO+VP 3인 최근 30일 매수 클러스터","자사주 $50B 확장 발표 (8-K)"],
+             value:["PER 55 · 섹터평균 대비 프리미엄","PEG 1.8 · 성장률 대비 합리적","EV/EBITDA 42 · 부담"]}},
+  {t:"MSFT", n:"Microsoft", m:"US", sec:"Software", tech:85, macro:90, filing:82, value:68, ev:1.42, target:15, hitl:false,
+    reasons:{tech:["50일 SMA 정배열 유지","VWAP 상단 지속 · 매집 신호","Bollinger 상단 밴드워크"],
+             macro:["Azure AI 매출 가속 · RISK_ON 수혜","금리 안정 → 밸류 재평가"],
+             filing:["13F: Berkshire 신규 진입 · Bridgewater 증량 35%","Form 4 계획매도 (10b5-1) 무관"],
+             value:["PER 32 · 성장률 정당화","FCF Yield 3.2% · 우수"]}},
+  {t:"AMD", n:"AMD", m:"US", sec:"AI/반도체", tech:88, macro:85, filing:78, value:60, ev:1.62, target:19, hitl:false,
+    reasons:{tech:["MI300X 랠리 재개 · 볼륨 급증","MACD 히스토그램 양전환 확대"],
+             macro:["AI 인프라 사이클 초기","반도체 지수 상승 추세"],
+             filing:["8-K: Meta 대규모 발주 계약","13F 컨센서스 BULLISH 0.58"],
+             value:["PER 62 · 부담","Forward PER 24 · 개선 여지"]}},
+  {t:"META", n:"Meta Platforms", m:"US", sec:"인터넷", tech:80, macro:82, filing:88, value:72, ev:1.35, target:14, hitl:false,
+    reasons:{tech:["일목 후행스팬 상단 돌파","EMA 21 강한 지지"],
+             macro:["광고 사이클 회복 · RISK_ON"],
+             filing:["Form 4: Zuckerberg 계획매도 아님 (조심)","자사주 $50B 진행 중"],
+             value:["PER 26 · 매력적","FCF 마진 40%+"]}},
+  {t:"GOOGL", n:"Alphabet", m:"US", sec:"인터넷", tech:75, macro:85, filing:80, value:78, ev:1.28, target:13, hitl:false,
+    reasons:{tech:["박스권 상단 이탈 임박","MACD 0선 상단 안착"],
+             macro:["Gemini AI 서비스 확장","광고 회복"],
+             filing:["13F 헤지펀드 상위 12곳 유지","AI 판례 승소 8-K"],
+             value:["PER 24 · 저평가","현금 $110B"]}},
+  {t:"AMZN", n:"Amazon", m:"US", sec:"E-commerce/Cloud", tech:72, macro:80, filing:85, value:65, ev:1.22, target:12, hitl:false,
+    reasons:{tech:["3개월 신고가 갱신","OBV 상승 · 매집 확인"],
+             macro:["AWS 성장률 반등 · 소비 회복"],
+             filing:["13F: 상위 15 신규+증량","Form 4 CFO 대량 매수"],
+             value:["PSR 3.2 · 합리적"]}},
+  {t:"TSLA", n:"Tesla", m:"US", sec:"EV/자동차", tech:65, macro:70, filing:55, value:38, ev:0.85, target:8, hitl:true,
+    reasons:{tech:["ADX 22 · 추세 미약","RSI 55 · 중립"],
+             macro:["EV 수요 둔화 우려"],
+             filing:["Form 4: Musk 조기옵션 행사 (모호)","13F: 헤지펀드 이탈 증가"],
+             value:["PER 78 · 극심 프리미엄"]}},
+  {t:"AVGO", n:"Broadcom", m:"US", sec:"반도체", tech:82, macro:85, filing:76, value:58, ev:1.55, target:17, hitl:false,
+    reasons:{tech:["일봉 정배열 · 강한상승","MACD 히스토 확장"],
+             macro:["AI ASIC 수요 폭발"],
+             filing:["13F: 대형펀드 편입 확대"],
+             value:["PER 48 · 부담"]}},
+  {t:"LLY", n:"Eli Lilly", m:"US", sec:"제약/바이오", tech:70, macro:75, filing:82, value:45, ev:1.15, target:11, hitl:false,
+    reasons:{tech:["50일선 위 지지 확인","박스권 형성"],
+             macro:["헬스케어 방어주 로테이션"],
+             filing:["8-K: GLP-1 신약 승인","임원 매수 클러스터"],
+             value:["PER 68 · 매우 부담"]}},
+  {t:"COST", n:"Costco", m:"US", sec:"소매", tech:68, macro:72, filing:70, value:48, ev:0.95, target:9, hitl:false,
+    reasons:{tech:["느린 상승 트렌드 유지","저변동성"],
+             macro:["소비 방어 · NEUTRAL 수혜"],
+             filing:["13F: 안정적 유지"],
+             value:["PER 52 · 프리미엄"]}},
+  {t:"CRWD", n:"CrowdStrike", m:"US", sec:"사이버보안", tech:78, macro:78, filing:80, value:42, ev:1.32, target:16, hitl:false,
+    reasons:{tech:["MACD 회복 · 골든크로스 임박","이치모쿠 구름 재돌파"],
+             macro:["사이버 보안 예산 확대"],
+             filing:["Form 4: CEO 매수 · 8-K 대형계약 5건"],
+             value:["PSR 22 · 극심 프리미엄"]}},
+  {t:"UBER", n:"Uber", m:"US", sec:"플랫폼", tech:75, macro:78, filing:78, value:70, ev:1.25, target:14, hitl:false,
+    reasons:{tech:["박스권 상단 돌파","볼륨 급증 · OBV 신고가"],
+             macro:["소비/모빌리티 회복"],
+             filing:["Bridgewater 신규 · 자사주 $7B"],
+             value:["PER 32 · 개선 중"]}},
+  {t:"PANW", n:"Palo Alto Networks", m:"US", sec:"사이버보안", tech:80, macro:80, filing:76, value:52, ev:1.42, target:15, hitl:false,
+    reasons:{tech:["MACD 강한 양전환","EMA 9/21 정배열"],
+             macro:["사이버 방어 수요"],
+             filing:["13F 상위 컨센서스 강세"],
+             value:["PER 45 · 성장률 감안 OK"]}},
+  {t:"NOW", n:"ServiceNow", m:"US", sec:"Software", tech:76, macro:82, filing:74, value:55, ev:1.28, target:13, hitl:false,
+    reasons:{tech:["횡보 이탈 상방","ADX 28 · 추세 진행"],
+             macro:["AI Now Assist 매출 가속"],
+             filing:["Form 4: CFO 매수"],
+             value:["PER 58 · 부담"]}},
+  {t:"AXP", n:"American Express", m:"US", sec:"금융", tech:70, macro:75, filing:72, value:75, ev:1.05, target:10, hitl:false,
+    reasons:{tech:["50일선 반등 확인","RSI 60"],
+             macro:["소비 회복 · 금리 안정"],
+             filing:["Buffet 지속 보유 (13F)"],
+             value:["PER 20 · 매력적"]}},
+  {t:"NFLX", n:"Netflix", m:"US", sec:"미디어", tech:73, macro:70, filing:68, value:50, ev:1.15, target:12, hitl:false,
+    reasons:{tech:["3개월 신고가 근접","MACD 강세 유지"],
+             macro:["콘텐츠 사이클"],
+             filing:["13F 헤지펀드 증량"],
+             value:["PER 42 · 부담"]}},
+  {t:"ORCL", n:"Oracle", m:"US", sec:"Software", tech:82, macro:80, filing:78, value:65, ev:1.38, target:16, hitl:false,
+    reasons:{tech:["신고가 갱신 · 강한 추세","Bollinger 상단 밴드워크"],
+             macro:["OCI 성장 · 클라우드 로테이션"],
+             filing:["13F 신규 진입 다수 · Form 4 매수"],
+             value:["PER 32 · 합리적"]}},
+  {t:"MU", n:"Micron", m:"US", sec:"반도체", tech:85, macro:82, filing:72, value:78, ev:1.55, target:18, hitl:false,
+    reasons:{tech:["MACD 강력 상승 · 히스토 확장","20일 SMA 위 지속"],
+             macro:["HBM 수요 폭발 · AI 수혜"],
+             filing:["8-K: 대규모 CAPEX 계획","13F 신규 진입"],
+             value:["Forward PER 12 · 매우 매력적"]}},
+
+  // 한국 대형주
+  {t:"005930.KS", n:"삼성전자", m:"KR", sec:"반도체", tech:78, macro:80, filing:82, value:75, ev:1.32, target:14, hitl:false,
+    reasons:{tech:["MACD 골든크로스 유지","박스권 상단 이탈"],
+             macro:["메모리 사이클 회복 · HBM3E 양산"],
+             filing:["DART: 자기주식 취득 결정 (오버행 해소)","국민연금 5% 유지"],
+             value:["PBR 1.5 · 저평가","Forward PER 12"]}},
+  {t:"000660.KS", n:"SK하이닉스", m:"KR", sec:"반도체", tech:88, macro:85, filing:78, value:70, ev:1.58, target:18, hitl:false,
+    reasons:{tech:["신고가 갱신 · 강한상승 유지","이치모쿠 구름 위 안착"],
+             macro:["HBM 독점 · NVDA 수혜"],
+             filing:["DART: 임원 매수 클러스터","공정공시 실적 서프라이즈"],
+             value:["PER 8 · 극심 저평가"]}},
+  {t:"035420.KS", n:"NAVER", m:"KR", sec:"인터넷", tech:65, macro:70, filing:68, value:80, ev:0.95, target:9, hitl:false,
+    reasons:{tech:["박스권 하단 지지","MACD 회복 시도"],
+             macro:["광고 회복 · 커머스 성장"],
+             filing:["자기주식 소각 예정"],
+             value:["PER 22 · 매력적"]}},
+  {t:"035720.KS", n:"카카오", m:"KR", sec:"인터넷", tech:55, macro:65, filing:45, value:70, ev:0.55, target:5, hitl:true,
+    reasons:{tech:["RSI 45 · 중립","박스권"],
+             macro:["플랫폼 규제 리스크"],
+             filing:["DART: 대량보유 5% 변동 · 국민연금 감량","임원 매도 클러스터 (경고)"],
+             value:["PER 25 · 개선 여지"]}},
+  {t:"005380.KS", n:"현대차", m:"KR", sec:"자동차", tech:72, macro:75, filing:75, value:85, ev:1.15, target:12, hitl:false,
+    reasons:{tech:["일봉 정배열 · 상승","OBV 상승"],
+             macro:["EV 판매 회복 · 미국 관세 이슈 완화"],
+             filing:["자기주식 취득 결정","실적 서프라이즈 (I001)"],
+             value:["PER 5.5 · 극심 저평가","배당수익률 4.2%"]}},
+  {t:"373220.KS", n:"LG에너지솔루션", m:"KR", sec:"2차전지", tech:60, macro:68, filing:58, value:60, ev:0.75, target:7, hitl:false,
+    reasons:{tech:["횡보 · MACD 0선 근처"],
+             macro:["EV 수요 둔화 우려 완화 시작"],
+             filing:["대량보유 신규 진입 대기"],
+             value:["PER 45 · 성장 지속시 정당화"]}},
+  {t:"207940.KS", n:"삼성바이오로직스", m:"KR", sec:"바이오", tech:75, macro:72, filing:70, value:55, ev:1.12, target:11, hitl:false,
+    reasons:{tech:["박스권 상단 돌파 시도","MACD 강세 유지"],
+             macro:["CDMO 수주 확대"],
+             filing:["실적 서프라이즈 · 매출가이던스 상향"],
+             value:["PER 60 · 부담"]}},
+  {t:"068270.KS", n:"셀트리온", m:"KR", sec:"바이오", tech:68, macro:68, filing:65, value:72, ev:0.92, target:9, hitl:false,
+    reasons:{tech:["박스권 · 하단 지지"],
+             macro:["바이오시밀러 미국 진출 확대"],
+             filing:["자기주식 취득"],
+             value:["PER 32 · 성장률 감안 합리적"]}},
+  {t:"105560.KS", n:"KB금융", m:"KR", sec:"금융", tech:70, macro:75, filing:78, value:88, ev:1.05, target:10, hitl:false,
+    reasons:{tech:["신고가 갱신 · 배당주 재평가","MACD 강세"],
+             macro:["금리 안정 · 배당 성수기"],
+             filing:["자기주식 소각 결정 · 밸류업 참여"],
+             value:["PER 5 · PBR 0.55 · 극심 저평가","배당수익률 5.8%"]}},
+  {t:"055550.KS", n:"신한지주", m:"KR", sec:"금융", tech:68, macro:75, filing:75, value:88, ev:1.02, target:10, hitl:false,
+    reasons:{tech:["일목 균형표 안정 상승"],
+             macro:["금융 밸류업 수혜"],
+             filing:["자기주식 소각 · 밸류업 공시"],
+             value:["PER 5.5 · PBR 0.5"]}},
+  {t:"010130.KS", n:"고려아연", m:"KR", sec:"비철금속", tech:82, macro:70, filing:88, value:65, ev:1.45, target:16, hitl:true,
+    reasons:{tech:["강력한 상승 추세 · 신고가","ADX 40+"],
+             macro:["니켈/구리 수요 회복"],
+             filing:["DART: 경영권 분쟁 · 5% 대량보유 급변","자기주식 취득"],
+             value:["PER 15 · 합리적"]}},
+
+  // Watch/Avoid 예시
+  {t:"F", n:"Ford Motor", m:"US", sec:"자동차", tech:45, macro:55, filing:50, value:75, ev:0.35, target:3, hitl:false,
+    reasons:{tech:["횡보 · 방향성 부재","RSI 48"],
+             macro:["EV 전환 지연"],
+             filing:["13F 이탈 증가"],
+             value:["PER 7 · 저평가"]}},
+  {t:"INTC", n:"Intel", m:"US", sec:"반도체", tech:35, macro:60, filing:38, value:70, ev:-0.25, target:-5, hitl:true,
+    reasons:{tech:["MACD 데드크로스 · 약세","이동평균 역배열"],
+             macro:["반도체 사이클 소외"],
+             filing:["8-K: CFO 사임 (5.02) · 리스크 플래그","Form 4: 대량 매도"],
+             value:["PER N/A · 적자 지속"]}},
+];
+
+// LIVE 데이터가 있으면 사용, 없으면 DEMO
+const STOCKS = (window.LIVE_STOCKS && window.LIVE_STOCKS.length > 0) ? window.LIVE_STOCKS : DEMO_STOCKS;
+const IS_LIVE = !!(window.LIVE_STOCKS && window.LIVE_STOCKS.length > 0);
+
+// LIVE 거시 지표 반영
+if (window.LIVE_MACRO) {
+  const M = window.LIVE_MACRO;
+  document.getElementById('vixVal').textContent = M.vix.toFixed(2);
+  document.getElementById('us10yVal').textContent = M.us10y.toFixed(2) + '%';
+  document.getElementById('dxyVal').textContent = M.dxy.toFixed(2);
+  const regime = (M.vix < 18 && M.us10y < 4.5) ? 'RISK_ON'
+              : (M.vix > 25 || M.us10y > 5.0) ? 'RISK_OFF' : 'NEUTRAL';
+  const pill = document.getElementById('regimePill');
+  pill.textContent = regime;
+  pill.className = 'regime-pill regime-' + regime;
+
+  // FRED 정밀 지표 표시 (활성화 시)
+  if (M.fred && M.fred.available) {
+    const F = M.fred;
+    const macroBar = document.querySelector('.macro-bar');
+    const fredWrap = document.createElement('div');
+    fredWrap.style.cssText = 'display:flex; gap:20px; flex-wrap:wrap; width:100%; padding-top:12px; margin-top:8px; border-top:1px dashed #2a3450; font-size:12px;';
+    const items = [];
+    if (F.yield_curve !== null && F.yield_curve !== undefined) {
+      const yc = F.yield_curve;
+      const color = yc < 0 ? '#f87171' : yc < 0.3 ? '#facc15' : '#4ade80';
+      const label = yc < 0 ? '역전 (침체 선행)' : yc < 0.3 ? '평탄화' : '정상';
+      items.push(`<div><span style="color:#7a8199">Yield Curve (10Y-2Y):</span> <span style="color:${color}; font-weight:600">${yc>=0?'+':''}${yc.toFixed(2)}%p</span> <span style="color:#7a8199">· ${label}</span></div>`);
+    }
+    if (F.core_cpi_yoy !== null && F.core_cpi_yoy !== undefined) {
+      const c = F.core_cpi_yoy;
+      const color = c < 2.5 ? '#4ade80' : c > 4 ? '#f87171' : '#facc15';
+      items.push(`<div><span style="color:#7a8199">Core CPI YoY:</span> <span style="color:${color}; font-weight:600">${c.toFixed(2)}%</span></div>`);
+    }
+    if (F.unemployment !== null && F.unemployment !== undefined) {
+      const u = F.unemployment;
+      const color = u < 4 ? '#4ade80' : u > 5 ? '#f87171' : '#facc15';
+      const chg = F.unemp_3m_change;
+      const chgStr = chg !== null && chg !== undefined ? ` <span style="color:${chg>0.3?'#f87171':'#7a8199'}">(3M ${chg>=0?'+':''}${chg}%p)</span>` : '';
+      items.push(`<div><span style="color:#7a8199">실업률:</span> <span style="color:${color}; font-weight:600">${u.toFixed(2)}%</span>${chgStr}</div>`);
+    }
+    if (F.fed_funds !== null && F.fed_funds !== undefined) {
+      items.push(`<div><span style="color:#7a8199">Fed Funds:</span> <span style="color:#fff; font-weight:600">${F.fed_funds.toFixed(2)}%</span></div>`);
+    }
+    if (items.length) {
+      fredWrap.innerHTML = `<div style="color:#22d3ee; font-weight:600; font-size:11px; letter-spacing:1px;">FRED 정밀 지표</div>` + items.join('');
+      macroBar.appendChild(fredWrap);
+    }
+  }
+}
+
+// 컨센서스 규칙: 4축 중 몇 축이 70+ 인가
+function calcConsensus(s){
+  return [s.tech, s.macro, s.filing, s.value].filter(v=>v>=70).length;
+}
+// 종합 점수: 가중 평균 (Tech 35, Filing 30, Macro 20, Value 15)
+function calcTotal(s){
+  return Math.round(s.tech*0.35 + s.macro*0.20 + s.filing*0.30 + s.value*0.15);
+}
+// 시그널 판정
+function calcSignal(s){
+  const total = calcTotal(s);
+  const cons = calcConsensus(s);
+  if (total >= 80 && cons >= 3) return "STRONG_BUY";
+  if (total >= 70 && cons >= 3) return "BUY";
+  if (total >= 60 && cons >= 2) return "WATCH";
+  if (total >= 45) return "HOLD";
+  return "AVOID";
+}
+
+// Enrich data
+STOCKS.forEach(s => {
+  s.total = calcTotal(s);
+  s.consensus = calcConsensus(s);
+  s.signal = calcSignal(s);
+});
+
+// State
+let currentSort = { key:'total', dir:'desc' };
+let filteredStocks = [...STOCKS];
+
+// Render helpers
+function scoreClass(v) { return v>=70 ? 'hi' : v>=50 ? 'mid' : 'lo'; }
+function scoreBar(v){
+  const cls = scoreClass(v);
+  return `<div class="score-cell">
+    <div class="mini-bar"><div class="mini-bar-fill ${cls}" style="width:${v}%"></div></div>
+    <span class="score-num ${cls}">${v}</span>
+  </div>`;
+}
+function consensusDots(n){
+  let html = '<div class="consensus">';
+  for (let i=0; i<4; i++) html += `<div class="cdot ${i<n?'on':''}"></div>`;
+  return html + '</div>';
+}
+function targetCell(v){
+  const cls = v>=10?'hi':v>=5?'mid':'lo';
+  const sign = v>=0?'+':'';
+  return `<span class="score-num ${cls}" style="min-width:auto">${sign}${v}%</span>`;
+}
+function evCell(v){
+  const cls = v>=1.0?'hi':v>=0.3?'mid':'lo';
+  const sign = v>=0?'+':'';
+  return `<span class="score-num ${cls}" style="min-width:auto">${sign}${v.toFixed(2)}R</span>`;
+}
+
+function render() {
+  const tbody = document.getElementById('tbody');
+  tbody.innerHTML = filteredStocks.map((s, i) => `
+    <tr class="${s.hitl?'hitl':''}" onclick="showDetail('${s.t}')">
+      <td style="color:#7a8199">${i+1}</td>
+      <td>
+        <div class="ticker">${s.t} ${s.hitl?'<span class="hitl-badge">HITL</span>':''}</div>
+        <div class="ticker-sub">${s.n} · <span class="sector-tag">${s.sec}</span></div>
+      </td>
+      <td><span class="signal-pill signal-${s.signal}">${s.signal.replace('_',' ')}</span></td>
+      <td>${scoreBar(s.total)}</td>
+      <td>${scoreBar(s.tech)}</td>
+      <td>${scoreBar(s.macro)}</td>
+      <td>${scoreBar(s.filing)}</td>
+      <td>${scoreBar(s.value)}</td>
+      <td>${consensusDots(s.consensus)}</td>
+      <td>${evCell(s.ev)}</td>
+      <td>${targetCell(s.target)}</td>
+    </tr>
+  `).join('') || '<tr><td colspan="11" style="text-align:center; padding:40px; color:#7a8199">조건에 맞는 종목이 없습니다.</td></tr>';
+
+  document.getElementById('resultCount').textContent = `${filteredStocks.length} 종목`;
+  document.getElementById('kpiTotal').textContent = STOCKS.length;
+  document.getElementById('kpiStrong').textContent = STOCKS.filter(s=>s.signal==='STRONG_BUY').length;
+  document.getElementById('kpiHitl').textContent = STOCKS.filter(s=>s.hitl).length;
+  document.getElementById('kpiBlock').textContent = STOCKS.filter(s=>s.signal==='AVOID').length;
+  const avgEV = STOCKS.reduce((a,s)=>a+s.ev, 0) / STOCKS.length;
+  document.getElementById('kpiEV').textContent = avgEV.toFixed(2);
+}
+
+// Filter/Sort
+function applyFilters() {
+  const minScore = +document.getElementById('minScore').value || 0;
+  const market = document.getElementById('marketFilter').value;
+  const sector = document.getElementById('sectorFilter').value;
+  const signal = document.getElementById('signalFilter').value;
+  const q = document.getElementById('searchInput').value.trim().toLowerCase();
+
+  filteredStocks = STOCKS.filter(s =>
+    s.total >= minScore &&
+    (market==='ALL' || s.m===market) &&
+    (sector==='ALL' || s.sec===sector) &&
+    (signal==='ALL' || s.signal===signal) &&
+    (!q || s.t.toLowerCase().includes(q) || s.n.toLowerCase().includes(q))
+  );
+  sortAndRender();
+}
+function resetFilters() {
+  document.getElementById('minScore').value = 60;
+  document.getElementById('marketFilter').value = 'ALL';
+  document.getElementById('sectorFilter').value = 'ALL';
+  document.getElementById('signalFilter').value = 'ALL';
+  document.getElementById('searchInput').value = '';
+  applyFilters();
+}
+function sortAndRender() {
+  const { key, dir } = currentSort;
+  filteredStocks.sort((a,b) => {
+    let va = a[key], vb = b[key];
+    if (typeof va === 'string') { va = va.toLowerCase(); vb = vb.toLowerCase(); }
+    return dir==='asc' ? (va>vb?1:-1) : (va<vb?1:-1);
+  });
+  render();
+}
+
+// Sort handlers
+document.querySelectorAll('th[data-sort]').forEach(th => {
+  th.addEventListener('click', () => {
+    const key = th.dataset.sort;
+    if (currentSort.key === key) currentSort.dir = currentSort.dir==='desc'?'asc':'desc';
+    else { currentSort.key = key; currentSort.dir = 'desc'; }
+    document.querySelectorAll('th').forEach(h=>h.classList.remove('sort-active'));
+    th.classList.add('sort-active');
+    th.textContent = th.textContent.replace(/[↑↓]/g,'').trim() + ' ' + (currentSort.dir==='desc'?'↓':'↑');
+    sortAndRender();
+  });
+});
+
+// Modal
+function showDetail(ticker) {
+  const s = STOCKS.find(x=>x.t===ticker);
+  document.getElementById('modalTitle').innerHTML = `${s.t} · ${s.n} ${s.hitl?'<span class="hitl-badge">HITL 필요</span>':''}`;
+  document.getElementById('modalSub').textContent = `${s.m==='US'?'미국':'한국'} · ${s.sec} · 3개월 목표 상승률 ${s.target>=0?'+':''}${s.target}%`;
+  const body = document.getElementById('modalBody');
+  body.innerHTML = `
+    <div class="detail-grid">
+      <div class="detail-card"><div class="lbl">시그널</div><div class="val"><span class="signal-pill signal-${s.signal}">${s.signal.replace('_',' ')}</span></div></div>
+      <div class="detail-card"><div class="lbl">종합점수</div><div class="val" style="color:${s.total>=70?'#4ade80':s.total>=50?'#facc15':'#f87171'}">${s.total} / 100</div></div>
+      <div class="detail-card"><div class="lbl">컨센서스</div><div class="val">${s.consensus} / 4 축 강세</div></div>
+      <div class="detail-card"><div class="lbl">기대수익 (EV)</div><div class="val">${s.ev>=0?'+':''}${s.ev.toFixed(2)}R</div></div>
+    </div>
+
+    <div class="agent-section">
+      <h3>📊 Market Analyst — 기술적 분석 (${s.tech}/100)</h3>
+      <ul class="agent-list">${s.reasons.tech.map(r=>`<li><span class="bullet ${s.tech<50?'neg':s.tech<70?'neu':''}">▸</span> ${r}</li>`).join('')}</ul>
+    </div>
+
+    <div class="agent-section">
+      <h3>📰 Macro Analyst — 거시 환경 (${s.macro}/100)</h3>
+      <ul class="agent-list">${s.reasons.macro.map(r=>`<li><span class="bullet ${s.macro<50?'neg':s.macro<70?'neu':''}">▸</span> ${r}</li>`).join('')}</ul>
+    </div>
+
+    <div class="agent-section">
+      <h3>📄 Filings Analyst — 공시 시그널 (${s.filing}/100)</h3>
+      <ul class="agent-list">${s.reasons.filing.map(r=>`<li><span class="bullet ${s.filing<50?'neg':s.filing<70?'neu':''}">▸</span> ${r}</li>`).join('')}</ul>
+    </div>
+
+    <div class="agent-section">
+      <h3>💰 Valuation — 밸류에이션 (${s.value}/100)</h3>
+      <ul class="agent-list">${s.reasons.value.map(r=>`<li><span class="bullet ${s.value<50?'neg':s.value<70?'neu':''}">▸</span> ${r}</li>`).join('')}</ul>
+    </div>
+
+    ${s.hitl ? `<div class="disclaimer" style="margin-top:0"><strong>⚠️ HITL 필요:</strong> 이 종목은 리스크 지표 or 신규 진입 or 대형 포지션으로 인해 사용자 승인이 필요합니다. Risk Manager 검토 후 진행하세요.</div>` : ''}
+    ${s.signal==='AVOID' ? `<div class="disclaimer" style="margin-top:12px"><strong>❌ AVOID:</strong> AI Auditor가 리스크 이슈를 감지했거나 4축 컨센서스가 미달합니다. 진입 금지 권고.</div>` : ''}
+  `;
+  document.getElementById('modal').classList.add('show');
+}
+function closeModal(){ document.getElementById('modal').classList.remove('show'); }
+
+// Init sector filter options
+const sectors = [...new Set(STOCKS.map(s=>s.sec))].sort();
+const sectorSelect = document.getElementById('sectorFilter');
+sectors.forEach(sec => {
+  const opt = document.createElement('option');
+  opt.value = sec; opt.textContent = sec;
+  sectorSelect.appendChild(opt);
+});
+
+// Status badge: LIVE or DEMO 표시
+const badge = document.querySelector('.status-badge');
+if (IS_LIVE) {
+  const genAt = window.LIVE_MACRO ? new Date(window.LIVE_MACRO.generated_at) : new Date();
+  document.getElementById('cycleTime').textContent =
+    `LIVE 데이터 · ${genAt.toLocaleString('ko-KR')} 생성`;
+  badge.style.background = 'rgba(34,211,238,.1)';
+  badge.style.borderColor = '#22d3ee';
+  badge.style.color = '#22d3ee';
+  badge.querySelector('.status-dot').style.background = '#22d3ee';
+} else {
+  setInterval(() => {
+    const now = new Date();
+    document.getElementById('cycleTime').textContent =
+      `DEMO 데이터 · ${now.toLocaleTimeString('ko-KR')}`;
+  }, 1000);
+}
+
+// Enter key on search
+document.getElementById('searchInput').addEventListener('keypress', e => {
+  if (e.key === 'Enter') applyFilters();
+});
+
+// Initial render
+applyFilters();
+</script>
+</body>
+</html>
