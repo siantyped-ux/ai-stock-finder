@@ -9,6 +9,9 @@ _sheet_overview.txt
 *.log
 scan_log.txt
 
+# 원본 설계 문서 (비공개 유지)
+*.xlsx
+
 # Python
 __pycache__/
 *.pyc
