@@ -20,12 +20,20 @@ on:
         description: '스캔 시장 (US / KR / ALL)'
         default: 'ALL'
         required: false
+  push:
+    branches: [main]
+    paths:
+      - 'index.html'
+      - 'stock_finder_dashboard.html'
+      - 'dashboard_data.js'
 
 permissions:
   contents: write
 
 jobs:
   scan:
+    # push 이벤트에서는 스캔을 건너뛰고 배포만 수행 (schedule/workflow_dispatch에서만 스캔)
+    if: github.event_name != 'push'
     runs-on: ubuntu-latest
     timeout-minutes: 90
 
@@ -81,6 +89,8 @@ jobs:
 
   deploy-pages:
     needs: scan
+    # scan이 성공했거나(schedule/dispatch), skip되었을 때(push) 모두 배포
+    if: always() && (needs.scan.result == 'success' || needs.scan.result == 'skipped')
     runs-on: ubuntu-latest
     permissions:
       pages: write
