@@ -18,7 +18,10 @@ xlsx v5 시스템의 4축 컨센서스 로직을 실제 데이터로 적용
 
 from __future__ import annotations
 import argparse
+import contextlib
+import io
 import json
+import logging
 import os
 import sys
 import time
@@ -32,6 +35,9 @@ if sys.platform == "win32":
         sys.stderr.reconfigure(encoding="utf-8")
     except Exception:
         pass
+
+# yfinance 상장폐지 종목에 대한 반복 ERROR 로그 억제
+logging.getLogger("yfinance").setLevel(logging.CRITICAL)
 
 try:
     import yfinance as yf
@@ -866,24 +872,33 @@ KOSPI_EXPANDED = [
     ("375500", "DL이앤씨"), ("096770", "SK이노베이션"), ("079550", "LIG넥스원"),
     ("006360", "GS건설"), ("078930", "GS"), ("036460", "한국가스공사"),
     ("016360", "삼성증권"), ("005940", "NH투자증권"), ("026960", "동서"),
-    ("010060", "OCI홀딩스"), ("008560", "메리츠증권"), ("000210", "DL"),
+    ("010060", "OCI홀딩스"), ("000210", "DL"),
+    # 008560 메리츠증권: 2022 상장폐지(메리츠금융지주로 통합) — 제외
     ("006800", "미래에셋증권"), ("196170", "알테오젠"), ("064350", "현대로템"),
     ("005830", "DB손해보험"), ("002380", "KCC"), ("011790", "SKC"),
     ("006650", "대한유화"), ("000670", "영풍"), ("138930", "BNK금융지주"),
     ("006260", "LS"), ("008770", "호텔신라"), ("009830", "한화솔루션"),
     ("139130", "DGB금융지주"), ("011780", "금호석유"), ("078340", "컴투스"),
     ("079160", "CJ CGV"), ("033780", "KT&G"), ("005810", "풍산"),
-    ("002270", "롯데푸드"), ("002960", "한국쉘석유"), ("000120", "CJ대한통운"),
-    ("010620", "HD현대미포조선"), ("003410", "쌍용C&E"), ("120110", "코오롱인더"),
-    ("042670", "두산인프라코어"), ("069620", "대웅제약"), ("185750", "종근당"),
+    ("002960", "한국쉘석유"), ("000120", "CJ대한통운"),
+    ("120110", "코오롱인더"),
+    ("069620", "대웅제약"), ("185750", "종근당"),
     ("006840", "AK홀딩스"), ("008930", "한미사이언스"), ("002790", "아모레G"),
-    ("036490", "SK바이오사이언스"), ("069260", "휴켐스"), ("000080", "하이트진로"),
+    ("069260", "휴켐스"), ("000080", "하이트진로"),
+    # 아래 티커는 상장폐지/합병으로 yfinance 조회 불가 — 제외:
+    # 002270 롯데푸드(2022 롯데제과에 흡수합병)
+    # 010620 HD현대미포조선(329180 HD현대미포로 대체)
+    # 003410 쌍용C&E(2024 상장폐지)
+    # 042670 두산인프라코어(HD현대인프라코어로 개편, 티커 변경)
+    # 036490 SK바이오사이언스(yfinance 데이터 이슈)
     ("030200", "KT"), ("012450", "한화에어로스페이스"), ("047810", "한국항공우주"),
     ("051910", "LG화학"), ("051900", "LG생활건강"), ("066570", "LG전자"),
     ("003550", "LG"), ("000150", "두산"), ("034020", "두산에너빌리티"),
     ("241560", "두산밥캣"), ("035250", "강원랜드"), ("114090", "GKL"),
-    ("020150", "롯데에너지머티리얼즈"), ("004020", "현대제철"), ("003600", "SK디스커버리"),
-    ("069960", "현대백화점"), ("023530", "롯데쇼핑"), ("011200", "HMM"),
+    ("020150", "롯데에너지머티리얼즈"), ("004020", "현대제철"),
+    # 003600 SK디스커버리: yfinance 데이터 이슈로 제외
+    ("069960", "현대백화점"), ("023530", "롯데쇼핑"),
+    # 011200 HMM 은 위(857행)에 이미 포함 — 중복 제거
     ("012750", "에스원"), ("035150", "백광산업"), ("018670", "삼성E&A"),
     ("003490", "대한항공"), ("020560", "아시아나항공"), ("047040", "대우건설"),
     ("088980", "맥쿼리인프라"), ("161390", "한국타이어앤테크놀로지"), ("161890", "한국콜마"),
@@ -902,20 +917,21 @@ def fetch_kr_universe(min_market_cap: float = 3e11) -> list:
         print(f"    [cache] 한국 유니버스 {len(cached)}종목 (캐시)")
         return cached
 
-    # pykrx 시도 (인코딩 이슈 있음)
+    # pykrx 시도 (인코딩 이슈 있음). pykrx 내부의 print 오류 노이즈는 억제.
     try:
         from pykrx import stock as pykrx_stock
         print(f"    [*] pykrx KOSPI 유니버스 조회 시도...")
         cap_df = None
-        for delta in range(1, 30):
-            d = (datetime.now() - timedelta(days=delta)).strftime("%Y%m%d")
-            try:
-                df = pykrx_stock.get_market_cap_by_ticker(d, market="KOSPI")
-                if df is not None and len(df) > 100:
-                    cap_df = df
-                    break
-            except Exception:
-                continue
+        with contextlib.redirect_stdout(io.StringIO()), contextlib.redirect_stderr(io.StringIO()):
+            for delta in range(1, 30):
+                d = (datetime.now() - timedelta(days=delta)).strftime("%Y%m%d")
+                try:
+                    df = pykrx_stock.get_market_cap_by_ticker(d, market="KOSPI")
+                    if df is not None and len(df) > 100:
+                        cap_df = df
+                        break
+                except Exception:
+                    continue
 
         if cap_df is not None and len(cap_df) > 100:
             # 시가총액 컬럼 접근 (한글 인코딩 이슈 우회)
