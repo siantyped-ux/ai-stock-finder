@@ -1100,9 +1100,22 @@ def calc_hitl(signal, total, tech):
 
 
 def calc_ev_and_target(tech, macro, filing, value, r3m) -> tuple[float, int]:
+    # NaN 방어: 입력값 중 하나라도 NaN/None이면 중립값(0)으로 대체
+    def _safe(v):
+        if v is None:
+            return 0.0
+        try:
+            if np.isnan(v):
+                return 0.0
+        except (TypeError, ValueError):
+            pass
+        return v
+    tech, macro, filing, value, r3m = _safe(tech), _safe(macro), _safe(filing), _safe(value), _safe(r3m)
     strength = (tech * 0.4 + filing * 0.3 + macro * 0.2 + value * 0.1) / 100
     momentum_adj = np.clip(r3m / 30, -0.5, 0.5)
     ev = round((strength - 0.5) * 3.5 + momentum_adj * 0.4, 2)
+    if np.isnan(ev):
+        return 0.0, 0
     target = int(round(ev * 12))
     return ev, int(np.clip(target, -15, 30))
 
