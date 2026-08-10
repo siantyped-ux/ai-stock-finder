@@ -1,12 +1,12 @@
 // AI 3-Month Stock Finder - Live Data
-// Generated: 2026-08-09 04:14:20
-// Macro: VIX=15.15, DXY=99.60, US10Y=4.69%
+// Generated: 2026-08-10 04:32:40
+// Macro: VIX=15.15, DXY=99.72, US10Y=4.69%
 // FMP: active · DART: active · FRED: active
 window.LIVE_MACRO = {
   vix: 15.15,
-  dxy: 99.60,
+  dxy: 99.72,
   us10y: 4.69,
-  generated_at: "2026-08-09T04:14:20.882213",
+  generated_at: "2026-08-10T04:32:40.931896",
   fmp_active: true,
   dart_active: true,
   fred_active: true,
@@ -37,7 +37,7 @@ window.LIVE_STOCKS = [
       ],
       "macro": [
         "NEUTRAL · VIX 15.2 · US10Y 4.69%",
-        "DXY 99.6 약세 · 성장주 유리"
+        "DXY 99.7 약세 · 성장주 유리"
       ],
       "filing": [
         "13F: 기관지분율 -45.35%p",
@@ -50,7 +50,7 @@ window.LIVE_STOCKS = [
         "PER 34.2 · 적정",
         "Forward PER 17.4 · 이익 성장 반영",
         "PBR 27.8 · 부담",
-        "PEG 0.60 · 성장률 대비 저평가"
+        "PEG 0.62 · 성장률 대비 저평가"
       ]
     }
   },
@@ -113,7 +113,7 @@ window.LIVE_STOCKS = [
       ],
       "macro": [
         "NEUTRAL · VIX 15.2 · US10Y 4.69%",
-        "DXY 99.6 약세 · 성장주 유리"
+        "DXY 99.7 약세 · 성장주 유리"
       ],
       "filing": [
         "13F: 기관지분율 -17.99%p",
@@ -124,7 +124,7 @@ window.LIVE_STOCKS = [
       ],
       "value": [
         "PER 17.7 · 저평가",
-        "PEG 0.98 · 성장률 대비 저평가"
+        "PEG 0.96 · 성장률 대비 저평가"
       ]
     }
   },
@@ -150,7 +150,7 @@ window.LIVE_STOCKS = [
       ],
       "macro": [
         "NEUTRAL · VIX 15.2 · US10Y 4.69%",
-        "DXY 99.6 약세 · 성장주 유리"
+        "DXY 99.7 약세 · 성장주 유리"
       ],
       "filing": [
         "13F: 증량-감량 순 +312",
@@ -161,7 +161,7 @@ window.LIVE_STOCKS = [
       ],
       "value": [
         "PER 17.8 · 저평가",
-        "PEG 0.98 · 성장률 대비 저평가"
+        "PEG 0.96 · 성장률 대비 저평가"
       ]
     }
   },
@@ -263,7 +263,7 @@ window.LIVE_STOCKS = [
       ],
       "macro": [
         "NEUTRAL · VIX 15.2 · US10Y 4.69%",
-        "DXY 99.6 약세 · 성장주 유리"
+        "DXY 99.7 약세 · 성장주 유리"
       ],
       "filing": [
         "13F: 기관지분율 -11.51%p",
@@ -302,7 +302,7 @@ window.LIVE_STOCKS = [
       ],
       "macro": [
         "NEUTRAL · VIX 15.2 · US10Y 4.69%",
-        "DXY 99.6 약세 · 성장주 유리"
+        "DXY 99.7 약세 · 성장주 유리"
       ],
       "filing": [
         "13F: 증량-감량 순 -367",
@@ -315,7 +315,7 @@ window.LIVE_STOCKS = [
         "PER 71.4 · 극심 프리미엄",
         "Forward PER 21.9 · 이익 성장 반영",
         "PBR 23.2 · 부담",
-        "PEG 0.47 · 성장률 대비 저평가"
+        "PEG 0.48 · 성장률 대비 저평가"
       ]
     }
   },
@@ -340,7 +340,7 @@ window.LIVE_STOCKS = [
       ],
       "macro": [
         "NEUTRAL · VIX 15.2 · US10Y 4.69%",
-        "DXY 99.6 약세 · 성장주 유리"
+        "DXY 99.7 약세 · 성장주 유리"
       ],
       "filing": [
         "13F: 기관지분율 -46.38%p",
@@ -389,7 +389,7 @@ window.LIVE_STOCKS = [
         "PER 304.2 · 극심 프리미엄",
         "Forward PER 148.1 · 이익 성장 반영",
         "PBR 14.9 · 부담",
-        "PEG 4.71 · 성장률 대비 부담"
+        "PEG 4.81 · 성장률 대비 부담"
       ]
     }
   },
@@ -417,7 +417,7 @@ window.LIVE_STOCKS = [
       ],
       "macro": [
         "NEUTRAL · VIX 15.2 · US10Y 4.69%",
-        "DXY 99.6 약세 · 성장주 유리"
+        "DXY 99.7 약세 · 성장주 유리"
       ],
       "filing": [
         "13F: 기관지분율 -49.75%p",
@@ -456,7 +456,7 @@ window.LIVE_STOCKS = [
       ],
       "macro": [
         "NEUTRAL · VIX 15.2 · US10Y 4.69%",
-        "DXY 99.6 약세 · 성장주 유리"
+        "DXY 99.7 약세 · 성장주 유리"
       ],
       "filing": [
         "13F: 신규진입 +167곳",
@@ -544,7 +544,7 @@ window.LIVE_STOCKS = [
       "value": [
         "PER 39.4 · 적정",
         "PBR 9.4 · 부담",
-        "PEG 4.27 · 성장률 대비 부담"
+        "PEG 4.26 · 성장률 대비 부담"
       ]
     }
   },
@@ -572,7 +572,7 @@ window.LIVE_STOCKS = [
       ],
       "macro": [
         "NEUTRAL · VIX 15.2 · US10Y 4.69%",
-        "DXY 99.6 약세 · 성장주 유리"
+        "DXY 99.7 약세 · 성장주 유리"
       ],
       "filing": [
         "13F: 신규진입 급증 +335곳 (STRONG_CONSENSUS)",
@@ -617,7 +617,7 @@ window.LIVE_STOCKS = [
         "13F: 기관지분율 -52.12%p",
         "P/C비율 급등 +442% (헤지 강화)",
         "13F: 보유기관 3007곳 · 지분율 24.5% (2026Q2)",
-        "Form 4: 매도 우세 P0/S5",
+        "Form 4: 매도 우세 P0/S4",
         "8-K: 최근 60일 이벤트 3건 (활발)"
       ],
       "value": [
@@ -650,7 +650,7 @@ window.LIVE_STOCKS = [
       ],
       "macro": [
         "NEUTRAL · VIX 15.2 · US10Y 4.69%",
-        "DXY 99.6 약세 · 성장주 유리"
+        "DXY 99.7 약세 · 성장주 유리"
       ],
       "filing": [
         "13F: 기관지분율 -14.95%p",
@@ -661,8 +661,8 @@ window.LIVE_STOCKS = [
       ],
       "value": [
         "PER 59.2 · 프리미엄",
-        "Forward PER 29.4 · 이익 성장 반영",
-        "PBR 1479.3 · 부담"
+        "Forward PER 29.3 · 이익 성장 반영",
+        "PBR 1472.6 · 부담"
       ]
     }
   },
@@ -728,7 +728,7 @@ window.LIVE_STOCKS = [
       ],
       "macro": [
         "NEUTRAL · VIX 15.2 · US10Y 4.69%",
-        "DXY 99.6 약세 · 성장주 유리"
+        "DXY 99.7 약세 · 성장주 유리"
       ],
       "filing": [
         "13F: 증량-감량 순 +384",
@@ -740,7 +740,7 @@ window.LIVE_STOCKS = [
       "value": [
         "PER 30.0 · 적정",
         "Forward PER 21.1 · 이익 성장 반영",
-        "PEG 4.24 · 성장률 대비 부담"
+        "PEG 4.28 · 성장률 대비 부담"
       ]
     }
   },
@@ -767,7 +767,7 @@ window.LIVE_STOCKS = [
       ],
       "macro": [
         "NEUTRAL · VIX 15.2 · US10Y 4.69%",
-        "DXY 99.6 약세 · 성장주 유리"
+        "DXY 99.7 약세 · 성장주 유리"
       ],
       "filing": [
         "13F: 신규진입 급증 +423곳 (STRONG_CONSENSUS)",
@@ -918,7 +918,7 @@ window.LIVE_STOCKS = [
       ],
       "macro": [
         "NEUTRAL · VIX 15.2 · US10Y 4.69%",
-        "DXY 99.6 약세 · 성장주 유리"
+        "DXY 99.7 약세 · 성장주 유리"
       ],
       "filing": [
         "13F: 기관지분율 -48.52%p",
@@ -957,7 +957,7 @@ window.LIVE_STOCKS = [
       ],
       "macro": [
         "NEUTRAL · VIX 15.2 · US10Y 4.69%",
-        "DXY 99.6 약세 · 성장주 유리"
+        "DXY 99.7 약세 · 성장주 유리"
       ],
       "filing": [
         "13F: 기관지분율 -53.49%p",
@@ -1002,13 +1002,13 @@ window.LIVE_STOCKS = [
         "P/C비율 급등 +144% (헤지 강화)",
         "13F: 보유기관 2348곳 · 지분율 14.4% (2026Q2)",
         "Form 4: 매도 우세 P0/S11",
-        "* FMP 실시간 공시 반영"
+        "8-K: 최근 60일 이벤트 없음"
       ],
       "value": [
         "PER 25.2 · 적정",
         "Forward PER 13.5 · 이익 성장 반영",
         "PBR 11.3 · 부담",
-        "PEG 0.82 · 성장률 대비 저평가"
+        "PEG 0.83 · 성장률 대비 저평가"
       ]
     }
   },
@@ -1045,7 +1045,7 @@ window.LIVE_STOCKS = [
       "value": [
         "PER 47.6 · 프리미엄",
         "PBR 25.4 · 부담",
-        "PEG 4.61 · 성장률 대비 부담"
+        "PEG 4.60 · 성장률 대비 부담"
       ]
     }
   },
@@ -1112,7 +1112,7 @@ window.LIVE_STOCKS = [
       ],
       "macro": [
         "NEUTRAL · VIX 15.2 · US10Y 4.69%",
-        "DXY 99.6 약세 · 성장주 유리"
+        "DXY 99.7 약세 · 성장주 유리"
       ],
       "filing": [
         "13F: 기관지분율 -55.24%p",
@@ -1200,7 +1200,7 @@ window.LIVE_STOCKS = [
       "value": [
         "PER 43.7 · 프리미엄",
         "PBR 21.8 · 부담",
-        "PEG 5.50 · 성장률 대비 부담"
+        "PEG 5.44 · 성장률 대비 부담"
       ]
     }
   },
@@ -1239,7 +1239,7 @@ window.LIVE_STOCKS = [
       "value": [
         "PER 26.1 · 적정",
         "PBR 10.4 · 부담",
-        "PEG 4.18 · 성장률 대비 부담"
+        "PEG 4.19 · 성장률 대비 부담"
       ]
     }
   },
@@ -1275,7 +1275,7 @@ window.LIVE_STOCKS = [
       ],
       "value": [
         "PER 18.0 · 저평가",
-        "PEG 0.73 · 성장률 대비 저평가",
+        "PEG 0.72 · 성장률 대비 저평가",
         "FCF Yield 6.0% · 우수"
       ]
     }
@@ -1304,7 +1304,7 @@ window.LIVE_STOCKS = [
       ],
       "macro": [
         "NEUTRAL · VIX 15.2 · US10Y 4.69%",
-        "DXY 99.6 약세 · 성장주 유리"
+        "DXY 99.7 약세 · 성장주 유리"
       ],
       "filing": [
         "13F: 신규진입 +158곳",
@@ -1429,7 +1429,7 @@ window.LIVE_STOCKS = [
       ],
       "value": [
         "PER 22.0 · 적정",
-        "PEG 4.20 · 성장률 대비 부담"
+        "PEG 4.17 · 성장률 대비 부담"
       ]
     }
   },
@@ -1494,7 +1494,7 @@ window.LIVE_STOCKS = [
       ],
       "macro": [
         "NEUTRAL · VIX 15.2 · US10Y 4.69%",
-        "DXY 99.6 약세 · 성장주 유리"
+        "DXY 99.7 약세 · 성장주 유리"
       ],
       "filing": [
         "13F: 기관지분율 -51.66%p",
@@ -1505,7 +1505,7 @@ window.LIVE_STOCKS = [
       "value": [
         "PER 102.9 · 극심 프리미엄",
         "Forward PER 13.5 · 이익 성장 반영",
-        "PEG 12.28 · 성장률 대비 부담"
+        "PEG 12.30 · 성장률 대비 부담"
       ]
     }
   },
@@ -1532,7 +1532,7 @@ window.LIVE_STOCKS = [
       ],
       "macro": [
         "NEUTRAL · VIX 15.2 · US10Y 4.69%",
-        "DXY 99.6 약세 · 성장주 유리"
+        "DXY 99.7 약세 · 성장주 유리"
       ],
       "filing": [
         "13F: 신규진입 급감 -267곳",
@@ -1583,7 +1583,7 @@ window.LIVE_STOCKS = [
       "value": [
         "PER 19.7 · 적정",
         "Forward PER 14.2 · 이익 성장 반영",
-        "PEG 0.53 · 성장률 대비 저평가",
+        "PEG 0.54 · 성장률 대비 저평가",
         "FCF 음수 · 현금유출"
       ]
     }
@@ -1648,7 +1648,7 @@ window.LIVE_STOCKS = [
       ],
       "macro": [
         "NEUTRAL · VIX 15.2 · US10Y 4.69%",
-        "DXY 99.6 약세 · 성장주 유리"
+        "DXY 99.7 약세 · 성장주 유리"
       ],
       "filing": [
         "13F: 기관지분율 -6.80%p",
@@ -1699,7 +1699,7 @@ window.LIVE_STOCKS = [
       "value": [
         "PER 36.1 · 적정",
         "Forward PER 20.8 · 이익 성장 반영",
-        "PEG 0.76 · 성장률 대비 저평가"
+        "PEG 0.74 · 성장률 대비 저평가"
       ]
     }
   },
@@ -1765,7 +1765,7 @@ window.LIVE_STOCKS = [
       ],
       "macro": [
         "NEUTRAL · VIX 15.2 · US10Y 4.69%",
-        "DXY 99.6 약세 · 성장주 유리"
+        "DXY 99.7 약세 · 성장주 유리"
       ],
       "filing": [
         "13F: 기관지분율 -5.49%p",
@@ -1777,7 +1777,7 @@ window.LIVE_STOCKS = [
       "value": [
         "PER 23.7 · 적정",
         "Forward PER 15.8 · 이익 성장 반영",
-        "PEG 3.52 · 성장률 대비 부담"
+        "PEG 3.57 · 성장률 대비 부담"
       ]
     }
   },
@@ -1817,7 +1817,7 @@ window.LIVE_STOCKS = [
         "PER 313.7 · 극심 프리미엄",
         "Forward PER 88.3 · 이익 성장 반영",
         "PBR 10.7 · 부담",
-        "PEG 3.98 · 성장률 대비 부담"
+        "PEG 4.03 · 성장률 대비 부담"
       ]
     }
   },
@@ -1989,7 +1989,7 @@ window.LIVE_STOCKS = [
       ],
       "macro": [
         "NEUTRAL · VIX 15.2 · US10Y 4.69%",
-        "DXY 99.6 약세 · 성장주 유리"
+        "DXY 99.7 약세 · 성장주 유리"
       ],
       "filing": [
         "13F: 신규진입 +71곳",
@@ -2029,7 +2029,7 @@ window.LIVE_STOCKS = [
       ],
       "macro": [
         "NEUTRAL · VIX 15.2 · US10Y 4.69%",
-        "DXY 99.6 약세 · 성장주 유리"
+        "DXY 99.7 약세 · 성장주 유리"
       ],
       "filing": [
         "13F: 신규진입 +57곳",
@@ -2106,7 +2106,7 @@ window.LIVE_STOCKS = [
       ],
       "macro": [
         "NEUTRAL · VIX 15.2 · US10Y 4.69%",
-        "DXY 99.6 약세 · 성장주 유리"
+        "DXY 99.7 약세 · 성장주 유리"
       ],
       "filing": [
         "13F: 증량-감량 순 +656",
@@ -2269,7 +2269,7 @@ window.LIVE_STOCKS = [
       "value": [
         "PER 14.6 · 저평가",
         "Forward PER 10.5 · 이익 성장 반영",
-        "PEG 0.74 · 성장률 대비 저평가"
+        "PEG 0.73 · 성장률 대비 저평가"
       ]
     }
   },
@@ -2477,7 +2477,7 @@ window.LIVE_STOCKS = [
       ],
       "macro": [
         "NEUTRAL · VIX 15.2 · US10Y 4.69%",
-        "DXY 99.6 약세 · 성장주 유리"
+        "DXY 99.7 약세 · 성장주 유리"
       ],
       "filing": [
         "13F: 기관지분율 -54.62%p",
@@ -2517,7 +2517,7 @@ window.LIVE_STOCKS = [
       ],
       "macro": [
         "NEUTRAL · VIX 15.2 · US10Y 4.69%",
-        "DXY 99.6 약세 · 성장주 유리"
+        "DXY 99.7 약세 · 성장주 유리"
       ],
       "filing": [
         "13F: 기관지분율 -61.22%p",
@@ -2567,7 +2567,7 @@ window.LIVE_STOCKS = [
       "value": [
         "PER 137.2 · 극심 프리미엄",
         "PBR 47.1 · 부담",
-        "PEG 6.82 · 성장률 대비 부담"
+        "PEG 6.97 · 성장률 대비 부담"
       ]
     }
   },
@@ -2579,11 +2579,11 @@ window.LIVE_STOCKS = [
     "tech": 96,
     "macro": 55,
     "filing": 45,
-    "value": 55,
-    "total": 66,
+    "value": 63,
+    "total": 68,
     "consensus": 1,
     "signal": "HOLD",
-    "ev": 0.84,
+    "ev": 0.87,
     "target": 10,
     "hitl": false,
     "reasons": {
@@ -2606,7 +2606,8 @@ window.LIVE_STOCKS = [
       ],
       "value": [
         "PER 14.4 · 저평가",
-        "PEG 4.06 · 성장률 대비 부담"
+        "Forward PER 10.3 · 이익 성장 반영",
+        "PEG 3.98 · 성장률 대비 부담"
       ]
     }
   },
@@ -2632,7 +2633,7 @@ window.LIVE_STOCKS = [
       ],
       "macro": [
         "NEUTRAL · VIX 15.2 · US10Y 4.69%",
-        "DXY 99.6 약세 · 성장주 유리"
+        "DXY 99.7 약세 · 성장주 유리"
       ],
       "filing": [
         "13F: 기관지분율 -5.78%p",
@@ -2643,7 +2644,7 @@ window.LIVE_STOCKS = [
       ],
       "value": [
         "PER 11.7 · 극심 저평가",
-        "PEG 3.09 · 성장률 대비 부담",
+        "PEG 3.20 · 성장률 대비 부담",
         "FCF Yield 18.0% · 우수"
       ]
     }
@@ -2721,7 +2722,7 @@ window.LIVE_STOCKS = [
       ],
       "value": [
         "PER 20.0 · 적정",
-        "Forward PER 15.8 · 이익 성장 반영"
+        "Forward PER 15.7 · 이익 성장 반영"
       ]
     }
   },
@@ -2760,7 +2761,7 @@ window.LIVE_STOCKS = [
       ],
       "value": [
         "PER 101.7 · 극심 프리미엄",
-        "Forward PER 62.7 · 이익 성장 반영",
+        "Forward PER 62.3 · 이익 성장 반영",
         "PBR 15.8 · 부담"
       ]
     }
@@ -2788,7 +2789,7 @@ window.LIVE_STOCKS = [
       ],
       "macro": [
         "NEUTRAL · VIX 15.2 · US10Y 4.69%",
-        "DXY 99.6 약세 · 성장주 유리"
+        "DXY 99.7 약세 · 성장주 유리"
       ],
       "filing": [
         "13F: 신규진입 급감 -240곳",
@@ -2863,7 +2864,7 @@ window.LIVE_STOCKS = [
       ],
       "macro": [
         "NEUTRAL · VIX 15.2 · US10Y 4.69%",
-        "DXY 99.6 약세 · 성장주 유리"
+        "DXY 99.7 약세 · 성장주 유리"
       ],
       "filing": [
         "13F: 신규진입 급증 +248곳 (STRONG_CONSENSUS)",
@@ -2936,7 +2937,7 @@ window.LIVE_STOCKS = [
       ],
       "macro": [
         "NEUTRAL · VIX 15.2 · US10Y 4.69%",
-        "DXY 99.6 약세 · 성장주 유리"
+        "DXY 99.7 약세 · 성장주 유리"
       ],
       "filing": [
         "13F: 기관지분율 -31.05%p",
@@ -2948,7 +2949,7 @@ window.LIVE_STOCKS = [
       "value": [
         "PER 18.5 · 적정",
         "Forward PER 12.3 · 이익 성장 반영",
-        "PEG 0.83 · 성장률 대비 저평가",
+        "PEG 0.82 · 성장률 대비 저평가",
         "FCF Yield 6.0% · 우수"
       ]
     }
@@ -2975,7 +2976,7 @@ window.LIVE_STOCKS = [
       ],
       "macro": [
         "NEUTRAL · VIX 15.2 · US10Y 4.69%",
-        "DXY 99.6 약세 · 성장주 유리"
+        "DXY 99.7 약세 · 성장주 유리"
       ],
       "filing": [
         "13F: 기관지분율 -59.82%p",
@@ -2987,7 +2988,7 @@ window.LIVE_STOCKS = [
       "value": [
         "PER 58.1 · 프리미엄",
         "Forward PER 25.9 · 이익 성장 반영",
-        "PEG 0.69 · 성장률 대비 저평가"
+        "PEG 0.71 · 성장률 대비 저평가"
       ]
     }
   },
@@ -3087,7 +3088,7 @@ window.LIVE_STOCKS = [
       ],
       "macro": [
         "NEUTRAL · VIX 15.2 · US10Y 4.69%",
-        "DXY 99.6 약세 · 성장주 유리"
+        "DXY 99.7 약세 · 성장주 유리"
       ],
       "filing": [
         "13F: 기관지분율 -53.78%p",
@@ -3174,7 +3175,7 @@ window.LIVE_STOCKS = [
         "PER 58.5 · 프리미엄",
         "Forward PER 14.7 · 이익 성장 반영",
         "PBR 166.5 · 부담",
-        "PEG 0.48 · 성장률 대비 저평가"
+        "PEG 0.46 · 성장률 대비 저평가"
       ]
     }
   },
@@ -3200,7 +3201,7 @@ window.LIVE_STOCKS = [
       ],
       "macro": [
         "NEUTRAL · VIX 15.2 · US10Y 4.69%",
-        "DXY 99.6 약세 · 성장주 유리"
+        "DXY 99.7 약세 · 성장주 유리"
       ],
       "filing": [
         "13F: 기관지분율 -49.01%p",
@@ -3242,7 +3243,7 @@ window.LIVE_STOCKS = [
         "13F: 기관지분율 -58.42%p",
         "P/C비율 급등 +82% (헤지 강화)",
         "13F: 보유기관 1062곳 · 지분율 18.0% (2026Q2)",
-        "Form 4: 매도 우세 P0/S7",
+        "Form 4: 매도 우세 P0/S6",
         "* FMP 실시간 공시 반영"
       ],
       "value": [
@@ -3286,7 +3287,7 @@ window.LIVE_STOCKS = [
       "value": [
         "PER 31.3 · 적정",
         "PBR 17.1 · 부담",
-        "PEG 3.46 · 성장률 대비 부담"
+        "PEG 3.45 · 성장률 대비 부담"
       ]
     }
   },
@@ -3350,18 +3351,18 @@ window.LIVE_STOCKS = [
       ],
       "macro": [
         "NEUTRAL · VIX 15.2 · US10Y 4.69%",
-        "DXY 99.6 약세 · 성장주 유리"
+        "DXY 99.7 약세 · 성장주 유리"
       ],
       "filing": [
         "13F: 신규진입 +127곳",
         "13F: 기관지분율 -52.92%p",
         "13F: 보유기관 1976곳 · 지분율 25.2% (2026Q2)",
-        "Form 4: 매도 우세 P0/S50",
+        "Form 4: 매도 우세 P0/S24",
         "8-K: 최근 60일 이벤트 3건 (활발)"
       ],
       "value": [
         "PER 19.2 · 적정",
-        "PEG 0.67 · 성장률 대비 저평가",
+        "PEG 0.72 · 성장률 대비 저평가",
         "FCF Yield 5.8% · 우수"
       ]
     }
@@ -3401,7 +3402,7 @@ window.LIVE_STOCKS = [
       "value": [
         "PER 34.0 · 적정",
         "Forward PER 13.2 · 이익 성장 반영",
-        "PEG 0.96 · 성장률 대비 저평가"
+        "PEG 0.89 · 성장률 대비 저평가"
       ]
     }
   },
@@ -3477,7 +3478,7 @@ window.LIVE_STOCKS = [
         "PER 45.6 · 프리미엄",
         "Forward PER 28.0 · 이익 성장 반영",
         "PBR 8.6 · 부담",
-        "PEG 3.22 · 성장률 대비 부담"
+        "PEG 3.23 · 성장률 대비 부담"
       ]
     }
   },
@@ -3514,7 +3515,7 @@ window.LIVE_STOCKS = [
       "value": [
         "PER 23.8 · 적정",
         "PBR 9.0 · 부담",
-        "PEG 3.27 · 성장률 대비 부담"
+        "PEG 3.24 · 성장률 대비 부담"
       ]
     }
   },
@@ -3626,7 +3627,7 @@ window.LIVE_STOCKS = [
       "value": [
         "PER 23.8 · 적정",
         "Forward PER 17.3 · 이익 성장 반영",
-        "PEG 0.90 · 성장률 대비 저평가"
+        "PEG 0.93 · 성장률 대비 저평가"
       ]
     }
   },
@@ -3731,7 +3732,7 @@ window.LIVE_STOCKS = [
       ],
       "macro": [
         "NEUTRAL · VIX 15.2 · US10Y 4.69%",
-        "DXY 99.6 약세 · 성장주 유리"
+        "DXY 99.7 약세 · 성장주 유리"
       ],
       "filing": [
         "13F: 기관지분율 -60.39%p",
@@ -3741,7 +3742,7 @@ window.LIVE_STOCKS = [
       ],
       "value": [
         "PER 13.5 · 저평가",
-        "PBR 14.1 · 부담",
+        "PBR 14.0 · 부담",
         "FCF Yield 5.9% · 우수"
       ]
     }
@@ -3845,7 +3846,7 @@ window.LIVE_STOCKS = [
       ],
       "macro": [
         "NEUTRAL · VIX 15.2 · US10Y 4.69%",
-        "DXY 99.6 약세 · 성장주 유리"
+        "DXY 99.7 약세 · 성장주 유리"
       ],
       "filing": [
         "13F: 신규진입 급감 -230곳",
@@ -3884,7 +3885,7 @@ window.LIVE_STOCKS = [
       ],
       "macro": [
         "NEUTRAL · VIX 15.2 · US10Y 4.69%",
-        "DXY 99.6 약세 · 성장주 유리"
+        "DXY 99.7 약세 · 성장주 유리"
       ],
       "filing": [
         "13F: 보유기관 3곳 · 지분율 0.0% (2026Q2)",
@@ -3931,7 +3932,7 @@ window.LIVE_STOCKS = [
       "value": [
         "PER 22.3 · 적정",
         "Forward PER 12.4 · 이익 성장 반영",
-        "PEG 0.78 · 성장률 대비 저평가"
+        "PEG 0.80 · 성장률 대비 저평가"
       ]
     }
   },
@@ -3960,7 +3961,7 @@ window.LIVE_STOCKS = [
         "NEUTRAL · VIX 15.2 · US10Y 4.69%"
       ],
       "filing": [
-        "13F: 기관지분율 -2.44%p",
+        "13F: 기관지분율 -2.45%p",
         "13F: 보유기관 289곳 · 지분율 0.7% (2026Q2)",
         "8-K: 최근 60일 이벤트 없음",
         "* FMP 실시간 공시 반영"
@@ -4002,7 +4003,7 @@ window.LIVE_STOCKS = [
       ],
       "value": [
         "PER 16.5 · 저평가",
-        "PEG 7.55 · 성장률 대비 부담"
+        "PEG 8.32 · 성장률 대비 부담"
       ]
     }
   },
@@ -4031,7 +4032,7 @@ window.LIVE_STOCKS = [
       ],
       "macro": [
         "NEUTRAL · VIX 15.2 · US10Y 4.69%",
-        "DXY 99.6 약세 · 성장주 유리"
+        "DXY 99.7 약세 · 성장주 유리"
       ],
       "filing": [
         "13F: 증량-감량 순 -484",
@@ -4117,7 +4118,7 @@ window.LIVE_STOCKS = [
       "value": [
         "PER 17.9 · 저평가",
         "Forward PER 13.6 · 이익 성장 반영",
-        "PEG 0.40 · 성장률 대비 저평가"
+        "PEG 0.85 · 성장률 대비 저평가"
       ]
     }
   },
@@ -4146,7 +4147,7 @@ window.LIVE_STOCKS = [
       ],
       "macro": [
         "NEUTRAL · VIX 15.2 · US10Y 4.69%",
-        "DXY 99.6 약세 · 성장주 유리"
+        "DXY 99.7 약세 · 성장주 유리"
       ],
       "filing": [
         "13F: 기관지분율 -58.56%p",
@@ -4193,7 +4194,7 @@ window.LIVE_STOCKS = [
       ],
       "value": [
         "PER 15.6 · 저평가",
-        "PEG 0.93 · 성장률 대비 저평가",
+        "PEG 0.94 · 성장률 대비 저평가",
         "FCF Yield 5.4% · 우수"
       ]
     }
@@ -4343,8 +4344,8 @@ window.LIVE_STOCKS = [
       ],
       "value": [
         "PER 21.1 · 적정",
-        "Forward PER 16.1 · 이익 성장 반영",
-        "PEG 11.85 · 성장률 대비 부담"
+        "Forward PER 16.0 · 이익 성장 반영",
+        "PEG 11.51 · 성장률 대비 부담"
       ]
     }
   },
@@ -4383,7 +4384,7 @@ window.LIVE_STOCKS = [
         "PER 37.7 · 적정",
         "Forward PER 28.2 · 이익 성장 반영",
         "PBR 9.3 · 부담",
-        "PEG 4.18 · 성장률 대비 부담"
+        "PEG 4.20 · 성장률 대비 부담"
       ]
     }
   },
@@ -4448,7 +4449,7 @@ window.LIVE_STOCKS = [
       ],
       "macro": [
         "NEUTRAL · VIX 15.2 · US10Y 4.69%",
-        "DXY 99.6 약세 · 성장주 유리"
+        "DXY 99.7 약세 · 성장주 유리"
       ],
       "filing": [
         "13F: 기관지분율 -56.74%p",
@@ -4490,7 +4491,7 @@ window.LIVE_STOCKS = [
       "filing": [
         "13F: 기관지분율 -62.28%p",
         "13F: 보유기관 1253곳 · 지분율 22.5% (2026Q2)",
-        "Form 4: 매도 우세 P0/S11",
+        "Form 4: 매도 우세 P0/S9",
         "8-K: 최근 60일 이벤트 3건 (활발)",
         "* FMP 실시간 공시 반영"
       ],
@@ -4524,7 +4525,7 @@ window.LIVE_STOCKS = [
       ],
       "macro": [
         "NEUTRAL · VIX 15.2 · US10Y 4.69%",
-        "DXY 99.6 약세 · 성장주 유리"
+        "DXY 99.7 약세 · 성장주 유리"
       ],
       "filing": [
         "13F: 증량-감량 순 -335",
@@ -4567,12 +4568,12 @@ window.LIVE_STOCKS = [
         "13F: 기관지분율 -62.88%p",
         "P/C비율 급등 +117% (헤지 강화)",
         "13F: 보유기관 1010곳 · 지분율 30.8% (2026Q2)",
-        "8-K: 최근 60일 이벤트 7건 (활발)",
+        "8-K: 최근 60일 이벤트 6건 (활발)",
         "* FMP 실시간 공시 반영"
       ],
       "value": [
         "PER 31.2 · 적정",
-        "PEG 128.39 · 성장률 대비 부담"
+        "PEG 129.33 · 성장률 대비 부담"
       ]
     }
   },
@@ -4610,7 +4611,7 @@ window.LIVE_STOCKS = [
       "value": [
         "PER 9.6 · 극심 저평가",
         "Forward PER 7.5 · 이익 성장 반영",
-        "PEG 0.84 · 성장률 대비 저평가",
+        "PEG 0.85 · 성장률 대비 저평가",
         "FCF Yield 54.9% · 우수"
       ]
     }
@@ -4677,7 +4678,7 @@ window.LIVE_STOCKS = [
       ],
       "macro": [
         "NEUTRAL · VIX 15.2 · US10Y 4.69%",
-        "DXY 99.6 약세 · 성장주 유리"
+        "DXY 99.7 약세 · 성장주 유리"
       ],
       "filing": [
         "13F: 기관지분율 -49.86%p",
@@ -4831,13 +4832,13 @@ window.LIVE_STOCKS = [
       ],
       "macro": [
         "NEUTRAL · VIX 15.2 · US10Y 4.69%",
-        "DXY 99.6 약세 · 성장주 유리"
+        "DXY 99.7 약세 · 성장주 유리"
       ],
       "filing": [
         "13F: 기관지분율 -68.16%p",
         "P/C비율 하락 -47% (헤지 완화)",
         "13F: 보유기관 1028곳 · 지분율 24.4% (2026Q2)",
-        "Form 4: 매도 우세 P0/S11",
+        "Form 4: 매도 우세 P0/S10",
         "* FMP 실시간 공시 반영"
       ],
       "value": [
@@ -4944,7 +4945,7 @@ window.LIVE_STOCKS = [
       ],
       "macro": [
         "NEUTRAL · VIX 15.2 · US10Y 4.69%",
-        "DXY 99.6 약세 · 성장주 유리"
+        "DXY 99.7 약세 · 성장주 유리"
       ],
       "filing": [
         "13F: 신규진입 +55곳",
@@ -4956,7 +4957,7 @@ window.LIVE_STOCKS = [
       "value": [
         "PER 25.3 · 적정",
         "Forward PER 11.3 · 이익 성장 반영",
-        "PEG 0.27 · 성장률 대비 저평가",
+        "PEG 0.26 · 성장률 대비 저평가",
         "FCF Yield 6.6% · 우수"
       ]
     }
@@ -5155,11 +5156,11 @@ window.LIVE_STOCKS = [
     "tech": 26,
     "macro": 55,
     "filing": 43,
-    "value": 50,
-    "total": 40,
+    "value": 58,
+    "total": 42,
     "consensus": 0,
     "signal": "AVOID",
-    "ev": -0.57,
+    "ev": -0.55,
     "target": -7,
     "hitl": true,
     "reasons": {
@@ -5183,7 +5184,8 @@ window.LIVE_STOCKS = [
       "value": [
         "PER 26.7 · 적정",
         "Forward PER 16.3 · 이익 성장 반영",
-        "PBR 36.8 · 부담"
+        "PBR 36.8 · 부담",
+        "PEG 0.96 · 성장률 대비 저평가"
       ]
     }
   },
@@ -5218,7 +5220,7 @@ window.LIVE_STOCKS = [
       ],
       "value": [
         "PER 4.5 · 극심 저평가",
-        "PEG 4.63 · 성장률 대비 부담",
+        "PEG 4.49 · 성장률 대비 부담",
         "FCF Yield 71.7% · 우수"
       ]
     }
@@ -5259,7 +5261,7 @@ window.LIVE_STOCKS = [
       "value": [
         "PER 122.5 · 극심 프리미엄",
         "PBR 59.1 · 부담",
-        "PEG 8.00 · 성장률 대비 부담"
+        "PEG 8.35 · 성장률 대비 부담"
       ]
     }
   },
@@ -5322,7 +5324,7 @@ window.LIVE_STOCKS = [
         "NEUTRAL · VIX 15.2 · US10Y 4.69%"
       ],
       "filing": [
-        "13F: 기관지분율 -63.93%p",
+        "13F: 기관지분율 -63.94%p",
         "P/C비율 하락 -132% (헤지 완화)",
         "13F: 보유기관 923곳 · 지분율 26.2% (2026Q2)",
         "* FMP 실시간 공시 반영"
@@ -5397,7 +5399,7 @@ window.LIVE_STOCKS = [
       ],
       "macro": [
         "NEUTRAL · VIX 15.2 · US10Y 4.69%",
-        "DXY 99.6 약세 · 성장주 유리"
+        "DXY 99.7 약세 · 성장주 유리"
       ],
       "filing": [
         "13F: 기관지분율 -55.82%p",
@@ -5557,7 +5559,7 @@ window.LIVE_STOCKS = [
       ],
       "value": [
         "PER 17.2 · 저평가",
-        "Forward PER 13.4 · 이익 성장 반영"
+        "Forward PER 13.3 · 이익 성장 반영"
       ]
     }
   },
@@ -5820,12 +5822,12 @@ window.LIVE_STOCKS = [
     "sec": "산업재",
     "tech": 87,
     "macro": 55,
-    "filing": 56,
+    "filing": 53,
     "value": 50,
-    "total": 66,
+    "total": 65,
     "consensus": 1,
     "signal": "HOLD",
-    "ev": 0.67,
+    "ev": 0.63,
     "target": 8,
     "hitl": false,
     "reasons": {
@@ -5841,7 +5843,6 @@ window.LIVE_STOCKS = [
         "13F: 기관지분율 -58.02%p",
         "P/C비율 하락 -57% (헤지 완화)",
         "13F: 보유기관 1118곳 · 지분율 27.8% (2026Q2)",
-        "8-K: 최근 60일 이벤트 3건 (활발)",
         "* FMP 실시간 공시 반영"
       ],
       "value": [
@@ -5875,7 +5876,7 @@ window.LIVE_STOCKS = [
       ],
       "macro": [
         "NEUTRAL · VIX 15.2 · US10Y 4.69%",
-        "DXY 99.6 약세 · 성장주 유리"
+        "DXY 99.7 약세 · 성장주 유리"
       ],
       "filing": [
         "13F: 기관지분율 -14.35%p",
@@ -5887,7 +5888,7 @@ window.LIVE_STOCKS = [
       "value": [
         "PER 16.7 · 저평가",
         "Forward PER 10.3 · 이익 성장 반영",
-        "PEG 105.52 · 성장률 대비 부담"
+        "PEG 106.96 · 성장률 대비 부담"
       ]
     }
   },
@@ -5919,7 +5920,7 @@ window.LIVE_STOCKS = [
       "filing": [
         "13F: 기관지분율 -65.64%p",
         "13F: 보유기관 1437곳 · 지분율 21.1% (2026Q2)",
-        "Form 4: 매도 우세 P0/S10",
+        "Form 4: 매도 우세 P0/S8",
         "8-K: 최근 60일 이벤트 3건 (활발)",
         "* FMP 실시간 공시 반영"
       ],
@@ -6001,7 +6002,7 @@ window.LIVE_STOCKS = [
         "PER 15.2 · 저평가",
         "Forward PER 9.6 · 이익 성장 반영",
         "PBR 9.2 · 부담",
-        "PEG 0.63 · 성장률 대비 저평가"
+        "PEG 0.64 · 성장률 대비 저평가"
       ]
     }
   },
@@ -6066,7 +6067,7 @@ window.LIVE_STOCKS = [
       ],
       "macro": [
         "NEUTRAL · VIX 15.2 · US10Y 4.69%",
-        "DXY 99.6 약세 · 성장주 유리"
+        "DXY 99.7 약세 · 성장주 유리"
       ],
       "filing": [
         "13F: 기관지분율 -6.59%p",
@@ -6078,7 +6079,7 @@ window.LIVE_STOCKS = [
       "value": [
         "PER 23.2 · 적정",
         "Forward PER 8.2 · 이익 성장 반영",
-        "PEG 28.20 · 성장률 대비 부담",
+        "PEG 28.53 · 성장률 대비 부담",
         "FCF Yield 6.0% · 우수"
       ]
     }
@@ -6115,7 +6116,7 @@ window.LIVE_STOCKS = [
       ],
       "value": [
         "PER 67.1 · 극심 프리미엄",
-        "PEG 3.39 · 성장률 대비 부담"
+        "PEG 3.36 · 성장률 대비 부담"
       ]
     }
   },
@@ -6179,7 +6180,7 @@ window.LIVE_STOCKS = [
       ],
       "macro": [
         "NEUTRAL · VIX 15.2 · US10Y 4.69%",
-        "DXY 99.6 약세 · 성장주 유리"
+        "DXY 99.7 약세 · 성장주 유리"
       ],
       "filing": [
         "13F: 기관지분율 -59.36%p",
@@ -6227,7 +6228,7 @@ window.LIVE_STOCKS = [
       ],
       "value": [
         "PER 77.0 · 극심 프리미엄",
-        "Forward PER 35.0 · 이익 성장 반영",
+        "Forward PER 34.8 · 이익 성장 반영",
         "PBR 10.5 · 부담"
       ]
     }
@@ -6292,7 +6293,7 @@ window.LIVE_STOCKS = [
       ],
       "macro": [
         "NEUTRAL · VIX 15.2 · US10Y 4.69%",
-        "DXY 99.6 약세 · 성장주 유리"
+        "DXY 99.7 약세 · 성장주 유리"
       ],
       "filing": [
         "13F: 기관지분율 -41.02%p",
@@ -6340,7 +6341,7 @@ window.LIVE_STOCKS = [
       "value": [
         "PER 34.1 · 적정",
         "Forward PER 17.0 · 이익 성장 반영",
-        "PEG 6.22 · 성장률 대비 부담"
+        "PEG 6.24 · 성장률 대비 부담"
       ]
     }
   },
@@ -6603,13 +6604,13 @@ window.LIVE_STOCKS = [
     "sec": "금융",
     "tech": 80,
     "macro": 55,
-    "filing": 53,
+    "filing": 50,
     "value": 45,
-    "total": 62,
+    "total": 61,
     "consensus": 1,
     "signal": "HOLD",
-    "ev": 0.39,
-    "target": 5,
+    "ev": 0.36,
+    "target": 4,
     "hitl": false,
     "reasons": {
       "tech": [
@@ -6623,12 +6624,11 @@ window.LIVE_STOCKS = [
       "filing": [
         "13F: 기관지분율 -60.53%p",
         "13F: 보유기관 963곳 · 지분율 28.8% (2026Q2)",
-        "8-K: 최근 60일 이벤트 3건 (활발)",
         "* FMP 실시간 공시 반영"
       ],
       "value": [
         "PER 22.4 · 적정",
-        "PEG 4.63 · 성장률 대비 부담"
+        "PEG 4.62 · 성장률 대비 부담"
       ]
     }
   },
@@ -6697,7 +6697,7 @@ window.LIVE_STOCKS = [
       ],
       "macro": [
         "NEUTRAL · VIX 15.2 · US10Y 4.69%",
-        "DXY 99.6 약세 · 성장주 유리"
+        "DXY 99.7 약세 · 성장주 유리"
       ],
       "filing": [
         "13F: 기관지분율 -63.68%p",
@@ -6709,7 +6709,7 @@ window.LIVE_STOCKS = [
         "PER 113.8 · 극심 프리미엄",
         "Forward PER 27.2 · 이익 성장 반영",
         "PBR 9.4 · 부담",
-        "PEG 4.88 · 성장률 대비 부담"
+        "PEG 4.67 · 성장률 대비 부담"
       ]
     }
   },
@@ -6786,7 +6786,7 @@ window.LIVE_STOCKS = [
         "PER 67.6 · 극심 프리미엄",
         "Forward PER 35.6 · 이익 성장 반영",
         "PBR 13.6 · 부담",
-        "PEG 3.06 · 성장률 대비 부담"
+        "PEG 3.07 · 성장률 대비 부담"
       ]
     }
   },
@@ -6891,7 +6891,7 @@ window.LIVE_STOCKS = [
       ],
       "value": [
         "PER 10.5 · 극심 저평가",
-        "PEG 0.95 · 성장률 대비 저평가",
+        "PEG 0.97 · 성장률 대비 저평가",
         "FCF Yield 31.8% · 우수"
       ]
     }
@@ -6965,7 +6965,7 @@ window.LIVE_STOCKS = [
       ],
       "value": [
         "PER 49.5 · 프리미엄",
-        "Forward PER 31.8 · 이익 성장 반영",
+        "Forward PER 31.6 · 이익 성장 반영",
         "PBR 11.8 · 부담"
       ]
     }
@@ -7117,7 +7117,7 @@ window.LIVE_STOCKS = [
       "value": [
         "PER 14.6 · 저평가",
         "Forward PER 9.9 · 이익 성장 반영",
-        "PEG 0.76 · 성장률 대비 저평가"
+        "PEG 0.77 · 성장률 대비 저평가"
       ]
     }
   },
@@ -7218,7 +7218,7 @@ window.LIVE_STOCKS = [
       ],
       "macro": [
         "NEUTRAL · VIX 15.2 · US10Y 4.69%",
-        "DXY 99.6 약세 · 성장주 유리"
+        "DXY 99.7 약세 · 성장주 유리"
       ],
       "filing": [
         "13F: 증량-감량 순 -395",
@@ -7295,7 +7295,7 @@ window.LIVE_STOCKS = [
       ],
       "macro": [
         "NEUTRAL · VIX 15.2 · US10Y 4.69%",
-        "DXY 99.6 약세 · 성장주 유리"
+        "DXY 99.7 약세 · 성장주 유리"
       ],
       "filing": [
         "13F: 기관지분율 -38.60%p",
@@ -7355,13 +7355,13 @@ window.LIVE_STOCKS = [
     "sec": "산업재",
     "tech": 50,
     "macro": 55,
-    "filing": 40,
+    "filing": 50,
     "value": 58,
-    "total": 49,
+    "total": 52,
     "consensus": 0,
     "signal": "HOLD",
-    "ev": -0.11,
-    "target": -1,
+    "ev": -0.0,
+    "target": 0,
     "hitl": false,
     "reasons": {
       "tech": [
@@ -7375,7 +7375,6 @@ window.LIVE_STOCKS = [
       "filing": [
         "13F: 기관지분율 -53.90%p",
         "13F: 보유기관 1315곳 · 지분율 30.5% (2026Q2)",
-        "Form 4: 매도 우세 P0/S9",
         "* FMP 실시간 공시 반영"
       ],
       "value": [
@@ -7445,7 +7444,7 @@ window.LIVE_STOCKS = [
         "NEUTRAL · VIX 15.2 · US10Y 4.69%"
       ],
       "filing": [
-        "13F: 기관지분율 -52.24%p",
+        "13F: 기관지분율 -52.33%p",
         "P/C비율 급등 +60% (헤지 강화)",
         "13F: 보유기관 1498곳 · 지분율 28.8% (2026Q2)",
         "* FMP 실시간 공시 반영"
@@ -7698,7 +7697,7 @@ window.LIVE_STOCKS = [
       ],
       "macro": [
         "NEUTRAL · VIX 15.2 · US10Y 4.69%",
-        "DXY 99.6 약세 · 성장주 유리"
+        "DXY 99.7 약세 · 성장주 유리"
       ],
       "filing": [
         "13F: 기관지분율 -59.73%p",
@@ -7934,7 +7933,7 @@ window.LIVE_STOCKS = [
       ],
       "value": [
         "PER 477.4 · 극심 프리미엄",
-        "Forward PER 79.3 · 이익 성장 반영",
+        "Forward PER 78.9 · 이익 성장 반영",
         "PBR 20.9 · 부담"
       ]
     }
@@ -7999,7 +7998,7 @@ window.LIVE_STOCKS = [
       ],
       "macro": [
         "NEUTRAL · VIX 15.2 · US10Y 4.69%",
-        "DXY 99.6 약세 · 성장주 유리"
+        "DXY 99.7 약세 · 성장주 유리"
       ],
       "filing": [
         "13F: 기관지분율 -5.05%p",
@@ -8024,12 +8023,12 @@ window.LIVE_STOCKS = [
     "tech": 76,
     "macro": 55,
     "filing": 50,
-    "value": 42,
-    "total": 59,
+    "value": 37,
+    "total": 58,
     "consensus": 1,
     "signal": "HOLD",
-    "ev": 0.55,
-    "target": 7,
+    "ev": 0.53,
+    "target": 6,
     "hitl": false,
     "reasons": {
       "tech": [
@@ -8049,7 +8048,8 @@ window.LIVE_STOCKS = [
       ],
       "value": [
         "PER 35.6 · 적정",
-        "PBR 13.0 · 부담"
+        "PBR 13.0 · 부담",
+        "PEG 3.02 · 성장률 대비 부담"
       ]
     }
   },
@@ -8198,7 +8198,7 @@ window.LIVE_STOCKS = [
       "value": [
         "PER 41.4 · 프리미엄",
         "PBR 15.8 · 부담",
-        "PEG 3.21 · 성장률 대비 부담"
+        "PEG 3.22 · 성장률 대비 부담"
       ]
     }
   },
@@ -8234,7 +8234,7 @@ window.LIVE_STOCKS = [
       ],
       "value": [
         "PER 18.2 · 적정",
-        "PEG 3.92 · 성장률 대비 부담"
+        "PEG 3.95 · 성장률 대비 부담"
       ]
     }
   },
@@ -8263,7 +8263,7 @@ window.LIVE_STOCKS = [
       ],
       "macro": [
         "NEUTRAL · VIX 15.2 · US10Y 4.69%",
-        "DXY 99.6 약세 · 성장주 유리"
+        "DXY 99.7 약세 · 성장주 유리"
       ],
       "filing": [
         "13F: 기관지분율 -61.91%p",
@@ -8570,7 +8570,7 @@ window.LIVE_STOCKS = [
       ],
       "value": [
         "PER 9.5 · 극심 저평가",
-        "PEG 3.80 · 성장률 대비 부담"
+        "PEG 3.89 · 성장률 대비 부담"
       ]
     }
   },
@@ -8643,7 +8643,7 @@ window.LIVE_STOCKS = [
       ],
       "value": [
         "PER 12.1 · 저평가",
-        "PEG 0.43 · 성장률 대비 저평가",
+        "PEG 0.42 · 성장률 대비 저평가",
         "FCF 음수 · 현금유출"
       ]
     }
@@ -8790,7 +8790,7 @@ window.LIVE_STOCKS = [
       ],
       "value": [
         "PER 19.8 · 적정",
-        "PEG 3.07 · 성장률 대비 부담"
+        "PEG 3.05 · 성장률 대비 부담"
       ]
     }
   },
@@ -8862,7 +8862,7 @@ window.LIVE_STOCKS = [
       ],
       "value": [
         "PER 28.5 · 적정",
-        "PEG 4.54 · 성장률 대비 부담"
+        "PEG 4.43 · 성장률 대비 부담"
       ]
     }
   },
@@ -8940,13 +8940,13 @@ window.LIVE_STOCKS = [
     "sec": "제약/바이오",
     "tech": 43,
     "macro": 60,
-    "filing": 43,
+    "filing": 53,
     "value": 94,
-    "total": 54,
+    "total": 57,
     "consensus": 1,
     "signal": "HOLD",
-    "ev": 0.03,
-    "target": 0,
+    "ev": 0.14,
+    "target": 2,
     "hitl": false,
     "reasons": {
       "tech": [
@@ -8955,19 +8955,18 @@ window.LIVE_STOCKS = [
       ],
       "macro": [
         "NEUTRAL · VIX 15.2 · US10Y 4.69%",
-        "DXY 99.6 약세 · 성장주 유리"
+        "DXY 99.7 약세 · 성장주 유리"
       ],
       "filing": [
         "13F: 기관지분율 -59.78%p",
         "P/C비율 하락 -60% (헤지 완화)",
         "13F: 보유기관 1007곳 · 지분율 28.6% (2026Q2)",
-        "Form 4: 매도 우세 P0/S15",
         "* FMP 실시간 공시 반영"
       ],
       "value": [
         "PER 11.7 · 극심 저평가",
         "Forward PER 8.4 · 이익 성장 반영",
-        "PEG 0.81 · 성장률 대비 저평가",
+        "PEG 0.85 · 성장률 대비 저평가",
         "FCF Yield 10.7% · 우수"
       ]
     }
@@ -8998,7 +8997,7 @@ window.LIVE_STOCKS = [
         "NEUTRAL · VIX 15.2 · US10Y 4.69%"
       ],
       "filing": [
-        "13F: 기관지분율 -52.94%p",
+        "13F: 기관지분율 -52.95%p",
         "P/C비율 하락 -87% (헤지 완화)",
         "13F: 보유기관 1256곳 · 지분율 30.4% (2026Q2)",
         "Form 4: 매도 우세 P0/S4",
@@ -9077,7 +9076,7 @@ window.LIVE_STOCKS = [
         "NEUTRAL · VIX 15.2 · US10Y 4.69%"
       ],
       "filing": [
-        "13F: 기관지분율 -37.55%p",
+        "13F: 기관지분율 -37.56%p",
         "P/C비율 급등 +270% (헤지 강화)",
         "13F: 보유기관 445곳 · 지분율 6.8% (2026Q2)",
         "8-K: 최근 60일 이벤트 없음",
@@ -9085,7 +9084,7 @@ window.LIVE_STOCKS = [
       ],
       "value": [
         "PER 16.9 · 저평가",
-        "Forward PER 12.5 · 이익 성장 반영",
+        "Forward PER 12.4 · 이익 성장 반영",
         "PEG 0.78 · 성장률 대비 저평가"
       ]
     }
@@ -9150,7 +9149,7 @@ window.LIVE_STOCKS = [
       ],
       "macro": [
         "NEUTRAL · VIX 15.2 · US10Y 4.69%",
-        "DXY 99.6 약세 · 성장주 유리"
+        "DXY 99.7 약세 · 성장주 유리"
       ],
       "filing": [
         "13F: 기관지분율 -66.17%p",
@@ -9161,7 +9160,7 @@ window.LIVE_STOCKS = [
       "value": [
         "PER 20.0 · 적정",
         "Forward PER 14.3 · 이익 성장 반영",
-        "PEG 0.69 · 성장률 대비 저평가"
+        "PEG 0.71 · 성장률 대비 저평가"
       ]
     }
   },
@@ -9234,7 +9233,7 @@ window.LIVE_STOCKS = [
       "value": [
         "PER 38.5 · 적정",
         "PBR 17.2 · 부담",
-        "PEG 4.07 · 성장률 대비 부담"
+        "PEG 4.12 · 성장률 대비 부담"
       ]
     }
   },
@@ -9382,7 +9381,7 @@ window.LIVE_STOCKS = [
       "value": [
         "PER 245.3 · 극심 프리미엄",
         "Forward PER 66.1 · 이익 성장 반영",
-        "PEG 13.94 · 성장률 대비 부담",
+        "PEG 14.03 · 성장률 대비 부담",
         "FCF Yield 5.2% · 우수"
       ]
     }
@@ -9422,7 +9421,7 @@ window.LIVE_STOCKS = [
       "value": [
         "PER 10.0 · 극심 저평가",
         "Forward PER 8.0 · 이익 성장 반영",
-        "PBR 0.79 · 자산가치 이하"
+        "PBR 0.78 · 자산가치 이하"
       ]
     }
   },
@@ -9487,7 +9486,7 @@ window.LIVE_STOCKS = [
       ],
       "macro": [
         "NEUTRAL · VIX 15.2 · US10Y 4.69%",
-        "DXY 99.6 약세 · 성장주 유리"
+        "DXY 99.7 약세 · 성장주 유리"
       ],
       "filing": [
         "13F: 기관지분율 -4.28%p",
@@ -9498,7 +9497,7 @@ window.LIVE_STOCKS = [
       ],
       "value": [
         "PER 13.8 · 저평가",
-        "PEG 0.92 · 성장률 대비 저평가",
+        "PEG 0.90 · 성장률 대비 저평가",
         "FCF Yield 215.1% · 우수"
       ]
     }
@@ -9686,7 +9685,7 @@ window.LIVE_STOCKS = [
       ],
       "value": [
         "PER 13.8 · 저평가",
-        "PEG 0.61 · 성장률 대비 저평가"
+        "PEG 0.64 · 성장률 대비 저평가"
       ]
     }
   },
@@ -9751,7 +9750,7 @@ window.LIVE_STOCKS = [
       ],
       "macro": [
         "NEUTRAL · VIX 15.2 · US10Y 4.69%",
-        "DXY 99.6 약세 · 성장주 유리"
+        "DXY 99.7 약세 · 성장주 유리"
       ],
       "filing": [
         "13F: 기관지분율 -66.40%p",
@@ -9801,7 +9800,7 @@ window.LIVE_STOCKS = [
       ],
       "value": [
         "PER 5.3 · 극심 저평가",
-        "PEG 3.17 · 성장률 대비 부담",
+        "PEG 3.20 · 성장률 대비 부담",
         "FCF Yield 22.5% · 우수"
       ]
     }
@@ -9838,7 +9837,7 @@ window.LIVE_STOCKS = [
       ],
       "value": [
         "PER 19.9 · 적정",
-        "PEG 3.40 · 성장률 대비 부담"
+        "PEG 3.35 · 성장률 대비 부담"
       ]
     }
   },
@@ -10051,7 +10050,7 @@ window.LIVE_STOCKS = [
       ],
       "macro": [
         "NEUTRAL · VIX 15.2 · US10Y 4.69%",
-        "DXY 99.6 약세 · 성장주 유리"
+        "DXY 99.7 약세 · 성장주 유리"
       ],
       "filing": [
         "13F: 기관지분율 -52.07%p",
@@ -10135,7 +10134,7 @@ window.LIVE_STOCKS = [
       "value": [
         "PER 21.3 · 적정",
         "Forward PER 12.0 · 이익 성장 반영",
-        "PEG 0.83 · 성장률 대비 저평가"
+        "PEG 0.81 · 성장률 대비 저평가"
       ]
     }
   },
@@ -10164,15 +10163,15 @@ window.LIVE_STOCKS = [
         "NEUTRAL · VIX 15.2 · US10Y 4.69%"
       ],
       "filing": [
-        "13F: 기관지분율 -39.86%p",
+        "13F: 기관지분율 -39.87%p",
         "13F: 보유기관 754곳 · 지분율 18.3% (2026Q2)",
-        "Form 4: 실제매수 클러스터 P20/S3 (90일)",
+        "Form 4: 실제매수 클러스터 P18/S3 (90일)",
         "8-K: 최근 60일 이벤트 3건 (활발)",
         "* FMP 실시간 공시 반영"
       ],
       "value": [
         "PER 30.4 · 적정",
-        "PEG 3.02 · 성장률 대비 부담"
+        "PEG 3.09 · 성장률 대비 부담"
       ]
     }
   },
@@ -10286,7 +10285,7 @@ window.LIVE_STOCKS = [
         "PER 284.9 · 극심 프리미엄",
         "Forward PER 44.8 · 이익 성장 반영",
         "PBR 39.9 · 부담",
-        "PEG 0.98 · 성장률 대비 저평가"
+        "PEG 0.92 · 성장률 대비 저평가"
       ]
     }
   },
@@ -10323,7 +10322,7 @@ window.LIVE_STOCKS = [
       "value": [
         "PER 41.1 · 프리미엄",
         "Forward PER 16.7 · 이익 성장 반영",
-        "PEG 0.83 · 성장률 대비 저평가"
+        "PEG 0.81 · 성장률 대비 저평가"
       ]
     }
   },
@@ -10335,11 +10334,11 @@ window.LIVE_STOCKS = [
     "tech": 47,
     "macro": 55,
     "filing": 35,
-    "value": 60,
-    "total": 47,
+    "value": 68,
+    "total": 48,
     "consensus": 0,
     "signal": "HOLD",
-    "ev": 0.01,
+    "ev": 0.04,
     "target": 0,
     "hitl": false,
     "reasons": {
@@ -10355,11 +10354,12 @@ window.LIVE_STOCKS = [
         "13F: 기관지분율 -37.24%p",
         "P/C비율 급등 +70% (헤지 강화)",
         "13F: 보유기관 1053곳 · 지분율 29.5% (2026Q2)",
-        "Form 4: 매도 우세 P0/S67",
+        "Form 4: 매도 우세 P0/S65",
         "* FMP 실시간 공시 반영"
       ],
       "value": [
-        "PER 13.4 · 저평가"
+        "PER 13.4 · 저평가",
+        "FCF Yield 8.2% · 우수"
       ]
     }
   },
@@ -10398,7 +10398,7 @@ window.LIVE_STOCKS = [
       "value": [
         "PER 18.7 · 적정",
         "Forward PER 9.0 · 이익 성장 반영",
-        "PEG 0.53 · 성장률 대비 저평가",
+        "PEG 0.52 · 성장률 대비 저평가",
         "FCF 음수 · 현금유출"
       ]
     }
@@ -10436,7 +10436,7 @@ window.LIVE_STOCKS = [
       "value": [
         "PER 29.4 · 적정",
         "Forward PER 7.1 · 이익 성장 반영",
-        "PEG 0.35 · 성장률 대비 저평가",
+        "PEG 0.34 · 성장률 대비 저평가",
         "FCF Yield 21.3% · 우수"
       ]
     }
@@ -10464,10 +10464,10 @@ window.LIVE_STOCKS = [
       ],
       "macro": [
         "NEUTRAL · VIX 15.2 · US10Y 4.69%",
-        "DXY 99.6 약세 · 성장주 유리"
+        "DXY 99.7 약세 · 성장주 유리"
       ],
       "filing": [
-        "13F: 기관지분율 -66.01%p",
+        "13F: 기관지분율 -66.02%p",
         "P/C비율 하락 -261% (헤지 완화)",
         "13F: 보유기관 720곳 · 지분율 25.2% (2026Q2)",
         "* FMP 실시간 공시 반영"
@@ -10475,7 +10475,7 @@ window.LIVE_STOCKS = [
       "value": [
         "PER 169.0 · 극심 프리미엄",
         "Forward PER 16.8 · 이익 성장 반영",
-        "PEG 0.94 · 성장률 대비 저평가"
+        "PEG 0.93 · 성장률 대비 저평가"
       ]
     }
   },
@@ -10503,7 +10503,7 @@ window.LIVE_STOCKS = [
       ],
       "macro": [
         "NEUTRAL · VIX 15.2 · US10Y 4.69%",
-        "DXY 99.6 약세 · 성장주 유리"
+        "DXY 99.7 약세 · 성장주 유리"
       ],
       "filing": [
         "13F: 기관지분율 -65.64%p",
@@ -10516,7 +10516,7 @@ window.LIVE_STOCKS = [
         "PER 23.8 · 적정",
         "Forward PER 16.2 · 이익 성장 반영",
         "PBR 20.0 · 부담",
-        "PEG 0.67 · 성장률 대비 저평가"
+        "PEG 0.68 · 성장률 대비 저평가"
       ]
     }
   },
@@ -10669,7 +10669,7 @@ window.LIVE_STOCKS = [
       "value": [
         "PER 31.3 · 적정",
         "PBR 11.9 · 부담",
-        "PEG 4.76 · 성장률 대비 부담"
+        "PEG 4.78 · 성장률 대비 부담"
       ]
     }
   },
@@ -10769,7 +10769,7 @@ window.LIVE_STOCKS = [
       ],
       "macro": [
         "NEUTRAL · VIX 15.2 · US10Y 4.69%",
-        "DXY 99.6 약세 · 성장주 유리"
+        "DXY 99.7 약세 · 성장주 유리"
       ],
       "filing": [
         "13F: 기관지분율 -64.54%p",
@@ -10780,7 +10780,7 @@ window.LIVE_STOCKS = [
       "value": [
         "PER 47.7 · 프리미엄",
         "Forward PER 13.2 · 이익 성장 반영",
-        "PEG 0.56 · 성장률 대비 저평가",
+        "PEG 0.58 · 성장률 대비 저평가",
         "FCF Yield 5.9% · 우수"
       ]
     }
@@ -10792,13 +10792,13 @@ window.LIVE_STOCKS = [
     "sec": "산업재",
     "tech": 43,
     "macro": 55,
-    "filing": 40,
+    "filing": 50,
     "value": 50,
-    "total": 46,
+    "total": 49,
     "consensus": 0,
     "signal": "HOLD",
-    "ev": -0.12,
-    "target": -1,
+    "ev": -0.01,
+    "target": 0,
     "hitl": false,
     "reasons": {
       "tech": [
@@ -10811,7 +10811,6 @@ window.LIVE_STOCKS = [
       "filing": [
         "13F: 기관지분율 -49.00%p",
         "13F: 보유기관 803곳 · 지분율 23.8% (2026Q2)",
-        "Form 4: 매도 우세 P0/S15",
         "* FMP 실시간 공시 반영"
       ],
       "value": [
@@ -10895,7 +10894,7 @@ window.LIVE_STOCKS = [
       ],
       "value": [
         "PER 32.1 · 적정",
-        "PEG 3.73 · 성장률 대비 부담"
+        "PEG 3.83 · 성장률 대비 부담"
       ]
     }
   },
@@ -10931,7 +10930,7 @@ window.LIVE_STOCKS = [
       ],
       "value": [
         "PER 12.7 · 저평가",
-        "PEG 3.54 · 성장률 대비 부담"
+        "PEG 3.27 · 성장률 대비 부담"
       ]
     }
   },
@@ -10970,7 +10969,7 @@ window.LIVE_STOCKS = [
         "PER 41.7 · 프리미엄",
         "Forward PER 28.2 · 이익 성장 반영",
         "PBR 92.3 · 부담",
-        "PEG 0.75 · 성장률 대비 저평가"
+        "PEG 0.74 · 성장률 대비 저평가"
       ]
     }
   },
@@ -11010,7 +11009,7 @@ window.LIVE_STOCKS = [
       "value": [
         "PER 44.3 · 프리미엄",
         "PBR 14.6 · 부담",
-        "PEG 3.68 · 성장률 대비 부담"
+        "PEG 3.75 · 성장률 대비 부담"
       ]
     }
   },
@@ -11037,7 +11036,7 @@ window.LIVE_STOCKS = [
       ],
       "macro": [
         "NEUTRAL · VIX 15.2 · US10Y 4.69%",
-        "DXY 99.6 약세 · 성장주 유리"
+        "DXY 99.7 약세 · 성장주 유리"
       ],
       "filing": [
         "13F: 기관지분율 -64.34%p",
@@ -11049,7 +11048,7 @@ window.LIVE_STOCKS = [
         "PER 52.1 · 프리미엄",
         "Forward PER 32.8 · 이익 성장 반영",
         "PBR 18.9 · 부담",
-        "PEG 0.98 · 성장률 대비 저평가"
+        "PEG 0.97 · 성장률 대비 저평가"
       ]
     }
   },
@@ -11125,7 +11124,7 @@ window.LIVE_STOCKS = [
         "PER 137.0 · 극심 프리미엄",
         "Forward PER 42.8 · 이익 성장 반영",
         "PBR 20.2 · 부담",
-        "PEG 0.70 · 성장률 대비 저평가"
+        "PEG 0.71 · 성장률 대비 저평가"
       ]
     }
   },
@@ -11200,7 +11199,7 @@ window.LIVE_STOCKS = [
       "value": [
         "PER 37.0 · 적정",
         "Forward PER 28.1 · 이익 성장 반영",
-        "PEG 3.14 · 성장률 대비 부담"
+        "PEG 3.24 · 성장률 대비 부담"
       ]
     }
   },
@@ -11227,7 +11226,7 @@ window.LIVE_STOCKS = [
       ],
       "macro": [
         "NEUTRAL · VIX 15.2 · US10Y 4.69%",
-        "DXY 99.6 약세 · 성장주 유리"
+        "DXY 99.7 약세 · 성장주 유리"
       ],
       "filing": [
         "13F: 신규진입 +71곳",
@@ -11383,7 +11382,7 @@ window.LIVE_STOCKS = [
       ],
       "macro": [
         "NEUTRAL · VIX 15.2 · US10Y 4.69%",
-        "DXY 99.6 약세 · 성장주 유리"
+        "DXY 99.7 약세 · 성장주 유리"
       ],
       "filing": [
         "13F: 기관지분율 -2.68%p",
@@ -11393,7 +11392,7 @@ window.LIVE_STOCKS = [
       ],
       "value": [
         "PER 32.9 · 적정",
-        "PEG 0.38 · 성장률 대비 저평가",
+        "PEG 0.40 · 성장률 대비 저평가",
         "FCF Yield 971.6% · 우수"
       ]
     }
@@ -11422,7 +11421,7 @@ window.LIVE_STOCKS = [
       ],
       "macro": [
         "NEUTRAL · VIX 15.2 · US10Y 4.69%",
-        "DXY 99.6 약세 · 성장주 유리"
+        "DXY 99.7 약세 · 성장주 유리"
       ],
       "filing": [
         "13F: 기관지분율 -58.64%p",
@@ -11571,7 +11570,7 @@ window.LIVE_STOCKS = [
       ],
       "macro": [
         "NEUTRAL · VIX 15.2 · US10Y 4.69%",
-        "DXY 99.6 약세 · 성장주 유리"
+        "DXY 99.7 약세 · 성장주 유리"
       ],
       "filing": [
         "13F: 기관지분율 -43.39%p",
@@ -11662,7 +11661,7 @@ window.LIVE_STOCKS = [
         "PER 31.0 · 적정",
         "Forward PER 13.9 · 이익 성장 반영",
         "PBR 88.8 · 부담",
-        "PEG 0.90 · 성장률 대비 저평가"
+        "PEG 0.93 · 성장률 대비 저평가"
       ]
     }
   },
@@ -11774,7 +11773,7 @@ window.LIVE_STOCKS = [
       "value": [
         "PER 284.9 · 극심 프리미엄",
         "Forward PER 10.5 · 이익 성장 반영",
-        "PEG 56.78 · 성장률 대비 부담",
+        "PEG 19.36 · 성장률 대비 부담",
         "FCF Yield 9.6% · 우수"
       ]
     }
@@ -11889,7 +11888,7 @@ window.LIVE_STOCKS = [
         "PER 36.4 · 적정",
         "Forward PER 17.5 · 이익 성장 반영",
         "PBR 16.5 · 부담",
-        "PEG 0.92 · 성장률 대비 저평가"
+        "PEG 0.96 · 성장률 대비 저평가"
       ]
     }
   },
@@ -11936,12 +11935,12 @@ window.LIVE_STOCKS = [
     "sec": "금융",
     "tech": 47,
     "macro": 55,
-    "filing": 48,
+    "filing": 45,
     "value": 58,
-    "total": 51,
+    "total": 50,
     "consensus": 0,
     "signal": "HOLD",
-    "ev": 0.2,
+    "ev": 0.17,
     "target": 2,
     "hitl": false,
     "reasons": {
@@ -11958,7 +11957,7 @@ window.LIVE_STOCKS = [
         "13F: 기관지분율 -93.03%p",
         "P/C비율 하락 -57% (헤지 완화)",
         "13F: 보유기관 789곳 · 지분율 27.0% (2026Q2)",
-        "8-K: 최근 60일 이벤트 3건 (활발)"
+        "* FMP 실시간 공시 반영"
       ],
       "value": [
         "PER 19.2 · 적정",
@@ -11989,13 +11988,13 @@ window.LIVE_STOCKS = [
       ],
       "macro": [
         "NEUTRAL · VIX 15.2 · US10Y 4.69%",
-        "DXY 99.6 약세 · 성장주 유리"
+        "DXY 99.7 약세 · 성장주 유리"
       ],
       "filing": [
         "13F: 기관지분율 -57.75%p",
         "P/C비율 하락 -141% (헤지 완화)",
         "13F: 보유기관 785곳 · 지분율 29.2% (2026Q2)",
-        "Form 4: 매도 우세 P0/S14",
+        "Form 4: 매도 우세 P0/S12",
         "* FMP 실시간 공시 반영"
       ],
       "value": [
@@ -12225,7 +12224,7 @@ window.LIVE_STOCKS = [
       "value": [
         "PER 66.9 · 극심 프리미엄",
         "Forward PER 18.8 · 이익 성장 반영",
-        "PEG 0.94 · 성장률 대비 저평가"
+        "PEG 0.91 · 성장률 대비 저평가"
       ]
     }
   },
@@ -12322,7 +12321,7 @@ window.LIVE_STOCKS = [
       ],
       "macro": [
         "NEUTRAL · VIX 15.2 · US10Y 4.69%",
-        "DXY 99.6 약세 · 성장주 유리"
+        "DXY 99.7 약세 · 성장주 유리"
       ],
       "filing": [
         "13F: 기관지분율 -9.20%p",
@@ -12334,7 +12333,7 @@ window.LIVE_STOCKS = [
       "value": [
         "PER 110.0 · 극심 프리미엄",
         "Forward PER 22.0 · 이익 성장 반영",
-        "PEG 0.39 · 성장률 대비 저평가"
+        "PEG 0.41 · 성장률 대비 저평가"
       ]
     }
   },
@@ -12596,7 +12595,7 @@ window.LIVE_STOCKS = [
       ],
       "value": [
         "PER 41.3 · 프리미엄",
-        "Forward PER 29.8 · 이익 성장 반영",
+        "Forward PER 29.7 · 이익 성장 반영",
         "PBR 14.0 · 부담"
       ]
     }
@@ -12662,7 +12661,7 @@ window.LIVE_STOCKS = [
       ],
       "macro": [
         "NEUTRAL · VIX 15.2 · US10Y 4.69%",
-        "DXY 99.6 약세 · 성장주 유리"
+        "DXY 99.7 약세 · 성장주 유리"
       ],
       "filing": [
         "13F: 기관지분율 -58.30%p",
@@ -12673,7 +12672,7 @@ window.LIVE_STOCKS = [
       "value": [
         "PER 30.6 · 적정",
         "Forward PER 13.3 · 이익 성장 반영",
-        "FCF Yield 9.6% · 우수"
+        "FCF Yield 9.3% · 우수"
       ]
     }
   },
@@ -12750,7 +12749,7 @@ window.LIVE_STOCKS = [
       "value": [
         "PER 69.3 · 극심 프리미엄",
         "Forward PER 43.5 · 이익 성장 반영",
-        "PEG 4.63 · 성장률 대비 부담"
+        "PEG 4.61 · 성장률 대비 부담"
       ]
     }
   },
@@ -12787,7 +12786,7 @@ window.LIVE_STOCKS = [
       ],
       "value": [
         "PER 21.1 · 적정",
-        "PEG 3.18 · 성장률 대비 부담"
+        "PEG 3.17 · 성장률 대비 부담"
       ]
     }
   },
@@ -12819,7 +12818,7 @@ window.LIVE_STOCKS = [
       "filing": [
         "13F: 기관지분율 -35.07%p",
         "13F: 보유기관 621곳 · 지분율 15.7% (2026Q2)",
-        "Form 4: 매도 우세 P0/S75",
+        "Form 4: 매도 우세 P0/S71",
         "* FMP 실시간 공시 반영"
       ],
       "value": [
@@ -12904,7 +12903,7 @@ window.LIVE_STOCKS = [
       "value": [
         "PER 55.8 · 프리미엄",
         "Forward PER 14.2 · 이익 성장 반영",
-        "PEG 0.67 · 성장률 대비 저평가",
+        "PEG 0.71 · 성장률 대비 저평가",
         "FCF Yield 7.0% · 우수"
       ]
     }
@@ -12942,7 +12941,7 @@ window.LIVE_STOCKS = [
       "value": [
         "PER 141.1 · 극심 프리미엄",
         "Forward PER 15.3 · 이익 성장 반영",
-        "PEG 0.91 · 성장률 대비 저평가",
+        "PEG 0.83 · 성장률 대비 저평가",
         "FCF 음수 · 현금유출"
       ]
     }
@@ -13081,7 +13080,7 @@ window.LIVE_STOCKS = [
       ],
       "macro": [
         "NEUTRAL · VIX 15.2 · US10Y 4.69%",
-        "DXY 99.6 약세 · 성장주 유리"
+        "DXY 99.7 약세 · 성장주 유리"
       ],
       "filing": [
         "13F: 기관지분율 -4.92%p",
@@ -13092,7 +13091,7 @@ window.LIVE_STOCKS = [
       ],
       "value": [
         "PER 18.4 · 적정",
-        "PEG 0.97 · 성장률 대비 저평가",
+        "PEG 0.94 · 성장률 대비 저평가",
         "FCF Yield 78.6% · 우수"
       ]
     }
@@ -13121,7 +13120,7 @@ window.LIVE_STOCKS = [
       ],
       "macro": [
         "NEUTRAL · VIX 15.2 · US10Y 4.69%",
-        "DXY 99.6 약세 · 성장주 유리"
+        "DXY 99.7 약세 · 성장주 유리"
       ],
       "filing": [
         "13F: 신규진입 +64곳",
@@ -13209,7 +13208,7 @@ window.LIVE_STOCKS = [
       "value": [
         "PER 24.1 · 적정",
         "Forward PER 7.8 · 이익 성장 반영",
-        "PEG 0.83 · 성장률 대비 저평가"
+        "PEG 0.84 · 성장률 대비 저평가"
       ]
     }
   },
@@ -13236,7 +13235,7 @@ window.LIVE_STOCKS = [
       ],
       "macro": [
         "NEUTRAL · VIX 15.2 · US10Y 4.69%",
-        "DXY 99.6 약세 · 성장주 유리"
+        "DXY 99.7 약세 · 성장주 유리"
       ],
       "filing": [
         "13F: 기관지분율 -58.88%p",
@@ -13247,7 +13246,7 @@ window.LIVE_STOCKS = [
       "value": [
         "PER 41.1 · 프리미엄",
         "PBR 29.9 · 부담",
-        "PEG 3.61 · 성장률 대비 부담"
+        "PEG 3.59 · 성장률 대비 부담"
       ]
     }
   },
@@ -13274,7 +13273,7 @@ window.LIVE_STOCKS = [
       ],
       "macro": [
         "NEUTRAL · VIX 15.2 · US10Y 4.69%",
-        "DXY 99.6 약세 · 성장주 유리"
+        "DXY 99.7 약세 · 성장주 유리"
       ],
       "filing": [
         "13F: 기관지분율 -70.34%p",
@@ -13312,17 +13311,17 @@ window.LIVE_STOCKS = [
       ],
       "macro": [
         "NEUTRAL · VIX 15.2 · US10Y 4.69%",
-        "DXY 99.6 약세 · 성장주 유리"
+        "DXY 99.7 약세 · 성장주 유리"
       ],
       "filing": [
-        "13F: 기관지분율 -79.89%p",
+        "13F: 기관지분율 -79.90%p",
         "P/C비율 급등 +193% (헤지 강화)",
         "13F: 보유기관 405곳 · 지분율 17.8% (2026Q2)",
         "Form 4: 매도 우세 P0/S86",
         "* FMP 실시간 공시 반영"
       ],
       "value": [
-        "Forward PER -3516.4 · 이익 성장 반영",
+        "Forward PER -3397.7 · 이익 성장 반영",
         "PBR 25.9 · 부담"
       ]
     }
@@ -13353,7 +13352,7 @@ window.LIVE_STOCKS = [
         "NEUTRAL · VIX 15.2 · US10Y 4.69%"
       ],
       "filing": [
-        "13F: 기관지분율 -58.44%p",
+        "13F: 기관지분율 -58.45%p",
         "P/C비율 하락 -88% (헤지 완화)",
         "13F: 보유기관 580곳 · 지분율 30.6% (2026Q2)",
         "Form 4: 매도 우세 P0/S44",
@@ -13362,7 +13361,7 @@ window.LIVE_STOCKS = [
       "value": [
         "PER 24.5 · 적정",
         "PBR 13.0 · 부담",
-        "PEG 3.25 · 성장률 대비 부담"
+        "PEG 3.44 · 성장률 대비 부담"
       ]
     }
   },
@@ -13438,7 +13437,7 @@ window.LIVE_STOCKS = [
         "PER 237.9 · 극심 프리미엄",
         "Forward PER 54.0 · 이익 성장 반영",
         "PBR 12.6 · 부담",
-        "PEG 4.82 · 성장률 대비 부담"
+        "PEG 4.51 · 성장률 대비 부담"
       ]
     }
   },
@@ -13464,7 +13463,7 @@ window.LIVE_STOCKS = [
       ],
       "macro": [
         "NEUTRAL · VIX 15.2 · US10Y 4.69%",
-        "DXY 99.6 약세 · 성장주 유리"
+        "DXY 99.7 약세 · 성장주 유리"
       ],
       "filing": [
         "13F: 기관지분율 -61.56%p",
@@ -13476,7 +13475,7 @@ window.LIVE_STOCKS = [
       "value": [
         "PER 124.5 · 극심 프리미엄",
         "Forward PER 18.7 · 이익 성장 반영",
-        "PEG 0.27 · 성장률 대비 저평가"
+        "PEG 0.31 · 성장률 대비 저평가"
       ]
     }
   },
@@ -13589,7 +13588,7 @@ window.LIVE_STOCKS = [
       ],
       "value": [
         "PER 72.6 · 극심 프리미엄",
-        "Forward PER -87.0 · 이익 성장 반영",
+        "Forward PER -64.0 · 이익 성장 반영",
         "PEG 0.63 · 성장률 대비 저평가",
         "FCF 음수 · 현금유출"
       ]
@@ -13629,7 +13628,7 @@ window.LIVE_STOCKS = [
         "PER 41.7 · 프리미엄",
         "Forward PER 32.7 · 이익 성장 반영",
         "PBR 9.9 · 부담",
-        "PEG 3.05 · 성장률 대비 부담"
+        "PEG 3.06 · 성장률 대비 부담"
       ]
     }
   },
@@ -13658,7 +13657,7 @@ window.LIVE_STOCKS = [
         "NEUTRAL · VIX 15.2 · US10Y 4.69%"
       ],
       "filing": [
-        "13F: 기관지분율 -69.64%p",
+        "13F: 기관지분율 -69.65%p",
         "P/C비율 하락 -54% (헤지 완화)",
         "13F: 보유기관 420곳 · 지분율 23.9% (2026Q2)",
         "8-K: 최근 60일 이벤트 3건 (활발)",
@@ -13809,7 +13808,7 @@ window.LIVE_STOCKS = [
       ],
       "macro": [
         "NEUTRAL · VIX 15.2 · US10Y 4.69%",
-        "DXY 99.6 약세 · 성장주 유리"
+        "DXY 99.7 약세 · 성장주 유리"
       ],
       "filing": [
         "13F: 기관지분율 -11.58%p",
@@ -13831,11 +13830,11 @@ window.LIVE_STOCKS = [
     "tech": 77,
     "macro": 60,
     "filing": 43,
-    "value": 50,
-    "total": 59,
+    "value": 42,
+    "total": 58,
     "consensus": 1,
     "signal": "HOLD",
-    "ev": 0.57,
+    "ev": 0.55,
     "target": 7,
     "hitl": false,
     "reasons": {
@@ -13848,7 +13847,7 @@ window.LIVE_STOCKS = [
       ],
       "macro": [
         "NEUTRAL · VIX 15.2 · US10Y 4.69%",
-        "DXY 99.6 약세 · 성장주 유리"
+        "DXY 99.7 약세 · 성장주 유리"
       ],
       "filing": [
         "13F: 기관지분율 -88.03%p",
@@ -13858,8 +13857,9 @@ window.LIVE_STOCKS = [
         "* FMP 실시간 공시 반영"
       ],
       "value": [
-        "Forward PER -31.8 · 이익 성장 반영",
-        "PBR 27.4 · 부담"
+        "Forward PER -31.0 · 이익 성장 반영",
+        "PBR 27.4 · 부담",
+        "FCF 음수 · 현금유출"
       ]
     }
   },
@@ -13897,7 +13897,7 @@ window.LIVE_STOCKS = [
       ],
       "value": [
         "PER 11.0 · 극심 저평가",
-        "Forward PER 8.7 · 이익 성장 반영",
+        "Forward PER 8.6 · 이익 성장 반영",
         "PEG 0.71 · 성장률 대비 저평가"
       ]
     }
@@ -14266,7 +14266,7 @@ window.LIVE_STOCKS = [
       ],
       "macro": [
         "NEUTRAL · VIX 15.2 · US10Y 4.69%",
-        "DXY 99.6 약세 · 성장주 유리"
+        "DXY 99.7 약세 · 성장주 유리"
       ],
       "filing": [
         "13F: 기관지분율 -60.55%p",
@@ -14309,7 +14309,7 @@ window.LIVE_STOCKS = [
         "13F: 기관지분율 -70.73%p",
         "P/C비율 급등 +571% (헤지 강화)",
         "13F: 보유기관 404곳 · 지분율 13.0% (2026Q2)",
-        "Form 4: 매도 우세 P1/S8",
+        "Form 4: 매도 우세 P0/S7",
         "8-K: 최근 60일 이벤트 4건 (활발)"
       ],
       "value": [
@@ -14326,12 +14326,12 @@ window.LIVE_STOCKS = [
     "tech": 43,
     "macro": 55,
     "filing": 45,
-    "value": 76,
-    "total": 51,
+    "value": 84,
+    "total": 52,
     "consensus": 1,
     "signal": "HOLD",
-    "ev": 0.03,
-    "target": 0,
+    "ev": 0.05,
+    "target": 1,
     "hitl": false,
     "reasons": {
       "tech": [
@@ -14350,7 +14350,8 @@ window.LIVE_STOCKS = [
       "value": [
         "PER 14.4 · 저평가",
         "Forward PER 8.9 · 이익 성장 반영",
-        "PEG 0.65 · 성장률 대비 저평가"
+        "PEG 0.64 · 성장률 대비 저평가",
+        "FCF Yield 17.8% · 우수"
       ]
     }
   },
@@ -14527,7 +14528,7 @@ window.LIVE_STOCKS = [
       ],
       "macro": [
         "NEUTRAL · VIX 15.2 · US10Y 4.69%",
-        "DXY 99.6 약세 · 성장주 유리"
+        "DXY 99.7 약세 · 성장주 유리"
       ],
       "filing": [
         "13F: 기관지분율 -56.74%p",
@@ -14562,7 +14563,7 @@ window.LIVE_STOCKS = [
       ],
       "macro": [
         "NEUTRAL · VIX 15.2 · US10Y 4.69%",
-        "DXY 99.6 약세 · 성장주 유리"
+        "DXY 99.7 약세 · 성장주 유리"
       ],
       "filing": [
         "13F: 기관지분율 -39.98%p",
@@ -14573,7 +14574,7 @@ window.LIVE_STOCKS = [
       "value": [
         "PER 58.9 · 프리미엄",
         "Forward PER 11.5 · 이익 성장 반영",
-        "PEG 0.95 · 성장률 대비 저평가",
+        "PEG 0.97 · 성장률 대비 저평가",
         "FCF Yield 5.4% · 우수"
       ]
     }
@@ -14647,7 +14648,7 @@ window.LIVE_STOCKS = [
       ],
       "value": [
         "PER 30.3 · 적정",
-        "Forward PER 11.9 · 이익 성장 반영",
+        "Forward PER 11.8 · 이익 성장 반영",
         "FCF Yield 12.0% · 우수"
       ]
     }
@@ -14723,7 +14724,7 @@ window.LIVE_STOCKS = [
       ],
       "value": [
         "PER 50.6 · 프리미엄",
-        "PEG 8.25 · 성장률 대비 부담",
+        "PEG 8.71 · 성장률 대비 부담",
         "FCF Yield 6.6% · 우수"
       ]
     }
@@ -14896,7 +14897,7 @@ window.LIVE_STOCKS = [
       ],
       "macro": [
         "NEUTRAL · VIX 15.2 · US10Y 4.69%",
-        "DXY 99.6 약세 · 성장주 유리"
+        "DXY 99.7 약세 · 성장주 유리"
       ],
       "filing": [
         "13F: 기관지분율 -67.90%p",
@@ -14908,7 +14909,7 @@ window.LIVE_STOCKS = [
       "value": [
         "PER 29.7 · 적정",
         "Forward PER 16.5 · 이익 성장 반영",
-        "PEG 0.95 · 성장률 대비 저평가",
+        "PEG 0.98 · 성장률 대비 저평가",
         "FCF Yield 5.5% · 우수"
       ]
     }
@@ -14959,11 +14960,11 @@ window.LIVE_STOCKS = [
     "tech": 70,
     "macro": 55,
     "filing": 40,
-    "value": 50,
-    "total": 55,
+    "value": 42,
+    "total": 54,
     "consensus": 1,
     "signal": "HOLD",
-    "ev": 0.41,
+    "ev": 0.38,
     "target": 5,
     "hitl": false,
     "reasons": {
@@ -14984,9 +14985,8 @@ window.LIVE_STOCKS = [
         "* FMP 실시간 공시 반영"
       ],
       "value": [
-        "PER 22.1 · 적정",
-        "PBR 43.4 · 부담",
-        "PEG 0.84 · 성장률 대비 저평가"
+        "PER 22.0 · 적정",
+        "PBR 43.4 · 부담"
       ]
     }
   },
@@ -14998,12 +14998,12 @@ window.LIVE_STOCKS = [
     "tech": 50,
     "macro": 55,
     "filing": 53,
-    "value": 68,
-    "total": 55,
+    "value": 60,
+    "total": 53,
     "consensus": 0,
     "signal": "HOLD",
-    "ev": -0.04,
-    "target": 0,
+    "ev": -0.07,
+    "target": -1,
     "hitl": false,
     "reasons": {
       "tech": [
@@ -15017,12 +15017,13 @@ window.LIVE_STOCKS = [
       "filing": [
         "13F: 기관지분율 -22.94%p",
         "13F: 보유기관 364곳 · 지분율 6.4% (2026Q2)",
-        "8-K: 최근 60일 이벤트 4건 (활발)",
+        "8-K: 최근 60일 이벤트 3건 (활발)",
         "* FMP 실시간 공시 반영"
       ],
       "value": [
         "PER 15.3 · 저평가",
-        "PEG 0.53 · 성장률 대비 저평가"
+        "PEG 0.53 · 성장률 대비 저평가",
+        "FCF 음수 · 현금유출"
       ]
     }
   },
@@ -15095,7 +15096,7 @@ window.LIVE_STOCKS = [
       ],
       "value": [
         "PER 18.8 · 적정",
-        "PEG 3.73 · 성장률 대비 부담"
+        "PEG 3.76 · 성장률 대비 부담"
       ]
     }
   },
@@ -15127,7 +15128,7 @@ window.LIVE_STOCKS = [
         "13F: 기관지분율 -56.18%p",
         "P/C비율 급등 +93% (헤지 강화)",
         "13F: 보유기관 576곳 · 지분율 25.2% (2026Q2)",
-        "Form 4: 매도 우세 P0/S8",
+        "Form 4: 매도 우세 P0/S7",
         "8-K: 최근 60일 이벤트 3건 (활발)"
       ],
       "value": [
@@ -15145,11 +15146,11 @@ window.LIVE_STOCKS = [
     "tech": 70,
     "macro": 55,
     "filing": 50,
-    "value": 58,
-    "total": 59,
+    "value": 50,
+    "total": 58,
     "consensus": 1,
     "signal": "HOLD",
-    "ev": 0.54,
+    "ev": 0.51,
     "target": 6,
     "hitl": false,
     "reasons": {
@@ -15170,8 +15171,7 @@ window.LIVE_STOCKS = [
       ],
       "value": [
         "PER 40.8 · 프리미엄",
-        "Forward PER 23.0 · 이익 성장 반영",
-        "PEG 0.98 · 성장률 대비 저평가"
+        "Forward PER 23.0 · 이익 성장 반영"
       ]
     }
   },
@@ -15198,7 +15198,7 @@ window.LIVE_STOCKS = [
       ],
       "macro": [
         "NEUTRAL · VIX 15.2 · US10Y 4.69%",
-        "DXY 99.6 약세 · 성장주 유리"
+        "DXY 99.7 약세 · 성장주 유리"
       ],
       "filing": [
         "13F: 기관지분율 -8.96%p",
@@ -15209,7 +15209,7 @@ window.LIVE_STOCKS = [
       "value": [
         "PER 12.9 · 저평가",
         "PBR 0.94 · 자산가치 이하",
-        "PEG 0.83 · 성장률 대비 저평가",
+        "PEG 0.82 · 성장률 대비 저평가",
         "FCF Yield 21.4% · 우수"
       ]
     }
@@ -15237,7 +15237,7 @@ window.LIVE_STOCKS = [
       ],
       "macro": [
         "NEUTRAL · VIX 15.2 · US10Y 4.69%",
-        "DXY 99.6 약세 · 성장주 유리"
+        "DXY 99.7 약세 · 성장주 유리"
       ],
       "filing": [
         "13F: 기관지분율 -5.73%p",
@@ -15247,7 +15247,7 @@ window.LIVE_STOCKS = [
         "* FMP 실시간 공시 반영"
       ],
       "value": [
-        "PER 9.2 · 극심 저평가",
+        "PER 9.1 · 극심 저평가",
         "PEG 0.59 · 성장률 대비 저평가",
         "FCF Yield 13.8% · 우수"
       ]
@@ -15278,7 +15278,7 @@ window.LIVE_STOCKS = [
       ],
       "macro": [
         "NEUTRAL · VIX 15.2 · US10Y 4.69%",
-        "DXY 99.6 약세 · 성장주 유리"
+        "DXY 99.7 약세 · 성장주 유리"
       ],
       "filing": [
         "13F: 기관지분율 -29.54%p",
@@ -15506,12 +15506,12 @@ window.LIVE_STOCKS = [
         "13F: 기관지분율 -64.88%p",
         "P/C비율 급등 +205% (헤지 강화)",
         "13F: 보유기관 486곳 · 지분율 24.3% (2026Q2)",
-        "Form 4: 매도 우세 P0/S32",
+        "Form 4: 매도 우세 P0/S31",
         "* FMP 실시간 공시 반영"
       ],
       "value": [
         "PER 33.6 · 적정",
-        "PEG 0.36 · 성장률 대비 저평가"
+        "PEG 0.44 · 성장률 대비 저평가"
       ]
     }
   },
@@ -15697,7 +15697,7 @@ window.LIVE_STOCKS = [
         "13F: 기관지분율 -55.11%p",
         "P/C비율 급등 +235% (헤지 강화)",
         "13F: 보유기관 660곳 · 지분율 30.0% (2026Q2)",
-        "Form 4: 매도 우세 P0/S15",
+        "Form 4: 매도 우세 P0/S14",
         "* FMP 실시간 공시 반영"
       ],
       "value": [
@@ -15739,7 +15739,7 @@ window.LIVE_STOCKS = [
       "value": [
         "PER 25.4 · 적정",
         "PBR 8.9 · 부담",
-        "PEG 0.40 · 성장률 대비 저평가"
+        "PEG 0.41 · 성장률 대비 저평가"
       ]
     }
   },
@@ -15830,11 +15830,11 @@ window.LIVE_STOCKS = [
     "tech": 43,
     "macro": 55,
     "filing": 53,
-    "value": 78,
-    "total": 54,
+    "value": 88,
+    "total": 55,
     "consensus": 1,
     "signal": "HOLD",
-    "ev": -0.04,
+    "ev": -0.01,
     "target": 0,
     "hitl": false,
     "reasons": {
@@ -15854,7 +15854,8 @@ window.LIVE_STOCKS = [
       ],
       "value": [
         "PER 7.8 · 극심 저평가",
-        "Forward PER 6.0 · 이익 성장 반영"
+        "Forward PER 6.0 · 이익 성장 반영",
+        "PBR 1.00 · 자산가치 이하"
       ]
     }
   },
@@ -15941,11 +15942,11 @@ window.LIVE_STOCKS = [
     "tech": 43,
     "macro": 55,
     "filing": 50,
-    "value": 78,
-    "total": 53,
+    "value": 73,
+    "total": 52,
     "consensus": 1,
     "signal": "HOLD",
-    "ev": -0.09,
+    "ev": -0.11,
     "target": -1,
     "hitl": false,
     "reasons": {
@@ -15964,6 +15965,7 @@ window.LIVE_STOCKS = [
       ],
       "value": [
         "PER 9.2 · 극심 저평가",
+        "PEG 3.01 · 성장률 대비 부담",
         "FCF Yield 7.9% · 우수"
       ]
     }
@@ -16028,7 +16030,7 @@ window.LIVE_STOCKS = [
       ],
       "macro": [
         "NEUTRAL · VIX 15.2 · US10Y 4.69%",
-        "DXY 99.6 약세 · 성장주 유리"
+        "DXY 99.7 약세 · 성장주 유리"
       ],
       "filing": [
         "13F: 기관지분율 -34.81%p",
@@ -16107,7 +16109,7 @@ window.LIVE_STOCKS = [
       "value": [
         "PER 33.2 · 적정",
         "Forward PER 10.2 · 이익 성장 반영",
-        "PEG 0.56 · 성장률 대비 저평가"
+        "PEG 0.55 · 성장률 대비 저평가"
       ]
     }
   },
@@ -16145,7 +16147,7 @@ window.LIVE_STOCKS = [
         "PER 11.1 · 극심 저평가",
         "PBR 0.01 · 자산가치 이하",
         "PEG 0.77 · 성장률 대비 저평가",
-        "FCF Yield 35601.9% · 우수"
+        "FCF Yield 35221.0% · 우수"
       ]
     }
   },
@@ -16290,7 +16292,7 @@ window.LIVE_STOCKS = [
       "value": [
         "PER 35.9 · 적정",
         "Forward PER 22.3 · 이익 성장 반영",
-        "PEG 0.79 · 성장률 대비 저평가"
+        "PEG 0.78 · 성장률 대비 저평가"
       ]
     }
   },
@@ -16363,7 +16365,7 @@ window.LIVE_STOCKS = [
       ],
       "value": [
         "PER 15.4 · 저평가",
-        "PEG 0.88 · 성장률 대비 저평가"
+        "PEG 0.87 · 성장률 대비 저평가"
       ]
     }
   },
@@ -16472,7 +16474,7 @@ window.LIVE_STOCKS = [
         "13F: 기관지분율 -46.27%p",
         "13F: 보유기관 465곳 · 지분율 12.4% (2026Q2)",
         "Form 4: 매도 우세 P3/S46",
-        "8-K: 최근 60일 이벤트 12건 (활발)",
+        "8-K: 최근 60일 이벤트 11건 (활발)",
         "* FMP 실시간 공시 반영"
       ],
       "value": [
@@ -16514,7 +16516,7 @@ window.LIVE_STOCKS = [
       ],
       "value": [
         "PER 30.9 · 적정",
-        "PEG 0.91 · 성장률 대비 저평가"
+        "PEG 0.92 · 성장률 대비 저평가"
       ]
     }
   },
@@ -16541,7 +16543,7 @@ window.LIVE_STOCKS = [
       ],
       "macro": [
         "NEUTRAL · VIX 15.2 · US10Y 4.69%",
-        "DXY 99.6 약세 · 성장주 유리"
+        "DXY 99.7 약세 · 성장주 유리"
       ],
       "filing": [
         "13F: 기관지분율 -1.97%p",
@@ -16657,7 +16659,7 @@ window.LIVE_STOCKS = [
         "NEUTRAL · VIX 15.2 · US10Y 4.69%"
       ],
       "filing": [
-        "13F: 기관지분율 -49.45%p",
+        "13F: 기관지분율 -49.46%p",
         "P/C비율 급등 +132% (헤지 강화)",
         "13F: 보유기관 299곳 · 지분율 10.3% (2026Q2)",
         "8-K: 최근 60일 이벤트 없음",
@@ -16665,7 +16667,7 @@ window.LIVE_STOCKS = [
       ],
       "value": [
         "PER 10.5 · 극심 저평가",
-        "FCF Yield 9.0% · 우수"
+        "FCF Yield 9.1% · 우수"
       ]
     }
   },
@@ -16729,7 +16731,7 @@ window.LIVE_STOCKS = [
       ],
       "macro": [
         "NEUTRAL · VIX 15.2 · US10Y 4.69%",
-        "DXY 99.6 약세 · 성장주 유리"
+        "DXY 99.7 약세 · 성장주 유리"
       ],
       "filing": [
         "13F: 기관지분율 -71.04%p",
@@ -16767,12 +16769,12 @@ window.LIVE_STOCKS = [
       ],
       "macro": [
         "NEUTRAL · VIX 15.2 · US10Y 4.69%",
-        "DXY 99.6 약세 · 성장주 유리"
+        "DXY 99.7 약세 · 성장주 유리"
       ],
       "filing": [
         "13F: 기관지분율 -63.12%p",
         "13F: 보유기관 708곳 · 지분율 22.6% (2026Q2)",
-        "Form 4: 순매수 P2/S0",
+        "Form 4: 순매수 P1/S0",
         "8-K: 최근 60일 이벤트 3건 (활발)",
         "* FMP 실시간 공시 반영"
       ],
@@ -16814,7 +16816,7 @@ window.LIVE_STOCKS = [
       ],
       "value": [
         "PER 13.8 · 저평가",
-        "PEG 0.98 · 성장률 대비 저평가",
+        "PEG 0.96 · 성장률 대비 저평가",
         "FCF 음수 · 현금유출"
       ]
     }
@@ -16843,7 +16845,7 @@ window.LIVE_STOCKS = [
         "NEUTRAL · VIX 15.2 · US10Y 4.69%"
       ],
       "filing": [
-        "13F: 기관지분율 -65.09%p",
+        "13F: 기관지분율 -65.10%p",
         "P/C비율 급등 +59% (헤지 강화)",
         "13F: 보유기관 592곳 · 지분율 27.0% (2026Q2)",
         "* FMP 실시간 공시 반영"
@@ -17028,12 +17030,12 @@ window.LIVE_STOCKS = [
       ],
       "macro": [
         "NEUTRAL · VIX 15.2 · US10Y 4.69%",
-        "DXY 99.6 약세 · 성장주 유리"
+        "DXY 99.7 약세 · 성장주 유리"
       ],
       "filing": [
         "13F: 기관지분율 -64.92%p",
         "13F: 보유기관 504곳 · 지분율 29.8% (2026Q2)",
-        "Form 4: 매도 우세 P0/S13",
+        "Form 4: 매도 우세 P0/S12",
         "* FMP 실시간 공시 반영"
       ],
       "value": [
@@ -17102,7 +17104,7 @@ window.LIVE_STOCKS = [
       ],
       "macro": [
         "NEUTRAL · VIX 15.2 · US10Y 4.69%",
-        "DXY 99.6 약세 · 성장주 유리"
+        "DXY 99.7 약세 · 성장주 유리"
       ],
       "filing": [
         "13F: 기관지분율 -75.86%p",
@@ -17113,7 +17115,7 @@ window.LIVE_STOCKS = [
       "value": [
         "PER 53.1 · 프리미엄",
         "Forward PER 18.0 · 이익 성장 반영",
-        "PEG 0.24 · 성장률 대비 저평가",
+        "PEG 0.25 · 성장률 대비 저평가",
         "FCF Yield 5.2% · 우수"
       ]
     }
@@ -17264,7 +17266,7 @@ window.LIVE_STOCKS = [
       ],
       "value": [
         "PER 14.6 · 저평가",
-        "PEG 5.95 · 성장률 대비 부담",
+        "PEG 5.81 · 성장률 대비 부담",
         "FCF 음수 · 현금유출"
       ]
     }
@@ -17277,11 +17279,11 @@ window.LIVE_STOCKS = [
     "tech": 28,
     "macro": 60,
     "filing": 35,
-    "value": 58,
-    "total": 41,
+    "value": 50,
+    "total": 40,
     "consensus": 0,
     "signal": "AVOID",
-    "ev": -0.32,
+    "ev": -0.35,
     "target": -4,
     "hitl": true,
     "reasons": {
@@ -17292,7 +17294,7 @@ window.LIVE_STOCKS = [
       ],
       "macro": [
         "NEUTRAL · VIX 15.2 · US10Y 4.69%",
-        "DXY 99.6 약세 · 성장주 유리"
+        "DXY 99.7 약세 · 성장주 유리"
       ],
       "filing": [
         "13F: 기관지분율 -47.24%p",
@@ -17304,8 +17306,7 @@ window.LIVE_STOCKS = [
       "value": [
         "PER 37.6 · 적정",
         "Forward PER 16.8 · 이익 성장 반영",
-        "PBR 9.5 · 부담",
-        "PEG 0.98 · 성장률 대비 저평가"
+        "PBR 9.5 · 부담"
       ]
     }
   },
@@ -17442,7 +17443,7 @@ window.LIVE_STOCKS = [
       ],
       "macro": [
         "NEUTRAL · VIX 15.2 · US10Y 4.69%",
-        "DXY 99.6 약세 · 성장주 유리"
+        "DXY 99.7 약세 · 성장주 유리"
       ],
       "filing": [
         "13F: 기관지분율 -41.63%p",
@@ -17539,13 +17540,13 @@ window.LIVE_STOCKS = [
     "sec": "제약/바이오",
     "tech": 91,
     "macro": 60,
-    "filing": 56,
+    "filing": 53,
     "value": 53,
-    "total": 69,
+    "total": 68,
     "consensus": 1,
     "signal": "HOLD",
-    "ev": 0.82,
-    "target": 10,
+    "ev": 0.79,
+    "target": 9,
     "hitl": false,
     "reasons": {
       "tech": [
@@ -17556,19 +17557,18 @@ window.LIVE_STOCKS = [
       ],
       "macro": [
         "NEUTRAL · VIX 15.2 · US10Y 4.69%",
-        "DXY 99.6 약세 · 성장주 유리"
+        "DXY 99.7 약세 · 성장주 유리"
       ],
       "filing": [
         "13F: 기관지분율 -66.14%p",
         "P/C비율 하락 -97% (헤지 완화)",
         "13F: 보유기관 582곳 · 지분율 25.9% (2026Q2)",
-        "8-K: 최근 60일 이벤트 4건 (활발)",
         "* FMP 실시간 공시 반영"
       ],
       "value": [
         "PER 36.9 · 적정",
         "Forward PER 12.5 · 이익 성장 반영",
-        "PEG 4.97 · 성장률 대비 부담"
+        "PEG 5.01 · 성장률 대비 부담"
       ]
     }
   },
@@ -17633,10 +17633,10 @@ window.LIVE_STOCKS = [
       ],
       "macro": [
         "NEUTRAL · VIX 15.2 · US10Y 4.69%",
-        "DXY 99.6 약세 · 성장주 유리"
+        "DXY 99.7 약세 · 성장주 유리"
       ],
       "filing": [
-        "13F: 기관지분율 -66.48%p",
+        "13F: 기관지분율 -66.50%p",
         "13F: 보유기관 827곳 · 지분율 30.3% (2026Q2)",
         "Form 4: 순매수 P2/S0",
         "* FMP 실시간 공시 반영"
@@ -17672,7 +17672,7 @@ window.LIVE_STOCKS = [
       ],
       "macro": [
         "NEUTRAL · VIX 15.2 · US10Y 4.69%",
-        "DXY 99.6 약세 · 성장주 유리"
+        "DXY 99.7 약세 · 성장주 유리"
       ],
       "filing": [
         "13F: 신규진입 급감 -372곳",
@@ -17731,11 +17731,11 @@ window.LIVE_STOCKS = [
     "tech": 43,
     "macro": 55,
     "filing": 48,
-    "value": 80,
-    "total": 52,
+    "value": 70,
+    "total": 51,
     "consensus": 1,
     "signal": "HOLD",
-    "ev": -0.05,
+    "ev": -0.08,
     "target": -1,
     "hitl": false,
     "reasons": {
@@ -17754,8 +17754,7 @@ window.LIVE_STOCKS = [
         "* FMP 실시간 공시 반영"
       ],
       "value": [
-        "PER 9.3 · 극심 저평가",
-        "PBR 0.96 · 자산가치 이하"
+        "PER 9.3 · 극심 저평가"
       ]
     }
   },
@@ -17892,7 +17891,7 @@ window.LIVE_STOCKS = [
       ],
       "macro": [
         "NEUTRAL · VIX 15.2 · US10Y 4.69%",
-        "DXY 99.6 약세 · 성장주 유리"
+        "DXY 99.7 약세 · 성장주 유리"
       ],
       "filing": [
         "13F: 기관지분율 -42.41%p",
@@ -17942,7 +17941,7 @@ window.LIVE_STOCKS = [
       "value": [
         "PER 28.3 · 적정",
         "PBR 15.9 · 부담",
-        "PEG 3.25 · 성장률 대비 부담"
+        "PEG 3.31 · 성장률 대비 부담"
       ]
     }
   },
@@ -17992,13 +17991,13 @@ window.LIVE_STOCKS = [
     "tech": 40,
     "macro": 60,
     "filing": 35,
-    "value": 58,
-    "total": 45,
+    "value": 50,
+    "total": 44,
     "consensus": 0,
-    "signal": "HOLD",
-    "ev": -0.4,
+    "signal": "AVOID",
+    "ev": -0.43,
     "target": -5,
-    "hitl": false,
+    "hitl": true,
     "reasons": {
       "tech": [
         "단기 역배열 (P<54.7<69.2)",
@@ -18008,7 +18007,7 @@ window.LIVE_STOCKS = [
       ],
       "macro": [
         "NEUTRAL · VIX 15.2 · US10Y 4.69%",
-        "DXY 99.6 약세 · 성장주 유리"
+        "DXY 99.7 약세 · 성장주 유리"
       ],
       "filing": [
         "13F: 기관지분율 -99.34%p",
@@ -18019,8 +18018,7 @@ window.LIVE_STOCKS = [
       ],
       "value": [
         "PER 42.1 · 프리미엄",
-        "Forward PER 20.6 · 이익 성장 반영",
-        "PEG 0.99 · 성장률 대비 저평가"
+        "Forward PER 20.6 · 이익 성장 반영"
       ]
     }
   },
@@ -18083,7 +18081,7 @@ window.LIVE_STOCKS = [
       ],
       "macro": [
         "NEUTRAL · VIX 15.2 · US10Y 4.69%",
-        "DXY 99.6 약세 · 성장주 유리"
+        "DXY 99.7 약세 · 성장주 유리"
       ],
       "filing": [
         "13F: 기관지분율 -80.42%p",
@@ -18096,7 +18094,7 @@ window.LIVE_STOCKS = [
         "PER 38.2 · 적정",
         "Forward PER 17.4 · 이익 성장 반영",
         "PBR 21.6 · 부담",
-        "PEG 0.43 · 성장률 대비 저평가"
+        "PEG 0.42 · 성장률 대비 저평가"
       ]
     }
   },
@@ -18123,7 +18121,7 @@ window.LIVE_STOCKS = [
       ],
       "macro": [
         "NEUTRAL · VIX 15.2 · US10Y 4.69%",
-        "DXY 99.6 약세 · 성장주 유리"
+        "DXY 99.7 약세 · 성장주 유리"
       ],
       "filing": [
         "13F: 기관지분율 -46.91%p",
@@ -18349,7 +18347,7 @@ window.LIVE_STOCKS = [
       ],
       "macro": [
         "NEUTRAL · VIX 15.2 · US10Y 4.69%",
-        "DXY 99.6 약세 · 성장주 유리"
+        "DXY 99.7 약세 · 성장주 유리"
       ],
       "filing": [
         "13F: 기관지분율 -52.70%p",
@@ -18387,7 +18385,7 @@ window.LIVE_STOCKS = [
       ],
       "macro": [
         "NEUTRAL · VIX 15.2 · US10Y 4.69%",
-        "DXY 99.6 약세 · 성장주 유리"
+        "DXY 99.7 약세 · 성장주 유리"
       ],
       "filing": [
         "13F: 기관지분율 -65.99%p",
@@ -18495,7 +18493,7 @@ window.LIVE_STOCKS = [
       ],
       "macro": [
         "NEUTRAL · VIX 15.2 · US10Y 4.69%",
-        "DXY 99.6 약세 · 성장주 유리"
+        "DXY 99.7 약세 · 성장주 유리"
       ],
       "filing": [
         "13F: 기관지분율 -50.78%p",
@@ -18508,7 +18506,7 @@ window.LIVE_STOCKS = [
         "PER 100.2 · 극심 프리미엄",
         "Forward PER 38.8 · 이익 성장 반영",
         "PBR 9.6 · 부담",
-        "PEG 6.08 · 성장률 대비 부담"
+        "PEG 6.45 · 성장률 대비 부담"
       ]
     }
   },
@@ -18572,7 +18570,7 @@ window.LIVE_STOCKS = [
       ],
       "macro": [
         "NEUTRAL · VIX 15.2 · US10Y 4.69%",
-        "DXY 99.6 약세 · 성장주 유리"
+        "DXY 99.7 약세 · 성장주 유리"
       ],
       "filing": [
         "13F: 기관지분율 -72.85%p",
@@ -18646,7 +18644,7 @@ window.LIVE_STOCKS = [
       ],
       "macro": [
         "NEUTRAL · VIX 15.2 · US10Y 4.69%",
-        "DXY 99.6 약세 · 성장주 유리"
+        "DXY 99.7 약세 · 성장주 유리"
       ],
       "filing": [
         "13F: 기관지분율 -85.99%p",
@@ -18656,7 +18654,7 @@ window.LIVE_STOCKS = [
         "* FMP 실시간 공시 반영"
       ],
       "value": [
-        "PER 158.8 · 극심 프리미엄",
+        "PER 162.0 · 극심 프리미엄",
         "PBR 40.3 · 부담",
         "FCF 음수 · 현금유출"
       ]
@@ -18796,7 +18794,7 @@ window.LIVE_STOCKS = [
         "NEUTRAL · VIX 15.2 · US10Y 4.69%"
       ],
       "filing": [
-        "13F: 기관지분율 -55.41%p",
+        "13F: 기관지분율 -55.42%p",
         "P/C비율 하락 -66% (헤지 완화)",
         "13F: 보유기관 613곳 · 지분율 33.9% (2026Q2)",
         "* FMP 실시간 공시 반영"
@@ -18829,7 +18827,7 @@ window.LIVE_STOCKS = [
       ],
       "macro": [
         "NEUTRAL · VIX 15.2 · US10Y 4.69%",
-        "DXY 99.6 약세 · 성장주 유리"
+        "DXY 99.7 약세 · 성장주 유리"
       ],
       "filing": [
         "13F: 기관지분율 -38.01%p",
@@ -18841,7 +18839,7 @@ window.LIVE_STOCKS = [
       "value": [
         "PER 16.7 · 저평가",
         "Forward PER 11.1 · 이익 성장 반영",
-        "PEG 25.83 · 성장률 대비 부담"
+        "PEG 28.20 · 성장률 대비 부담"
       ]
     }
   },
@@ -18989,7 +18987,7 @@ window.LIVE_STOCKS = [
       ],
       "value": [
         "PER 11.1 · 극심 저평가",
-        "PEG 23.17 · 성장률 대비 부담"
+        "PEG 24.71 · 성장률 대비 부담"
       ]
     }
   },
@@ -19061,7 +19059,7 @@ window.LIVE_STOCKS = [
       ],
       "value": [
         "PER 18.4 · 적정",
-        "PEG 3.47 · 성장률 대비 부담"
+        "PEG 3.56 · 성장률 대비 부담"
       ]
     }
   },
@@ -19361,7 +19359,7 @@ window.LIVE_STOCKS = [
       "value": [
         "PER 25.5 · 적정",
         "Forward PER 10.8 · 이익 성장 반영",
-        "PEG 0.66 · 성장률 대비 저평가",
+        "PEG 0.68 · 성장률 대비 저평가",
         "FCF Yield 5.9% · 우수"
       ]
     }
@@ -19541,7 +19539,7 @@ window.LIVE_STOCKS = [
       ],
       "value": [
         "PER 14.7 · 저평가",
-        "PEG 4.87 · 성장률 대비 부담",
+        "PEG 4.84 · 성장률 대비 부담",
         "FCF Yield 11.5% · 우수"
       ]
     }
@@ -19580,7 +19578,7 @@ window.LIVE_STOCKS = [
       "value": [
         "PER 16.7 · 저평가",
         "Forward PER 11.0 · 이익 성장 반영",
-        "PEG 0.79 · 성장률 대비 저평가",
+        "PEG 0.78 · 성장률 대비 저평가",
         "FCF Yield 7.7% · 우수"
       ]
     }
@@ -19750,7 +19748,7 @@ window.LIVE_STOCKS = [
       ],
       "macro": [
         "NEUTRAL · VIX 15.2 · US10Y 4.69%",
-        "DXY 99.6 약세 · 성장주 유리"
+        "DXY 99.7 약세 · 성장주 유리"
       ],
       "filing": [
         "13F: 기관지분율 -62.04%p",
@@ -19828,7 +19826,7 @@ window.LIVE_STOCKS = [
       ],
       "macro": [
         "NEUTRAL · VIX 15.2 · US10Y 4.69%",
-        "DXY 99.6 약세 · 성장주 유리"
+        "DXY 99.7 약세 · 성장주 유리"
       ],
       "filing": [
         "13F: 기관지분율 -60.84%p",
@@ -19866,7 +19864,7 @@ window.LIVE_STOCKS = [
       ],
       "macro": [
         "NEUTRAL · VIX 15.2 · US10Y 4.69%",
-        "DXY 99.6 약세 · 성장주 유리"
+        "DXY 99.7 약세 · 성장주 유리"
       ],
       "filing": [
         "13F: 기관지분율 -58.84%p",
@@ -19903,7 +19901,7 @@ window.LIVE_STOCKS = [
       ],
       "macro": [
         "NEUTRAL · VIX 15.2 · US10Y 4.69%",
-        "DXY 99.6 약세 · 성장주 유리"
+        "DXY 99.7 약세 · 성장주 유리"
       ],
       "filing": [
         "13F: 기관지분율 -3.49%p",
@@ -19954,7 +19952,7 @@ window.LIVE_STOCKS = [
       "value": [
         "PER 12.4 · 저평가",
         "Forward PER 9.1 · 이익 성장 반영",
-        "PEG 0.91 · 성장률 대비 저평가",
+        "PEG 0.92 · 성장률 대비 저평가",
         "FCF Yield 8.5% · 우수"
       ]
     }
@@ -20005,11 +20003,11 @@ window.LIVE_STOCKS = [
     "tech": 40,
     "macro": 55,
     "filing": 43,
-    "value": 43,
+    "value": 38,
     "total": 44,
     "consensus": 0,
     "signal": "AVOID",
-    "ev": -0.4,
+    "ev": -0.42,
     "target": -5,
     "hitl": true,
     "reasons": {
@@ -20031,7 +20029,8 @@ window.LIVE_STOCKS = [
       ],
       "value": [
         "PER 1004.5 · 극심 프리미엄",
-        "Forward PER 52.2 · 이익 성장 반영"
+        "Forward PER 52.2 · 이익 성장 반영",
+        "PEG 7.44 · 성장률 대비 부담"
       ]
     }
   },
@@ -20060,7 +20059,7 @@ window.LIVE_STOCKS = [
       ],
       "macro": [
         "NEUTRAL · VIX 15.2 · US10Y 4.69%",
-        "DXY 99.6 약세 · 성장주 유리"
+        "DXY 99.7 약세 · 성장주 유리"
       ],
       "filing": [
         "13F: 기관지분율 -70.95%p",
@@ -20071,7 +20070,7 @@ window.LIVE_STOCKS = [
       ],
       "value": [
         "PER 127.0 · 극심 프리미엄",
-        "Forward PER 49.4 · 이익 성장 반영",
+        "Forward PER 51.0 · 이익 성장 반영",
         "PEG 12.52 · 성장률 대비 부담"
       ]
     }
@@ -20111,7 +20110,7 @@ window.LIVE_STOCKS = [
       "value": [
         "PER 23.9 · 적정",
         "Forward PER 12.6 · 이익 성장 반영",
-        "PEG 0.95 · 성장률 대비 저평가",
+        "PEG 0.89 · 성장률 대비 저평가",
         "FCF Yield 7.1% · 우수"
       ]
     }
@@ -20183,7 +20182,7 @@ window.LIVE_STOCKS = [
       ],
       "value": [
         "PER 18.6 · 적정",
-        "FCF Yield 6.1% · 우수"
+        "FCF Yield 5.1% · 우수"
       ]
     }
   },
@@ -20329,7 +20328,7 @@ window.LIVE_STOCKS = [
       "filing": [
         "13F: 기관지분율 -42.05%p",
         "13F: 보유기관 314곳 · 지분율 14.4% (2026Q2)",
-        "Form 4: 실제매수 클러스터 P51/S9 (90일)",
+        "Form 4: 실제매수 클러스터 P50/S8 (90일)",
         "* FMP 실시간 공시 반영"
       ],
       "value": [
@@ -20408,7 +20407,7 @@ window.LIVE_STOCKS = [
       "value": [
         "PER 68.4 · 극심 프리미엄",
         "Forward PER 20.2 · 이익 성장 반영",
-        "PEG 0.77 · 성장률 대비 저평가"
+        "PEG 0.75 · 성장률 대비 저평가"
       ]
     }
   },
@@ -20435,7 +20434,7 @@ window.LIVE_STOCKS = [
       ],
       "macro": [
         "NEUTRAL · VIX 15.2 · US10Y 4.69%",
-        "DXY 99.6 약세 · 성장주 유리"
+        "DXY 99.7 약세 · 성장주 유리"
       ],
       "filing": [
         "13F: 기관지분율 -60.35%p",
@@ -20547,7 +20546,7 @@ window.LIVE_STOCKS = [
       ],
       "macro": [
         "NEUTRAL · VIX 15.2 · US10Y 4.69%",
-        "DXY 99.6 약세 · 성장주 유리"
+        "DXY 99.7 약세 · 성장주 유리"
       ],
       "filing": [
         "13F: 기관지분율 -24.18%p",
@@ -20659,7 +20658,7 @@ window.LIVE_STOCKS = [
       ],
       "macro": [
         "NEUTRAL · VIX 15.2 · US10Y 4.69%",
-        "DXY 99.6 약세 · 성장주 유리"
+        "DXY 99.7 약세 · 성장주 유리"
       ],
       "filing": [
         "13F: 기관지분율 -72.81%p",
@@ -20671,7 +20670,7 @@ window.LIVE_STOCKS = [
         "PER 45.3 · 프리미엄",
         "Forward PER 35.5 · 이익 성장 반영",
         "PBR 8.3 · 부담",
-        "PEG 3.01 · 성장률 대비 부담"
+        "PEG 3.04 · 성장률 대비 부담"
       ]
     }
   },
@@ -20850,7 +20849,7 @@ window.LIVE_STOCKS = [
       ],
       "macro": [
         "NEUTRAL · VIX 15.2 · US10Y 4.69%",
-        "DXY 99.6 약세 · 성장주 유리"
+        "DXY 99.7 약세 · 성장주 유리"
       ],
       "filing": [
         "13F: 기관지분율 -76.27%p",
@@ -20861,7 +20860,7 @@ window.LIVE_STOCKS = [
       ],
       "value": [
         "PER 15.4 · 저평가",
-        "PEG 28.20 · 성장률 대비 부담"
+        "PEG 28.72 · 성장률 대비 부담"
       ]
     }
   },
@@ -20897,7 +20896,7 @@ window.LIVE_STOCKS = [
       ],
       "value": [
         "PER 11.4 · 극심 저평가",
-        "PEG 3.04 · 성장률 대비 부담",
+        "PEG 3.05 · 성장률 대비 부담",
         "FCF Yield 8.3% · 우수"
       ]
     }
@@ -21047,7 +21046,7 @@ window.LIVE_STOCKS = [
       ],
       "value": [
         "PER 33.6 · 적정",
-        "Forward PER 19.9 · 이익 성장 반영",
+        "Forward PER 20.0 · 이익 성장 반영",
         "PEG 0.73 · 성장률 대비 저평가"
       ]
     }
@@ -21094,13 +21093,13 @@ window.LIVE_STOCKS = [
     "sec": "산업재",
     "tech": 87,
     "macro": 55,
-    "filing": 43,
+    "filing": 53,
     "value": 70,
-    "total": 65,
+    "total": 68,
     "consensus": 2,
     "signal": "WATCH",
-    "ev": 0.57,
-    "target": 7,
+    "ev": 0.67,
+    "target": 8,
     "hitl": false,
     "reasons": {
       "tech": [
@@ -21115,8 +21114,8 @@ window.LIVE_STOCKS = [
         "13F: 기관지분율 -60.56%p",
         "P/C비율 하락 -65% (헤지 완화)",
         "13F: 보유기관 325곳 · 지분율 28.7% (2026Q2)",
-        "Form 4: 매도 우세 P0/S5",
-        "8-K: 최근 60일 이벤트 없음"
+        "8-K: 최근 60일 이벤트 없음",
+        "* FMP 실시간 공시 반영"
       ],
       "value": [
         "PER 7.5 · 극심 저평가",
@@ -21260,7 +21259,7 @@ window.LIVE_STOCKS = [
       ],
       "macro": [
         "NEUTRAL · VIX 15.2 · US10Y 4.69%",
-        "DXY 99.6 약세 · 성장주 유리"
+        "DXY 99.7 약세 · 성장주 유리"
       ],
       "filing": [
         "13F: 기관지분율 -74.75%p",
@@ -21302,7 +21301,7 @@ window.LIVE_STOCKS = [
         "NEUTRAL · VIX 15.2 · US10Y 4.69%"
       ],
       "filing": [
-        "13F: 기관지분율 -40.77%p",
+        "13F: 기관지분율 -40.78%p",
         "13F: 보유기관 260곳 · 지분율 21.5% (2026Q2)",
         "Form 4: 매도 우세 P0/S79",
         "* FMP 실시간 공시 반영"
@@ -21347,7 +21346,7 @@ window.LIVE_STOCKS = [
       "value": [
         "PER 37.5 · 적정",
         "Forward PER 22.6 · 이익 성장 반영",
-        "PEG 0.87 · 성장률 대비 저평가"
+        "PEG 0.88 · 성장률 대비 저평가"
       ]
     }
   },
@@ -21376,7 +21375,7 @@ window.LIVE_STOCKS = [
       ],
       "macro": [
         "NEUTRAL · VIX 15.2 · US10Y 4.69%",
-        "DXY 99.6 약세 · 성장주 유리"
+        "DXY 99.7 약세 · 성장주 유리"
       ],
       "filing": [
         "13F: 기관지분율 -6.90%p",
@@ -21416,7 +21415,7 @@ window.LIVE_STOCKS = [
       ],
       "macro": [
         "NEUTRAL · VIX 15.2 · US10Y 4.69%",
-        "DXY 99.6 약세 · 성장주 유리"
+        "DXY 99.7 약세 · 성장주 유리"
       ],
       "filing": [
         "13F: 기관지분율 -15.95%p",
@@ -21460,7 +21459,7 @@ window.LIVE_STOCKS = [
         "13F: 기관지분율 -50.62%p",
         "P/C비율 급등 +1515% (헤지 강화)",
         "13F: 보유기관 462곳 · 지분율 22.2% (2026Q2)",
-        "Form 4: 실제매수 클러스터 P61/S3 (90일)",
+        "Form 4: 실제매수 클러스터 P60/S3 (90일)",
         "* FMP 실시간 공시 반영"
       ],
       "value": [
@@ -21494,7 +21493,7 @@ window.LIVE_STOCKS = [
       ],
       "macro": [
         "NEUTRAL · VIX 15.2 · US10Y 4.69%",
-        "DXY 99.6 약세 · 성장주 유리"
+        "DXY 99.7 약세 · 성장주 유리"
       ],
       "filing": [
         "13F: 기관지분율 -56.31%p",
@@ -21532,7 +21531,7 @@ window.LIVE_STOCKS = [
       ],
       "macro": [
         "NEUTRAL · VIX 15.2 · US10Y 4.69%",
-        "DXY 99.6 약세 · 성장주 유리"
+        "DXY 99.7 약세 · 성장주 유리"
       ],
       "filing": [
         "13F: 기관지분율 -93.25%p",
@@ -21555,12 +21554,12 @@ window.LIVE_STOCKS = [
     "tech": 84,
     "macro": 55,
     "filing": 45,
-    "value": 37,
-    "total": 59,
+    "value": 42,
+    "total": 60,
     "consensus": 1,
     "signal": "HOLD",
-    "ev": 0.61,
-    "target": 7,
+    "ev": 0.63,
+    "target": 8,
     "hitl": false,
     "reasons": {
       "tech": [
@@ -21580,8 +21579,7 @@ window.LIVE_STOCKS = [
       ],
       "value": [
         "PER 26.1 · 적정",
-        "PBR 11.0 · 부담",
-        "PEG 3.88 · 성장률 대비 부담"
+        "PBR 11.0 · 부담"
       ]
     }
   },
@@ -21770,7 +21768,7 @@ window.LIVE_STOCKS = [
       ],
       "value": [
         "PER 14.0 · 저평가",
-        "PEG 19.15 · 성장률 대비 부담"
+        "PEG 19.42 · 성장률 대비 부담"
       ]
     }
   },
@@ -21797,7 +21795,7 @@ window.LIVE_STOCKS = [
       ],
       "macro": [
         "NEUTRAL · VIX 15.2 · US10Y 4.69%",
-        "DXY 99.6 약세 · 성장주 유리"
+        "DXY 99.7 약세 · 성장주 유리"
       ],
       "filing": [
         "13F: 기관지분율 -78.47%p",
@@ -21871,7 +21869,7 @@ window.LIVE_STOCKS = [
       ],
       "macro": [
         "NEUTRAL · VIX 15.2 · US10Y 4.69%",
-        "DXY 99.6 약세 · 성장주 유리"
+        "DXY 99.7 약세 · 성장주 유리"
       ],
       "filing": [
         "13F: 기관지분율 -64.88%p",
@@ -21979,7 +21977,7 @@ window.LIVE_STOCKS = [
       ],
       "macro": [
         "NEUTRAL · VIX 15.2 · US10Y 4.69%",
-        "DXY 99.6 약세 · 성장주 유리"
+        "DXY 99.7 약세 · 성장주 유리"
       ],
       "filing": [
         "13F: 기관지분율 -66.06%p",
@@ -22055,7 +22053,7 @@ window.LIVE_STOCKS = [
       ],
       "macro": [
         "NEUTRAL · VIX 15.2 · US10Y 4.69%",
-        "DXY 99.6 약세 · 성장주 유리"
+        "DXY 99.7 약세 · 성장주 유리"
       ],
       "filing": [
         "13F: 기관지분율 -59.13%p",
@@ -22066,7 +22064,7 @@ window.LIVE_STOCKS = [
       ],
       "value": [
         "PER 64.9 · 극심 프리미엄",
-        "Forward PER 39.0 · 이익 성장 반영",
+        "Forward PER 39.4 · 이익 성장 반영",
         "PBR 8.5 · 부담"
       ]
     }
@@ -22096,7 +22094,7 @@ window.LIVE_STOCKS = [
       ],
       "macro": [
         "NEUTRAL · VIX 15.2 · US10Y 4.69%",
-        "DXY 99.6 약세 · 성장주 유리"
+        "DXY 99.7 약세 · 성장주 유리"
       ],
       "filing": [
         "13F: 기관지분율 -89.15%p",
@@ -22212,7 +22210,7 @@ window.LIVE_STOCKS = [
       "value": [
         "PER 30.1 · 적정",
         "Forward PER 19.6 · 이익 성장 반영",
-        "PEG 0.72 · 성장률 대비 저평가"
+        "PEG 0.73 · 성장률 대비 저평가"
       ]
     }
   },
@@ -22361,7 +22359,7 @@ window.LIVE_STOCKS = [
       "value": [
         "PER 38.6 · 적정",
         "Forward PER 11.2 · 이익 성장 반영",
-        "PEG 0.64 · 성장률 대비 저평가"
+        "PEG 0.65 · 성장률 대비 저평가"
       ]
     }
   },
@@ -22397,7 +22395,7 @@ window.LIVE_STOCKS = [
       ],
       "value": [
         "PER 6.6 · 극심 저평가",
-        "PEG 0.24 · 성장률 대비 저평가",
+        "PEG 0.25 · 성장률 대비 저평가",
         "FCF Yield 12.0% · 우수"
       ]
     }
@@ -22447,11 +22445,11 @@ window.LIVE_STOCKS = [
     "tech": 88,
     "macro": 55,
     "filing": 61,
-    "value": 50,
-    "total": 68,
+    "value": 42,
+    "total": 66,
     "consensus": 1,
     "signal": "HOLD",
-    "ev": 0.77,
+    "ev": 0.74,
     "target": 9,
     "hitl": false,
     "reasons": {
@@ -22466,7 +22464,7 @@ window.LIVE_STOCKS = [
         "NEUTRAL · VIX 15.2 · US10Y 4.69%"
       ],
       "filing": [
-        "13F: 기관지분율 -71.66%p",
+        "13F: 기관지분율 -71.67%p",
         "P/C비율 하락 -120% (헤지 완화)",
         "13F: 보유기관 398곳 · 지분율 28.8% (2026Q2)",
         "Form 4: 순매수 P2/S1",
@@ -22474,7 +22472,6 @@ window.LIVE_STOCKS = [
       ],
       "value": [
         "PER 21.7 · 적정",
-        "PEG 0.90 · 성장률 대비 저평가",
         "FCF 음수 · 현금유출"
       ]
     }
@@ -22580,7 +22577,7 @@ window.LIVE_STOCKS = [
         "NEUTRAL · VIX 15.2 · US10Y 4.69%"
       ],
       "filing": [
-        "13F: 기관지분율 -44.97%p",
+        "13F: 기관지분율 -44.98%p",
         "P/C비율 하락 -67% (헤지 완화)",
         "13F: 보유기관 239곳 · 지분율 9.8% (2026Q2)",
         "* FMP 실시간 공시 반영"
@@ -22797,7 +22794,7 @@ window.LIVE_STOCKS = [
         "NEUTRAL · VIX 15.2 · US10Y 4.69%"
       ],
       "filing": [
-        "13F: 기관지분율 -66.00%p",
+        "13F: 기관지분율 -66.02%p",
         "P/C비율 하락 -74% (헤지 완화)",
         "13F: 보유기관 414곳 · 지분율 25.9% (2026Q2)",
         "Form 4: 실제매수 클러스터 P3/S0 (90일)",
@@ -22919,7 +22916,7 @@ window.LIVE_STOCKS = [
       "value": [
         "PER 46.0 · 프리미엄",
         "Forward PER 23.5 · 이익 성장 반영",
-        "PEG 0.81 · 성장률 대비 저평가"
+        "PEG 0.83 · 성장률 대비 저평가"
       ]
     }
   },
@@ -22946,7 +22943,7 @@ window.LIVE_STOCKS = [
       ],
       "macro": [
         "NEUTRAL · VIX 15.2 · US10Y 4.69%",
-        "DXY 99.6 약세 · 성장주 유리"
+        "DXY 99.7 약세 · 성장주 유리"
       ],
       "filing": [
         "13F: 기관지분율 -42.38%p",
@@ -23024,7 +23021,7 @@ window.LIVE_STOCKS = [
       ],
       "macro": [
         "NEUTRAL · VIX 15.2 · US10Y 4.69%",
-        "DXY 99.6 약세 · 성장주 유리"
+        "DXY 99.7 약세 · 성장주 유리"
       ],
       "filing": [
         "13F: 기관지분율 -64.97%p",
@@ -23280,7 +23277,7 @@ window.LIVE_STOCKS = [
       ],
       "macro": [
         "NEUTRAL · VIX 15.2 · US10Y 4.69%",
-        "DXY 99.6 약세 · 성장주 유리"
+        "DXY 99.7 약세 · 성장주 유리"
       ],
       "filing": [
         "13F: 기관지분율 -50.00%p",
@@ -23290,7 +23287,7 @@ window.LIVE_STOCKS = [
       ],
       "value": [
         "PER 4.0 · 극심 저평가",
-        "PEG 0.99 · 성장률 대비 저평가",
+        "PEG 0.96 · 성장률 대비 저평가",
         "FCF Yield 10.7% · 우수"
       ]
     }
@@ -23329,7 +23326,7 @@ window.LIVE_STOCKS = [
       "value": [
         "PER 25.2 · 적정",
         "Forward PER 10.4 · 이익 성장 반영",
-        "PEG 0.33 · 성장률 대비 저평가",
+        "PEG 0.32 · 성장률 대비 저평가",
         "FCF Yield 8.3% · 우수"
       ]
     }
@@ -23405,7 +23402,7 @@ window.LIVE_STOCKS = [
       "value": [
         "PER 18.1 · 적정",
         "Forward PER 11.8 · 이익 성장 반영",
-        "PEG 0.93 · 성장률 대비 저평가"
+        "PEG 0.89 · 성장률 대비 저평가"
       ]
     }
   },
@@ -23734,7 +23731,7 @@ window.LIVE_STOCKS = [
       ],
       "value": [
         "PER 19.8 · 적정",
-        "PEG 11.51 · 성장률 대비 부담"
+        "PEG 11.61 · 성장률 대비 부담"
       ]
     }
   },
@@ -23918,7 +23915,7 @@ window.LIVE_STOCKS = [
         "NEUTRAL · VIX 15.2 · US10Y 4.69%"
       ],
       "filing": [
-        "13F: 기관지분율 -68.52%p",
+        "13F: 기관지분율 -68.53%p",
         "P/C비율 하락 -72% (헤지 완화)",
         "13F: 보유기관 536곳 · 지분율 25.6% (2026Q2)",
         "* FMP 실시간 공시 반영"
@@ -24029,7 +24026,7 @@ window.LIVE_STOCKS = [
       ],
       "macro": [
         "NEUTRAL · VIX 15.2 · US10Y 4.69%",
-        "DXY 99.6 약세 · 성장주 유리"
+        "DXY 99.7 약세 · 성장주 유리"
       ],
       "filing": [
         "13F: 기관지분율 -2.22%p",
@@ -24039,8 +24036,8 @@ window.LIVE_STOCKS = [
       ],
       "value": [
         "PER 15.0 · 저평가",
-        "Forward PER 11.5 · 이익 성장 반영",
-        "PEG 0.95 · 성장률 대비 저평가"
+        "Forward PER 11.4 · 이익 성장 반영",
+        "PEG 0.94 · 성장률 대비 저평가"
       ]
     }
   },
@@ -24104,7 +24101,7 @@ window.LIVE_STOCKS = [
       ],
       "macro": [
         "NEUTRAL · VIX 15.2 · US10Y 4.69%",
-        "DXY 99.6 약세 · 성장주 유리"
+        "DXY 99.7 약세 · 성장주 유리"
       ],
       "filing": [
         "13F: 기관지분율 -11.53%p",
@@ -24181,12 +24178,12 @@ window.LIVE_STOCKS = [
       ],
       "macro": [
         "NEUTRAL · VIX 15.2 · US10Y 4.69%",
-        "DXY 99.6 약세 · 성장주 유리"
+        "DXY 99.7 약세 · 성장주 유리"
       ],
       "filing": [
         "13F: 기관지분율 -70.00%p",
         "13F: 보유기관 246곳 · 지분율 17.3% (2026Q2)",
-        "Form 4: 매도 우세 P0/S17",
+        "Form 4: 매도 우세 P0/S16",
         "* FMP 실시간 공시 반영"
       ],
       "value": [
@@ -24220,7 +24217,7 @@ window.LIVE_STOCKS = [
       ],
       "macro": [
         "NEUTRAL · VIX 15.2 · US10Y 4.69%",
-        "DXY 99.6 약세 · 성장주 유리"
+        "DXY 99.7 약세 · 성장주 유리"
       ],
       "filing": [
         "13F: 기관지분율 -65.34%p",
@@ -24305,7 +24302,7 @@ window.LIVE_STOCKS = [
       "value": [
         "PER 38.7 · 적정",
         "Forward PER 15.1 · 이익 성장 반영",
-        "PEG 0.52 · 성장률 대비 저평가",
+        "PEG 0.53 · 성장률 대비 저평가",
         "FCF 음수 · 현금유출"
       ]
     }
@@ -24416,7 +24413,7 @@ window.LIVE_STOCKS = [
         "8-K: 최근 60일 이벤트 3건 (활발)"
       ],
       "value": [
-        "PER 25.9 · 적정"
+        "PER 25.2 · 적정"
       ]
     }
   },
@@ -24519,7 +24516,7 @@ window.LIVE_STOCKS = [
       ],
       "macro": [
         "NEUTRAL · VIX 15.2 · US10Y 4.69%",
-        "DXY 99.6 약세 · 성장주 유리"
+        "DXY 99.7 약세 · 성장주 유리"
       ],
       "filing": [
         "13F: 기관지분율 -76.90%p",
@@ -24531,7 +24528,7 @@ window.LIVE_STOCKS = [
       "value": [
         "PER 23.4 · 적정",
         "Forward PER 10.6 · 이익 성장 반영",
-        "PEG 0.70 · 성장률 대비 저평가",
+        "PEG 0.68 · 성장률 대비 저평가",
         "FCF Yield 5.9% · 우수"
       ]
     }
@@ -24596,7 +24593,7 @@ window.LIVE_STOCKS = [
       ],
       "macro": [
         "NEUTRAL · VIX 15.2 · US10Y 4.69%",
-        "DXY 99.6 약세 · 성장주 유리"
+        "DXY 99.7 약세 · 성장주 유리"
       ],
       "filing": [
         "13F: 기관지분율 -39.91%p",
@@ -24835,7 +24832,7 @@ window.LIVE_STOCKS = [
       ],
       "value": [
         "PER 34.3 · 적정",
-        "PEG 3.18 · 성장률 대비 부담"
+        "PEG 3.26 · 성장률 대비 부담"
       ]
     }
   },
@@ -24943,7 +24940,7 @@ window.LIVE_STOCKS = [
         "13F: 기관지분율 -83.16%p",
         "P/C비율 급등 +40% (헤지 강화)",
         "13F: 보유기관 252곳 · 지분율 19.5% (2026Q2)",
-        "Form 4: 매도 우세 P0/S32",
+        "Form 4: 매도 우세 P0/S29",
         "8-K: 최근 60일 이벤트 없음"
       ],
       "value": [
@@ -25176,7 +25173,7 @@ window.LIVE_STOCKS = [
       "value": [
         "PER 34.5 · 적정",
         "Forward PER 17.0 · 이익 성장 반영",
-        "PEG 0.79 · 성장률 대비 저평가"
+        "PEG 0.70 · 성장률 대비 저평가"
       ]
     }
   },
@@ -25346,7 +25343,7 @@ window.LIVE_STOCKS = [
       ],
       "macro": [
         "NEUTRAL · VIX 15.2 · US10Y 4.69%",
-        "DXY 99.6 약세 · 성장주 유리"
+        "DXY 99.7 약세 · 성장주 유리"
       ],
       "filing": [
         "13F: 기관지분율 -79.30%p",
@@ -25371,12 +25368,12 @@ window.LIVE_STOCKS = [
     "tech": 80,
     "macro": 60,
     "filing": 53,
-    "value": 61,
-    "total": 65,
+    "value": 66,
+    "total": 66,
     "consensus": 1,
     "signal": "HOLD",
-    "ev": 0.61,
-    "target": 7,
+    "ev": 0.63,
+    "target": 8,
     "hitl": false,
     "reasons": {
       "tech": [
@@ -25386,7 +25383,7 @@ window.LIVE_STOCKS = [
       ],
       "macro": [
         "NEUTRAL · VIX 15.2 · US10Y 4.69%",
-        "DXY 99.6 약세 · 성장주 유리"
+        "DXY 99.7 약세 · 성장주 유리"
       ],
       "filing": [
         "13F: 기관지분율 -11.66%p",
@@ -25397,8 +25394,7 @@ window.LIVE_STOCKS = [
       "value": [
         "PER 31.5 · 적정",
         "Forward PER 21.6 · 이익 성장 반영",
-        "PEG 3.53 · 성장률 대비 부담",
-        "FCF Yield 5.9% · 우수"
+        "FCF Yield 6.0% · 우수"
       ]
     }
   },
@@ -25580,7 +25576,7 @@ window.LIVE_STOCKS = [
       ],
       "value": [
         "PER 8.5 · 극심 저평가",
-        "PEG 3.49 · 성장률 대비 부담",
+        "PEG 3.42 · 성장률 대비 부담",
         "FCF Yield 7.4% · 우수"
       ]
     }
@@ -25773,7 +25769,7 @@ window.LIVE_STOCKS = [
       "value": [
         "PER 17.1 · 저평가",
         "Forward PER 8.8 · 이익 성장 반영",
-        "FCF Yield 9.2% · 우수"
+        "FCF Yield 8.9% · 우수"
       ]
     }
   },
@@ -25951,7 +25947,7 @@ window.LIVE_STOCKS = [
         "NEUTRAL · VIX 15.2 · US10Y 4.69%"
       ],
       "filing": [
-        "13F: 기관지분율 -63.34%p",
+        "13F: 기관지분율 -63.35%p",
         "P/C비율 급등 +67% (헤지 강화)",
         "13F: 보유기관 473곳 · 지분율 30.7% (2026Q2)",
         "Form 4: 매도 우세 P0/S16",
@@ -26146,7 +26142,7 @@ window.LIVE_STOCKS = [
       "value": [
         "PER 48.4 · 프리미엄",
         "Forward PER 17.6 · 이익 성장 반영",
-        "PEG 0.46 · 성장률 대비 저평가"
+        "PEG 0.44 · 성장률 대비 저평가"
       ]
     }
   },
@@ -26365,7 +26361,7 @@ window.LIVE_STOCKS = [
         "PER 39.4 · 적정",
         "Forward PER 21.6 · 이익 성장 반영",
         "PBR 12.3 · 부담",
-        "PEG 0.91 · 성장률 대비 저평가"
+        "PEG 0.93 · 성장률 대비 저평가"
       ]
     }
   },
@@ -26540,7 +26536,7 @@ window.LIVE_STOCKS = [
       ],
       "macro": [
         "NEUTRAL · VIX 15.2 · US10Y 4.69%",
-        "DXY 99.6 약세 · 성장주 유리"
+        "DXY 99.7 약세 · 성장주 유리"
       ],
       "filing": [
         "13F: 기관지분율 -88.14%p",
@@ -26618,7 +26614,7 @@ window.LIVE_STOCKS = [
       ],
       "macro": [
         "NEUTRAL · VIX 15.2 · US10Y 4.69%",
-        "DXY 99.6 약세 · 성장주 유리"
+        "DXY 99.7 약세 · 성장주 유리"
       ],
       "filing": [
         "13F: 기관지분율 -58.05%p",
@@ -26630,7 +26626,7 @@ window.LIVE_STOCKS = [
       "value": [
         "PER 34.7 · 적정",
         "PBR 38.0 · 부담",
-        "PEG 3.15 · 성장률 대비 부담"
+        "PEG 3.16 · 성장률 대비 부담"
       ]
     }
   },
@@ -26700,7 +26696,7 @@ window.LIVE_STOCKS = [
       "filing": [
         "13F: 기관지분율 -65.63%p",
         "13F: 보유기관 168곳 · 지분율 12.6% (2026Q2)",
-        "Form 4: 실제매수 클러스터 P25/S10 (90일)",
+        "Form 4: 실제매수 클러스터 P22/S10 (90일)",
         "8-K: 최근 60일 이벤트 6건 (활발)",
         "* FMP 실시간 공시 반영"
       ],
@@ -26735,19 +26731,19 @@ window.LIVE_STOCKS = [
       ],
       "macro": [
         "NEUTRAL · VIX 15.2 · US10Y 4.69%",
-        "DXY 99.6 약세 · 성장주 유리"
+        "DXY 99.7 약세 · 성장주 유리"
       ],
       "filing": [
         "13F: 기관지분율 -71.31%p",
         "P/C비율 하락 -103% (헤지 완화)",
         "13F: 보유기관 396곳 · 지분율 28.2% (2026Q2)",
-        "Form 4: 매도 우세 P0/S27",
+        "Form 4: 매도 우세 P0/S26",
         "* FMP 실시간 공시 반영"
       ],
       "value": [
         "PER 23.9 · 적정",
         "Forward PER 13.4 · 이익 성장 반영",
-        "PEG 0.47 · 성장률 대비 저평가"
+        "PEG 0.48 · 성장률 대비 저평가"
       ]
     }
   },
@@ -26919,7 +26915,7 @@ window.LIVE_STOCKS = [
       ],
       "macro": [
         "NEUTRAL · VIX 15.2 · US10Y 4.69%",
-        "DXY 99.6 약세 · 성장주 유리"
+        "DXY 99.7 약세 · 성장주 유리"
       ],
       "filing": [
         "13F: 기관지분율 -29.80%p",
@@ -26931,8 +26927,8 @@ window.LIVE_STOCKS = [
       "value": [
         "PER 24.3 · 적정",
         "Forward PER 12.5 · 이익 성장 반영",
-        "PEG 0.82 · 성장률 대비 저평가",
-        "FCF Yield 11.6% · 우수"
+        "PEG 0.77 · 성장률 대비 저평가",
+        "FCF Yield 11.5% · 우수"
       ]
     }
   },
@@ -26980,11 +26976,11 @@ window.LIVE_STOCKS = [
     "tech": 66,
     "macro": 55,
     "filing": 56,
-    "value": 68,
-    "total": 61,
-    "consensus": 0,
+    "value": 76,
+    "total": 62,
+    "consensus": 1,
     "signal": "HOLD",
-    "ev": 0.58,
+    "ev": 0.61,
     "target": 7,
     "hitl": false,
     "reasons": {
@@ -27007,7 +27003,8 @@ window.LIVE_STOCKS = [
       ],
       "value": [
         "PER 13.4 · 저평가",
-        "Forward PER 8.4 · 이익 성장 반영"
+        "Forward PER 8.4 · 이익 성장 반영",
+        "FCF Yield 61.2% · 우수"
       ]
     }
   },
@@ -27035,7 +27032,7 @@ window.LIVE_STOCKS = [
       ],
       "macro": [
         "NEUTRAL · VIX 15.2 · US10Y 4.69%",
-        "DXY 99.6 약세 · 성장주 유리"
+        "DXY 99.7 약세 · 성장주 유리"
       ],
       "filing": [
         "13F: 기관지분율 -76.52%p",
@@ -27172,12 +27169,12 @@ window.LIVE_STOCKS = [
     "tech": 84,
     "macro": 60,
     "filing": 53,
-    "value": 61,
-    "total": 66,
+    "value": 66,
+    "total": 67,
     "consensus": 1,
     "signal": "HOLD",
-    "ev": 0.69,
-    "target": 8,
+    "ev": 0.71,
+    "target": 9,
     "hitl": false,
     "reasons": {
       "tech": [
@@ -27188,7 +27185,7 @@ window.LIVE_STOCKS = [
       ],
       "macro": [
         "NEUTRAL · VIX 15.2 · US10Y 4.69%",
-        "DXY 99.6 약세 · 성장주 유리"
+        "DXY 99.7 약세 · 성장주 유리"
       ],
       "filing": [
         "13F: 기관지분율 -53.23%p",
@@ -27199,8 +27196,7 @@ window.LIVE_STOCKS = [
       "value": [
         "PER 27.7 · 적정",
         "Forward PER 19.0 · 이익 성장 반영",
-        "PEG 3.07 · 성장률 대비 부담",
-        "FCF Yield 6.7% · 우수"
+        "FCF Yield 6.8% · 우수"
       ]
     }
   },
@@ -27315,7 +27311,7 @@ window.LIVE_STOCKS = [
       ],
       "value": [
         "PER 15.6 · 저평가",
-        "PEG 3.85 · 성장률 대비 부담"
+        "PEG 3.83 · 성장률 대비 부담"
       ]
     }
   },
@@ -27343,7 +27339,7 @@ window.LIVE_STOCKS = [
       ],
       "macro": [
         "NEUTRAL · VIX 15.2 · US10Y 4.69%",
-        "DXY 99.6 약세 · 성장주 유리"
+        "DXY 99.7 약세 · 성장주 유리"
       ],
       "filing": [
         "13F: 보유기관 1곳 · 지분율 0.0% (2026Q2)",
@@ -27379,7 +27375,7 @@ window.LIVE_STOCKS = [
       ],
       "macro": [
         "NEUTRAL · VIX 15.2 · US10Y 4.69%",
-        "DXY 99.6 약세 · 성장주 유리"
+        "DXY 99.7 약세 · 성장주 유리"
       ],
       "filing": [
         "13F: 기관지분율 -75.79%p",
@@ -27702,14 +27698,14 @@ window.LIVE_STOCKS = [
     "sec": "산업재",
     "tech": 40,
     "macro": 55,
-    "filing": 35,
+    "filing": 45,
     "value": 42,
-    "total": 42,
+    "total": 45,
     "consensus": 0,
-    "signal": "AVOID",
-    "ev": -0.49,
-    "target": -6,
-    "hitl": true,
+    "signal": "HOLD",
+    "ev": -0.39,
+    "target": -5,
+    "hitl": false,
     "reasons": {
       "tech": [
         "단기 역배열 (P<171.8<185.0)",
@@ -27724,7 +27720,6 @@ window.LIVE_STOCKS = [
         "13F: 기관지분율 -63.17%p",
         "P/C비율 급등 +84% (헤지 강화)",
         "13F: 보유기관 458곳 · 지분율 29.7% (2026Q2)",
-        "Form 4: 매도 우세 P0/S4",
         "* FMP 실시간 공시 반영"
       ],
       "value": [
@@ -27934,7 +27929,7 @@ window.LIVE_STOCKS = [
       ],
       "macro": [
         "NEUTRAL · VIX 15.2 · US10Y 4.69%",
-        "DXY 99.6 약세 · 성장주 유리"
+        "DXY 99.7 약세 · 성장주 유리"
       ],
       "filing": [
         "13F: 기관지분율 -69.42%p",
@@ -27944,7 +27939,7 @@ window.LIVE_STOCKS = [
       ],
       "value": [
         "PER 115.0 · 극심 프리미엄",
-        "Forward PER 31.0 · 이익 성장 반영"
+        "Forward PER 27.0 · 이익 성장 반영"
       ]
     }
   },
@@ -28156,7 +28151,7 @@ window.LIVE_STOCKS = [
         "NEUTRAL · VIX 15.2 · US10Y 4.69%"
       ],
       "filing": [
-        "13F: 기관지분율 -55.46%p",
+        "13F: 기관지분율 -55.55%p",
         "P/C비율 하락 -31% (헤지 완화)",
         "13F: 보유기관 333곳 · 지분율 20.3% (2026Q2)",
         "* FMP 실시간 공시 반영"
@@ -28229,7 +28224,7 @@ window.LIVE_STOCKS = [
       ],
       "macro": [
         "NEUTRAL · VIX 15.2 · US10Y 4.69%",
-        "DXY 99.6 약세 · 성장주 유리"
+        "DXY 99.7 약세 · 성장주 유리"
       ],
       "filing": [
         "13F: 기관지분율 -38.31%p",
@@ -28341,7 +28336,7 @@ window.LIVE_STOCKS = [
       ],
       "macro": [
         "NEUTRAL · VIX 15.2 · US10Y 4.69%",
-        "DXY 99.6 약세 · 성장주 유리"
+        "DXY 99.7 약세 · 성장주 유리"
       ],
       "filing": [
         "13F: 기관지분율 -56.74%p",
@@ -28351,8 +28346,8 @@ window.LIVE_STOCKS = [
       ],
       "value": [
         "PER 69.6 · 극심 프리미엄",
-        "Forward PER 10.0 · 이익 성장 반영",
-        "PEG 0.36 · 성장률 대비 저평가",
+        "Forward PER 9.9 · 이익 성장 반영",
+        "PEG 0.37 · 성장률 대비 저평가",
         "FCF Yield 8.9% · 우수"
       ]
     }
@@ -28456,7 +28451,7 @@ window.LIVE_STOCKS = [
       ],
       "macro": [
         "NEUTRAL · VIX 15.2 · US10Y 4.69%",
-        "DXY 99.6 약세 · 성장주 유리"
+        "DXY 99.7 약세 · 성장주 유리"
       ],
       "filing": [
         "13F: 기관지분율 -5.20%p",
@@ -28731,7 +28726,7 @@ window.LIVE_STOCKS = [
       "value": [
         "PER 41.8 · 프리미엄",
         "Forward PER 20.6 · 이익 성장 반영",
-        "PEG 0.99 · 성장률 대비 저평가"
+        "PEG 0.90 · 성장률 대비 저평가"
       ]
     }
   },
@@ -28825,7 +28820,7 @@ window.LIVE_STOCKS = [
       ],
       "macro": [
         "NEUTRAL · VIX 15.2 · US10Y 4.69%",
-        "DXY 99.6 약세 · 성장주 유리"
+        "DXY 99.7 약세 · 성장주 유리"
       ],
       "filing": [
         "13F: 기관지분율 -17.94%p",
@@ -28874,7 +28869,7 @@ window.LIVE_STOCKS = [
       ],
       "value": [
         "PER 10.4 · 극심 저평가",
-        "PEG 0.96 · 성장률 대비 저평가",
+        "PEG 0.99 · 성장률 대비 저평가",
         "FCF Yield 7.8% · 우수"
       ]
     }
@@ -28949,7 +28944,7 @@ window.LIVE_STOCKS = [
       "value": [
         "PER 33.3 · 적정",
         "Forward PER 26.3 · 이익 성장 반영",
-        "PEG 0.91 · 성장률 대비 저평가"
+        "PEG 0.90 · 성장률 대비 저평가"
       ]
     }
   },
@@ -28986,7 +28981,7 @@ window.LIVE_STOCKS = [
       ],
       "value": [
         "PER 56.4 · 프리미엄",
-        "PBR 14.6 · 부담",
+        "PBR 14.0 · 부담",
         "FCF 음수 · 현금유출"
       ]
     }
@@ -29087,7 +29082,7 @@ window.LIVE_STOCKS = [
       ],
       "macro": [
         "NEUTRAL · VIX 15.2 · US10Y 4.69%",
-        "DXY 99.6 약세 · 성장주 유리"
+        "DXY 99.7 약세 · 성장주 유리"
       ],
       "filing": [
         "13F: 기관지분율 -80.38%p",
@@ -29098,7 +29093,7 @@ window.LIVE_STOCKS = [
       "value": [
         "PER 62.9 · 극심 프리미엄",
         "Forward PER 14.9 · 이익 성장 반영",
-        "PEG 0.69 · 성장률 대비 저평가"
+        "PEG 0.70 · 성장률 대비 저평가"
       ]
     }
   },
@@ -29173,7 +29168,7 @@ window.LIVE_STOCKS = [
         "* FMP 실시간 공시 반영"
       ],
       "value": [
-        "PER 46.8 · 프리미엄"
+        "PER 46.6 · 프리미엄"
       ]
     }
   },
@@ -29201,7 +29196,7 @@ window.LIVE_STOCKS = [
       ],
       "macro": [
         "NEUTRAL · VIX 15.2 · US10Y 4.69%",
-        "DXY 99.6 약세 · 성장주 유리"
+        "DXY 99.7 약세 · 성장주 유리"
       ],
       "filing": [
         "13F: 기관지분율 -55.17%p",
@@ -29543,7 +29538,7 @@ window.LIVE_STOCKS = [
       ],
       "macro": [
         "NEUTRAL · VIX 15.2 · US10Y 4.69%",
-        "DXY 99.6 약세 · 성장주 유리"
+        "DXY 99.7 약세 · 성장주 유리"
       ],
       "filing": [
         "8-K: 최근 60일 이벤트 4건 (활발)",
@@ -29617,7 +29612,7 @@ window.LIVE_STOCKS = [
       ],
       "macro": [
         "NEUTRAL · VIX 15.2 · US10Y 4.69%",
-        "DXY 99.6 약세 · 성장주 유리"
+        "DXY 99.7 약세 · 성장주 유리"
       ],
       "filing": [
         "13F: 기관지분율 -59.38%p",
@@ -29783,7 +29778,7 @@ window.LIVE_STOCKS = [
         "PER 91.7 · 극심 프리미엄",
         "Forward PER 41.8 · 이익 성장 반영",
         "PBR 10.8 · 부담",
-        "PEG 0.88 · 성장률 대비 저평가"
+        "PEG 0.94 · 성장률 대비 저평가"
       ]
     }
   },
@@ -30019,13 +30014,13 @@ window.LIVE_STOCKS = [
       "filing": [
         "13F: 기관지분율 -66.12%p",
         "13F: 보유기관 413곳 · 지분율 31.6% (2026Q2)",
-        "Form 4: 매도 우세 P0/S6",
+        "Form 4: 매도 우세 P0/S5",
         "* FMP 실시간 공시 반영"
       ],
       "value": [
         "PER 33.7 · 적정",
         "Forward PER 11.8 · 이익 성장 반영",
-        "PEG 0.57 · 성장률 대비 저평가",
+        "PEG 0.49 · 성장률 대비 저평가",
         "FCF Yield 7.7% · 우수"
       ]
     }
@@ -30056,7 +30051,7 @@ window.LIVE_STOCKS = [
         "NEUTRAL · VIX 15.2 · US10Y 4.69%"
       ],
       "filing": [
-        "13F: 기관지분율 -56.61%p",
+        "13F: 기관지분율 -56.63%p",
         "13F: 보유기관 346곳 · 지분율 36.2% (2026Q2)",
         "* FMP 실시간 공시 반영"
       ],
@@ -30089,7 +30084,7 @@ window.LIVE_STOCKS = [
       ],
       "macro": [
         "NEUTRAL · VIX 15.2 · US10Y 4.69%",
-        "DXY 99.6 약세 · 성장주 유리"
+        "DXY 99.7 약세 · 성장주 유리"
       ],
       "filing": [
         "13F: 기관지분율 -64.05%p",
@@ -30237,7 +30232,7 @@ window.LIVE_STOCKS = [
       ],
       "macro": [
         "NEUTRAL · VIX 15.2 · US10Y 4.69%",
-        "DXY 99.6 약세 · 성장주 유리"
+        "DXY 99.7 약세 · 성장주 유리"
       ],
       "filing": [
         "13F: 기관지분율 -24.12%p",
@@ -30247,9 +30242,9 @@ window.LIVE_STOCKS = [
       ],
       "value": [
         "PER 21.1 · 적정",
-        "Forward PER 13.7 · 이익 성장 반영",
+        "Forward PER 13.4 · 이익 성장 반영",
         "PBR 21.3 · 부담",
-        "PEG 0.48 · 성장률 대비 저평가"
+        "PEG 0.47 · 성장률 대비 저평가"
       ]
     }
   },
@@ -30313,7 +30308,7 @@ window.LIVE_STOCKS = [
       ],
       "macro": [
         "NEUTRAL · VIX 15.2 · US10Y 4.69%",
-        "DXY 99.6 약세 · 성장주 유리"
+        "DXY 99.7 약세 · 성장주 유리"
       ],
       "filing": [
         "13F: 기관지분율 -36.87%p",
@@ -30467,10 +30462,10 @@ window.LIVE_STOCKS = [
       ],
       "macro": [
         "NEUTRAL · VIX 15.2 · US10Y 4.69%",
-        "DXY 99.6 약세 · 성장주 유리"
+        "DXY 99.7 약세 · 성장주 유리"
       ],
       "filing": [
-        "13F: 기관지분율 -71.81%p",
+        "13F: 기관지분율 -71.83%p",
         "P/C비율 하락 -117% (헤지 완화)",
         "13F: 보유기관 382곳 · 지분율 28.5% (2026Q2)",
         "Form 4: 매도 우세 P0/S6",
@@ -30585,7 +30580,7 @@ window.LIVE_STOCKS = [
       "value": [
         "PER 43.6 · 프리미엄",
         "Forward PER 15.4 · 이익 성장 반영",
-        "PEG 0.56 · 성장률 대비 저평가"
+        "PEG 0.57 · 성장률 대비 저평가"
       ]
     }
   },
@@ -30834,14 +30829,14 @@ window.LIVE_STOCKS = [
         "NEUTRAL · VIX 15.2 · US10Y 4.69%"
       ],
       "filing": [
-        "13F: 기관지분율 -68.10%p",
+        "13F: 기관지분율 -68.11%p",
         "P/C비율 하락 -51% (헤지 완화)",
         "13F: 보유기관 291곳 · 지분율 25.3% (2026Q2)",
         "* FMP 실시간 공시 반영"
       ],
       "value": [
         "PER 34.0 · 적정",
-        "PEG 3.06 · 성장률 대비 부담"
+        "PEG 3.08 · 성장률 대비 부담"
       ]
     }
   },
@@ -30879,7 +30874,7 @@ window.LIVE_STOCKS = [
       ],
       "value": [
         "PER 7.9 · 극심 저평가",
-        "PEG 0.66 · 성장률 대비 저평가",
+        "PEG 0.72 · 성장률 대비 저평가",
         "FCF Yield 16.3% · 우수"
       ]
     }
@@ -30917,7 +30912,7 @@ window.LIVE_STOCKS = [
         "PER 10.3 · 극심 저평가",
         "Forward PER 6.8 · 이익 성장 반영",
         "PBR 0.99 · 자산가치 이하",
-        "PEG 0.48 · 성장률 대비 저평가"
+        "PEG 0.47 · 성장률 대비 저평가"
       ]
     }
   },
@@ -31085,7 +31080,7 @@ window.LIVE_STOCKS = [
       ],
       "macro": [
         "NEUTRAL · VIX 15.2 · US10Y 4.69%",
-        "DXY 99.6 약세 · 성장주 유리"
+        "DXY 99.7 약세 · 성장주 유리"
       ],
       "filing": [
         "13F: 기관지분율 -4.97%p",
@@ -31097,7 +31092,7 @@ window.LIVE_STOCKS = [
       "value": [
         "PER 54.4 · 프리미엄",
         "Forward PER 12.7 · 이익 성장 반영",
-        "PEG 0.70 · 성장률 대비 저평가"
+        "PEG 0.67 · 성장률 대비 저평가"
       ]
     }
   },
@@ -31172,7 +31167,7 @@ window.LIVE_STOCKS = [
       ],
       "value": [
         "PER 34.3 · 적정",
-        "PEG 3.92 · 성장률 대비 부담"
+        "PEG 4.23 · 성장률 대비 부담"
       ]
     }
   },
@@ -31273,7 +31268,7 @@ window.LIVE_STOCKS = [
       ],
       "macro": [
         "NEUTRAL · VIX 15.2 · US10Y 4.69%",
-        "DXY 99.6 약세 · 성장주 유리"
+        "DXY 99.7 약세 · 성장주 유리"
       ],
       "filing": [
         "13F: 기관지분율 -3.68%p",
@@ -31286,7 +31281,7 @@ window.LIVE_STOCKS = [
         "PER 12.6 · 저평가",
         "Forward PER 6.7 · 이익 성장 반영",
         "PBR 0.89 · 자산가치 이하",
-        "PEG 0.84 · 성장률 대비 저평가"
+        "PEG 0.85 · 성장률 대비 저평가"
       ]
     }
   },
@@ -31387,7 +31382,7 @@ window.LIVE_STOCKS = [
       ],
       "macro": [
         "NEUTRAL · VIX 15.2 · US10Y 4.69%",
-        "DXY 99.6 약세 · 성장주 유리"
+        "DXY 99.7 약세 · 성장주 유리"
       ],
       "filing": [
         "13F: 기관지분율 -84.47%p",
@@ -31427,7 +31422,7 @@ window.LIVE_STOCKS = [
       ],
       "macro": [
         "NEUTRAL · VIX 15.2 · US10Y 4.69%",
-        "DXY 99.6 약세 · 성장주 유리"
+        "DXY 99.7 약세 · 성장주 유리"
       ],
       "filing": [
         "13F: 기관지분율 -91.81%p",
@@ -31435,7 +31430,7 @@ window.LIVE_STOCKS = [
         "* FMP 실시간 공시 반영"
       ],
       "value": [
-        "PER 21.2 · 적정",
+        "PER 21.1 · 적정",
         "PEG 0.12 · 성장률 대비 저평가"
       ]
     }
@@ -31541,7 +31536,7 @@ window.LIVE_STOCKS = [
         "NEUTRAL · VIX 15.2 · US10Y 4.69%"
       ],
       "filing": [
-        "13F: 기관지분율 -60.57%p",
+        "13F: 기관지분율 -60.58%p",
         "P/C비율 하락 -45% (헤지 완화)",
         "13F: 보유기관 383곳 · 지분율 32.8% (2026Q2)",
         "* FMP 실시간 공시 반영"
@@ -31576,7 +31571,7 @@ window.LIVE_STOCKS = [
       ],
       "macro": [
         "NEUTRAL · VIX 15.2 · US10Y 4.69%",
-        "DXY 99.6 약세 · 성장주 유리"
+        "DXY 99.7 약세 · 성장주 유리"
       ],
       "filing": [
         "13F: 기관지분율 -82.54%p",
@@ -31615,7 +31610,7 @@ window.LIVE_STOCKS = [
       ],
       "macro": [
         "NEUTRAL · VIX 15.2 · US10Y 4.69%",
-        "DXY 99.6 약세 · 성장주 유리"
+        "DXY 99.7 약세 · 성장주 유리"
       ],
       "filing": [
         "13F: 기관지분율 -67.88%p",
@@ -31627,7 +31622,7 @@ window.LIVE_STOCKS = [
         "PER 80.0 · 극심 프리미엄",
         "Forward PER 52.9 · 이익 성장 반영",
         "PBR 8.4 · 부담",
-        "PEG 4.38 · 성장률 대비 부담"
+        "PEG 4.40 · 성장률 대비 부담"
       ]
     }
   },
@@ -31809,7 +31804,7 @@ window.LIVE_STOCKS = [
       ],
       "value": [
         "PER 31.5 · 적정",
-        "PEG 4.86 · 성장률 대비 부담"
+        "PEG 4.90 · 성장률 대비 부담"
       ]
     }
   },
@@ -31836,7 +31831,7 @@ window.LIVE_STOCKS = [
       ],
       "macro": [
         "NEUTRAL · VIX 15.2 · US10Y 4.69%",
-        "DXY 99.6 약세 · 성장주 유리"
+        "DXY 99.7 약세 · 성장주 유리"
       ],
       "filing": [
         "13F: 기관지분율 -5.25%p",
@@ -31875,7 +31870,7 @@ window.LIVE_STOCKS = [
       ],
       "macro": [
         "NEUTRAL · VIX 15.2 · US10Y 4.69%",
-        "DXY 99.6 약세 · 성장주 유리"
+        "DXY 99.7 약세 · 성장주 유리"
       ],
       "filing": [
         "13F: 기관지분율 -78.78%p",
@@ -31887,7 +31882,7 @@ window.LIVE_STOCKS = [
       "value": [
         "PER 249.3 · 극심 프리미엄",
         "Forward PER 13.9 · 이익 성장 반영",
-        "PEG 0.52 · 성장률 대비 저평가"
+        "PEG 0.53 · 성장률 대비 저평가"
       ]
     }
   },
@@ -31899,11 +31894,11 @@ window.LIVE_STOCKS = [
     "tech": 74,
     "macro": 55,
     "filing": 42,
-    "value": 68,
-    "total": 60,
-    "consensus": 1,
-    "signal": "HOLD",
-    "ev": 0.47,
+    "value": 76,
+    "total": 61,
+    "consensus": 2,
+    "signal": "WATCH",
+    "ev": 0.5,
     "target": 6,
     "hitl": false,
     "reasons": {
@@ -31923,7 +31918,8 @@ window.LIVE_STOCKS = [
       ],
       "value": [
         "PER 14.9 · 저평가",
-        "Forward PER 11.3 · 이익 성장 반영"
+        "Forward PER 11.3 · 이익 성장 반영",
+        "PEG 0.99 · 성장률 대비 저평가"
       ]
     }
   },
@@ -31998,7 +31994,7 @@ window.LIVE_STOCKS = [
       "value": [
         "PER 40.4 · 프리미엄",
         "Forward PER 17.5 · 이익 성장 반영",
-        "PEG 0.73 · 성장률 대비 저평가"
+        "PEG 0.74 · 성장률 대비 저평가"
       ]
     }
   },
@@ -32070,7 +32066,7 @@ window.LIVE_STOCKS = [
       "value": [
         "PER 48.8 · 프리미엄",
         "Forward PER 18.0 · 이익 성장 반영",
-        "PEG 0.90 · 성장률 대비 저평가"
+        "PEG 0.88 · 성장률 대비 저평가"
       ]
     }
   },
@@ -32099,7 +32095,7 @@ window.LIVE_STOCKS = [
       ],
       "macro": [
         "NEUTRAL · VIX 15.2 · US10Y 4.69%",
-        "DXY 99.6 약세 · 성장주 유리"
+        "DXY 99.7 약세 · 성장주 유리"
       ],
       "filing": [
         "13F: 기관지분율 -56.93%p",
@@ -32181,7 +32177,7 @@ window.LIVE_STOCKS = [
         "13F: 기관지분율 -51.71%p",
         "P/C비율 하락 -668% (헤지 완화)",
         "13F: 보유기관 213곳 · 지분율 30.5% (2026Q2)",
-        "Form 4: 실제매수 클러스터 P8/S0 (90일)",
+        "Form 4: 실제매수 클러스터 P7/S0 (90일)",
         "* FMP 실시간 공시 반영"
       ],
       "value": [
@@ -32212,10 +32208,10 @@ window.LIVE_STOCKS = [
       ],
       "macro": [
         "NEUTRAL · VIX 15.2 · US10Y 4.69%",
-        "DXY 99.6 약세 · 성장주 유리"
+        "DXY 99.7 약세 · 성장주 유리"
       ],
       "filing": [
-        "13F: 기관지분율 -73.04%p",
+        "13F: 기관지분율 -73.05%p",
         "P/C비율 하락 -56% (헤지 완화)",
         "13F: 보유기관 333곳 · 지분율 24.2% (2026Q2)",
         "8-K: 최근 60일 이벤트 4건 (활발)",
@@ -32224,7 +32220,7 @@ window.LIVE_STOCKS = [
       "value": [
         "PER 30.2 · 적정",
         "Forward PER 13.8 · 이익 성장 반영",
-        "PEG 0.83 · 성장률 대비 저평가"
+        "PEG 0.82 · 성장률 대비 저평가"
       ]
     }
   },
@@ -32291,7 +32287,7 @@ window.LIVE_STOCKS = [
       ],
       "macro": [
         "NEUTRAL · VIX 15.2 · US10Y 4.69%",
-        "DXY 99.6 약세 · 성장주 유리"
+        "DXY 99.7 약세 · 성장주 유리"
       ],
       "filing": [
         "13F: 기관지분율 -72.58%p",
@@ -32338,7 +32334,7 @@ window.LIVE_STOCKS = [
       "value": [
         "PER 25.8 · 적정",
         "Forward PER 17.9 · 이익 성장 반영",
-        "PEG 4.98 · 성장률 대비 부담",
+        "PEG 5.10 · 성장률 대비 부담",
         "FCF 음수 · 현금유출"
       ]
     }
@@ -32366,7 +32362,7 @@ window.LIVE_STOCKS = [
       ],
       "macro": [
         "NEUTRAL · VIX 15.2 · US10Y 4.69%",
-        "DXY 99.6 약세 · 성장주 유리"
+        "DXY 99.7 약세 · 성장주 유리"
       ],
       "filing": [
         "13F: 기관지분율 -65.47%p",
@@ -32374,7 +32370,7 @@ window.LIVE_STOCKS = [
         "* FMP 실시간 공시 반영"
       ],
       "value": [
-        "Forward PER -17.9 · 이익 성장 반영",
+        "Forward PER -18.0 · 이익 성장 반영",
         "PBR 26.6 · 부담",
         "FCF 음수 · 현금유출"
       ]
@@ -32440,7 +32436,7 @@ window.LIVE_STOCKS = [
       ],
       "macro": [
         "NEUTRAL · VIX 15.2 · US10Y 4.69%",
-        "DXY 99.6 약세 · 성장주 유리"
+        "DXY 99.7 약세 · 성장주 유리"
       ],
       "filing": [
         "13F: 기관지분율 -71.91%p",
@@ -32450,7 +32446,7 @@ window.LIVE_STOCKS = [
       "value": [
         "PER 172.5 · 극심 프리미엄",
         "Forward PER 9.7 · 이익 성장 반영",
-        "PEG 0.74 · 성장률 대비 저평가"
+        "PEG 0.79 · 성장률 대비 저평가"
       ]
     }
   },
@@ -32599,7 +32595,7 @@ window.LIVE_STOCKS = [
       "value": [
         "PER 168.0 · 극심 프리미엄",
         "Forward PER 17.5 · 이익 성장 반영",
-        "PEG 0.59 · 성장률 대비 저평가"
+        "PEG 0.60 · 성장률 대비 저평가"
       ]
     }
   },
@@ -32664,7 +32660,7 @@ window.LIVE_STOCKS = [
       ],
       "macro": [
         "NEUTRAL · VIX 15.2 · US10Y 4.69%",
-        "DXY 99.6 약세 · 성장주 유리"
+        "DXY 99.7 약세 · 성장주 유리"
       ],
       "filing": [
         "13F: 기관지분율 -83.87%p",
@@ -32740,18 +32736,18 @@ window.LIVE_STOCKS = [
       ],
       "macro": [
         "NEUTRAL · VIX 15.2 · US10Y 4.69%",
-        "DXY 99.6 약세 · 성장주 유리"
+        "DXY 99.7 약세 · 성장주 유리"
       ],
       "filing": [
         "13F: 기관지분율 -68.03%p",
         "13F: 보유기관 346곳 · 지분율 33.9% (2026Q2)",
-        "Form 4: 매도 우세 P0/S24",
+        "Form 4: 매도 우세 P0/S19",
         "* FMP 실시간 공시 반영"
       ],
       "value": [
         "PER 30.2 · 적정",
         "Forward PER 9.9 · 이익 성장 반영",
-        "PBR 55.7 · 부담"
+        "PBR 81.9 · 부담"
       ]
     }
   },
@@ -32788,7 +32784,7 @@ window.LIVE_STOCKS = [
       "value": [
         "PER 42.5 · 프리미엄",
         "Forward PER 15.6 · 이익 성장 반영",
-        "PEG 0.94 · 성장률 대비 저평가",
+        "PEG 0.91 · 성장률 대비 저평가",
         "FCF Yield 8.6% · 우수"
       ]
     }
@@ -32925,7 +32921,7 @@ window.LIVE_STOCKS = [
       ],
       "macro": [
         "NEUTRAL · VIX 15.2 · US10Y 4.69%",
-        "DXY 99.6 약세 · 성장주 유리"
+        "DXY 99.7 약세 · 성장주 유리"
       ],
       "filing": [
         "13F: 기관지분율 -51.98%p",
@@ -33010,8 +33006,8 @@ window.LIVE_STOCKS = [
       ],
       "value": [
         "PER 14.7 · 저평가",
-        "PBR 19.7 · 부담",
-        "PEG 0.08 · 성장률 대비 저평가"
+        "PBR 20.9 · 부담",
+        "PEG 0.09 · 성장률 대비 저평가"
       ]
     }
   },
@@ -33044,7 +33040,7 @@ window.LIVE_STOCKS = [
         "13F: 기관지분율 -63.02%p",
         "P/C비율 급등 +47% (헤지 강화)",
         "13F: 보유기관 206곳 · 지분율 26.4% (2026Q2)",
-        "8-K: 최근 60일 이벤트 4건 (활발)",
+        "8-K: 최근 60일 이벤트 3건 (활발)",
         "* FMP 실시간 공시 반영"
       ],
       "value": [
@@ -33079,7 +33075,7 @@ window.LIVE_STOCKS = [
       "filing": [
         "13F: 기관지분율 -28.21%p",
         "13F: 보유기관 58곳 · 지분율 7.6% (2026Q2)",
-        "Form 4: 매도 우세 P0/S31",
+        "Form 4: 매도 우세 P0/S28",
         "8-K: 최근 60일 이벤트 없음",
         "* FMP 실시간 공시 반영"
       ],
@@ -33123,7 +33119,7 @@ window.LIVE_STOCKS = [
       ],
       "value": [
         "PER 36.6 · 적정",
-        "Forward PER 13.5 · 이익 성장 반영"
+        "Forward PER 13.6 · 이익 성장 반영"
       ]
     }
   },
@@ -33200,7 +33196,7 @@ window.LIVE_STOCKS = [
         "PER 56.7 · 프리미엄",
         "Forward PER 15.2 · 이익 성장 반영",
         "PBR 9.4 · 부담",
-        "PEG 0.79 · 성장률 대비 저평가"
+        "PEG 0.81 · 성장률 대비 저평가"
       ]
     }
   },
@@ -33227,19 +33223,19 @@ window.LIVE_STOCKS = [
       ],
       "macro": [
         "NEUTRAL · VIX 15.2 · US10Y 4.69%",
-        "DXY 99.6 약세 · 성장주 유리"
+        "DXY 99.7 약세 · 성장주 유리"
       ],
       "filing": [
         "13F: 기관지분율 -80.23%p",
         "P/C비율 급등 +62% (헤지 강화)",
         "13F: 보유기관 303곳 · 지분율 11.9% (2026Q2)",
-        "Form 4: 매도 우세 P0/S7",
+        "Form 4: 매도 우세 P0/S6",
         "* FMP 실시간 공시 반영"
       ],
       "value": [
         "PER 15.6 · 저평가",
         "Forward PER 10.8 · 이익 성장 반영",
-        "PEG 0.56 · 성장률 대비 저평가",
+        "PEG 0.57 · 성장률 대비 저평가",
         "FCF Yield 8.9% · 우수"
       ]
     }
@@ -33279,7 +33275,7 @@ window.LIVE_STOCKS = [
       "value": [
         "PER 27.4 · 적정",
         "Forward PER 10.3 · 이익 성장 반영",
-        "FCF Yield 11.1% · 우수"
+        "FCF Yield 7.8% · 우수"
       ]
     }
   },
@@ -33305,7 +33301,7 @@ window.LIVE_STOCKS = [
       ],
       "macro": [
         "NEUTRAL · VIX 15.2 · US10Y 4.69%",
-        "DXY 99.6 약세 · 성장주 유리"
+        "DXY 99.7 약세 · 성장주 유리"
       ],
       "filing": [
         "13F: 기관지분율 -95.71%p",
@@ -33540,7 +33536,7 @@ window.LIVE_STOCKS = [
       ],
       "value": [
         "PER 24.0 · 적정",
-        "Forward PER 13.1 · 이익 성장 반영",
+        "Forward PER 16.3 · 이익 성장 반영",
         "PBR 25.6 · 부담"
       ]
     }
@@ -33835,7 +33831,7 @@ window.LIVE_STOCKS = [
       "value": [
         "PER 39.1 · 적정",
         "Forward PER 11.8 · 이익 성장 반영",
-        "PEG 0.67 · 성장률 대비 저평가",
+        "PEG 0.71 · 성장률 대비 저평가",
         "FCF Yield 10.9% · 우수"
       ]
     }
@@ -33910,7 +33906,7 @@ window.LIVE_STOCKS = [
       "value": [
         "PER 259.3 · 극심 프리미엄",
         "Forward PER 17.5 · 이익 성장 반영",
-        "PEG 0.49 · 성장률 대비 저평가"
+        "PEG 0.50 · 성장률 대비 저평가"
       ]
     }
   },
@@ -33945,7 +33941,7 @@ window.LIVE_STOCKS = [
       ],
       "value": [
         "PER 357.5 · 극심 프리미엄",
-        "Forward PER 54.4 · 이익 성장 반영",
+        "Forward PER 54.5 · 이익 성장 반영",
         "PEG 36.41 · 성장률 대비 부담",
         "FCF 음수 · 현금유출"
       ]
@@ -34023,7 +34019,7 @@ window.LIVE_STOCKS = [
       ],
       "value": [
         "PER 20.5 · 적정",
-        "PEG 3.80 · 성장률 대비 부담",
+        "PEG 3.81 · 성장률 대비 부담",
         "FCF 음수 · 현금유출"
       ]
     }
@@ -34091,7 +34087,7 @@ window.LIVE_STOCKS = [
       ],
       "macro": [
         "NEUTRAL · VIX 15.2 · US10Y 4.69%",
-        "DXY 99.6 약세 · 성장주 유리"
+        "DXY 99.7 약세 · 성장주 유리"
       ],
       "filing": [
         "13F: 기관지분율 -90.35%p",
@@ -34102,7 +34098,7 @@ window.LIVE_STOCKS = [
       "value": [
         "PER 103.3 · 극심 프리미엄",
         "Forward PER 35.4 · 이익 성장 반영",
-        "PEG 0.96 · 성장률 대비 저평가"
+        "PEG 0.97 · 성장률 대비 저평가"
       ]
     }
   },
@@ -34206,7 +34202,7 @@ window.LIVE_STOCKS = [
       ],
       "macro": [
         "NEUTRAL · VIX 15.2 · US10Y 4.69%",
-        "DXY 99.6 약세 · 성장주 유리"
+        "DXY 99.7 약세 · 성장주 유리"
       ],
       "filing": [
         "13F: 기관지분율 -11.94%p",
@@ -34252,7 +34248,7 @@ window.LIVE_STOCKS = [
       ],
       "value": [
         "PER 64.3 · 극심 프리미엄",
-        "Forward PER 33.6 · 이익 성장 반영"
+        "Forward PER 33.5 · 이익 성장 반영"
       ]
     }
   },
@@ -34290,7 +34286,7 @@ window.LIVE_STOCKS = [
       ],
       "value": [
         "PER 37.5 · 적정",
-        "PEG 3.20 · 성장률 대비 부담",
+        "PEG 3.19 · 성장률 대비 부담",
         "FCF Yield 7.0% · 우수"
       ]
     }
@@ -34354,7 +34350,7 @@ window.LIVE_STOCKS = [
       ],
       "macro": [
         "NEUTRAL · VIX 15.2 · US10Y 4.69%",
-        "DXY 99.6 약세 · 성장주 유리"
+        "DXY 99.7 약세 · 성장주 유리"
       ],
       "filing": [
         "13F: 기관지분율 -56.60%p",
@@ -34363,7 +34359,7 @@ window.LIVE_STOCKS = [
       ],
       "value": [
         "PER 21.1 · 적정",
-        "Forward PER 15.5 · 이익 성장 반영"
+        "Forward PER 15.4 · 이익 성장 반영"
       ]
     }
   },
@@ -34430,7 +34426,7 @@ window.LIVE_STOCKS = [
         "NEUTRAL · VIX 15.2 · US10Y 4.69%"
       ],
       "filing": [
-        "13F: 기관지분율 -74.67%p",
+        "13F: 기관지분율 -74.68%p",
         "P/C비율 하락 -104% (헤지 완화)",
         "13F: 보유기관 370곳 · 지분율 25.4% (2026Q2)",
         "Form 4: 순매수 P2/S0",
@@ -34537,7 +34533,7 @@ window.LIVE_STOCKS = [
       ],
       "macro": [
         "NEUTRAL · VIX 15.2 · US10Y 4.69%",
-        "DXY 99.6 약세 · 성장주 유리"
+        "DXY 99.7 약세 · 성장주 유리"
       ],
       "filing": [
         "13F: 기관지분율 -89.95%p",
@@ -34611,7 +34607,7 @@ window.LIVE_STOCKS = [
       ],
       "macro": [
         "NEUTRAL · VIX 15.2 · US10Y 4.69%",
-        "DXY 99.6 약세 · 성장주 유리"
+        "DXY 99.7 약세 · 성장주 유리"
       ],
       "filing": [
         "13F: 기관지분율 -70.08%p",
@@ -34686,7 +34682,7 @@ window.LIVE_STOCKS = [
       ],
       "macro": [
         "NEUTRAL · VIX 15.2 · US10Y 4.69%",
-        "DXY 99.6 약세 · 성장주 유리"
+        "DXY 99.7 약세 · 성장주 유리"
       ],
       "filing": [
         "13F: 기관지분율 -62.02%p",
@@ -34747,12 +34743,12 @@ window.LIVE_STOCKS = [
     "tech": 69,
     "macro": 55,
     "filing": 46,
-    "value": 42,
-    "total": 55,
+    "value": 50,
+    "total": 56,
     "consensus": 0,
     "signal": "HOLD",
-    "ev": 0.11,
-    "target": 1,
+    "ev": 0.14,
+    "target": 2,
     "hitl": false,
     "reasons": {
       "tech": [
@@ -34764,15 +34760,14 @@ window.LIVE_STOCKS = [
         "NEUTRAL · VIX 15.2 · US10Y 4.69%"
       ],
       "filing": [
-        "13F: 기관지분율 -60.63%p",
+        "13F: 기관지분율 -60.70%p",
         "P/C비율 하락 -43% (헤지 완화)",
         "13F: 보유기관 216곳 · 지분율 14.8% (2026Q2)",
         "Form 4: 매도 우세 P0/S21",
         "8-K: 최근 60일 이벤트 3건 (활발)"
       ],
       "value": [
-        "PER 29.5 · 적정",
-        "PBR 9.7 · 부담",
+        "PER 29.1 · 적정",
         "PEG 0.78 · 성장률 대비 저평가",
         "FCF 음수 · 현금유출"
       ]
@@ -34811,7 +34806,7 @@ window.LIVE_STOCKS = [
       "value": [
         "PER 36.3 · 적정",
         "Forward PER 14.6 · 이익 성장 반영",
-        "PEG 0.68 · 성장률 대비 저평가",
+        "PEG 0.69 · 성장률 대비 저평가",
         "FCF 음수 · 현금유출"
       ]
     }
@@ -34848,7 +34843,7 @@ window.LIVE_STOCKS = [
       ],
       "value": [
         "PER 77.8 · 극심 프리미엄",
-        "PBR 11.4 · 부담"
+        "PBR 11.5 · 부담"
       ]
     }
   },
@@ -34896,13 +34891,13 @@ window.LIVE_STOCKS = [
     "sec": "IT",
     "tech": 47,
     "macro": 55,
-    "filing": 53,
+    "filing": 43,
     "value": 59,
-    "total": 52,
+    "total": 49,
     "consensus": 0,
     "signal": "HOLD",
-    "ev": 0.14,
-    "target": 2,
+    "ev": 0.04,
+    "target": 0,
     "hitl": false,
     "reasons": {
       "tech": [
@@ -34917,12 +34912,13 @@ window.LIVE_STOCKS = [
         "13F: 기관지분율 -74.17%p",
         "P/C비율 하락 -34% (헤지 완화)",
         "13F: 보유기관 266곳 · 지분율 19.4% (2026Q2)",
+        "Form 4: 매도 우세 P0/S4",
         "* FMP 실시간 공시 반영"
       ],
       "value": [
         "PER 74.6 · 극심 프리미엄",
         "Forward PER 12.7 · 이익 성장 반영",
-        "PEG 0.40 · 성장률 대비 저평가",
+        "PEG 0.33 · 성장률 대비 저평가",
         "FCF Yield 6.2% · 우수"
       ]
     }
@@ -34986,7 +34982,7 @@ window.LIVE_STOCKS = [
       ],
       "macro": [
         "NEUTRAL · VIX 15.2 · US10Y 4.69%",
-        "DXY 99.6 약세 · 성장주 유리"
+        "DXY 99.7 약세 · 성장주 유리"
       ],
       "filing": [
         "13F: 기관지분율 -19.39%p",
@@ -35032,7 +35028,7 @@ window.LIVE_STOCKS = [
         "13F: 기관지분율 -31.46%p",
         "P/C비율 하락 -57% (헤지 완화)",
         "13F: 보유기관 227곳 · 지분율 12.2% (2026Q2)",
-        "8-K: 최근 60일 이벤트 12건 (활발)",
+        "8-K: 최근 60일 이벤트 11건 (활발)",
         "* FMP 실시간 공시 반영"
       ],
       "value": [
@@ -35108,7 +35104,7 @@ window.LIVE_STOCKS = [
       ],
       "value": [
         "PER 9.9 · 극심 저평가",
-        "PEG 0.45 · 성장률 대비 저평가"
+        "PEG 0.46 · 성장률 대비 저평가"
       ]
     }
   },
@@ -35137,7 +35133,7 @@ window.LIVE_STOCKS = [
       ],
       "macro": [
         "NEUTRAL · VIX 15.2 · US10Y 4.69%",
-        "DXY 99.6 약세 · 성장주 유리"
+        "DXY 99.7 약세 · 성장주 유리"
       ],
       "filing": [
         "13F: 기관지분율 -57.46%p",
@@ -35184,7 +35180,7 @@ window.LIVE_STOCKS = [
       "value": [
         "PER 24.6 · 적정",
         "Forward PER 19.5 · 이익 성장 반영",
-        "PEG 0.74 · 성장률 대비 저평가"
+        "PEG 0.76 · 성장률 대비 저평가"
       ]
     }
   },
@@ -35211,7 +35207,7 @@ window.LIVE_STOCKS = [
       ],
       "macro": [
         "NEUTRAL · VIX 15.2 · US10Y 4.69%",
-        "DXY 99.6 약세 · 성장주 유리"
+        "DXY 99.7 약세 · 성장주 유리"
       ],
       "filing": [
         "13F: 기관지분율 -70.35%p",
@@ -35223,7 +35219,7 @@ window.LIVE_STOCKS = [
       "value": [
         "PER 36.6 · 적정",
         "Forward PER 14.2 · 이익 성장 반영",
-        "PEG 9.46 · 성장률 대비 부담"
+        "PEG 10.00 · 성장률 대비 부담"
       ]
     }
   },
@@ -35252,7 +35248,7 @@ window.LIVE_STOCKS = [
       ],
       "macro": [
         "NEUTRAL · VIX 15.2 · US10Y 4.69%",
-        "DXY 99.6 약세 · 성장주 유리"
+        "DXY 99.7 약세 · 성장주 유리"
       ],
       "filing": [
         "13F: 기관지분율 -73.56%p",
@@ -35408,11 +35404,11 @@ window.LIVE_STOCKS = [
         "P/C비율 하락 -92% (헤지 완화)",
         "13F: 보유기관 302곳 · 지분율 19.7% (2026Q2)",
         "Form 4: 매도 우세 P0/S9",
-        "8-K: 최근 60일 이벤트 4건 (활발)"
+        "8-K: 최근 60일 이벤트 3건 (활발)"
       ],
       "value": [
         "PER 6.4 · 극심 저평가",
-        "PEG 0.92 · 성장률 대비 저평가"
+        "PEG 0.88 · 성장률 대비 저평가"
       ]
     }
   },
@@ -35439,7 +35435,7 @@ window.LIVE_STOCKS = [
       ],
       "macro": [
         "NEUTRAL · VIX 15.2 · US10Y 4.69%",
-        "DXY 99.6 약세 · 성장주 유리"
+        "DXY 99.7 약세 · 성장주 유리"
       ],
       "filing": [
         "13F: 기관지분율 -49.91%p",
@@ -35710,7 +35706,7 @@ window.LIVE_STOCKS = [
         "PER 73.0 · 극심 프리미엄",
         "Forward PER 17.5 · 이익 성장 반영",
         "PBR 8.6 · 부담",
-        "PEG 0.65 · 성장률 대비 저평가"
+        "PEG 0.66 · 성장률 대비 저평가"
       ]
     }
   },
@@ -35739,7 +35735,7 @@ window.LIVE_STOCKS = [
       ],
       "macro": [
         "NEUTRAL · VIX 15.2 · US10Y 4.69%",
-        "DXY 99.6 약세 · 성장주 유리"
+        "DXY 99.7 약세 · 성장주 유리"
       ],
       "filing": [
         "13F: 기관지분율 -76.59%p",
@@ -35823,7 +35819,7 @@ window.LIVE_STOCKS = [
       ],
       "value": [
         "PER 9.0 · 극심 저평가",
-        "PEG 4.62 · 성장률 대비 부담"
+        "PEG 4.60 · 성장률 대비 부담"
       ]
     }
   },
@@ -35851,7 +35847,7 @@ window.LIVE_STOCKS = [
       ],
       "macro": [
         "NEUTRAL · VIX 15.2 · US10Y 4.69%",
-        "DXY 99.6 약세 · 성장주 유리"
+        "DXY 99.7 약세 · 성장주 유리"
       ],
       "filing": [
         "13F: 기관지분율 -75.43%p",
@@ -35937,7 +35933,7 @@ window.LIVE_STOCKS = [
       ],
       "value": [
         "PER 15.5 · 저평가",
-        "PEG 4.65 · 성장률 대비 부담"
+        "PEG 3.69 · 성장률 대비 부담"
       ]
     }
   },
@@ -35963,7 +35959,7 @@ window.LIVE_STOCKS = [
       ],
       "macro": [
         "NEUTRAL · VIX 15.2 · US10Y 4.69%",
-        "DXY 99.6 약세 · 성장주 유리"
+        "DXY 99.7 약세 · 성장주 유리"
       ],
       "filing": [
         "13F: 기관지분율 -9.99%p",
@@ -36183,7 +36179,7 @@ window.LIVE_STOCKS = [
       ],
       "macro": [
         "NEUTRAL · VIX 15.2 · US10Y 4.69%",
-        "DXY 99.6 약세 · 성장주 유리"
+        "DXY 99.7 약세 · 성장주 유리"
       ],
       "filing": [
         "13F: 기관지분율 -62.59%p",
@@ -36270,7 +36266,7 @@ window.LIVE_STOCKS = [
         "PER 1935.5 · 극심 프리미엄",
         "Forward PER 33.1 · 이익 성장 반영",
         "PBR 21.2 · 부담",
-        "PEG 0.44 · 성장률 대비 저평가"
+        "PEG 0.45 · 성장률 대비 저평가"
       ]
     }
   },
@@ -36316,12 +36312,12 @@ window.LIVE_STOCKS = [
     "tech": 88,
     "macro": 60,
     "filing": 46,
-    "value": 58,
-    "total": 65,
+    "value": 50,
+    "total": 64,
     "consensus": 1,
     "signal": "HOLD",
-    "ev": 0.71,
-    "target": 9,
+    "ev": 0.68,
+    "target": 8,
     "hitl": false,
     "reasons": {
       "tech": [
@@ -36333,7 +36329,7 @@ window.LIVE_STOCKS = [
       ],
       "macro": [
         "NEUTRAL · VIX 15.2 · US10Y 4.69%",
-        "DXY 99.6 약세 · 성장주 유리"
+        "DXY 99.7 약세 · 성장주 유리"
       ],
       "filing": [
         "13F: 기관지분율 -94.74%p",
@@ -36343,7 +36339,8 @@ window.LIVE_STOCKS = [
         "8-K: 최근 60일 이벤트 6건 (활발)"
       ],
       "value": [
-        "Forward PER -39.1 · 이익 성장 반영"
+        "Forward PER -39.3 · 이익 성장 반영",
+        "FCF 음수 · 현금유출"
       ]
     }
   },
@@ -36409,7 +36406,7 @@ window.LIVE_STOCKS = [
       ],
       "macro": [
         "NEUTRAL · VIX 15.2 · US10Y 4.69%",
-        "DXY 99.6 약세 · 성장주 유리"
+        "DXY 99.7 약세 · 성장주 유리"
       ],
       "filing": [
         "13F: 기관지분율 -84.23%p",
@@ -36501,11 +36498,11 @@ window.LIVE_STOCKS = [
     "tech": 69,
     "macro": 55,
     "filing": 53,
-    "value": 60,
-    "total": 60,
+    "value": 68,
+    "total": 61,
     "consensus": 0,
     "signal": "HOLD",
-    "ev": 0.57,
+    "ev": 0.6,
     "target": 7,
     "hitl": false,
     "reasons": {
@@ -36525,7 +36522,8 @@ window.LIVE_STOCKS = [
         "* FMP 실시간 공시 반영"
       ],
       "value": [
-        "PER 12.9 · 저평가"
+        "PER 12.9 · 저평가",
+        "FCF Yield 10.5% · 우수"
       ]
     }
   },
@@ -36534,21 +36532,22 @@ window.LIVE_STOCKS = [
     "n": "삼성전자",
     "m": "KR",
     "sec": "미분류",
-    "tech": 50,
+    "tech": 40,
     "macro": 55,
     "filing": 55,
     "value": 78,
-    "total": 57,
+    "total": 53,
     "consensus": 1,
     "signal": "HOLD",
-    "ev": 0.0,
-    "target": 0,
+    "ev": -0.15,
+    "target": -2,
     "hitl": false,
     "reasons": {
       "tech": [
-        "단기 역배열 (P<247950.0<293615.9)",
-        "RSI 47 · 중립",
-        "MACD 골든크로스 · 히스토 +860.91"
+        "단기 역배열 (P<245250.0<292252.5)",
+        "RSI 42 · 중립",
+        "MACD 골든크로스 · 히스토 +1002.47",
+        "3개월 수익률 -19.0% · 급락"
       ],
       "macro": [
         "NEUTRAL · VIX 15.2 · US10Y 4.69%"
@@ -36567,22 +36566,21 @@ window.LIVE_STOCKS = [
     "n": "SK하이닉스",
     "m": "KR",
     "sec": "미분류",
-    "tech": 21,
+    "tech": 18,
     "macro": 55,
     "filing": 47,
     "value": 78,
-    "total": 44,
+    "total": 43,
     "consensus": 1,
     "signal": "AVOID",
-    "ev": -0.5,
-    "target": -6,
+    "ev": -0.55,
+    "target": -7,
     "hitl": true,
     "reasons": {
       "tech": [
-        "단기 역배열 (P<1725300.0<2124500.0)",
-        "RSI 40 · 중립",
-        "MACD 데드크로스 · 히스토 -11129.30",
-        "3개월 수익률 -15.6% · 급락",
+        "단기 역배열 (P<1688250.0<2107500.0)",
+        "MACD 데드크로스 · 히스토 -9533.24",
+        "3개월 수익률 -23.4% · 급락",
         "Bollinger 하단 근접 · 반등 여지"
       ],
       "macro": [
@@ -36593,8 +36591,8 @@ window.LIVE_STOCKS = [
         "* DART 실시간 공시 반영"
       ],
       "value": [
-        "PER 3.1 · 극심 저평가",
-        "PEG 0.21 · 성장률 대비 저평가"
+        "PER 3.2 · 극심 저평가",
+        "PEG 0.20 · 성장률 대비 저평가"
       ]
     }
   },
@@ -36603,21 +36601,22 @@ window.LIVE_STOCKS = [
     "n": "LG에너지솔루션",
     "m": "KR",
     "sec": "미분류",
-    "tech": 59,
+    "tech": 54,
     "macro": 55,
     "filing": 55,
     "value": 29,
-    "total": 52,
+    "total": 51,
     "consensus": 0,
     "signal": "HOLD",
-    "ev": -0.06,
-    "target": -1,
+    "ev": -0.13,
+    "target": -2,
     "hitl": false,
     "reasons": {
       "tech": [
         "RSI 63 · 강세 지속 구간",
-        "MACD 골든크로스 · 히스토 +6176.91",
-        "3개월 수익률 -24.4% · 급락",
+        "MACD 골든크로스 · 히스토 +6970.45",
+        "거래량 감소 · 0.6배",
+        "3개월 수익률 -22.9% · 급락",
         "Bollinger 상단 접근 (100%)"
       ],
       "macro": [
@@ -36627,7 +36626,7 @@ window.LIVE_STOCKS = [
         "* DART 실시간 공시 반영"
       ],
       "value": [
-        "PER 45.9 · 프리미엄",
+        "PER 46.0 · 프리미엄",
         "PEG 7.45 · 성장률 대비 부담",
         "FCF 음수 · 현금유출"
       ]
@@ -36645,15 +36644,15 @@ window.LIVE_STOCKS = [
     "total": 64,
     "consensus": 1,
     "signal": "HOLD",
-    "ev": 0.64,
+    "ev": 0.66,
     "target": 8,
     "hitl": false,
     "reasons": {
       "tech": [
-        "단기 정배열 (P>1449800.0>1393640.0)",
-        "RSI 67 · 강세 지속 구간",
-        "MACD 골든크로스 · 히스토 +6733.84",
-        "3개월 수익률 +5.7%"
+        "단기 정배열 (P>1458050.0>1397380.0)",
+        "RSI 65 · 강세 지속 구간",
+        "MACD 골든크로스 · 히스토 +8101.45",
+        "3개월 수익률 +7.0%"
       ],
       "macro": [
         "NEUTRAL · VIX 15.2 · US10Y 4.69%"
@@ -36662,7 +36661,7 @@ window.LIVE_STOCKS = [
         "* DART 실시간 공시 반영"
       ],
       "value": [
-        "PER 31.6 · 적정"
+        "PER 31.7 · 적정"
       ]
     }
   },
@@ -36671,23 +36670,22 @@ window.LIVE_STOCKS = [
     "n": "현대차",
     "m": "KR",
     "sec": "미분류",
-    "tech": 35,
+    "tech": 50,
     "macro": 55,
     "filing": 55,
     "value": 65,
-    "total": 50,
+    "total": 55,
     "consensus": 0,
     "signal": "HOLD",
-    "ev": -0.27,
-    "target": -3,
+    "ev": -0.06,
+    "target": -1,
     "hitl": false,
     "reasons": {
       "tech": [
-        "단기 역배열 (P<403950.0<509770.0)",
-        "RSI 49 · 중립",
-        "MACD 골든크로스 · 히스토 +7318.30",
+        "RSI 52 · 중립",
+        "MACD 골든크로스 · 히스토 +8103.24",
         "거래량 감소 · 0.5배",
-        "3개월 수익률 -35.2% · 급락"
+        "3개월 수익률 -37.1% · 급락"
       ],
       "macro": [
         "NEUTRAL · VIX 15.2 · US10Y 4.69%"
@@ -36696,7 +36694,7 @@ window.LIVE_STOCKS = [
         "* DART 실시간 공시 반영"
       ],
       "value": [
-        "PER 8.1 · 극심 저평가",
+        "PER 8.3 · 극심 저평가",
         "PEG 4.13 · 성장률 대비 부담"
       ]
     }
@@ -36718,10 +36716,10 @@ window.LIVE_STOCKS = [
     "hitl": false,
     "reasons": {
       "tech": [
-        "단기 역배열 (P<136150.0<147446.0)",
-        "RSI 46 · 중립",
-        "MACD 골든크로스 · 히스토 +697.21",
-        "3개월 수익률 -18.0% · 급락"
+        "단기 역배열 (P<135485.0<146844.0)",
+        "RSI 40 · 중립",
+        "MACD 골든크로스 · 히스토 +920.13",
+        "3개월 수익률 -23.2% · 급락"
       ],
       "macro": [
         "NEUTRAL · VIX 15.2 · US10Y 4.69%"
@@ -36733,7 +36731,7 @@ window.LIVE_STOCKS = [
         "* DART API 키 미설정 · 프록시 사용"
       ],
       "value": [
-        "PER 5.7 · 극심 저평가",
+        "PER 5.6 · 극심 저평가",
         "PEG 0.42 · 성장률 대비 저평가"
       ]
     }
@@ -36750,13 +36748,13 @@ window.LIVE_STOCKS = [
     "total": 59,
     "consensus": 1,
     "signal": "HOLD",
-    "ev": 0.3,
+    "ev": 0.31,
     "target": 4,
     "hitl": false,
     "reasons": {
       "tech": [
-        "RSI 58 · 강세 지속 구간",
-        "MACD 골든크로스 · 히스토 +2646.61"
+        "RSI 55 · 강세 지속 구간",
+        "MACD 골든크로스 · 히스토 +1622.74"
       ],
       "macro": [
         "NEUTRAL · VIX 15.2 · US10Y 4.69%"
@@ -36766,7 +36764,7 @@ window.LIVE_STOCKS = [
         "* DART 실시간 공시 반영"
       ],
       "value": [
-        "PER 13.9 · 저평가",
+        "PER 13.8 · 저평가",
         "PEG 25.64 · 성장률 대비 부담"
       ]
     }
@@ -36783,15 +36781,15 @@ window.LIVE_STOCKS = [
     "total": 63,
     "consensus": 0,
     "signal": "HOLD",
-    "ev": 0.55,
+    "ev": 0.61,
     "target": 7,
     "hitl": false,
     "reasons": {
       "tech": [
-        "단기 정배열 (P>180205.0>176279.8)",
-        "RSI 77 · 과매수 경계",
-        "MACD 골든크로스 · 히스토 +2202.09",
-        "3개월 수익률 +5.5%",
+        "단기 정배열 (P>181445.0>176660.8)",
+        "RSI 79 · 과매수 경계",
+        "MACD 골든크로스 · 히스토 +2336.67",
+        "3개월 수익률 +9.8%",
         "Bollinger 상단 접근 (100%)"
       ],
       "macro": [
@@ -36815,22 +36813,21 @@ window.LIVE_STOCKS = [
     "n": "KB금융",
     "m": "KR",
     "sec": "미분류",
-    "tech": 69,
+    "tech": 47,
     "macro": 55,
     "filing": 55,
     "value": 78,
-    "total": 63,
+    "total": 56,
     "consensus": 1,
     "signal": "HOLD",
-    "ev": 0.58,
-    "target": 7,
+    "ev": 0.25,
+    "target": 3,
     "hitl": false,
     "reasons": {
       "tech": [
-        "이동평균 완벽 정배열 (P>172398.9>164335.8>144194.4)",
-        "RSI 59 · 강세 지속 구간",
-        "MACD 데드크로스 · 히스토 -155.00",
-        "3개월 수익률 +9.5%"
+        "RSI 48 · 중립",
+        "MACD 데드크로스 · 히스토 -161.03",
+        "3개월 수익률 +8.3%"
       ],
       "macro": [
         "NEUTRAL · VIX 15.2 · US10Y 4.69%"
@@ -36839,7 +36836,7 @@ window.LIVE_STOCKS = [
         "* DART 실시간 공시 반영"
       ],
       "value": [
-        "PER 8.8 · 극심 저평가",
+        "PER 8.6 · 극심 저평가",
         "PEG 0.74 · 성장률 대비 저평가"
       ]
     }
@@ -36862,15 +36859,15 @@ window.LIVE_STOCKS = [
     "reasons": {
       "tech": [
         "RSI 62 · 강세 지속 구간",
-        "MACD 골든크로스 · 히스토 +4949.48",
-        "3개월 수익률 -36.7% · 급락",
+        "MACD 골든크로스 · 히스토 +5366.21",
+        "3개월 수익률 -35.0% · 급락",
         "Bollinger 상단 접근 (100%)"
       ],
       "macro": [
         "NEUTRAL · VIX 15.2 · US10Y 4.69%"
       ],
       "filing": [
-        "고점 대비 63%",
+        "고점 대비 65%",
         "* DART API 키 미설정 · 프록시 사용"
       ],
       "value": [
@@ -36884,23 +36881,22 @@ window.LIVE_STOCKS = [
     "n": "신한지주",
     "m": "KR",
     "sec": "미분류",
-    "tech": 88,
+    "tech": 84,
     "macro": 55,
-    "filing": 76,
+    "filing": 68,
     "value": 65,
-    "total": 74,
-    "consensus": 2,
-    "signal": "WATCH",
-    "ev": 1.07,
-    "target": 13,
+    "total": 71,
+    "consensus": 1,
+    "signal": "HOLD",
+    "ev": 0.87,
+    "target": 10,
     "hitl": false,
     "reasons": {
       "tech": [
-        "이동평균 완벽 정배열 (P>104056.3>101118.9>89235.3)",
-        "RSI 69 · 강세 지속 구간",
-        "MACD 골든크로스 · 히스토 +443.06",
-        "3개월 수익률 +13.1%",
-        "Bollinger 상단 접근 (99%)"
+        "이동평균 완벽 정배열 (P>103901.3>101382.6>89409.5)",
+        "RSI 53 · 중립",
+        "MACD 골든크로스 · 히스토 +356.67",
+        "3개월 수익률 +9.1%"
       ],
       "macro": [
         "NEUTRAL · VIX 15.2 · US10Y 4.69%"
@@ -36908,11 +36904,10 @@ window.LIVE_STOCKS = [
       "filing": [
         "내부자 보유 5.2%",
         "배당성향 25% · 안정",
-        "3개월 신고가 근접 (100%)",
         "* DART API 키 미설정 · 프록시 사용"
       ],
       "value": [
-        "PER 8.0 · 극심 저평가",
+        "PER 7.7 · 극심 저평가",
         "PEG 5.14 · 성장률 대비 부담"
       ]
     }
@@ -36922,20 +36917,20 @@ window.LIVE_STOCKS = [
     "n": "현대모비스",
     "m": "KR",
     "sec": "미분류",
-    "tech": 67,
+    "tech": 60,
     "macro": 55,
     "filing": 63,
     "value": 78,
-    "total": 65,
+    "total": 63,
     "consensus": 1,
     "signal": "HOLD",
-    "ev": 0.48,
-    "target": 6,
+    "ev": 0.29,
+    "target": 3,
     "hitl": false,
     "reasons": {
       "tech": [
-        "RSI 55 · 강세 지속 구간",
-        "MACD 골든크로스 · 히스토 +7160.21",
+        "RSI 55 · 중립",
+        "MACD 골든크로스 · 히스토 +7133.72",
         "거래량 감소 · 0.5배"
       ],
       "macro": [
@@ -36958,20 +36953,20 @@ window.LIVE_STOCKS = [
     "n": "카카오",
     "m": "KR",
     "sec": "미분류",
-    "tech": 59,
+    "tech": 72,
     "macro": 55,
-    "filing": 60,
+    "filing": 55,
     "value": 58,
-    "total": 58,
-    "consensus": 0,
+    "total": 61,
+    "consensus": 1,
     "signal": "HOLD",
-    "ev": 0.12,
-    "target": 1,
+    "ev": 0.25,
+    "target": 3,
     "hitl": false,
     "reasons": {
       "tech": [
-        "MACD 골든크로스 · 히스토 +529.54",
-        "Bollinger 상단 접근 (100%)"
+        "RSI 66 · 강세 지속 구간",
+        "MACD 골든크로스 · 히스토 +492.34"
       ],
       "macro": [
         "NEUTRAL · VIX 15.2 · US10Y 4.69%"
@@ -36980,11 +36975,12 @@ window.LIVE_STOCKS = [
         "기관 보유 22% · 낮음",
         "내부자 보유 29.8%",
         "배당성향 6% · 안정",
+        "고점 대비 85%",
         "* DART API 키 미설정 · 프록시 사용"
       ],
       "value": [
-        "PER 21.6 · 적정",
-        "FCF Yield 17.8% · 우수"
+        "PER 21.0 · 적정",
+        "FCF Yield 18.3% · 우수"
       ]
     }
   },
@@ -37005,20 +37001,20 @@ window.LIVE_STOCKS = [
     "hitl": false,
     "reasons": {
       "tech": [
-        "RSI 60 · 강세 지속 구간",
-        "MACD 골든크로스 · 히스토 +9229.62",
-        "3개월 수익률 -32.3% · 급락"
+        "RSI 59 · 강세 지속 구간",
+        "MACD 골든크로스 · 히스토 +11344.50",
+        "3개월 수익률 -31.5% · 급락"
       ],
       "macro": [
         "NEUTRAL · VIX 15.2 · US10Y 4.69%"
       ],
       "filing": [
         "내부자 보유 23.0%",
-        "고점 대비 67%",
+        "고점 대비 68%",
         "* DART API 키 미설정 · 프록시 사용"
       ],
       "value": [
-        "PER 25.7 · 적정",
+        "PER 26.2 · 적정",
         "PEG 12.29 · 성장률 대비 부담"
       ]
     }
@@ -37028,22 +37024,21 @@ window.LIVE_STOCKS = [
     "n": "삼성물산",
     "m": "KR",
     "sec": "미분류",
-    "tech": 40,
+    "tech": 55,
     "macro": 55,
     "filing": 63,
     "value": 50,
-    "total": 51,
+    "total": 57,
     "consensus": 0,
     "signal": "HOLD",
-    "ev": -0.17,
-    "target": -2,
+    "ev": 0.04,
+    "target": 0,
     "hitl": false,
     "reasons": {
       "tech": [
-        "단기 역배열 (P<339075.0<408530.0)",
-        "RSI 54 · 중립",
-        "MACD 골든크로스 · 히스토 +4244.78",
-        "3개월 수익률 -20.4% · 급락"
+        "RSI 49 · 중립",
+        "MACD 골든크로스 · 히스토 +4733.96",
+        "3개월 수익률 -25.4% · 급락"
       ],
       "macro": [
         "NEUTRAL · VIX 15.2 · US10Y 4.69%"
@@ -37076,9 +37071,9 @@ window.LIVE_STOCKS = [
     "hitl": false,
     "reasons": {
       "tech": [
-        "RSI 62 · 강세 지속 구간",
-        "MACD 골든크로스 · 히스토 +333.16",
-        "3개월 수익률 -19.2% · 급락"
+        "RSI 60 · 강세 지속 구간",
+        "MACD 골든크로스 · 히스토 +326.66",
+        "3개월 수익률 -17.6% · 급락"
       ],
       "macro": [
         "NEUTRAL · VIX 15.2 · US10Y 4.69%"
@@ -37086,7 +37081,7 @@ window.LIVE_STOCKS = [
       "filing": [
         "내부자 보유 19.5%",
         "배당성향 11% · 안정",
-        "고점 대비 81%",
+        "고점 대비 82%",
         "* DART API 키 미설정 · 프록시 사용"
       ],
       "value": [
@@ -37099,21 +37094,22 @@ window.LIVE_STOCKS = [
     "n": "고려아연",
     "m": "KR",
     "sec": "미분류",
-    "tech": 62,
+    "tech": 59,
     "macro": 55,
     "filing": 55,
     "value": 42,
-    "total": 56,
+    "total": 54,
     "consensus": 0,
     "signal": "HOLD",
-    "ev": 0.03,
+    "ev": -0.01,
     "target": 0,
     "hitl": false,
     "reasons": {
       "tech": [
-        "RSI 61 · 강세 지속 구간",
-        "MACD 골든크로스 · 히스토 +28022.86",
-        "3개월 수익률 -28.8% · 급락"
+        "RSI 66 · 강세 지속 구간",
+        "MACD 골든크로스 · 히스토 +32980.05",
+        "3개월 수익률 -19.8% · 급락",
+        "Bollinger 상단 접근 (100%)"
       ],
       "macro": [
         "NEUTRAL · VIX 15.2 · US10Y 4.69%"
@@ -37122,11 +37118,11 @@ window.LIVE_STOCKS = [
         "기관 보유 8% · 낮음",
         "내부자 보유 74.6%",
         "배당성향 39% · 안정",
-        "고점 대비 71%",
+        "고점 대비 80%",
         "* DART API 키 미설정 · 프록시 사용"
       ],
       "value": [
-        "PER 20.1 · 적정",
+        "PER 22.2 · 적정",
         "FCF 음수 · 현금유출"
       ]
     }
@@ -37143,14 +37139,14 @@ window.LIVE_STOCKS = [
     "total": 49,
     "consensus": 1,
     "signal": "HOLD",
-    "ev": -0.22,
+    "ev": -0.26,
     "target": -3,
     "hitl": false,
     "reasons": {
       "tech": [
-        "단기 역배열 (P<568675.0<635130.0)",
-        "RSI 43 · 중립",
-        "MACD 데드크로스 · 히스토 -4860.43"
+        "단기 역배열 (P<561425.0<632090.0)",
+        "RSI 41 · 중립",
+        "MACD 데드크로스 · 히스토 -3850.11"
       ],
       "macro": [
         "NEUTRAL · VIX 15.2 · US10Y 4.69%"
@@ -37159,12 +37155,12 @@ window.LIVE_STOCKS = [
         "기관 보유 22% · 낮음",
         "내부자 보유 25.4%",
         "배당성향 15% · 안정",
-        "고점 대비 59%",
+        "고점 대비 60%",
         "* DART API 키 미설정 · 프록시 사용"
       ],
       "value": [
         "PER 4.1 · 극심 저평가",
-        "FCF Yield 15.4% · 우수"
+        "FCF Yield 15.3% · 우수"
       ]
     }
   },
@@ -37173,21 +37169,22 @@ window.LIVE_STOCKS = [
     "n": "포스코퓨처엠",
     "m": "KR",
     "sec": "미분류",
-    "tech": 62,
+    "tech": 59,
     "macro": 55,
     "filing": 50,
     "value": 22,
-    "total": 51,
+    "total": 50,
     "consensus": 0,
     "signal": "HOLD",
-    "ev": -0.09,
-    "target": -1,
+    "ev": -0.14,
+    "target": -2,
     "hitl": false,
     "reasons": {
       "tech": [
-        "RSI 61 · 강세 지속 구간",
-        "MACD 골든크로스 · 히스토 +3936.27",
-        "3개월 수익률 -46.3% · 급락"
+        "RSI 63 · 강세 지속 구간",
+        "MACD 골든크로스 · 히스토 +4649.78",
+        "3개월 수익률 -42.5% · 급락",
+        "Bollinger 상단 접근 (100%)"
       ],
       "macro": [
         "NEUTRAL · VIX 15.2 · US10Y 4.69%"
@@ -37195,11 +37192,11 @@ window.LIVE_STOCKS = [
       "filing": [
         "기관 보유 10% · 낮음",
         "내부자 보유 63.2%",
-        "고점 대비 54%",
+        "고점 대비 58%",
         "* DART API 키 미설정 · 프록시 사용"
       ],
       "value": [
-        "PER 153.4 · 극심 프리미엄",
+        "PER 158.7 · 극심 프리미엄",
         "PEG 4.51 · 성장률 대비 부담",
         "FCF 음수 · 현금유출"
       ]
@@ -37222,10 +37219,10 @@ window.LIVE_STOCKS = [
     "hitl": false,
     "reasons": {
       "tech": [
-        "RSI 65 · 강세 지속 구간",
-        "MACD 골든크로스 · 히스토 +3470.64",
+        "RSI 63 · 강세 지속 구간",
+        "MACD 골든크로스 · 히스토 +2944.37",
         "거래량 감소 · 0.5배",
-        "3개월 수익률 +26.3% · 강한 상승"
+        "3개월 수익률 +27.2% · 강한 상승"
       ],
       "macro": [
         "NEUTRAL · VIX 15.2 · US10Y 4.69%"
@@ -37247,22 +37244,21 @@ window.LIVE_STOCKS = [
     "n": "삼성생명",
     "m": "KR",
     "sec": "미분류",
-    "tech": 53,
+    "tech": 50,
     "macro": 55,
     "filing": 55,
     "value": 62,
-    "total": 55,
+    "total": 54,
     "consensus": 0,
     "signal": "HOLD",
-    "ev": 0.08,
+    "ev": 0.05,
     "target": 1,
     "hitl": false,
     "reasons": {
       "tech": [
-        "단기 역배열 (P<304850.0<366320.0)",
-        "RSI 44 · 중립",
-        "MACD 골든크로스 · 히스토 +65.61",
-        "Bollinger 하단 근접 · 반등 여지"
+        "단기 역배열 (P<301925.0<364810.0)",
+        "RSI 42 · 중립",
+        "MACD 골든크로스 · 히스토 +627.54"
       ],
       "macro": [
         "NEUTRAL · VIX 15.2 · US10Y 4.69%"
@@ -37271,11 +37267,11 @@ window.LIVE_STOCKS = [
         "기관 보유 24% · 낮음",
         "내부자 보유 49.8%",
         "배당성향 33% · 안정",
-        "고점 대비 55%",
+        "고점 대비 57%",
         "* DART API 키 미설정 · 프록시 사용"
       ],
       "value": [
-        "PER 11.2 · 극심 저평가",
+        "PER 11.5 · 극심 저평가",
         "FCF 음수 · 현금유출"
       ]
     }
@@ -37285,23 +37281,22 @@ window.LIVE_STOCKS = [
     "n": "메리츠금융지주",
     "m": "KR",
     "sec": "미분류",
-    "tech": 81,
+    "tech": 84,
     "macro": 55,
-    "filing": 63,
+    "filing": 55,
     "value": 70,
-    "total": 69,
+    "total": 67,
     "consensus": 2,
     "signal": "WATCH",
-    "ev": 0.84,
-    "target": 10,
+    "ev": 0.76,
+    "target": 9,
     "hitl": false,
     "reasons": {
       "tech": [
-        "단기 정배열 (P>119135.0>112334.0)",
-        "RSI 67 · 강세 지속 구간",
-        "MACD 골든크로스 · 히스토 +360.99",
-        "3개월 수익률 +12.4%",
-        "Bollinger 상단 접근 (92%)"
+        "단기 정배열 (P>119530.0>112732.0)",
+        "RSI 62 · 강세 지속 구간",
+        "MACD 골든크로스 · 히스토 +186.74",
+        "3개월 수익률 +9.7%"
       ],
       "macro": [
         "NEUTRAL · VIX 15.2 · US10Y 4.69%"
@@ -37309,11 +37304,10 @@ window.LIVE_STOCKS = [
       "filing": [
         "기관 보유 20% · 낮음",
         "내부자 보유 58.8%",
-        "3개월 신고가 근접 (100%)",
         "* DART API 키 미설정 · 프록시 사용"
       ],
       "value": [
-        "PER 6.9 · 극심 저평가"
+        "PER 6.7 · 극심 저평가"
       ]
     }
   },
@@ -37322,23 +37316,22 @@ window.LIVE_STOCKS = [
     "n": "HMM",
     "m": "KR",
     "sec": "미분류",
-    "tech": 81,
+    "tech": 84,
     "macro": 55,
-    "filing": 76,
+    "filing": 68,
     "value": 52,
-    "total": 70,
-    "consensus": 2,
-    "signal": "WATCH",
-    "ev": 0.83,
-    "target": 10,
+    "total": 69,
+    "consensus": 1,
+    "signal": "HOLD",
+    "ev": 0.79,
+    "target": 9,
     "hitl": false,
     "reasons": {
       "tech": [
-        "단기 정배열 (P>20557.5>19938.8)",
-        "RSI 65 · 강세 지속 구간",
-        "MACD 골든크로스 · 히스토 +109.73",
-        "3개월 수익률 +5.8%",
-        "Bollinger 상단 접근 (99%)"
+        "단기 정배열 (P>20635.5>19972.6)",
+        "RSI 60 · 강세 지속 구간",
+        "MACD 골든크로스 · 히스토 +85.15",
+        "3개월 수익률 +6.2%"
       ],
       "macro": [
         "NEUTRAL · VIX 15.2 · US10Y 4.69%"
@@ -37346,11 +37339,10 @@ window.LIVE_STOCKS = [
       "filing": [
         "내부자 보유 35.1%",
         "배당성향 47% · 안정",
-        "3개월 신고가 근접 (98%)",
         "* DART API 키 미설정 · 프록시 사용"
       ],
       "value": [
-        "PER 16.5 · 저평가",
+        "PER 16.1 · 저평가",
         "FCF 음수 · 현금유출"
       ]
     }
@@ -37360,22 +37352,21 @@ window.LIVE_STOCKS = [
     "n": "하나금융지주",
     "m": "KR",
     "sec": "미분류",
-    "tech": 84,
+    "tech": 80,
     "macro": 55,
-    "filing": 74,
+    "filing": 66,
     "value": 65,
-    "total": 72,
-    "consensus": 2,
-    "signal": "WATCH",
-    "ev": 0.91,
-    "target": 11,
+    "total": 69,
+    "consensus": 1,
+    "signal": "HOLD",
+    "ev": 0.72,
+    "target": 9,
     "hitl": false,
     "reasons": {
       "tech": [
-        "이동평균 완벽 정배열 (P>129145.1>122839.9>108172.1)",
-        "RSI 54 · 중립",
-        "MACD 골든크로스 · 히스토 +258.12",
-        "3개월 수익률 +7.4%"
+        "이동평균 완벽 정배열 (P>129255.8>123145.9>108400.4)",
+        "RSI 47 · 중립",
+        "MACD 골든크로스 · 히스토 +183.73"
       ],
       "macro": [
         "NEUTRAL · VIX 15.2 · US10Y 4.69%"
@@ -37383,11 +37374,10 @@ window.LIVE_STOCKS = [
       "filing": [
         "기관 보유 60%",
         "배당성향 29% · 안정",
-        "3개월 신고가 근접 (99%)",
         "* DART API 키 미설정 · 프록시 사용"
       ],
       "value": [
-        "PER 7.5 · 극심 저평가",
+        "PER 7.2 · 극심 저평가",
         "PEG 4.79 · 성장률 대비 부담"
       ]
     }
@@ -37397,20 +37387,21 @@ window.LIVE_STOCKS = [
     "n": "SK텔레콤",
     "m": "KR",
     "sec": "미분류",
-    "tech": 65,
+    "tech": 50,
     "macro": 55,
     "filing": 50,
     "value": 68,
-    "total": 59,
+    "total": 54,
     "consensus": 0,
     "signal": "HOLD",
-    "ev": 0.24,
-    "target": 3,
+    "ev": -0.08,
+    "target": -1,
     "hitl": false,
     "reasons": {
       "tech": [
-        "RSI 53 · 중립",
-        "MACD 골든크로스 · 히스토 +626.69"
+        "단기 역배열 (P<87810.0<93144.0)",
+        "RSI 50 · 중립",
+        "MACD 골든크로스 · 히스토 +322.03"
       ],
       "macro": [
         "NEUTRAL · VIX 15.2 · US10Y 4.69%"
@@ -37418,12 +37409,12 @@ window.LIVE_STOCKS = [
       "filing": [
         "기관 보유 26% · 낮음",
         "내부자 보유 32.5%",
-        "고점 대비 70%",
+        "고점 대비 67%",
         "* DART API 키 미설정 · 프록시 사용"
       ],
       "value": [
-        "PER 13.9 · 저평가",
-        "PEG 0.69 · 성장률 대비 저평가"
+        "PER 13.4 · 저평가",
+        "PEG 0.67 · 성장률 대비 저평가"
       ]
     }
   },
@@ -37432,22 +37423,23 @@ window.LIVE_STOCKS = [
     "n": "롯데케미칼",
     "m": "KR",
     "sec": "미분류",
-    "tech": 57,
+    "tech": 35,
     "macro": 55,
     "filing": 50,
     "value": 50,
-    "total": 53,
+    "total": 46,
     "consensus": 0,
     "signal": "HOLD",
-    "ev": -0.07,
-    "target": -1,
+    "ev": -0.38,
+    "target": -5,
     "hitl": false,
     "reasons": {
       "tech": [
-        "RSI 57 · 강세 지속 구간",
-        "MACD 골든크로스 · 히스토 +846.21",
-        "거래량 감소 · 0.4배",
-        "3개월 수익률 -38.9% · 급락"
+        "단기 역배열 (P<58560.0<66278.0)",
+        "RSI 52 · 중립",
+        "MACD 골든크로스 · 히스토 +765.20",
+        "거래량 감소 · 0.5배",
+        "3개월 수익률 -45.9% · 급락"
       ],
       "macro": [
         "NEUTRAL · VIX 15.2 · US10Y 4.69%"
@@ -37455,11 +37447,11 @@ window.LIVE_STOCKS = [
       "filing": [
         "기관 보유 14% · 낮음",
         "내부자 보유 56.3%",
-        "고점 대비 57%",
+        "고점 대비 54%",
         "* DART API 키 미설정 · 프록시 사용"
       ],
       "value": [
-        "Forward PER -15.0 · 이익 성장 반영",
+        "Forward PER -26.3 · 이익 성장 반영",
         "FCF 음수 · 현금유출"
       ]
     }
@@ -37481,9 +37473,9 @@ window.LIVE_STOCKS = [
     "hitl": false,
     "reasons": {
       "tech": [
-        "RSI 51 · 중립",
-        "MACD 골든크로스 · 히스토 +13323.78",
-        "3개월 수익률 -45.6% · 급락"
+        "RSI 49 · 중립",
+        "MACD 골든크로스 · 히스토 +15108.50",
+        "3개월 수익률 -44.1% · 급락"
       ],
       "macro": [
         "NEUTRAL · VIX 15.2 · US10Y 4.69%"
@@ -37491,7 +37483,7 @@ window.LIVE_STOCKS = [
       "filing": [
         "내부자 보유 37.1%",
         "배당성향 32% · 안정",
-        "고점 대비 54%",
+        "고점 대비 56%",
         "* DART API 키 미설정 · 프록시 사용"
       ],
       "value": [
@@ -37504,22 +37496,21 @@ window.LIVE_STOCKS = [
     "n": "아모레퍼시픽",
     "m": "KR",
     "sec": "미분류",
-    "tech": 71,
+    "tech": 80,
     "macro": 55,
-    "filing": 68,
+    "filing": 60,
     "value": 50,
     "total": 64,
     "consensus": 1,
     "signal": "HOLD",
-    "ev": 0.65,
-    "target": 8,
+    "ev": 0.62,
+    "target": 7,
     "hitl": false,
     "reasons": {
       "tech": [
-        "단기 정배열 (P>125080.0>116344.0)",
-        "MACD 골든크로스 · 히스토 +1650.99",
-        "3개월 수익률 +9.6%",
-        "Bollinger 상단 접근 (100%)"
+        "단기 정배열 (P>125625.0>116716.0)",
+        "RSI 63 · 강세 지속 구간",
+        "MACD 골든크로스 · 히스토 +1243.01"
       ],
       "macro": [
         "NEUTRAL · VIX 15.2 · US10Y 4.69%"
@@ -37528,11 +37519,10 @@ window.LIVE_STOCKS = [
         "기관 보유 23% · 낮음",
         "내부자 보유 50.1%",
         "배당성향 37% · 안정",
-        "3개월 신고가 근접 (100%)",
         "* DART API 키 미설정 · 프록시 사용"
       ],
       "value": [
-        "PER 20.6 · 적정"
+        "PER 19.5 · 적정"
       ]
     }
   },
@@ -37541,22 +37531,21 @@ window.LIVE_STOCKS = [
     "n": "HD현대중공업",
     "m": "KR",
     "sec": "미분류",
-    "tech": 59,
+    "tech": 62,
     "macro": 55,
     "filing": 55,
     "value": 78,
-    "total": 60,
+    "total": 61,
     "consensus": 1,
     "signal": "HOLD",
-    "ev": 0.11,
-    "target": 1,
+    "ev": 0.15,
+    "target": 2,
     "hitl": false,
     "reasons": {
       "tech": [
         "RSI 62 · 강세 지속 구간",
-        "MACD 골든크로스 · 히스토 +3846.32",
-        "3개월 수익률 -21.8% · 급락",
-        "Bollinger 상단 접근 (90%)"
+        "MACD 골든크로스 · 히스토 +4084.67",
+        "3개월 수익률 -23.0% · 급락"
       ],
       "macro": [
         "NEUTRAL · VIX 15.2 · US10Y 4.69%"
@@ -37586,14 +37575,14 @@ window.LIVE_STOCKS = [
     "total": 48,
     "consensus": 0,
     "signal": "HOLD",
-    "ev": -0.23,
+    "ev": -0.21,
     "target": -3,
     "hitl": false,
     "reasons": {
       "tech": [
-        "단기 역배열 (P<22135.0<22191.0)",
-        "RSI 44 · 중립",
-        "MACD 데드크로스 · 히스토 -6.56"
+        "단기 역배열 (P<22080.0<22199.0)",
+        "RSI 46 · 중립",
+        "MACD 데드크로스 · 히스토 -0.14"
       ],
       "macro": [
         "NEUTRAL · VIX 15.2 · US10Y 4.69%"
@@ -37605,7 +37594,7 @@ window.LIVE_STOCKS = [
         "* DART API 키 미설정 · 프록시 사용"
       ],
       "value": [
-        "PER 15.6 · 저평가"
+        "PER 15.5 · 저평가"
       ]
     }
   },
@@ -37614,21 +37603,23 @@ window.LIVE_STOCKS = [
     "n": "삼성화재",
     "m": "KR",
     "sec": "미분류",
-    "tech": 80,
+    "tech": 53,
     "macro": 55,
     "filing": 66,
     "value": 62,
-    "total": 68,
-    "consensus": 1,
+    "total": 59,
+    "consensus": 0,
     "signal": "HOLD",
-    "ev": 0.86,
-    "target": 10,
+    "ev": 0.49,
+    "target": 6,
     "hitl": false,
     "reasons": {
       "tech": [
-        "RSI 61 · 강세 지속 구간",
-        "MACD 골든크로스 · 히스토 +1446.71",
-        "3개월 수익률 +29.3% · 강한 상승"
+        "단기 역배열 (P<632250.0<644740.0)",
+        "RSI 52 · 중립",
+        "MACD 골든크로스 · 히스토 +833.58",
+        "거래량 감소 · 0.6배",
+        "3개월 수익률 +24.2% · 강한 상승"
       ],
       "macro": [
         "NEUTRAL · VIX 15.2 · US10Y 4.69%"
@@ -37639,7 +37630,7 @@ window.LIVE_STOCKS = [
         "* DART API 키 미설정 · 프록시 사용"
       ],
       "value": [
-        "PER 10.0 · 극심 저평가",
+        "PER 9.8 · 극심 저평가",
         "FCF 음수 · 현금유출"
       ]
     }
@@ -37649,22 +37640,22 @@ window.LIVE_STOCKS = [
     "n": "S-Oil",
     "m": "KR",
     "sec": "미분류",
-    "tech": 62,
+    "tech": 66,
     "macro": 55,
     "filing": 60,
     "value": 70,
-    "total": 61,
+    "total": 63,
     "consensus": 1,
     "signal": "HOLD",
-    "ev": 0.58,
-    "target": 7,
+    "ev": 0.63,
+    "target": 8,
     "hitl": false,
     "reasons": {
       "tech": [
-        "이동평균 완벽 정배열 (P>135075.0>120292.0>103861.9)",
-        "RSI 44 · 중립",
-        "MACD 데드크로스 · 히스토 -1710.61",
-        "3개월 수익률 +17.8%"
+        "이동평균 완벽 정배열 (P>135360.0>120908.0>104210.4)",
+        "RSI 47 · 중립",
+        "MACD 데드크로스 · 히스토 -980.34",
+        "3개월 수익률 +24.3% · 강한 상승"
       ],
       "macro": [
         "NEUTRAL · VIX 15.2 · US10Y 4.69%"
@@ -37685,21 +37676,22 @@ window.LIVE_STOCKS = [
     "n": "LG이노텍",
     "m": "KR",
     "sec": "미분류",
-    "tech": 50,
+    "tech": 40,
     "macro": 55,
     "filing": 55,
-    "value": 65,
-    "total": 55,
+    "value": 55,
+    "total": 50,
     "consensus": 0,
     "signal": "HOLD",
-    "ev": -0.01,
-    "target": 0,
+    "ev": -0.24,
+    "target": -3,
     "hitl": false,
     "reasons": {
       "tech": [
-        "단기 역배열 (P<592550.0<875860.0)",
-        "RSI 46 · 중립",
-        "MACD 골든크로스 · 히스토 +11760.43"
+        "단기 역배열 (P<583150.0<864260.0)",
+        "RSI 43 · 중립",
+        "MACD 골든크로스 · 히스토 +13634.87",
+        "3개월 수익률 -19.5% · 급락"
       ],
       "macro": [
         "NEUTRAL · VIX 15.2 · US10Y 4.69%"
@@ -37712,7 +37704,7 @@ window.LIVE_STOCKS = [
         "* DART API 키 미설정 · 프록시 사용"
       ],
       "value": [
-        "PER 12.0 · 극심 저평가",
+        "PER 12.0 · 저평가",
         "PEG 19.39 · 성장률 대비 부담"
       ]
     }
@@ -37735,22 +37727,22 @@ window.LIVE_STOCKS = [
     "reasons": {
       "tech": [
         "RSI 55 · 강세 지속 구간",
-        "MACD 골든크로스 · 히스토 +270.75",
+        "MACD 골든크로스 · 히스토 +297.12",
         "거래량 감소 · 0.6배",
-        "3개월 수익률 -31.0% · 급락"
+        "3개월 수익률 -34.0% · 급락"
       ],
       "macro": [
         "NEUTRAL · VIX 15.2 · US10Y 4.69%"
       ],
       "filing": [
         "내부자 보유 18.1%",
-        "고점 대비 65%",
+        "고점 대비 66%",
         "* DART API 키 미설정 · 프록시 사용"
       ],
       "value": [
-        "PER 13.0 · 저평가",
+        "PER 13.2 · 저평가",
         "PEG 0.11 · 성장률 대비 저평가",
-        "FCF Yield 15.5% · 우수"
+        "FCF Yield 15.3% · 우수"
       ]
     }
   },
@@ -37759,22 +37751,23 @@ window.LIVE_STOCKS = [
     "n": "HD현대미포",
     "m": "KR",
     "sec": "미분류",
-    "tech": 57,
+    "tech": 54,
     "macro": 55,
     "filing": 55,
     "value": 60,
-    "total": 56,
+    "total": 55,
     "consensus": 0,
     "signal": "HOLD",
-    "ev": 0.02,
+    "ev": -0.02,
     "target": 0,
     "hitl": false,
     "reasons": {
       "tech": [
-        "RSI 63 · 강세 지속 구간",
-        "MACD 골든크로스 · 히스토 +10786.86",
+        "RSI 67 · 강세 지속 구간",
+        "MACD 골든크로스 · 히스토 +12511.15",
         "거래량 감소 · 0.6배",
-        "3개월 수익률 -23.1% · 급락"
+        "3개월 수익률 -22.3% · 급락",
+        "Bollinger 상단 접근 (100%)"
       ],
       "macro": [
         "NEUTRAL · VIX 15.2 · US10Y 4.69%"
@@ -37783,11 +37776,11 @@ window.LIVE_STOCKS = [
         "기관 보유 18% · 낮음",
         "내부자 보유 69.3%",
         "배당성향 28% · 안정",
-        "고점 대비 68%",
+        "고점 대비 71%",
         "* DART API 키 미설정 · 프록시 사용"
       ],
       "value": [
-        "PER 14.2 · 저평가"
+        "PER 14.9 · 저평가"
       ]
     }
   },
@@ -37796,21 +37789,21 @@ window.LIVE_STOCKS = [
     "n": "기업은행",
     "m": "KR",
     "sec": "미분류",
-    "tech": 51,
+    "tech": 28,
     "macro": 55,
     "filing": 60,
     "value": 70,
-    "total": 57,
+    "total": 49,
     "consensus": 1,
     "signal": "HOLD",
-    "ev": 0.17,
-    "target": 2,
+    "ev": -0.15,
+    "target": -2,
     "hitl": false,
     "reasons": {
       "tech": [
-        "단기 정배열 (P>20665.5>20631.5)",
-        "RSI 47 · 중립",
-        "MACD 데드크로스 · 히스토 -11.49"
+        "단기 역배열 (P<20629.1<20632.8)",
+        "RSI 50 · 중립",
+        "MACD 데드크로스 · 히스토 -17.23"
       ],
       "macro": [
         "NEUTRAL · VIX 15.2 · US10Y 4.69%"
@@ -37822,7 +37815,7 @@ window.LIVE_STOCKS = [
         "* DART API 키 미설정 · 프록시 사용"
       ],
       "value": [
-        "PER 5.7 · 극심 저평가"
+        "PER 5.5 · 극심 저평가"
       ]
     }
   },
@@ -37843,9 +37836,9 @@ window.LIVE_STOCKS = [
     "hitl": false,
     "reasons": {
       "tech": [
-        "RSI 50 · 중립",
-        "MACD 골든크로스 · 히스토 +21604.97",
-        "3개월 수익률 +39.8% · 강한 상승"
+        "RSI 49 · 중립",
+        "MACD 골든크로스 · 히스토 +25982.99",
+        "3개월 수익률 +41.8% · 강한 상승"
       ],
       "macro": [
         "NEUTRAL · VIX 15.2 · US10Y 4.69%"
@@ -37866,32 +37859,33 @@ window.LIVE_STOCKS = [
     "n": "한화오션",
     "m": "KR",
     "sec": "미분류",
-    "tech": 62,
+    "tech": 59,
     "macro": 55,
     "filing": 58,
     "value": 60,
-    "total": 59,
+    "total": 58,
     "consensus": 0,
     "signal": "HOLD",
-    "ev": 0.12,
+    "ev": 0.08,
     "target": 1,
     "hitl": false,
     "reasons": {
       "tech": [
-        "RSI 56 · 강세 지속 구간",
-        "MACD 골든크로스 · 히스토 +2043.72",
-        "3개월 수익률 -29.1% · 급락"
+        "RSI 60 · 강세 지속 구간",
+        "MACD 골든크로스 · 히스토 +2196.34",
+        "3개월 수익률 -28.8% · 급락",
+        "Bollinger 상단 접근 (90%)"
       ],
       "macro": [
         "NEUTRAL · VIX 15.2 · US10Y 4.69%"
       ],
       "filing": [
         "내부자 보유 38.0%",
-        "고점 대비 66%",
+        "고점 대비 69%",
         "* DART API 키 미설정 · 프록시 사용"
       ],
       "value": [
-        "PER 14.0 · 저평가",
+        "PER 14.5 · 저평가",
         "PEG 0.44 · 성장률 대비 저평가",
         "FCF 음수 · 현금유출"
       ]
@@ -37909,13 +37903,13 @@ window.LIVE_STOCKS = [
     "total": 60,
     "consensus": 1,
     "signal": "HOLD",
-    "ev": 0.26,
-    "target": 3,
+    "ev": 0.34,
+    "target": 4,
     "hitl": false,
     "reasons": {
       "tech": [
-        "RSI 55 · 강세 지속 구간",
-        "MACD 골든크로스 · 히스토 +5503.70"
+        "RSI 58 · 강세 지속 구간",
+        "MACD 골든크로스 · 히스토 +7070.44"
       ],
       "macro": [
         "NEUTRAL · VIX 15.2 · US10Y 4.69%"
@@ -37924,11 +37918,11 @@ window.LIVE_STOCKS = [
         "기관 보유 22% · 낮음",
         "내부자 보유 50.1%",
         "배당성향 15% · 안정",
-        "고점 대비 73%",
+        "고점 대비 75%",
         "* DART API 키 미설정 · 프록시 사용"
       ],
       "value": [
-        "PER 23.1 · 적정"
+        "PER 23.9 · 적정"
       ]
     }
   },
@@ -37971,21 +37965,20 @@ window.LIVE_STOCKS = [
     "n": "넷마블",
     "m": "KR",
     "sec": "미분류",
-    "tech": 54,
+    "tech": 72,
     "macro": 55,
     "filing": 60,
     "value": 78,
-    "total": 60,
-    "consensus": 1,
-    "signal": "HOLD",
-    "ev": 0.23,
-    "target": 3,
+    "total": 66,
+    "consensus": 2,
+    "signal": "WATCH",
+    "ev": 0.45,
+    "target": 5,
     "hitl": false,
     "reasons": {
       "tech": [
-        "RSI 75 · 과매수 경계",
-        "MACD 골든크로스 · 히스토 +542.14",
-        "Bollinger 상단 접근 (100%)"
+        "RSI 68 · 강세 지속 구간",
+        "MACD 골든크로스 · 히스토 +509.51"
       ],
       "macro": [
         "NEUTRAL · VIX 15.2 · US10Y 4.69%"
@@ -37997,8 +37990,8 @@ window.LIVE_STOCKS = [
         "* DART API 키 미설정 · 프록시 사용"
       ],
       "value": [
-        "PER 10.6 · 극심 저평가",
-        "FCF Yield 14.7% · 우수"
+        "PER 10.3 · 극심 저평가",
+        "FCF Yield 15.2% · 우수"
       ]
     }
   },
@@ -38007,22 +38000,21 @@ window.LIVE_STOCKS = [
     "n": "엔씨소프트",
     "m": "KR",
     "sec": "미분류",
-    "tech": 49,
+    "tech": 67,
     "macro": 55,
     "filing": 63,
     "value": 78,
-    "total": 59,
+    "total": 65,
     "consensus": 1,
     "signal": "HOLD",
-    "ev": 0.22,
-    "target": 3,
+    "ev": 0.45,
+    "target": 5,
     "hitl": false,
     "reasons": {
       "tech": [
-        "RSI 76 · 과매수 경계",
-        "MACD 골든크로스 · 히스토 +3416.35",
-        "거래량 감소 · 0.5배",
-        "Bollinger 상단 접근 (96%)"
+        "RSI 67 · 강세 지속 구간",
+        "MACD 골든크로스 · 히스토 +3181.08",
+        "거래량 감소 · 0.5배"
       ],
       "macro": [
         "NEUTRAL · VIX 15.2 · US10Y 4.69%"
@@ -38030,12 +38022,12 @@ window.LIVE_STOCKS = [
       "filing": [
         "내부자 보유 21.4%",
         "배당성향 5% · 안정",
-        "고점 대비 74%",
+        "고점 대비 71%",
         "* DART API 키 미설정 · 프록시 사용"
       ],
       "value": [
-        "PER 10.9 · 극심 저평가",
-        "FCF Yield 5.7% · 우수"
+        "PER 10.6 · 극심 저평가",
+        "FCF Yield 5.9% · 우수"
       ]
     }
   },
@@ -38044,22 +38036,23 @@ window.LIVE_STOCKS = [
     "n": "한온시스템",
     "m": "KR",
     "sec": "미분류",
-    "tech": 57,
+    "tech": 54,
     "macro": 55,
     "filing": 50,
     "value": 60,
-    "total": 55,
+    "total": 54,
     "consensus": 0,
     "signal": "HOLD",
-    "ev": -0.03,
-    "target": 0,
+    "ev": -0.07,
+    "target": -1,
     "hitl": false,
     "reasons": {
       "tech": [
-        "RSI 57 · 강세 지속 구간",
-        "MACD 골든크로스 · 히스토 +59.04",
+        "RSI 59 · 강세 지속 구간",
+        "MACD 골든크로스 · 히스토 +70.19",
         "거래량 감소 · 0.2배",
-        "3개월 수익률 -24.0% · 급락"
+        "3개월 수익률 -35.0% · 급락",
+        "Bollinger 상단 접근 (91%)"
       ],
       "macro": [
         "NEUTRAL · VIX 15.2 · US10Y 4.69%"
@@ -38067,11 +38060,11 @@ window.LIVE_STOCKS = [
       "filing": [
         "기관 보유 9% · 낮음",
         "내부자 보유 65.4%",
-        "고점 대비 63%",
+        "고점 대비 65%",
         "* DART API 키 미설정 · 프록시 사용"
       ],
       "value": [
-        "PER 13.0 · 저평가"
+        "PER 13.3 · 저평가"
       ]
     }
   },
@@ -38092,10 +38085,10 @@ window.LIVE_STOCKS = [
     "hitl": false,
     "reasons": {
       "tech": [
-        "RSI 62 · 강세 지속 구간",
-        "MACD 골든크로스 · 히스토 +3078.16",
+        "RSI 60 · 강세 지속 구간",
+        "MACD 골든크로스 · 히스토 +3076.85",
         "거래량 감소 · 0.5배",
-        "3개월 수익률 -33.0% · 급락"
+        "3개월 수익률 -33.9% · 급락"
       ],
       "macro": [
         "NEUTRAL · VIX 15.2 · US10Y 4.69%"
@@ -38107,7 +38100,7 @@ window.LIVE_STOCKS = [
         "* DART API 키 미설정 · 프록시 사용"
       ],
       "value": [
-        "PER 17.2 · 저평가",
+        "PER 17.1 · 저평가",
         "FCF 음수 · 현금유출"
       ]
     }
@@ -38117,22 +38110,22 @@ window.LIVE_STOCKS = [
     "n": "이마트",
     "m": "KR",
     "sec": "미분류",
-    "tech": 57,
+    "tech": 50,
     "macro": 55,
     "filing": 55,
     "value": 70,
-    "total": 58,
+    "total": 56,
     "consensus": 1,
     "signal": "HOLD",
-    "ev": 0.06,
-    "target": 1,
+    "ev": -0.04,
+    "target": 0,
     "hitl": false,
     "reasons": {
       "tech": [
-        "RSI 63 · 강세 지속 구간",
-        "MACD 골든크로스 · 히스토 +475.12",
+        "RSI 54 · 중립",
+        "MACD 골든크로스 · 히스토 +516.08",
         "거래량 감소 · 0.5배",
-        "3개월 수익률 -27.7% · 급락"
+        "3개월 수익률 -27.8% · 급락"
       ],
       "macro": [
         "NEUTRAL · VIX 15.2 · US10Y 4.69%"
@@ -38161,13 +38154,13 @@ window.LIVE_STOCKS = [
     "total": 54,
     "consensus": 0,
     "signal": "HOLD",
-    "ev": 0.08,
+    "ev": 0.11,
     "target": 1,
     "hitl": false,
     "reasons": {
       "tech": [
         "RSI 76 · 과매수 경계",
-        "MACD 골든크로스 · 히스토 +1196.32",
+        "MACD 골든크로스 · 히스토 +1288.43",
         "Bollinger 상단 접근 (100%)"
       ],
       "macro": [
@@ -38180,7 +38173,7 @@ window.LIVE_STOCKS = [
         "* DART API 키 미설정 · 프록시 사용"
       ],
       "value": [
-        "PER 28.9 · 적정",
+        "PER 29.0 · 적정",
         "FCF 음수 · 현금유출"
       ]
     }
@@ -38197,13 +38190,13 @@ window.LIVE_STOCKS = [
     "total": 68,
     "consensus": 2,
     "signal": "WATCH",
-    "ev": 0.62,
+    "ev": 0.6,
     "target": 7,
     "hitl": false,
     "reasons": {
       "tech": [
-        "RSI 59 · 강세 지속 구간",
-        "MACD 골든크로스 · 히스토 +54.92"
+        "RSI 61 · 강세 지속 구간",
+        "MACD 골든크로스 · 히스토 +48.44"
       ],
       "macro": [
         "NEUTRAL · VIX 15.2 · US10Y 4.69%"
@@ -38237,10 +38230,10 @@ window.LIVE_STOCKS = [
     "reasons": {
       "tech": [
         "RSI 67 · 강세 지속 구간",
-        "MACD 골든크로스 · 히스토 +2001.78",
+        "MACD 골든크로스 · 히스토 +2097.61",
         "거래량 감소 · 0.4배",
-        "3개월 수익률 -24.5% · 급락",
-        "Bollinger 상단 접근 (98%)"
+        "3개월 수익률 -19.8% · 급락",
+        "Bollinger 상단 접근 (96%)"
       ],
       "macro": [
         "NEUTRAL · VIX 15.2 · US10Y 4.69%"
@@ -38248,12 +38241,12 @@ window.LIVE_STOCKS = [
       "filing": [
         "내부자 보유 24.8%",
         "배당성향 8% · 안정",
-        "고점 대비 75%",
+        "고점 대비 80%",
         "* DART API 키 미설정 · 프록시 사용"
       ],
       "value": [
-        "PER 6.1 · 극심 저평가",
-        "FCF Yield 6.0% · 우수"
+        "PER 6.2 · 극심 저평가",
+        "FCF Yield 5.9% · 우수"
       ]
     }
   },
@@ -38269,14 +38262,14 @@ window.LIVE_STOCKS = [
     "total": 58,
     "consensus": 0,
     "signal": "HOLD",
-    "ev": 0.13,
+    "ev": 0.15,
     "target": 2,
     "hitl": false,
     "reasons": {
       "tech": [
-        "단기 정배열 (P>114685.0>108264.0)",
+        "단기 정배열 (P>115530.0>108320.0)",
         "RSI 52 · 중립",
-        "MACD 데드크로스 · 히스토 -427.09",
+        "MACD 데드크로스 · 히스토 -2.15",
         "거래량 급증 · 최근 20일 평균 1.6배"
       ],
       "macro": [
@@ -38288,8 +38281,8 @@ window.LIVE_STOCKS = [
         "* DART API 키 미설정 · 프록시 사용"
       ],
       "value": [
-        "PER 14.2 · 저평가",
-        "FCF Yield 16.6% · 우수"
+        "PER 14.1 · 저평가",
+        "FCF Yield 16.7% · 우수"
       ]
     }
   },
@@ -38298,21 +38291,22 @@ window.LIVE_STOCKS = [
     "n": "LIG넥스원",
     "m": "KR",
     "sec": "미분류",
-    "tech": 60,
+    "tech": 64,
     "macro": 55,
     "filing": 63,
     "value": 42,
-    "total": 57,
+    "total": 59,
     "consensus": 0,
     "signal": "HOLD",
-    "ev": 0.13,
-    "target": 2,
+    "ev": 0.26,
+    "target": 3,
     "hitl": false,
     "reasons": {
       "tech": [
-        "RSI 54 · 중립",
-        "MACD 골든크로스 · 히스토 +9857.66",
-        "거래량 감소 · 0.6배"
+        "RSI 62 · 강세 지속 구간",
+        "MACD 골든크로스 · 히스토 +14724.71",
+        "거래량 감소 · 0.6배",
+        "Bollinger 상단 접근 (100%)"
       ],
       "macro": [
         "NEUTRAL · VIX 15.2 · US10Y 4.69%"
@@ -38320,11 +38314,11 @@ window.LIVE_STOCKS = [
       "filing": [
         "내부자 보유 38.4%",
         "배당성향 21% · 안정",
-        "고점 대비 74%",
+        "고점 대비 82%",
         "* DART API 키 미설정 · 프록시 사용"
       ],
       "value": [
-        "PER 30.7 · 적정",
+        "PER 34.2 · 적정",
         "FCF 음수 · 현금유출"
       ]
     }
@@ -38334,23 +38328,23 @@ window.LIVE_STOCKS = [
     "n": "GS건설",
     "m": "KR",
     "sec": "미분류",
-    "tech": 85,
+    "tech": 92,
     "macro": 55,
-    "filing": 50,
+    "filing": 55,
     "value": 78,
-    "total": 67,
+    "total": 71,
     "consensus": 2,
     "signal": "WATCH",
-    "ev": 0.42,
-    "target": 5,
+    "ev": 0.71,
+    "target": 9,
     "hitl": false,
     "reasons": {
       "tech": [
-        "이동평균 완벽 정배열 (P>28082.5>27919.0>24896.5)",
-        "RSI 59 · 강세 지속 구간",
-        "MACD 골든크로스 · 히스토 +637.36",
+        "이동평균 완벽 정배열 (P>28215.0>28033.0>24978.0)",
+        "RSI 63 · 강세 지속 구간",
+        "MACD 골든크로스 · 히스토 +871.75",
         "거래량 급증 · 최근 20일 평균 1.4배",
-        "3개월 수익률 -15.3% · 급락"
+        "Bollinger 상단 접근 (94%)"
       ],
       "macro": [
         "NEUTRAL · VIX 15.2 · US10Y 4.69%"
@@ -38358,12 +38352,11 @@ window.LIVE_STOCKS = [
       "filing": [
         "기관 보유 29% · 낮음",
         "내부자 보유 23.0%",
-        "고점 대비 85%",
         "* DART API 키 미설정 · 프록시 사용"
       ],
       "value": [
-        "PER 7.1 · 극심 저평가",
-        "FCF Yield 22.2% · 우수"
+        "PER 7.7 · 극심 저평가",
+        "FCF Yield 20.4% · 우수"
       ]
     }
   },
@@ -38374,21 +38367,21 @@ window.LIVE_STOCKS = [
     "sec": "미분류",
     "tech": 100,
     "macro": 55,
-    "filing": 68,
+    "filing": 60,
     "value": 70,
-    "total": 77,
+    "total": 74,
     "consensus": 2,
     "signal": "WATCH",
-    "ev": 1.19,
-    "target": 14,
+    "ev": 1.11,
+    "target": 13,
     "hitl": false,
     "reasons": {
       "tech": [
-        "이동평균 완벽 정배열 (P>87750.0>78432.0>66229.5)",
-        "RSI 65 · 강세 지속 구간",
-        "MACD 골든크로스 · 히스토 +880.08",
+        "이동평균 완벽 정배열 (P>88545.0>78872.0>66488.2)",
+        "RSI 63 · 강세 지속 구간",
+        "MACD 골든크로스 · 히스토 +680.44",
         "거래량 급증 · 최근 20일 평균 1.7배",
-        "3개월 수익률 +24.6% · 강한 상승"
+        "3개월 수익률 +24.2% · 강한 상승"
       ],
       "macro": [
         "NEUTRAL · VIX 15.2 · US10Y 4.69%"
@@ -38397,11 +38390,10 @@ window.LIVE_STOCKS = [
         "기관 보유 22% · 낮음",
         "내부자 보유 53.4%",
         "배당성향 22% · 안정",
-        "3개월 신고가 근접 (100%)",
         "* DART API 키 미설정 · 프록시 사용"
       ],
       "value": [
-        "PER 9.6 · 극심 저평가"
+        "PER 9.3 · 극심 저평가"
       ]
     }
   },
@@ -38410,20 +38402,20 @@ window.LIVE_STOCKS = [
     "n": "한국가스공사",
     "m": "KR",
     "sec": "미분류",
-    "tech": 59,
+    "tech": 72,
     "macro": 55,
     "filing": 60,
     "value": 78,
-    "total": 61,
-    "consensus": 1,
-    "signal": "HOLD",
-    "ev": 0.29,
-    "target": 3,
+    "total": 66,
+    "consensus": 2,
+    "signal": "WATCH",
+    "ev": 0.48,
+    "target": 6,
     "hitl": false,
     "reasons": {
       "tech": [
-        "MACD 골든크로스 · 히스토 +233.17",
-        "Bollinger 상단 접근 (97%)"
+        "RSI 69 · 강세 지속 구간",
+        "MACD 골든크로스 · 히스토 +237.08"
       ],
       "macro": [
         "NEUTRAL · VIX 15.2 · US10Y 4.69%"
@@ -38436,7 +38428,7 @@ window.LIVE_STOCKS = [
       ],
       "value": [
         "PER 3.7 · 극심 저평가",
-        "FCF Yield 43.0% · 우수"
+        "FCF Yield 43.4% · 우수"
       ]
     }
   },
@@ -38445,22 +38437,21 @@ window.LIVE_STOCKS = [
     "n": "삼성증권",
     "m": "KR",
     "sec": "미분류",
-    "tech": 18,
+    "tech": 15,
     "macro": 55,
     "filing": 61,
     "value": 70,
-    "total": 46,
+    "total": 45,
     "consensus": 1,
     "signal": "HOLD",
-    "ev": -0.43,
-    "target": -5,
+    "ev": -0.47,
+    "target": -6,
     "hitl": false,
     "reasons": {
       "tech": [
-        "단기 역배열 (P<100255.0<109558.0)",
-        "MACD 데드크로스 · 히스토 -124.47",
-        "3개월 수익률 -33.7% · 급락",
-        "Bollinger 하단 근접 · 반등 여지"
+        "단기 역배열 (P<99265.0<108986.0)",
+        "MACD 데드크로스 · 히스토 -138.36",
+        "3개월 수익률 -31.8% · 급락"
       ],
       "macro": [
         "NEUTRAL · VIX 15.2 · US10Y 4.69%"
@@ -38468,11 +38459,11 @@ window.LIVE_STOCKS = [
       "filing": [
         "기관 보유 63%",
         "배당성향 30% · 안정",
-        "고점 대비 66%",
+        "고점 대비 68%",
         "* DART API 키 미설정 · 프록시 사용"
       ],
       "value": [
-        "PER 5.7 · 극심 저평가"
+        "PER 5.8 · 극심 저평가"
       ]
     }
   },
@@ -38481,22 +38472,22 @@ window.LIVE_STOCKS = [
     "n": "NH투자증권",
     "m": "KR",
     "sec": "미분류",
-    "tech": 18,
+    "tech": 40,
     "macro": 55,
     "filing": 55,
     "value": 70,
-    "total": 44,
+    "total": 52,
     "consensus": 1,
-    "signal": "AVOID",
-    "ev": -0.49,
-    "target": -6,
-    "hitl": true,
+    "signal": "HOLD",
+    "ev": -0.18,
+    "target": -2,
+    "hitl": false,
     "reasons": {
       "tech": [
-        "단기 역배열 (P<28980.0<29987.0)",
+        "단기 역배열 (P<28802.5<29939.0)",
         "RSI 42 · 중립",
-        "MACD 데드크로스 · 히스토 -2.61",
-        "3개월 수익률 -24.0% · 급락"
+        "MACD 골든크로스 · 히스토 +29.80",
+        "3개월 수익률 -22.2% · 급락"
       ],
       "macro": [
         "NEUTRAL · VIX 15.2 · US10Y 4.69%"
@@ -38505,11 +38496,11 @@ window.LIVE_STOCKS = [
         "기관 보유 21% · 낮음",
         "내부자 보유 63.3%",
         "배당성향 37% · 안정",
-        "고점 대비 76%",
+        "고점 대비 78%",
         "* DART API 키 미설정 · 프록시 사용"
       ],
       "value": [
-        "PER 7.1 · 극심 저평가"
+        "PER 7.2 · 극심 저평가"
       ]
     }
   },
@@ -38518,22 +38509,22 @@ window.LIVE_STOCKS = [
     "n": "동서",
     "m": "KR",
     "sec": "미분류",
-    "tech": 77,
+    "tech": 84,
     "macro": 55,
     "filing": 63,
     "value": 50,
-    "total": 64,
+    "total": 67,
     "consensus": 1,
     "signal": "HOLD",
-    "ev": 0.61,
-    "target": 7,
+    "ev": 0.74,
+    "target": 9,
     "hitl": false,
     "reasons": {
       "tech": [
-        "단기 정배열 (P>25635.0>25041.0)",
+        "단기 정배열 (P>25655.0>25070.0)",
         "RSI 63 · 강세 지속 구간",
-        "MACD 골든크로스 · 히스토 +27.86",
-        "Bollinger 상단 접근 (92%)"
+        "MACD 골든크로스 · 히스토 +41.83",
+        "3개월 수익률 +6.7%"
       ],
       "macro": [
         "NEUTRAL · VIX 15.2 · US10Y 4.69%"
@@ -38541,7 +38532,7 @@ window.LIVE_STOCKS = [
       "filing": [
         "기관 보유 4% · 낮음",
         "내부자 보유 68.1%",
-        "3개월 신고가 근접 (100%)",
+        "3개월 신고가 근접 (99%)",
         "* DART API 키 미설정 · 프록시 사용"
       ],
       "value": [
@@ -38554,21 +38545,22 @@ window.LIVE_STOCKS = [
     "n": "OCI홀딩스",
     "m": "KR",
     "sec": "미분류",
-    "tech": 69,
+    "tech": 59,
     "macro": 55,
     "filing": 50,
     "value": 52,
-    "total": 58,
+    "total": 54,
     "consensus": 0,
     "signal": "HOLD",
-    "ev": 0.12,
-    "target": 1,
+    "ev": -0.03,
+    "target": 0,
     "hitl": false,
     "reasons": {
       "tech": [
         "RSI 64 · 강세 지속 구간",
-        "MACD 골든크로스 · 히스토 +10006.76",
-        "Bollinger 상단 접근 (100%)"
+        "MACD 골든크로스 · 히스토 +10567.96",
+        "3개월 수익률 -16.9% · 급락",
+        "Bollinger 상단 접근 (94%)"
       ],
       "macro": [
         "NEUTRAL · VIX 15.2 · US10Y 4.69%"
@@ -38576,11 +38568,11 @@ window.LIVE_STOCKS = [
       "filing": [
         "기관 보유 25% · 낮음",
         "내부자 보유 29.7%",
-        "고점 대비 70%",
+        "고점 대비 68%",
         "* DART API 키 미설정 · 프록시 사용"
       ],
       "value": [
-        "PER 14.1 · 저평가",
+        "PER 13.8 · 저평가",
         "FCF 음수 · 현금유출"
       ]
     }
@@ -38602,9 +38594,9 @@ window.LIVE_STOCKS = [
     "hitl": false,
     "reasons": {
       "tech": [
-        "RSI 61 · 강세 지속 구간",
-        "MACD 골든크로스 · 히스토 +831.56",
-        "3개월 수익률 -20.5% · 급락"
+        "RSI 59 · 강세 지속 구간",
+        "MACD 골든크로스 · 히스토 +867.94",
+        "3개월 수익률 -23.1% · 급락"
       ],
       "macro": [
         "NEUTRAL · VIX 15.2 · US10Y 4.69%"
@@ -38612,12 +38604,12 @@ window.LIVE_STOCKS = [
       "filing": [
         "기관 보유 11% · 낮음",
         "내부자 보유 49.3%",
-        "고점 대비 76%",
+        "고점 대비 77%",
         "* DART API 키 미설정 · 프록시 사용"
       ],
       "value": [
-        "PER 3.8 · 극심 저평가",
-        "FCF Yield 28.0% · 우수"
+        "PER 3.9 · 극심 저평가",
+        "FCF Yield 27.7% · 우수"
       ]
     }
   },
@@ -38626,23 +38618,22 @@ window.LIVE_STOCKS = [
     "n": "미래에셋증권",
     "m": "KR",
     "sec": "미분류",
-    "tech": 35,
+    "tech": 50,
     "macro": 55,
     "filing": 63,
     "value": 70,
-    "total": 53,
+    "total": 58,
     "consensus": 1,
     "signal": "HOLD",
-    "ev": -0.17,
-    "target": -2,
+    "ev": 0.04,
+    "target": 0,
     "hitl": false,
     "reasons": {
       "tech": [
-        "단기 역배열 (P<36362.5<43746.0)",
-        "RSI 42 · 중립",
-        "MACD 골든크로스 · 히스토 +458.08",
+        "RSI 48 · 중립",
+        "MACD 골든크로스 · 히스토 +648.41",
         "거래량 감소 · 0.5배",
-        "3개월 수익률 -57.4% · 급락"
+        "3개월 수익률 -54.1% · 급락"
       ],
       "macro": [
         "NEUTRAL · VIX 15.2 · US10Y 4.69%"
@@ -38650,11 +38641,11 @@ window.LIVE_STOCKS = [
       "filing": [
         "내부자 보유 8.7%",
         "배당성향 8% · 안정",
-        "고점 대비 43%",
+        "고점 대비 46%",
         "* DART API 키 미설정 · 프록시 사용"
       ],
       "value": [
-        "PER 8.9 · 극심 저평가"
+        "PER 9.6 · 극심 저평가"
       ]
     }
   },
@@ -38663,22 +38654,21 @@ window.LIVE_STOCKS = [
     "n": "현대로템",
     "m": "KR",
     "sec": "미분류",
-    "tech": 40,
+    "tech": 55,
     "macro": 55,
     "filing": 63,
     "value": 60,
-    "total": 53,
+    "total": 58,
     "consensus": 0,
     "signal": "HOLD",
-    "ev": -0.13,
-    "target": -2,
+    "ev": 0.08,
+    "target": 1,
     "hitl": false,
     "reasons": {
       "tech": [
-        "단기 역배열 (P<147990.0<175768.0)",
-        "RSI 50 · 중립",
-        "MACD 골든크로스 · 히스토 +2303.47",
-        "3개월 수익률 -34.1% · 급락"
+        "RSI 48 · 중립",
+        "MACD 골든크로스 · 히스토 +2884.98",
+        "3개월 수익률 -32.2% · 급락"
       ],
       "macro": [
         "NEUTRAL · VIX 15.2 · US10Y 4.69%"
@@ -38686,11 +38676,11 @@ window.LIVE_STOCKS = [
       "filing": [
         "내부자 보유 33.8%",
         "배당성향 8% · 안정",
-        "고점 대비 65%",
+        "고점 대비 66%",
         "* DART API 키 미설정 · 프록시 사용"
       ],
       "value": [
-        "PER 12.6 · 저평가"
+        "PER 12.8 · 저평가"
       ]
     }
   },
@@ -38699,21 +38689,21 @@ window.LIVE_STOCKS = [
     "n": "DB손해보험",
     "m": "KR",
     "sec": "미분류",
-    "tech": 65,
+    "tech": 58,
     "macro": 55,
     "filing": 68,
     "value": 62,
-    "total": 63,
+    "total": 61,
     "consensus": 0,
     "signal": "HOLD",
-    "ev": 0.49,
-    "target": 6,
+    "ev": 0.38,
+    "target": 5,
     "hitl": false,
     "reasons": {
       "tech": [
-        "이동평균 완벽 정배열 (P>160525.0>150162.0>147261.5)",
-        "RSI 57 · 강세 지속 구간",
-        "MACD 데드크로스 · 히스토 -345.72"
+        "이동평균 완벽 정배열 (P>160855.0>150588.0>147428.7)",
+        "RSI 51 · 중립",
+        "MACD 데드크로스 · 히스토 -226.96"
       ],
       "macro": [
         "NEUTRAL · VIX 15.2 · US10Y 4.69%"
@@ -38724,7 +38714,7 @@ window.LIVE_STOCKS = [
         "* DART API 키 미설정 · 프록시 사용"
       ],
       "value": [
-        "PER 5.7 · 극심 저평가",
+        "PER 5.5 · 극심 저평가",
         "FCF 음수 · 현금유출"
       ]
     }
@@ -38734,21 +38724,22 @@ window.LIVE_STOCKS = [
     "n": "KCC",
     "m": "KR",
     "sec": "미분류",
-    "tech": 62,
+    "tech": 57,
     "macro": 55,
     "filing": 55,
     "value": 78,
-    "total": 61,
+    "total": 59,
     "consensus": 1,
     "signal": "HOLD",
-    "ev": 0.15,
-    "target": 2,
+    "ev": 0.08,
+    "target": 1,
     "hitl": false,
     "reasons": {
       "tech": [
-        "RSI 60 · 강세 지속 구간",
-        "MACD 골든크로스 · 히스토 +8632.57",
-        "3개월 수익률 -26.9% · 급락"
+        "RSI 57 · 강세 지속 구간",
+        "MACD 골든크로스 · 히스토 +9841.23",
+        "거래량 감소 · 0.6배",
+        "3개월 수익률 -26.7% · 급락"
       ],
       "macro": [
         "NEUTRAL · VIX 15.2 · US10Y 4.69%"
@@ -38761,7 +38752,7 @@ window.LIVE_STOCKS = [
         "* DART API 키 미설정 · 프록시 사용"
       ],
       "value": [
-        "PER 5.9 · 극심 저평가",
+        "PER 6.9 · 극심 저평가",
         "FCF Yield 13.8% · 우수"
       ]
     }
@@ -38771,22 +38762,22 @@ window.LIVE_STOCKS = [
     "n": "SKC",
     "m": "KR",
     "sec": "미분류",
-    "tech": 50,
+    "tech": 57,
     "macro": 55,
     "filing": 50,
     "value": 50,
-    "total": 51,
+    "total": 53,
     "consensus": 0,
     "signal": "HOLD",
-    "ev": -0.16,
-    "target": -2,
+    "ev": -0.07,
+    "target": -1,
     "hitl": false,
     "reasons": {
       "tech": [
-        "RSI 53 · 중립",
-        "MACD 골든크로스 · 히스토 +2164.04",
+        "RSI 55 · 강세 지속 구간",
+        "MACD 골든크로스 · 히스토 +2592.14",
         "거래량 감소 · 0.3배",
-        "3개월 수익률 -49.2% · 급락"
+        "3개월 수익률 -45.4% · 급락"
       ],
       "macro": [
         "NEUTRAL · VIX 15.2 · US10Y 4.69%"
@@ -38794,11 +38785,11 @@ window.LIVE_STOCKS = [
       "filing": [
         "기관 보유 14% · 낮음",
         "내부자 보유 42.6%",
-        "고점 대비 51%",
+        "고점 대비 55%",
         "* DART API 키 미설정 · 프록시 사용"
       ],
       "value": [
-        "Forward PER -35.6 · 이익 성장 반영",
+        "Forward PER -37.5 · 이익 성장 반영",
         "FCF 음수 · 현금유출"
       ]
     }
@@ -38820,11 +38811,11 @@ window.LIVE_STOCKS = [
     "hitl": false,
     "reasons": {
       "tech": [
-        "단기 역배열 (P<95935.0<109960.0)",
-        "RSI 46 · 중립",
-        "MACD 골든크로스 · 히스토 +770.09",
+        "단기 역배열 (P<95155.0<109202.0)",
+        "RSI 43 · 중립",
+        "MACD 골든크로스 · 히스토 +851.13",
         "거래량 감소 · 0.6배",
-        "3개월 수익률 -45.6% · 급락"
+        "3개월 수익률 -46.8% · 급락"
       ],
       "macro": [
         "NEUTRAL · VIX 15.2 · US10Y 4.69%"
@@ -38833,12 +38824,12 @@ window.LIVE_STOCKS = [
         "기관 보유 17% · 낮음",
         "내부자 보유 40.7%",
         "배당성향 10% · 안정",
-        "고점 대비 54%",
+        "고점 대비 53%",
         "* DART API 키 미설정 · 프록시 사용"
       ],
       "value": [
-        "PER 4.3 · 극심 저평가",
-        "FCF Yield 48.2% · 우수"
+        "PER 4.1 · 극심 저평가",
+        "FCF Yield 49.9% · 우수"
       ]
     }
   },
@@ -38847,21 +38838,21 @@ window.LIVE_STOCKS = [
     "n": "영풍",
     "m": "KR",
     "sec": "미분류",
-    "tech": 62,
+    "tech": 49,
     "macro": 55,
     "filing": 55,
     "value": 58,
-    "total": 58,
+    "total": 53,
     "consensus": 0,
     "signal": "HOLD",
-    "ev": 0.08,
-    "target": 1,
+    "ev": -0.1,
+    "target": -1,
     "hitl": false,
     "reasons": {
       "tech": [
-        "RSI 65 · 강세 지속 구간",
-        "MACD 골든크로스 · 히스토 +952.91",
-        "3개월 수익률 -43.4% · 급락"
+        "MACD 골든크로스 · 히스토 +1106.66",
+        "3개월 수익률 -38.5% · 급락",
+        "Bollinger 상단 접근 (100%)"
       ],
       "macro": [
         "NEUTRAL · VIX 15.2 · US10Y 4.69%"
@@ -38870,11 +38861,11 @@ window.LIVE_STOCKS = [
         "기관 보유 7% · 낮음",
         "내부자 보유 71.5%",
         "배당성향 0% · 안정",
-        "고점 대비 57%",
+        "고점 대비 62%",
         "* DART API 키 미설정 · 프록시 사용"
       ],
       "value": [
-        "FCF Yield 41.9% · 우수"
+        "FCF Yield 39.6% · 우수"
       ]
     }
   },
@@ -38895,9 +38886,9 @@ window.LIVE_STOCKS = [
     "hitl": false,
     "reasons": {
       "tech": [
-        "단기 역배열 (P<16775.0<17110.0)",
-        "RSI 26 · 과매도",
-        "MACD 데드크로스 · 히스토 -239.13"
+        "단기 역배열 (P<16628.5<17066.2)",
+        "RSI 19 · 과매도",
+        "MACD 데드크로스 · 히스토 -202.04"
       ],
       "macro": [
         "NEUTRAL · VIX 15.2 · US10Y 4.69%"
@@ -38905,11 +38896,11 @@ window.LIVE_STOCKS = [
       "filing": [
         "내부자 보유 25.7%",
         "배당성향 27% · 안정",
-        "고점 대비 81%",
+        "고점 대비 79%",
         "* DART API 키 미설정 · 프록시 사용"
       ],
       "value": [
-        "PER 5.1 · 극심 저평가"
+        "PER 5.0 · 극심 저평가"
       ]
     }
   },
@@ -38930,9 +38921,9 @@ window.LIVE_STOCKS = [
     "hitl": false,
     "reasons": {
       "tech": [
-        "RSI 59 · 강세 지속 구간",
-        "MACD 골든크로스 · 히스토 +9780.97",
-        "3개월 수익률 -41.6% · 급락"
+        "RSI 60 · 강세 지속 구간",
+        "MACD 골든크로스 · 히스토 +10665.36",
+        "3개월 수익률 -38.7% · 급락"
       ],
       "macro": [
         "NEUTRAL · VIX 15.2 · US10Y 4.69%"
@@ -38940,11 +38931,11 @@ window.LIVE_STOCKS = [
       "filing": [
         "내부자 보유 33.1%",
         "배당성향 20% · 안정",
-        "고점 대비 57%",
+        "고점 대비 60%",
         "* DART API 키 미설정 · 프록시 사용"
       ],
       "value": [
-        "PER 14.2 · 저평가",
+        "PER 14.9 · 저평가",
         "FCF 음수 · 현금유출"
       ]
     }
@@ -38954,22 +38945,22 @@ window.LIVE_STOCKS = [
     "n": "호텔신라",
     "m": "KR",
     "sec": "미분류",
-    "tech": 18,
+    "tech": 40,
     "macro": 55,
     "filing": 50,
-    "value": 78,
-    "total": 44,
-    "consensus": 1,
-    "signal": "AVOID",
-    "ev": -0.52,
-    "target": -6,
-    "hitl": true,
+    "value": 68,
+    "total": 50,
+    "consensus": 0,
+    "signal": "HOLD",
+    "ev": -0.24,
+    "target": -3,
+    "hitl": false,
     "reasons": {
       "tech": [
-        "단기 역배열 (P<45455.0<49812.0)",
-        "RSI 41 · 중립",
-        "MACD 데드크로스 · 히스토 -114.47",
-        "3개월 수익률 -33.5% · 급락"
+        "단기 역배열 (P<45132.5<49585.0)",
+        "RSI 43 · 중립",
+        "MACD 골든크로스 · 히스토 +52.78",
+        "3개월 수익률 -31.5% · 급락"
       ],
       "macro": [
         "NEUTRAL · VIX 15.2 · US10Y 4.69%"
@@ -38977,12 +38968,12 @@ window.LIVE_STOCKS = [
       "filing": [
         "기관 보유 27% · 낮음",
         "내부자 보유 7.3%",
-        "고점 대비 65%",
+        "고점 대비 67%",
         "* DART API 키 미설정 · 프록시 사용"
       ],
       "value": [
-        "PER 11.8 · 극심 저평가",
-        "FCF Yield 10.7% · 우수"
+        "PER 12.1 · 저평가",
+        "FCF Yield 10.4% · 우수"
       ]
     }
   },
@@ -39003,11 +38994,11 @@ window.LIVE_STOCKS = [
     "hitl": false,
     "reasons": {
       "tech": [
-        "RSI 65 · 강세 지속 구간",
-        "MACD 골든크로스 · 히스토 +1066.71",
+        "RSI 68 · 강세 지속 구간",
+        "MACD 골든크로스 · 히스토 +1351.59",
         "거래량 급증 · 최근 20일 평균 1.6배",
-        "3개월 수익률 -24.5% · 급락",
-        "Bollinger 상단 접근 (98%)"
+        "3개월 수익률 -18.0% · 급락",
+        "Bollinger 상단 접근 (100%)"
       ],
       "macro": [
         "NEUTRAL · VIX 15.2 · US10Y 4.69%"
@@ -39015,11 +39006,11 @@ window.LIVE_STOCKS = [
       "filing": [
         "기관 보유 16% · 낮음",
         "내부자 보유 37.5%",
-        "고점 대비 71%",
+        "고점 대비 74%",
         "* DART API 키 미설정 · 프록시 사용"
       ],
       "value": [
-        "PER 10.2 · 극심 저평가"
+        "PER 10.5 · 극심 저평가"
       ]
     }
   },
@@ -39028,21 +39019,20 @@ window.LIVE_STOCKS = [
     "n": "DGB금융지주",
     "m": "KR",
     "sec": "미분류",
-    "tech": 80,
+    "tech": 65,
     "macro": 55,
     "filing": 68,
     "value": 70,
-    "total": 70,
-    "consensus": 2,
-    "signal": "WATCH",
-    "ev": 0.63,
-    "target": 8,
+    "total": 65,
+    "consensus": 1,
+    "signal": "HOLD",
+    "ev": 0.37,
+    "target": 4,
     "hitl": false,
     "reasons": {
       "tech": [
-        "이동평균 완벽 정배열 (P>17579.5>17405.6>16300.0)",
-        "RSI 50 · 중립",
-        "MACD 골든크로스 · 히스토 +31.33"
+        "RSI 44 · 중립",
+        "MACD 골든크로스 · 히스토 +21.93"
       ],
       "macro": [
         "NEUTRAL · VIX 15.2 · US10Y 4.69%"
@@ -39053,7 +39043,7 @@ window.LIVE_STOCKS = [
         "* DART API 키 미설정 · 프록시 사용"
       ],
       "value": [
-        "PER 5.3 · 극심 저평가"
+        "PER 5.1 · 극심 저평가"
       ]
     }
   },
@@ -39062,21 +39052,21 @@ window.LIVE_STOCKS = [
     "n": "금호석유",
     "m": "KR",
     "sec": "미분류",
-    "tech": 69,
+    "tech": 55,
     "macro": 55,
-    "filing": 68,
+    "filing": 63,
     "value": 86,
-    "total": 68,
+    "total": 62,
     "consensus": 1,
     "signal": "HOLD",
-    "ev": 0.43,
-    "target": 5,
+    "ev": 0.17,
+    "target": 2,
     "hitl": false,
     "reasons": {
       "tech": [
-        "RSI 64 · 강세 지속 구간",
-        "MACD 골든크로스 · 히스토 +1326.00",
-        "Bollinger 상단 접근 (100%)"
+        "RSI 53 · 중립",
+        "MACD 골든크로스 · 히스토 +1185.77",
+        "3개월 수익률 -18.6% · 급락"
       ],
       "macro": [
         "NEUTRAL · VIX 15.2 · US10Y 4.69%"
@@ -39084,12 +39074,13 @@ window.LIVE_STOCKS = [
       "filing": [
         "내부자 보유 30.2%",
         "배당성향 17% · 안정",
+        "고점 대비 81%",
         "* DART API 키 미설정 · 프록시 사용"
       ],
       "value": [
-        "PER 7.6 · 극심 저평가",
+        "PER 7.1 · 극심 저평가",
         "PEG 0.43 · 성장률 대비 저평가",
-        "FCF Yield 13.3% · 우수"
+        "FCF Yield 14.2% · 우수"
       ]
     }
   },
@@ -39098,23 +39089,22 @@ window.LIVE_STOCKS = [
     "n": "CJ CGV",
     "m": "KR",
     "sec": "미분류",
-    "tech": 79,
+    "tech": 82,
     "macro": 55,
     "filing": 63,
     "value": 66,
-    "total": 67,
+    "total": 68,
     "consensus": 1,
     "signal": "HOLD",
-    "ev": 0.79,
-    "target": 9,
+    "ev": 0.86,
+    "target": 10,
     "hitl": false,
     "reasons": {
       "tech": [
-        "단기 정배열 (P>4810.5>4614.4)",
-        "MACD 골든크로스 · 히스토 +74.97",
+        "단기 정배열 (P>4864.8>4633.8)",
+        "MACD 골든크로스 · 히스토 +73.16",
         "거래량 급증 · 최근 20일 평균 1.5배",
-        "3개월 수익률 +11.4%",
-        "Bollinger 상단 접근 (95%)"
+        "3개월 수익률 +13.8%"
       ],
       "macro": [
         "NEUTRAL · VIX 15.2 · US10Y 4.69%"
@@ -39122,12 +39112,12 @@ window.LIVE_STOCKS = [
       "filing": [
         "기관 보유 6% · 낮음",
         "내부자 보유 51.9%",
-        "3개월 신고가 근접 (100%)",
+        "3개월 신고가 근접 (99%)",
         "* DART API 키 미설정 · 프록시 사용"
       ],
       "value": [
-        "Forward PER -34.1 · 이익 성장 반영",
-        "FCF Yield 15.9% · 우수"
+        "Forward PER -15.2 · 이익 성장 반영",
+        "FCF Yield 16.0% · 우수"
       ]
     }
   },
@@ -39136,22 +39126,21 @@ window.LIVE_STOCKS = [
     "n": "KT&G",
     "m": "KR",
     "sec": "미분류",
-    "tech": 84,
+    "tech": 87,
     "macro": 55,
-    "filing": 74,
+    "filing": 66,
     "value": 55,
-    "total": 71,
-    "consensus": 2,
-    "signal": "WATCH",
-    "ev": 0.84,
-    "target": 10,
+    "total": 70,
+    "consensus": 1,
+    "signal": "HOLD",
+    "ev": 0.76,
+    "target": 9,
     "hitl": false,
     "reasons": {
       "tech": [
-        "이동평균 완벽 정배열 (P>178905.0>178804.0>159124.3)",
-        "RSI 63 · 강세 지속 구간",
-        "MACD 골든크로스 · 히스토 +518.67",
-        "Bollinger 상단 접근 (100%)"
+        "이동평균 완벽 정배열 (P>179395.0>178796.0>159365.0)",
+        "RSI 56 · 강세 지속 구간",
+        "MACD 골든크로스 · 히스토 +503.96"
       ],
       "macro": [
         "NEUTRAL · VIX 15.2 · US10Y 4.69%"
@@ -39159,11 +39148,10 @@ window.LIVE_STOCKS = [
       "filing": [
         "기관 보유 72%",
         "배당성향 52% · 안정",
-        "3개월 신고가 근접 (100%)",
         "* DART API 키 미설정 · 프록시 사용"
       ],
       "value": [
-        "PER 13.7 · 저평가",
+        "PER 13.2 · 저평가",
         "PEG 3.72 · 성장률 대비 부담"
       ]
     }
@@ -39180,15 +39168,15 @@ window.LIVE_STOCKS = [
     "total": 63,
     "consensus": 1,
     "signal": "HOLD",
-    "ev": 0.24,
+    "ev": 0.28,
     "target": 3,
     "hitl": false,
     "reasons": {
       "tech": [
         "RSI 67 · 강세 지속 구간",
-        "MACD 골든크로스 · 히스토 +580.45",
+        "MACD 골든크로스 · 히스토 +598.85",
         "거래량 감소 · 0.4배",
-        "Bollinger 상단 접근 (99%)"
+        "Bollinger 상단 접근 (98%)"
       ],
       "macro": [
         "NEUTRAL · VIX 15.2 · US10Y 4.69%"
@@ -39200,8 +39188,8 @@ window.LIVE_STOCKS = [
         "* DART API 키 미설정 · 프록시 사용"
       ],
       "value": [
-        "PER 4.3 · 극심 저평가",
-        "FCF Yield 10.6% · 우수"
+        "PER 4.4 · 극심 저평가",
+        "FCF Yield 10.4% · 우수"
       ]
     }
   },
@@ -39210,23 +39198,23 @@ window.LIVE_STOCKS = [
     "n": "한국쉘석유",
     "m": "KR",
     "sec": "미분류",
-    "tech": 76,
+    "tech": 86,
     "macro": 55,
     "filing": 55,
     "value": 58,
-    "total": 63,
+    "total": 66,
     "consensus": 1,
     "signal": "HOLD",
-    "ev": 0.57,
-    "target": 7,
+    "ev": 0.71,
+    "target": 9,
     "hitl": false,
     "reasons": {
       "tech": [
-        "이동평균 완벽 정배열 (P>502000.0>494510.0>461338.3)",
-        "RSI 52 · 중립",
-        "MACD 골든크로스 · 히스토 +75.38",
+        "이동평균 완벽 정배열 (P>502800.0>494730.0>461932.7)",
+        "RSI 58 · 강세 지속 구간",
+        "MACD 골든크로스 · 히스토 +577.86",
         "거래량 감소 · 0.5배",
-        "3개월 수익률 +6.4%"
+        "3개월 수익률 +6.8%"
       ],
       "macro": [
         "NEUTRAL · VIX 15.2 · US10Y 4.69%"
@@ -39246,22 +39234,21 @@ window.LIVE_STOCKS = [
     "n": "CJ대한통운",
     "m": "KR",
     "sec": "미분류",
-    "tech": 59,
+    "tech": 62,
     "macro": 55,
     "filing": 55,
     "value": 78,
-    "total": 60,
+    "total": 61,
     "consensus": 1,
     "signal": "HOLD",
-    "ev": 0.11,
-    "target": 1,
+    "ev": 0.15,
+    "target": 2,
     "hitl": false,
     "reasons": {
       "tech": [
-        "RSI 67 · 강세 지속 구간",
-        "MACD 골든크로스 · 히스토 +969.19",
-        "3개월 수익률 -21.5% · 급락",
-        "Bollinger 상단 접근 (100%)"
+        "RSI 65 · 강세 지속 구간",
+        "MACD 골든크로스 · 히스토 +925.34",
+        "3개월 수익률 -19.8% · 급락"
       ],
       "macro": [
         "NEUTRAL · VIX 15.2 · US10Y 4.69%"
@@ -39270,12 +39257,12 @@ window.LIVE_STOCKS = [
         "기관 보유 22% · 낮음",
         "내부자 보유 48.0%",
         "배당성향 7% · 안정",
-        "고점 대비 79%",
+        "고점 대비 80%",
         "* DART API 키 미설정 · 프록시 사용"
       ],
       "value": [
-        "PER 6.0 · 극심 저평가",
-        "FCF Yield 20.2% · 우수"
+        "PER 5.9 · 극심 저평가",
+        "FCF Yield 20.4% · 우수"
       ]
     }
   },
@@ -39296,11 +39283,11 @@ window.LIVE_STOCKS = [
     "hitl": false,
     "reasons": {
       "tech": [
-        "RSI 61 · 강세 지속 구간",
-        "MACD 골든크로스 · 히스토 +1438.06",
+        "RSI 63 · 강세 지속 구간",
+        "MACD 골든크로스 · 히스토 +1562.93",
         "거래량 감소 · 0.5배",
-        "3개월 수익률 -36.2% · 급락",
-        "Bollinger 상단 접근 (98%)"
+        "3개월 수익률 -34.2% · 급락",
+        "Bollinger 상단 접근 (91%)"
       ],
       "macro": [
         "NEUTRAL · VIX 15.2 · US10Y 4.69%"
@@ -39308,12 +39295,12 @@ window.LIVE_STOCKS = [
       "filing": [
         "기관 보유 28% · 낮음",
         "내부자 보유 32.0%",
-        "고점 대비 64%",
+        "고점 대비 66%",
         "* DART API 키 미설정 · 프록시 사용"
       ],
       "value": [
-        "PER 8.0 · 극심 저평가",
-        "FCF Yield 5.7% · 우수"
+        "PER 7.9 · 극심 저평가",
+        "FCF Yield 5.8% · 우수"
       ]
     }
   },
@@ -39329,14 +39316,14 @@ window.LIVE_STOCKS = [
     "total": 66,
     "consensus": 1,
     "signal": "HOLD",
-    "ev": 0.45,
-    "target": 5,
+    "ev": 0.49,
+    "target": 6,
     "hitl": false,
     "reasons": {
       "tech": [
-        "단기 정배열 (P>123675.0>122810.0)",
-        "RSI 61 · 강세 지속 구간",
-        "MACD 골든크로스 · 히스토 +623.24"
+        "단기 정배열 (P>123485.0>122738.0)",
+        "RSI 57 · 강세 지속 구간",
+        "MACD 골든크로스 · 히스토 +755.33"
       ],
       "macro": [
         "NEUTRAL · VIX 15.2 · US10Y 4.69%"
@@ -39360,19 +39347,19 @@ window.LIVE_STOCKS = [
     "sec": "미분류",
     "tech": 69,
     "macro": 55,
-    "filing": 60,
+    "filing": 55,
     "value": 78,
-    "total": 65,
+    "total": 63,
     "consensus": 1,
     "signal": "HOLD",
-    "ev": 0.31,
-    "target": 4,
+    "ev": 0.28,
+    "target": 3,
     "hitl": false,
     "reasons": {
       "tech": [
-        "RSI 65 · 강세 지속 구간",
-        "MACD 골든크로스 · 히스토 +488.15",
-        "Bollinger 상단 접근 (99%)"
+        "RSI 67 · 강세 지속 구간",
+        "MACD 골든크로스 · 히스토 +562.89",
+        "Bollinger 상단 접근 (95%)"
       ],
       "macro": [
         "NEUTRAL · VIX 15.2 · US10Y 4.69%"
@@ -39381,11 +39368,12 @@ window.LIVE_STOCKS = [
         "기관 보유 23% · 낮음",
         "내부자 보유 45.3%",
         "배당성향 8% · 안정",
+        "고점 대비 85%",
         "* DART API 키 미설정 · 프록시 사용"
       ],
       "value": [
         "PER 11.8 · 극심 저평가",
-        "FCF Yield 8.3% · 우수"
+        "FCF Yield 8.4% · 우수"
       ]
     }
   },
@@ -39394,22 +39382,21 @@ window.LIVE_STOCKS = [
     "n": "AK홀딩스",
     "m": "KR",
     "sec": "미분류",
-    "tech": 62,
+    "tech": 65,
     "macro": 55,
     "filing": 55,
     "value": 42,
-    "total": 56,
+    "total": 57,
     "consensus": 0,
     "signal": "HOLD",
-    "ev": 0.12,
-    "target": 1,
+    "ev": 0.18,
+    "target": 2,
     "hitl": false,
     "reasons": {
       "tech": [
-        "단기 정배열 (P>6432.0>6330.8)",
-        "RSI 90 · 과매수 경계",
-        "MACD 골든크로스 · 히스토 +153.29",
-        "Bollinger 상단 접근 (95%)"
+        "단기 정배열 (P>6504.0>6326.8)",
+        "RSI 85 · 과매수 경계",
+        "MACD 골든크로스 · 히스토 +135.64"
       ],
       "macro": [
         "NEUTRAL · VIX 15.2 · US10Y 4.69%"
@@ -39441,11 +39428,11 @@ window.LIVE_STOCKS = [
     "hitl": false,
     "reasons": {
       "tech": [
-        "단기 정배열 (P>35447.5>32441.0)",
+        "단기 정배열 (P>36042.5>32713.0)",
         "RSI 88 · 과매수 경계",
-        "MACD 골든크로스 · 히스토 +1074.20",
-        "거래량 급증 · 최근 20일 평균 1.6배",
-        "3개월 수익률 +20.4% · 강한 상승"
+        "MACD 골든크로스 · 히스토 +1152.60",
+        "거래량 급증 · 최근 20일 평균 1.5배",
+        "3개월 수익률 +28.7% · 강한 상승"
       ],
       "macro": [
         "NEUTRAL · VIX 15.2 · US10Y 4.69%"
@@ -39467,21 +39454,21 @@ window.LIVE_STOCKS = [
     "n": "아모레G",
     "m": "KR",
     "sec": "미분류",
-    "tech": 67,
+    "tech": 80,
     "macro": 55,
-    "filing": 68,
+    "filing": 60,
     "value": 78,
-    "total": 67,
-    "consensus": 1,
-    "signal": "HOLD",
-    "ev": 0.56,
-    "target": 7,
+    "total": 69,
+    "consensus": 2,
+    "signal": "WATCH",
+    "ev": 0.63,
+    "target": 8,
     "hitl": false,
     "reasons": {
       "tech": [
-        "단기 정배열 (P>24860.0>23725.0)",
-        "MACD 골든크로스 · 히스토 +257.58",
-        "Bollinger 상단 접근 (100%)"
+        "단기 정배열 (P>24947.5>23792.0)",
+        "RSI 63 · 강세 지속 구간",
+        "MACD 골든크로스 · 히스토 +190.25"
       ],
       "macro": [
         "NEUTRAL · VIX 15.2 · US10Y 4.69%"
@@ -39490,12 +39477,11 @@ window.LIVE_STOCKS = [
         "기관 보유 15% · 낮음",
         "내부자 보유 66.3%",
         "배당성향 30% · 안정",
-        "3개월 신고가 근접 (100%)",
         "* DART API 키 미설정 · 프록시 사용"
       ],
       "value": [
-        "PER 6.4 · 극심 저평가",
-        "FCF Yield 19.7% · 우수"
+        "PER 6.2 · 극심 저평가",
+        "FCF Yield 20.6% · 우수"
       ]
     }
   },
@@ -39516,10 +39502,10 @@ window.LIVE_STOCKS = [
     "hitl": false,
     "reasons": {
       "tech": [
-        "RSI 65 · 강세 지속 구간",
-        "MACD 골든크로스 · 히스토 +168.90",
+        "RSI 63 · 강세 지속 구간",
+        "MACD 골든크로스 · 히스토 +191.38",
         "거래량 감소 · 0.4배",
-        "Bollinger 상단 접근 (100%)"
+        "Bollinger 상단 접근 (98%)"
       ],
       "macro": [
         "NEUTRAL · VIX 15.2 · US10Y 4.69%"
@@ -39527,12 +39513,12 @@ window.LIVE_STOCKS = [
       "filing": [
         "기관 보유 20% · 낮음",
         "내부자 보유 51.8%",
-        "고점 대비 82%",
+        "고점 대비 80%",
         "* DART API 키 미설정 · 프록시 사용"
       ],
       "value": [
-        "PER 9.0 · 극심 저평가",
-        "FCF Yield 11.4% · 우수"
+        "PER 8.9 · 극심 저평가",
+        "FCF Yield 11.6% · 우수"
       ]
     }
   },
@@ -39541,20 +39527,20 @@ window.LIVE_STOCKS = [
     "n": "하이트진로",
     "m": "KR",
     "sec": "미분류",
-    "tech": 59,
+    "tech": 72,
     "macro": 55,
     "filing": 55,
     "value": 78,
-    "total": 60,
-    "consensus": 1,
-    "signal": "HOLD",
-    "ev": 0.23,
-    "target": 3,
+    "total": 64,
+    "consensus": 2,
+    "signal": "WATCH",
+    "ev": 0.41,
+    "target": 5,
     "hitl": false,
     "reasons": {
       "tech": [
-        "MACD 골든크로스 · 히스토 +93.85",
-        "Bollinger 상단 접근 (100%)"
+        "RSI 66 · 강세 지속 구간",
+        "MACD 골든크로스 · 히스토 +89.76"
       ],
       "macro": [
         "NEUTRAL · VIX 15.2 · US10Y 4.69%"
@@ -39565,8 +39551,8 @@ window.LIVE_STOCKS = [
         "* DART API 키 미설정 · 프록시 사용"
       ],
       "value": [
-        "PER 10.2 · 극심 저평가",
-        "FCF Yield 6.2% · 우수"
+        "PER 10.0 · 극심 저평가",
+        "FCF Yield 6.3% · 우수"
       ]
     }
   },
@@ -39582,13 +39568,13 @@ window.LIVE_STOCKS = [
     "total": 65,
     "consensus": 1,
     "signal": "HOLD",
-    "ev": 0.41,
+    "ev": 0.4,
     "target": 5,
     "hitl": false,
     "reasons": {
       "tech": [
         "RSI 53 · 중립",
-        "MACD 골든크로스 · 히스토 +97.96"
+        "MACD 골든크로스 · 히스토 +68.46"
       ],
       "macro": [
         "NEUTRAL · VIX 15.2 · US10Y 4.69%"
@@ -39599,9 +39585,9 @@ window.LIVE_STOCKS = [
         "* DART API 키 미설정 · 프록시 사용"
       ],
       "value": [
-        "PER 8.4 · 극심 저평가",
-        "PEG 4.40 · 성장률 대비 부담",
-        "FCF Yield 10.1% · 우수"
+        "PER 8.3 · 극심 저평가",
+        "PEG 4.38 · 성장률 대비 부담",
+        "FCF Yield 10.3% · 우수"
       ]
     }
   },
@@ -39612,19 +39598,17 @@ window.LIVE_STOCKS = [
     "sec": "미분류",
     "tech": 59,
     "macro": 55,
-    "filing": 63,
+    "filing": 68,
     "value": 42,
-    "total": 57,
+    "total": 58,
     "consensus": 0,
     "signal": "HOLD",
-    "ev": 0.07,
-    "target": 1,
+    "ev": 0.16,
+    "target": 2,
     "hitl": false,
     "reasons": {
       "tech": [
-        "RSI 69 · 강세 지속 구간",
-        "MACD 골든크로스 · 히스토 +28802.06",
-        "3개월 수익률 -16.1% · 급락",
+        "MACD 골든크로스 · 히스토 +34856.55",
         "Bollinger 상단 접근 (100%)"
       ],
       "macro": [
@@ -39633,11 +39617,10 @@ window.LIVE_STOCKS = [
       "filing": [
         "내부자 보유 36.9%",
         "배당성향 22% · 안정",
-        "고점 대비 83%",
         "* DART API 키 미설정 · 프록시 사용"
       ],
       "value": [
-        "PER 19.0 · 적정",
+        "PER 20.0 · 적정",
         "FCF 음수 · 현금유출"
       ]
     }
@@ -39654,13 +39637,13 @@ window.LIVE_STOCKS = [
     "total": 62,
     "consensus": 0,
     "signal": "HOLD",
-    "ev": 0.33,
-    "target": 4,
+    "ev": 0.29,
+    "target": 3,
     "hitl": false,
     "reasons": {
       "tech": [
-        "RSI 55 · 중립",
-        "MACD 골든크로스 · 히스토 +1604.53"
+        "RSI 54 · 중립",
+        "MACD 골든크로스 · 히스토 +1987.08"
       ],
       "macro": [
         "NEUTRAL · VIX 15.2 · US10Y 4.69%"
@@ -39671,7 +39654,7 @@ window.LIVE_STOCKS = [
         "* DART API 키 미설정 · 프록시 사용"
       ],
       "value": [
-        "PER 33.9 · 적정",
+        "PER 33.3 · 적정",
         "PEG 0.47 · 성장률 대비 저평가",
         "FCF 음수 · 현금유출"
       ]
@@ -39682,22 +39665,23 @@ window.LIVE_STOCKS = [
     "n": "LG화학",
     "m": "KR",
     "sec": "미분류",
-    "tech": 59,
+    "tech": 54,
     "macro": 55,
     "filing": 50,
-    "value": 52,
+    "value": 62,
     "total": 54,
     "consensus": 0,
     "signal": "HOLD",
-    "ev": -0.03,
-    "target": 0,
+    "ev": -0.07,
+    "target": -1,
     "hitl": false,
     "reasons": {
       "tech": [
         "RSI 59 · 강세 지속 구간",
-        "MACD 골든크로스 · 히스토 +4851.56",
-        "3개월 수익률 -35.7% · 급락",
-        "Bollinger 상단 접근 (100%)"
+        "MACD 골든크로스 · 히스토 +5329.37",
+        "거래량 감소 · 0.6배",
+        "3개월 수익률 -35.4% · 급락",
+        "Bollinger 상단 접근 (91%)"
       ],
       "macro": [
         "NEUTRAL · VIX 15.2 · US10Y 4.69%"
@@ -39705,11 +39689,11 @@ window.LIVE_STOCKS = [
       "filing": [
         "기관 보유 28% · 낮음",
         "내부자 보유 35.0%",
-        "고점 대비 64%",
+        "고점 대비 65%",
         "* DART API 키 미설정 · 프록시 사용"
       ],
       "value": [
-        "PER 12.1 · 저평가",
+        "PER 12.0 · 극심 저평가",
         "FCF 음수 · 현금유출"
       ]
     }
@@ -39719,34 +39703,33 @@ window.LIVE_STOCKS = [
     "n": "LG생활건강",
     "m": "KR",
     "sec": "미분류",
-    "tech": 78,
+    "tech": 77,
     "macro": 55,
-    "filing": 71,
+    "filing": 63,
     "value": 45,
-    "total": 66,
-    "consensus": 2,
-    "signal": "WATCH",
-    "ev": 0.83,
-    "target": 10,
+    "total": 64,
+    "consensus": 1,
+    "signal": "HOLD",
+    "ev": 0.73,
+    "target": 9,
     "hitl": false,
     "reasons": {
       "tech": [
-        "단기 정배열 (P>266375.0>250550.0)",
-        "RSI 91 · 과매수 경계",
-        "MACD 골든크로스 · 히스토 +7554.93",
+        "단기 정배열 (P>269850.0>251880.0)",
+        "RSI 77 · 과매수 경계",
+        "MACD 골든크로스 · 히스토 +6600.76",
         "거래량 급증 · 최근 20일 평균 1.6배",
-        "3개월 수익률 +21.1% · 강한 상승"
+        "3개월 수익률 +17.1%"
       ],
       "macro": [
         "NEUTRAL · VIX 15.2 · US10Y 4.69%"
       ],
       "filing": [
         "내부자 보유 35.5%",
-        "3개월 신고가 근접 (100%)",
         "* DART API 키 미설정 · 프록시 사용"
       ],
       "value": [
-        "PER 20.5 · 적정",
+        "PER 19.3 · 적정",
         "PEG 4.44 · 성장률 대비 부담"
       ]
     }
@@ -39768,10 +39751,10 @@ window.LIVE_STOCKS = [
     "hitl": false,
     "reasons": {
       "tech": [
-        "RSI 58 · 강세 지속 구간",
-        "MACD 골든크로스 · 히스토 +3316.89",
+        "RSI 57 · 강세 지속 구간",
+        "MACD 골든크로스 · 히스토 +4183.69",
         "거래량 감소 · 0.5배",
-        "3개월 수익률 +20.1% · 강한 상승"
+        "3개월 수익률 +20.8% · 강한 상승"
       ],
       "macro": [
         "NEUTRAL · VIX 15.2 · US10Y 4.69%"
@@ -39780,12 +39763,12 @@ window.LIVE_STOCKS = [
         "기관 보유 26% · 낮음",
         "내부자 보유 35.3%",
         "배당성향 25% · 안정",
-        "고점 대비 47%",
+        "고점 대비 48%",
         "* DART API 키 미설정 · 프록시 사용"
       ],
       "value": [
-        "PER 11.3 · 극심 저평가",
-        "FCF Yield 7.0% · 우수"
+        "PER 11.6 · 극심 저평가",
+        "FCF Yield 6.9% · 우수"
       ]
     }
   },
@@ -39794,33 +39777,32 @@ window.LIVE_STOCKS = [
     "n": "LG",
     "m": "KR",
     "sec": "미분류",
-    "tech": 64,
+    "tech": 67,
     "macro": 55,
     "filing": 58,
     "value": 70,
-    "total": 61,
+    "total": 62,
     "consensus": 1,
     "signal": "HOLD",
-    "ev": 0.38,
+    "ev": 0.44,
     "target": 5,
     "hitl": false,
     "reasons": {
       "tech": [
-        "RSI 67 · 강세 지속 구간",
-        "MACD 골든크로스 · 히스토 +1580.63",
-        "거래량 감소 · 0.4배",
-        "Bollinger 상단 접근 (100%)"
+        "RSI 62 · 강세 지속 구간",
+        "MACD 골든크로스 · 히스토 +1542.73",
+        "거래량 감소 · 0.4배"
       ],
       "macro": [
         "NEUTRAL · VIX 15.2 · US10Y 4.69%"
       ],
       "filing": [
         "내부자 보유 43.4%",
-        "고점 대비 65%",
+        "고점 대비 64%",
         "* DART API 키 미설정 · 프록시 사용"
       ],
       "value": [
-        "PER 10.3 · 극심 저평가"
+        "PER 10.1 · 극심 저평가"
       ]
     }
   },
@@ -39829,21 +39811,21 @@ window.LIVE_STOCKS = [
     "n": "두산",
     "m": "KR",
     "sec": "미분류",
-    "tech": 55,
+    "tech": 62,
     "macro": 55,
     "filing": 50,
     "value": 50,
-    "total": 53,
+    "total": 55,
     "consensus": 0,
     "signal": "HOLD",
-    "ev": -0.09,
-    "target": -1,
+    "ev": 0.0,
+    "target": 0,
     "hitl": false,
     "reasons": {
       "tech": [
-        "RSI 54 · 중립",
-        "MACD 골든크로스 · 히스토 +24338.77",
-        "3개월 수익률 -31.3% · 급락"
+        "RSI 55 · 강세 지속 구간",
+        "MACD 골든크로스 · 히스토 +25469.97",
+        "3개월 수익률 -28.6% · 급락"
       ],
       "macro": [
         "NEUTRAL · VIX 15.2 · US10Y 4.69%"
@@ -39851,11 +39833,11 @@ window.LIVE_STOCKS = [
       "filing": [
         "기관 보유 22% · 낮음",
         "내부자 보유 41.2%",
-        "고점 대비 54%",
+        "고점 대비 56%",
         "* DART API 키 미설정 · 프록시 사용"
       ],
       "value": [
-        "PER 26.4 · 적정"
+        "PER 27.2 · 적정"
       ]
     }
   },
@@ -39864,21 +39846,22 @@ window.LIVE_STOCKS = [
     "n": "두산에너빌리티",
     "m": "KR",
     "sec": "미분류",
-    "tech": 62,
+    "tech": 59,
     "macro": 55,
     "filing": 50,
     "value": 35,
-    "total": 53,
+    "total": 52,
     "consensus": 0,
     "signal": "HOLD",
-    "ev": -0.05,
+    "ev": -0.09,
     "target": -1,
     "hitl": false,
     "reasons": {
       "tech": [
-        "RSI 66 · 강세 지속 구간",
-        "MACD 골든크로스 · 히스토 +2199.67",
-        "3개월 수익률 -40.5% · 급락"
+        "RSI 65 · 강세 지속 구간",
+        "MACD 골든크로스 · 히스토 +2358.59",
+        "3개월 수익률 -38.4% · 급락",
+        "Bollinger 상단 접근 (92%)"
       ],
       "macro": [
         "NEUTRAL · VIX 15.2 · US10Y 4.69%"
@@ -39886,11 +39869,11 @@ window.LIVE_STOCKS = [
       "filing": [
         "기관 보유 25% · 낮음",
         "내부자 보유 30.9%",
-        "고점 대비 59%",
+        "고점 대비 62%",
         "* DART API 키 미설정 · 프록시 사용"
       ],
       "value": [
-        "PER 74.2 · 극심 프리미엄"
+        "PER 75.8 · 극심 프리미엄"
       ]
     }
   },
@@ -39906,13 +39889,13 @@ window.LIVE_STOCKS = [
     "total": 63,
     "consensus": 1,
     "signal": "HOLD",
-    "ev": 0.26,
-    "target": 3,
+    "ev": 0.31,
+    "target": 4,
     "hitl": false,
     "reasons": {
       "tech": [
         "RSI 57 · 강세 지속 구간",
-        "MACD 골든크로스 · 히스토 +408.01",
+        "MACD 골든크로스 · 히스토 +495.74",
         "거래량 감소 · 0.6배"
       ],
       "macro": [
@@ -39925,7 +39908,7 @@ window.LIVE_STOCKS = [
         "* DART API 키 미설정 · 프록시 사용"
       ],
       "value": [
-        "PER 9.6 · 극심 저평가"
+        "PER 9.8 · 극심 저평가"
       ]
     }
   },
@@ -39934,20 +39917,21 @@ window.LIVE_STOCKS = [
     "n": "강원랜드",
     "m": "KR",
     "sec": "미분류",
-    "tech": 72,
+    "tech": 67,
     "macro": 55,
     "filing": 55,
     "value": 70,
-    "total": 63,
-    "consensus": 2,
-    "signal": "WATCH",
-    "ev": 0.34,
-    "target": 4,
+    "total": 61,
+    "consensus": 1,
+    "signal": "HOLD",
+    "ev": 0.27,
+    "target": 3,
     "hitl": false,
     "reasons": {
       "tech": [
-        "RSI 60 · 강세 지속 구간",
-        "MACD 골든크로스 · 히스토 +46.35"
+        "RSI 59 · 강세 지속 구간",
+        "MACD 골든크로스 · 히스토 +40.62",
+        "거래량 감소 · 0.6배"
       ],
       "macro": [
         "NEUTRAL · VIX 15.2 · US10Y 4.69%"
@@ -39967,22 +39951,23 @@ window.LIVE_STOCKS = [
     "n": "GKL",
     "m": "KR",
     "sec": "미분류",
-    "tech": 57,
+    "tech": 35,
     "macro": 55,
     "filing": 55,
     "value": 86,
-    "total": 60,
+    "total": 53,
     "consensus": 1,
     "signal": "HOLD",
-    "ev": 0.11,
-    "target": 1,
+    "ev": -0.2,
+    "target": -2,
     "hitl": false,
     "reasons": {
       "tech": [
-        "RSI 56 · 강세 지속 구간",
-        "MACD 골든크로스 · 히스토 +62.97",
+        "단기 역배열 (P<9442.0<10421.2)",
+        "RSI 48 · 중립",
+        "MACD 골든크로스 · 히스토 +59.42",
         "거래량 감소 · 0.6배",
-        "3개월 수익률 -17.2% · 급락"
+        "3개월 수익률 -17.8% · 급락"
       ],
       "macro": [
         "NEUTRAL · VIX 15.2 · US10Y 4.69%"
@@ -39991,13 +39976,13 @@ window.LIVE_STOCKS = [
         "기관 보유 12% · 낮음",
         "내부자 보유 51.0%",
         "배당성향 56% · 안정",
-        "고점 대비 75%",
+        "고점 대비 74%",
         "* DART API 키 미설정 · 프록시 사용"
       ],
       "value": [
-        "PER 9.5 · 극심 저평가",
+        "PER 9.3 · 극심 저평가",
         "PEG 0.59 · 성장률 대비 저평가",
-        "FCF Yield 12.3% · 우수"
+        "FCF Yield 12.6% · 우수"
       ]
     }
   },
@@ -40018,10 +40003,10 @@ window.LIVE_STOCKS = [
     "hitl": false,
     "reasons": {
       "tech": [
-        "RSI 52 · 중립",
-        "MACD 골든크로스 · 히스토 +1080.27",
+        "RSI 55 · 중립",
+        "MACD 골든크로스 · 히스토 +1180.58",
         "거래량 감소 · 0.4배",
-        "3개월 수익률 -57.1% · 급락"
+        "3개월 수익률 -57.6% · 급락"
       ],
       "macro": [
         "NEUTRAL · VIX 15.2 · US10Y 4.69%"
@@ -40029,11 +40014,11 @@ window.LIVE_STOCKS = [
       "filing": [
         "기관 보유 14% · 낮음",
         "내부자 보유 58.9%",
-        "고점 대비 41%",
+        "고점 대비 42%",
         "* DART API 키 미설정 · 프록시 사용"
       ],
       "value": [
-        "PER 65.9 · 극심 프리미엄",
+        "PER 68.0 · 극심 프리미엄",
         "FCF 음수 · 현금유출"
       ]
     }
@@ -40043,22 +40028,23 @@ window.LIVE_STOCKS = [
     "n": "현대제철",
     "m": "KR",
     "sec": "미분류",
-    "tech": 57,
+    "tech": 54,
     "macro": 55,
     "filing": 50,
     "value": 78,
-    "total": 58,
+    "total": 57,
     "consensus": 1,
     "signal": "HOLD",
-    "ev": 0.03,
+    "ev": -0.01,
     "target": 0,
     "hitl": false,
     "reasons": {
       "tech": [
-        "RSI 61 · 강세 지속 구간",
-        "MACD 골든크로스 · 히스토 +543.00",
+        "RSI 62 · 강세 지속 구간",
+        "MACD 골든크로스 · 히스토 +581.77",
         "거래량 감소 · 0.5배",
-        "3개월 수익률 -34.0% · 급락"
+        "3개월 수익률 -34.5% · 급락",
+        "Bollinger 상단 접근 (91%)"
       ],
       "macro": [
         "NEUTRAL · VIX 15.2 · US10Y 4.69%"
@@ -40066,12 +40052,12 @@ window.LIVE_STOCKS = [
       "filing": [
         "기관 보유 21% · 낮음",
         "내부자 보유 36.0%",
-        "고점 대비 61%",
+        "고점 대비 62%",
         "* DART API 키 미설정 · 프록시 사용"
       ],
       "value": [
-        "PER 11.2 · 극심 저평가",
-        "FCF Yield 7.9% · 우수"
+        "PER 11.3 · 극심 저평가",
+        "FCF Yield 7.8% · 우수"
       ]
     }
   },
@@ -40087,14 +40073,14 @@ window.LIVE_STOCKS = [
     "total": 49,
     "consensus": 1,
     "signal": "HOLD",
-    "ev": -0.27,
+    "ev": -0.26,
     "target": -3,
     "hitl": false,
     "reasons": {
       "tech": [
-        "단기 역배열 (P<132410.0<156686.0)",
-        "RSI 27 · 과매도",
-        "MACD 데드크로스 · 히스토 -2721.90",
+        "단기 역배열 (P<129170.0<156548.0)",
+        "RSI 23 · 과매도",
+        "MACD 데드크로스 · 히스토 -2402.49",
         "Bollinger 하단 근접 · 반등 여지"
       ],
       "macro": [
@@ -40108,7 +40094,7 @@ window.LIVE_STOCKS = [
       ],
       "value": [
         "PER 6.4 · 극심 저평가",
-        "FCF Yield 23.8% · 우수"
+        "FCF Yield 23.7% · 우수"
       ]
     }
   },
@@ -40129,10 +40115,10 @@ window.LIVE_STOCKS = [
     "hitl": true,
     "reasons": {
       "tech": [
-        "단기 역배열 (P<127395.0<155274.9)",
-        "RSI 27 · 과매도",
-        "MACD 데드크로스 · 히스토 -1191.17",
-        "3개월 수익률 -27.3% · 급락",
+        "단기 역배열 (P<124890.0<154375.4)",
+        "RSI 29 · 과매도",
+        "MACD 데드크로스 · 히스토 -993.10",
+        "3개월 수익률 -26.9% · 급락",
         "Bollinger 하단 근접 · 반등 여지"
       ],
       "macro": [
@@ -40141,12 +40127,12 @@ window.LIVE_STOCKS = [
       "filing": [
         "기관 보유 17% · 낮음",
         "내부자 보유 60.1%",
-        "고점 대비 49%",
+        "고점 대비 52%",
         "* DART API 키 미설정 · 프록시 사용"
       ],
       "value": [
-        "PER 6.9 · 극심 저평가",
-        "FCF Yield 13.7% · 우수"
+        "PER 7.2 · 극심 저평가",
+        "FCF Yield 13.0% · 우수"
       ]
     }
   },
@@ -40155,11 +40141,11 @@ window.LIVE_STOCKS = [
     "n": "에스원",
     "m": "KR",
     "sec": "미분류",
-    "tech": 63,
+    "tech": 69,
     "macro": 55,
-    "filing": 63,
+    "filing": 58,
     "value": 68,
-    "total": 62,
+    "total": 63,
     "consensus": 0,
     "signal": "HOLD",
     "ev": 0.48,
@@ -40167,20 +40153,21 @@ window.LIVE_STOCKS = [
     "hitl": false,
     "reasons": {
       "tech": [
-        "MACD 골든크로스 · 히스토 +492.89",
-        "3개월 수익률 +5.1%",
-        "Bollinger 상단 접근 (100%)"
+        "RSI 69 · 강세 지속 구간",
+        "MACD 골든크로스 · 히스토 +500.95",
+        "Bollinger 상단 접근 (93%)"
       ],
       "macro": [
         "NEUTRAL · VIX 15.2 · US10Y 4.69%"
       ],
       "filing": [
         "내부자 보유 36.7%",
+        "고점 대비 85%",
         "* DART API 키 미설정 · 프록시 사용"
       ],
       "value": [
-        "PER 13.7 · 저평가",
-        "FCF Yield 5.2% · 우수"
+        "PER 13.5 · 저평가",
+        "FCF Yield 5.3% · 우수"
       ]
     }
   },
@@ -40196,13 +40183,13 @@ window.LIVE_STOCKS = [
     "total": 60,
     "consensus": 0,
     "signal": "HOLD",
-    "ev": 0.21,
+    "ev": 0.26,
     "target": 3,
     "hitl": false,
     "reasons": {
       "tech": [
         "RSI 64 · 강세 지속 구간",
-        "MACD 골든크로스 · 히스토 +81.07",
+        "MACD 골든크로스 · 히스토 +101.04",
         "거래량 감소 · 0.5배",
         "Bollinger 상단 접근 (100%)"
       ],
@@ -40216,7 +40203,7 @@ window.LIVE_STOCKS = [
         "* DART API 키 미설정 · 프록시 사용"
       ],
       "value": [
-        "FCF Yield 6.7% · 우수"
+        "FCF Yield 6.6% · 우수"
       ]
     }
   },
@@ -40232,14 +40219,14 @@ window.LIVE_STOCKS = [
     "total": 55,
     "consensus": 0,
     "signal": "HOLD",
-    "ev": -0.03,
-    "target": 0,
+    "ev": -0.05,
+    "target": -1,
     "hitl": false,
     "reasons": {
       "tech": [
-        "단기 정배열 (P>223758.1>219531.2)",
-        "RSI 54 · 중립",
-        "MACD 데드크로스 · 히스토 -792.87"
+        "단기 정배열 (P>224455.6>219275.0)",
+        "RSI 51 · 중립",
+        "MACD 데드크로스 · 히스토 -151.17"
       ],
       "macro": [
         "NEUTRAL · VIX 15.2 · US10Y 4.69%"
@@ -40248,11 +40235,11 @@ window.LIVE_STOCKS = [
         "기관 보유 13% · 낮음",
         "내부자 보유 72.7%",
         "배당성향 20% · 안정",
-        "고점 대비 79%",
+        "고점 대비 80%",
         "* DART API 키 미설정 · 프록시 사용"
       ],
       "value": [
-        "PER 5.8 · 극심 저평가",
+        "PER 5.9 · 극심 저평가",
         "FCF 음수 · 현금유출"
       ]
     }
@@ -40269,13 +40256,13 @@ window.LIVE_STOCKS = [
     "total": 64,
     "consensus": 1,
     "signal": "HOLD",
-    "ev": 0.49,
+    "ev": 0.53,
     "target": 6,
     "hitl": false,
     "reasons": {
       "tech": [
-        "RSI 62 · 강세 지속 구간",
-        "MACD 골든크로스 · 히스토 +228.08"
+        "RSI 57 · 강세 지속 구간",
+        "MACD 골든크로스 · 히스토 +193.65"
       ],
       "macro": [
         "NEUTRAL · VIX 15.2 · US10Y 4.69%"
@@ -40287,7 +40274,7 @@ window.LIVE_STOCKS = [
         "* DART API 키 미설정 · 프록시 사용"
       ],
       "value": [
-        "PER 8.4 · 극심 저평가",
+        "PER 8.2 · 극심 저평가",
         "FCF 음수 · 현금유출"
       ]
     }
@@ -40297,21 +40284,21 @@ window.LIVE_STOCKS = [
     "n": "아시아나항공",
     "m": "KR",
     "sec": "미분류",
-    "tech": 69,
+    "tech": 67,
     "macro": 55,
     "filing": 55,
     "value": 50,
-    "total": 59,
+    "total": 58,
     "consensus": 0,
     "signal": "HOLD",
-    "ev": 0.4,
-    "target": 5,
+    "ev": 0.36,
+    "target": 4,
     "hitl": false,
     "reasons": {
       "tech": [
-        "RSI 62 · 강세 지속 구간",
-        "MACD 골든크로스 · 히스토 +59.98",
-        "Bollinger 상단 접근 (92%)"
+        "RSI 55 · 강세 지속 구간",
+        "MACD 골든크로스 · 히스토 +51.22",
+        "거래량 감소 · 0.6배"
       ],
       "macro": [
         "NEUTRAL · VIX 15.2 · US10Y 4.69%"
@@ -40343,10 +40330,10 @@ window.LIVE_STOCKS = [
     "hitl": false,
     "reasons": {
       "tech": [
-        "RSI 57 · 강세 지속 구간",
-        "MACD 골든크로스 · 히스토 +588.43",
+        "RSI 59 · 강세 지속 구간",
+        "MACD 골든크로스 · 히스토 +658.64",
         "거래량 감소 · 0.3배",
-        "3개월 수익률 -50.0% · 급락"
+        "3개월 수익률 -46.4% · 급락"
       ],
       "macro": [
         "NEUTRAL · VIX 15.2 · US10Y 4.69%"
@@ -40354,11 +40341,11 @@ window.LIVE_STOCKS = [
       "filing": [
         "기관 보유 17% · 낮음",
         "내부자 보유 51.5%",
-        "고점 대비 50%",
+        "고점 대비 53%",
         "* DART API 키 미설정 · 프록시 사용"
       ],
       "value": [
-        "PER 14.1 · 저평가",
+        "PER 14.8 · 저평가",
         "FCF 음수 · 현금유출"
       ]
     }
@@ -40375,14 +40362,14 @@ window.LIVE_STOCKS = [
     "total": 52,
     "consensus": 0,
     "signal": "HOLD",
-    "ev": -0.03,
+    "ev": -0.02,
     "target": 0,
     "hitl": false,
     "reasons": {
       "tech": [
-        "단기 역배열 (P<10045.5<10245.3)",
-        "RSI 47 · 중립",
-        "MACD 골든크로스 · 히스토 +9.88"
+        "단기 역배열 (P<10033.5<10232.0)",
+        "RSI 49 · 중립",
+        "MACD 골든크로스 · 히스토 +11.53"
       ],
       "macro": [
         "NEUTRAL · VIX 15.2 · US10Y 4.69%"
@@ -40407,15 +40394,15 @@ window.LIVE_STOCKS = [
     "total": 62,
     "consensus": 0,
     "signal": "HOLD",
-    "ev": 0.61,
+    "ev": 0.62,
     "target": 7,
     "hitl": false,
     "reasons": {
       "tech": [
-        "이동평균 완벽 정배열 (P>69685.0>68420.0>60910.9)",
-        "RSI 51 · 중립",
-        "MACD 데드크로스 · 히스토 -113.29",
-        "3개월 수익률 +13.5%"
+        "이동평균 완벽 정배열 (P>69600.0>68556.0>61058.0)",
+        "RSI 48 · 중립",
+        "MACD 데드크로스 · 히스토 -42.07",
+        "3개월 수익률 +14.2%"
       ],
       "macro": [
         "NEUTRAL · VIX 15.2 · US10Y 4.69%"
@@ -40436,22 +40423,21 @@ window.LIVE_STOCKS = [
     "n": "한국콜마",
     "m": "KR",
     "sec": "미분류",
-    "tech": 91,
+    "tech": 80,
     "macro": 55,
     "filing": 60,
     "value": 60,
-    "total": 70,
+    "total": 66,
     "consensus": 1,
     "signal": "HOLD",
-    "ev": 0.94,
-    "target": 11,
+    "ev": 0.65,
+    "target": 8,
     "hitl": false,
     "reasons": {
       "tech": [
-        "이동평균 완벽 정배열 (P>102335.0>96436.0>78879.7)",
-        "RSI 60 · 강세 지속 구간",
-        "MACD 골든크로스 · 히스토 +207.53",
-        "3개월 수익률 +14.0%"
+        "이동평균 완벽 정배열 (P>102195.0>96778.0>79026.8)",
+        "RSI 53 · 중립",
+        "MACD 골든크로스 · 히스토 +226.52"
       ],
       "macro": [
         "NEUTRAL · VIX 15.2 · US10Y 4.69%"
@@ -40463,7 +40449,7 @@ window.LIVE_STOCKS = [
         "* DART API 키 미설정 · 프록시 사용"
       ],
       "value": [
-        "PER 13.1 · 저평가"
+        "PER 12.7 · 저평가"
       ]
     }
   }
