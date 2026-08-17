@@ -79,8 +79,8 @@ DART_BASE = "https://opendart.fss.or.kr/api"
 FRED_BASE = "https://api.stlouisfed.org/fred"
 
 # 한국 종목의 corp_code 매핑 (DART 조회에 필요)
-# 전체 매핑은 CORPCODE.xml 다운로드로 자동화 가능
-CORP_CODE_MAP = {
+# 런타임에 load_dart_corpcode()가 opendart corpCode.xml에서 전체 상장사를 병합
+CORP_CODE_MAP: dict[str, str] = {
     "005930.KS": "00126380",  # 삼성전자
     "000660.KS": "00164779",  # SK하이닉스
     "035420.KS": "00266961",  # NAVER
@@ -572,6 +572,76 @@ def fetch_fmp_filing_signals(ticker: str) -> dict:
 
 
 # ─── DART API (한국 공시) ─────────────────────────────────────
+def load_dart_corpcode() -> dict[str, str]:
+    """
+    DART OpenAPI corpCode.xml(ZIP)을 받아 티커→corp_code 매핑을 반환.
+    - stock_code가 있는 상장사만 대상 (비상장 법인 제외)
+    - KOSPI(.KS), KOSDAQ(.KQ) 두 suffix 모두 등록 (한국 단축코드는 6자리 유일)
+    - 7일 TTL로 .cache/dart_corpcode.json 캐시
+    - DART_KEY 없거나 다운로드 실패 시 빈 dict 반환 (하드코딩 매핑 폴백)
+    """
+    if not DART_KEY:
+        return {}
+
+    cache_key = "dart_corpcode"
+    cached = _load_cache(cache_key, ttl_hours=24 * 7)
+    if isinstance(cached, dict) and cached:
+        return cached
+
+    import zipfile
+    import xml.etree.ElementTree as ET
+
+    try:
+        r = requests.get(
+            f"{DART_BASE}/corpCode.xml",
+            params={"crtfc_key": DART_KEY},
+            timeout=30,
+        )
+        if r.status_code != 200:
+            print(f"    [!] DART corpCode HTTP {r.status_code}")
+            return {}
+        content = r.content
+        # ZIP 매직 넘버 확인 (에러 시 JSON 응답)
+        if content[:2] != b"PK":
+            try:
+                err = r.json()
+                print(f"    [!] DART corpCode 오류: {err.get('message', 'unknown')}")
+            except Exception:
+                print("    [!] DART corpCode: ZIP 응답 아님")
+            return {}
+
+        mapping: dict[str, str] = {}
+        with zipfile.ZipFile(io.BytesIO(content)) as zf:
+            xml_name = next(
+                (n for n in zf.namelist() if n.upper().endswith(".XML")), None
+            )
+            if xml_name is None:
+                return {}
+            with zf.open(xml_name) as xf:
+                for _ev, elem in ET.iterparse(xf, events=("end",)):
+                    if elem.tag != "list":
+                        continue
+                    stock_code = (elem.findtext("stock_code") or "").strip()
+                    corp_code = (elem.findtext("corp_code") or "").strip()
+                    if (
+                        stock_code
+                        and corp_code
+                        and stock_code.isdigit()
+                        and len(stock_code) == 6
+                    ):
+                        mapping[f"{stock_code}.KS"] = corp_code
+                        mapping[f"{stock_code}.KQ"] = corp_code
+                    elem.clear()
+
+        if mapping:
+            _save_cache(cache_key, mapping)
+            print(f"    [OK] DART 회사코드 {len(mapping) // 2}개 상장사 로드")
+        return mapping
+    except Exception as e:
+        print(f"    [!] DART corpCode 로드 실패: {str(e)[:80]}")
+        return {}
+
+
 def _dart_get(endpoint: str, params: dict = None) -> Optional[dict]:
     if not DART_KEY:
         return None
@@ -1061,8 +1131,18 @@ def calc_filing_score(info: dict, hist_df, ticker: str, market: str) -> tuple[in
                 score -= 5
                 reasons.append(f"고점 대비 {prox:.0f}%")
 
-        api_hint = "FMP" if market == "US" else "DART"
-        reasons.append(f"* {api_hint} API 키 미설정 · 프록시 사용")
+        if market == "US":
+            if not FMP_KEY:
+                reasons.append("* FMP API 키 미설정 · 프록시 사용")
+            else:
+                reasons.append("* FMP 최근 공시 없음 · 프록시 보조")
+        elif market == "KR":
+            if not DART_KEY:
+                reasons.append("* DART API 키 미설정 · 프록시 사용")
+            elif ticker not in CORP_CODE_MAP:
+                reasons.append("* DART corp_code 매핑 없음 · 프록시 사용")
+            else:
+                reasons.append("* DART 최근 공시 없음 · 프록시 보조")
 
     if not reasons:
         reasons.append("공시 데이터 부족")
@@ -1222,6 +1302,17 @@ def main():
     if not FMP_KEY and not DART_KEY and not FRED_KEY:
         print("      → .env 파일에 API 키를 추가하면 실제 시그널이 반영됩니다")
     print("-" * 65)
+
+    # DART 회사코드 매핑 확장 (전체 상장사 corp_code 자동 로드)
+    if DART_KEY:
+        print("[*] DART 회사코드 매핑 로드...")
+        dynamic_map = load_dart_corpcode()
+        if dynamic_map:
+            CORP_CODE_MAP.update(dynamic_map)
+            print(f"    총 corp_code 매핑: {len({v for v in CORP_CODE_MAP.values()})}개 상장사")
+        else:
+            print("    [!] 동적 매핑 실패 — 하드코딩 11종목만 사용")
+        print("-" * 65)
 
     # 유니버스 로드
     print("[*] 종목 유니버스 로드...")
