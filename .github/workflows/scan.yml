@@ -72,18 +72,18 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add dashboard_data.js
+          git add dashboard_data.js history/
           if git diff --staged --quiet; then
             echo "No changes to commit"
           else
-            git commit -m "Auto scan: $(date -u +'%Y-%m-%d %H:%M UTC')"
+            git commit -m "Auto scan: $(TZ=Asia/Seoul date +'%Y-%m-%d %H:%M KST')"
             # 스캔 중 main이 앞으로 갔을 수 있으므로 rebase 후 푸시 (충돌 시 최대 3회 재시도)
             for i in 1 2 3; do
               git pull --rebase origin main && git push && exit 0
               echo "push retry $i"
               sleep 5
             done
-            echo "::error::Failed to push dashboard_data.js after 3 attempts"
+            echo "::error::Failed to push scan results after 3 attempts"
             exit 1
           fi
 
