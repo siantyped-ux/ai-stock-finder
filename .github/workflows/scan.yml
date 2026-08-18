@@ -2,10 +2,9 @@ name: AI Stock Finder Auto Scan
 
 on:
   schedule:
-    # UTC 02:30 = KST 11:30 (미국 장 마감 후, 한국 장 마감 후)
-    - cron: '30 2 * * *'
-    # 필요 시 추가 스케줄 예시:
-    # - cron: '0 22 * * 1-5'  # UTC 22:00 = KST 07:00 (미국 장 개장 전)
+    # UTC 21:00 = KST 익일 06:00 (미국 장 마감 1시간 후, 한국 장 개장 전)
+    # GitHub Actions 스케줄은 부하에 따라 5~30분 지연될 수 있음
+    - cron: '0 21 * * *'
   workflow_dispatch:
     inputs:
       min_us_cap:
