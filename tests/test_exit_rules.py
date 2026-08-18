@@ -90,7 +90,7 @@ def test_advance_updates_high_and_bar_count():
     pos = _pos()
     bar = er.Bar("2026-08-20", open=101.0, high=108.0, low=99.0, close=107.0)
 
-    got = er.advance(pos, bar)
+    got = er.advance(pos, bar, P)
 
     assert got.high_since_entry == 108.0
     assert got.bars_held == 1
@@ -101,7 +101,7 @@ def test_advance_keeps_the_higher_high():
     pos = _pos(high_since_entry=120.0)
     bar = er.Bar("2026-08-20", open=101.0, high=108.0, low=99.0, close=107.0)
 
-    got = er.advance(pos, bar)
+    got = er.advance(pos, bar, P)
 
     assert got.high_since_entry == 120.0
     assert got.bars_held == 1
@@ -231,7 +231,7 @@ def test_todays_high_does_not_set_todays_stop():
 
     assert er.evaluate(pos, bar, P) is None
 
-    after = er.advance(pos, bar)
+    after = er.advance(pos, bar, P)
     assert after.high_since_entry == 120.0
     assert er.current_stop(after, P, atr=2.0) == 114.0
 
@@ -265,12 +265,12 @@ def test_stop_does_not_retreat_when_atr_widens():
     pos = _pos()
     up = er.Bar("2026-08-20", open=101.0, high=140.0, low=100.0, close=139.0,
                 atr14=2.0, total=75)
-    pos = er.advance(pos, up)
+    pos = er.advance(pos, up, P)
     assert pos.stop == 134.0            # 140 - 3.0 * 2.0
 
     calm = er.Bar("2026-08-21", open=139.0, high=140.0, low=138.0, close=139.0,
                   atr14=10.0, total=75)
-    pos = er.advance(pos, calm)
+    pos = er.advance(pos, calm, P)
 
     assert pos.stop == 134.0            # 110 으로 내려가지 않는다
 
@@ -279,11 +279,11 @@ def test_stop_holds_through_a_missing_atr_bar():
     pos = _pos()
     up = er.Bar("2026-08-20", open=101.0, high=140.0, low=100.0, close=139.0,
                 atr14=2.0, total=75)
-    pos = er.advance(pos, up)
+    pos = er.advance(pos, up, P)
 
     gap = er.Bar("2026-08-21", open=139.0, high=139.5, low=138.0, close=139.0,
                  atr14=None, total=75)
-    pos = er.advance(pos, gap)
+    pos = er.advance(pos, gap, P)
 
     assert pos.stop == 134.0            # 초기 손절 94 로 원복하지 않는다
 
@@ -292,7 +292,7 @@ def test_current_stop_returns_the_stored_stop_when_atr_is_missing():
     pos = _pos()
     up = er.Bar("2026-08-20", open=101.0, high=140.0, low=100.0, close=139.0,
                 atr14=2.0, total=75)
-    pos = er.advance(pos, up)
+    pos = er.advance(pos, up, P)
 
     assert er.current_stop(pos, P, atr=None) == 134.0
 
@@ -306,7 +306,7 @@ def test_evaluate_uses_the_ratcheted_stop():
     pos = _pos()
     up = er.Bar("2026-08-20", open=101.0, high=140.0, low=100.0, close=139.0,
                 atr14=2.0, total=75)
-    pos = er.advance(pos, up)   # stop = 134
+    pos = er.advance(pos, up, P)   # stop = 134
 
     drop = er.Bar("2026-08-21", open=139.0, high=139.0, low=133.0, close=134.0,
                   atr14=10.0, total=75)
@@ -314,3 +314,16 @@ def test_evaluate_uses_the_ratcheted_stop():
 
     assert got.reason == "TRAIL"
     assert got.price == 134.0
+
+
+def test_advance_honours_a_non_default_trail_multiplier():
+    # advance 가 Params() 기본값을 하드코딩하면 저장 손절선과 evaluate 판정이 어긋난다.
+    p2 = er.Params(trail_atr_mult=2.0)
+    pos = er.open_position("X", "d0", 100.0, 2.0, p2)
+    bar = er.Bar("d1", open=101.0, high=140.0, low=100.0, close=139.0,
+                 atr14=2.0, total=75)
+
+    after = er.advance(pos, bar, p2)
+
+    assert after.stop == 136.0          # 140 - 2.0 * 2.0, 기본값이면 134
+    assert er.current_stop(after, p2, atr=2.0) == 136.0

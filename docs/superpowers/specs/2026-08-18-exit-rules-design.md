@@ -98,6 +98,7 @@ class Position:
     initial_stop: float
     r_unit: float            # entry_price - initial_stop
     high_since_entry: float
+    stop: float              # 현재 유효 손절선 (래칫 - 내려가지 않음)
     bars_held: int
 
 
@@ -150,17 +151,35 @@ STOP과 TRAIL은 같은 트리거이며 손절선이 초기값인지 트레일�
 
 ## 트레일링 손절
 
+`advance` 가 봉마다 손절선을 갱신하며, **한 방향으로만 움직인다**.
+
 ```
 트레일 활성: high_since_entry >= entry_price + r_unit
-손절선     : initial_stop                                        (비활성)
-             max(initial_stop, high_since_entry - trail_atr_mult * bar.atr14)  (활성)
+후보       : high_since_entry - trail_atr_mult * bar.atr14   (활성이고 atr14 있을 때)
+손절선     : max(직전 손절선, 후보)
 ```
 
-초기 손절은 **진입 시점 ATR**로 고정한다 — R 정의가 흔들리면 안 된다.
-트레일링은 **현재 ATR**을 쓴다(Chandelier 표준). 3개월간 변동성이 크게 바뀌므로
+초기 손절은 **진입 시점 ATR** 로 고정한다 - R 정의가 흔들리면 안 된다.
+트레일링은 **현재 ATR** 을 쓴다(Chandelier 표준). 3개월간 변동성이 크게 바뀌므로
 트레일링까지 진입 시점 값에 묶으면 뒤로 갈수록 부정확해진다.
 
-`bar.atr14`가 없으면 트레일링을 적용하지 않고 초기 손절을 유지한다.
+### 초기 손절선이 아니라 직전 손절선에 클램프하는 이유
+
+초기값에만 클램프하면 손절선이 뒤로 물러선다. 고점 140 · ATR 2.0 에서 손절선이
+134 였다가, 고점이 그대로인 채 ATR 이 10 으로 확대되면 110 으로 24포인트 후퇴한다.
+확정된 이익 보호가 풀리는 것이다. 직전 손절선에 클램프하면 134 가 유지된다.
+
+`bar.atr14` 가 없으면 후보를 계산하지 않고 **직전 손절선을 그대로 유지**한다.
+초기 손절로 되돌리면 하루의 데이터 결측만으로 그동안 쌓인 보호가 전부 풀린다.
+
+### "1R 도달 시 본전이동" 의 정확한 범위
+
+두 ATR 배수가 같을 때 트레일 후보가 정확히 진입가가 되려면
+`stop_atr_mult * atr_at_entry == trail_atr_mult * atr_now` 여야 하므로,
+**진입 이후 ATR 이 변하지 않은 경우에만 정확히 성립한다.** 60일 보유 동안
+변동성이 움직이면 근사치가 된다. 파라미터를 추가하지 않고 얻는 성질이라
+유지할 가치가 있지만 보장으로 취급해서는 안 된다.
+
 
 ### 상태 갱신 순서 (룩어헤드 차단)
 
@@ -169,7 +188,7 @@ STOP과 TRAIL은 같은 트리거이며 손절선이 초기값인지 트레일�
 ```python
 decision = evaluate(position, bar, params)   # 어제까지의 high_since_entry 사용
 if decision is None:
-    position = advance(position, bar)        # high_since_entry, bars_held 갱신
+    position = advance(position, bar, params)  # 고점·손절선·bars_held 갱신
 ```
 
 순서를 바꾸면 오늘 고가로 계산한 손절선이 오늘 장중에 체결되는 셈이 되어
@@ -181,7 +200,7 @@ if decision is None:
 def open_position(ticker, date, entry_price, atr_at_entry, params) -> Position
 def current_stop(position, params, atr) -> float
 def evaluate(position, bar, params) -> Optional[ExitDecision]
-def advance(position, bar) -> Position
+def advance(position, bar, params) -> Position
 ```
 
 전부 순수 함수다. 파일 접근도 네트워크 접근도 하지 않는다.
@@ -192,7 +211,7 @@ def advance(position, bar) -> Position
 |---|---|
 | 특정일 OHLC 결측 | 그날 평가와 갱신을 모두 건너뛴다. `bars_held`는 증가하지 않는다 |
 | 진입일 시가 없음 | 진입 취소, 포지션 미생성 |
-| `bar.atr14` 없음 | 트레일링 미적용, 초기 손절 유지 |
+| `bar.atr14` 없음 | 트레일 후보 미계산, **직전 손절선 유지** |
 | `bar.total` 없음 | SIGNAL 판정 생략, 나머지 트리거는 정상 평가 |
 | `atr_at_entry`가 0 또는 None | `ValueError`. 손절폭 0은 R이 0이 되어 이후 모든 계산이 무의미해진다 |
 
@@ -205,7 +224,8 @@ def advance(position, bar) -> Position
 
 1. **STOP** — 저가가 정확히 손절선일 때 체결 / 갭하락 시 시가 체결
 2. **TRAIL** — 고점이 진입가+1R일 때 손절선이 정확히 진입가가 되는지
-3. **TRAIL** — 트레일 손절선이 초기 손절선 아래로 내려가지 않는지
+3. **TRAIL** — 손절선이 직전 값 아래로 내려가지 않는지 (고점 고정 · ATR 확대)
+3-b. **TRAIL** — `atr14` 결측 봉에서 직전 손절선이 유지되는지
 4. **TIME** — `bars_held == max_hold_days`에서 시가 체결
 5. **SIGNAL** — `total < exit_total`에서 시가 체결
 6. **히스테리시스** — `total`이 65일 때 청산되지 않는지 (진입 70 / 청산 60 사이)

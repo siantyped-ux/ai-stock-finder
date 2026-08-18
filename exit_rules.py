@@ -113,25 +113,28 @@ def current_stop(position: Position, params: Params,
     return max(position.stop, trailed)
 
 
-def advance(position: Position, bar: Bar) -> Position:
+def advance(position: Position, bar: Bar, params: Params) -> Position:
     """봉 하나를 소화하고 포지션 상태를 갱신한다.
 
     반드시 evaluate 다음에 호출할 것. 먼저 호출하면 오늘 고가로 계산한 손절선이
     오늘 장중에 체결되는 셈이 되어 룩어헤드가 된다.
 
-    고점을 먼저 갱신한 다음 그 새 고점으로 손절선을 다시 래칫한다 — 순서를
-    바꾸면 오늘 고가가 오늘 손절선에 반영되어 버린다. advance 는 params 를
-    받지 않으므로 트레일 배수는 Params 기본값(3.0)을 쓴다.
+    고점을 먼저 갱신한 다음 그 새 고점으로 손절선을 다시 래칫한다 - 순서를
+    바꾸면 오늘 고가가 오늘 손절선에 반영되어 버린다.
+
+    params 를 반드시 받는다. 여기서 Params() 기본값을 쓰면 호출자가 다른
+    trail_atr_mult 를 줬을 때 저장되는 손절선과 evaluate 가 판정에 쓰는
+    손절선이 조용히 어긋난다.
     """
     new_high = max(position.high_since_entry, bar.high)
     with_new_high = replace(position, high_since_entry=new_high)
-    new_stop = current_stop(with_new_high, Params(), bar.atr14)
     return replace(
         position,
         high_since_entry=new_high,
-        stop=new_stop,
+        stop=current_stop(with_new_high, params, bar.atr14),
         bars_held=position.bars_held + 1,
     )
+
 
 
 def evaluate(position: Position, bar: Bar,
