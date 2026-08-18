@@ -1,7 +1,9 @@
 import csv
+import math
 from datetime import datetime, timedelta, timezone
 
 import pandas as pd
+import pytest
 
 import history
 
@@ -122,3 +124,120 @@ def test_price_fields_no_info():
     df = _hist_df()
     got = history.price_fields(df, None)
     assert got["market_cap"] is None
+
+
+def test_write_snapshot_rejects_naive_scan_ts(tmp_path):
+    naive = datetime(2026, 8, 19, 6, 0, 30)
+    with pytest.raises(ValueError) as exc:
+        history.write_snapshot([_row()], naive, out_dir=tmp_path)
+    assert "tz" in str(exc.value).lower() or "시간대" in str(exc.value)
+
+
+def test_write_snapshot_rejects_missing_required_field(tmp_path):
+    scan_ts = datetime(2026, 8, 19, 6, 0, 30, tzinfo=KST)
+    row = _row()
+    del row["ticker"]
+    with pytest.raises(ValueError) as exc:
+        history.write_snapshot([row], scan_ts, out_dir=tmp_path)
+    assert "ticker" in str(exc.value)
+
+
+def test_write_snapshot_allows_missing_price_fields(tmp_path):
+    # 시세 조회 실패·소급 적재에서는 가격 열이 비는 것이 정상이다.
+    scan_ts = datetime(2026, 8, 19, 6, 0, 30, tzinfo=KST)
+    row = _row()
+    for f in ("bar_date", "close", "volume", "avg_vol20", "atr14", "market_cap"):
+        del row[f]
+
+    path = history.write_snapshot([row], scan_ts, out_dir=tmp_path)
+
+    with open(path, encoding="utf-8", newline="") as f:
+        got = list(csv.DictReader(f))
+    assert got[0]["close"] == ""
+    assert got[0]["market_cap"] == ""
+    assert got[0]["ticker"] == "NVDA"
+
+
+def test_write_snapshot_writes_nan_as_blank(tmp_path):
+    scan_ts = datetime(2026, 8, 19, 6, 0, 30, tzinfo=KST)
+    rows = [_row(close=float("nan"), atr14=float("nan"))]
+
+    path = history.write_snapshot(rows, scan_ts, out_dir=tmp_path)
+
+    with open(path, encoding="utf-8", newline="") as f:
+        got = list(csv.DictReader(f))
+    assert got[0]["close"] == ""
+    assert got[0]["atr14"] == ""
+
+
+def test_write_snapshot_leaves_no_file_when_a_later_row_is_bad(tmp_path):
+    scan_ts = datetime(2026, 8, 19, 6, 0, 30, tzinfo=KST)
+    rows = [_row(), _row(ticker="BAD", bogus=1)]
+
+    with pytest.raises(ValueError):
+        history.write_snapshot(rows, scan_ts, out_dir=tmp_path)
+
+    # 잘린 CSV가 최종 경로에 남으면 안 된다. 임시 파일도 치워져야 한다.
+    assert list(tmp_path.iterdir()) == []
+
+
+def test_write_snapshot_overwrite_does_not_leave_stale_rows(tmp_path):
+    scan_ts = datetime(2026, 8, 19, 6, 0, 30, tzinfo=KST)
+    history.write_snapshot([_row(), _row(ticker="AAPL")], scan_ts, out_dir=tmp_path)
+
+    path = history.write_snapshot([_row(ticker="TSLA")], scan_ts, out_dir=tmp_path)
+
+    with open(path, encoding="utf-8", newline="") as f:
+        got = list(csv.DictReader(f))
+    assert [r["ticker"] for r in got] == ["TSLA"]
+
+
+def test_price_fields_nan_volume_does_not_raise():
+    df = _hist_df()
+    df.loc[df.index[-1], "Volume"] = float("nan")
+
+    got = history.price_fields(df, {})
+
+    assert got["volume"] is None
+    assert got["close"] == 159.0
+
+
+def test_price_fields_nan_close_returns_none():
+    df = _hist_df()
+    df.loc[df.index[-1], "Close"] = float("nan")
+
+    got = history.price_fields(df, {})
+
+    assert got["close"] is None
+
+
+def test_price_fields_nan_market_cap_returns_none():
+    df = _hist_df()
+    got = history.price_fields(df, {"marketCap": float("nan")})
+    assert got["market_cap"] is None
+
+
+def test_price_fields_market_cap_keeps_int_type():
+    df = _hist_df()
+    got = history.price_fields(df, {"marketCap": 123456})
+    assert isinstance(got["market_cap"], int)
+
+
+def test_atr_uses_the_gap_branch_not_just_the_daily_range():
+    # 당일 레인지는 좁지만(0.5) 전일 종가 대비 갭이 크다(1.0).
+    # high-low 만 쓰는 잘못된 구현이면 0.5가 나온다.
+    idx = pd.date_range("2026-06-01", periods=20, freq="D")
+    close = [100.0] * 19 + [101.0]
+    high = [100.25] * 19 + [101.0]
+    low = [99.75] * 19 + [100.5]
+    df = pd.DataFrame(
+        {"Open": close, "High": high, "Low": low, "Close": close,
+         "Volume": [1000] * 20},
+        index=idx,
+    )
+
+    got = history.price_fields(df, {})
+
+    # 마지막 봉 TR = max(101.0-100.5, |101.0-100.0|, |100.5-100.0|) = 1.0
+    # 나머지 봉 TR = 0.5 -> 14봉 평균 = (0.5*13 + 1.0) / 14
+    assert got["atr14"] == round((0.5 * 13 + 1.0) / 14, 4)
