@@ -16,6 +16,45 @@ KST = history.KST
 CORRUPT_RATIO = 0.8   # 중앙값 대비 이 비율 미만이면 손상으로 본다
 
 
+def _git(*args: str) -> bytes:
+    return subprocess.run(["git", *args], capture_output=True, check=True).stdout
+
+
+def load_snapshots() -> list[dict]:
+    """git 이력의 dashboard_data.js 스냅샷을 모두 읽어온다.
+
+    generated_at은 CI 러너가 만든 naive UTC 값이므로 UTC로 간주해 KST로 변환한다.
+    """
+    shas = _git("log", "--format=%H", "--", "dashboard_data.js").decode().split()
+    snaps = []
+    for sha in shas:
+        blob = _git("show", f"{sha}:dashboard_data.js").decode("utf-8", "replace")
+
+        m = re.search(r'window\.LIVE_STOCKS = (\[.*\]);', blob, re.S)
+        if not m:
+            continue
+        try:
+            stocks = json.loads(m.group(1))
+        except json.JSONDecodeError:
+            continue
+
+        g = re.search(r'generated_at: "([^"]+)"', blob)
+        if not g:
+            continue
+        naive = datetime.fromisoformat(g.group(1))
+        ts_kst = naive.replace(tzinfo=timezone.utc).astimezone(KST)
+
+        snaps.append({
+            "sha": sha,
+            "ts": ts_kst.isoformat(),
+            "date": f"{ts_kst:%Y-%m-%d}",
+            "count": len(stocks),
+            "stocks": stocks,
+            "scan_ts": ts_kst,
+        })
+    return snaps
+
+
 def drop_corrupt(snaps: list[dict]) -> list[dict]:
     """종목 수가 전체 중앙값의 CORRUPT_RATIO(80%) 미만인 스냅샷을 제거한다."""
     if not snaps:
