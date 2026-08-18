@@ -187,3 +187,53 @@ def test_signal_exit_uses_the_row_total():
 
     assert trades[0].exit_reason == "SIGNAL"
     assert trades[0].exit_price == 100.0    # 시가 체결
+
+
+def _trade(net_r, is_open=False, reason="STOP"):
+    return ts.Trade(
+        ticker="X", market="US", source="live", entry_date="d1",
+        entry_price=100.0, r_unit=6.0,
+        exit_date=None if is_open else "d2",
+        exit_price=None if is_open else 106.0,
+        exit_reason=None if is_open else reason,
+        bars_held=1, is_open=is_open,
+        gross_r=net_r + 0.05, cost_r=0.05, net_r=net_r,
+    )
+
+
+def test_summary_counts_only_closed_trades():
+    trades = [_trade(1.0), _trade(-1.0), _trade(5.0, is_open=True)]
+
+    got = ts.summarize(trades)
+
+    assert got["closed"] == 2
+    assert got["open"] == 1
+    assert got["win_rate"] == pytest.approx(0.5)
+    assert got["avg_net_r"] == pytest.approx(0.0)
+
+
+def test_summary_of_no_closed_trades_is_not_a_crash():
+    got = ts.summarize([_trade(2.0, is_open=True)])
+
+    assert got["closed"] == 0
+    assert got["open"] == 1
+    assert got["win_rate"] is None
+    assert got["avg_net_r"] is None
+
+
+def test_summary_breaks_down_by_exit_reason():
+    trades = [_trade(1.0, reason="TRAIL"), _trade(-1.0, reason="STOP"),
+              _trade(-1.0, reason="STOP")]
+
+    got = ts.summarize(trades)
+
+    assert got["by_reason"] == {"TRAIL": 1, "STOP": 2}
+
+
+def test_summary_reports_open_r_separately():
+    trades = [_trade(1.0), _trade(3.0, is_open=True)]
+
+    got = ts.summarize(trades)
+
+    assert got["avg_net_r"] == pytest.approx(1.0)     # 미결 3.0 은 안 섞인다
+    assert got["open_net_r"] == pytest.approx(3.0)

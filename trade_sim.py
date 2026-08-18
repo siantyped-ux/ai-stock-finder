@@ -8,6 +8,7 @@
 """
 from __future__ import annotations
 
+from collections import Counter
 from dataclasses import dataclass, replace
 from typing import Optional
 
@@ -191,3 +192,24 @@ def simulate_ticker(ticker: str, market: str, rows: list, bars: dict,
                                   None, None, costs))
 
     return trades
+
+
+def summarize(trades: list) -> dict:
+    """R 통계를 낸다. 닫힌 트레이드와 미결 포지션을 절대 섞지 않는다.
+
+    미결을 승률에 넣으면 "아직 손절되지 않았을 뿐"인 포지션이 승리로 잡혀
+    성과가 부풀려진다.
+    """
+    closed = [t for t in trades if not t.is_open]
+    opened = [t for t in trades if t.is_open]
+
+    wins = sum(1 for t in closed if t.net_r > 0)
+    return {
+        "closed": len(closed),
+        "open": len(opened),
+        "win_rate": (wins / len(closed)) if closed else None,
+        "avg_net_r": (sum(t.net_r for t in closed) / len(closed)) if closed else None,
+        "total_net_r": sum(t.net_r for t in closed),
+        "open_net_r": sum(t.net_r for t in opened),
+        "by_reason": dict(Counter(t.exit_reason for t in closed)),
+    }
