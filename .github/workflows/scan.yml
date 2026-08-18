@@ -76,7 +76,9 @@ jobs:
           if git diff --staged --quiet; then
             echo "No changes to commit"
           else
-            git commit -m "Auto scan: $(TZ=Asia/Seoul date +'%Y-%m-%d %H:%M KST')"
+            # KST 는 서머타임이 없어 UTC+9 고정. TZ=Asia/Seoul 은 tzdata 가 없는
+            # 환경에서 조용히 UTC 를 KST 라고 찍으므로 오프셋으로 계산한다.
+            git commit -m "Auto scan: $(date -u -d '+9 hours' +'%Y-%m-%d %H:%M KST')"
             # 스캔 중 main이 앞으로 갔을 수 있으므로 rebase 후 푸시 (충돌 시 최대 3회 재시도)
             for i in 1 2 3; do
               git pull --rebase origin main && git push && exit 0
