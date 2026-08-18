@@ -742,8 +742,11 @@ def atr_series(hist_df, period: int = 14) -> dict:
 
     out = {}
     for i in range(len(dates)):
-        # i 번째 봉 시점에 알 수 있는 TR 은 인덱스 i-1 까지다.
-        available = tr[:i]
+        # tr[k] 는 봉 k+1 의 TR 이다(봉 k 와 k+1 로 계산). 따라서 봉 i 가
+        # 열리기 전에 알 수 있는 TR 은 봉 1..i-1 의 것, 즉 tr[:i-1] 이다.
+        # tr[:i] 로 자르면 tr[i-1] = 봉 i 자신의 TR 이 섞여 그 봉의 고저가
+        # 자기 손절선 계산에 들어간다.
+        available = tr[:max(i - 1, 0)]
         if len(available) >= period:
             out[dates[i]] = round(float(np.mean(available[-period:])), 4)
     return out
