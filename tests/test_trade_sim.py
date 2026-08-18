@@ -16,29 +16,33 @@ def test_costs_defaults():
     assert C.slippage_pct == 0.05
 
 
-def test_us_cost_in_r():
-    # 진입가 100, 1R = 6.
-    # 왕복 = 0.10 + 0.10 + 슬리피지 0.05*2 = 0.30% -> 0.30 원 -> 0.05 R
-    got = ts.cost_r(entry_price=100.0, r_unit=6.0, market="US", costs=C)
-    assert got == pytest.approx(0.30 / 6.0)
+def test_us_cost_charges_each_side_at_its_own_price():
+    # 진입 100, 청산 130, 1R = 6.
+    # 매수측 (0.10+0.05)% x 100 = 0.15
+    # 매도측 (0.10+0.05)% x 130 = 0.195
+    got = ts.cost_r(entry_price=100.0, exit_price=130.0, r_unit=6.0,
+                    market="US", costs=C)
+    assert got == pytest.approx((0.15 + 0.195) / 6.0)
 
 
 def test_kr_cost_includes_the_sell_tax():
-    # 왕복 = 0.02 + 0.02 + 거래세 0.15 + 슬리피지 0.10 = 0.29%
-    got = ts.cost_r(entry_price=100.0, r_unit=6.0, market="KR", costs=C)
-    assert got == pytest.approx(0.29 / 6.0)
+    # 매수측 (0.02+0.05)% x 100 = 0.07
+    # 매도측 (0.02+0.15+0.05)% x 100 = 0.22
+    got = ts.cost_r(entry_price=100.0, exit_price=100.0, r_unit=6.0,
+                    market="KR", costs=C)
+    assert got == pytest.approx((0.07 + 0.22) / 6.0)
 
 
 def test_bigger_r_absorbs_cost():
     # r_unit 이 두 배면 비용 부담(R 기준)은 절반이다.
-    small = ts.cost_r(100.0, 6.0, "US", C)
-    big = ts.cost_r(100.0, 12.0, "US", C)
+    small = ts.cost_r(100.0, 100.0, 6.0, "US", C)
+    big = ts.cost_r(100.0, 100.0, 12.0, "US", C)
     assert big == pytest.approx(small / 2)
 
 
 def test_unknown_market_is_rejected():
     with pytest.raises(ValueError):
-        ts.cost_r(100.0, 6.0, "JP", C)
+        ts.cost_r(100.0, 100.0, 6.0, "JP", C)
 
 
 def test_entry_fires_only_on_transition_into_buy():
@@ -237,3 +241,43 @@ def test_summary_reports_open_r_separately():
 
     assert got["avg_net_r"] == pytest.approx(1.0)     # 미결 3.0 은 안 섞인다
     assert got["open_net_r"] == pytest.approx(3.0)
+
+
+def test_cost_grows_with_the_exit_price():
+    # 진입가 기준 근사는 이 두 값을 같게 만들었다. 큰 승리일수록
+    # 매도 비용이 실제로 커지는데 그것을 과소계상했다.
+    flat = ts.cost_r(100.0, 100.0, 6.0, "US", C)
+    winner = ts.cost_r(100.0, 160.0, 6.0, "US", C)
+    assert winner > flat
+
+
+def test_cost_understatement_at_ten_r_would_have_exceeded_a_hundredth_of_r():
+    # US 매도측 0.15%. 10R 청산이면 근사 오차가 0.015R 이었다.
+    entry, r_unit = 100.0, 6.0
+    exit_price = entry + 10 * r_unit          # +10R
+    exact = ts.cost_r(entry, exit_price, r_unit, "US", C)
+    approx = ts.cost_r(entry, entry, r_unit, "US", C)
+    assert exact - approx == pytest.approx(0.015, abs=1e-6)
+
+
+def test_pending_persists_when_the_caller_forgets_to_consume():
+    # consume() 는 호출자 책임이다. 잊으면 보유 중에도 진입 신호가 계속 난다.
+    # 계약을 테스트로 고정해 두어, 동작이 바뀌면 드러나게 한다.
+    st = ts.EntryState()
+    r = ts.step_entry(st, "BUY")
+    assert r.should_enter is True
+    r2 = ts.step_entry(r.state, "BUY")        # consume 없이 그대로
+    assert r2.should_enter is True
+
+
+def test_weekend_gap_then_a_one_day_dropout():
+    # 토 전환 -> 일(봉 없음) -> 월 이탈 -> 화 재전환
+    st = ts.EntryState()
+    sat = ts.step_entry(st, "BUY")
+    assert sat.should_enter is True
+    sun = ts.step_entry(sat.state, "BUY")
+    assert sun.should_enter is True
+    mon = ts.step_entry(sun.state, "HOLD")
+    assert mon.should_enter is False
+    tue = ts.step_entry(mon.state, "BUY")
+    assert tue.should_enter is True

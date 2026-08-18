@@ -31,25 +31,30 @@ class Costs:
     slippage_pct: float = 0.05
 
 
-def cost_r(entry_price: float, r_unit: float, market: str,
-           costs: Costs) -> float:
+def cost_r(entry_price: float, exit_price: float, r_unit: float,
+           market: str, costs: Costs) -> float:
     """왕복 거래비용을 R 배수로 환산한다.
 
-    매도 비용도 진입가 기준으로 잡는 근사다. 청산가 기준이 정확하지만
-    그러면 미결 포지션의 비용이 확정되지 않아 닫힌 트레이드와 비교가
-    어려워진다. 손절폭이 진입가의 10% 안팎이라 오차는 0.01R 미만이다.
+    매수측 비용은 진입가에, 매도측 비용은 청산가에 각각 매긴다 - 실제로
+    수수료가 부과되는 가격이 그것이기 때문이다. 미결 포지션은 마지막
+    종가를 청산가로 대신 넣어 부른다.
 
     r_unit 이 클수록(변동성이 큰 종목일수록) 비용 부담이 자동으로 작아진다.
     """
     if market == "US":
-        pct = costs.us_buy_pct + costs.us_sell_pct
+        buy_pct = costs.us_buy_pct
+        sell_pct = costs.us_sell_pct
+        tax_pct = 0.0
     elif market == "KR":
-        pct = costs.kr_buy_pct + costs.kr_sell_pct + costs.kr_tax_pct
+        buy_pct = costs.kr_buy_pct
+        sell_pct = costs.kr_sell_pct
+        tax_pct = costs.kr_tax_pct
     else:
         raise ValueError(f"알 수 없는 시장: {market!r} (US 또는 KR 이어야 함)")
 
-    pct += costs.slippage_pct * 2
-    return (entry_price * pct / 100.0) / r_unit
+    buy_side = (buy_pct + costs.slippage_pct) / 100.0 * entry_price
+    sell_side = (sell_pct + tax_pct + costs.slippage_pct) / 100.0 * exit_price
+    return (buy_side + sell_side) / r_unit
 
 
 BUY_SIGNALS = ("BUY", "STRONG_BUY")
@@ -115,7 +120,7 @@ def _make_trade(pos: er.Position, market: str, source: str,
                 exit_price: float, exit_date: Optional[str],
                 exit_reason: Optional[str], costs: Costs) -> Trade:
     gross = (exit_price - pos.entry_price) / pos.r_unit
-    cost = cost_r(pos.entry_price, pos.r_unit, market, costs)
+    cost = cost_r(pos.entry_price, exit_price, pos.r_unit, market, costs)
     return Trade(
         ticker=pos.ticker,
         market=market,
