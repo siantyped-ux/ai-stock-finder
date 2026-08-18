@@ -291,3 +291,33 @@ def test_module_has_no_io_dependencies():
     for banned in ("import history", "import stock_finder", "import yfinance",
                    "import requests", "open(", "subprocess", "csv"):
         assert banned not in src, f"trade_sim 이 {banned} 를 쓰면 안 된다"
+
+
+def test_a_transition_while_holding_does_not_leak_into_a_later_bar():
+    # d4 전환은 A 를 보유 중이라 쓸 수 없다. A 가 d5 에 청산돼도
+    # 그 전환으로 새 포지션을 열어서는 안 된다 - d5 는 전환일이 아니다.
+    rows = [_row("d1", "BUY"), _row("d2", "BUY"), _row("d3", "WATCH"),
+            _row("d4", "BUY"), _row("d5", "BUY")]
+    bars = {d: _bar(d, 100.0, 101.0, 99.0, 100.0)
+            for d in ("d1", "d2", "d3", "d4")}
+    bars["d5"] = _bar("d5", 99.0, 99.0, 90.0, 91.0)      # 손절
+
+    trades = ts.simulate_ticker("X", "US", rows, bars, P, C)
+
+    assert len(trades) == 1
+    assert trades[0].entry_date == "d1"
+    assert trades[0].exit_date == "d5"
+
+
+def test_no_entry_on_the_bar_a_position_closed():
+    # 청산은 장중 손절가에, 진입은 그 봉 시가에 체결된다. 같은 봉에서
+    # 둘 다 일어나면 진입이 자기가 뒤따른다는 청산보다 앞서게 된다.
+    rows = [_row("d1", "BUY"), _row("d2", "HOLD"), _row("d3", "BUY")]
+    bars = {"d1": _bar("d1", 100.0, 101.0, 99.0, 100.0),
+            "d2": _bar("d2", 100.0, 101.0, 99.0, 100.0),
+            "d3": _bar("d3", 99.0, 99.0, 90.0, 91.0)}     # d3 전환 + 손절
+
+    trades = ts.simulate_ticker("X", "US", rows, bars, P, C)
+
+    entries = [t.entry_date for t in trades]
+    assert "d3" not in entries

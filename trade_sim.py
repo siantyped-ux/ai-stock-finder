@@ -152,6 +152,14 @@ def simulate_ticker(ticker: str, market: str, rows: list, bars: dict,
     트레일 계산에 반영되고 bars_held 가 실제 보유 봉 수와 맞는다. 다만
     진입 봉에서는 evaluate 를 돌리지 않는다. 그 봉의 시가에 막 들어갔고,
     같은 봉에서 청산까지 판정하려면 봉 안의 시간 순서를 알아야 한다.
+
+    두 가지 규칙이 더 있다.
+    1. 포지션을 보유 중이라 진입에 쓰지 못한 전환도, 그 봉에서는 반드시
+       소진한다. 그러지 않으면 그 전환이 살아남아 훗날 - 보유 중이던
+       포지션이 청산된 뒤 - 엉뚱한 봉에서 뒤늦게 새 포지션을 연다.
+    2. 같은 봉에서 포지션이 청산됐다면 그 봉에는 새로 진입하지 않는다.
+       청산은 장중 손절가에, 진입은 그 봉 시가에 체결되므로 같은 봉에서
+       둘 다 일어나면 진입이 자신이 뒤따른다는 청산보다 앞서게 된다.
     """
     trades = []
     state = EntryState()
@@ -166,6 +174,7 @@ def simulate_ticker(ticker: str, market: str, rows: list, bars: dict,
             bar = er.Bar(bar.date, bar.open, bar.high, bar.low, bar.close,
                          bar.atr14, row["total"])
 
+        closed_this_bar = False
         if pos is not None and bar is not None:
             decision = er.evaluate(pos, bar, params)
             if decision is not None:
@@ -173,21 +182,24 @@ def simulate_ticker(ticker: str, market: str, rows: list, bars: dict,
                                           decision.price, decision.date,
                                           decision.reason, costs))
                 pos = None
+                closed_this_bar = True
             else:
                 pos = er.advance(pos, bar, params)
                 last_close = bar.close
 
         step = step_entry(state, row["signal"])
         entered = False
-        if step.should_enter and pos is None and bar is not None:
-            if bar.atr14:
-                pos = er.open_position(ticker, row["date"], bar.open,
-                                       bar.atr14, params)
-                pos = er.advance(pos, bar, params)
-                open_source = row["source"]
-                last_close = bar.close
-            # ATR 이 없어 못 들어갔어도 이 전환은 소진한다. 그러지 않으면
-            # 같은 전환으로 다음 봉에 뒤늦게 진입해 버린다.
+        if step.should_enter and bar is not None:
+            if pos is None and not closed_this_bar:
+                if bar.atr14:
+                    pos = er.open_position(ticker, row["date"], bar.open,
+                                           bar.atr14, params)
+                    pos = er.advance(pos, bar, params)
+                    open_source = row["source"]
+                    last_close = bar.close
+            # 실제로 진입했든, 이미 보유 중이거나 방금 청산돼 못
+            # 들어갔든, 봉이 있는 한 이 전환은 소진한다. 그러지 않으면
+            # 같은 전환으로 훗날 뒤늦게 진입해 버린다.
             entered = True
 
         state = consume(step.state) if entered else step.state

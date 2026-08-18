@@ -41,3 +41,32 @@ def test_atr_needs_enough_history():
     # 15봉이면 TR 이 14개지만 그중 마지막은 당일 것이라 쓸 수 없다.
     short = _flat_frame(n=15)
     assert sorted(short.index)[-1].strftime("%Y-%m-%d") not in bt.atr_series(short)
+
+
+def test_run_deduplicates_repeated_ticker_dates(monkeypatch):
+    # 실제 아카이브에 (ticker, date) 중복이 존재한다. 그대로 두면 같은 봉을
+    # 두 번 처리해 진입 봉까지 평가하게 되고 bars_held 가 부풀려진다.
+    import exit_rules as er
+
+    rows = [
+        {"ticker": "X", "date": "2026-01-02", "market": "US", "signal": "BUY",
+         "total": "75", "source": "live"},
+        {"ticker": "X", "date": "2026-01-02", "market": "US", "signal": "BUY",
+         "total": "75", "source": "live"},
+        {"ticker": "X", "date": "2026-01-03", "market": "US", "signal": "BUY",
+         "total": "75", "source": "live"},
+    ]
+    bars = {
+        "2026-01-02": er.Bar("2026-01-02", 100.0, 101.0, 99.0, 100.0,
+                             atr14=2.0, total=None),
+        "2026-01-03": er.Bar("2026-01-03", 100.0, 101.0, 99.0, 100.0,
+                             atr14=2.0, total=None),
+    }
+
+    monkeypatch.setattr(bt, "load_archive", lambda pattern: rows)
+    monkeypatch.setattr(bt, "fetch_bars", lambda ticker: bars)
+
+    result = bt.run()
+
+    assert len(result["trades"]) == 1
+    assert result["trades"][0].bars_held == 2      # 중복이면 3 이 된다

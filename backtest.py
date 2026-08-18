@@ -8,7 +8,6 @@ from __future__ import annotations
 import argparse
 import csv
 import glob
-import os
 from collections import defaultdict
 
 import numpy as np
@@ -92,6 +91,20 @@ def run(pattern: str = "history/*.csv", params: er.Params = None,
     costs = costs or ts.Costs()
 
     rows = load_archive(pattern)
+
+    # 아카이브에 (ticker, date) 중복이 실제로 존재한다. 그대로 두면
+    # simulate_ticker 가 같은 봉을 두 번 처리해 진입 봉까지 평가하게 되고
+    # bars_held 가 부풀려진다. 먼저 나온 행을 남긴다.
+    seen = set()
+    deduped = []
+    for r in rows:
+        key = (r["ticker"], r["date"])
+        if key in seen:
+            continue
+        seen.add(key)
+        deduped.append(r)
+    rows = deduped
+
     by_ticker = defaultdict(list)
     for r in rows:
         by_ticker[r["ticker"]].append(r)
