@@ -37,6 +37,7 @@
 | 적재 범위 | 스코어 + 종가·거래량·ATR·시가총액 | 시총과 유니버스 구성원은 시점이 지나면 복원 불가. 사이징(ATR)과 유동성 필터(거래량)는 백테스트 시 반드시 필요하다 |
 | 소급 적재 | 함 (손상본 제외) | git에 스냅샷 23개가 남아 있어 검증 시작점을 3주 앞당길 수 있다 |
 | 구현 구조 | `history.py` 모듈 분리 | `stock_finder.py`가 이미 1,500줄이다. 스키마와 기록 책임을 한 곳에 모아 단독 테스트가 가능하게 한다 |
+| ATR·평균거래량 산출 위치 | `history.py` | `stock_finder.py`에 두면 `backfill_history.py`가 이를 쓰려고 `stock_finder`를 임포트하고 `stock_finder`는 `history`를 임포트해 순환이 생긴다. 이력 행의 필드 산출은 이력 모듈의 책임으로 둔다 |
 
 ### 검토했으나 채택하지 않은 대안
 
@@ -51,7 +52,7 @@
 ## 구조
 
 ```
-history.py              신규 · 스키마 정의 + CSV 기록 (단일 책임)
+history.py              신규 · 스키마 정의 + 행 필드 산출(ATR 등) + CSV 기록
 backfill_history.py     신규 · git 스냅샷 소급 적재 (1회성 스크립트)
 stock_finder.py         수정 · 이력 행 추출 후 history.record() 호출
 tests/test_history.py   신규 · pytest 3건
@@ -136,13 +137,16 @@ CI: git add dashboard_data.js history/
 2. 각 blob에서 `window.LIVE_STOCKS`와 `generated_at`을 파싱한다.
    `generated_at`은 CI 러너에서 생성된 naive UTC 값이므로 UTC로 간주해 KST로 변환한다.
 3. 종목 수가 전체 스냅샷 중앙값의 50% 미만인 스냅샷은 손상으로 보고 제외한다.
-   현재 데이터에서는 2026-08-03(133종목), 2026-08-18(773종목)이 걸러진다.
+   현재 데이터에서는 2026-07-31(3종목), 2026-08-03(133종목), 2026-08-18(773종목)
+   3건이 걸러진다.
 4. 등장한 고유 티커에 대해 1년 일봉을 **티커당 1회만** 받는다 (약 1,200회 호출).
    `info`는 받지 않으므로 정규 스캔보다 빠르다.
 5. 각 스냅샷 날짜에 해당하는 봉을 잘라 `close`·`volume`·`avg_vol20`·`atr14`를 채운다.
 6. `market_cap`은 공란, `source=backfill`로 기록한다.
 
-같은 날짜에 스냅샷이 여러 개면 가장 늦은 것을 채택한다.
+손상본을 먼저 제외한 뒤, 같은 날짜에 스냅샷이 여러 개면 가장 늦은 것을 채택한다.
+순서가 중요하다. 중복 제거를 먼저 하면 그날의 마지막 실행이 손상본일 때
+(2026-08-18이 실제로 그랬다) 정상 스냅샷이 손상본에 가려진다.
 이미 존재하는 `history/*.csv`는 덮어쓰지 않는다 (재실행 안전).
 
 ## 에러 처리
@@ -186,13 +190,13 @@ gzip 압축 후 `.git` 기준 연 15MB 내외로 예상한다. 현재 `.git`은 
 | `history.py` | 신규 |
 | `backfill_history.py` | 신규 |
 | `tests/test_history.py` | 신규 |
-| `stock_finder.py` | `_scan_one` 반환값 변경, ATR 헬퍼 추가, 가드 뒤 기록 호출 |
+| `stock_finder.py` | `_scan_one` 반환값 변경, 가드를 순수 함수로 분리, 가드 뒤 기록 호출 |
 | `.github/workflows/scan.yml` | `git add`에 `history/` 추가 |
 | `requirements.txt` | `pytest` 추가 |
 
 ## 완료 기준
 
 - 정규 스캔 1회 실행 시 `history/<KST날짜>.csv`가 생성되고 행 수가 수집 종목 수와 일치한다.
-- 소급 적재 실행 후 손상 스냅샷 2건을 제외한 날짜별 CSV가 생성된다.
+- 소급 적재 실행 후 손상 스냅샷 3건을 제외한 날짜별 CSV가 생성된다.
 - pytest 3건 통과.
 - CI 스캔 성공 후 `history/` 파일이 리포에 커밋된다.
