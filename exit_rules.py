@@ -85,3 +85,35 @@ def open_position(ticker: str, date: str, entry_price: float,
         high_since_entry=entry_price,
         bars_held=0,
     )
+
+
+def current_stop(position: Position, params: Params,
+                 atr: Optional[float]) -> float:
+    """현재 유효한 손절선.
+
+    고점이 진입가+1R 에 닿으면 트레일링이 켜진다. 트레일링은 현재 ATR 을 쓴다
+    (Chandelier 표준) — 3개월간 변동성이 크게 바뀌므로 진입 시점 값에 묶어두면
+    뒤로 갈수록 부정확해진다. 손절선은 절대 내려가지 않는다.
+    """
+    if atr is None:
+        return position.initial_stop
+
+    trail_active = position.high_since_entry >= position.entry_price + position.r_unit
+    if not trail_active:
+        return position.initial_stop
+
+    trailed = position.high_since_entry - params.trail_atr_mult * atr
+    return max(position.initial_stop, trailed)
+
+
+def advance(position: Position, bar: Bar) -> Position:
+    """봉 하나를 소화하고 포지션 상태를 갱신한다.
+
+    반드시 evaluate 다음에 호출할 것. 먼저 호출하면 오늘 고가로 계산한 손절선이
+    오늘 장중에 체결되는 셈이 되어 룩어헤드가 된다.
+    """
+    return replace(
+        position,
+        high_since_entry=max(position.high_since_entry, bar.high),
+        bars_held=position.bars_held + 1,
+    )
