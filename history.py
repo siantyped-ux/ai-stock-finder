@@ -8,7 +8,6 @@ from __future__ import annotations
 import csv
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
-from typing import Optional
 
 KST = timezone(timedelta(hours=9))
 
