@@ -34,11 +34,14 @@ jobs:
     # push 이벤트에서는 스캔을 건너뛰고 배포만 수행 (schedule/workflow_dispatch에서만 스캔)
     if: github.event_name != 'push'
     runs-on: ubuntu-latest
-    timeout-minutes: 90
+    timeout-minutes: 120
 
     steps:
       - name: Checkout repository
         uses: actions/checkout@v7
+        with:
+          # rebase가 필요하므로 shallow clone 대신 전체 히스토리를 가져옴
+          fetch-depth: 0
 
       - name: Setup Python 3.11
         uses: actions/setup-python@v7
@@ -62,7 +65,8 @@ jobs:
             --market ${{ github.event.inputs.market || 'ALL' }} \
             --min-us-cap ${{ github.event.inputs.min_us_cap || '1e10' }} \
             --min-kr-cap ${{ github.event.inputs.min_kr_cap || '3e11' }} \
-            --sleep 0.2
+            --sleep 0.2 \
+            --workers 6
 
       - name: Commit and push dashboard_data.js
         run: |
@@ -73,7 +77,14 @@ jobs:
             echo "No changes to commit"
           else
             git commit -m "Auto scan: $(date -u +'%Y-%m-%d %H:%M UTC')"
-            git push
+            # 스캔 중 main이 앞으로 갔을 수 있으므로 rebase 후 푸시 (충돌 시 최대 3회 재시도)
+            for i in 1 2 3; do
+              git pull --rebase origin main && git push && exit 0
+              echo "push retry $i"
+              sleep 5
+            done
+            echo "::error::Failed to push dashboard_data.js after 3 attempts"
+            exit 1
           fi
 
       - name: Upload scan log as artifact

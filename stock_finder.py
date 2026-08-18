@@ -24,7 +24,9 @@ import json
 import logging
 import os
 import sys
+import threading
 import time
+from concurrent.futures import ThreadPoolExecutor, as_completed
 from datetime import datetime, timedelta
 from typing import Optional
 
@@ -1277,7 +1279,9 @@ def parse_args():
     p.add_argument("--test", action="store_true",
                    help="테스트 모드 (기존 34개 폴백 종목)")
     p.add_argument("--sleep", type=float, default=0.3,
-                   help="종목간 대기 (초, 기본 0.3)")
+                   help="종목간 대기 (초, 기본 0.3 · 워커 스레드별로 적용)")
+    p.add_argument("--workers", type=int, default=6,
+                   help="동시 조회 스레드 수 (기본 6, 1=순차 실행)")
     p.add_argument("--all", action="store_true",
                    help="시총 필터 없이 진짜 모든 종목 (매우 오래 걸림)")
     return p.parse_args()
@@ -1334,7 +1338,7 @@ def main():
 
     n_us = sum(1 for s in universe if s[2] == "US")
     n_kr = sum(1 for s in universe if s[2] == "KR")
-    est_sec = len(universe) * (2.5 + args.sleep)
+    est_sec = len(universe) * (2.5 + args.sleep) / max(1, args.workers)
     est_min = est_sec / 60
     print(f"    총 {len(universe)}종목 (US: {n_us}, KR: {n_kr})")
     print(f"    예상 소요시간: 약 {est_min:.1f}분 ({est_sec/3600:.1f}시간)")
@@ -1357,56 +1361,91 @@ def main():
     start_time = time.time()
     total_n = len(universe)
 
-    for i, (ticker, name, market, sector) in enumerate(universe, 1):
-        # 진행률 표시 (100종목마다 상세, 그 외 간단)
-        elapsed = time.time() - start_time
-        rate = i / elapsed if elapsed > 0 else 0
-        eta = (total_n - i) / rate if rate > 0 else 0
-        pct = i / total_n * 100
+    n_workers = max(1, args.workers)
 
-        if total_n > 100 and i % 25 != 0 and i != total_n:
-            # 대량 스캔 시 간략 표시
-            print(f"\r[{i:5d}/{total_n}] {pct:5.1f}% · ETA {eta/60:5.1f}분 · {ticker:12s}",
-                  end="", flush=True)
-        else:
-            print(f"\r[{i:5d}/{total_n}] {pct:5.1f}% · ETA {eta/60:5.1f}분 · {ticker:12s} ({name[:25]})...",
-                  flush=True)
+    # 진행 상황 공유 상태 (워커 스레드에서 갱신)
+    state = {"done": 0}
+    state_lock = threading.Lock()
+    collected = []   # (universe 인덱스, 결과) — 마지막에 원래 순서로 정렬
 
-        data = fetch_stock(ticker)
-        if not data:
-            continue
+    def _scan_one(ticker: str, name: str, market: str, sector: str):
+        """종목 1개 스코어링. 실패 시 None 반환. (워커 스레드에서 실행)"""
+        try:
+            data = fetch_stock(ticker)
+            if not data:
+                return None
 
-        hist = data["hist"]
-        info = data["info"]
+            hist = data["hist"]
+            info = data["info"]
 
-        tech, tech_r, r3m = calc_tech_score(hist)
-        macro, macro_r, regime = calc_macro_score(vix, dxy, us10y, sector, fred_data)
-        value, value_r = calc_value_score(info, sector)
-        filing, filing_r = calc_filing_score(info, hist, ticker, market)
+            tech, tech_r, r3m = calc_tech_score(hist)
+            macro, macro_r, regime = calc_macro_score(vix, dxy, us10y, sector, fred_data)
+            value, value_r = calc_value_score(info, sector)
+            filing, filing_r = calc_filing_score(info, hist, ticker, market)
 
-        total = calc_total(tech, macro, filing, value)
-        cons = calc_consensus(tech, macro, filing, value)
-        signal = calc_signal(total, cons)
-        hitl = calc_hitl(signal, total, tech)
-        ev, target = calc_ev_and_target(tech, macro, filing, value, r3m)
+            total = calc_total(tech, macro, filing, value)
+            cons = calc_consensus(tech, macro, filing, value)
+            signal = calc_signal(total, cons)
+            hitl = calc_hitl(signal, total, tech)
+            ev, target = calc_ev_and_target(tech, macro, filing, value, r3m)
 
-        # STRONG_BUY/BUY/WATCH만 결과에 포함하되, 전체는 유지 옵션 필요 시 조정
-        results.append({
-            "t": ticker, "n": name, "m": market, "sec": sector,
-            "tech": tech, "macro": macro, "filing": filing, "value": value,
-            "total": total, "consensus": cons, "signal": signal,
-            "ev": ev, "target": target, "hitl": hitl,
-            "reasons": {
-                "tech": tech_r, "macro": macro_r,
-                "filing": filing_r, "value": value_r,
+            return {
+                "t": ticker, "n": name, "m": market, "sec": sector,
+                "tech": tech, "macro": macro, "filing": filing, "value": value,
+                "total": total, "consensus": cons, "signal": signal,
+                "ev": ev, "target": target, "hitl": hitl,
+                "reasons": {
+                    "tech": tech_r, "macro": macro_r,
+                    "filing": filing_r, "value": value_r,
+                }
             }
-        })
+        except Exception as e:
+            print(f"[!] {ticker}: 스코어링 실패 {str(e)[:60]}")
+            return None
+        finally:
+            # 워커별 쓰로틀 (API rate limit 방어)
+            time.sleep(args.sleep)
 
-        # 중간 저장 (200종목마다) - 크래시 방지
-        if i % 200 == 0 and i < total_n:
-            _save_intermediate(results, vix, dxy, us10y, fred_data)
+    print(f"[*] 스캔 시작 (동시 {n_workers} 스레드)")
 
-        time.sleep(args.sleep)
+    with ThreadPoolExecutor(max_workers=n_workers) as pool:
+        futures = {
+            pool.submit(_scan_one, ticker, name, market, sector): (i, ticker, name)
+            for i, (ticker, name, market, sector) in enumerate(universe, 1)
+        }
+
+        for fut in as_completed(futures):
+            i, ticker, name = futures[fut]
+            res = fut.result()
+
+            with state_lock:
+                state["done"] += 1
+                done = state["done"]
+                if res:
+                    collected.append((i, res))
+                # 중간 저장 (200종목마다) - 크래시 방지
+                snapshot = None
+                if done % 200 == 0 and done < total_n:
+                    snapshot = [r for _, r in sorted(collected, key=lambda x: x[0])]
+
+            elapsed = time.time() - start_time
+            rate = done / elapsed if elapsed > 0 else 0
+            eta = (total_n - done) / rate if rate > 0 else 0
+            pct = done / total_n * 100
+
+            if total_n > 100 and done % 25 != 0 and done != total_n:
+                # 대량 스캔 시 간략 표시
+                print(f"\r[{done:5d}/{total_n}] {pct:5.1f}% · ETA {eta/60:5.1f}분 · {ticker:12s}",
+                      end="", flush=True)
+            else:
+                print(f"\r[{done:5d}/{total_n}] {pct:5.1f}% · ETA {eta/60:5.1f}분 · {ticker:12s} ({name[:25]})...",
+                      flush=True)
+
+            if snapshot is not None:
+                _save_intermediate(snapshot, vix, dxy, us10y, fred_data)
+
+    # 스레드 완료 순서가 아니라 유니버스 원래 순서로 복원
+    results = [r for _, r in sorted(collected, key=lambda x: x[0])]
 
     print()  # 진행률 라인 개행
 
