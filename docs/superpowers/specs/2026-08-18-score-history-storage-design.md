@@ -63,16 +63,16 @@ history/YYYY-MM-DD.csv  산출물 · 하루 1파일
 23개 열, 순서 고정:
 
 ```
-scan_ts_utc, date, ticker, name, market, sector,
+scan_ts_kst, date, ticker, name, market, sector,
 bar_date, close, volume, avg_vol20, atr14, market_cap,
 tech, macro, filing, value, total, consensus, signal, ev, target, hitl, source
 ```
 
 | 열 | 설명 |
 |---|---|
-| `scan_ts_utc` | 스캔 시작 시각 (ISO 8601, UTC) |
-| `date` | 스캔의 UTC 날짜. 파일명과 동일 |
-| `bar_date` | 스코어링에 사용된 마지막 봉의 날짜 |
+| `scan_ts_kst` | 스캔 시작 시각 (ISO 8601, KST · `+09:00` 오프셋 명시) |
+| `date` | 스캔의 **KST 날짜**. 파일명과 동일 |
+| `bar_date` | 스코어링에 사용된 마지막 봉의 **거래소 세션 날짜** (변환하지 않음) |
 | `close` | `bar_date`의 종가 |
 | `volume` | `bar_date`의 거래량 |
 | `avg_vol20` | 최근 20봉 평균 거래량 (유동성 필터용) |
@@ -82,11 +82,26 @@ tech, macro, filing, value, total, consensus, signal, ev, target, hitl, source
 | `hitl` | 기존 HITL 플래그 |
 | `source` | `live` 또는 `backfill` |
 
-### 날짜 열이 두 개인 이유
+### 날짜 기준: KST
 
-스캔은 UTC 21:00(= KST 익일 06:00)에 실행되므로 UTC 날짜와 KST 날짜가 하루 어긋난다.
-파일명·`date`는 UTC로 통일하되, 실제 분석은 `bar_date`(마지막 거래일) 기준으로 조인한다.
-`scan_ts_utc`는 같은 UTC 날짜에 여러 번 실행된 경우를 구분한다.
+스캔 시각 관련 열(`scan_ts_kst`, `date`)과 파일명은 **모두 KST 기준**이다.
+스캔은 UTC 21:00에 실행되는데 이는 KST로 익일 06:00이므로, UTC를 쓰면 파일명이 하루
+앞선 날짜가 되어 사람이 읽을 때 계속 어긋난다. KST 기준이면 "KST 06:00에 돈 스캔"과
+"그날짜 CSV"가 직관적으로 일치한다.
+
+`scan_ts_kst`는 같은 KST 날짜에 여러 번 실행된 경우를 구분한다.
+
+**구현 주의**: CI 러너의 시스템 시간대는 UTC이고 개발 머신은 KST이므로, naive한
+`datetime.now()`는 실행 환경에 따라 다른 값을 낸다. 반드시
+`datetime.now(timezone.utc).astimezone(timezone(timedelta(hours=9)))`로 명시 변환한다.
+
+#### `bar_date`만 예외인 이유
+
+`bar_date`는 시각이 아니라 거래소 세션의 이름표다. 미국 세션 `2026-08-17`은 KST로
+8/17 22:30 ~ 8/18 05:00에 걸쳐 있어 단일 KST 날짜로 환산할 수 없고, 환산하면 거래소가
+쓰는 날짜와 어긋나 다른 데이터 소스와 조인이 깨진다. 따라서 `bar_date`는 거래소가
+부여한 세션 날짜를 그대로 보존한다 (미국은 ET 기준, 한국은 KST 기준).
+수익률 계산은 이 열로 조인한다.
 
 ### `source` 열이 필요한 이유
 
@@ -100,7 +115,7 @@ tech, macro, filing, value, total, consensus, signal, ev, target, hitl, source
    ↓
 완결성 가드 — 수집률 < --min-success 이면 exit 1
    ↓
-history/YYYY-MM-DD.csv 기록          ← 가드 통과분만
+history/YYYY-MM-DD.csv 기록 (KST 날짜)  ← 가드 통과분만
    ↓
 dashboard_data.js 기록
    ↓
@@ -110,7 +125,7 @@ CI: git add dashboard_data.js history/
 가드보다 뒤에 기록하는 것이 핵심이다. 773종목짜리 손상 스캔이 이력에 영구 기록되면
 몇 달 뒤 백테스트 결과가 오염되는데, 그 시점에는 원인 추적이 사실상 불가능하다.
 
-같은 UTC 날짜에 두 번 실행되면 나중 실행이 파일을 덮어쓴다. 가드를 통과한 결과만
+같은 KST 날짜에 두 번 실행되면 나중 실행이 파일을 덮어쓴다. 가드를 통과한 결과만
 기록되므로 나중 것이 항상 유효하다.
 
 ## 소급 적재
@@ -119,6 +134,7 @@ CI: git add dashboard_data.js history/
 
 1. `git log --format=%H -- dashboard_data.js`로 스냅샷 커밋을 순회한다.
 2. 각 blob에서 `window.LIVE_STOCKS`와 `generated_at`을 파싱한다.
+   `generated_at`은 CI 러너에서 생성된 naive UTC 값이므로 UTC로 간주해 KST로 변환한다.
 3. 종목 수가 전체 스냅샷 중앙값의 50% 미만인 스냅샷은 손상으로 보고 제외한다.
    현재 데이터에서는 2026-08-03(133종목), 2026-08-18(773종목)이 걸러진다.
 4. 등장한 고유 티커에 대해 1년 일봉을 **티커당 1회만** 받는다 (약 1,200회 호출).
@@ -176,7 +192,7 @@ gzip 압축 후 `.git` 기준 연 15MB 내외로 예상한다. 현재 `.git`은 
 
 ## 완료 기준
 
-- 정규 스캔 1회 실행 시 `history/<UTC날짜>.csv`가 생성되고 행 수가 수집 종목 수와 일치한다.
+- 정규 스캔 1회 실행 시 `history/<KST날짜>.csv`가 생성되고 행 수가 수집 종목 수와 일치한다.
 - 소급 적재 실행 후 손상 스냅샷 2건을 제외한 날짜별 CSV가 생성된다.
 - pytest 3건 통과.
 - CI 스캔 성공 후 `history/` 파일이 리포에 커밋된다.
