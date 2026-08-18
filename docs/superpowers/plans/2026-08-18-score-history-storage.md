@@ -741,11 +741,11 @@ from datetime import datetime, timedelta, timezone
 import history
 
 KST = history.KST
-CORRUPT_RATIO = 0.5   # 중앙값 대비 이 비율 미만이면 손상으로 본다
+CORRUPT_RATIO = 0.8   # 중앙값 대비 이 비율 미만이면 손상으로 본다
 
 
 def drop_corrupt(snaps: list[dict]) -> list[dict]:
-    """종목 수가 전체 중앙값의 50% 미만인 스냅샷을 제거한다."""
+    """종목 수가 전체 중앙값의 CORRUPT_RATIO(80%) 미만인 스냅샷을 제거한다."""
     if not snaps:
         return []
     median = statistics.median(s["count"] for s in snaps)
