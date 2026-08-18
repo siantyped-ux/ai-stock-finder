@@ -104,3 +104,132 @@ def test_advance_keeps_the_higher_high():
 
     assert got.high_since_entry == 120.0
     assert got.bars_held == 1
+
+
+def test_stop_fills_at_the_stop_when_low_touches_it():
+    pos = _pos()
+    bar = er.Bar("2026-08-20", open=99.0, high=100.0, low=94.0, close=95.0,
+                 atr14=2.0, total=75)
+
+    got = er.evaluate(pos, bar, P)
+
+    assert got.reason == "STOP"
+    assert got.price == 94.0
+    assert got.date == "2026-08-20"
+
+
+def test_stop_fills_at_the_open_on_a_gap_down():
+    # 시가가 이미 손절선 아래면 그 가격에 체결된다 — 슬리피지.
+    pos = _pos()
+    bar = er.Bar("2026-08-20", open=90.0, high=92.0, low=88.0, close=91.0,
+                 atr14=2.0, total=75)
+
+    got = er.evaluate(pos, bar, P)
+
+    assert got.reason == "STOP"
+    assert got.price == 90.0
+
+
+def test_no_exit_when_nothing_triggers():
+    pos = _pos()
+    bar = er.Bar("2026-08-20", open=101.0, high=103.0, low=99.0, close=102.0,
+                 atr14=2.0, total=75)
+
+    assert er.evaluate(pos, bar, P) is None
+
+
+def test_trail_exit_is_labelled_trail_not_stop():
+    pos = _pos(high_since_entry=120.0)   # 손절선 = 114
+    bar = er.Bar("2026-08-20", open=118.0, high=119.0, low=113.0, close=115.0,
+                 atr14=2.0, total=75)
+
+    got = er.evaluate(pos, bar, P)
+
+    assert got.reason == "TRAIL"
+    assert got.price == 114.0
+
+
+def test_time_exit_fills_at_the_open():
+    pos = _pos(bars_held=60)
+    bar = er.Bar("2026-08-20", open=105.0, high=106.0, low=104.0, close=105.5,
+                 atr14=2.0, total=75)
+
+    got = er.evaluate(pos, bar, P)
+
+    assert got.reason == "TIME"
+    assert got.price == 105.0
+
+
+def test_signal_exit_fills_at_the_open():
+    pos = _pos()
+    bar = er.Bar("2026-08-20", open=105.0, high=106.0, low=104.0, close=105.5,
+                 atr14=2.0, total=59)
+
+    got = er.evaluate(pos, bar, P)
+
+    assert got.reason == "SIGNAL"
+    assert got.price == 105.0
+
+
+def test_hysteresis_holds_between_entry_and_exit_thresholds():
+    # 진입 70 / 청산 60 사이에서는 아무 일도 일어나지 않는다.
+    pos = _pos()
+    bar = er.Bar("2026-08-20", open=105.0, high=106.0, low=104.0, close=105.5,
+                 atr14=2.0, total=65)
+
+    assert er.evaluate(pos, bar, P) is None
+
+
+def test_signal_exit_at_exactly_the_threshold_does_not_fire():
+    pos = _pos()
+    bar = er.Bar("2026-08-20", open=105.0, high=106.0, low=104.0, close=105.5,
+                 atr14=2.0, total=60)
+
+    assert er.evaluate(pos, bar, P) is None
+
+
+def test_time_beats_stop_on_the_same_bar():
+    # 둘 다 발동해도 TIME 은 개장 전에 결정돼 시가에 나간다.
+    pos = _pos(bars_held=60)
+    bar = er.Bar("2026-08-20", open=99.0, high=100.0, low=90.0, close=91.0,
+                 atr14=2.0, total=75)
+
+    got = er.evaluate(pos, bar, P)
+
+    assert got.reason == "TIME"
+    assert got.price == 99.0
+
+
+def test_signal_beats_stop_on_the_same_bar():
+    pos = _pos()
+    bar = er.Bar("2026-08-20", open=99.0, high=100.0, low=90.0, close=91.0,
+                 atr14=2.0, total=50)
+
+    got = er.evaluate(pos, bar, P)
+
+    assert got.reason == "SIGNAL"
+    assert got.price == 99.0
+
+
+def test_missing_total_skips_signal_but_keeps_stop():
+    pos = _pos()
+    bar = er.Bar("2026-08-20", open=99.0, high=100.0, low=90.0, close=91.0,
+                 atr14=2.0, total=None)
+
+    got = er.evaluate(pos, bar, P)
+
+    assert got.reason == "STOP"
+
+
+def test_todays_high_does_not_set_todays_stop():
+    # 룩어헤드 차단. 오늘 고가 120 이 트레일을 켜더라도 오늘 손절선은
+    # 어제까지의 고점(=진입가)으로 계산된 94 여야 한다. 저가 95 는 94 를 안 건드린다.
+    pos = _pos()
+    bar = er.Bar("2026-08-20", open=101.0, high=120.0, low=95.0, close=119.0,
+                 atr14=2.0, total=75)
+
+    assert er.evaluate(pos, bar, P) is None
+
+    after = er.advance(pos, bar)
+    assert after.high_since_entry == 120.0
+    assert er.current_stop(after, P, atr=2.0) == 114.0

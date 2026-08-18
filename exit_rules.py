@@ -117,3 +117,27 @@ def advance(position: Position, bar: Bar) -> Position:
         high_since_entry=max(position.high_since_entry, bar.high),
         bars_held=position.bars_held + 1,
     )
+
+
+def evaluate(position: Position, bar: Bar,
+             params: Params) -> Optional[ExitDecision]:
+    """이 봉에서 청산이 발생하는지 판정한다. 없으면 None.
+
+    순서는 하루 안의 시간 순서다. TIME 과 SIGNAL 은 개장 전에 결정된다 —
+    bars_held 는 결정론적이고 total 은 KST 07:00 스캔에서 이미 나와 있다.
+    따라서 둘 다 시가 시장가로 나가고, 장중에 걸린 손절보다 먼저 체결된다.
+    """
+    if position.bars_held >= params.max_hold_days:
+        return ExitDecision("TIME", bar.open, bar.date)
+
+    if bar.total is not None and bar.total < params.exit_total:
+        return ExitDecision("SIGNAL", bar.open, bar.date)
+
+    stop = current_stop(position, params, bar.atr14)
+    if bar.low <= stop:
+        trailing = stop > position.initial_stop
+        # 갭하락으로 시가가 이미 손절선 아래면 그 가격에 체결된다.
+        fill = min(bar.open, stop)
+        return ExitDecision("TRAIL" if trailing else "STOP", fill, bar.date)
+
+    return None
