@@ -327,3 +327,10 @@ def test_advance_honours_a_non_default_trail_multiplier():
 
     assert after.stop == 136.0          # 140 - 2.0 * 2.0, 기본값이면 134
     assert er.current_stop(after, p2, atr=2.0) == 136.0
+
+
+def test_all_dataclasses_are_frozen():
+    # 백테스트 루프가 Position 을 봉마다 넘겨 쓰므로, 가변이 되면 한 트레이드의
+    # 상태 변경이 다른 트레이드로 샐 수 있다.
+    for cls in (er.Params, er.Bar, er.Position, er.ExitDecision):
+        assert cls.__dataclass_params__.frozen, cls.__name__

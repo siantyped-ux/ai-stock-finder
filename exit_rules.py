@@ -34,6 +34,11 @@ class Bar:
     """하루치 시세와 그날의 스코어.
 
     atr14 가 없으면 트레일링을 적용하지 않고, total 이 없으면 SIGNAL 판정을 건너뛴다.
+
+    atr14 와 total 은 둘 다 이 봉이 열리기 전에 알 수 있는 값이어야 한다.
+    atr14 는 전일 종가까지로 계산한 ATR 을 넣을 것 - 당일 고저를 포함해 계산하면
+    개장 전에 정해져 있어야 할 손절선이 미래 정보를 쓰게 되어, 이 모듈이 순수해도
+    호출자 쪽에서 룩어헤드가 다시 생긴다.
     """
     date: str
     open: float
@@ -134,7 +139,6 @@ def advance(position: Position, bar: Bar, params: Params) -> Position:
         stop=current_stop(with_new_high, params, bar.atr14),
         bars_held=position.bars_held + 1,
     )
-
 
 
 def evaluate(position: Position, bar: Bar,

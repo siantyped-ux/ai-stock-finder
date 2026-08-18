@@ -1,6 +1,6 @@
 # 청산 규칙 모듈 Implementation Plan
 
-> **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
+> **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [x]`) syntax for tracking.
 
 **Goal:** 진입한 포지션이 언제 어떤 가격에 청산되는지를 순수 함수로 정의해, 2단계 백테스트와 4단계 실거래가 같은 규칙을 쓰도록 한다.
 
@@ -36,7 +36,7 @@
 - Create: `exit_rules.py`
 - Test: `tests/test_exit_rules.py`
 
-- [ ] **Step 1: 실패하는 테스트 작성**
+- [x] **Step 1: 실패하는 테스트 작성**
 
 `tests/test_exit_rules.py` 신규 생성:
 
@@ -90,12 +90,12 @@ def test_open_position_rejects_negative_atr():
                          atr_at_entry=-1.0, params=P)
 ```
 
-- [ ] **Step 2: 테스트 실패 확인**
+- [x] **Step 2: 테스트 실패 확인**
 
 Run: `python -m pytest tests/test_exit_rules.py -v`
 Expected: FAIL — `ModuleNotFoundError: No module named 'exit_rules'`
 
-- [ ] **Step 3: exit_rules.py 구현**
+- [x] **Step 3: exit_rules.py 구현**
 
 `exit_rules.py` 신규 생성:
 
@@ -189,12 +189,12 @@ def open_position(ticker: str, date: str, entry_price: float,
     )
 ```
 
-- [ ] **Step 4: 테스트 통과 확인**
+- [x] **Step 4: 테스트 통과 확인**
 
 Run: `python -m pytest tests/test_exit_rules.py -v`
 Expected: 5 passed
 
-- [ ] **Step 5: 커밋**
+- [x] **Step 5: 커밋**
 
 ```bash
 git add exit_rules.py tests/test_exit_rules.py
@@ -209,7 +209,7 @@ git commit -m "Add exit rule data model and position entry"
 - Modify: `exit_rules.py`
 - Modify: `tests/test_exit_rules.py`
 
-- [ ] **Step 1: 실패하는 테스트 추가**
+- [x] **Step 1: 실패하는 테스트 추가**
 
 `tests/test_exit_rules.py` 끝에 추가:
 
@@ -273,12 +273,12 @@ def test_advance_keeps_the_higher_high():
     assert got.bars_held == 1
 ```
 
-- [ ] **Step 2: 테스트 실패 확인**
+- [x] **Step 2: 테스트 실패 확인**
 
 Run: `python -m pytest tests/test_exit_rules.py -v`
 Expected: FAIL — `AttributeError: module 'exit_rules' has no attribute 'current_stop'`
 
-- [ ] **Step 3: 구현**
+- [x] **Step 3: 구현**
 
 `exit_rules.py`의 `open_position` 아래에 추가:
 
@@ -315,12 +315,12 @@ def advance(position: Position, bar: Bar) -> Position:
     )
 ```
 
-- [ ] **Step 4: 테스트 통과 확인**
+- [x] **Step 4: 테스트 통과 확인**
 
 Run: `python -m pytest tests/test_exit_rules.py -v`
 Expected: 12 passed
 
-- [ ] **Step 5: 커밋**
+- [x] **Step 5: 커밋**
 
 ```bash
 git add exit_rules.py tests/test_exit_rules.py
@@ -335,7 +335,7 @@ git commit -m "Compute the trailing stop and advance position state"
 - Modify: `exit_rules.py`
 - Modify: `tests/test_exit_rules.py`
 
-- [ ] **Step 1: 실패하는 테스트 추가**
+- [x] **Step 1: 실패하는 테스트 추가**
 
 `tests/test_exit_rules.py` 끝에 추가:
 
@@ -469,12 +469,12 @@ def test_todays_high_does_not_set_todays_stop():
     assert er.current_stop(after, P, atr=2.0) == 114.0
 ```
 
-- [ ] **Step 2: 테스트 실패 확인**
+- [x] **Step 2: 테스트 실패 확인**
 
 Run: `python -m pytest tests/test_exit_rules.py -v`
 Expected: FAIL — `AttributeError: module 'exit_rules' has no attribute 'evaluate'`
 
-- [ ] **Step 3: 구현**
+- [x] **Step 3: 구현**
 
 `exit_rules.py` 끝에 추가:
 
@@ -503,17 +503,17 @@ def evaluate(position: Position, bar: Bar,
     return None
 ```
 
-- [ ] **Step 4: 테스트 통과 확인**
+- [x] **Step 4: 테스트 통과 확인**
 
 Run: `python -m pytest tests/test_exit_rules.py -v`
 Expected: 24 passed
 
-- [ ] **Step 5: 전체 테스트 확인**
+- [x] **Step 5: 전체 테스트 확인**
 
 Run: `python -m pytest tests/ -v`
 Expected: 59 passed (기존 35 + 신규 24)
 
-- [ ] **Step 6: 커밋**
+- [x] **Step 6: 커밋**
 
 ```bash
 git add exit_rules.py tests/test_exit_rules.py
@@ -527,7 +527,7 @@ git commit -m "Decide position exits in open-then-intraday order"
 **Files:**
 - Modify: `tests/test_exit_rules.py`
 
-- [ ] **Step 1: 실패하는 테스트 추가**
+- [x] **Step 1: 실패하는 테스트 추가**
 
 `tests/test_exit_rules.py` 끝에 추가. 파일 상단에 `import inspect`를 추가한다:
 
@@ -547,18 +547,18 @@ def test_params_has_exactly_four_fields():
     assert len(dataclasses.fields(er.Params)) == 4
 ```
 
-- [ ] **Step 2: 테스트 실패 확인 또는 통과 확인**
+- [x] **Step 2: 테스트 실패 확인 또는 통과 확인**
 
 Run: `python -m pytest tests/test_exit_rules.py -v`
 Expected: 26 passed — 구현이 이미 조건을 만족하므로 두 테스트 모두 바로 통과한다.
 통과하지 않으면 `exit_rules.py`가 스펙을 위반한 것이므로 모듈을 고친다. 테스트를 고치지 않는다.
 
-- [ ] **Step 3: 전체 테스트 확인**
+- [x] **Step 3: 전체 테스트 확인**
 
 Run: `python -m pytest tests/ -v`
 Expected: 61 passed (기존 35 + 신규 26)
 
-- [ ] **Step 4: 계약 확인 — 스펙의 공개 함수 4개가 모두 존재하는지**
+- [x] **Step 4: 계약 확인 — 스펙의 공개 함수 4개가 모두 존재하는지**
 
 ```bash
 python -c "
@@ -577,7 +577,7 @@ print('1R 도달 시 손절선:', er.current_stop(replace(pos, high_since_entry=
 ```
 Expected: 파라미터 4개가 3.0/3.0/60/60 으로 출력되고, 1R 도달 시 손절선이 정확히 `100.0`
 
-- [ ] **Step 5: 커밋**
+- [x] **Step 5: 커밋**
 
 ```bash
 git add tests/test_exit_rules.py
@@ -588,10 +588,10 @@ git commit -m "Pin the purity and parameter-count contracts"
 
 ## 완료 기준 점검
 
-- [ ] `exit_rules.py`의 네 함수가 순수 함수로 구현되고 테스트가 통과한다 (Task 3 Step 5, Task 4 Step 3)
-- [ ] 파라미터는 정확히 4개이며 기본값이 코드에 명시돼 있다 (Task 4 Step 1, Step 4)
-- [ ] 모듈이 `history.py`·`stock_finder.py`를 임포트하지 않는다 (Task 4 Step 1)
-- [ ] 스펙의 테스트 11개 항목이 모두 커버된다:
+- [x] `exit_rules.py`의 네 함수가 순수 함수로 구현되고 테스트가 통과한다 (Task 3 Step 5, Task 4 Step 3)
+- [x] 파라미터는 정확히 4개이며 기본값이 코드에 명시돼 있다 (Task 4 Step 1, Step 4)
+- [x] 모듈이 `history.py`·`stock_finder.py`를 임포트하지 않는다 (Task 4 Step 1)
+- [x] 스펙의 테스트 11개 항목이 모두 커버된다:
   STOP 체결·갭하락(Task 3) · 트레일 본전이동(Task 2) · 트레일 하한(Task 2) ·
   TIME(Task 3) · SIGNAL(Task 3) · 히스테리시스(Task 3) · TIME>STOP(Task 3) ·
   SIGNAL>STOP(Task 3) · 룩어헤드(Task 3) · 결측(Task 2·3) · 입력검증(Task 1)
