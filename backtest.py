@@ -83,3 +83,109 @@ def fetch_bars(ticker: str) -> dict:
             atr14=atrs.get(date),
         )
     return bars
+
+
+def run(pattern: str = "history/*.csv", params: er.Params = None,
+        costs: ts.Costs = None) -> dict:
+    """아카이브 전체를 시뮬레이션하고 트레이드·통계·커버리지를 돌려준다."""
+    params = params or er.Params()
+    costs = costs or ts.Costs()
+
+    rows = load_archive(pattern)
+    by_ticker = defaultdict(list)
+    for r in rows:
+        by_ticker[r["ticker"]].append(r)
+
+    # 한 번이라도 BUY 였던 티커만 시세를 받는다.
+    candidates = {t for t, rs in by_ticker.items()
+                  if any(r["signal"] in ts.BUY_SIGNALS for r in rs)}
+
+    trades, failed = [], []
+    for ticker in sorted(candidates):
+        bars = fetch_bars(ticker)
+        if not bars:
+            failed.append(ticker)
+            continue
+        rs = by_ticker[ticker]
+        market = rs[0]["market"]
+        prepared = [{"date": r["date"], "signal": r["signal"],
+                     "total": int(r["total"]) if r["total"] else None,
+                     "source": r["source"]} for r in rs]
+        trades.extend(ts.simulate_ticker(ticker, market, prepared, bars,
+                                         params, costs))
+
+    dates = sorted({r["date"] for r in rows})
+    sources = [r["source"] for r in rows]
+    return {
+        "trades": trades,
+        "summary": ts.summarize(trades),
+        "dates": dates,
+        "live_rows": sum(1 for s in sources if s == "live"),
+        "backfill_rows": sum(1 for s in sources if s == "backfill"),
+        "candidates": sorted(candidates),
+        "failed": failed,
+    }
+
+
+def report(result: dict) -> None:
+    """데이터 출처를 가장 먼저 출력한다.
+
+    이 경고가 없으면 몇 달 뒤 결과만 보고 시그널이 검증됐다고 오독한다.
+    backfill 행의 스코어는 그때 대시보드가 보여준 값이지 올바른 값이 아니다.
+    """
+    dates, s = result["dates"], result["summary"]
+    live, back = result["live_rows"], result["backfill_rows"]
+
+    print("=" * 60)
+    print("[데이터 커버리지]")
+    print(f"  아카이브 {len(dates)}일 ({dates[0]} ~ {dates[-1]})")
+    print(f"  source: backfill {back}행 / live {live}행")
+    if live == 0:
+        print("  !! 전부 backfill 이다. 이 스코어는 미확정 봉 결함에 오염된")
+        print("     값이므로, 아래 결과는 파이프라인 검증용이며 시그널 성능의")
+        print("     근거가 아니다.")
+    elif back:
+        print(f"  !! backfill 이 섞여 있다 (전체의 {back/(back+live)*100:.0f}%).")
+    if result["failed"]:
+        print(f"  시세 조회 실패: {', '.join(result['failed'])}")
+
+    print()
+    print(f"[닫힌 트레이드] {s['closed']}건")
+    if s["closed"]:
+        print(f"  승률 {s['win_rate']*100:.1f}% · 평균 {s['avg_net_r']:+.2f}R"
+              f" · 합계 {s['total_net_r']:+.2f}R")
+        print(f"  청산사유: {s['by_reason']}")
+        for t in result["trades"]:
+            if not t.is_open:
+                print(f"    {t.ticker:8s} {t.entry_date} @{t.entry_price:.2f}"
+                      f" -> {t.exit_date} @{t.exit_price:.2f}"
+                      f" · {t.exit_reason:6s} · {t.net_r:+.2f}R")
+
+    print(f"[미결 포지션] {s['open']}건 · 평가 {s['open_net_r']:+.2f}R")
+    for t in result["trades"]:
+        if t.is_open:
+            print(f"    {t.ticker:8s} {t.entry_date} @{t.entry_price:.2f}"
+                  f" · {t.bars_held}봉 · {t.net_r:+.2f}R")
+    print("=" * 60)
+
+
+def main():
+    p = argparse.ArgumentParser(description="스코어 아카이브 백테스트")
+    p.add_argument("--history", default="history/*.csv")
+    p.add_argument("--stop-atr-mult", type=float, default=3.0)
+    p.add_argument("--trail-atr-mult", type=float, default=3.0)
+    p.add_argument("--max-hold-days", type=int, default=60)
+    p.add_argument("--exit-total", type=int, default=60)
+    args = p.parse_args()
+
+    params = er.Params(
+        stop_atr_mult=args.stop_atr_mult,
+        trail_atr_mult=args.trail_atr_mult,
+        max_hold_days=args.max_hold_days,
+        exit_total=args.exit_total,
+    )
+    report(run(args.history, params))
+
+
+if __name__ == "__main__":
+    main()
