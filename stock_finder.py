@@ -1221,6 +1221,13 @@ def fetch_macro() -> tuple[float, float, float]:
     return float(vix), float(dxy), float(us10y)
 
 
+def is_scan_complete(n_collected: int, n_total: int, min_rate: float) -> bool:
+    """수집률이 기준 이상인지. 유니버스가 비면 False."""
+    if n_total <= 0:
+        return False
+    return (n_collected / n_total) >= min_rate
+
+
 def fetch_stock(ticker: str, retries: int = 4) -> Optional[dict]:
     """yfinance 조회. 429(rate limit) 시 지수 백오프로 재시도.
 
@@ -1469,7 +1476,7 @@ def main():
     # 완결성 가드 - rate limit 등으로 대량 유실된 결과를 배포하지 않도록 차단
     ok_rate = len(results) / total_n if total_n else 0
     print(f"[*] 수집 {len(results)}/{total_n}종목 ({ok_rate*100:.1f}%)")
-    if ok_rate < args.min_success:
+    if not is_scan_complete(len(results), total_n, args.min_success):
         print(f"[!] 수집률 {ok_rate*100:.1f}% < 기준 {args.min_success*100:.0f}% · "
               f"결과를 저장하지 않고 실패 처리합니다 (--workers 를 낮추세요)")
         sys.exit(1)
