@@ -1,6 +1,7 @@
 import pytest
 
 import trade_sim as ts
+import exit_rules as er
 
 
 C = ts.Costs()
@@ -91,3 +92,98 @@ def test_reentry_needs_a_fresh_transition():
     assert r.should_enter is False
     r = ts.step_entry(r.state, "BUY")
     assert r.should_enter is True
+
+
+P = er.Params()
+
+
+def _bar(date, o, h, l, c, atr=2.0):
+    return er.Bar(date, open=o, high=h, low=l, close=c, atr14=atr)
+
+
+def _row(date, signal, source="live"):
+    return {"date": date, "signal": signal, "total": 75, "source": source}
+
+
+def test_one_trade_opens_and_stays_open():
+    rows = [_row("d1", "BUY"), _row("d2", "BUY")]
+    bars = {"d1": _bar("d1", 100.0, 101.0, 99.0, 100.5),
+            "d2": _bar("d2", 100.5, 102.0, 100.0, 101.5)}
+
+    trades = ts.simulate_ticker("X", "US", rows, bars, P, C)
+
+    assert len(trades) == 1
+    t = trades[0]
+    assert t.is_open is True
+    assert t.entry_date == "d1"
+    assert t.entry_price == 100.0
+    assert t.r_unit == 6.0                 # 3.0 * 2.0
+    assert t.exit_reason is None
+    assert t.gross_r == pytest.approx((101.5 - 100.0) / 6.0)
+
+
+def test_stop_closes_the_trade():
+    rows = [_row("d1", "BUY"), _row("d2", "BUY")]
+    bars = {"d1": _bar("d1", 100.0, 101.0, 99.0, 100.5),
+            "d2": _bar("d2", 99.0, 99.5, 90.0, 91.0)}
+
+    trades = ts.simulate_ticker("X", "US", rows, bars, P, C)
+
+    assert len(trades) == 1
+    t = trades[0]
+    assert t.is_open is False
+    assert t.exit_reason == "STOP"
+    assert t.exit_price == 94.0             # 100 - 3.0 * 2.0
+    assert t.gross_r == pytest.approx(-1.0)
+    assert t.net_r < t.gross_r              # 비용만큼 더 나쁘다
+
+
+def test_no_bar_means_no_bars_held():
+    rows = [_row("d1", "BUY"), _row("sat", "BUY"), _row("d2", "BUY")]
+    bars = {"d1": _bar("d1", 100.0, 101.0, 99.0, 100.5),
+            "d2": _bar("d2", 100.5, 102.0, 100.0, 101.5)}
+
+    trades = ts.simulate_ticker("X", "US", rows, bars, P, C)
+
+    assert trades[0].bars_held == 2         # d1, d2 만. sat 은 세지 않는다
+
+
+def test_entry_waits_for_the_next_session():
+    # sat 에 전환됐고 sat 에는 봉이 없다. d2 에 진입해야 한다.
+    rows = [_row("sat", "BUY"), _row("d2", "BUY")]
+    bars = {"d2": _bar("d2", 50.0, 51.0, 49.0, 50.5)}
+
+    trades = ts.simulate_ticker("X", "US", rows, bars, P, C)
+
+    assert len(trades) == 1
+    assert trades[0].entry_date == "d2"
+    assert trades[0].entry_price == 50.0
+
+
+def test_no_reentry_while_holding():
+    rows = [_row(d, "BUY") for d in ("d1", "d2", "d3")]
+    bars = {d: _bar(d, 100.0, 101.0, 99.5, 100.5) for d in ("d1", "d2", "d3")}
+
+    trades = ts.simulate_ticker("X", "US", rows, bars, P, C)
+
+    assert len(trades) == 1
+
+
+def test_missing_atr_at_entry_skips_the_trade():
+    rows = [_row("d1", "BUY")]
+    bars = {"d1": er.Bar("d1", open=100.0, high=101.0, low=99.0, close=100.5,
+                         atr14=None)}
+
+    assert ts.simulate_ticker("X", "US", rows, bars, P, C) == []
+
+
+def test_signal_exit_uses_the_row_total():
+    rows = [_row("d1", "BUY"), {"date": "d2", "signal": "HOLD", "total": 50,
+                                "source": "live"}]
+    bars = {"d1": _bar("d1", 100.0, 101.0, 99.0, 100.5),
+            "d2": _bar("d2", 100.0, 101.0, 99.5, 100.5)}
+
+    trades = ts.simulate_ticker("X", "US", rows, bars, P, C)
+
+    assert trades[0].exit_reason == "SIGNAL"
+    assert trades[0].exit_price == 100.0    # 시가 체결

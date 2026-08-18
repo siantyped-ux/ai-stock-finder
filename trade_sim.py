@@ -108,3 +108,86 @@ def step_entry(state: EntryState, signal: str) -> EntryStep:
 def consume(state: EntryState) -> EntryState:
     """진입이 일어났으니 대기를 해제한다."""
     return replace(state, pending=False)
+
+
+def _make_trade(pos: er.Position, market: str, source: str,
+                exit_price: float, exit_date: Optional[str],
+                exit_reason: Optional[str], costs: Costs) -> Trade:
+    gross = (exit_price - pos.entry_price) / pos.r_unit
+    cost = cost_r(pos.entry_price, pos.r_unit, market, costs)
+    return Trade(
+        ticker=pos.ticker,
+        market=market,
+        source=source,
+        entry_date=pos.entry_date,
+        entry_price=pos.entry_price,
+        r_unit=pos.r_unit,
+        exit_date=exit_date,
+        exit_price=exit_price if exit_date else None,
+        exit_reason=exit_reason,
+        bars_held=pos.bars_held,
+        is_open=exit_date is None,
+        gross_r=gross,
+        cost_r=cost,
+        net_r=gross - cost,
+    )
+
+
+def simulate_ticker(ticker: str, market: str, rows: list, bars: dict,
+                    params: er.Params, costs: Costs) -> list:
+    """티커 하나의 트레이드를 재현한다.
+
+    rows 는 아카이브 행(date·signal·total·source)을 날짜 오름차순으로,
+    bars 는 날짜 -> exit_rules.Bar 매핑이다. 봉이 없는 날은 세션이 없었다는
+    뜻이므로 보유 일수를 세지 않는다.
+
+    exit_rules 의 계약대로 evaluate 를 먼저 하고 advance 를 나중에 한다.
+    진입한 봉도 advance 로 접어 넣는다 - 그래야 그날 고가가 다음 봉의
+    트레일 계산에 반영되고 bars_held 가 실제 보유 봉 수와 맞는다. 다만
+    진입 봉에서는 evaluate 를 돌리지 않는다. 그 봉의 시가에 막 들어갔고,
+    같은 봉에서 청산까지 판정하려면 봉 안의 시간 순서를 알아야 한다.
+    """
+    trades = []
+    state = EntryState()
+    pos = None
+    last_close = None
+    open_source = ""
+
+    for row in rows:
+        bar = bars.get(row["date"])
+        if bar is not None and row.get("total") is not None:
+            # 그날 스코어를 봉에 실어 SIGNAL 판정이 가능하게 한다.
+            bar = er.Bar(bar.date, bar.open, bar.high, bar.low, bar.close,
+                         bar.atr14, row["total"])
+
+        if pos is not None and bar is not None:
+            decision = er.evaluate(pos, bar, params)
+            if decision is not None:
+                trades.append(_make_trade(pos, market, open_source,
+                                          decision.price, decision.date,
+                                          decision.reason, costs))
+                pos = None
+            else:
+                pos = er.advance(pos, bar, params)
+                last_close = bar.close
+
+        step = step_entry(state, row["signal"])
+        entered = False
+        if step.should_enter and pos is None and bar is not None:
+            if bar.atr14:
+                pos = er.open_position(ticker, row["date"], bar.open,
+                                       bar.atr14, params)
+                pos = er.advance(pos, bar, params)
+                open_source = row["source"]
+                last_close = bar.close
+            # ATR 이 없어 못 들어갔어도 이 전환은 소진한다. 그러지 않으면
+            # 같은 전환으로 다음 봉에 뒤늦게 진입해 버린다.
+            entered = True
+
+        state = consume(step.state) if entered else step.state
+
+    if pos is not None and last_close is not None:
+        trades.append(_make_trade(pos, market, open_source, last_close,
+                                  None, None, costs))
+
+    return trades
