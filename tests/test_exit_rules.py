@@ -249,3 +249,12 @@ def test_params_has_exactly_four_fields():
     # v5 설계서가 파라미터 5개 초과를 금지한다.
     import dataclasses
     assert len(dataclasses.fields(er.Params)) == 4
+
+
+def test_time_does_not_fire_one_bar_before_the_cap():
+    # SIGNAL 은 임계 양쪽을 모두 검증하는데 TIME 은 발동 케이스만 있었다.
+    pos = _pos(bars_held=59)
+    bar = er.Bar("2026-08-20", open=105.0, high=106.0, low=104.0, close=105.5,
+                 atr14=2.0, total=75)
+
+    assert er.evaluate(pos, bar, P) is None

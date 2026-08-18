@@ -93,7 +93,12 @@ def current_stop(position: Position, params: Params,
 
     고점이 진입가+1R 에 닿으면 트레일링이 켜진다. 트레일링은 현재 ATR 을 쓴다
     (Chandelier 표준) — 3개월간 변동성이 크게 바뀌므로 진입 시점 값에 묶어두면
-    뒤로 갈수록 부정확해진다. 손절선은 절대 내려가지 않는다.
+    뒤로 갈수록 부정확해진다.
+
+    하한은 초기 손절선이다. 직전 손절선이 아니라는 점에 주의할 것 — 고점이
+    그대로인 채 ATR 이 확대되면 트레일 손절선은 전날보다 내려갈 수 있다
+    (실측: 고점 120, ATR 2.0 에서 114 였다가 ATR 4.0 에서 108). Position 이
+    직전 손절선을 저장하지 않아서다.
     """
     if atr is None:
         return position.initial_stop
