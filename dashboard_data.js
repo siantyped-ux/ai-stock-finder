@@ -1,12 +1,12 @@
 // AI 3-Month Stock Finder - Live Data
-// Generated: 2026-08-18 01:34:22
-// Macro: VIX=14.25, DXY=99.56, US10Y=4.68%
+// Generated: 2026-08-18 01:54:44
+// Macro: VIX=14.25, DXY=99.55, US10Y=4.68%
 // FMP: active · DART: active · FRED: active
 window.LIVE_MACRO = {
   vix: 14.25,
-  dxy: 99.56,
+  dxy: 99.55,
   us10y: 4.68,
-  generated_at: "2026-08-18T01:34:22.181500",
+  generated_at: "2026-08-18T01:54:44.202120",
   fmp_active: true,
   dart_active: true,
   fred_active: true,
@@ -201,7 +201,7 @@ window.LIVE_STOCKS = [
         "* FMP 실시간 공시 반영"
       ],
       "value": [
-        "PER 26.8 · 적정",
+        "PER 27.6 · 적정",
         "Forward PER 20.4 · 이익 성장 반영",
         "PBR 8.1 · 부담"
       ]
@@ -317,7 +317,7 @@ window.LIVE_STOCKS = [
         "* FMP 실시간 공시 반영"
       ],
       "value": [
-        "PER 65.3 · 극심 프리미엄",
+        "PER 65.4 · 극심 프리미엄",
         "Forward PER 20.1 · 이익 성장 반영",
         "PBR 21.3 · 부담",
         "PEG 0.44 · 성장률 대비 저평가"
@@ -692,15 +692,15 @@ window.LIVE_STOCKS = [
     "total": 62,
     "consensus": 1,
     "signal": "HOLD",
-    "ev": 0.48,
+    "ev": 0.49,
     "target": 6,
     "hitl": false,
     "reasons": {
       "tech": [
-        "이동평균 완벽 정배열 (P>156.3>147.8>140.6)",
-        "RSI 67 · 강세 지속 구간",
-        "MACD 골든크로스 · 히스토 +0.28",
-        "Bollinger 상단 접근 (96%)"
+        "이동평균 완벽 정배열 (P>155.3>146.8>139.7)",
+        "RSI 68 · 강세 지속 구간",
+        "MACD 골든크로스 · 히스토 +0.34",
+        "Bollinger 상단 접근 (100%)"
       ],
       "macro": [
         "NEUTRAL · VIX 14.2 · US10Y 4.68%",
@@ -906,7 +906,7 @@ window.LIVE_STOCKS = [
       ],
       "value": [
         "PER 33.6 · 적정",
-        "Forward PER 20.7 · 이익 성장 반영",
+        "Forward PER 20.5 · 이익 성장 반영",
         "PBR 8.9 · 부담"
       ]
     }
@@ -916,21 +916,20 @@ window.LIVE_STOCKS = [
     "n": "AbbVie Inc.",
     "m": "US",
     "sec": "제약/바이오",
-    "tech": 47,
+    "tech": 48,
     "macro": 65,
     "filing": 81,
     "value": 51,
-    "total": 61,
+    "total": 62,
     "consensus": 1,
     "signal": "HOLD",
-    "ev": 0.59,
+    "ev": 0.61,
     "target": 7,
     "hitl": false,
     "reasons": {
       "tech": [
-        "RSI 42 · 중립",
-        "MACD 데드크로스 · 히스토 -0.97",
-        "3개월 수익률 +19.8%"
+        "MACD 데드크로스 · 히스토 -0.81",
+        "3개월 수익률 +20.4% · 강한 상승"
       ],
       "macro": [
         "NEUTRAL · VIX 14.2 · US10Y 4.68%",
@@ -945,7 +944,7 @@ window.LIVE_STOCKS = [
         "8-K: 최근 60일 이벤트 4건 (활발)"
       ],
       "value": [
-        "PER 70.7 · 극심 프리미엄",
+        "PER 70.5 · 극심 프리미엄",
         "Forward PER 15.4 · 이익 성장 반영",
         "PEG 0.41 · 성장률 대비 저평가"
       ]
@@ -985,7 +984,7 @@ window.LIVE_STOCKS = [
         "Form 4: 매도 우세 P0/S47"
       ],
       "value": [
-        "PER 59.8 · 프리미엄",
+        "PER 57.8 · 프리미엄",
         "Forward PER 29.8 · 이익 성장 반영",
         "PBR 34.5 · 부담"
       ]
@@ -1150,11 +1149,11 @@ window.LIVE_STOCKS = [
     "tech": 84,
     "macro": 60,
     "filing": 32,
-    "value": 74,
-    "total": 62,
-    "consensus": 2,
-    "signal": "WATCH",
-    "ev": 0.5,
+    "value": 66,
+    "total": 61,
+    "consensus": 1,
+    "signal": "HOLD",
+    "ev": 0.47,
     "target": 6,
     "hitl": false,
     "reasons": {
@@ -1176,8 +1175,7 @@ window.LIVE_STOCKS = [
         "Form 4: 매도 우세 P0/S10"
       ],
       "value": [
-        "PER 19.5 · 적정",
-        "Forward PER 15.5 · 이익 성장 반영",
+        "PER 19.2 · 적정",
         "PEG 0.77 · 성장률 대비 저평가",
         "FCF Yield 5.5% · 우수"
       ]
@@ -1217,7 +1215,7 @@ window.LIVE_STOCKS = [
         "* FMP 실시간 공시 반영"
       ],
       "value": [
-        "PER 147.5 · 극심 프리미엄",
+        "PER 148.8 · 극심 프리미엄",
         "Forward PER 74.6 · 이익 성장 반영",
         "PBR 42.4 · 부담"
       ]
@@ -1296,7 +1294,7 @@ window.LIVE_STOCKS = [
         "* FMP 실시간 공시 반영"
       ],
       "value": [
-        "PER 26.1 · 적정",
+        "PER 26.3 · 적정",
         "PBR 10.4 · 부담",
         "PEG 4.23 · 성장률 대비 부담"
       ]
@@ -1568,7 +1566,7 @@ window.LIVE_STOCKS = [
       ],
       "value": [
         "PER 39.1 · 적정",
-        "Forward PER 21.6 · 이익 성장 반영",
+        "Forward PER 21.7 · 이익 성장 반영",
         "PEG 0.81 · 성장률 대비 저평가"
       ]
     }
@@ -1953,7 +1951,7 @@ window.LIVE_STOCKS = [
         "* FMP 실시간 공시 반영"
       ],
       "value": [
-        "PER 30.9 · 적정",
+        "PER 30.5 · 적정",
         "PBR 24.0 · 부담",
         "FCF Yield 5.5% · 우수"
       ]
@@ -1977,8 +1975,8 @@ window.LIVE_STOCKS = [
     "reasons": {
       "tech": [
         "RSI 59 · 강세 지속 구간",
-        "MACD 골든크로스 · 히스토 +2.87",
-        "3개월 수익률 +17.1%"
+        "MACD 골든크로스 · 히스토 +2.89",
+        "3개월 수익률 +17.3%"
       ],
       "macro": [
         "NEUTRAL · VIX 14.2 · US10Y 4.68%",
@@ -1995,7 +1993,7 @@ window.LIVE_STOCKS = [
       "value": [
         "PER 55.6 · 프리미엄",
         "Forward PER 31.3 · 이익 성장 반영",
-        "PBR 42.3 · 부담"
+        "PBR 46.1 · 부담"
       ]
     }
   },
@@ -2032,7 +2030,7 @@ window.LIVE_STOCKS = [
         "* FMP 실시간 공시 반영"
       ],
       "value": [
-        "PER 12.7 · 저평가"
+        "PER 12.9 · 저평가"
       ]
     }
   },
@@ -2183,7 +2181,7 @@ window.LIVE_STOCKS = [
         "* FMP 실시간 공시 반영"
       ],
       "value": [
-        "PER 10.1 · 극심 저평가",
+        "PER 10.0 · 극심 저평가",
         "FCF Yield 8.5% · 우수"
       ]
     }
@@ -2222,7 +2220,7 @@ window.LIVE_STOCKS = [
         "* FMP 실시간 공시 반영"
       ],
       "value": [
-        "PER 63.9 · 극심 프리미엄",
+        "PER 62.9 · 극심 프리미엄",
         "Forward PER 39.1 · 이익 성장 반영",
         "PBR 17.2 · 부담"
       ]
@@ -2263,7 +2261,7 @@ window.LIVE_STOCKS = [
         "* FMP 실시간 공시 반영"
       ],
       "value": [
-        "PER 23.5 · 적정",
+        "PER 23.4 · 적정",
         "Forward PER 13.5 · 이익 성장 반영"
       ]
     }
@@ -2897,21 +2895,19 @@ window.LIVE_STOCKS = [
     "n": "Novo Nordisk A/S",
     "m": "US",
     "sec": "제약/바이오",
-    "tech": 35,
+    "tech": 40,
     "macro": 65,
     "filing": 68,
     "value": 73,
-    "total": 57,
+    "total": 58,
     "consensus": 1,
     "signal": "HOLD",
-    "ev": 0.18,
-    "target": 2,
+    "ev": 0.27,
+    "target": 3,
     "hitl": false,
     "reasons": {
       "tech": [
-        "RSI 30 · 과매도",
-        "MACD 데드크로스 · 히스토 -0.33",
-        "Bollinger 하단 근접 · 반등 여지"
+        "MACD 데드크로스 · 히스토 -0.29"
       ],
       "macro": [
         "NEUTRAL · VIX 14.2 · US10Y 4.68%",
@@ -2926,7 +2922,7 @@ window.LIVE_STOCKS = [
         "* FMP 실시간 공시 반영"
       ],
       "value": [
-        "PER 11.1 · 극심 저평가",
+        "PER 11.3 · 극심 저평가",
         "PEG 3.14 · 성장률 대비 부담",
         "FCF Yield 19.2% · 우수"
       ]
@@ -3512,10 +3508,10 @@ window.LIVE_STOCKS = [
     "hitl": false,
     "reasons": {
       "tech": [
-        "이동평균 완벽 정배열 (P>52.9>51.3>44.1)",
-        "RSI 57 · 강세 지속 구간",
-        "MACD 데드크로스 · 히스토 -0.06",
-        "3개월 수익률 +17.3%"
+        "이동평균 완벽 정배열 (P>53.0>51.5>44.2)",
+        "RSI 61 · 강세 지속 구간",
+        "MACD 데드크로스 · 히스토 -0.07",
+        "3개월 수익률 +15.4%"
       ],
       "macro": [
         "NEUTRAL · VIX 14.2 · US10Y 4.68%",
@@ -3650,7 +3646,7 @@ window.LIVE_STOCKS = [
         "* FMP 실시간 공시 반영"
       ],
       "value": [
-        "PER 31.4 · 적정",
+        "PER 32.2 · 적정",
         "Forward PER 18.8 · 이익 성장 반영",
         "PBR 12.5 · 부담"
       ]
@@ -3729,7 +3725,7 @@ window.LIVE_STOCKS = [
         "* FMP 실시간 공시 반영"
       ],
       "value": [
-        "PER 8.1 · 극심 저평가",
+        "PER 8.2 · 극심 저평가",
         "FCF Yield 6.0% · 우수"
       ]
     }
@@ -3926,11 +3922,11 @@ window.LIVE_STOCKS = [
     "tech": 88,
     "macro": 60,
     "filing": 48,
-    "value": 66,
-    "total": 67,
-    "consensus": 1,
-    "signal": "HOLD",
-    "ev": 0.84,
+    "value": 74,
+    "total": 68,
+    "consensus": 2,
+    "signal": "WATCH",
+    "ev": 0.86,
     "target": 10,
     "hitl": false,
     "reasons": {
@@ -3954,7 +3950,8 @@ window.LIVE_STOCKS = [
       "value": [
         "PER 23.5 · 적정",
         "Forward PER 16.5 · 이익 성장 반영",
-        "PEG 0.93 · 성장률 대비 저평가"
+        "PEG 0.93 · 성장률 대비 저평가",
+        "FCF Yield 5.0% · 우수"
       ]
     }
   },
@@ -4052,8 +4049,8 @@ window.LIVE_STOCKS = [
     "reasons": {
       "tech": [
         "단기 역배열 (P<19.8<20.1)",
-        "RSI 16 · 과매도",
-        "MACD 데드크로스 · 히스토 -0.05",
+        "RSI 8 · 과매도",
+        "MACD 데드크로스 · 히스토 -0.04",
         "Bollinger 하단 근접 · 반등 여지"
       ],
       "macro": [
@@ -4083,14 +4080,14 @@ window.LIVE_STOCKS = [
     "total": 62,
     "consensus": 1,
     "signal": "HOLD",
-    "ev": 0.45,
-    "target": 5,
+    "ev": 0.46,
+    "target": 6,
     "hitl": false,
     "reasons": {
       "tech": [
-        "이동평균 완벽 정배열 (P>120.3>114.6>108.8)",
-        "MACD 골든크로스 · 히스토 +0.82",
-        "Bollinger 상단 접근 (95%)"
+        "이동평균 완벽 정배열 (P>119.5>113.8>108.1)",
+        "MACD 골든크로스 · 히스토 +0.87",
+        "Bollinger 상단 접근 (99%)"
       ],
       "macro": [
         "NEUTRAL · VIX 14.2 · US10Y 4.68%",
@@ -4368,7 +4365,7 @@ window.LIVE_STOCKS = [
         "* FMP 실시간 공시 반영"
       ],
       "value": [
-        "PER 44.8 · 프리미엄",
+        "PER 45.2 · 프리미엄",
         "Forward PER 32.3 · 이익 성장 반영"
       ]
     }
@@ -4429,10 +4426,10 @@ window.LIVE_STOCKS = [
     "hitl": false,
     "reasons": {
       "tech": [
-        "단기 정배열 (P>214.5>204.9)",
-        "RSI 62 · 강세 지속 구간",
-        "MACD 골든크로스 · 히스토 +0.42",
-        "3개월 수익률 +18.8%"
+        "단기 정배열 (P>213.8>204.2)",
+        "RSI 63 · 강세 지속 구간",
+        "MACD 골든크로스 · 히스토 +0.47",
+        "3개월 수익률 +19.2%"
       ],
       "macro": [
         "NEUTRAL · VIX 14.2 · US10Y 4.68%",
@@ -4446,7 +4443,7 @@ window.LIVE_STOCKS = [
         "* FMP 실시간 공시 반영"
       ],
       "value": [
-        "PER 12.2 · 저평가",
+        "PER 12.5 · 저평가",
         "Forward PER 9.2 · 이익 성장 반영",
         "PEG 0.24 · 성장률 대비 저평가"
       ]
@@ -4688,11 +4685,11 @@ window.LIVE_STOCKS = [
     "tech": 91,
     "macro": 65,
     "filing": 50,
-    "value": 58,
-    "total": 69,
+    "value": 50,
+    "total": 67,
     "consensus": 1,
     "signal": "HOLD",
-    "ev": 0.91,
+    "ev": 0.88,
     "target": 11,
     "hitl": false,
     "reasons": {
@@ -4714,8 +4711,7 @@ window.LIVE_STOCKS = [
         "* FMP 실시간 공시 반영"
       ],
       "value": [
-        "PER 30.1 · 적정",
-        "Forward PER 23.6 · 이익 성장 반영"
+        "PER 29.5 · 적정"
       ]
     }
   },
@@ -4945,7 +4941,7 @@ window.LIVE_STOCKS = [
         "* FMP 실시간 공시 반영"
       ],
       "value": [
-        "PER 73.6 · 극심 프리미엄",
+        "PER 77.4 · 극심 프리미엄",
         "Forward PER 23.5 · 이익 성장 반영",
         "PBR 9.7 · 부담"
       ]
@@ -5052,7 +5048,7 @@ window.LIVE_STOCKS = [
         "* FMP 실시간 공시 반영"
       ],
       "value": [
-        "PER 14.2 · 저평가",
+        "PER 14.6 · 저평가",
         "Forward PER 10.7 · 이익 성장 반영",
         "PBR 9.6 · 부담"
       ]
@@ -5401,7 +5397,7 @@ window.LIVE_STOCKS = [
         "* FMP 실시간 공시 반영"
       ],
       "value": [
-        "PER 55.1 · 프리미엄",
+        "PER 56.5 · 프리미엄",
         "Forward PER 41.5 · 이익 성장 반영",
         "PBR 73.7 · 부담"
       ]
@@ -5440,7 +5436,7 @@ window.LIVE_STOCKS = [
         "* FMP 실시간 공시 반영"
       ],
       "value": [
-        "PER 19.2 · 적정"
+        "PER 19.1 · 적정"
       ]
     }
   },
@@ -5473,7 +5469,7 @@ window.LIVE_STOCKS = [
         "* FMP 실시간 공시 반영"
       ],
       "value": [
-        "PER 66.3 · 극심 프리미엄",
+        "PER 66.6 · 극심 프리미엄",
         "Forward PER 32.1 · 이익 성장 반영",
         "PBR 26.4 · 부담"
       ]
@@ -5721,14 +5717,14 @@ window.LIVE_STOCKS = [
     "total": 37,
     "consensus": 0,
     "signal": "AVOID",
-    "ev": -0.55,
+    "ev": -0.56,
     "target": -7,
     "hitl": true,
     "reasons": {
       "tech": [
-        "단기 역배열 (P<49.6<49.8)",
-        "RSI 29 · 과매도",
-        "MACD 데드크로스 · 히스토 -0.04",
+        "단기 역배열 (P<49.5<49.7)",
+        "RSI 30 · 과매도",
+        "MACD 데드크로스 · 히스토 -0.02",
         "거래량 감소 · 0.2배"
       ],
       "macro": [
@@ -5908,14 +5904,14 @@ window.LIVE_STOCKS = [
     "total": 40,
     "consensus": 0,
     "signal": "AVOID",
-    "ev": -0.41,
+    "ev": -0.4,
     "target": -5,
     "hitl": true,
     "reasons": {
       "tech": [
-        "단기 역배열 (P<94.0<94.6)",
-        "RSI 23 · 과매도",
-        "MACD 데드크로스 · 히스토 -0.17"
+        "단기 역배열 (P<93.3<93.8)",
+        "RSI 27 · 과매도",
+        "MACD 데드크로스 · 히스토 -0.12"
       ],
       "macro": [
         "NEUTRAL · VIX 14.2 · US10Y 4.68%",
@@ -6005,7 +6001,7 @@ window.LIVE_STOCKS = [
         "* FMP 실시간 공시 반영"
       ],
       "value": [
-        "PER 18.1 · 적정",
+        "PER 18.3 · 적정",
         "PEG 0.52 · 성장률 대비 저평가"
       ]
     }
@@ -6022,13 +6018,13 @@ window.LIVE_STOCKS = [
     "total": 41,
     "consensus": 0,
     "signal": "AVOID",
-    "ev": -0.43,
+    "ev": -0.44,
     "target": -5,
     "hitl": true,
     "reasons": {
       "tech": [
-        "단기 역배열 (P<16.5<16.6)",
-        "RSI 22 · 과매도",
+        "단기 역배열 (P<16.4<16.6)",
+        "RSI 21 · 과매도",
         "MACD 데드크로스 · 히스토 -0.05",
         "Bollinger 하단 근접 · 반등 여지"
       ],
@@ -6158,7 +6154,7 @@ window.LIVE_STOCKS = [
       ],
       "value": [
         "PER 12.4 · 저평가",
-        "FCF Yield 8.8% · 우수"
+        "FCF Yield 9.2% · 우수"
       ]
     }
   },
@@ -6538,7 +6534,7 @@ window.LIVE_STOCKS = [
         "* FMP 실시간 공시 반영"
       ],
       "value": [
-        "PER 23.1 · 적정",
+        "PER 23.3 · 적정",
         "Forward PER 17.0 · 이익 성장 반영",
         "FCF Yield 6.8% · 우수"
       ]
@@ -6928,20 +6924,21 @@ window.LIVE_STOCKS = [
     "n": "Brookfield Finance Inc.",
     "m": "US",
     "sec": "금융",
-    "tech": 48,
+    "tech": 33,
     "macro": 60,
     "filing": 55,
     "value": 50,
-    "total": 53,
+    "total": 48,
     "consensus": 0,
     "signal": "HOLD",
-    "ev": 0.09,
-    "target": 1,
+    "ev": -0.12,
+    "target": -1,
     "hitl": false,
     "reasons": {
       "tech": [
+        "단기 역배열 (P<15.2<15.2)",
         "MACD 데드크로스 · 히스토 -0.01",
-        "거래량 급증 · 최근 20일 평균 1.5배"
+        "거래량 급증 · 최근 20일 평균 1.6배"
       ],
       "macro": [
         "NEUTRAL · VIX 14.2 · US10Y 4.68%",
@@ -7027,7 +7024,7 @@ window.LIVE_STOCKS = [
         "* FMP 실시간 공시 반영"
       ],
       "value": [
-        "PER 29.4 · 적정",
+        "PER 29.2 · 적정",
         "Forward PER 22.3 · 이익 성장 반영"
       ]
     }
@@ -7084,7 +7081,7 @@ window.LIVE_STOCKS = [
     "hitl": false,
     "reasons": {
       "tech": [
-        "RSI 42 · 중립",
+        "RSI 46 · 중립",
         "MACD 데드크로스 · 히스토 -0.01"
       ],
       "macro": [
@@ -7364,7 +7361,7 @@ window.LIVE_STOCKS = [
         "* FMP 실시간 공시 반영"
       ],
       "value": [
-        "PER 48.7 · 프리미엄",
+        "PER 50.3 · 프리미엄",
         "Forward PER 31.5 · 이익 성장 반영",
         "PBR 11.6 · 부담"
       ]
@@ -7669,7 +7666,7 @@ window.LIVE_STOCKS = [
         "Form 4: 매도 우세 P0/S4"
       ],
       "value": [
-        "PER 22.5 · 적정",
+        "PER 22.9 · 적정",
         "Forward PER 16.2 · 이익 성장 반영",
         "FCF Yield 5.4% · 우수"
       ]
@@ -7709,7 +7706,7 @@ window.LIVE_STOCKS = [
         "* FMP 실시간 공시 반영"
       ],
       "value": [
-        "PER 49.3 · 프리미엄",
+        "PER 48.7 · 프리미엄",
         "Forward PER 21.7 · 이익 성장 반영",
         "PEG 4.96 · 성장률 대비 부담",
         "FCF 음수 · 현금유출"
@@ -7759,23 +7756,22 @@ window.LIVE_STOCKS = [
     "n": "United Parcel Service, Inc.",
     "m": "US",
     "sec": "산업재",
-    "tech": 35,
+    "tech": 32,
     "macro": 60,
     "filing": 60,
     "value": 66,
-    "total": 52,
+    "total": 51,
     "consensus": 0,
     "signal": "HOLD",
-    "ev": 0.11,
+    "ev": 0.09,
     "target": 1,
     "hitl": false,
     "reasons": {
       "tech": [
-        "단기 역배열 (P<107.5<108.8)",
-        "RSI 42 · 중립",
-        "MACD 데드크로스 · 히스토 -0.48",
-        "3개월 수익률 +6.8%",
-        "Bollinger 하단 근접 · 반등 여지"
+        "단기 역배열 (P<105.9<107.1)",
+        "RSI 45 · 중립",
+        "MACD 데드크로스 · 히스토 -0.37",
+        "3개월 수익률 +8.5%"
       ],
       "macro": [
         "NEUTRAL · VIX 14.2 · US10Y 4.68%",
@@ -7958,15 +7954,15 @@ window.LIVE_STOCKS = [
     "total": 67,
     "consensus": 1,
     "signal": "HOLD",
-    "ev": 0.81,
-    "target": 10,
+    "ev": 0.78,
+    "target": 9,
     "hitl": false,
     "reasons": {
       "tech": [
-        "단기 정배열 (P>50.1>48.0)",
-        "RSI 67 · 강세 지속 구간",
-        "MACD 골든크로스 · 히스토 +0.37",
-        "3개월 수익률 +10.8%"
+        "단기 정배열 (P>50.5>48.2)",
+        "RSI 65 · 강세 지속 구간",
+        "MACD 골든크로스 · 히스토 +0.28",
+        "3개월 수익률 +9.2%"
       ],
       "macro": [
         "NEUTRAL · VIX 14.2 · US10Y 4.68%",
@@ -8124,7 +8120,7 @@ window.LIVE_STOCKS = [
         "* FMP 실시간 공시 반영"
       ],
       "value": [
-        "PER 30.3 · 적정",
+        "PER 30.8 · 적정",
         "PBR 27.3 · 부담"
       ]
     }
@@ -8613,7 +8609,7 @@ window.LIVE_STOCKS = [
       "value": [
         "PER 12.3 · 저평가",
         "PEG 11.40 · 성장률 대비 부담",
-        "FCF Yield 11.8% · 우수"
+        "FCF Yield 11.7% · 우수"
       ]
     }
   },
@@ -8799,7 +8795,8 @@ window.LIVE_STOCKS = [
         "* FMP 실시간 공시 반영"
       ],
       "value": [
-        "PER 37.1 · 적정",
+        "PER 40.1 · 프리미엄",
+        "Forward PER 31.1 · 이익 성장 반영",
         "PBR 12.5 · 부담"
       ]
     }
@@ -8836,7 +8833,7 @@ window.LIVE_STOCKS = [
         "* FMP 실시간 공시 반영"
       ],
       "value": [
-        "PER 29.2 · 적정",
+        "PER 28.6 · 적정",
         "PEG 4.43 · 성장률 대비 부담"
       ]
     }
@@ -9065,7 +9062,7 @@ window.LIVE_STOCKS = [
         "* FMP 실시간 공시 반영"
       ],
       "value": [
-        "PER 36.0 · 적정",
+        "PER 36.8 · 적정",
         "Forward PER 24.0 · 이익 성장 반영",
         "PBR 28.3 · 부담"
       ]
@@ -9325,7 +9322,7 @@ window.LIVE_STOCKS = [
         "* FMP 실시간 공시 반영"
       ],
       "value": [
-        "PER 47.9 · 프리미엄",
+        "PER 48.1 · 프리미엄",
         "Forward PER 31.2 · 이익 성장 반영"
       ]
     }
@@ -9335,22 +9332,21 @@ window.LIVE_STOCKS = [
     "n": "Ferrari N.V.",
     "m": "US",
     "sec": "소비재",
-    "tech": 80,
+    "tech": 85,
     "macro": 60,
     "filing": 60,
     "value": 37,
-    "total": 64,
+    "total": 65,
     "consensus": 1,
     "signal": "HOLD",
-    "ev": 0.75,
-    "target": 9,
+    "ev": 0.82,
+    "target": 10,
     "hitl": false,
     "reasons": {
       "tech": [
-        "이동평균 완벽 정배열 (P>393.4>376.8>361.6)",
-        "RSI 79 · 과매수 경계",
-        "MACD 골든크로스 · 히스토 +1.40",
-        "3개월 수익률 +29.9% · 강한 상승"
+        "이동평균 완벽 정배열 (P>395.4>378.0>361.7)",
+        "MACD 골든크로스 · 히스토 +1.01",
+        "3개월 수익률 +28.4% · 강한 상승"
       ],
       "macro": [
         "NEUTRAL · VIX 14.2 · US10Y 4.68%",
@@ -9363,7 +9359,7 @@ window.LIVE_STOCKS = [
         "* FMP 실시간 공시 반영"
       ],
       "value": [
-        "PER 39.0 · 적정",
+        "PER 38.8 · 적정",
         "PBR 17.4 · 부담",
         "PEG 4.14 · 성장률 대비 부담"
       ]
@@ -9517,7 +9513,7 @@ window.LIVE_STOCKS = [
         "* FMP 실시간 공시 반영"
       ],
       "value": [
-        "PER 28.0 · 적정",
+        "PER 27.8 · 적정",
         "Forward PER 20.4 · 이익 성장 반영"
       ]
     }
@@ -9746,7 +9742,7 @@ window.LIVE_STOCKS = [
         "* FMP 실시간 공시 반영"
       ],
       "value": [
-        "PER 10.1 · 극심 저평가",
+        "PER 10.2 · 극심 저평가",
         "Forward PER 8.0 · 이익 성장 반영",
         "PBR 0.79 · 자산가치 이하"
       ]
@@ -9949,19 +9945,21 @@ window.LIVE_STOCKS = [
     "n": "Strive, Inc. Variable Rate Series A Perp",
     "m": "US",
     "sec": "금융",
-    "tech": 40,
+    "tech": 60,
     "macro": 60,
     "filing": 58,
     "value": 42,
-    "total": 50,
+    "total": 57,
     "consensus": 0,
     "signal": "HOLD",
-    "ev": 0.02,
-    "target": 0,
+    "ev": 0.3,
+    "target": 4,
     "hitl": false,
     "reasons": {
       "tech": [
-        "RSI 79 · 과매수 경계",
+        "단기 정배열 (P>97.4>95.6)",
+        "RSI 82 · 과매수 경계",
+        "MACD 골든크로스 · 히스토 +0.18",
         "거래량 감소 · 0.3배"
       ],
       "macro": [
@@ -10014,7 +10012,7 @@ window.LIVE_STOCKS = [
       "value": [
         "PER 60.8 · 극심 프리미엄",
         "Forward PER 38.4 · 이익 성장 반영",
-        "PBR 20.2 · 부담"
+        "PBR 22.1 · 부담"
       ]
     }
   },
@@ -10236,7 +10234,7 @@ window.LIVE_STOCKS = [
         "Form 4: 매도 우세 P0/S8"
       ],
       "value": [
-        "PER 305.5 · 극심 프리미엄",
+        "PER 301.5 · 극심 프리미엄",
         "Forward PER 47.5 · 이익 성장 반영",
         "PBR 42.2 · 부담",
         "PEG 0.97 · 성장률 대비 저평가"
@@ -10348,7 +10346,7 @@ window.LIVE_STOCKS = [
         "* FMP 실시간 공시 반영"
       ],
       "value": [
-        "PER 30.5 · 적정",
+        "PER 30.4 · 적정",
         "PEG 3.08 · 성장률 대비 부담"
       ]
     }
@@ -10542,7 +10540,7 @@ window.LIVE_STOCKS = [
         "* FMP 실시간 공시 반영"
       ],
       "value": [
-        "PER 20.9 · 적정",
+        "PER 20.8 · 적정",
         "FCF Yield 6.9% · 우수"
       ]
     }
@@ -10769,7 +10767,7 @@ window.LIVE_STOCKS = [
         "8-K: 최근 60일 이벤트 4건 (활발)"
       ],
       "value": [
-        "PER 18.5 · 적정",
+        "PER 18.7 · 적정",
         "Forward PER 8.9 · 이익 성장 반영",
         "PEG 0.54 · 성장률 대비 저평가",
         "FCF 음수 · 현금유출"
@@ -10810,7 +10808,7 @@ window.LIVE_STOCKS = [
         "* FMP 실시간 공시 반영"
       ],
       "value": [
-        "PER 21.8 · 적정",
+        "PER 21.5 · 적정",
         "Forward PER 14.5 · 이익 성장 반영",
         "PEG 5.21 · 성장률 대비 부담"
       ]
@@ -10849,7 +10847,7 @@ window.LIVE_STOCKS = [
         "* FMP 실시간 공시 반영"
       ],
       "value": [
-        "PER 30.3 · 적정",
+        "PER 29.8 · 적정",
         "PEG 0.43 · 성장률 대비 저평가",
         "FCF 음수 · 현금유출"
       ]
@@ -10860,20 +10858,22 @@ window.LIVE_STOCKS = [
     "n": "Keysight Technologies, Inc.",
     "m": "US",
     "sec": "IT",
-    "tech": 59,
+    "tech": 58,
     "macro": 60,
     "filing": 63,
     "value": 42,
-    "total": 58,
+    "total": 57,
     "consensus": 0,
     "signal": "HOLD",
-    "ev": 0.35,
+    "ev": 0.37,
     "target": 4,
     "hitl": false,
     "reasons": {
       "tech": [
-        "MACD 골든크로스 · 히스토 +4.89",
-        "Bollinger 상단 접근 (94%)"
+        "RSI 79 · 과매수 경계",
+        "MACD 골든크로스 · 히스토 +4.50",
+        "3개월 수익률 +6.1%",
+        "Bollinger 상단 접근 (93%)"
       ],
       "macro": [
         "NEUTRAL · VIX 14.2 · US10Y 4.68%",
@@ -11535,7 +11535,7 @@ window.LIVE_STOCKS = [
         "* FMP 실시간 공시 반영"
       ],
       "value": [
-        "PER 37.2 · 적정",
+        "PER 37.3 · 적정",
         "Forward PER 28.2 · 이익 성장 반영",
         "PEG 3.25 · 성장률 대비 부담"
       ]
@@ -11609,7 +11609,7 @@ window.LIVE_STOCKS = [
         "* FMP 실시간 공시 반영"
       ],
       "value": [
-        "PER 39.4 · 적정",
+        "PER 38.6 · 적정",
         "Forward PER 11.6 · 이익 성장 반영",
         "PEG 21.43 · 성장률 대비 부담",
         "FCF Yield 8.7% · 우수"
@@ -12234,7 +12234,7 @@ window.LIVE_STOCKS = [
         "* FMP 실시간 공시 반영"
       ],
       "value": [
-        "PER 54.1 · 프리미엄",
+        "PER 54.7 · 프리미엄",
         "Forward PER 26.9 · 이익 성장 반영"
       ]
     }
@@ -12345,8 +12345,8 @@ window.LIVE_STOCKS = [
         "* FMP 실시간 공시 반영"
       ],
       "value": [
-        "PER 11.4 · 극심 저평가",
-        "FCF Yield 8.5% · 우수"
+        "PER 11.7 · 극심 저평가",
+        "FCF Yield 8.6% · 우수"
       ]
     }
   },
@@ -12358,11 +12358,11 @@ window.LIVE_STOCKS = [
     "tech": 95,
     "macro": 60,
     "filing": 60,
-    "value": 27,
-    "total": 67,
+    "value": 35,
+    "total": 68,
     "consensus": 1,
     "signal": "HOLD",
-    "ev": 0.92,
+    "ev": 0.95,
     "target": 11,
     "hitl": false,
     "reasons": {
@@ -12382,7 +12382,8 @@ window.LIVE_STOCKS = [
         "* FMP 실시간 공시 반영"
       ],
       "value": [
-        "PER 66.5 · 극심 프리미엄",
+        "PER 67.1 · 극심 프리미엄",
+        "Forward PER 53.5 · 이익 성장 반영",
         "PBR 10.9 · 부담"
       ]
     }
@@ -12457,7 +12458,7 @@ window.LIVE_STOCKS = [
         "* FMP 실시간 공시 반영"
       ],
       "value": [
-        "PER 29.5 · 적정",
+        "PER 30.7 · 적정",
         "Forward PER 13.3 · 이익 성장 반영",
         "PBR 84.6 · 부담",
         "PEG 0.92 · 성장률 대비 저평가"
@@ -12515,13 +12516,13 @@ window.LIVE_STOCKS = [
     "total": 48,
     "consensus": 0,
     "signal": "HOLD",
-    "ev": -0.2,
+    "ev": -0.18,
     "target": -2,
     "hitl": false,
     "reasons": {
       "tech": [
-        "RSI 27 · 과매도",
-        "MACD 데드크로스 · 히스토 -0.85"
+        "RSI 23 · 과매도",
+        "MACD 데드크로스 · 히스토 -0.69"
       ],
       "macro": [
         "NEUTRAL · VIX 14.2 · US10Y 4.68%",
@@ -12623,11 +12624,11 @@ window.LIVE_STOCKS = [
     "tech": 69,
     "macro": 60,
     "filing": 48,
-    "value": 68,
-    "total": 61,
-    "consensus": 0,
+    "value": 76,
+    "total": 62,
+    "consensus": 1,
     "signal": "HOLD",
-    "ev": 0.58,
+    "ev": 0.61,
     "target": 7,
     "hitl": false,
     "reasons": {
@@ -12649,8 +12650,9 @@ window.LIVE_STOCKS = [
         "* FMP 실시간 공시 반영"
       ],
       "value": [
-        "PER 13.6 · 저평가",
-        "FCF Yield 5.8% · 우수"
+        "PER 13.8 · 저평가",
+        "Forward PER 10.9 · 이익 성장 반영",
+        "FCF Yield 5.9% · 우수"
       ]
     }
   },
@@ -12688,7 +12690,7 @@ window.LIVE_STOCKS = [
         "* FMP 실시간 공시 반영"
       ],
       "value": [
-        "PER 13.4 · 저평가",
+        "PER 12.9 · 저평가",
         "Forward PER 10.0 · 이익 성장 반영",
         "PEG 0.78 · 성장률 대비 저평가",
         "FCF Yield 7.9% · 우수"
@@ -12743,12 +12745,12 @@ window.LIVE_STOCKS = [
     "tech": 88,
     "macro": 60,
     "filing": 45,
-    "value": 66,
-    "total": 66,
+    "value": 59,
+    "total": 65,
     "consensus": 1,
     "signal": "HOLD",
-    "ev": 0.81,
-    "target": 10,
+    "ev": 0.78,
+    "target": 9,
     "hitl": false,
     "reasons": {
       "tech": [
@@ -12769,7 +12771,7 @@ window.LIVE_STOCKS = [
         "* FMP 실시간 공시 반영"
       ],
       "value": [
-        "PER 59.4 · 프리미엄",
+        "PER 61.7 · 극심 프리미엄",
         "Forward PER 15.1 · 이익 성장 반영",
         "PEG 0.78 · 성장률 대비 저평가",
         "FCF Yield 6.6% · 우수"
@@ -12820,19 +12822,20 @@ window.LIVE_STOCKS = [
     "n": "Entergy Louisiana, LLC COLLATERAL TR MT",
     "m": "US",
     "sec": "유틸리티",
-    "tech": 28,
+    "tech": 20,
     "macro": 60,
     "filing": 58,
     "value": 50,
-    "total": 47,
+    "total": 44,
     "consensus": 0,
-    "signal": "HOLD",
-    "ev": -0.17,
-    "target": -2,
-    "hitl": false,
+    "signal": "AVOID",
+    "ev": -0.29,
+    "target": -3,
+    "hitl": true,
     "reasons": {
       "tech": [
         "단기 역배열 (P<19.9<20.0)",
+        "RSI 19 · 과매도",
         "MACD 데드크로스 · 히스토 -0.02",
         "Bollinger 하단 근접 · 반등 여지"
       ],
@@ -12903,8 +12906,8 @@ window.LIVE_STOCKS = [
     "hitl": false,
     "reasons": {
       "tech": [
-        "단기 역배열 (P<456.3<462.5)",
-        "MACD 데드크로스 · 히스토 -1.20"
+        "단기 역배열 (P<455.0<461.1)",
+        "MACD 데드크로스 · 히스토 -1.11"
       ],
       "macro": [
         "NEUTRAL · VIX 14.2 · US10Y 4.68%",
@@ -13031,7 +13034,7 @@ window.LIVE_STOCKS = [
         "* FMP 실시간 공시 반영"
       ],
       "value": [
-        "PER 19.1 · 적정",
+        "PER 18.8 · 적정",
         "PEG 0.97 · 성장률 대비 저평가",
         "FCF Yield 75.3% · 우수"
       ]
@@ -13109,7 +13112,7 @@ window.LIVE_STOCKS = [
         "8-K: 최근 60일 이벤트 3건 (활발)"
       ],
       "value": [
-        "PER 50.2 · 프리미엄",
+        "PER 48.7 · 프리미엄",
         "Forward PER 18.3 · 이익 성장 반영",
         "PBR 8.7 · 부담",
         "PEG 0.94 · 성장률 대비 저평가"
@@ -13375,7 +13378,7 @@ window.LIVE_STOCKS = [
         "* FMP 실시간 공시 반영"
       ],
       "value": [
-        "PER 20.7 · 적정",
+        "PER 21.0 · 적정",
         "PEG 3.14 · 성장률 대비 부담"
       ]
     }
@@ -13397,10 +13400,10 @@ window.LIVE_STOCKS = [
     "hitl": false,
     "reasons": {
       "tech": [
-        "단기 정배열 (P>132.6>126.6)",
-        "RSI 64 · 강세 지속 구간",
-        "MACD 골든크로스 · 히스토 +1.03",
-        "3개월 수익률 +15.7%"
+        "단기 정배열 (P>133.7>126.9)",
+        "RSI 63 · 강세 지속 구간",
+        "MACD 골든크로스 · 히스토 +0.82",
+        "3개월 수익률 +15.4%"
       ],
       "macro": [
         "NEUTRAL · VIX 14.2 · US10Y 4.68%",
@@ -13412,7 +13415,7 @@ window.LIVE_STOCKS = [
         "* FMP 실시간 공시 반영"
       ],
       "value": [
-        "PER 65.1 · 극심 프리미엄",
+        "PER 66.4 · 극심 프리미엄",
         "Forward PER 19.7 · 이익 성장 반영",
         "PBR 12.8 · 부담"
       ]
@@ -13423,21 +13426,21 @@ window.LIVE_STOCKS = [
     "n": "Ferrovial SE",
     "m": "US",
     "sec": "산업재",
-    "tech": 50,
+    "tech": 35,
     "macro": 60,
     "filing": 55,
     "value": 38,
-    "total": 52,
+    "total": 46,
     "consensus": 0,
     "signal": "HOLD",
-    "ev": 0.03,
-    "target": 0,
+    "ev": -0.19,
+    "target": -2,
     "hitl": false,
     "reasons": {
       "tech": [
-        "단기 역배열 (P<64.5<66.0)",
-        "RSI 54 · 중립",
-        "MACD 골든크로스 · 히스토 +0.03"
+        "단기 역배열 (P<64.6<65.9)",
+        "RSI 60 · 강세 지속 구간",
+        "MACD 데드크로스 · 히스토 -0.01"
       ],
       "macro": [
         "NEUTRAL · VIX 14.2 · US10Y 4.68%",
@@ -13490,7 +13493,7 @@ window.LIVE_STOCKS = [
         "* FMP 실시간 공시 반영"
       ],
       "value": [
-        "PER 36.3 · 적정",
+        "PER 36.8 · 적정",
         "Forward PER 23.2 · 이익 성장 반영"
       ]
     }
@@ -13573,23 +13576,23 @@ window.LIVE_STOCKS = [
     "n": "Revolution Medicines, Inc.",
     "m": "US",
     "sec": "제약/바이오",
-    "tech": 87,
+    "tech": 77,
     "macro": 65,
     "filing": 63,
     "value": 42,
-    "total": 69,
+    "total": 65,
     "consensus": 1,
     "signal": "HOLD",
-    "ev": 0.93,
-    "target": 11,
+    "ev": 0.79,
+    "target": 9,
     "hitl": false,
     "reasons": {
       "tech": [
-        "이동평균 완벽 정배열 (P>193.2>180.8>122.8)",
-        "RSI 68 · 강세 지속 구간",
-        "MACD 골든크로스 · 히스토 +1.20",
+        "이동평균 완벽 정배열 (P>194.4>181.8>123.6)",
+        "MACD 골든크로스 · 히스토 +0.95",
         "거래량 감소 · 0.6배",
-        "3개월 수익률 +45.5% · 강한 상승"
+        "3개월 수익률 +46.8% · 강한 상승",
+        "Bollinger 상단 접근 (96%)"
       ],
       "macro": [
         "NEUTRAL · VIX 14.2 · US10Y 4.68%",
@@ -13615,21 +13618,22 @@ window.LIVE_STOCKS = [
     "n": "Natera, Inc.",
     "m": "US",
     "sec": "제약/바이오",
-    "tech": 85,
+    "tech": 80,
     "macro": 65,
     "filing": 58,
     "value": 50,
-    "total": 68,
+    "total": 66,
     "consensus": 1,
     "signal": "HOLD",
-    "ev": 0.88,
-    "target": 11,
+    "ev": 0.81,
+    "target": 10,
     "hitl": false,
     "reasons": {
       "tech": [
-        "이동평균 완벽 정배열 (P>280.0>262.3>226.2)",
-        "MACD 골든크로스 · 히스토 +3.75",
-        "3개월 수익률 +68.6% · 강한 상승"
+        "이동평균 완벽 정배열 (P>282.5>264.1>226.8)",
+        "RSI 77 · 과매수 경계",
+        "MACD 골든크로스 · 히스토 +3.11",
+        "3개월 수익률 +63.2% · 강한 상승"
       ],
       "macro": [
         "NEUTRAL · VIX 14.2 · US10Y 4.68%",
@@ -13684,7 +13688,7 @@ window.LIVE_STOCKS = [
       "value": [
         "PER 21.2 · 적정",
         "Forward PER 15.0 · 이익 성장 반영",
-        "PBR 9.6 · 부담"
+        "PBR 9.8 · 부담"
       ]
     }
   },
@@ -13803,21 +13807,22 @@ window.LIVE_STOCKS = [
     "n": "Viking Holdings Ltd",
     "m": "US",
     "sec": "소비재",
-    "tech": 47,
+    "tech": 50,
     "macro": 60,
     "filing": 45,
     "value": 50,
-    "total": 49,
+    "total": 50,
     "consensus": 0,
     "signal": "HOLD",
-    "ev": 0.18,
-    "target": 2,
+    "ev": 0.22,
+    "target": 3,
     "hitl": false,
     "reasons": {
       "tech": [
-        "RSI 44 · 중립",
-        "MACD 데드크로스 · 히스토 -0.84",
-        "3개월 수익률 +19.3%"
+        "RSI 42 · 중립",
+        "MACD 데드크로스 · 히스토 -0.86",
+        "3개월 수익률 +16.0%",
+        "Bollinger 하단 근접 · 반등 여지"
       ],
       "macro": [
         "NEUTRAL · VIX 14.2 · US10Y 4.68%",
@@ -13831,7 +13836,7 @@ window.LIVE_STOCKS = [
         "8-K: 최근 60일 이벤트 없음"
       ],
       "value": [
-        "PER 37.1 · 적정",
+        "PER 36.3 · 적정",
         "Forward PER 22.6 · 이익 성장 반영",
         "PBR 42.9 · 부담"
       ]
@@ -13941,7 +13946,7 @@ window.LIVE_STOCKS = [
         "* FMP 실시간 공시 반영"
       ],
       "value": [
-        "PER 118.0 · 극심 프리미엄",
+        "PER 116.3 · 극심 프리미엄",
         "Forward PER 17.6 · 이익 성장 반영",
         "PEG 0.24 · 성장률 대비 저평가"
       ]
@@ -13978,7 +13983,7 @@ window.LIVE_STOCKS = [
         "* FMP 실시간 공시 반영"
       ],
       "value": [
-        "PER 31.3 · 적정",
+        "PER 31.0 · 적정",
         "Forward PER 24.7 · 이익 성장 반영",
         "PBR 19.5 · 부담"
       ]
@@ -14091,7 +14096,7 @@ window.LIVE_STOCKS = [
         "* FMP 실시간 공시 반영"
       ],
       "value": [
-        "PER 38.4 · 적정",
+        "PER 38.8 · 적정",
         "PBR 26.7 · 부담",
         "PEG 3.37 · 성장률 대비 부담"
       ]
@@ -14322,7 +14327,7 @@ window.LIVE_STOCKS = [
         "* FMP 실시간 공시 반영"
       ],
       "value": [
-        "PER 60.8 · 극심 프리미엄",
+        "PER 61.8 · 극심 프리미엄",
         "Forward PER 11.9 · 이익 성장 반영",
         "FCF Yield 5.2% · 우수"
       ]
@@ -14370,20 +14375,21 @@ window.LIVE_STOCKS = [
     "n": "Haleon plc",
     "m": "US",
     "sec": "제약/바이오",
-    "tech": 47,
+    "tech": 39,
     "macro": 65,
     "filing": 55,
     "value": 58,
-    "total": 55,
+    "total": 52,
     "consensus": 0,
     "signal": "HOLD",
-    "ev": 0.25,
-    "target": 3,
+    "ev": 0.1,
+    "target": 1,
     "hitl": false,
     "reasons": {
       "tech": [
+        "RSI 23 · 과매도",
         "MACD 데드크로스 · 히스토 -0.06",
-        "3개월 수익률 +7.6%",
+        "3개월 수익률 +5.2%",
         "Bollinger 하단 근접 · 반등 여지"
       ],
       "macro": [
@@ -14397,7 +14403,7 @@ window.LIVE_STOCKS = [
         "* FMP 실시간 공시 반영"
       ],
       "value": [
-        "PER 19.6 · 적정",
+        "PER 20.0 · 적정",
         "Forward PER 15.4 · 이익 성장 반영"
       ]
     }
@@ -14586,7 +14592,7 @@ window.LIVE_STOCKS = [
         "* FMP 실시간 공시 반영"
       ],
       "value": [
-        "PER 14.1 · 저평가",
+        "PER 14.2 · 저평가",
         "FCF Yield 5.8% · 우수"
       ]
     }
@@ -14627,7 +14633,7 @@ window.LIVE_STOCKS = [
         "PER 6.4 · 극심 저평가",
         "PBR 0.53 · 자산가치 이하",
         "PEG 3.45 · 성장률 대비 부담",
-        "FCF Yield 646.9% · 우수"
+        "FCF Yield 646.8% · 우수"
       ]
     }
   },
@@ -14795,14 +14801,14 @@ window.LIVE_STOCKS = [
     "total": 44,
     "consensus": 0,
     "signal": "AVOID",
-    "ev": -0.33,
+    "ev": -0.34,
     "target": -4,
     "hitl": true,
     "reasons": {
       "tech": [
-        "단기 역배열 (P<15.7<15.9)",
-        "RSI 28 · 과매도",
-        "MACD 데드크로스 · 히스토 -0.02",
+        "단기 역배열 (P<15.6<15.9)",
+        "RSI 24 · 과매도",
+        "MACD 데드크로스 · 히스토 -0.01",
         "Bollinger 하단 근접 · 반등 여지"
       ],
       "macro": [
@@ -14866,11 +14872,11 @@ window.LIVE_STOCKS = [
     "tech": 20,
     "macro": 60,
     "filing": 63,
-    "value": 50,
-    "total": 45,
+    "value": 58,
+    "total": 47,
     "consensus": 0,
     "signal": "HOLD",
-    "ev": -0.29,
+    "ev": -0.26,
     "target": -3,
     "hitl": false,
     "reasons": {
@@ -14891,7 +14897,8 @@ window.LIVE_STOCKS = [
         "* FMP 실시간 공시 반영"
       ],
       "value": [
-        "PER 30.1 · 적정"
+        "PER 31.1 · 적정",
+        "Forward PER 24.5 · 이익 성장 반영"
       ]
     }
   },
@@ -14966,7 +14973,7 @@ window.LIVE_STOCKS = [
         "* FMP 실시간 공시 반영"
       ],
       "value": [
-        "PER 19.1 · 적정",
+        "PER 19.5 · 적정",
         "Forward PER 6.8 · 이익 성장 반영",
         "PEG 0.74 · 성장률 대비 저평가",
         "FCF Yield 41.9% · 우수"
@@ -15161,7 +15168,7 @@ window.LIVE_STOCKS = [
         "* FMP 실시간 공시 반영"
       ],
       "value": [
-        "PER 16.2 · 저평가",
+        "PER 16.6 · 저평가",
         "FCF Yield 5.9% · 우수"
       ]
     }
@@ -15275,8 +15282,8 @@ window.LIVE_STOCKS = [
         "* FMP 실시간 공시 반영"
       ],
       "value": [
-        "PER 22.4 · 적정",
-        "Forward PER 15.2 · 이익 성장 반영",
+        "PER 22.7 · 적정",
+        "Forward PER 15.1 · 이익 성장 반영",
         "PBR 14.7 · 부담"
       ]
     }
@@ -15369,20 +15376,20 @@ window.LIVE_STOCKS = [
     "tech": 93,
     "macro": 65,
     "filing": 48,
-    "value": 35,
-    "total": 65,
+    "value": 43,
+    "total": 66,
     "consensus": 1,
     "signal": "HOLD",
-    "ev": 0.83,
+    "ev": 0.86,
     "target": 10,
     "hitl": false,
     "reasons": {
       "tech": [
-        "단기 정배열 (P>332.5>304.2)",
-        "RSI 70 · 강세 지속 구간",
-        "MACD 골든크로스 · 히스토 +2.32",
+        "단기 정배열 (P>334.9>305.8)",
+        "RSI 68 · 강세 지속 구간",
+        "MACD 골든크로스 · 히스토 +1.86",
         "거래량 급증 · 최근 20일 평균 1.4배",
-        "3개월 수익률 +23.6% · 강한 상승"
+        "3개월 수익률 +23.7% · 강한 상승"
       ],
       "macro": [
         "NEUTRAL · VIX 14.2 · US10Y 4.68%",
@@ -15397,8 +15404,7 @@ window.LIVE_STOCKS = [
       ],
       "value": [
         "PER 64.8 · 극심 프리미엄",
-        "Forward PER 35.3 · 이익 성장 반영",
-        "PBR 8.5 · 부담"
+        "Forward PER 35.3 · 이익 성장 반영"
       ]
     }
   },
@@ -15475,7 +15481,7 @@ window.LIVE_STOCKS = [
         "* FMP 실시간 공시 반영"
       ],
       "value": [
-        "PER 92.1 · 극심 프리미엄",
+        "PER 91.5 · 극심 프리미엄",
         "Forward PER 47.6 · 이익 성장 반영",
         "FCF 음수 · 현금유출"
       ]
@@ -15658,7 +15664,7 @@ window.LIVE_STOCKS = [
         "* FMP 실시간 공시 반영"
       ],
       "value": [
-        "PER 9.4 · 극심 저평가",
+        "PER 9.5 · 극심 저평가",
         "PEG 0.12 · 성장률 대비 저평가",
         "FCF Yield 14.7% · 우수"
       ]
@@ -16079,7 +16085,7 @@ window.LIVE_STOCKS = [
         "* FMP 실시간 공시 반영"
       ],
       "value": [
-        "PER 32.8 · 적정",
+        "PER 33.2 · 적정",
         "Forward PER 25.8 · 이익 성장 반영"
       ]
     }
@@ -16306,7 +16312,7 @@ window.LIVE_STOCKS = [
         "* FMP 실시간 공시 반영"
       ],
       "value": [
-        "PER 37.6 · 적정",
+        "PER 36.9 · 적정",
         "PBR 29.4 · 부담"
       ]
     }
@@ -16328,8 +16334,8 @@ window.LIVE_STOCKS = [
     "hitl": false,
     "reasons": {
       "tech": [
-        "RSI 50 · 중립",
-        "MACD 골든크로스 · 히스토 +0.07",
+        "RSI 45 · 중립",
+        "MACD 골든크로스 · 히스토 +0.08",
         "거래량 급증 · 최근 20일 평균 1.5배"
       ],
       "macro": [
@@ -16412,7 +16418,7 @@ window.LIVE_STOCKS = [
         "* FMP 실시간 공시 반영"
       ],
       "value": [
-        "PER 9.2 · 극심 저평가",
+        "PER 9.1 · 극심 저평가",
         "FCF Yield 7.9% · 우수"
       ]
     }
@@ -16614,16 +16620,16 @@ window.LIVE_STOCKS = [
     "total": 64,
     "consensus": 1,
     "signal": "HOLD",
-    "ev": 0.65,
+    "ev": 0.66,
     "target": 8,
     "hitl": false,
     "reasons": {
       "tech": [
-        "단기 정배열 (P>77.2>76.6)",
+        "단기 정배열 (P>77.6>76.6)",
         "RSI 66 · 강세 지속 구간",
-        "MACD 골든크로스 · 히스토 +0.83",
+        "MACD 골든크로스 · 히스토 +0.73",
         "거래량 감소 · 0.5배",
-        "3개월 수익률 +10.2%"
+        "3개월 수익률 +10.9%"
       ],
       "macro": [
         "NEUTRAL · VIX 14.2 · US10Y 4.68%",
@@ -16675,7 +16681,7 @@ window.LIVE_STOCKS = [
         "* FMP 실시간 공시 반영"
       ],
       "value": [
-        "PER 10.4 · 극심 저평가",
+        "PER 10.7 · 극심 저평가",
         "PEG 0.91 · 성장률 대비 저평가",
         "FCF 음수 · 현금유출"
       ]
@@ -16714,7 +16720,7 @@ window.LIVE_STOCKS = [
         "* FMP 실시간 공시 반영"
       ],
       "value": [
-        "PER 35.1 · 적정",
+        "PER 35.5 · 적정",
         "PBR 12.8 · 부담"
       ]
     }
@@ -16825,7 +16831,7 @@ window.LIVE_STOCKS = [
         "* FMP 실시간 공시 반영"
       ],
       "value": [
-        "PER 26.9 · 적정",
+        "PER 27.1 · 적정",
         "PBR 11.5 · 부담",
         "FCF Yield 150.0% · 우수"
       ]
@@ -16885,8 +16891,8 @@ window.LIVE_STOCKS = [
     "reasons": {
       "tech": [
         "단기 정배열 (P>67.7>65.9)",
-        "RSI 53 · 중립",
-        "MACD 데드크로스 · 히스토 -0.04"
+        "RSI 46 · 중립",
+        "MACD 데드크로스 · 히스토 -0.01"
       ],
       "macro": [
         "NEUTRAL · VIX 14.2 · US10Y 4.68%",
@@ -16936,7 +16942,7 @@ window.LIVE_STOCKS = [
         "* FMP 실시간 공시 반영"
       ],
       "value": [
-        "PER 12.3 · 저평가",
+        "PER 12.5 · 저평가",
         "PBR 8.9 · 부담",
         "PEG 5.05 · 성장률 대비 부담",
         "FCF Yield 6.7% · 우수"
@@ -16960,9 +16966,9 @@ window.LIVE_STOCKS = [
     "hitl": false,
     "reasons": {
       "tech": [
-        "단기 정배열 (P>68.1>65.7)",
-        "MACD 골든크로스 · 히스토 +0.48",
-        "3개월 수익률 +19.2%"
+        "단기 정배열 (P>68.6>65.9)",
+        "MACD 골든크로스 · 히스토 +0.37",
+        "3개월 수익률 +17.7%"
       ],
       "macro": [
         "NEUTRAL · VIX 14.2 · US10Y 4.68%",
@@ -17025,20 +17031,19 @@ window.LIVE_STOCKS = [
     "n": "Banco Bradesco S.A.",
     "m": "US",
     "sec": "금융",
-    "tech": 51,
+    "tech": 43,
     "macro": 60,
     "filing": 55,
     "value": 80,
-    "total": 58,
+    "total": 56,
     "consensus": 1,
     "signal": "HOLD",
-    "ev": 0.22,
-    "target": 3,
+    "ev": 0.11,
+    "target": 1,
     "hitl": false,
     "reasons": {
       "tech": [
-        "MACD 데드크로스 · 히스토 -0.04",
-        "거래량 급증 · 최근 20일 평균 1.3배",
+        "MACD 데드크로스 · 히스토 -0.03",
         "Bollinger 하단 근접 · 반등 여지"
       ],
       "macro": [
@@ -17052,7 +17057,7 @@ window.LIVE_STOCKS = [
       ],
       "value": [
         "PER 7.1 · 극심 저평가",
-        "PBR 0.89 · 자산가치 이하"
+        "PBR 0.91 · 자산가치 이하"
       ]
     }
   },
@@ -17163,7 +17168,7 @@ window.LIVE_STOCKS = [
         "* FMP 실시간 공시 반영"
       ],
       "value": [
-        "PER 54.5 · 프리미엄",
+        "PER 54.1 · 프리미엄",
         "Forward PER 18.5 · 이익 성장 반영",
         "PEG 0.26 · 성장률 대비 저평가",
         "FCF Yield 5.1% · 우수"
@@ -17501,10 +17506,10 @@ window.LIVE_STOCKS = [
     "hitl": false,
     "reasons": {
       "tech": [
-        "이동평균 완벽 정배열 (P>72.5>70.1>61.8)",
-        "RSI 68 · 강세 지속 구간",
-        "MACD 골든크로스 · 히스토 +0.06",
-        "3개월 수익률 +22.9% · 강한 상승"
+        "이동평균 완벽 정배열 (P>72.6>70.2>61.9)",
+        "RSI 61 · 강세 지속 구간",
+        "MACD 골든크로스 · 히스토 +0.05",
+        "3개월 수익률 +22.3% · 강한 상승"
       ],
       "macro": [
         "NEUTRAL · VIX 14.2 · US10Y 4.68%",
@@ -17687,14 +17692,14 @@ window.LIVE_STOCKS = [
     "total": 65,
     "consensus": 1,
     "signal": "HOLD",
-    "ev": 0.62,
-    "target": 7,
+    "ev": 0.64,
+    "target": 8,
     "hitl": false,
     "reasons": {
       "tech": [
-        "이동평균 완벽 정배열 (P>97.1>93.2>89.1)",
-        "MACD 골든크로스 · 히스토 +1.10",
-        "3개월 수익률 +5.4%"
+        "이동평균 완벽 정배열 (P>97.9>93.2>89.3)",
+        "MACD 골든크로스 · 히스토 +0.88",
+        "3개월 수익률 +6.8%"
       ],
       "macro": [
         "NEUTRAL · VIX 14.2 · US10Y 4.68%",
@@ -17761,12 +17766,12 @@ window.LIVE_STOCKS = [
     "tech": 31,
     "macro": 65,
     "filing": 50,
-    "value": 65,
-    "total": 49,
+    "value": 55,
+    "total": 47,
     "consensus": 0,
     "signal": "HOLD",
-    "ev": -0.18,
-    "target": -2,
+    "ev": -0.22,
+    "target": -3,
     "hitl": false,
     "reasons": {
       "tech": [
@@ -17786,7 +17791,7 @@ window.LIVE_STOCKS = [
         "* FMP 실시간 공시 반영"
       ],
       "value": [
-        "PER 11.9 · 극심 저평가",
+        "PER 12.0 · 저평가",
         "PBR 9.3 · 부담",
         "PEG 6.61 · 성장률 대비 부담",
         "FCF Yield 6.7% · 우수"
@@ -18113,11 +18118,11 @@ window.LIVE_STOCKS = [
     "tech": 51,
     "macro": 60,
     "filing": 60,
-    "value": 68,
-    "total": 58,
-    "consensus": 0,
+    "value": 76,
+    "total": 59,
+    "consensus": 1,
     "signal": "HOLD",
-    "ev": 0.31,
+    "ev": 0.34,
     "target": 4,
     "hitl": false,
     "reasons": {
@@ -18137,7 +18142,8 @@ window.LIVE_STOCKS = [
       ],
       "value": [
         "PER 12.8 · 저평가",
-        "Forward PER 10.0 · 이익 성장 반영"
+        "Forward PER 10.0 · 이익 성장 반영",
+        "FCF Yield 5.7% · 우수"
       ]
     }
   },
@@ -18225,21 +18231,20 @@ window.LIVE_STOCKS = [
     "n": "Medline Inc.",
     "m": "US",
     "sec": "제약/바이오",
-    "tech": 28,
+    "tech": 25,
     "macro": 65,
     "filing": 45,
     "value": 50,
-    "total": 44,
+    "total": 43,
     "consensus": 0,
     "signal": "AVOID",
-    "ev": -0.3,
+    "ev": -0.34,
     "target": -4,
     "hitl": true,
     "reasons": {
       "tech": [
-        "단기 역배열 (P<37.7<38.1)",
-        "MACD 데드크로스 · 히스토 -0.42",
-        "Bollinger 하단 근접 · 반등 여지"
+        "단기 역배열 (P<37.5<38.1)",
+        "MACD 데드크로스 · 히스토 -0.34"
       ],
       "macro": [
         "NEUTRAL · VIX 14.2 · US10Y 4.68%",
@@ -18254,7 +18259,7 @@ window.LIVE_STOCKS = [
         "* FMP 실시간 공시 반영"
       ],
       "value": [
-        "PER 43.6 · 프리미엄",
+        "PER 44.7 · 프리미엄",
         "Forward PER 22.1 · 이익 성장 반영"
       ]
     }
@@ -18560,7 +18565,7 @@ window.LIVE_STOCKS = [
         "* FMP 실시간 공시 반영"
       ],
       "value": [
-        "PER 36.0 · 적정",
+        "PER 35.6 · 적정",
         "PBR 10.3 · 부담"
       ]
     }
@@ -18915,13 +18920,13 @@ window.LIVE_STOCKS = [
     "total": 49,
     "consensus": 0,
     "signal": "HOLD",
-    "ev": -0.11,
+    "ev": -0.1,
     "target": -1,
     "hitl": false,
     "reasons": {
       "tech": [
-        "RSI 41 · 중립",
-        "MACD 데드크로스 · 히스토 -0.13",
+        "RSI 48 · 중립",
+        "MACD 데드크로스 · 히스토 -0.12",
         "거래량 감소 · 0.5배"
       ],
       "macro": [
@@ -18943,19 +18948,20 @@ window.LIVE_STOCKS = [
     "n": "DTE Energy Company JR SUB DB 2017 E",
     "m": "US",
     "sec": "유틸리티",
-    "tech": 28,
+    "tech": 20,
     "macro": 60,
     "filing": 58,
     "value": 80,
-    "total": 51,
+    "total": 48,
     "consensus": 1,
     "signal": "HOLD",
-    "ev": -0.14,
-    "target": -2,
+    "ev": -0.25,
+    "target": -3,
     "hitl": false,
     "reasons": {
       "tech": [
         "단기 역배열 (P<19.8<20.1)",
+        "RSI 29 · 과매도",
         "MACD 데드크로스 · 히스토 -0.01",
         "Bollinger 하단 근접 · 반등 여지"
       ],
@@ -19080,7 +19086,7 @@ window.LIVE_STOCKS = [
         "* FMP 실시간 공시 반영"
       ],
       "value": [
-        "PER 23.9 · 적정",
+        "PER 24.2 · 적정",
         "FCF Yield 5.1% · 우수"
       ]
     }
@@ -19229,7 +19235,7 @@ window.LIVE_STOCKS = [
         "* FMP 실시간 공시 반영"
       ],
       "value": [
-        "PER 25.0 · 적정",
+        "PER 25.1 · 적정",
         "Forward PER 17.7 · 이익 성장 반영"
       ]
     }
@@ -19523,7 +19529,7 @@ window.LIVE_STOCKS = [
         "* FMP 실시간 공시 반영"
       ],
       "value": [
-        "PER 15.4 · 저평가"
+        "PER 15.5 · 저평가"
       ]
     }
   },
@@ -19661,7 +19667,7 @@ window.LIVE_STOCKS = [
     "hitl": false,
     "reasons": {
       "tech": [
-        "MACD 데드크로스 · 히스토 -0.11",
+        "MACD 데드크로스 · 히스토 -0.12",
         "Bollinger 하단 근접 · 반등 여지"
       ],
       "macro": [
@@ -19696,9 +19702,9 @@ window.LIVE_STOCKS = [
     "hitl": false,
     "reasons": {
       "tech": [
-        "이동평균 완벽 정배열 (P>74.3>73.9>71.6)",
-        "RSI 60 · 강세 지속 구간",
-        "MACD 골든크로스 · 히스토 +0.39",
+        "이동평균 완벽 정배열 (P>74.3>73.9>71.7)",
+        "RSI 58 · 강세 지속 구간",
+        "MACD 골든크로스 · 히스토 +0.40",
         "Bollinger 상단 접근 (99%)"
       ],
       "macro": [
@@ -19712,7 +19718,7 @@ window.LIVE_STOCKS = [
         "* FMP 실시간 공시 반영"
       ],
       "value": [
-        "PER 19.4 · 적정"
+        "PER 19.5 · 적정"
       ]
     }
   },
@@ -19874,11 +19880,11 @@ window.LIVE_STOCKS = [
     "tech": 76,
     "macro": 60,
     "filing": 60,
-    "value": 50,
-    "total": 64,
+    "value": 58,
+    "total": 65,
     "consensus": 1,
     "signal": "HOLD",
-    "ev": 0.65,
+    "ev": 0.68,
     "target": 8,
     "hitl": false,
     "reasons": {
@@ -19897,7 +19903,7 @@ window.LIVE_STOCKS = [
         "* FMP 실시간 공시 반영"
       ],
       "value": [
-        "PER 40.4 · 프리미엄",
+        "PER 39.9 · 적정",
         "Forward PER 28.0 · 이익 성장 반영"
       ]
     }
@@ -19937,7 +19943,7 @@ window.LIVE_STOCKS = [
         "8-K: 최근 60일 이벤트 5건 (활발)"
       ],
       "value": [
-        "PER 26.7 · 적정",
+        "PER 26.3 · 적정",
         "Forward PER 16.3 · 이익 성장 반영"
       ]
     }
@@ -20160,7 +20166,7 @@ window.LIVE_STOCKS = [
         "* FMP 실시간 공시 반영"
       ],
       "value": [
-        "PER 20.3 · 적정",
+        "PER 20.8 · 적정",
         "Forward PER 14.1 · 이익 성장 반영",
         "PEG 0.89 · 성장률 대비 저평가",
         "FCF Yield 5.8% · 우수"
@@ -20184,10 +20190,10 @@ window.LIVE_STOCKS = [
     "hitl": false,
     "reasons": {
       "tech": [
-        "이동평균 완벽 정배열 (P>34.9>33.7>27.3)",
-        "RSI 59 · 강세 지속 구간",
-        "MACD 골든크로스 · 히스토 +0.12",
-        "3개월 수익률 +23.7% · 강한 상승"
+        "이동평균 완벽 정배열 (P>35.0>33.8>27.4)",
+        "RSI 63 · 강세 지속 구간",
+        "MACD 골든크로스 · 히스토 +0.10",
+        "3개월 수익률 +26.9% · 강한 상승"
       ],
       "macro": [
         "NEUTRAL · VIX 14.2 · US10Y 4.68%",
@@ -20279,7 +20285,7 @@ window.LIVE_STOCKS = [
         "* FMP 실시간 공시 반영"
       ],
       "value": [
-        "PER 25.0 · 적정",
+        "PER 24.9 · 적정",
         "Forward PER 19.5 · 이익 성장 반영"
       ]
     }
@@ -20289,22 +20295,21 @@ window.LIVE_STOCKS = [
     "n": "SharkNinja, Inc.",
     "m": "US",
     "sec": "소비재",
-    "tech": 80,
+    "tech": 85,
     "macro": 60,
     "filing": 55,
     "value": 50,
-    "total": 64,
+    "total": 66,
     "consensus": 1,
     "signal": "HOLD",
-    "ev": 0.74,
-    "target": 9,
+    "ev": 0.81,
+    "target": 10,
     "hitl": false,
     "reasons": {
       "tech": [
-        "이동평균 완벽 정배열 (P>167.3>151.7>121.2)",
-        "RSI 80 · 과매수 경계",
-        "MACD 골든크로스 · 히스토 +1.26",
-        "3개월 수익률 +73.8% · 강한 상승"
+        "이동평균 완벽 정배열 (P>169.0>153.0>121.6)",
+        "MACD 골든크로스 · 히스토 +0.83",
+        "3개월 수익률 +72.6% · 강한 상승"
       ],
       "macro": [
         "NEUTRAL · VIX 14.2 · US10Y 4.68%",
@@ -20622,10 +20627,10 @@ window.LIVE_STOCKS = [
         "* FMP 실시간 공시 반영"
       ],
       "value": [
-        "PER 12.1 · 저평가",
+        "PER 12.6 · 저평가",
         "Forward PER 9.0 · 이익 성장 반영",
         "PEG 0.94 · 성장률 대비 저평가",
-        "FCF Yield 8.3% · 우수"
+        "FCF Yield 8.7% · 우수"
       ]
     }
   },
@@ -20737,7 +20742,7 @@ window.LIVE_STOCKS = [
         "* FMP 실시간 공시 반영"
       ],
       "value": [
-        "PER 50.9 · 프리미엄",
+        "PER 52.5 · 프리미엄",
         "Forward PER 14.2 · 이익 성장 반영",
         "PEG 0.26 · 성장률 대비 저평가"
       ]
@@ -21159,7 +21164,7 @@ window.LIVE_STOCKS = [
         "* FMP 실시간 공시 반영"
       ],
       "value": [
-        "PER 29.6 · 적정"
+        "PER 30.9 · 적정"
       ]
     }
   },
@@ -21234,7 +21239,7 @@ window.LIVE_STOCKS = [
         "* FMP 실시간 공시 반영"
       ],
       "value": [
-        "PER 44.3 · 프리미엄",
+        "PER 44.7 · 프리미엄",
         "Forward PER 34.8 · 이익 성장 반영",
         "PBR 8.2 · 부담"
       ]
@@ -21274,7 +21279,7 @@ window.LIVE_STOCKS = [
         "* FMP 실시간 공시 반영"
       ],
       "value": [
-        "PER 48.2 · 프리미엄",
+        "PER 47.4 · 프리미엄",
         "Forward PER 24.2 · 이익 성장 반영",
         "FCF 음수 · 현금유출"
       ]
@@ -21427,7 +21432,7 @@ window.LIVE_STOCKS = [
         "* FMP 실시간 공시 반영"
       ],
       "value": [
-        "PER 103.1 · 극심 프리미엄",
+        "PER 106.1 · 극심 프리미엄",
         "Forward PER 33.4 · 이익 성장 반영"
       ]
     }
@@ -21576,7 +21581,7 @@ window.LIVE_STOCKS = [
         "* FMP 실시간 공시 반영"
       ],
       "value": [
-        "PER 24.4 · 적정"
+        "PER 24.6 · 적정"
       ]
     }
   },
@@ -21697,7 +21702,7 @@ window.LIVE_STOCKS = [
         "PER 237.4 · 극심 프리미엄",
         "Forward PER 7.1 · 이익 성장 반영",
         "PEG 15.97 · 성장률 대비 부담",
-        "FCF Yield 17.5% · 우수"
+        "FCF Yield 18.2% · 우수"
       ]
     }
   },
@@ -21706,22 +21711,22 @@ window.LIVE_STOCKS = [
     "n": "Formula One Group",
     "m": "US",
     "sec": "인터넷",
-    "tech": 91,
+    "tech": 84,
     "macro": 65,
     "filing": 61,
     "value": 38,
-    "total": 69,
+    "total": 66,
     "consensus": 1,
     "signal": "HOLD",
-    "ev": 0.94,
-    "target": 11,
+    "ev": 0.83,
+    "target": 10,
     "hitl": false,
     "reasons": {
       "tech": [
-        "이동평균 완벽 정배열 (P>91.5>88.2>84.4)",
-        "RSI 59 · 강세 지속 구간",
-        "MACD 골든크로스 · 히스토 +0.20",
-        "3개월 수익률 +13.9%"
+        "이동평균 완벽 정배열 (P>91.6>88.5>84.4)",
+        "RSI 52 · 중립",
+        "MACD 골든크로스 · 히스토 +0.17",
+        "3개월 수익률 +12.9%"
       ],
       "macro": [
         "NEUTRAL · VIX 14.2 · US10Y 4.68%",
@@ -21792,13 +21797,13 @@ window.LIVE_STOCKS = [
     "total": 63,
     "consensus": 1,
     "signal": "HOLD",
-    "ev": 0.48,
+    "ev": 0.52,
     "target": 6,
     "hitl": false,
     "reasons": {
       "tech": [
-        "RSI 57 · 강세 지속 구간",
-        "MACD 골든크로스 · 히스토 +2.43",
+        "RSI 59 · 강세 지속 구간",
+        "MACD 골든크로스 · 히스토 +2.31",
         "거래량 급증 · 최근 20일 평균 1.4배"
       ],
       "macro": [
@@ -21887,9 +21892,9 @@ window.LIVE_STOCKS = [
         "* FMP 실시간 공시 반영"
       ],
       "value": [
-        "PER 23.9 · 적정",
+        "PER 24.5 · 적정",
         "Forward PER 18.1 · 이익 성장 반영",
-        "PBR 8.0 · 부담"
+        "PBR 8.3 · 부담"
       ]
     }
   },
@@ -21979,13 +21984,13 @@ window.LIVE_STOCKS = [
     "total": 60,
     "consensus": 0,
     "signal": "HOLD",
-    "ev": 0.41,
+    "ev": 0.42,
     "target": 5,
     "hitl": false,
     "reasons": {
       "tech": [
-        "RSI 52 · 중립",
-        "MACD 골든크로스 · 히스토 +0.03"
+        "RSI 47 · 중립",
+        "MACD 골든크로스 · 히스토 +0.01"
       ],
       "macro": [
         "NEUTRAL · VIX 14.2 · US10Y 4.68%",
@@ -22163,22 +22168,21 @@ window.LIVE_STOCKS = [
     "n": "Strategy Inc",
     "m": "US",
     "sec": "IT",
-    "tech": 62,
+    "tech": 65,
     "macro": 60,
     "filing": 58,
     "value": 60,
-    "total": 60,
+    "total": 61,
     "consensus": 0,
     "signal": "HOLD",
-    "ev": 0.28,
-    "target": 3,
+    "ev": 0.33,
+    "target": 4,
     "hitl": false,
     "reasons": {
       "tech": [
-        "단기 정배열 (P>62.8>62.3)",
-        "RSI 76 · 과매수 경계",
-        "MACD 골든크로스 · 히스토 +0.98",
-        "Bollinger 상단 접근 (93%)"
+        "단기 정배열 (P>63.2>62.3)",
+        "RSI 78 · 과매수 경계",
+        "MACD 골든크로스 · 히스토 +0.87"
       ],
       "macro": [
         "NEUTRAL · VIX 14.2 · US10Y 4.68%",
@@ -22309,22 +22313,22 @@ window.LIVE_STOCKS = [
     "n": "Samsara Inc.",
     "m": "US",
     "sec": "IT",
-    "tech": 95,
+    "tech": 88,
     "macro": 60,
     "filing": 50,
     "value": 35,
-    "total": 66,
+    "total": 63,
     "consensus": 1,
     "signal": "HOLD",
-    "ev": 0.85,
-    "target": 10,
+    "ev": 0.75,
+    "target": 9,
     "hitl": false,
     "reasons": {
       "tech": [
-        "이동평균 완벽 정배열 (P>37.5>35.5>33.6)",
-        "RSI 60 · 강세 지속 구간",
-        "MACD 골든크로스 · 히스토 +0.11",
-        "3개월 수익률 +31.9% · 강한 상승"
+        "이동평균 완벽 정배열 (P>37.6>35.6>33.6)",
+        "RSI 54 · 중립",
+        "MACD 골든크로스 · 히스토 +0.06",
+        "3개월 수익률 +27.4% · 강한 상승"
       ],
       "macro": [
         "NEUTRAL · VIX 14.2 · US10Y 4.68%",
@@ -22400,7 +22404,7 @@ window.LIVE_STOCKS = [
     "reasons": {
       "tech": [
         "단기 역배열 (P<25.0<25.1)",
-        "RSI 43 · 중립",
+        "RSI 45 · 중립",
         "MACD 골든크로스 · 히스토 +0.01",
         "거래량 감소 · 0.4배"
       ],
@@ -22496,21 +22500,21 @@ window.LIVE_STOCKS = [
     "n": "Tradeweb Markets Inc.",
     "m": "US",
     "sec": "금융",
-    "tech": 80,
+    "tech": 73,
     "macro": 60,
     "filing": 55,
     "value": 50,
-    "total": 64,
+    "total": 62,
     "consensus": 1,
     "signal": "HOLD",
-    "ev": 0.47,
-    "target": 6,
+    "ev": 0.36,
+    "target": 4,
     "hitl": false,
     "reasons": {
       "tech": [
-        "단기 정배열 (P>102.2>100.4)",
-        "RSI 56 · 강세 지속 구간",
-        "MACD 골든크로스 · 히스토 +0.45"
+        "단기 정배열 (P>102.4>100.5)",
+        "RSI 52 · 중립",
+        "MACD 골든크로스 · 히스토 +0.40"
       ],
       "macro": [
         "NEUTRAL · VIX 14.2 · US10Y 4.68%",
@@ -22557,7 +22561,7 @@ window.LIVE_STOCKS = [
         "* FMP 실시간 공시 반영"
       ],
       "value": [
-        "PER 31.6 · 적정",
+        "PER 32.2 · 적정",
         "Forward PER 21.9 · 이익 성장 반영"
       ]
     }
@@ -22723,14 +22727,14 @@ window.LIVE_STOCKS = [
     "total": 46,
     "consensus": 1,
     "signal": "HOLD",
-    "ev": -0.31,
+    "ev": -0.3,
     "target": -4,
     "hitl": false,
     "reasons": {
       "tech": [
-        "단기 역배열 (P<20.8<21.0)",
-        "RSI 29 · 과매도",
-        "MACD 데드크로스 · 히스토 -0.04",
+        "단기 역배열 (P<20.7<20.9)",
+        "RSI 19 · 과매도",
+        "MACD 데드크로스 · 히스토 -0.03",
         "Bollinger 하단 근접 · 반등 여지"
       ],
       "macro": [
@@ -22794,14 +22798,14 @@ window.LIVE_STOCKS = [
     "total": 73,
     "consensus": 3,
     "signal": "BUY",
-    "ev": 0.77,
+    "ev": 0.75,
     "target": 9,
     "hitl": false,
     "reasons": {
       "tech": [
-        "단기 정배열 (P>92.1>89.8)",
-        "RSI 60 · 강세 지속 구간",
-        "MACD 골든크로스 · 히스토 +0.30"
+        "단기 정배열 (P>92.6>89.9)",
+        "RSI 65 · 강세 지속 구간",
+        "MACD 골든크로스 · 히스토 +0.22"
       ],
       "macro": [
         "NEUTRAL · VIX 14.2 · US10Y 4.68%",
@@ -22815,7 +22819,7 @@ window.LIVE_STOCKS = [
       ],
       "value": [
         "PER 8.1 · 극심 저평가",
-        "FCF Yield 6.5% · 우수"
+        "FCF Yield 6.7% · 우수"
       ]
     }
   },
@@ -22852,7 +22856,7 @@ window.LIVE_STOCKS = [
         "* FMP 실시간 공시 반영"
       ],
       "value": [
-        "PER 4.8 · 극심 저평가",
+        "PER 4.9 · 극심 저평가",
         "PEG 0.22 · 성장률 대비 저평가",
         "FCF Yield 12.0% · 우수"
       ]
@@ -22875,10 +22879,10 @@ window.LIVE_STOCKS = [
     "hitl": false,
     "reasons": {
       "tech": [
-        "이동평균 완벽 정배열 (P>155.7>149.5>112.0)",
-        "RSI 64 · 강세 지속 구간",
-        "MACD 데드크로스 · 히스토 -0.22",
-        "3개월 수익률 +70.3% · 강한 상승"
+        "이동평균 완벽 정배열 (P>156.6>150.1>112.5)",
+        "RSI 66 · 강세 지속 구간",
+        "MACD 데드크로스 · 히스토 -0.39",
+        "3개월 수익률 +69.0% · 강한 상승"
       ],
       "macro": [
         "NEUTRAL · VIX 14.2 · US10Y 4.68%",
@@ -22942,11 +22946,11 @@ window.LIVE_STOCKS = [
     "tech": 31,
     "macro": 65,
     "filing": 45,
-    "value": 50,
-    "total": 45,
+    "value": 60,
+    "total": 46,
     "consensus": 0,
     "signal": "HOLD",
-    "ev": -0.35,
+    "ev": -0.32,
     "target": -4,
     "hitl": false,
     "reasons": {
@@ -22967,7 +22971,7 @@ window.LIVE_STOCKS = [
         "* FMP 실시간 공시 반영"
       ],
       "value": [
-        "PER 18.2 · 적정"
+        "PER 17.9 · 저평가"
       ]
     }
   },
@@ -23156,7 +23160,7 @@ window.LIVE_STOCKS = [
         "* FMP 실시간 공시 반영"
       ],
       "value": [
-        "PER 10.2 · 극심 저평가",
+        "PER 10.4 · 극심 저평가",
         "FCF Yield 10.6% · 우수"
       ]
     }
@@ -23191,7 +23195,7 @@ window.LIVE_STOCKS = [
         "* FMP 실시간 공시 반영"
       ],
       "value": [
-        "PER 6.3 · 극심 저평가",
+        "PER 6.6 · 극심 저평가",
         "PEG 0.25 · 성장률 대비 저평가",
         "FCF Yield 12.5% · 우수"
       ]
@@ -23276,20 +23280,21 @@ window.LIVE_STOCKS = [
     "n": "Burlington Stores, Inc.",
     "m": "US",
     "sec": "소비재",
-    "tech": 47,
+    "tech": 39,
     "macro": 60,
     "filing": 48,
     "value": 58,
-    "total": 52,
+    "total": 49,
     "consensus": 0,
     "signal": "HOLD",
-    "ev": 0.23,
-    "target": 3,
+    "ev": 0.12,
+    "target": 1,
     "hitl": false,
     "reasons": {
       "tech": [
-        "MACD 데드크로스 · 히스토 -4.24",
-        "3개월 수익률 +14.7%",
+        "RSI 19 · 과매도",
+        "MACD 데드크로스 · 히스토 -4.36",
+        "3개월 수익률 +16.0%",
         "Bollinger 하단 근접 · 반등 여지"
       ],
       "macro": [
@@ -23344,7 +23349,7 @@ window.LIVE_STOCKS = [
         "8-K: 최근 60일 이벤트 6건 (활발)"
       ],
       "value": [
-        "PER 18.9 · 적정",
+        "PER 18.6 · 적정",
         "Forward PER 12.3 · 이익 성장 반영",
         "PEG 0.91 · 성장률 대비 저평가"
       ]
@@ -23383,7 +23388,7 @@ window.LIVE_STOCKS = [
         "* FMP 실시간 공시 반영"
       ],
       "value": [
-        "PER 19.1 · 적정",
+        "PER 19.4 · 적정",
         "Forward PER 10.1 · 이익 성장 반영",
         "FCF Yield 7.1% · 우수"
       ]
@@ -23421,7 +23426,7 @@ window.LIVE_STOCKS = [
         "* FMP 실시간 공시 반영"
       ],
       "value": [
-        "PER 10.0 · 극심 저평가",
+        "PER 10.1 · 극심 저평가",
         "FCF Yield 5.9% · 우수"
       ]
     }
@@ -23607,7 +23612,7 @@ window.LIVE_STOCKS = [
         "* FMP 실시간 공시 반영"
       ],
       "value": [
-        "PER 15.7 · 저평가",
+        "PER 15.6 · 저평가",
         "PBR 0.73 · 자산가치 이하"
       ]
     }
@@ -23646,7 +23651,7 @@ window.LIVE_STOCKS = [
         "* FMP 실시간 공시 반영"
       ],
       "value": [
-        "PER 20.5 · 적정",
+        "PER 20.6 · 적정",
         "FCF Yield 5.3% · 우수"
       ]
     }
@@ -23707,8 +23712,8 @@ window.LIVE_STOCKS = [
     "hitl": true,
     "reasons": {
       "tech": [
-        "단기 역배열 (P<18.7<18.9)",
-        "RSI 29 · 과매도",
+        "단기 역배열 (P<18.6<18.9)",
+        "RSI 26 · 과매도",
         "MACD 데드크로스 · 히스토 -0.03",
         "Bollinger 하단 근접 · 반등 여지"
       ],
@@ -23730,22 +23735,22 @@ window.LIVE_STOCKS = [
     "n": "Strategy Inc",
     "m": "US",
     "sec": "IT",
-    "tech": 62,
+    "tech": 75,
     "macro": 60,
     "filing": 48,
     "value": 60,
-    "total": 57,
-    "consensus": 0,
+    "total": 62,
+    "consensus": 1,
     "signal": "HOLD",
-    "ev": 0.18,
-    "target": 2,
+    "ev": 0.37,
+    "target": 4,
     "hitl": false,
     "reasons": {
       "tech": [
-        "단기 정배열 (P>64.0>62.6)",
-        "MACD 골든크로스 · 히스토 +0.69",
-        "거래량 감소 · 0.5배",
-        "Bollinger 상단 접근 (91%)"
+        "단기 정배열 (P>64.4>62.6)",
+        "RSI 69 · 강세 지속 구간",
+        "MACD 골든크로스 · 히스토 +0.59",
+        "거래량 감소 · 0.5배"
       ],
       "macro": [
         "NEUTRAL · VIX 14.2 · US10Y 4.68%",
@@ -23793,7 +23798,7 @@ window.LIVE_STOCKS = [
         "* FMP 실시간 공시 반영"
       ],
       "value": [
-        "PER 22.5 · 적정",
+        "PER 22.7 · 적정",
         "FCF 음수 · 현금유출"
       ]
     }
@@ -23832,7 +23837,7 @@ window.LIVE_STOCKS = [
         "PER 14.0 · 저평가",
         "Forward PER 10.2 · 이익 성장 반영",
         "PEG 7.02 · 성장률 대비 부담",
-        "FCF Yield 6.6% · 우수"
+        "FCF Yield 6.5% · 우수"
       ]
     }
   },
@@ -23884,11 +23889,11 @@ window.LIVE_STOCKS = [
     "tech": 70,
     "macro": 65,
     "filing": 60,
-    "value": 53,
-    "total": 63,
+    "value": 45,
+    "total": 62,
     "consensus": 1,
     "signal": "HOLD",
-    "ev": 0.7,
+    "ev": 0.67,
     "target": 8,
     "hitl": false,
     "reasons": {
@@ -23911,8 +23916,7 @@ window.LIVE_STOCKS = [
         "* FMP 실시간 공시 반영"
       ],
       "value": [
-        "PER 26.1 · 적정",
-        "Forward PER 20.7 · 이익 성장 반영",
+        "PER 25.3 · 적정",
         "PEG 5.66 · 성장률 대비 부담"
       ]
     }
@@ -24010,7 +24014,7 @@ window.LIVE_STOCKS = [
     "reasons": {
       "tech": [
         "이동평균 완벽 정배열 (P>24.8>24.7>24.3)",
-        "RSI 56 · 강세 지속 구간",
+        "RSI 63 · 강세 지속 구간",
         "MACD 골든크로스 · 히스토 +0.02",
         "거래량 감소 · 0.5배"
       ],
@@ -24098,7 +24102,7 @@ window.LIVE_STOCKS = [
         "* FMP 실시간 공시 반영"
       ],
       "value": [
-        "PER 43.4 · 프리미엄",
+        "PER 44.0 · 프리미엄",
         "Forward PER 19.7 · 이익 성장 반영",
         "PBR 10.0 · 부담",
         "PEG 0.23 · 성장률 대비 저평가"
@@ -24160,10 +24164,10 @@ window.LIVE_STOCKS = [
     "hitl": false,
     "reasons": {
       "tech": [
-        "단기 정배열 (P>46.0>43.3)",
-        "MACD 골든크로스 · 히스토 +0.79",
-        "거래량 급증 · 최근 20일 평균 1.3배",
-        "3개월 수익률 +25.2% · 강한 상승"
+        "단기 정배열 (P>46.4>43.5)",
+        "MACD 골든크로스 · 히스토 +0.70",
+        "거래량 급증 · 최근 20일 평균 1.4배",
+        "3개월 수익률 +26.6% · 강한 상승"
       ],
       "macro": [
         "NEUTRAL · VIX 14.2 · US10Y 4.68%",
@@ -24176,7 +24180,7 @@ window.LIVE_STOCKS = [
         "* FMP 실시간 공시 반영"
       ],
       "value": [
-        "PER 225.1 · 극심 프리미엄",
+        "PER 235.3 · 극심 프리미엄",
         "Forward PER 14.2 · 이익 성장 반영"
       ]
     }
@@ -24225,19 +24229,20 @@ window.LIVE_STOCKS = [
     "n": "The Southern Company JR 2017B NT 77",
     "m": "US",
     "sec": "유틸리티",
-    "tech": 28,
+    "tech": 20,
     "macro": 60,
     "filing": 58,
     "value": 60,
-    "total": 48,
+    "total": 45,
     "consensus": 0,
     "signal": "HOLD",
-    "ev": -0.21,
-    "target": -3,
+    "ev": -0.32,
+    "target": -4,
     "hitl": false,
     "reasons": {
       "tech": [
-        "단기 역배열 (P<20.2<20.4)",
+        "단기 역배열 (P<20.1<20.4)",
+        "RSI 28 · 과매도",
         "MACD 데드크로스 · 히스토 -0.02",
         "Bollinger 하단 근접 · 반등 여지"
       ],
@@ -24556,7 +24561,7 @@ window.LIVE_STOCKS = [
         "* FMP 실시간 공시 반영"
       ],
       "value": [
-        "PER 61.4 · 극심 프리미엄",
+        "PER 63.0 · 극심 프리미엄",
         "Forward PER 18.0 · 이익 성장 반영",
         "FCF Yield 9.5% · 우수"
       ]
@@ -24567,21 +24572,22 @@ window.LIVE_STOCKS = [
     "n": "APi Group Corporation",
     "m": "US",
     "sec": "산업재",
-    "tech": 54,
+    "tech": 58,
     "macro": 60,
     "filing": 45,
     "value": 50,
-    "total": 52,
+    "total": 53,
     "consensus": 0,
     "signal": "HOLD",
-    "ev": 0.12,
-    "target": 1,
+    "ev": 0.21,
+    "target": 3,
     "hitl": false,
     "reasons": {
       "tech": [
-        "RSI 77 · 과매수 경계",
-        "MACD 골든크로스 · 히스토 +0.56",
-        "Bollinger 상단 접근 (100%)"
+        "RSI 82 · 과매수 경계",
+        "MACD 골든크로스 · 히스토 +0.52",
+        "3개월 수익률 +5.9%",
+        "Bollinger 상단 접근 (99%)"
       ],
       "macro": [
         "NEUTRAL · VIX 14.2 · US10Y 4.68%",
@@ -24669,7 +24675,7 @@ window.LIVE_STOCKS = [
         "* FMP 실시간 공시 반영"
       ],
       "value": [
-        "PER 23.8 · 적정",
+        "PER 24.4 · 적정",
         "Forward PER 10.8 · 이익 성장 반영",
         "PEG 0.67 · 성장률 대비 저평가",
         "FCF Yield 5.8% · 우수"
@@ -24846,7 +24852,7 @@ window.LIVE_STOCKS = [
     "reasons": {
       "tech": [
         "이동평균 완벽 정배열 (P>25.6>25.5>25.2)",
-        "RSI 61 · 강세 지속 구간",
+        "RSI 60 · 강세 지속 구간",
         "MACD 골든크로스 · 히스토 +0.00",
         "거래량 감소 · 0.5배"
       ],
@@ -24906,21 +24912,22 @@ window.LIVE_STOCKS = [
     "n": "KE Holdings Inc.",
     "m": "US",
     "sec": "리츠",
-    "tech": 58,
+    "tech": 46,
     "macro": 60,
     "filing": 55,
     "value": 58,
-    "total": 58,
+    "total": 53,
     "consensus": 0,
     "signal": "HOLD",
-    "ev": 0.17,
-    "target": 2,
+    "ev": 0.02,
+    "target": 0,
     "hitl": false,
     "reasons": {
       "tech": [
         "단기 정배열 (P>16.8>16.1)",
-        "RSI 58 · 강세 지속 구간",
-        "MACD 데드크로스 · 히스토 -0.03"
+        "RSI 53 · 중립",
+        "MACD 데드크로스 · 히스토 -0.04",
+        "거래량 감소 · 0.6배"
       ],
       "macro": [
         "NEUTRAL · VIX 14.2 · US10Y 4.68%",
@@ -24951,15 +24958,15 @@ window.LIVE_STOCKS = [
     "total": 71,
     "consensus": 1,
     "signal": "HOLD",
-    "ev": 0.87,
+    "ev": 0.86,
     "target": 10,
     "hitl": false,
     "reasons": {
       "tech": [
-        "이동평균 완벽 정배열 (P>20.9>19.8>17.6)",
-        "RSI 64 · 강세 지속 구간",
+        "이동평균 완벽 정배열 (P>20.9>19.8>17.7)",
+        "RSI 69 · 강세 지속 구간",
         "MACD 골든크로스 · 히스토 +0.09",
-        "3개월 수익률 +7.3%",
+        "3개월 수익률 +6.9%",
         "Bollinger 상단 접근 (100%)"
       ],
       "macro": [
@@ -24972,7 +24979,7 @@ window.LIVE_STOCKS = [
         "* FMP 실시간 공시 반영"
       ],
       "value": [
-        "PER 14.3 · 저평가",
+        "PER 13.9 · 저평가",
         "Forward PER 10.3 · 이익 성장 반영"
       ]
     }
@@ -25048,7 +25055,7 @@ window.LIVE_STOCKS = [
         "8-K: 최근 60일 이벤트 3건 (활발)"
       ],
       "value": [
-        "PER 43.5 · 프리미엄",
+        "PER 41.5 · 프리미엄",
         "Forward PER 23.9 · 이익 성장 반영",
         "PBR 13.6 · 부담",
         "PEG 0.98 · 성장률 대비 저평가"
@@ -25060,21 +25067,20 @@ window.LIVE_STOCKS = [
     "n": "Fortive Corporation",
     "m": "US",
     "sec": "IT",
-    "tech": 50,
+    "tech": 47,
     "macro": 60,
     "filing": 63,
     "value": 74,
-    "total": 60,
+    "total": 58,
     "consensus": 1,
     "signal": "HOLD",
-    "ev": 0.34,
-    "target": 4,
+    "ev": 0.29,
+    "target": 3,
     "hitl": false,
     "reasons": {
       "tech": [
-        "단기 역배열 (P<61.0<61.2)",
-        "RSI 41 · 중립",
-        "MACD 골든크로스 · 히스토 +0.05"
+        "단기 역배열 (P<61.1<61.2)",
+        "MACD 골든크로스 · 히스토 +0.04"
       ],
       "macro": [
         "NEUTRAL · VIX 14.2 · US10Y 4.68%",
@@ -25207,7 +25213,7 @@ window.LIVE_STOCKS = [
         "* FMP 실시간 공시 반영"
       ],
       "value": [
-        "PER 97.2 · 극심 프리미엄",
+        "PER 106.0 · 극심 프리미엄",
         "Forward PER 11.8 · 이익 성장 반영",
         "PEG 0.22 · 성장률 대비 저평가",
         "FCF Yield 5.5% · 우수"
@@ -25431,7 +25437,7 @@ window.LIVE_STOCKS = [
         "* FMP 실시간 공시 반영"
       ],
       "value": [
-        "PER 13.6 · 저평가",
+        "PER 13.5 · 저평가",
         "Forward PER 10.0 · 이익 성장 반영",
         "FCF Yield 20.2% · 우수"
       ]
@@ -25631,22 +25637,22 @@ window.LIVE_STOCKS = [
     "n": "News Corporation",
     "m": "US",
     "sec": "인터넷",
-    "tech": 91,
+    "tech": 69,
     "macro": 65,
     "filing": 58,
     "value": 66,
-    "total": 72,
-    "consensus": 1,
+    "total": 64,
+    "consensus": 0,
     "signal": "HOLD",
-    "ev": 0.95,
-    "target": 11,
+    "ev": 0.62,
+    "target": 7,
     "hitl": false,
     "reasons": {
       "tech": [
-        "이동평균 완벽 정배열 (P>32.0>30.8>29.5)",
-        "RSI 61 · 강세 지속 구간",
-        "MACD 골든크로스 · 히스토 +0.01",
-        "3개월 수익률 +9.9%"
+        "이동평균 완벽 정배열 (P>32.1>30.9>29.5)",
+        "RSI 56 · 강세 지속 구간",
+        "MACD 데드크로스 · 히스토 -0.01",
+        "3개월 수익률 +8.1%"
       ],
       "macro": [
         "NEUTRAL · VIX 14.2 · US10Y 4.68%",
@@ -25783,22 +25789,21 @@ window.LIVE_STOCKS = [
     "n": "Nutanix, Inc.",
     "m": "US",
     "sec": "IT",
-    "tech": 80,
+    "tech": 85,
     "macro": 60,
     "filing": 60,
     "value": 43,
-    "total": 64,
+    "total": 66,
     "consensus": 1,
     "signal": "HOLD",
-    "ev": 0.77,
-    "target": 9,
+    "ev": 0.84,
+    "target": 10,
     "hitl": false,
     "reasons": {
       "tech": [
-        "이동평균 완벽 정배열 (P>60.0>54.8>49.0)",
-        "RSI 76 · 과매수 경계",
-        "MACD 골든크로스 · 히스토 +0.50",
-        "3개월 수익률 +41.7% · 강한 상승"
+        "이동평균 완벽 정배열 (P>60.4>55.0>49.0)",
+        "MACD 골든크로스 · 히스토 +0.40",
+        "3개월 수익률 +38.4% · 강한 상승"
       ],
       "macro": [
         "NEUTRAL · VIX 14.2 · US10Y 4.68%",
@@ -25847,7 +25852,7 @@ window.LIVE_STOCKS = [
         "* FMP 실시간 공시 반영"
       ],
       "value": [
-        "PER 34.6 · 적정",
+        "PER 34.3 · 적정",
         "Forward PER 25.1 · 이익 성장 반영"
       ]
     }
@@ -26037,7 +26042,7 @@ window.LIVE_STOCKS = [
         "* FMP 실시간 공시 반영"
       ],
       "value": [
-        "PER 27.2 · 적정",
+        "PER 27.7 · 적정",
         "PEG 13.14 · 성장률 대비 부담",
         "FCF Yield 6.6% · 우수"
       ]
@@ -26129,14 +26134,14 @@ window.LIVE_STOCKS = [
     "total": 64,
     "consensus": 1,
     "signal": "HOLD",
-    "ev": 0.58,
+    "ev": 0.61,
     "target": 7,
     "hitl": false,
     "reasons": {
       "tech": [
-        "단기 정배열 (P>46.9>45.0)",
-        "RSI 58 · 강세 지속 구간",
-        "MACD 골든크로스 · 히스토 +0.15"
+        "단기 정배열 (P>47.0>45.1)",
+        "RSI 57 · 강세 지속 구간",
+        "MACD 골든크로스 · 히스토 +0.12"
       ],
       "macro": [
         "NEUTRAL · VIX 14.2 · US10Y 4.68%",
@@ -26185,7 +26190,7 @@ window.LIVE_STOCKS = [
       ],
       "value": [
         "PER 132.5 · 극심 프리미엄",
-        "Forward PER 30.4 · 이익 성장 반영",
+        "Forward PER 30.1 · 이익 성장 반영",
         "PBR 8.2 · 부담"
       ]
     }
@@ -26482,7 +26487,7 @@ window.LIVE_STOCKS = [
         "* FMP 실시간 공시 반영"
       ],
       "value": [
-        "PER 39.6 · 적정",
+        "PER 39.0 · 적정",
         "PEG 0.27 · 성장률 대비 저평가"
       ]
     }
@@ -26598,7 +26603,7 @@ window.LIVE_STOCKS = [
       "value": [
         "PER 16.4 · 저평가",
         "PEG 4.97 · 성장률 대비 부담",
-        "FCF Yield 5.5% · 우수"
+        "FCF Yield 5.4% · 우수"
       ]
     }
   },
@@ -26831,22 +26836,22 @@ window.LIVE_STOCKS = [
     "n": "Medpace Holdings, Inc.",
     "m": "US",
     "sec": "제약/바이오",
-    "tech": 66,
+    "tech": 73,
     "macro": 65,
     "filing": 45,
     "value": 37,
-    "total": 55,
-    "consensus": 0,
+    "total": 58,
+    "consensus": 1,
     "signal": "HOLD",
-    "ev": 0.43,
-    "target": 5,
+    "ev": 0.53,
+    "target": 6,
     "hitl": false,
     "reasons": {
       "tech": [
-        "이동평균 완벽 정배열 (P>578.2>534.0>519.8)",
-        "RSI 53 · 중립",
-        "MACD 데드크로스 · 히스토 -2.06",
-        "3개월 수익률 +43.8% · 강한 상승"
+        "이동평균 완벽 정배열 (P>582.1>536.9>519.9)",
+        "RSI 62 · 강세 지속 구간",
+        "MACD 데드크로스 · 히스토 -2.41",
+        "3개월 수익률 +41.9% · 강한 상승"
       ],
       "macro": [
         "NEUTRAL · VIX 14.2 · US10Y 4.68%",
@@ -26884,9 +26889,9 @@ window.LIVE_STOCKS = [
     "hitl": false,
     "reasons": {
       "tech": [
-        "단기 정배열 (P>46.3>44.0)",
-        "RSI 65 · 강세 지속 구간",
-        "MACD 데드크로스 · 히스토 -0.04"
+        "단기 정배열 (P>46.4>44.1)",
+        "RSI 60 · 강세 지속 구간",
+        "MACD 데드크로스 · 히스토 -0.08"
       ],
       "macro": [
         "NEUTRAL · VIX 14.2 · US10Y 4.68%",
@@ -26899,7 +26904,7 @@ window.LIVE_STOCKS = [
         "* FMP 실시간 공시 반영"
       ],
       "value": [
-        "PER 17.3 · 저평가",
+        "PER 17.4 · 저평가",
         "FCF Yield 5.3% · 우수"
       ]
     }
@@ -26909,20 +26914,21 @@ window.LIVE_STOCKS = [
     "n": "Performance Food Group Co",
     "m": "US",
     "sec": "소매",
-    "tech": 47,
+    "tech": 39,
     "macro": 60,
     "filing": 40,
     "value": 50,
-    "total": 48,
+    "total": 45,
     "consensus": 0,
     "signal": "HOLD",
-    "ev": 0.04,
-    "target": 0,
+    "ev": -0.07,
+    "target": -1,
     "hitl": false,
     "reasons": {
       "tech": [
+        "RSI 28 · 과매도",
         "MACD 데드크로스 · 히스토 -1.35",
-        "3개월 수익률 +9.1%",
+        "3개월 수익률 +8.9%",
         "Bollinger 하단 근접 · 반등 여지"
       ],
       "macro": [
@@ -26936,7 +26942,7 @@ window.LIVE_STOCKS = [
         "* FMP 실시간 공시 반영"
       ],
       "value": [
-        "PER 45.5 · 프리미엄",
+        "PER 46.7 · 프리미엄",
         "Forward PER 15.7 · 이익 성장 반영"
       ]
     }
@@ -27086,7 +27092,7 @@ window.LIVE_STOCKS = [
         "* FMP 실시간 공시 반영"
       ],
       "value": [
-        "PER 17.5 · 저평가",
+        "PER 17.7 · 저평가",
         "Forward PER 13.5 · 이익 성장 반영"
       ]
     }
@@ -27206,21 +27212,21 @@ window.LIVE_STOCKS = [
     "n": "Talen Energy Corporation",
     "m": "US",
     "sec": "유틸리티",
-    "tech": 69,
+    "tech": 76,
     "macro": 60,
     "filing": 63,
     "value": 60,
-    "total": 64,
-    "consensus": 0,
+    "total": 66,
+    "consensus": 1,
     "signal": "HOLD",
-    "ev": 0.6,
-    "target": 7,
+    "ev": 0.74,
+    "target": 9,
     "hitl": false,
     "reasons": {
       "tech": [
-        "RSI 54 · 중립",
-        "MACD 골든크로스 · 히스토 +3.53",
-        "3개월 수익률 +6.8%"
+        "RSI 64 · 강세 지속 구간",
+        "MACD 골든크로스 · 히스토 +3.59",
+        "3개월 수익률 +10.1%"
       ],
       "macro": [
         "NEUTRAL · VIX 14.2 · US10Y 4.68%",
@@ -27324,22 +27330,22 @@ window.LIVE_STOCKS = [
     "n": "News Corporation",
     "m": "US",
     "sec": "인터넷",
-    "tech": 91,
+    "tech": 62,
     "macro": 65,
     "filing": 53,
     "value": 66,
-    "total": 71,
-    "consensus": 1,
+    "total": 60,
+    "consensus": 0,
     "signal": "HOLD",
-    "ev": 0.91,
-    "target": 11,
+    "ev": 0.48,
+    "target": 6,
     "hitl": false,
     "reasons": {
       "tech": [
-        "이동평균 완벽 정배열 (P>28.2>27.1>25.8)",
-        "RSI 60 · 강세 지속 구간",
-        "MACD 골든크로스 · 히스토 +0.00",
-        "3개월 수익률 +10.7%"
+        "이동평균 완벽 정배열 (P>28.2>27.2>25.9)",
+        "RSI 54 · 중립",
+        "MACD 데드크로스 · 히스토 -0.01",
+        "3개월 수익률 +9.3%"
       ],
       "macro": [
         "NEUTRAL · VIX 14.2 · US10Y 4.68%",
@@ -27436,158 +27442,6 @@ window.LIVE_STOCKS = [
     }
   },
   {
-    "t": "DOCN",
-    "n": "DigitalOcean Holdings, Inc.",
-    "m": "US",
-    "sec": "IT",
-    "tech": 72,
-    "macro": 60,
-    "filing": 63,
-    "value": 26,
-    "total": 60,
-    "consensus": 1,
-    "signal": "HOLD",
-    "ev": 0.32,
-    "target": 4,
-    "hitl": false,
-    "reasons": {
-      "tech": [
-        "RSI 65 · 강세 지속 구간",
-        "MACD 골든크로스 · 히스토 +2.31"
-      ],
-      "macro": [
-        "NEUTRAL · VIX 14.2 · US10Y 4.68%",
-        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
-      ],
-      "filing": [
-        "13F: 신규진입 +55곳",
-        "13F: 기관지분율 -2.51%p",
-        "13F: 보유기관 616곳 · 지분율 103.3% (2026Q3)",
-        "8-K: 최근 60일 이벤트 4건 (활발)",
-        "* FMP 실시간 공시 반영"
-      ],
-      "value": [
-        "PER 59.1 · 프리미엄",
-        "PBR 15.3 · 부담",
-        "FCF 음수 · 현금유출"
-      ]
-    }
-  },
-  {
-    "t": "ALB",
-    "n": "Albemarle Corporation",
-    "m": "US",
-    "sec": "소재",
-    "tech": 47,
-    "macro": 60,
-    "filing": 60,
-    "value": 59,
-    "total": 55,
-    "consensus": 0,
-    "signal": "HOLD",
-    "ev": -0.04,
-    "target": 0,
-    "hitl": false,
-    "reasons": {
-      "tech": [
-        "RSI 80 · 과매수 경계",
-        "MACD 골든크로스 · 히스토 +2.81",
-        "3개월 수익률 -23.6% · 급락"
-      ],
-      "macro": [
-        "NEUTRAL · VIX 14.2 · US10Y 4.68%",
-        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
-      ],
-      "filing": [
-        "13F: 기관지분율 +6.65%p",
-        "13F: 보유기관 1001곳 · 지분율 98.8% (2026Q3)",
-        "* FMP 실시간 공시 반영"
-      ],
-      "value": [
-        "PER 496.3 · 극심 프리미엄",
-        "Forward PER 11.6 · 이익 성장 반영",
-        "PEG 0.79 · 성장률 대비 저평가",
-        "FCF Yield 8.4% · 우수"
-      ]
-    }
-  },
-  {
-    "t": "TIGO",
-    "n": "Millicom International Cellular S.A.",
-    "m": "US",
-    "sec": "인터넷",
-    "tech": 47,
-    "macro": 65,
-    "filing": 60,
-    "value": 74,
-    "total": 59,
-    "consensus": 1,
-    "signal": "HOLD",
-    "ev": 0.45,
-    "target": 5,
-    "hitl": false,
-    "reasons": {
-      "tech": [
-        "RSI 48 · 중립",
-        "MACD 데드크로스 · 히스토 -0.48",
-        "3개월 수익률 +19.9%"
-      ],
-      "macro": [
-        "NEUTRAL · VIX 14.2 · US10Y 4.68%",
-        "DXY 99.6 약세 · 성장주 유리",
-        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
-      ],
-      "filing": [
-        "13F: 기관지분율 +2.98%p",
-        "13F: 보유기관 438곳 · 지분율 46.1% (2026Q3)",
-        "8-K: 최근 60일 이벤트 없음",
-        "* FMP 실시간 공시 반영"
-      ],
-      "value": [
-        "PER 23.6 · 적정",
-        "Forward PER 12.1 · 이익 성장 반영",
-        "PEG 0.54 · 성장률 대비 저평가",
-        "FCF Yield 11.9% · 우수"
-      ]
-    }
-  },
-  {
-    "t": "CCZ",
-    "n": "Comcast Holdings Corp.",
-    "m": "US",
-    "sec": "인터넷",
-    "tech": 15,
-    "macro": 65,
-    "filing": 55,
-    "value": 42,
-    "total": 41,
-    "consensus": 0,
-    "signal": "AVOID",
-    "ev": -0.39,
-    "target": -5,
-    "hitl": true,
-    "reasons": {
-      "tech": [
-        "단기 역배열 (P<65.0<65.1)",
-        "RSI 0 · 과매도",
-        "MACD 데드크로스 · 히스토 -0.45",
-        "거래량 감소 · 0.3배",
-        "Bollinger 하단 근접 · 반등 여지"
-      ],
-      "macro": [
-        "NEUTRAL · VIX 14.2 · US10Y 4.68%",
-        "DXY 99.6 약세 · 성장주 유리",
-        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
-      ],
-      "filing": [
-        "* FMP 실시간 공시 반영"
-      ],
-      "value": [
-        "PER 54.0 · 프리미엄"
-      ]
-    }
-  },
-  {
     "t": "PS",
     "n": "Pershing Square Inc.",
     "m": "US",
@@ -27599,14 +27453,14 @@ window.LIVE_STOCKS = [
     "total": 65,
     "consensus": 1,
     "signal": "HOLD",
-    "ev": 0.54,
-    "target": 6,
+    "ev": 0.62,
+    "target": 7,
     "hitl": false,
     "reasons": {
       "tech": [
-        "단기 정배열 (P>36.0>34.6)",
-        "RSI 70 · 강세 지속 구간",
-        "MACD 골든크로스 · 히스토 +0.59"
+        "단기 정배열 (P>36.3>34.7)",
+        "RSI 69 · 강세 지속 구간",
+        "MACD 골든크로스 · 히스토 +0.53"
       ],
       "macro": [
         "NEUTRAL · VIX 14.2 · US10Y 4.68%",
@@ -27650,7 +27504,7 @@ window.LIVE_STOCKS = [
         "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
       ],
       "filing": [
-        "13F: 보유기관 861곳 · 지분율 92.8% (2026Q3)",
+        "13F: 보유기관 871곳 · 지분율 92.9% (2026Q3)",
         "Form 4: 매도 우세 P0/S4",
         "* FMP 실시간 공시 반영"
       ],
@@ -27755,7 +27609,7 @@ window.LIVE_STOCKS = [
       "tech": [
         "MACD 데드크로스 · 히스토 -0.72",
         "거래량 감소 · 0.6배",
-        "3개월 수익률 +20.8% · 강한 상승",
+        "3개월 수익률 +22.3% · 강한 상승",
         "Bollinger 하단 근접 · 반등 여지"
       ],
       "macro": [
@@ -27830,9 +27684,9 @@ window.LIVE_STOCKS = [
     "hitl": false,
     "reasons": {
       "tech": [
-        "이동평균 완벽 정배열 (P>25.5>25.3>24.8)",
-        "RSI 63 · 강세 지속 구간",
-        "MACD 골든크로스 · 히스토 +0.02"
+        "이동평균 완벽 정배열 (P>25.5>25.4>24.8)",
+        "RSI 67 · 강세 지속 구간",
+        "MACD 골든크로스 · 히스토 +0.01"
       ],
       "macro": [
         "NEUTRAL · VIX 14.2 · US10Y 4.68%",
@@ -27922,7 +27776,7 @@ window.LIVE_STOCKS = [
       "value": [
         "PER 28.7 · 적정",
         "Forward PER 22.9 · 이익 성장 반영",
-        "PBR 10.0 · 부담"
+        "PBR 10.4 · 부담"
       ]
     }
   },
@@ -27972,20 +27826,20 @@ window.LIVE_STOCKS = [
     "n": "Viper Energy, Inc.",
     "m": "US",
     "sec": "에너지",
-    "tech": 65,
+    "tech": 72,
     "macro": 60,
     "filing": 60,
     "value": 60,
-    "total": 62,
-    "consensus": 0,
+    "total": 64,
+    "consensus": 1,
     "signal": "HOLD",
-    "ev": 0.28,
-    "target": 3,
+    "ev": 0.37,
+    "target": 4,
     "hitl": false,
     "reasons": {
       "tech": [
-        "RSI 53 · 중립",
-        "MACD 골든크로스 · 히스토 +0.06"
+        "RSI 58 · 강세 지속 구간",
+        "MACD 골든크로스 · 히스토 +0.08"
       ],
       "macro": [
         "NEUTRAL · VIX 14.2 · US10Y 4.68%",
@@ -28145,7 +27999,7 @@ window.LIVE_STOCKS = [
         "8-K: 최근 60일 이벤트 없음"
       ],
       "value": [
-        "PER 19.2 · 적정",
+        "PER 19.3 · 적정",
         "PBR 9.8 · 부담"
       ]
     }
@@ -28186,7 +28040,7 @@ window.LIVE_STOCKS = [
         "* FMP 실시간 공시 반영"
       ],
       "value": [
-        "PER 62.4 · 극심 프리미엄",
+        "PER 60.5 · 극심 프리미엄",
         "Forward PER 14.8 · 이익 성장 반영",
         "PEG 0.56 · 성장률 대비 저평가"
       ]
@@ -28427,21 +28281,20 @@ window.LIVE_STOCKS = [
     "n": "TransUnion",
     "m": "US",
     "sec": "금융",
-    "tech": 47,
+    "tech": 44,
     "macro": 60,
     "filing": 53,
     "value": 66,
-    "total": 54,
+    "total": 53,
     "consensus": 0,
     "signal": "HOLD",
-    "ev": 0.32,
-    "target": 4,
+    "ev": 0.27,
+    "target": 3,
     "hitl": false,
     "reasons": {
       "tech": [
-        "RSI 53 · 중립",
-        "MACD 데드크로스 · 히스토 -0.34",
-        "3개월 수익률 +19.0%"
+        "MACD 데드크로스 · 히스토 -0.35",
+        "3개월 수익률 +14.9%"
       ],
       "macro": [
         "NEUTRAL · VIX 14.2 · US10Y 4.68%",
@@ -28455,7 +28308,7 @@ window.LIVE_STOCKS = [
         "* FMP 실시간 공시 반영"
       ],
       "value": [
-        "PER 20.8 · 적정",
+        "PER 21.2 · 적정",
         "Forward PER 14.0 · 이익 성장 반영",
         "FCF Yield 5.4% · 우수"
       ]
@@ -28590,10 +28443,10 @@ window.LIVE_STOCKS = [
     "hitl": false,
     "reasons": {
       "tech": [
-        "단기 역배열 (P<99.8<110.1)",
-        "RSI 45 · 중립",
-        "MACD 골든크로스 · 히스토 +1.22",
-        "3개월 수익률 -31.3% · 급락"
+        "단기 역배열 (P<100.0<109.2)",
+        "RSI 55 · 중립",
+        "MACD 골든크로스 · 히스토 +1.13",
+        "3개월 수익률 -26.3% · 급락"
       ],
       "macro": [
         "NEUTRAL · VIX 14.2 · US10Y 4.68%",
@@ -28629,10 +28482,10 @@ window.LIVE_STOCKS = [
     "hitl": false,
     "reasons": {
       "tech": [
-        "단기 역배열 (P<53.2<53.9)",
-        "RSI 50 · 중립",
-        "MACD 데드크로스 · 히스토 -0.23",
-        "3개월 수익률 +11.5%"
+        "단기 역배열 (P<53.3<54.0)",
+        "RSI 46 · 중립",
+        "MACD 데드크로스 · 히스토 -0.26",
+        "3개월 수익률 +11.2%"
       ],
       "macro": [
         "NEUTRAL · VIX 14.2 · US10Y 4.68%",
@@ -28682,10 +28535,10 @@ window.LIVE_STOCKS = [
         "* FMP 실시간 공시 반영"
       ],
       "value": [
-        "PER 155.6 · 극심 프리미엄",
+        "PER 159.7 · 극심 프리미엄",
         "Forward PER 40.9 · 이익 성장 반영",
         "PEG 9.42 · 성장률 대비 부담",
-        "FCF Yield 12.1% · 우수"
+        "FCF Yield 12.2% · 우수"
       ]
     }
   },
@@ -28770,21 +28623,21 @@ window.LIVE_STOCKS = [
     "n": "Corebridge Financial, Inc.",
     "m": "US",
     "sec": "금융",
-    "tech": 95,
+    "tech": 88,
     "macro": 60,
     "filing": 53,
     "value": 58,
-    "total": 70,
+    "total": 67,
     "consensus": 1,
     "signal": "HOLD",
-    "ev": 0.96,
-    "target": 12,
+    "ev": 0.86,
+    "target": 10,
     "hitl": false,
     "reasons": {
       "tech": [
-        "이동평균 완벽 정배열 (P>32.5>30.5>28.4)",
-        "RSI 58 · 강세 지속 구간",
-        "MACD 골든크로스 · 히스토 +0.04",
+        "이동평균 완벽 정배열 (P>32.6>30.6>28.4)",
+        "RSI 55 · 중립",
+        "MACD 골든크로스 · 히스토 +0.01",
         "3개월 수익률 +21.4% · 강한 상승"
       ],
       "macro": [
@@ -28873,7 +28726,7 @@ window.LIVE_STOCKS = [
         "* FMP 실시간 공시 반영"
       ],
       "value": [
-        "PER 8.8 · 극심 저평가",
+        "PER 8.5 · 극심 저평가",
         "PEG 0.77 · 성장률 대비 저평가",
         "FCF Yield 14.7% · 우수"
       ]
@@ -28896,9 +28749,9 @@ window.LIVE_STOCKS = [
     "hitl": false,
     "reasons": {
       "tech": [
-        "RSI 48 · 중립",
+        "RSI 43 · 중립",
         "MACD 데드크로스 · 히스토 -0.16",
-        "3개월 수익률 +18.5%"
+        "3개월 수익률 +15.8%"
       ],
       "macro": [
         "NEUTRAL · VIX 14.2 · US10Y 4.68%",
@@ -28906,9 +28759,9 @@ window.LIVE_STOCKS = [
         "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
       ],
       "filing": [
-        "13F: 기관지분율 +2.67%p",
+        "13F: 기관지분율 +2.71%p",
         "P/C비율 급등 +30% (헤지 강화)",
-        "13F: 보유기관 717곳 · 지분율 81.3% (2026Q3)",
+        "13F: 보유기관 724곳 · 지분율 81.3% (2026Q3)",
         "Form 4: 매도 우세 P0/S27",
         "* FMP 실시간 공시 반영"
       ],
@@ -28916,7 +28769,7 @@ window.LIVE_STOCKS = [
         "PER 67.9 · 극심 프리미엄",
         "Forward PER 9.6 · 이익 성장 반영",
         "PEG 0.37 · 성장률 대비 저평가",
-        "FCF Yield 9.3% · 우수"
+        "FCF Yield 9.2% · 우수"
       ]
     }
   },
@@ -29071,7 +28924,7 @@ window.LIVE_STOCKS = [
         "* FMP 실시간 공시 반영"
       ],
       "value": [
-        "PER 68.2 · 극심 프리미엄",
+        "PER 70.4 · 극심 프리미엄",
         "Forward PER 48.9 · 이익 성장 반영"
       ]
     }
@@ -29223,7 +29076,7 @@ window.LIVE_STOCKS = [
         "* FMP 실시간 공시 반영"
       ],
       "value": [
-        "PER 17.0 · 저평가",
+        "PER 17.1 · 저평가",
         "FCF Yield 6.2% · 우수"
       ]
     }
@@ -29376,6 +29229,45 @@ window.LIVE_STOCKS = [
     }
   },
   {
+    "t": "UNM",
+    "n": "Unum Group",
+    "m": "US",
+    "sec": "금융",
+    "tech": 76,
+    "macro": 60,
+    "filing": 66,
+    "value": 50,
+    "total": 66,
+    "consensus": 1,
+    "signal": "HOLD",
+    "ev": 0.75,
+    "target": 9,
+    "hitl": false,
+    "reasons": {
+      "tech": [
+        "RSI 57 · 강세 지속 구간",
+        "MACD 골든크로스 · 히스토 +0.40",
+        "3개월 수익률 +11.2%"
+      ],
+      "macro": [
+        "NEUTRAL · VIX 14.2 · US10Y 4.68%",
+        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
+      ],
+      "filing": [
+        "13F: 기관지분율 +9.64%p",
+        "P/C비율 하락 -41% (헤지 완화)",
+        "13F: 보유기관 779곳 · 지분율 86.7% (2026Q3)",
+        "8-K: 최근 60일 이벤트 3건 (활발)",
+        "* FMP 실시간 공시 반영"
+      ],
+      "value": [
+        "PER 21.6 · 적정",
+        "Forward PER 9.6 · 이익 성장 반영",
+        "FCF 음수 · 현금유출"
+      ]
+    }
+  },
+  {
     "t": "AIZN",
     "n": "Assurant, Inc. 5.25% Subordinat",
     "m": "US",
@@ -29405,6 +29297,11614 @@ window.LIVE_STOCKS = [
       ],
       "value": [
         "밸류 데이터 미확인"
+      ]
+    }
+  },
+  {
+    "t": "EG",
+    "n": "Everest Group, Ltd.",
+    "m": "US",
+    "sec": "금융",
+    "tech": 32,
+    "macro": 60,
+    "filing": 63,
+    "value": 100,
+    "total": 57,
+    "consensus": 1,
+    "signal": "HOLD",
+    "ev": 0.17,
+    "target": 2,
+    "hitl": false,
+    "reasons": {
+      "tech": [
+        "RSI 24 · 과매도",
+        "MACD 데드크로스 · 히스토 -2.23"
+      ],
+      "macro": [
+        "NEUTRAL · VIX 14.2 · US10Y 4.68%",
+        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
+      ],
+      "filing": [
+        "13F: 기관지분율 +8.57%p",
+        "P/C비율 하락 -52% (헤지 완화)",
+        "13F: 보유기관 688곳 · 지분율 97.1% (2026Q3)",
+        "* FMP 실시간 공시 반영"
+      ],
+      "value": [
+        "PER 7.8 · 극심 저평가",
+        "Forward PER 6.1 · 이익 성장 반영",
+        "PBR 0.92 · 자산가치 이하",
+        "PEG 0.97 · 성장률 대비 저평가"
+      ]
+    }
+  },
+  {
+    "t": "IVZ",
+    "n": "Invesco Ltd.",
+    "m": "US",
+    "sec": "금융",
+    "tech": 81,
+    "macro": 60,
+    "filing": 60,
+    "value": 86,
+    "total": 71,
+    "consensus": 2,
+    "signal": "WATCH",
+    "ev": 0.93,
+    "target": 11,
+    "hitl": false,
+    "reasons": {
+      "tech": [
+        "이동평균 완벽 정배열 (P>30.7>29.0>26.2)",
+        "MACD 골든크로스 · 히스토 +0.12",
+        "3개월 수익률 +19.7%"
+      ],
+      "macro": [
+        "NEUTRAL · VIX 14.2 · US10Y 4.68%",
+        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
+      ],
+      "filing": [
+        "13F: 기관지분율 +2.25%p",
+        "13F: 보유기관 686곳 · 지분율 95.1% (2026Q3)",
+        "8-K: 최근 60일 이벤트 없음",
+        "* FMP 실시간 공시 반영"
+      ],
+      "value": [
+        "PER 10.0 · 극심 저평가",
+        "PEG 0.90 · 성장률 대비 저평가",
+        "FCF Yield 7.9% · 우수"
+      ]
+    }
+  },
+  {
+    "t": "UHAL",
+    "n": "U-Haul Holding Company",
+    "m": "US",
+    "sec": "산업재",
+    "tech": 66,
+    "macro": 60,
+    "filing": 58,
+    "value": 35,
+    "total": 58,
+    "consensus": 0,
+    "signal": "HOLD",
+    "ev": 0.53,
+    "target": 6,
+    "hitl": false,
+    "reasons": {
+      "tech": [
+        "이동평균 완벽 정배열 (P>72.9>68.3>55.8)",
+        "RSI 52 · 중립",
+        "MACD 데드크로스 · 히스토 -0.29",
+        "3개월 수익률 +49.6% · 강한 상승"
+      ],
+      "macro": [
+        "NEUTRAL · VIX 14.2 · US10Y 4.68%",
+        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
+      ],
+      "filing": [
+        "P/C비율 하락 -134% (헤지 완화)",
+        "13F: 보유기관 227곳 · 지분율 4.6% (2026Q3)",
+        "* FMP 실시간 공시 반영"
+      ],
+      "value": [
+        "PER 526.9 · 극심 프리미엄",
+        "Forward PER 35.5 · 이익 성장 반영",
+        "FCF 음수 · 현금유출"
+      ]
+    }
+  },
+  {
+    "t": "LII",
+    "n": "Lennox International Inc.",
+    "m": "US",
+    "sec": "산업재",
+    "tech": 15,
+    "macro": 60,
+    "filing": 58,
+    "value": 42,
+    "total": 41,
+    "consensus": 0,
+    "signal": "AVOID",
+    "ev": -0.56,
+    "target": -7,
+    "hitl": true,
+    "reasons": {
+      "tech": [
+        "단기 역배열 (P<461.6<509.5)",
+        "RSI 21 · 과매도",
+        "MACD 데드크로스 · 히스토 -2.17",
+        "거래량 급증 · 최근 20일 평균 1.4배",
+        "3개월 수익률 -16.8% · 급락"
+      ],
+      "macro": [
+        "NEUTRAL · VIX 14.2 · US10Y 4.68%",
+        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
+      ],
+      "filing": [
+        "P/C비율 하락 -148% (헤지 완화)",
+        "13F: 보유기관 658곳 · 지분율 76.8% (2026Q3)",
+        "* FMP 실시간 공시 반영"
+      ],
+      "value": [
+        "PER 18.8 · 적정",
+        "PBR 11.1 · 부담"
+      ]
+    }
+  },
+  {
+    "t": "SMTC",
+    "n": "Semtech Corporation",
+    "m": "US",
+    "sec": "반도체",
+    "tech": 58,
+    "macro": 65,
+    "filing": 53,
+    "value": 42,
+    "total": 55,
+    "consensus": 0,
+    "signal": "HOLD",
+    "ev": 0.42,
+    "target": 5,
+    "hitl": false,
+    "reasons": {
+      "tech": [
+        "MACD 골든크로스 · 히스토 +3.56",
+        "거래량 감소 · 0.6배",
+        "3개월 수익률 +16.5%",
+        "Bollinger 상단 접근 (100%)"
+      ],
+      "macro": [
+        "NEUTRAL · VIX 14.2 · US10Y 4.68%",
+        "DXY 99.6 약세 · 성장주 유리",
+        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
+      ],
+      "filing": [
+        "13F: 신규진입 +111곳",
+        "13F: 기관지분율 -6.81%p",
+        "P/C비율 하락 -178% (헤지 완화)",
+        "13F: 보유기관 607곳 · 지분율 101.0% (2026Q3)",
+        "Form 4: 매도 우세 P0/S23"
+      ],
+      "value": [
+        "PER 39.1 · 적정",
+        "PBR 25.1 · 부담"
+      ]
+    }
+  },
+  {
+    "t": "KKRS",
+    "n": "KKR Group Finance Co. IX LLC 4.",
+    "m": "US",
+    "sec": "금융",
+    "tech": 50,
+    "macro": 60,
+    "filing": 55,
+    "value": 50,
+    "total": 54,
+    "consensus": 0,
+    "signal": "HOLD",
+    "ev": 0.12,
+    "target": 1,
+    "hitl": false,
+    "reasons": {
+      "tech": [
+        "단기 역배열 (P<16.2<16.2)",
+        "RSI 45 · 중립",
+        "MACD 골든크로스 · 히스토 +0.00"
+      ],
+      "macro": [
+        "NEUTRAL · VIX 14.2 · US10Y 4.68%",
+        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
+      ],
+      "filing": [
+        "* FMP 실시간 공시 반영"
+      ],
+      "value": [
+        "밸류 데이터 미확인"
+      ]
+    }
+  },
+  {
+    "t": "CACI",
+    "n": "CACI International Inc",
+    "m": "US",
+    "sec": "IT",
+    "tech": 78,
+    "macro": 60,
+    "filing": 55,
+    "value": 53,
+    "total": 64,
+    "consensus": 1,
+    "signal": "HOLD",
+    "ev": 0.73,
+    "target": 9,
+    "hitl": false,
+    "reasons": {
+      "tech": [
+        "단기 정배열 (P>557.9>514.0)",
+        "MACD 골든크로스 · 히스토 +13.11",
+        "3개월 수익률 +31.2% · 강한 상승"
+      ],
+      "macro": [
+        "NEUTRAL · VIX 14.2 · US10Y 4.68%",
+        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
+      ],
+      "filing": [
+        "13F: 기관지분율 +7.15%p",
+        "P/C비율 급등 +51% (헤지 강화)",
+        "13F: 보유기관 622곳 · 지분율 101.5% (2026Q3)",
+        "* FMP 실시간 공시 반영"
+      ],
+      "value": [
+        "PER 27.8 · 적정",
+        "Forward PER 17.3 · 이익 성장 반영",
+        "PEG 514.23 · 성장률 대비 부담"
+      ]
+    }
+  },
+  {
+    "t": "BWA",
+    "n": "BorgWarner Inc.",
+    "m": "US",
+    "sec": "소비재",
+    "tech": 73,
+    "macro": 60,
+    "filing": 73,
+    "value": 74,
+    "total": 71,
+    "consensus": 3,
+    "signal": "BUY",
+    "ev": 0.9,
+    "target": 11,
+    "hitl": false,
+    "reasons": {
+      "tech": [
+        "RSI 70 · 강세 지속 구간",
+        "MACD 골든크로스 · 히스토 +0.62",
+        "3개월 수익률 +13.3%",
+        "Bollinger 상단 접근 (91%)"
+      ],
+      "macro": [
+        "NEUTRAL · VIX 14.2 · US10Y 4.68%",
+        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
+      ],
+      "filing": [
+        "13F: 신규진입 +61곳",
+        "13F: 기관지분율 +7.59%p",
+        "13F: 보유기관 846곳 · 지분율 105.4% (2026Q3)",
+        "8-K: 최근 60일 이벤트 3건 (활발)",
+        "* FMP 실시간 공시 반영"
+      ],
+      "value": [
+        "PER 33.8 · 적정",
+        "Forward PER 11.8 · 이익 성장 반영",
+        "PEG 0.50 · 성장률 대비 저평가",
+        "FCF Yield 7.5% · 우수"
+      ]
+    }
+  },
+  {
+    "t": "RPM",
+    "n": "RPM International Inc.",
+    "m": "US",
+    "sec": "소재",
+    "tech": 62,
+    "macro": 60,
+    "filing": 60,
+    "value": 58,
+    "total": 60,
+    "consensus": 0,
+    "signal": "HOLD",
+    "ev": 0.57,
+    "target": 7,
+    "hitl": false,
+    "reasons": {
+      "tech": [
+        "이동평균 완벽 정배열 (P>111.3>108.5>105.7)",
+        "RSI 51 · 중립",
+        "MACD 데드크로스 · 히스토 -0.07",
+        "3개월 수익률 +16.2%"
+      ],
+      "macro": [
+        "NEUTRAL · VIX 14.2 · US10Y 4.68%",
+        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
+      ],
+      "filing": [
+        "13F: 기관지분율 +3.01%p",
+        "13F: 보유기관 792곳 · 지분율 86.3% (2026Q3)",
+        "* FMP 실시간 공시 반영"
+      ],
+      "value": [
+        "PER 22.0 · 적정",
+        "Forward PER 16.6 · 이익 성장 반영"
+      ]
+    }
+  },
+  {
+    "t": "GWRE",
+    "n": "Guidewire Software, Inc.",
+    "m": "US",
+    "sec": "IT",
+    "tech": 88,
+    "macro": 60,
+    "filing": 45,
+    "value": 43,
+    "total": 63,
+    "consensus": 1,
+    "signal": "HOLD",
+    "ev": 0.73,
+    "target": 9,
+    "hitl": false,
+    "reasons": {
+      "tech": [
+        "단기 정배열 (P>159.4>140.0)",
+        "RSI 59 · 강세 지속 구간",
+        "MACD 골든크로스 · 히스토 +0.93",
+        "3개월 수익률 +25.5% · 강한 상승"
+      ],
+      "macro": [
+        "NEUTRAL · VIX 14.2 · US10Y 4.68%",
+        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
+      ],
+      "filing": [
+        "13F: 보유기관 570곳 · 지분율 101.9% (2026Q3)",
+        "Form 4: 매도 우세 P0/S20",
+        "* FMP 실시간 공시 반영"
+      ],
+      "value": [
+        "PER 94.5 · 극심 프리미엄",
+        "Forward PER 42.0 · 이익 성장 반영",
+        "PBR 10.9 · 부담",
+        "PEG 0.96 · 성장률 대비 저평가"
+      ]
+    }
+  },
+  {
+    "t": "HTHT",
+    "n": "H World Group Limited",
+    "m": "US",
+    "sec": "소비재",
+    "tech": 69,
+    "macro": 60,
+    "filing": 60,
+    "value": 68,
+    "total": 64,
+    "consensus": 0,
+    "signal": "HOLD",
+    "ev": 0.54,
+    "target": 6,
+    "hitl": false,
+    "reasons": {
+      "tech": [
+        "RSI 65 · 강세 지속 구간",
+        "MACD 골든크로스 · 히스토 +0.28",
+        "Bollinger 상단 접근 (100%)"
+      ],
+      "macro": [
+        "NEUTRAL · VIX 14.2 · US10Y 4.68%",
+        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
+      ],
+      "filing": [
+        "13F: 기관지분율 +3.88%p",
+        "13F: 보유기관 263곳 · 지분율 50.9% (2026Q3)",
+        "8-K: 최근 60일 이벤트 없음",
+        "* FMP 실시간 공시 반영"
+      ],
+      "value": [
+        "PER 17.9 · 저평가",
+        "PBR 8.8 · 부담",
+        "PEG 0.27 · 성장률 대비 저평가",
+        "FCF Yield 45.2% · 우수"
+      ]
+    }
+  },
+  {
+    "t": "PAG",
+    "n": "Penske Automotive Group, Inc.",
+    "m": "US",
+    "sec": "소비재",
+    "tech": 74,
+    "macro": 60,
+    "filing": 61,
+    "value": 60,
+    "total": 65,
+    "consensus": 1,
+    "signal": "HOLD",
+    "ev": 0.76,
+    "target": 9,
+    "hitl": false,
+    "reasons": {
+      "tech": [
+        "이동평균 완벽 정배열 (P>215.3>195.7>167.2)",
+        "RSI 49 · 중립",
+        "MACD 데드크로스 · 히스토 -1.08",
+        "거래량 급증 · 최근 20일 평균 1.8배",
+        "3개월 수익률 +38.5% · 강한 상승"
+      ],
+      "macro": [
+        "NEUTRAL · VIX 14.2 · US10Y 4.68%",
+        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
+      ],
+      "filing": [
+        "P/C비율 하락 -88% (헤지 완화)",
+        "13F: 보유기관 398곳 · 지분율 29.1% (2026Q3)",
+        "8-K: 최근 60일 이벤트 4건 (활발)",
+        "* FMP 실시간 공시 반영"
+      ],
+      "value": [
+        "PER 15.8 · 저평가"
+      ]
+    }
+  },
+  {
+    "t": "UNMA",
+    "n": "Unum Group 6.250% JR NT58",
+    "m": "US",
+    "sec": "금융",
+    "tech": 47,
+    "macro": 60,
+    "filing": 58,
+    "value": 80,
+    "total": 58,
+    "consensus": 1,
+    "signal": "HOLD",
+    "ev": 0.12,
+    "target": 1,
+    "hitl": false,
+    "reasons": {
+      "tech": [
+        "단기 역배열 (P<21.3<21.7)",
+        "MACD 골든크로스 · 히스토 +0.01"
+      ],
+      "macro": [
+        "NEUTRAL · VIX 14.2 · US10Y 4.68%",
+        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
+      ],
+      "filing": [
+        "8-K: 최근 60일 이벤트 3건 (활발)",
+        "* FMP 실시간 공시 반영"
+      ],
+      "value": [
+        "PER 4.4 · 극심 저평가",
+        "PBR 0.49 · 자산가치 이하"
+      ]
+    }
+  },
+  {
+    "t": "AGI",
+    "n": "Alamos Gold Inc.",
+    "m": "US",
+    "sec": "소재",
+    "tech": 47,
+    "macro": 60,
+    "filing": 55,
+    "value": 70,
+    "total": 55,
+    "consensus": 1,
+    "signal": "HOLD",
+    "ev": -0.05,
+    "target": -1,
+    "hitl": false,
+    "reasons": {
+      "tech": [
+        "RSI 79 · 과매수 경계",
+        "MACD 골든크로스 · 히스토 +0.60",
+        "3개월 수익률 -15.6% · 급락"
+      ],
+      "macro": [
+        "NEUTRAL · VIX 14.2 · US10Y 4.68%",
+        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
+      ],
+      "filing": [
+        "13F: 보유기관 504곳 · 지분율 56.7% (2026Q3)",
+        "8-K: 최근 60일 이벤트 없음",
+        "* FMP 실시간 공시 반영"
+      ],
+      "value": [
+        "PER 12.0 · 극심 저평가"
+      ]
+    }
+  },
+  {
+    "t": "BNT",
+    "n": "Brookfield Wealth Solutions Ltd.",
+    "m": "US",
+    "sec": "금융",
+    "tech": 28,
+    "macro": 60,
+    "filing": 55,
+    "value": 60,
+    "total": 47,
+    "consensus": 0,
+    "signal": "HOLD",
+    "ev": -0.23,
+    "target": -3,
+    "hitl": false,
+    "reasons": {
+      "tech": [
+        "단기 역배열 (P<43.6<43.8)",
+        "RSI 50 · 중립",
+        "MACD 데드크로스 · 히스토 -0.01"
+      ],
+      "macro": [
+        "NEUTRAL · VIX 14.2 · US10Y 4.68%",
+        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
+      ],
+      "filing": [
+        "8-K: 최근 60일 이벤트 없음",
+        "* FMP 실시간 공시 반영"
+      ],
+      "value": [
+        "PER 51.0 · 프리미엄",
+        "PBR 0.88 · 자산가치 이하",
+        "FCF Yield 30.9% · 우수"
+      ]
+    }
+  },
+  {
+    "t": "GRAB",
+    "n": "Grab Holdings Limited",
+    "m": "US",
+    "sec": "IT",
+    "tech": 72,
+    "macro": 60,
+    "filing": 45,
+    "value": 66,
+    "total": 61,
+    "consensus": 1,
+    "signal": "HOLD",
+    "ev": 0.4,
+    "target": 5,
+    "hitl": false,
+    "reasons": {
+      "tech": [
+        "RSI 57 · 강세 지속 구간",
+        "MACD 골든크로스 · 히스토 +0.01"
+      ],
+      "macro": [
+        "NEUTRAL · VIX 14.2 · US10Y 4.68%",
+        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
+      ],
+      "filing": [
+        "13F: 보유기관 524곳 · 지분율 75.5% (2026Q3)",
+        "Form 4: 매도 우세 P0/S13",
+        "8-K: 최근 60일 이벤트 없음",
+        "* FMP 실시간 공시 반영"
+      ],
+      "value": [
+        "PER 32.5 · 적정",
+        "Forward PER 25.8 · 이익 성장 반영",
+        "PEG 0.89 · 성장률 대비 저평가"
+      ]
+    }
+  },
+  {
+    "t": "AEG",
+    "n": "Aegon Ltd.",
+    "m": "US",
+    "sec": "금융",
+    "tech": 69,
+    "macro": 60,
+    "filing": 50,
+    "value": 55,
+    "total": 59,
+    "consensus": 0,
+    "signal": "HOLD",
+    "ev": 0.53,
+    "target": 6,
+    "hitl": false,
+    "reasons": {
+      "tech": [
+        "이동평균 완벽 정배열 (P>9.3>8.9>7.8)",
+        "RSI 61 · 강세 지속 구간",
+        "MACD 데드크로스 · 히스토 -0.03",
+        "3개월 수익률 +13.5%"
+      ],
+      "macro": [
+        "NEUTRAL · VIX 14.2 · US10Y 4.68%",
+        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
+      ],
+      "filing": [
+        "P/C비율 급등 +69% (헤지 강화)",
+        "13F: 보유기관 306곳 · 지분율 7.9% (2026Q3)",
+        "8-K: 최근 60일 이벤트 없음",
+        "* FMP 실시간 공시 반영"
+      ],
+      "value": [
+        "PER 13.7 · 저평가",
+        "Forward PER 10.1 · 이익 성장 반영",
+        "PEG 14.09 · 성장률 대비 부담",
+        "FCF 음수 · 현금유출"
+      ]
+    }
+  },
+  {
+    "t": "DOC",
+    "n": "Healthpeak Properties, Inc.",
+    "m": "US",
+    "sec": "리츠",
+    "tech": 39,
+    "macro": 60,
+    "filing": 50,
+    "value": 53,
+    "total": 49,
+    "consensus": 0,
+    "signal": "HOLD",
+    "ev": 0.02,
+    "target": 0,
+    "hitl": false,
+    "reasons": {
+      "tech": [
+        "RSI 21 · 과매도",
+        "MACD 데드크로스 · 히스토 -0.18",
+        "3개월 수익률 +7.1%",
+        "Bollinger 하단 근접 · 반등 여지"
+      ],
+      "macro": [
+        "NEUTRAL · VIX 14.2 · US10Y 4.68%",
+        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
+      ],
+      "filing": [
+        "13F: 기관지분율 -1.61%p",
+        "13F: 보유기관 758곳 · 지분율 96.6% (2026Q3)",
+        "* FMP 실시간 공시 반영"
+      ],
+      "value": [
+        "PER 58.8 · 프리미엄",
+        "Forward PER -137.2 · 이익 성장 반영",
+        "PEG 4.32 · 성장률 대비 부담",
+        "FCF Yield 11.3% · 우수"
+      ]
+    }
+  },
+  {
+    "t": "AEFC",
+    "n": "Aegon Funding Company LLC",
+    "m": "US",
+    "sec": "금융",
+    "tech": 50,
+    "macro": 60,
+    "filing": 55,
+    "value": 50,
+    "total": 54,
+    "consensus": 0,
+    "signal": "HOLD",
+    "ev": 0.06,
+    "target": 1,
+    "hitl": false,
+    "reasons": {
+      "tech": [
+        "단기 역배열 (P<18.3<18.6)",
+        "RSI 50 · 중립",
+        "MACD 골든크로스 · 히스토 +0.03"
+      ],
+      "macro": [
+        "NEUTRAL · VIX 14.2 · US10Y 4.68%",
+        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
+      ],
+      "filing": [
+        "8-K: 최근 60일 이벤트 없음",
+        "* FMP 실시간 공시 반영"
+      ],
+      "value": [
+        "밸류 데이터 미확인"
+      ]
+    }
+  },
+  {
+    "t": "EMBJ",
+    "n": "Embraer S.A.",
+    "m": "US",
+    "sec": "산업재",
+    "tech": 82,
+    "macro": 60,
+    "filing": 55,
+    "value": 61,
+    "total": 66,
+    "consensus": 1,
+    "signal": "HOLD",
+    "ev": 0.81,
+    "target": 10,
+    "hitl": false,
+    "reasons": {
+      "tech": [
+        "이동평균 완벽 정배열 (P>70.4>65.3>65.0)",
+        "MACD 골든크로스 · 히스토 +0.42",
+        "3개월 수익률 +37.3% · 강한 상승",
+        "Bollinger 상단 접근 (98%)"
+      ],
+      "macro": [
+        "NEUTRAL · VIX 14.2 · US10Y 4.68%",
+        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
+      ],
+      "filing": [
+        "8-K: 최근 60일 이벤트 없음",
+        "* FMP 실시간 공시 반영"
+      ],
+      "value": [
+        "PER 30.6 · 적정",
+        "Forward PER 19.7 · 이익 성장 반영",
+        "PEG 28.22 · 성장률 대비 부담",
+        "FCF Yield 12.2% · 우수"
+      ]
+    }
+  },
+  {
+    "t": "W",
+    "n": "Wayfair Inc.",
+    "m": "US",
+    "sec": "소비재",
+    "tech": 95,
+    "macro": 60,
+    "filing": 45,
+    "value": 45,
+    "total": 66,
+    "consensus": 1,
+    "signal": "HOLD",
+    "ev": 0.83,
+    "target": 10,
+    "hitl": false,
+    "reasons": {
+      "tech": [
+        "이동평균 완벽 정배열 (P>96.4>90.2>88.4)",
+        "RSI 57 · 강세 지속 구간",
+        "MACD 골든크로스 · 히스토 +0.06",
+        "3개월 수익률 +73.9% · 강한 상승"
+      ],
+      "macro": [
+        "NEUTRAL · VIX 14.2 · US10Y 4.68%",
+        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
+      ],
+      "filing": [
+        "13F: 보유기관 509곳 · 지분율 93.4% (2026Q3)",
+        "Form 4: 매도 우세 P0/S11",
+        "* FMP 실시간 공시 반영"
+      ],
+      "value": [
+        "PER 26.6 · 적정",
+        "PEG 23.50 · 성장률 대비 부담"
+      ]
+    }
+  },
+  {
+    "t": "ARCC",
+    "n": "Ares Capital Corporation",
+    "m": "US",
+    "sec": "금융",
+    "tech": 91,
+    "macro": 60,
+    "filing": 53,
+    "value": 71,
+    "total": 70,
+    "consensus": 2,
+    "signal": "WATCH",
+    "ev": 0.85,
+    "target": 10,
+    "hitl": false,
+    "reasons": {
+      "tech": [
+        "이동평균 완벽 정배열 (P>19.3>18.8>18.6)",
+        "RSI 59 · 강세 지속 구간",
+        "MACD 골든크로스 · 히스토 +0.03",
+        "3개월 수익률 +7.6%"
+      ],
+      "macro": [
+        "NEUTRAL · VIX 14.2 · US10Y 4.68%",
+        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
+      ],
+      "filing": [
+        "13F: 기관지분율 -1.66%p",
+        "13F: 보유기관 802곳 · 지분율 33.7% (2026Q3)",
+        "8-K: 최근 60일 이벤트 4건 (활발)",
+        "* FMP 실시간 공시 반영"
+      ],
+      "value": [
+        "PER 14.9 · 저평가",
+        "Forward PER 10.2 · 이익 성장 반영",
+        "PEG 3.72 · 성장률 대비 부담",
+        "FCF Yield 5.4% · 우수"
+      ]
+    }
+  },
+  {
+    "t": "XELLL",
+    "n": "Xcel Energy Inc. 6.25% Junior Subordinat",
+    "m": "US",
+    "sec": "유틸리티",
+    "tech": 28,
+    "macro": 60,
+    "filing": 55,
+    "value": 60,
+    "total": 47,
+    "consensus": 0,
+    "signal": "HOLD",
+    "ev": -0.19,
+    "target": -2,
+    "hitl": false,
+    "reasons": {
+      "tech": [
+        "단기 역배열 (P<23.0<23.2)",
+        "RSI 42 · 중립",
+        "MACD 데드크로스 · 히스토 -0.01"
+      ],
+      "macro": [
+        "NEUTRAL · VIX 14.2 · US10Y 4.68%",
+        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
+      ],
+      "filing": [
+        "* FMP 최근 공시 없음 · 프록시 보조"
+      ],
+      "value": [
+        "PBR 0.61 · 자산가치 이하"
+      ]
+    }
+  },
+  {
+    "t": "AEIS",
+    "n": "Advanced Energy Industries, Inc.",
+    "m": "US",
+    "sec": "IT",
+    "tech": 76,
+    "macro": 60,
+    "filing": 55,
+    "value": 35,
+    "total": 60,
+    "consensus": 1,
+    "signal": "HOLD",
+    "ev": 0.61,
+    "target": 7,
+    "hitl": false,
+    "reasons": {
+      "tech": [
+        "RSI 70 · 강세 지속 구간",
+        "MACD 골든크로스 · 히스토 +5.30",
+        "3개월 수익률 +12.8%"
+      ],
+      "macro": [
+        "NEUTRAL · VIX 14.2 · US10Y 4.68%",
+        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
+      ],
+      "filing": [
+        "13F: 보유기관 694곳 · 지분율 108.1% (2026Q3)",
+        "* FMP 실시간 공시 반영"
+      ],
+      "value": [
+        "PER 64.4 · 극심 프리미엄",
+        "Forward PER 23.0 · 이익 성장 반영",
+        "PBR 9.6 · 부담"
+      ]
+    }
+  },
+  {
+    "t": "EQH",
+    "n": "Equitable Holdings, Inc.",
+    "m": "US",
+    "sec": "금융",
+    "tech": 95,
+    "macro": 60,
+    "filing": 56,
+    "value": 62,
+    "total": 71,
+    "consensus": 1,
+    "signal": "HOLD",
+    "ev": 1.0,
+    "target": 12,
+    "hitl": false,
+    "reasons": {
+      "tech": [
+        "이동평균 완벽 정배열 (P>49.8>46.9>43.7)",
+        "RSI 57 · 강세 지속 구간",
+        "MACD 골든크로스 · 히스토 +0.08",
+        "3개월 수익률 +21.2% · 강한 상승"
+      ],
+      "macro": [
+        "NEUTRAL · VIX 14.2 · US10Y 4.68%",
+        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
+      ],
+      "filing": [
+        "13F: 기관지분율 +6.91%p",
+        "P/C비율 하락 -74% (헤지 완화)",
+        "13F: 보유기관 483곳 · 지분율 94.9% (2026Q3)",
+        "Form 4: 매도 우세 P0/S15",
+        "8-K: 최근 60일 이벤트 4건 (활발)"
+      ],
+      "value": [
+        "PER 5.7 · 극심 저평가",
+        "FCF 음수 · 현금유출"
+      ]
+    }
+  },
+  {
+    "t": "REG",
+    "n": "Regency Centers Corporation",
+    "m": "US",
+    "sec": "리츠",
+    "tech": 17,
+    "macro": 60,
+    "filing": 63,
+    "value": 58,
+    "total": 46,
+    "consensus": 0,
+    "signal": "HOLD",
+    "ev": -0.23,
+    "target": -3,
+    "hitl": false,
+    "reasons": {
+      "tech": [
+        "단기 역배열 (P<79.2<79.5)",
+        "RSI 19 · 과매도",
+        "MACD 데드크로스 · 히스토 -0.39"
+      ],
+      "macro": [
+        "NEUTRAL · VIX 14.2 · US10Y 4.68%",
+        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
+      ],
+      "filing": [
+        "13F: 기관지분율 +9.61%p",
+        "13F: 보유기관 605곳 · 지분율 98.7% (2026Q3)",
+        "8-K: 최근 60일 이벤트 3건 (활발)",
+        "* FMP 실시간 공시 반영"
+      ],
+      "value": [
+        "PER 25.8 · 적정",
+        "FCF Yield 5.2% · 우수"
+      ]
+    }
+  },
+  {
+    "t": "GL",
+    "n": "Globe Life Inc.",
+    "m": "US",
+    "sec": "금융",
+    "tech": 47,
+    "macro": 60,
+    "filing": 53,
+    "value": 68,
+    "total": 55,
+    "consensus": 0,
+    "signal": "HOLD",
+    "ev": 0.31,
+    "target": 4,
+    "hitl": false,
+    "reasons": {
+      "tech": [
+        "RSI 51 · 중립",
+        "MACD 데드크로스 · 히스토 -0.77",
+        "3개월 수익률 +14.2%"
+      ],
+      "macro": [
+        "NEUTRAL · VIX 14.2 · US10Y 4.68%",
+        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
+      ],
+      "filing": [
+        "13F: 기관지분율 +4.29%p",
+        "13F: 보유기관 703곳 · 지분율 83.6% (2026Q3)",
+        "Form 4: 매도 우세 P0/S32",
+        "8-K: 최근 60일 이벤트 3건 (활발)",
+        "* FMP 실시간 공시 반영"
+      ],
+      "value": [
+        "PER 12.0 · 저평가",
+        "FCF Yield 8.4% · 우수"
+      ]
+    }
+  },
+  {
+    "t": "OHI",
+    "n": "Omega Healthcare Investors, Inc.",
+    "m": "US",
+    "sec": "리츠",
+    "tech": 35,
+    "macro": 60,
+    "filing": 63,
+    "value": 55,
+    "total": 51,
+    "consensus": 0,
+    "signal": "HOLD",
+    "ev": -0.02,
+    "target": 0,
+    "hitl": false,
+    "reasons": {
+      "tech": [
+        "RSI 18 · 과매도",
+        "MACD 데드크로스 · 히스토 -0.44",
+        "Bollinger 하단 근접 · 반등 여지"
+      ],
+      "macro": [
+        "NEUTRAL · VIX 14.2 · US10Y 4.68%",
+        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
+      ],
+      "filing": [
+        "13F: 기관지분율 +5.85%p",
+        "P/C비율 하락 -90% (헤지 완화)",
+        "13F: 보유기관 768곳 · 지분율 84.8% (2026Q3)",
+        "* FMP 실시간 공시 반영"
+      ],
+      "value": [
+        "PER 16.6 · 저평가",
+        "PEG 11.99 · 성장률 대비 부담"
+      ]
+    }
+  },
+  {
+    "t": "AIZ",
+    "n": "Assurant, Inc.",
+    "m": "US",
+    "sec": "금융",
+    "tech": 47,
+    "macro": 60,
+    "filing": 63,
+    "value": 68,
+    "total": 58,
+    "consensus": 0,
+    "signal": "HOLD",
+    "ev": 0.35,
+    "target": 4,
+    "hitl": false,
+    "reasons": {
+      "tech": [
+        "RSI 48 · 중립",
+        "MACD 데드크로스 · 히스토 -1.28",
+        "3개월 수익률 +9.3%"
+      ],
+      "macro": [
+        "NEUTRAL · VIX 14.2 · US10Y 4.68%",
+        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
+      ],
+      "filing": [
+        "13F: 기관지분율 +4.65%p",
+        "P/C비율 하락 -126% (헤지 완화)",
+        "13F: 보유기관 617곳 · 지분율 98.5% (2026Q3)",
+        "* FMP 실시간 공시 반영"
+      ],
+      "value": [
+        "PER 13.5 · 저평가",
+        "FCF Yield 15.5% · 우수"
+      ]
+    }
+  },
+  {
+    "t": "DT",
+    "n": "Dynatrace, Inc.",
+    "m": "US",
+    "sec": "IT",
+    "tech": 91,
+    "macro": 60,
+    "filing": 53,
+    "value": 43,
+    "total": 66,
+    "consensus": 1,
+    "signal": "HOLD",
+    "ev": 0.85,
+    "target": 10,
+    "hitl": false,
+    "reasons": {
+      "tech": [
+        "이동평균 완벽 정배열 (P>46.1>44.2>41.3)",
+        "RSI 62 · 강세 지속 구간",
+        "MACD 골든크로스 · 히스토 +0.15",
+        "3개월 수익률 +19.5%"
+      ],
+      "macro": [
+        "NEUTRAL · VIX 14.2 · US10Y 4.68%",
+        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
+      ],
+      "filing": [
+        "13F: 기관지분율 +3.85%p",
+        "13F: 보유기관 615곳 · 지분율 102.1% (2026Q3)",
+        "Form 4: 매도 우세 P0/S4",
+        "8-K: 최근 60일 이벤트 3건 (활발)",
+        "* FMP 실시간 공시 반영"
+      ],
+      "value": [
+        "PER 95.2 · 극심 프리미엄",
+        "Forward PER 20.7 · 이익 성장 반영"
+      ]
+    }
+  },
+  {
+    "t": "CRL",
+    "n": "Charles River Laboratories International",
+    "m": "US",
+    "sec": "제약/바이오",
+    "tech": 80,
+    "macro": 65,
+    "filing": 45,
+    "value": 58,
+    "total": 63,
+    "consensus": 1,
+    "signal": "HOLD",
+    "ev": 0.7,
+    "target": 8,
+    "hitl": false,
+    "reasons": {
+      "tech": [
+        "이동평균 완벽 정배열 (P>250.5>225.9>191.8)",
+        "RSI 81 · 과매수 경계",
+        "MACD 골든크로스 · 히스토 +3.01",
+        "3개월 수익률 +91.2% · 강한 상승"
+      ],
+      "macro": [
+        "NEUTRAL · VIX 14.2 · US10Y 4.68%",
+        "DXY 99.6 약세 · 성장주 유리",
+        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
+      ],
+      "filing": [
+        "13F: 보유기관 574곳 · 지분율 116.9% (2026Q3)",
+        "Form 4: 매도 우세 P0/S15",
+        "* FMP 실시간 공시 반영"
+      ],
+      "value": [
+        "PER 22.6 · 적정",
+        "PEG 0.12 · 성장률 대비 저평가"
+      ]
+    }
+  },
+  {
+    "t": "ALLE",
+    "n": "Allegion plc",
+    "m": "US",
+    "sec": "산업재",
+    "tech": 66,
+    "macro": 60,
+    "filing": 45,
+    "value": 58,
+    "total": 57,
+    "consensus": 0,
+    "signal": "HOLD",
+    "ev": 0.47,
+    "target": 6,
+    "hitl": false,
+    "reasons": {
+      "tech": [
+        "단기 정배열 (P>158.7>144.4)",
+        "RSI 57 · 강세 지속 구간",
+        "MACD 데드크로스 · 히스토 -0.44",
+        "3개월 수익률 +29.5% · 강한 상승"
+      ],
+      "macro": [
+        "NEUTRAL · VIX 14.2 · US10Y 4.68%",
+        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
+      ],
+      "filing": [
+        "13F: 기관지분율 +3.60%p",
+        "P/C비율 급등 +37% (헤지 강화)",
+        "13F: 보유기관 738곳 · 지분율 101.0% (2026Q3)",
+        "Form 4: 매도 우세 P0/S4",
+        "* FMP 실시간 공시 반영"
+      ],
+      "value": [
+        "PER 21.6 · 적정",
+        "Forward PER 16.6 · 이익 성장 반영"
+      ]
+    }
+  },
+  {
+    "t": "DTM",
+    "n": "DT Midstream, Inc.",
+    "m": "US",
+    "sec": "에너지",
+    "tech": 50,
+    "macro": 60,
+    "filing": 65,
+    "value": 50,
+    "total": 56,
+    "consensus": 0,
+    "signal": "HOLD",
+    "ev": 0.11,
+    "target": 1,
+    "hitl": false,
+    "reasons": {
+      "tech": [
+        "단기 역배열 (P<137.3<141.6)",
+        "RSI 43 · 중립",
+        "MACD 골든크로스 · 히스토 +0.18"
+      ],
+      "macro": [
+        "NEUTRAL · VIX 14.2 · US10Y 4.68%",
+        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
+      ],
+      "filing": [
+        "13F: 기관지분율 +3.85%p",
+        "13F: 보유기관 705곳 · 지분율 88.4% (2026Q3)",
+        "Form 4: 순매수 P2/S0",
+        "* FMP 실시간 공시 반영"
+      ],
+      "value": [
+        "PER 30.0 · 적정"
+      ]
+    }
+  },
+  {
+    "t": "WMG",
+    "n": "Warner Music Group Corp.",
+    "m": "US",
+    "sec": "인터넷",
+    "tech": 15,
+    "macro": 65,
+    "filing": 58,
+    "value": 58,
+    "total": 44,
+    "consensus": 0,
+    "signal": "AVOID",
+    "ev": -0.47,
+    "target": -6,
+    "hitl": true,
+    "reasons": {
+      "tech": [
+        "단기 역배열 (P<26.5<27.5)",
+        "MACD 데드크로스 · 히스토 -0.01",
+        "3개월 수익률 -23.3% · 급락"
+      ],
+      "macro": [
+        "NEUTRAL · VIX 14.2 · US10Y 4.68%",
+        "DXY 99.6 약세 · 성장주 유리",
+        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
+      ],
+      "filing": [
+        "13F: 기관지분율 +1.16%p",
+        "P/C비율 급등 +235% (헤지 강화)",
+        "13F: 보유기관 346곳 · 지분율 30.9% (2026Q3)",
+        "8-K: 최근 60일 이벤트 3건 (활발)",
+        "* FMP 실시간 공시 반영"
+      ],
+      "value": [
+        "PER 20.6 · 적정",
+        "Forward PER 13.4 · 이익 성장 반영",
+        "PBR 21.3 · 부담",
+        "PEG 0.46 · 성장률 대비 저평가"
+      ]
+    }
+  },
+  {
+    "t": "SGI",
+    "n": "Somnigroup International Inc",
+    "m": "US",
+    "sec": "소비재",
+    "tech": 25,
+    "macro": 60,
+    "filing": 63,
+    "value": 74,
+    "total": 51,
+    "consensus": 1,
+    "signal": "HOLD",
+    "ev": 0.0,
+    "target": 0,
+    "hitl": false,
+    "reasons": {
+      "tech": [
+        "단기 역배열 (P<67.7<71.5)",
+        "MACD 데드크로스 · 히스토 -0.09"
+      ],
+      "macro": [
+        "NEUTRAL · VIX 14.2 · US10Y 4.68%",
+        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
+      ],
+      "filing": [
+        "13F: 기관지분율 +4.39%p",
+        "13F: 보유기관 552곳 · 지분율 107.0% (2026Q3)",
+        "8-K: 최근 60일 이벤트 3건 (활발)",
+        "* FMP 실시간 공시 반영"
+      ],
+      "value": [
+        "PER 25.7 · 적정",
+        "Forward PER 18.1 · 이익 성장 반영",
+        "PEG 0.83 · 성장률 대비 저평가",
+        "FCF Yield 5.0% · 우수"
+      ]
+    }
+  },
+  {
+    "t": "AUR",
+    "n": "Aurora Innovation, Inc.",
+    "m": "US",
+    "sec": "IT",
+    "tech": 87,
+    "macro": 60,
+    "filing": 40,
+    "value": 50,
+    "total": 62,
+    "consensus": 1,
+    "signal": "HOLD",
+    "ev": 0.4,
+    "target": 5,
+    "hitl": false,
+    "reasons": {
+      "tech": [
+        "이동평균 완벽 정배열 (P>6.6>6.4>5.3)",
+        "RSI 64 · 강세 지속 구간",
+        "MACD 골든크로스 · 히스토 +0.04"
+      ],
+      "macro": [
+        "NEUTRAL · VIX 14.2 · US10Y 4.68%",
+        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
+      ],
+      "filing": [
+        "13F: 기관지분율 -1.29%p",
+        "13F: 보유기관 474곳 · 지분율 87.4% (2026Q3)",
+        "Form 4: 매도 우세 P1/S9",
+        "* FMP 실시간 공시 반영"
+      ],
+      "value": [
+        "Forward PER -15.5 · 이익 성장 반영",
+        "FCF 음수 · 현금유출"
+      ]
+    }
+  },
+  {
+    "t": "AA",
+    "n": "Alcoa Corporation",
+    "m": "US",
+    "sec": "소재",
+    "tech": 62,
+    "macro": 60,
+    "filing": 63,
+    "value": 73,
+    "total": 64,
+    "consensus": 1,
+    "signal": "HOLD",
+    "ev": 0.26,
+    "target": 3,
+    "hitl": false,
+    "reasons": {
+      "tech": [
+        "RSI 68 · 강세 지속 구간",
+        "MACD 골든크로스 · 히스토 +1.03",
+        "3개월 수익률 -17.1% · 급락"
+      ],
+      "macro": [
+        "NEUTRAL · VIX 14.2 · US10Y 4.68%",
+        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
+      ],
+      "filing": [
+        "13F: 기관지분율 +2.90%p",
+        "13F: 보유기관 764곳 · 지분율 78.5% (2026Q3)",
+        "8-K: 최근 60일 이벤트 3건 (활발)",
+        "* FMP 실시간 공시 반영"
+      ],
+      "value": [
+        "PER 10.8 · 극심 저평가",
+        "PEG 8.36 · 성장률 대비 부담",
+        "FCF Yield 7.0% · 우수"
+      ]
+    }
+  },
+  {
+    "t": "TME",
+    "n": "Tencent Music Entertainment Group",
+    "m": "US",
+    "sec": "인터넷",
+    "tech": 40,
+    "macro": 65,
+    "filing": 63,
+    "value": 78,
+    "total": 58,
+    "consensus": 1,
+    "signal": "HOLD",
+    "ev": 0.17,
+    "target": 2,
+    "hitl": false,
+    "reasons": {
+      "tech": [
+        "MACD 데드크로스 · 히스토 -0.10"
+      ],
+      "macro": [
+        "NEUTRAL · VIX 14.2 · US10Y 4.68%",
+        "DXY 99.6 약세 · 성장주 유리",
+        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
+      ],
+      "filing": [
+        "13F: 기관지분율 +1.66%p",
+        "P/C비율 하락 -42% (헤지 완화)",
+        "13F: 보유기관 326곳 · 지분율 28.0% (2026Q3)",
+        "8-K: 최근 60일 이벤트 없음",
+        "* FMP 실시간 공시 반영"
+      ],
+      "value": [
+        "PER 10.4 · 극심 저평가",
+        "FCF Yield 37.7% · 우수"
+      ]
+    }
+  },
+  {
+    "t": "TOL",
+    "n": "Toll Brothers, Inc.",
+    "m": "US",
+    "sec": "소비재",
+    "tech": 32,
+    "macro": 60,
+    "filing": 60,
+    "value": 70,
+    "total": 52,
+    "consensus": 1,
+    "signal": "HOLD",
+    "ev": 0.19,
+    "target": 2,
+    "hitl": false,
+    "reasons": {
+      "tech": [
+        "단기 역배열 (P<150.2<151.0)",
+        "MACD 데드크로스 · 히스토 -0.62",
+        "3개월 수익률 +14.8%",
+        "Bollinger 하단 근접 · 반등 여지"
+      ],
+      "macro": [
+        "NEUTRAL · VIX 14.2 · US10Y 4.68%",
+        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
+      ],
+      "filing": [
+        "13F: 기관지분율 +4.45%p",
+        "13F: 보유기관 826곳 · 지분율 91.6% (2026Q3)",
+        "8-K: 최근 60일 이벤트 없음",
+        "* FMP 실시간 공시 반영"
+      ],
+      "value": [
+        "PER 11.3 · 극심 저평가"
+      ]
+    }
+  },
+  {
+    "t": "CNA",
+    "n": "CNA Financial Corporation",
+    "m": "US",
+    "sec": "금융",
+    "tech": 39,
+    "macro": 60,
+    "filing": 60,
+    "value": 86,
+    "total": 57,
+    "consensus": 1,
+    "signal": "HOLD",
+    "ev": 0.33,
+    "target": 4,
+    "hitl": false,
+    "reasons": {
+      "tech": [
+        "RSI 22 · 과매도",
+        "MACD 데드크로스 · 히스토 -0.49",
+        "3개월 수익률 +13.6%",
+        "Bollinger 하단 근접 · 반등 여지"
+      ],
+      "macro": [
+        "NEUTRAL · VIX 14.2 · US10Y 4.68%",
+        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
+      ],
+      "filing": [
+        "13F: 기관지분율 +1.37%p",
+        "13F: 보유기관 308곳 · 지분율 101.0% (2026Q3)",
+        "* FMP 실시간 공시 반영"
+      ],
+      "value": [
+        "PER 11.2 · 극심 저평가",
+        "PEG 0.92 · 성장률 대비 저평가",
+        "FCF Yield 15.7% · 우수"
+      ]
+    }
+  },
+  {
+    "t": "AVY",
+    "n": "Avery Dennison Corporation",
+    "m": "US",
+    "sec": "소비재",
+    "tech": 84,
+    "macro": 60,
+    "filing": 55,
+    "value": 58,
+    "total": 67,
+    "consensus": 1,
+    "signal": "HOLD",
+    "ev": 0.8,
+    "target": 10,
+    "hitl": false,
+    "reasons": {
+      "tech": [
+        "단기 정배열 (P>171.0>164.6)",
+        "RSI 61 · 강세 지속 구간",
+        "MACD 골든크로스 · 히스토 +0.46",
+        "3개월 수익률 +13.3%"
+      ],
+      "macro": [
+        "NEUTRAL · VIX 14.2 · US10Y 4.68%",
+        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
+      ],
+      "filing": [
+        "13F: 기관지분율 +4.24%p",
+        "P/C비율 급등 +535% (헤지 강화)",
+        "13F: 보유기관 781곳 · 지분율 97.7% (2026Q3)",
+        "* FMP 실시간 공시 반영"
+      ],
+      "value": [
+        "PER 19.6 · 적정",
+        "FCF Yield 7.5% · 우수"
+      ]
+    }
+  },
+  {
+    "t": "SREA",
+    "n": "Sempra",
+    "m": "US",
+    "sec": "유틸리티",
+    "tech": 20,
+    "macro": 60,
+    "filing": 55,
+    "value": 50,
+    "total": 43,
+    "consensus": 0,
+    "signal": "AVOID",
+    "ev": -0.32,
+    "target": -4,
+    "hitl": true,
+    "reasons": {
+      "tech": [
+        "단기 역배열 (P<20.9<21.0)",
+        "RSI 23 · 과매도",
+        "MACD 데드크로스 · 히스토 -0.03",
+        "Bollinger 하단 근접 · 반등 여지"
+      ],
+      "macro": [
+        "NEUTRAL · VIX 14.2 · US10Y 4.68%",
+        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
+      ],
+      "filing": [
+        "* FMP 실시간 공시 반영"
+      ],
+      "value": [
+        "밸류 데이터 미확인"
+      ]
+    }
+  },
+  {
+    "t": "TXRH",
+    "n": "Texas Roadhouse, Inc.",
+    "m": "US",
+    "sec": "소비재",
+    "tech": 47,
+    "macro": 60,
+    "filing": 58,
+    "value": 42,
+    "total": 52,
+    "consensus": 0,
+    "signal": "HOLD",
+    "ev": 0.28,
+    "target": 3,
+    "hitl": false,
+    "reasons": {
+      "tech": [
+        "RSI 49 · 중립",
+        "MACD 데드크로스 · 히스토 -0.94",
+        "3개월 수익률 +15.9%"
+      ],
+      "macro": [
+        "NEUTRAL · VIX 14.2 · US10Y 4.68%",
+        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
+      ],
+      "filing": [
+        "P/C비율 하락 -98% (헤지 완화)",
+        "13F: 보유기관 659곳 · 지분율 99.3% (2026Q3)",
+        "* FMP 실시간 공시 반영"
+      ],
+      "value": [
+        "PER 32.7 · 적정",
+        "PBR 8.7 · 부담"
+      ]
+    }
+  },
+  {
+    "t": "HAS",
+    "n": "Hasbro, Inc.",
+    "m": "US",
+    "sec": "소비재",
+    "tech": 73,
+    "macro": 60,
+    "filing": 45,
+    "value": 60,
+    "total": 60,
+    "consensus": 1,
+    "signal": "HOLD",
+    "ev": 0.4,
+    "target": 5,
+    "hitl": false,
+    "reasons": {
+      "tech": [
+        "단기 정배열 (P>92.9>86.4)",
+        "RSI 46 · 중립",
+        "MACD 골든크로스 · 히스토 +0.13"
+      ],
+      "macro": [
+        "NEUTRAL · VIX 14.2 · US10Y 4.68%",
+        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
+      ],
+      "filing": [
+        "13F: 기관지분율 +5.37%p",
+        "P/C비율 급등 +35% (헤지 강화)",
+        "13F: 보유기관 781곳 · 지분율 99.0% (2026Q3)",
+        "Form 4: 매도 우세 P0/S7",
+        "* FMP 실시간 공시 반영"
+      ],
+      "value": [
+        "PER 17.2 · 저평가",
+        "PBR 19.0 · 부담",
+        "FCF Yield 5.1% · 우수"
+      ]
+    }
+  },
+  {
+    "t": "BAX",
+    "n": "Baxter International Inc.",
+    "m": "US",
+    "sec": "제약/바이오",
+    "tech": 73,
+    "macro": 65,
+    "filing": 66,
+    "value": 63,
+    "total": 68,
+    "consensus": 1,
+    "signal": "HOLD",
+    "ev": 0.84,
+    "target": 10,
+    "hitl": false,
+    "reasons": {
+      "tech": [
+        "이동평균 완벽 정배열 (P>25.7>23.1>19.8)",
+        "RSI 58 · 강세 지속 구간",
+        "MACD 데드크로스 · 히스토 -0.19",
+        "3개월 수익률 +45.7% · 강한 상승"
+      ],
+      "macro": [
+        "NEUTRAL · VIX 14.2 · US10Y 4.68%",
+        "DXY 99.6 약세 · 성장주 유리",
+        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
+      ],
+      "filing": [
+        "13F: 기관지분율 +6.38%p",
+        "P/C비율 하락 -73% (헤지 완화)",
+        "13F: 보유기관 710곳 · 지분율 109.1% (2026Q3)",
+        "8-K: 최근 60일 이벤트 4건 (활발)",
+        "* FMP 실시간 공시 반영"
+      ],
+      "value": [
+        "PER 12.7 · 저평가",
+        "PEG 36.68 · 성장률 대비 부담",
+        "FCF Yield 7.5% · 우수"
+      ]
+    }
+  },
+  {
+    "t": "NVMI",
+    "n": "Nova Ltd.",
+    "m": "US",
+    "sec": "반도체",
+    "tech": 72,
+    "macro": 65,
+    "filing": 40,
+    "value": 42,
+    "total": 56,
+    "consensus": 1,
+    "signal": "HOLD",
+    "ev": 0.1,
+    "target": 1,
+    "hitl": false,
+    "reasons": {
+      "tech": [
+        "RSI 55 · 강세 지속 구간",
+        "MACD 골든크로스 · 히스토 +6.05"
+      ],
+      "macro": [
+        "NEUTRAL · VIX 14.2 · US10Y 4.68%",
+        "DXY 99.6 약세 · 성장주 유리",
+        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
+      ],
+      "filing": [
+        "13F: 기관지분율 -5.43%p",
+        "13F: 보유기관 367곳 · 지분율 67.0% (2026Q3)",
+        "Form 4: 매도 우세 P0/S8",
+        "8-K: 최근 60일 이벤트 없음",
+        "* FMP 실시간 공시 반영"
+      ],
+      "value": [
+        "PER 52.4 · 프리미엄",
+        "Forward PER 30.8 · 이익 성장 반영",
+        "PBR 9.6 · 부담"
+      ]
+    }
+  },
+  {
+    "t": "BIPI",
+    "n": "BIP Bermuda Holdings I Limited",
+    "m": "US",
+    "sec": "산업재",
+    "tech": 58,
+    "macro": 60,
+    "filing": 55,
+    "value": 50,
+    "total": 56,
+    "consensus": 0,
+    "signal": "HOLD",
+    "ev": 0.29,
+    "target": 3,
+    "hitl": false,
+    "reasons": {
+      "tech": [
+        "이동평균 완벽 정배열 (P>16.7>16.4>16.3)",
+        "RSI 48 · 중립",
+        "MACD 데드크로스 · 히스토 -0.01"
+      ],
+      "macro": [
+        "NEUTRAL · VIX 14.2 · US10Y 4.68%",
+        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
+      ],
+      "filing": [
+        "8-K: 최근 60일 이벤트 없음",
+        "* FMP 실시간 공시 반영"
+      ],
+      "value": [
+        "밸류 데이터 미확인"
+      ]
+    }
+  },
+  {
+    "t": "ALLY",
+    "n": "Ally Financial Inc.",
+    "m": "US",
+    "sec": "금융",
+    "tech": 50,
+    "macro": 60,
+    "filing": 63,
+    "value": 96,
+    "total": 63,
+    "consensus": 1,
+    "signal": "HOLD",
+    "ev": 0.42,
+    "target": 5,
+    "hitl": false,
+    "reasons": {
+      "tech": [
+        "단기 역배열 (P<43.9<44.5)",
+        "RSI 49 · 중립",
+        "MACD 골든크로스 · 히스토 +0.04"
+      ],
+      "macro": [
+        "NEUTRAL · VIX 14.2 · US10Y 4.68%",
+        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
+      ],
+      "filing": [
+        "13F: 기관지분율 +1.70%p",
+        "P/C비율 하락 -35% (헤지 완화)",
+        "13F: 보유기관 637곳 · 지분율 94.3% (2026Q3)",
+        "* FMP 실시간 공시 반영"
+      ],
+      "value": [
+        "PER 10.6 · 극심 저평가",
+        "Forward PER 6.8 · 이익 성장 반영",
+        "PBR 0.98 · 자산가치 이하",
+        "PEG 0.49 · 성장률 대비 저평가"
+      ]
+    }
+  },
+  {
+    "t": "AIT",
+    "n": "Applied Industrial Technologies, Inc.",
+    "m": "US",
+    "sec": "산업재",
+    "tech": 91,
+    "macro": 60,
+    "filing": 63,
+    "value": 45,
+    "total": 70,
+    "consensus": 1,
+    "signal": "HOLD",
+    "ev": 0.96,
+    "target": 12,
+    "hitl": false,
+    "reasons": {
+      "tech": [
+        "이동평균 완벽 정배열 (P>350.4>336.6>290.1)",
+        "RSI 59 · 강세 지속 구간",
+        "MACD 골든크로스 · 히스토 +0.08",
+        "3개월 수익률 +17.7%"
+      ],
+      "macro": [
+        "NEUTRAL · VIX 14.2 · US10Y 4.68%",
+        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
+      ],
+      "filing": [
+        "13F: 기관지분율 +2.40%p",
+        "13F: 보유기관 624곳 · 지분율 95.8% (2026Q3)",
+        "8-K: 최근 60일 이벤트 3건 (활발)",
+        "* FMP 실시간 공시 반영"
+      ],
+      "value": [
+        "PER 33.0 · 적정",
+        "PEG 3.09 · 성장률 대비 부담"
+      ]
+    }
+  },
+  {
+    "t": "RNR",
+    "n": "RenaissanceRe Holdings Ltd.",
+    "m": "US",
+    "sec": "금융",
+    "tech": 44,
+    "macro": 60,
+    "filing": 53,
+    "value": 73,
+    "total": 54,
+    "consensus": 1,
+    "signal": "HOLD",
+    "ev": 0.19,
+    "target": 2,
+    "hitl": false,
+    "reasons": {
+      "tech": [
+        "MACD 데드크로스 · 히스토 -1.01",
+        "3개월 수익률 +6.9%"
+      ],
+      "macro": [
+        "NEUTRAL · VIX 14.2 · US10Y 4.68%",
+        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
+      ],
+      "filing": [
+        "13F: 기관지분율 +1.47%p",
+        "P/C비율 하락 -65% (헤지 완화)",
+        "13F: 보유기관 572곳 · 지분율 98.6% (2026Q3)",
+        "Form 4: 매도 우세 P0/S4",
+        "* FMP 실시간 공시 반영"
+      ],
+      "value": [
+        "PER 5.6 · 극심 저평가",
+        "PEG 3.62 · 성장률 대비 부담",
+        "FCF Yield 21.1% · 우수"
+      ]
+    }
+  },
+  {
+    "t": "HRL",
+    "n": "Hormel Foods Corporation",
+    "m": "US",
+    "sec": "소매",
+    "tech": 39,
+    "macro": 60,
+    "filing": 50,
+    "value": 58,
+    "total": 49,
+    "consensus": 0,
+    "signal": "HOLD",
+    "ev": 0.14,
+    "target": 2,
+    "hitl": false,
+    "reasons": {
+      "tech": [
+        "RSI 26 · 과매도",
+        "MACD 데드크로스 · 히스토 -0.17",
+        "3개월 수익률 +19.3%",
+        "Bollinger 하단 근접 · 반등 여지"
+      ],
+      "macro": [
+        "NEUTRAL · VIX 14.2 · US10Y 4.68%",
+        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
+      ],
+      "filing": [
+        "13F: 기관지분율 -1.60%p",
+        "13F: 보유기관 636곳 · 지분율 44.1% (2026Q3)",
+        "* FMP 실시간 공시 반영"
+      ],
+      "value": [
+        "PER 28.9 · 적정",
+        "Forward PER 15.4 · 이익 성장 반영"
+      ]
+    }
+  },
+  {
+    "t": "FNF",
+    "n": "Fidelity National Financial, Inc.",
+    "m": "US",
+    "sec": "금융",
+    "tech": 32,
+    "macro": 60,
+    "filing": 63,
+    "value": 84,
+    "total": 55,
+    "consensus": 1,
+    "signal": "HOLD",
+    "ev": 0.08,
+    "target": 1,
+    "hitl": false,
+    "reasons": {
+      "tech": [
+        "RSI 29 · 과매도",
+        "MACD 데드크로스 · 히스토 -0.39"
+      ],
+      "macro": [
+        "NEUTRAL · VIX 14.2 · US10Y 4.68%",
+        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
+      ],
+      "filing": [
+        "13F: 기관지분율 +4.48%p",
+        "P/C비율 하락 -625% (헤지 완화)",
+        "13F: 보유기관 705곳 · 지분율 86.0% (2026Q3)",
+        "* FMP 실시간 공시 반영"
+      ],
+      "value": [
+        "PER 17.2 · 저평가",
+        "Forward PER 8.5 · 이익 성장 반영",
+        "PEG 0.85 · 성장률 대비 저평가",
+        "FCF Yield 27.2% · 우수"
+      ]
+    }
+  },
+  {
+    "t": "GGG",
+    "n": "Graco Inc.",
+    "m": "US",
+    "sec": "산업재",
+    "tech": 55,
+    "macro": 60,
+    "filing": 63,
+    "value": 50,
+    "total": 58,
+    "consensus": 0,
+    "signal": "HOLD",
+    "ev": 0.38,
+    "target": 5,
+    "hitl": false,
+    "reasons": {
+      "tech": [
+        "단기 정배열 (P>80.7>77.0)",
+        "RSI 46 · 중립",
+        "MACD 데드크로스 · 히스토 -0.12",
+        "3개월 수익률 +7.5%"
+      ],
+      "macro": [
+        "NEUTRAL · VIX 14.2 · US10Y 4.68%",
+        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
+      ],
+      "filing": [
+        "13F: 기관지분율 +1.52%p",
+        "P/C비율 하락 -32% (헤지 완화)",
+        "13F: 보유기관 729곳 · 지분율 90.3% (2026Q3)",
+        "8-K: 최근 60일 이벤트 없음",
+        "* FMP 실시간 공시 반영"
+      ],
+      "value": [
+        "PER 25.8 · 적정"
+      ]
+    }
+  },
+  {
+    "t": "FIVE",
+    "n": "Five Below, Inc.",
+    "m": "US",
+    "sec": "소비재",
+    "tech": 81,
+    "macro": 60,
+    "filing": 63,
+    "value": 66,
+    "total": 69,
+    "consensus": 1,
+    "signal": "HOLD",
+    "ev": 0.82,
+    "target": 10,
+    "hitl": false,
+    "reasons": {
+      "tech": [
+        "이동평균 완벽 정배열 (P>222.3>202.6>201.8)",
+        "MACD 골든크로스 · 히스토 +1.58",
+        "3개월 수익률 +9.3%"
+      ],
+      "macro": [
+        "NEUTRAL · VIX 14.2 · US10Y 4.68%",
+        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
+      ],
+      "filing": [
+        "P/C비율 하락 -176% (헤지 완화)",
+        "13F: 보유기관 641곳 · 지분율 101.2% (2026Q3)",
+        "Form 4: 순매수 P1/S0",
+        "* FMP 실시간 공시 반영"
+      ],
+      "value": [
+        "PER 30.9 · 적정",
+        "Forward PER 24.1 · 이익 성장 반영",
+        "PEG 0.98 · 성장률 대비 저평가"
+      ]
+    }
+  },
+  {
+    "t": "EXEL",
+    "n": "Exelixis, Inc.",
+    "m": "US",
+    "sec": "제약/바이오",
+    "tech": 25,
+    "macro": 65,
+    "filing": 48,
+    "value": 76,
+    "total": 48,
+    "consensus": 1,
+    "signal": "HOLD",
+    "ev": -0.11,
+    "target": -1,
+    "hitl": false,
+    "reasons": {
+      "tech": [
+        "단기 역배열 (P<54.1<54.1)",
+        "MACD 데드크로스 · 히스토 -0.46"
+      ],
+      "macro": [
+        "NEUTRAL · VIX 14.2 · US10Y 4.68%",
+        "DXY 99.6 약세 · 성장주 유리",
+        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
+      ],
+      "filing": [
+        "P/C비율 하락 -52% (헤지 완화)",
+        "13F: 보유기관 763곳 · 지분율 100.9% (2026Q3)",
+        "Form 4: 매도 우세 P0/S4",
+        "* FMP 실시간 공시 반영"
+      ],
+      "value": [
+        "PER 16.1 · 저평가",
+        "Forward PER 12.9 · 이익 성장 반영",
+        "FCF Yield 5.7% · 우수"
+      ]
+    }
+  },
+  {
+    "t": "LULU",
+    "n": "Lululemon Athletica Inc.",
+    "m": "US",
+    "sec": "소비재",
+    "tech": 43,
+    "macro": 60,
+    "filing": 60,
+    "value": 86,
+    "total": 58,
+    "consensus": 1,
+    "signal": "HOLD",
+    "ev": 0.15,
+    "target": 2,
+    "hitl": false,
+    "reasons": {
+      "tech": [
+        "RSI 41 · 중립",
+        "MACD 데드크로스 · 히스토 -0.59"
+      ],
+      "macro": [
+        "NEUTRAL · VIX 14.2 · US10Y 4.68%",
+        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
+      ],
+      "filing": [
+        "13F: 보유기관 912곳 · 지분율 73.1% (2026Q3)",
+        "Form 4: 순매수 P1/S0",
+        "* FMP 실시간 공시 반영"
+      ],
+      "value": [
+        "PER 9.7 · 극심 저평가",
+        "PEG 0.92 · 성장률 대비 저평가",
+        "FCF Yield 8.6% · 우수"
+      ]
+    }
+  },
+  {
+    "t": "TYL",
+    "n": "Tyler Technologies, Inc.",
+    "m": "US",
+    "sec": "IT",
+    "tech": 73,
+    "macro": 60,
+    "filing": 60,
+    "value": 50,
+    "total": 63,
+    "consensus": 1,
+    "signal": "HOLD",
+    "ev": 0.5,
+    "target": 6,
+    "hitl": false,
+    "reasons": {
+      "tech": [
+        "단기 정배열 (P>313.3>306.2)",
+        "RSI 42 · 중립",
+        "MACD 골든크로스 · 히스토 +1.05"
+      ],
+      "macro": [
+        "NEUTRAL · VIX 14.2 · US10Y 4.68%",
+        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
+      ],
+      "filing": [
+        "13F: 기관지분율 +8.41%p",
+        "13F: 보유기관 765곳 · 지분율 101.8% (2026Q3)",
+        "* FMP 실시간 공시 반영"
+      ],
+      "value": [
+        "PER 43.1 · 프리미엄",
+        "Forward PER 20.9 · 이익 성장 반영"
+      ]
+    }
+  },
+  {
+    "t": "GNRC",
+    "n": "Generac Holdings Inc.",
+    "m": "US",
+    "sec": "산업재",
+    "tech": 72,
+    "macro": 60,
+    "filing": 40,
+    "value": 58,
+    "total": 58,
+    "consensus": 1,
+    "signal": "HOLD",
+    "ev": 0.13,
+    "target": 2,
+    "hitl": false,
+    "reasons": {
+      "tech": [
+        "RSI 68 · 강세 지속 구간",
+        "MACD 골든크로스 · 히스토 +3.77"
+      ],
+      "macro": [
+        "NEUTRAL · VIX 14.2 · US10Y 4.68%",
+        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
+      ],
+      "filing": [
+        "13F: 기관지분율 -1.32%p",
+        "13F: 보유기관 1023곳 · 지분율 91.3% (2026Q3)",
+        "Form 4: 매도 우세 P0/S10",
+        "* FMP 실시간 공시 반영"
+      ],
+      "value": [
+        "PER 50.5 · 프리미엄",
+        "Forward PER 18.7 · 이익 성장 반영",
+        "PEG 0.90 · 성장률 대비 저평가"
+      ]
+    }
+  },
+  {
+    "t": "DY",
+    "n": "Dycom Industries, Inc.",
+    "m": "US",
+    "sec": "산업재",
+    "tech": 72,
+    "macro": 60,
+    "filing": 55,
+    "value": 45,
+    "total": 60,
+    "consensus": 1,
+    "signal": "HOLD",
+    "ev": 0.46,
+    "target": 6,
+    "hitl": false,
+    "reasons": {
+      "tech": [
+        "RSI 59 · 강세 지속 구간",
+        "MACD 골든크로스 · 히스토 +3.73"
+      ],
+      "macro": [
+        "NEUTRAL · VIX 14.2 · US10Y 4.68%",
+        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
+      ],
+      "filing": [
+        "13F: 신규진입 +66곳",
+        "13F: 기관지분율 -3.47%p",
+        "P/C비율 급등 +77% (헤지 강화)",
+        "13F: 보유기관 638곳 · 지분율 94.7% (2026Q3)",
+        "* FMP 실시간 공시 반영"
+      ],
+      "value": [
+        "PER 41.3 · 프리미엄",
+        "Forward PER 21.7 · 이익 성장 반영",
+        "PEG 3.50 · 성장률 대비 부담"
+      ]
+    }
+  },
+  {
+    "t": "TRMB",
+    "n": "Trimble Inc.",
+    "m": "US",
+    "sec": "IT",
+    "tech": 43,
+    "macro": 60,
+    "filing": 63,
+    "value": 68,
+    "total": 56,
+    "consensus": 0,
+    "signal": "HOLD",
+    "ev": 0.19,
+    "target": 2,
+    "hitl": false,
+    "reasons": {
+      "tech": [
+        "RSI 40 · 중립",
+        "MACD 데드크로스 · 히스토 -0.25"
+      ],
+      "macro": [
+        "NEUTRAL · VIX 14.2 · US10Y 4.68%",
+        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
+      ],
+      "filing": [
+        "13F: 기관지분율 +6.61%p",
+        "P/C비율 하락 -54% (헤지 완화)",
+        "13F: 보유기관 714곳 · 지분율 100.3% (2026Q3)",
+        "* FMP 실시간 공시 반영"
+      ],
+      "value": [
+        "PER 13.5 · 저평가",
+        "FCF Yield 5.3% · 우수"
+      ]
+    }
+  },
+  {
+    "t": "ICLR",
+    "n": "ICON Public Limited Company",
+    "m": "US",
+    "sec": "제약/바이오",
+    "tech": 63,
+    "macro": 65,
+    "filing": 50,
+    "value": 51,
+    "total": 58,
+    "consensus": 0,
+    "signal": "HOLD",
+    "ev": 0.49,
+    "target": 6,
+    "hitl": false,
+    "reasons": {
+      "tech": [
+        "이동평균 완벽 정배열 (P>166.5>162.5>147.1)",
+        "MACD 데드크로스 · 히스토 -0.32",
+        "3개월 수익률 +48.9% · 강한 상승"
+      ],
+      "macro": [
+        "NEUTRAL · VIX 14.2 · US10Y 4.68%",
+        "DXY 99.6 약세 · 성장주 유리",
+        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
+      ],
+      "filing": [
+        "13F: 기관지분율 +2.77%p",
+        "13F: 보유기관 444곳 · 지분율 104.8% (2026Q3)",
+        "Form 4: 매도 우세 P0/S34",
+        "8-K: 최근 60일 이벤트 없음",
+        "* FMP 실시간 공시 반영"
+      ],
+      "value": [
+        "PER 260.7 · 극심 프리미엄",
+        "Forward PER 14.3 · 이익 성장 반영",
+        "PEG 0.53 · 성장률 대비 저평가"
+      ]
+    }
+  },
+  {
+    "t": "CHKP",
+    "n": "Check Point Software Technologies Ltd.",
+    "m": "US",
+    "sec": "IT",
+    "tech": 47,
+    "macro": 60,
+    "filing": 50,
+    "value": 68,
+    "total": 54,
+    "consensus": 0,
+    "signal": "HOLD",
+    "ev": 0.09,
+    "target": 1,
+    "hitl": false,
+    "reasons": {
+      "tech": [
+        "단기 역배열 (P<129.4<129.9)",
+        "MACD 골든크로스 · 히스토 +0.15"
+      ],
+      "macro": [
+        "NEUTRAL · VIX 14.2 · US10Y 4.68%",
+        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
+      ],
+      "filing": [
+        "13F: 기관지분율 +2.88%p",
+        "13F: 보유기관 664곳 · 지분율 71.1% (2026Q3)",
+        "Form 4: 매도 우세 P0/S7",
+        "8-K: 최근 60일 이벤트 없음",
+        "* FMP 실시간 공시 반영"
+      ],
+      "value": [
+        "PER 13.5 · 저평가",
+        "FCF Yield 5.4% · 우수"
+      ]
+    }
+  },
+  {
+    "t": "RVTY",
+    "n": "Revvity, Inc.",
+    "m": "US",
+    "sec": "제약/바이오",
+    "tech": 95,
+    "macro": 65,
+    "filing": 58,
+    "value": 58,
+    "total": 72,
+    "consensus": 1,
+    "signal": "HOLD",
+    "ev": 1.05,
+    "target": 13,
+    "hitl": false,
+    "reasons": {
+      "tech": [
+        "이동평균 완벽 정배열 (P>113.7>109.6>99.9)",
+        "RSI 62 · 강세 지속 구간",
+        "MACD 골든크로스 · 히스토 +0.09",
+        "3개월 수익률 +21.7% · 강한 상승"
+      ],
+      "macro": [
+        "NEUTRAL · VIX 14.2 · US10Y 4.68%",
+        "DXY 99.6 약세 · 성장주 유리",
+        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
+      ],
+      "filing": [
+        "P/C비율 하락 -1150% (헤지 완화)",
+        "13F: 보유기관 546곳 · 지분율 102.7% (2026Q3)",
+        "* FMP 실시간 공시 반영"
+      ],
+      "value": [
+        "PER 56.1 · 프리미엄",
+        "Forward PER 19.7 · 이익 성장 반영",
+        "PEG 0.72 · 성장률 대비 저평가"
+      ]
+    }
+  },
+  {
+    "t": "WSE",
+    "n": "Wise Group plc Class A Ordinary Shares",
+    "m": "US",
+    "sec": "IT",
+    "tech": 80,
+    "macro": 60,
+    "filing": 75,
+    "value": 45,
+    "total": 69,
+    "consensus": 2,
+    "signal": "WATCH",
+    "ev": 0.74,
+    "target": 9,
+    "hitl": false,
+    "reasons": {
+      "tech": [
+        "단기 정배열 (P>12.3>12.0)",
+        "RSI 66 · 강세 지속 구간",
+        "MACD 골든크로스 · 히스토 +0.09"
+      ],
+      "macro": [
+        "NEUTRAL · VIX 14.2 · US10Y 4.68%",
+        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
+      ],
+      "filing": [
+        "13F: 신규진입 급증 +209곳 (STRONG_CONSENSUS)",
+        "13F: 기관지분율 +34.12%p",
+        "13F: 보유기관 213곳 · 지분율 34.1% (2026Q3)",
+        "* FMP 실시간 공시 반영"
+      ],
+      "value": [
+        "PER 26.9 · 적정",
+        "Forward PER 18.6 · 이익 성장 반영",
+        "PEG 5.40 · 성장률 대비 부담",
+        "FCF 음수 · 현금유출"
+      ]
+    }
+  },
+  {
+    "t": "PEN",
+    "n": "Penumbra, Inc.",
+    "m": "US",
+    "sec": "제약/바이오",
+    "tech": 65,
+    "macro": 65,
+    "filing": 50,
+    "value": 30,
+    "total": 55,
+    "consensus": 0,
+    "signal": "HOLD",
+    "ev": 0.25,
+    "target": 3,
+    "hitl": false,
+    "reasons": {
+      "tech": [
+        "단기 정배열 (P>322.5>319.7)",
+        "RSI 85 · 과매수 경계",
+        "MACD 골든크로스 · 히스토 +0.48"
+      ],
+      "macro": [
+        "NEUTRAL · VIX 14.2 · US10Y 4.68%",
+        "DXY 99.6 약세 · 성장주 유리",
+        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
+      ],
+      "filing": [
+        "P/C비율 급등 +183% (헤지 강화)",
+        "13F: 보유기관 467곳 · 지분율 87.7% (2026Q3)",
+        "* FMP 실시간 공시 반영"
+      ],
+      "value": [
+        "PER 80.6 · 극심 프리미엄",
+        "Forward PER 53.4 · 이익 성장 반영",
+        "PBR 8.4 · 부담",
+        "PEG 4.43 · 성장률 대비 부담"
+      ]
+    }
+  },
+  {
+    "t": "BMRN",
+    "n": "BioMarin Pharmaceutical Inc.",
+    "m": "US",
+    "sec": "제약/바이오",
+    "tech": 95,
+    "macro": 65,
+    "filing": 63,
+    "value": 51,
+    "total": 73,
+    "consensus": 1,
+    "signal": "HOLD",
+    "ev": 1.08,
+    "target": 13,
+    "hitl": false,
+    "reasons": {
+      "tech": [
+        "이동평균 완벽 정배열 (P>62.9>59.8>56.9)",
+        "RSI 63 · 강세 지속 구간",
+        "MACD 골든크로스 · 히스토 +0.51",
+        "3개월 수익률 +34.2% · 강한 상승"
+      ],
+      "macro": [
+        "NEUTRAL · VIX 14.2 · US10Y 4.68%",
+        "DXY 99.6 약세 · 성장주 유리",
+        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
+      ],
+      "filing": [
+        "13F: 기관지분율 +6.04%p",
+        "P/C비율 하락 -37% (헤지 완화)",
+        "13F: 보유기관 583곳 · 지분율 101.5% (2026Q3)",
+        "* FMP 실시간 공시 반영"
+      ],
+      "value": [
+        "PER 180.1 · 극심 프리미엄",
+        "Forward PER 10.1 · 이익 성장 반영",
+        "PEG 0.53 · 성장률 대비 저평가"
+      ]
+    }
+  },
+  {
+    "t": "WTS",
+    "n": "Watts Water Technologies, Inc.",
+    "m": "US",
+    "sec": "산업재",
+    "tech": 80,
+    "macro": 60,
+    "filing": 73,
+    "value": 45,
+    "total": 69,
+    "consensus": 2,
+    "signal": "WATCH",
+    "ev": 0.91,
+    "target": 11,
+    "hitl": false,
+    "reasons": {
+      "tech": [
+        "이동평균 완벽 정배열 (P>362.0>353.0>308.7)",
+        "MACD 골든크로스 · 히스토 +2.42",
+        "거래량 감소 · 0.5배",
+        "3개월 수익률 +27.8% · 강한 상승"
+      ],
+      "macro": [
+        "NEUTRAL · VIX 14.2 · US10Y 4.68%",
+        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
+      ],
+      "filing": [
+        "13F: 신규진입 +53곳",
+        "13F: 기관지분율 +1.74%p",
+        "P/C비율 하락 -73% (헤지 완화)",
+        "13F: 보유기관 577곳 · 지분율 81.3% (2026Q3)",
+        "* FMP 실시간 공시 반영"
+      ],
+      "value": [
+        "PER 33.6 · 적정",
+        "PEG 3.93 · 성장률 대비 부담"
+      ]
+    }
+  },
+  {
+    "t": "WSO",
+    "n": "Watsco, Inc.",
+    "m": "US",
+    "sec": "산업재",
+    "tech": 15,
+    "macro": 60,
+    "filing": 63,
+    "value": 50,
+    "total": 44,
+    "consensus": 0,
+    "signal": "AVOID",
+    "ev": -0.48,
+    "target": -6,
+    "hitl": true,
+    "reasons": {
+      "tech": [
+        "단기 역배열 (P<332.9<365.6)",
+        "RSI 29 · 과매도",
+        "MACD 데드크로스 · 히스토 -0.48",
+        "거래량 급증 · 최근 20일 평균 1.5배",
+        "3개월 수익률 -19.7% · 급락"
+      ],
+      "macro": [
+        "NEUTRAL · VIX 14.2 · US10Y 4.68%",
+        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
+      ],
+      "filing": [
+        "13F: 기관지분율 +2.32%p",
+        "P/C비율 하락 -146% (헤지 완화)",
+        "13F: 보유기관 778곳 · 지분율 103.1% (2026Q3)",
+        "* FMP 실시간 공시 반영"
+      ],
+      "value": [
+        "PER 26.8 · 적정"
+      ]
+    }
+  },
+  {
+    "t": "CLX",
+    "n": "The Clorox Company",
+    "m": "US",
+    "sec": "소매",
+    "tech": 84,
+    "macro": 60,
+    "filing": 60,
+    "value": 50,
+    "total": 67,
+    "consensus": 1,
+    "signal": "HOLD",
+    "ev": 0.85,
+    "target": 10,
+    "hitl": false,
+    "reasons": {
+      "tech": [
+        "단기 정배열 (P>100.6>97.2)",
+        "RSI 66 · 강세 지속 구간",
+        "MACD 골든크로스 · 히스토 +0.50",
+        "3개월 수익률 +15.5%"
+      ],
+      "macro": [
+        "NEUTRAL · VIX 14.2 · US10Y 4.68%",
+        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
+      ],
+      "filing": [
+        "13F: 기관지분율 +4.48%p",
+        "13F: 보유기관 1071곳 · 지분율 86.5% (2026Q3)",
+        "* FMP 실시간 공시 반영"
+      ],
+      "value": [
+        "PER 22.0 · 적정",
+        "Forward PER 16.6 · 이익 성장 반영",
+        "PBR 142.4 · 부담"
+      ]
+    }
+  },
+  {
+    "t": "CNH",
+    "n": "CNH Industrial N.V.",
+    "m": "US",
+    "sec": "산업재",
+    "tech": 43,
+    "macro": 60,
+    "filing": 55,
+    "value": 58,
+    "total": 52,
+    "consensus": 0,
+    "signal": "HOLD",
+    "ev": 0.04,
+    "target": 0,
+    "hitl": false,
+    "reasons": {
+      "tech": [
+        "MACD 데드크로스 · 히스토 -0.06",
+        "Bollinger 하단 근접 · 반등 여지"
+      ],
+      "macro": [
+        "NEUTRAL · VIX 14.2 · US10Y 4.68%",
+        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
+      ],
+      "filing": [
+        "* FMP 실시간 공시 반영"
+      ],
+      "value": [
+        "PER 41.2 · 프리미엄",
+        "Forward PER 14.9 · 이익 성장 반영",
+        "PEG 0.54 · 성장률 대비 저평가"
+      ]
+    }
+  },
+  {
+    "t": "WBS",
+    "n": "Webster Financial Corporation",
+    "m": "US",
+    "sec": "금융",
+    "tech": 99,
+    "macro": 60,
+    "filing": 55,
+    "value": 60,
+    "total": 72,
+    "consensus": 1,
+    "signal": "HOLD",
+    "ev": 0.98,
+    "target": 12,
+    "hitl": false,
+    "reasons": {
+      "tech": [
+        "이동평균 완벽 정배열 (P>77.5>76.0>68.7)",
+        "RSI 66 · 강세 지속 구간",
+        "MACD 골든크로스 · 히스토 +0.06",
+        "거래량 급증 · 최근 20일 평균 1.5배",
+        "3개월 수익률 +10.3%"
+      ],
+      "macro": [
+        "NEUTRAL · VIX 14.2 · US10Y 4.68%",
+        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
+      ],
+      "filing": [
+        "13F: 기관지분율 +6.15%p",
+        "P/C비율 급등 +41% (헤지 강화)",
+        "13F: 보유기관 544곳 · 지분율 97.7% (2026Q3)",
+        "* FMP 실시간 공시 반영"
+      ],
+      "value": [
+        "PER 12.9 · 저평가"
+      ]
+    }
+  },
+  {
+    "t": "SF",
+    "n": "Stifel Financial Corp",
+    "m": "US",
+    "sec": "금융",
+    "tech": 55,
+    "macro": 60,
+    "filing": 52,
+    "value": 68,
+    "total": 57,
+    "consensus": 0,
+    "signal": "HOLD",
+    "ev": 0.41,
+    "target": 5,
+    "hitl": false,
+    "reasons": {
+      "tech": [
+        "단기 정배열 (P>82.9>77.2)",
+        "RSI 47 · 중립",
+        "MACD 데드크로스 · 히스토 -0.14",
+        "3개월 수익률 +14.0%"
+      ],
+      "macro": [
+        "NEUTRAL · VIX 14.2 · US10Y 4.68%",
+        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
+      ],
+      "filing": [
+        "13F: 증량-감량 순 -552",
+        "13F: 기관지분율 +2.14%p",
+        "13F: 보유기관 596곳 · 지분율 135.4% (2026Q3)",
+        "* FMP 실시간 공시 반영"
+      ],
+      "value": [
+        "PER 15.3 · 저평가",
+        "Forward PER 11.5 · 이익 성장 반영"
+      ]
+    }
+  },
+  {
+    "t": "CSGP",
+    "n": "CoStar Group, Inc.",
+    "m": "US",
+    "sec": "리츠",
+    "tech": 65,
+    "macro": 60,
+    "filing": 63,
+    "value": 51,
+    "total": 61,
+    "consensus": 0,
+    "signal": "HOLD",
+    "ev": 0.35,
+    "target": 4,
+    "hitl": false,
+    "reasons": {
+      "tech": [
+        "RSI 55 · 중립",
+        "MACD 골든크로스 · 히스토 +0.33"
+      ],
+      "macro": [
+        "NEUTRAL · VIX 14.2 · US10Y 4.68%",
+        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
+      ],
+      "filing": [
+        "13F: 기관지분율 +1.63%p",
+        "13F: 보유기관 774곳 · 지분율 100.6% (2026Q3)",
+        "8-K: 최근 60일 이벤트 3건 (활발)",
+        "* FMP 실시간 공시 반영"
+      ],
+      "value": [
+        "PER 174.2 · 극심 프리미엄",
+        "Forward PER 18.2 · 이익 성장 반영",
+        "PEG 0.64 · 성장률 대비 저평가"
+      ]
+    }
+  },
+  {
+    "t": "VIRT",
+    "n": "Virtu Financial, Inc.",
+    "m": "US",
+    "sec": "금융",
+    "tech": 69,
+    "macro": 60,
+    "filing": 63,
+    "value": 70,
+    "total": 66,
+    "consensus": 1,
+    "signal": "HOLD",
+    "ev": 0.66,
+    "target": 8,
+    "hitl": false,
+    "reasons": {
+      "tech": [
+        "RSI 53 · 중립",
+        "MACD 골든크로스 · 히스토 +0.20",
+        "3개월 수익률 +8.5%"
+      ],
+      "macro": [
+        "NEUTRAL · VIX 14.2 · US10Y 4.68%",
+        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
+      ],
+      "filing": [
+        "13F: 기관지분율 +7.03%p",
+        "13F: 보유기관 486곳 · 지분율 96.4% (2026Q3)",
+        "8-K: 최근 60일 이벤트 3건 (활발)",
+        "* FMP 실시간 공시 반영"
+      ],
+      "value": [
+        "PER 10.0 · 극심 저평가"
+      ]
+    }
+  },
+  {
+    "t": "CORT",
+    "n": "Corcept Therapeutics Incorporated",
+    "m": "US",
+    "sec": "제약/바이오",
+    "tech": 85,
+    "macro": 65,
+    "filing": 63,
+    "value": 43,
+    "total": 68,
+    "consensus": 1,
+    "signal": "HOLD",
+    "ev": 0.91,
+    "target": 11,
+    "hitl": false,
+    "reasons": {
+      "tech": [
+        "이동평균 완벽 정배열 (P>106.1>93.7>63.8)",
+        "MACD 골든크로스 · 히스토 +0.04",
+        "3개월 수익률 +112.6% · 강한 상승"
+      ],
+      "macro": [
+        "NEUTRAL · VIX 14.2 · US10Y 4.68%",
+        "DXY 99.6 약세 · 성장주 유리",
+        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
+      ],
+      "filing": [
+        "13F: 신규진입 +62곳",
+        "13F: 기관지분율 +3.13%p",
+        "P/C비율 하락 -181% (헤지 완화)",
+        "13F: 보유기관 446곳 · 지분율 79.7% (2026Q3)",
+        "Form 4: 매도 우세 P0/S47"
+      ],
+      "value": [
+        "PER 260.4 · 극심 프리미엄",
+        "Forward PER 25.9 · 이익 성장 반영",
+        "PBR 17.9 · 부담",
+        "PEG 0.81 · 성장률 대비 저평가"
+      ]
+    }
+  },
+  {
+    "t": "SEIC",
+    "n": "SEI Investments Company",
+    "m": "US",
+    "sec": "금융",
+    "tech": 59,
+    "macro": 60,
+    "filing": 45,
+    "value": 50,
+    "total": 54,
+    "consensus": 0,
+    "signal": "HOLD",
+    "ev": 0.34,
+    "target": 4,
+    "hitl": false,
+    "reasons": {
+      "tech": [
+        "이동평균 완벽 정배열 (P>103.1>96.4>86.2)",
+        "MACD 데드크로스 · 히스토 -0.16",
+        "3개월 수익률 +15.3%"
+      ],
+      "macro": [
+        "NEUTRAL · VIX 14.2 · US10Y 4.68%",
+        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
+      ],
+      "filing": [
+        "13F: 기관지분율 +1.26%p",
+        "P/C비율 급등 +153% (헤지 강화)",
+        "13F: 보유기관 577곳 · 지분율 74.9% (2026Q3)",
+        "Form 4: 매도 우세 P0/S14",
+        "* FMP 실시간 공시 반영"
+      ],
+      "value": [
+        "PER 18.8 · 적정"
+      ]
+    }
+  },
+  {
+    "t": "CCK",
+    "n": "Crown Holdings, Inc.",
+    "m": "US",
+    "sec": "소비재",
+    "tech": 47,
+    "macro": 60,
+    "filing": 50,
+    "value": 84,
+    "total": 56,
+    "consensus": 1,
+    "signal": "HOLD",
+    "ev": 0.35,
+    "target": 4,
+    "hitl": false,
+    "reasons": {
+      "tech": [
+        "MACD 데드크로스 · 히스토 -0.81",
+        "3개월 수익률 +20.0%",
+        "Bollinger 하단 근접 · 반등 여지"
+      ],
+      "macro": [
+        "NEUTRAL · VIX 14.2 · US10Y 4.68%",
+        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
+      ],
+      "filing": [
+        "13F: 기관지분율 -1.43%p",
+        "13F: 보유기관 604곳 · 지분율 96.4% (2026Q3)",
+        "* FMP 실시간 공시 반영"
+      ],
+      "value": [
+        "PER 17.1 · 저평가",
+        "Forward PER 12.8 · 이익 성장 반영",
+        "PEG 0.64 · 성장률 대비 저평가",
+        "FCF Yield 6.8% · 우수"
+      ]
+    }
+  },
+  {
+    "t": "HL",
+    "n": "Hecla Mining Company",
+    "m": "US",
+    "sec": "소재",
+    "tech": 79,
+    "macro": 60,
+    "filing": 50,
+    "value": 53,
+    "total": 63,
+    "consensus": 1,
+    "signal": "HOLD",
+    "ev": 0.61,
+    "target": 7,
+    "hitl": false,
+    "reasons": {
+      "tech": [
+        "단기 정배열 (P>16.1>15.7)",
+        "MACD 골든크로스 · 히스토 +0.39",
+        "거래량 급증 · 최근 20일 평균 1.6배",
+        "3개월 수익률 +9.1%",
+        "Bollinger 상단 접근 (97%)"
+      ],
+      "macro": [
+        "NEUTRAL · VIX 14.2 · US10Y 4.68%",
+        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
+      ],
+      "filing": [
+        "P/C비율 급등 +31% (헤지 강화)",
+        "13F: 보유기관 619곳 · 지분율 72.9% (2026Q3)",
+        "* FMP 실시간 공시 반영"
+      ],
+      "value": [
+        "PER 22.1 · 적정",
+        "Forward PER 17.7 · 이익 성장 반영",
+        "PEG 5.64 · 성장률 대비 부담"
+      ]
+    }
+  },
+  {
+    "t": "CR",
+    "n": "Crane Company",
+    "m": "US",
+    "sec": "산업재",
+    "tech": 51,
+    "macro": 60,
+    "filing": 63,
+    "value": 58,
+    "total": 57,
+    "consensus": 0,
+    "signal": "HOLD",
+    "ev": 0.45,
+    "target": 5,
+    "hitl": false,
+    "reasons": {
+      "tech": [
+        "RSI 43 · 중립",
+        "MACD 데드크로스 · 히스토 -0.61",
+        "3개월 수익률 +28.2% · 강한 상승"
+      ],
+      "macro": [
+        "NEUTRAL · VIX 14.2 · US10Y 4.68%",
+        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
+      ],
+      "filing": [
+        "13F: 기관지분율 +4.25%p",
+        "13F: 보유기관 603곳 · 지분율 79.1% (2026Q3)",
+        "8-K: 최근 60일 이벤트 3건 (활발)",
+        "* FMP 실시간 공시 반영"
+      ],
+      "value": [
+        "PER 38.1 · 적정",
+        "Forward PER 28.0 · 이익 성장 반영"
+      ]
+    }
+  },
+  {
+    "t": "FMS",
+    "n": "Fresenius Medical Care AG & Co. KGaA",
+    "m": "US",
+    "sec": "제약/바이오",
+    "tech": 47,
+    "macro": 65,
+    "filing": 58,
+    "value": 94,
+    "total": 61,
+    "consensus": 1,
+    "signal": "HOLD",
+    "ev": 0.43,
+    "target": 5,
+    "hitl": false,
+    "reasons": {
+      "tech": [
+        "MACD 데드크로스 · 히스토 -0.19",
+        "3개월 수익률 +10.0%",
+        "Bollinger 하단 근접 · 반등 여지"
+      ],
+      "macro": [
+        "NEUTRAL · VIX 14.2 · US10Y 4.68%",
+        "DXY 99.6 약세 · 성장주 유리",
+        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
+      ],
+      "filing": [
+        "P/C비율 하락 -222% (헤지 완화)",
+        "13F: 보유기관 239곳 · 지분율 7.7% (2026Q3)",
+        "8-K: 최근 60일 이벤트 없음",
+        "* FMP 실시간 공시 반영"
+      ],
+      "value": [
+        "PER 12.4 · 저평가",
+        "Forward PER 6.5 · 이익 성장 반영",
+        "PBR 0.86 · 자산가치 이하",
+        "PEG 0.83 · 성장률 대비 저평가"
+      ]
+    }
+  },
+  {
+    "t": "SJM",
+    "n": "The J. M. Smucker Company",
+    "m": "US",
+    "sec": "소매",
+    "tech": 47,
+    "macro": 60,
+    "filing": 40,
+    "value": 78,
+    "total": 52,
+    "consensus": 1,
+    "signal": "HOLD",
+    "ev": 0.22,
+    "target": 3,
+    "hitl": false,
+    "reasons": {
+      "tech": [
+        "RSI 42 · 중립",
+        "MACD 데드크로스 · 히스토 -0.27",
+        "3개월 수익률 +14.8%"
+      ],
+      "macro": [
+        "NEUTRAL · VIX 14.2 · US10Y 4.68%",
+        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
+      ],
+      "filing": [
+        "13F: 기관지분율 -1.59%p",
+        "13F: 보유기관 904곳 · 지분율 88.5% (2026Q3)",
+        "Form 4: 매도 우세 P0/S5",
+        "* FMP 실시간 공시 반영"
+      ],
+      "value": [
+        "PER 11.0 · 극심 저평가",
+        "FCF Yield 8.0% · 우수"
+      ]
+    }
+  },
+  {
+    "t": "ELS",
+    "n": "Equity LifeStyle Properties, Inc.",
+    "m": "US",
+    "sec": "리츠",
+    "tech": 47,
+    "macro": 60,
+    "filing": 55,
+    "value": 45,
+    "total": 52,
+    "consensus": 0,
+    "signal": "HOLD",
+    "ev": 0.13,
+    "target": 2,
+    "hitl": false,
+    "reasons": {
+      "tech": [
+        "RSI 44 · 중립",
+        "MACD 데드크로스 · 히스토 -0.11",
+        "3개월 수익률 +5.4%"
+      ],
+      "macro": [
+        "NEUTRAL · VIX 14.2 · US10Y 4.68%",
+        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
+      ],
+      "filing": [
+        "13F: 기관지분율 +4.01%p",
+        "P/C비율 급등 +73% (헤지 강화)",
+        "13F: 보유기관 481곳 · 지분율 109.6% (2026Q3)",
+        "* FMP 실시간 공시 반영"
+      ],
+      "value": [
+        "PER 31.3 · 적정",
+        "PEG 4.94 · 성장률 대비 부담"
+      ]
+    }
+  },
+  {
+    "t": "AGNC",
+    "n": "AGNC Investment Corp.",
+    "m": "US",
+    "sec": "리츠",
+    "tech": 84,
+    "macro": 60,
+    "filing": 60,
+    "value": 65,
+    "total": 69,
+    "consensus": 1,
+    "signal": "HOLD",
+    "ev": 0.84,
+    "target": 10,
+    "hitl": false,
+    "reasons": {
+      "tech": [
+        "이동평균 완벽 정배열 (P>10.7>10.6>10.2)",
+        "RSI 50 · 중립",
+        "MACD 골든크로스 · 히스토 +0.02",
+        "3개월 수익률 +9.9%"
+      ],
+      "macro": [
+        "NEUTRAL · VIX 14.2 · US10Y 4.68%",
+        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
+      ],
+      "filing": [
+        "13F: 기관지분율 +4.74%p",
+        "13F: 보유기관 724곳 · 지분율 42.9% (2026Q3)",
+        "* FMP 실시간 공시 반영"
+      ],
+      "value": [
+        "PER 5.4 · 극심 저평가",
+        "PEG 3.48 · 성장률 대비 부담"
+      ]
+    }
+  },
+  {
+    "t": "DKNG",
+    "n": "DraftKings Inc.",
+    "m": "US",
+    "sec": "소비재",
+    "tech": 65,
+    "macro": 60,
+    "filing": 60,
+    "value": 60,
+    "total": 62,
+    "consensus": 0,
+    "signal": "HOLD",
+    "ev": 0.4,
+    "target": 5,
+    "hitl": false,
+    "reasons": {
+      "tech": [
+        "RSI 54 · 중립",
+        "MACD 골든크로스 · 히스토 +0.34"
+      ],
+      "macro": [
+        "NEUTRAL · VIX 14.2 · US10Y 4.68%",
+        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
+      ],
+      "filing": [
+        "13F: 기관지분율 +5.00%p",
+        "13F: 보유기관 749곳 · 지분율 84.1% (2026Q3)",
+        "* FMP 실시간 공시 반영"
+      ],
+      "value": [
+        "PER 15.6 · 저평가",
+        "PBR 22.0 · 부담",
+        "PEG 0.11 · 성장률 대비 저평가"
+      ]
+    }
+  },
+  {
+    "t": "HII",
+    "n": "Huntington Ingalls Industries, Inc.",
+    "m": "US",
+    "sec": "산업재",
+    "tech": 80,
+    "macro": 60,
+    "filing": 50,
+    "value": 42,
+    "total": 61,
+    "consensus": 1,
+    "signal": "HOLD",
+    "ev": 0.42,
+    "target": 5,
+    "hitl": false,
+    "reasons": {
+      "tech": [
+        "단기 정배열 (P>310.3>295.7)",
+        "RSI 59 · 강세 지속 구간",
+        "MACD 골든크로스 · 히스토 +0.70"
+      ],
+      "macro": [
+        "NEUTRAL · VIX 14.2 · US10Y 4.68%",
+        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
+      ],
+      "filing": [
+        "P/C비율 급등 +77% (헤지 강화)",
+        "13F: 보유기관 817곳 · 지분율 89.9% (2026Q3)",
+        "* FMP 실시간 공시 반영"
+      ],
+      "value": [
+        "PER 19.0 · 적정",
+        "FCF 음수 · 현금유출"
+      ]
+    }
+  },
+  {
+    "t": "LI",
+    "n": "Li Auto Inc.",
+    "m": "US",
+    "sec": "소비재",
+    "tech": 15,
+    "macro": 60,
+    "filing": 55,
+    "value": 70,
+    "total": 44,
+    "consensus": 1,
+    "signal": "AVOID",
+    "ev": -0.5,
+    "target": -6,
+    "hitl": true,
+    "reasons": {
+      "tech": [
+        "단기 역배열 (P<12.7<12.8)",
+        "MACD 데드크로스 · 히스토 -0.05",
+        "3개월 수익률 -25.6% · 급락"
+      ],
+      "macro": [
+        "NEUTRAL · VIX 14.2 · US10Y 4.68%",
+        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
+      ],
+      "filing": [
+        "13F: 보유기관 189곳 · 지분율 4.1% (2026Q3)",
+        "8-K: 최근 60일 이벤트 없음",
+        "* FMP 실시간 공시 반영"
+      ],
+      "value": [
+        "PER 10.9 · 극심 저평가",
+        "PEG 0.82 · 성장률 대비 저평가",
+        "FCF 음수 · 현금유출"
+      ]
+    }
+  },
+  {
+    "t": "HMY",
+    "n": "Harmony Gold Mining Company Limited",
+    "m": "US",
+    "sec": "소재",
+    "tech": 73,
+    "macro": 60,
+    "filing": 50,
+    "value": 84,
+    "total": 65,
+    "consensus": 2,
+    "signal": "WATCH",
+    "ev": 0.71,
+    "target": 9,
+    "hitl": false,
+    "reasons": {
+      "tech": [
+        "단기 정배열 (P>17.4>16.3)",
+        "RSI 81 · 과매수 경계",
+        "MACD 골든크로스 · 히스토 +0.29",
+        "3개월 수익률 +21.8% · 강한 상승"
+      ],
+      "macro": [
+        "NEUTRAL · VIX 14.2 · US10Y 4.68%",
+        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
+      ],
+      "filing": [
+        "13F: 기관지분율 -3.33%p",
+        "13F: 보유기관 250곳 · 지분율 13.3% (2026Q3)",
+        "8-K: 최근 60일 이벤트 없음",
+        "* FMP 실시간 공시 반영"
+      ],
+      "value": [
+        "PER 12.2 · 저평가",
+        "Forward PER 6.0 · 이익 성장 반영",
+        "PEG 0.03 · 성장률 대비 저평가",
+        "FCF Yield 119.7% · 우수"
+      ]
+    }
+  },
+  {
+    "t": "ARWR",
+    "n": "Arrowhead Pharmaceuticals, Inc.",
+    "m": "US",
+    "sec": "제약/바이오",
+    "tech": 69,
+    "macro": 65,
+    "filing": 50,
+    "value": 42,
+    "total": 58,
+    "consensus": 0,
+    "signal": "HOLD",
+    "ev": 0.54,
+    "target": 6,
+    "hitl": false,
+    "reasons": {
+      "tech": [
+        "이동평균 완벽 정배열 (P>86.3>81.3>67.9)",
+        "RSI 56 · 강세 지속 구간",
+        "MACD 데드크로스 · 히스토 -0.12",
+        "3개월 수익률 +19.9%"
+      ],
+      "macro": [
+        "NEUTRAL · VIX 14.2 · US10Y 4.68%",
+        "DXY 99.6 약세 · 성장주 유리",
+        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
+      ],
+      "filing": [
+        "13F: 기관지분율 -1.95%p",
+        "13F: 보유기관 517곳 · 지분율 84.3% (2026Q3)",
+        "* FMP 실시간 공시 반영"
+      ],
+      "value": [
+        "Forward PER -18.2 · 이익 성장 반영",
+        "PBR 26.9 · 부담",
+        "FCF 음수 · 현금유출"
+      ]
+    }
+  },
+  {
+    "t": "SNN",
+    "n": "Smith & Nephew plc",
+    "m": "US",
+    "sec": "제약/바이오",
+    "tech": 32,
+    "macro": 65,
+    "filing": 60,
+    "value": 58,
+    "total": 51,
+    "consensus": 0,
+    "signal": "HOLD",
+    "ev": -0.04,
+    "target": 0,
+    "hitl": false,
+    "reasons": {
+      "tech": [
+        "RSI 24 · 과매도",
+        "MACD 데드크로스 · 히스토 -0.16"
+      ],
+      "macro": [
+        "NEUTRAL · VIX 14.2 · US10Y 4.68%",
+        "DXY 99.6 약세 · 성장주 유리",
+        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
+      ],
+      "filing": [
+        "13F: 기관지분율 +1.04%p",
+        "13F: 보유기관 292곳 · 지분율 8.4% (2026Q3)",
+        "8-K: 최근 60일 이벤트 없음",
+        "* FMP 실시간 공시 반영"
+      ],
+      "value": [
+        "PER 20.2 · 적정",
+        "Forward PER 12.2 · 이익 성장 반영",
+        "PBR 12.2 · 부담",
+        "FCF Yield 8.5% · 우수"
+      ]
+    }
+  },
+  {
+    "t": "AAOI",
+    "n": "Applied Optoelectronics, Inc.",
+    "m": "US",
+    "sec": "IT",
+    "tech": 54,
+    "macro": 60,
+    "filing": 35,
+    "value": 50,
+    "total": 49,
+    "consensus": 0,
+    "signal": "HOLD",
+    "ev": -0.17,
+    "target": -2,
+    "hitl": false,
+    "reasons": {
+      "tech": [
+        "RSI 76 · 과매수 경계",
+        "MACD 골든크로스 · 히스토 +5.99",
+        "Bollinger 상단 접근 (94%)"
+      ],
+      "macro": [
+        "NEUTRAL · VIX 14.2 · US10Y 4.68%",
+        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
+      ],
+      "filing": [
+        "13F: 기관지분율 -7.37%p",
+        "P/C비율 급등 +55% (헤지 강화)",
+        "13F: 보유기관 540곳 · 지분율 68.1% (2026Q3)",
+        "Form 4: 매도 우세 P0/S17",
+        "* FMP 실시간 공시 반영"
+      ],
+      "value": [
+        "PER 33.7 · 적정",
+        "PEG 0.78 · 성장률 대비 저평가",
+        "FCF 음수 · 현금유출"
+      ]
+    }
+  },
+  {
+    "t": "OC",
+    "n": "Owens Corning",
+    "m": "US",
+    "sec": "소재",
+    "tech": 95,
+    "macro": 60,
+    "filing": 60,
+    "value": 68,
+    "total": 73,
+    "consensus": 1,
+    "signal": "HOLD",
+    "ev": 1.07,
+    "target": 13,
+    "hitl": false,
+    "reasons": {
+      "tech": [
+        "이동평균 완벽 정배열 (P>147.2>139.7>121.5)",
+        "RSI 62 · 강세 지속 구간",
+        "MACD 골든크로스 · 히스토 +0.46",
+        "3개월 수익률 +37.8% · 강한 상승"
+      ],
+      "macro": [
+        "NEUTRAL · VIX 14.2 · US10Y 4.68%",
+        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
+      ],
+      "filing": [
+        "13F: 기관지분율 +8.50%p",
+        "13F: 보유기관 698곳 · 지분율 104.4% (2026Q3)",
+        "* FMP 실시간 공시 반영"
+      ],
+      "value": [
+        "PER 12.8 · 저평가",
+        "FCF Yield 7.3% · 우수"
+      ]
+    }
+  },
+  {
+    "t": "FHN",
+    "n": "First Horizon Corporation",
+    "m": "US",
+    "sec": "금융",
+    "tech": 84,
+    "macro": 60,
+    "filing": 55,
+    "value": 60,
+    "total": 67,
+    "consensus": 1,
+    "signal": "HOLD",
+    "ev": 0.77,
+    "target": 9,
+    "hitl": false,
+    "reasons": {
+      "tech": [
+        "이동평균 완벽 정배열 (P>25.7>25.4>23.8)",
+        "RSI 50 · 중립",
+        "MACD 골든크로스 · 히스토 +0.02",
+        "3개월 수익률 +10.4%"
+      ],
+      "macro": [
+        "NEUTRAL · VIX 14.2 · US10Y 4.68%",
+        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
+      ],
+      "filing": [
+        "13F: 기관지분율 +3.85%p",
+        "P/C비율 급등 +41% (헤지 강화)",
+        "13F: 보유기관 690곳 · 지분율 86.4% (2026Q3)",
+        "* FMP 실시간 공시 반영"
+      ],
+      "value": [
+        "PER 12.5 · 저평가"
+      ]
+    }
+  },
+  {
+    "t": "DECK",
+    "n": "Deckers Outdoor Corporation",
+    "m": "US",
+    "sec": "소비재",
+    "tech": 20,
+    "macro": 60,
+    "filing": 63,
+    "value": 68,
+    "total": 48,
+    "consensus": 0,
+    "signal": "HOLD",
+    "ev": -0.21,
+    "target": -3,
+    "hitl": false,
+    "reasons": {
+      "tech": [
+        "단기 역배열 (P<97.6<103.0)",
+        "RSI 21 · 과매도",
+        "MACD 데드크로스 · 히스토 -0.69",
+        "Bollinger 하단 근접 · 반등 여지"
+      ],
+      "macro": [
+        "NEUTRAL · VIX 14.2 · US10Y 4.68%",
+        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
+      ],
+      "filing": [
+        "13F: 기관지분율 +1.51%p",
+        "P/C비율 하락 -34% (헤지 완화)",
+        "13F: 보유기관 887곳 · 지분율 91.9% (2026Q3)",
+        "* FMP 실시간 공시 반영"
+      ],
+      "value": [
+        "PER 13.3 · 저평가",
+        "FCF Yield 7.1% · 우수"
+      ]
+    }
+  },
+  {
+    "t": "ALGN",
+    "n": "Align Technology, Inc.",
+    "m": "US",
+    "sec": "제약/바이오",
+    "tech": 54,
+    "macro": 65,
+    "filing": 63,
+    "value": 66,
+    "total": 61,
+    "consensus": 0,
+    "signal": "HOLD",
+    "ev": 0.46,
+    "target": 6,
+    "hitl": false,
+    "reasons": {
+      "tech": [
+        "단기 역배열 (P<173.3<175.4)",
+        "RSI 46 · 중립",
+        "MACD 골든크로스 · 히스토 +0.31",
+        "3개월 수익률 +7.8%"
+      ],
+      "macro": [
+        "NEUTRAL · VIX 14.2 · US10Y 4.68%",
+        "DXY 99.6 약세 · 성장주 유리",
+        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
+      ],
+      "filing": [
+        "13F: 기관지분율 +5.33%p",
+        "13F: 보유기관 696곳 · 지분율 102.5% (2026Q3)",
+        "8-K: 최근 60일 이벤트 3건 (활발)",
+        "* FMP 실시간 공시 반영"
+      ],
+      "value": [
+        "PER 31.5 · 적정",
+        "Forward PER 13.6 · 이익 성장 반영",
+        "PEG 0.86 · 성장률 대비 저평가"
+      ]
+    }
+  },
+  {
+    "t": "GDDY",
+    "n": "GoDaddy Inc.",
+    "m": "US",
+    "sec": "IT",
+    "tech": 43,
+    "macro": 60,
+    "filing": 48,
+    "value": 76,
+    "total": 53,
+    "consensus": 1,
+    "signal": "HOLD",
+    "ev": 0.06,
+    "target": 1,
+    "hitl": false,
+    "reasons": {
+      "tech": [
+        "RSI 40 · 중립",
+        "MACD 데드크로스 · 히스토 -0.09"
+      ],
+      "macro": [
+        "NEUTRAL · VIX 14.2 · US10Y 4.68%",
+        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
+      ],
+      "filing": [
+        "P/C비율 하락 -32% (헤지 완화)",
+        "13F: 보유기관 639곳 · 지분율 99.1% (2026Q3)",
+        "Form 4: 매도 우세 P0/S10",
+        "* FMP 실시간 공시 반영"
+      ],
+      "value": [
+        "PER 14.1 · 저평가",
+        "Forward PER 8.4 · 이익 성장 반영",
+        "PBR 1742.8 · 부담",
+        "PEG 0.68 · 성장률 대비 저평가"
+      ]
+    }
+  },
+  {
+    "t": "HALO",
+    "n": "Halozyme Therapeutics, Inc.",
+    "m": "US",
+    "sec": "제약/바이오",
+    "tech": 80,
+    "macro": 65,
+    "filing": 50,
+    "value": 50,
+    "total": 64,
+    "consensus": 1,
+    "signal": "HOLD",
+    "ev": 0.73,
+    "target": 9,
+    "hitl": false,
+    "reasons": {
+      "tech": [
+        "이동평균 완벽 정배열 (P>89.0>80.2>71.4)",
+        "RSI 82 · 과매수 경계",
+        "MACD 골든크로스 · 히스토 +1.31",
+        "3개월 수익률 +52.7% · 강한 상승"
+      ],
+      "macro": [
+        "NEUTRAL · VIX 14.2 · US10Y 4.68%",
+        "DXY 99.6 약세 · 성장주 유리",
+        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
+      ],
+      "filing": [
+        "13F: 기관지분율 +3.24%p",
+        "13F: 보유기관 677곳 · 지분율 105.2% (2026Q3)",
+        "Form 4: 매도 우세 P0/S16",
+        "* FMP 실시간 공시 반영"
+      ],
+      "value": [
+        "PER 30.2 · 적정",
+        "Forward PER 9.9 · 이익 성장 반영",
+        "PBR 81.8 · 부담"
+      ]
+    }
+  },
+  {
+    "t": "HBM",
+    "n": "Hudbay Minerals Inc.",
+    "m": "US",
+    "sec": "소재",
+    "tech": 76,
+    "macro": 60,
+    "filing": 60,
+    "value": 60,
+    "total": 66,
+    "consensus": 1,
+    "signal": "HOLD",
+    "ev": 0.75,
+    "target": 9,
+    "hitl": false,
+    "reasons": {
+      "tech": [
+        "이동평균 완벽 정배열 (P>24.8>24.3>22.6)",
+        "RSI 82 · 과매수 경계",
+        "MACD 골든크로스 · 히스토 +0.36",
+        "3개월 수익률 +13.1%"
+      ],
+      "macro": [
+        "NEUTRAL · VIX 14.2 · US10Y 4.68%",
+        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
+      ],
+      "filing": [
+        "13F: 기관지분율 +8.27%p",
+        "13F: 보유기관 338곳 · 지분율 82.9% (2026Q3)",
+        "8-K: 최근 60일 이벤트 없음",
+        "* FMP 실시간 공시 반영"
+      ],
+      "value": [
+        "PER 16.8 · 저평가"
+      ]
+    }
+  },
+  {
+    "t": "FIG",
+    "n": "Figma, Inc.",
+    "m": "US",
+    "sec": "IT",
+    "tech": 51,
+    "macro": 60,
+    "filing": 50,
+    "value": 30,
+    "total": 49,
+    "consensus": 0,
+    "signal": "HOLD",
+    "ev": 0.05,
+    "target": 1,
+    "hitl": false,
+    "reasons": {
+      "tech": [
+        "단기 정배열 (P>24.1>22.0)",
+        "RSI 52 · 중립",
+        "MACD 데드크로스 · 히스토 -0.06"
+      ],
+      "macro": [
+        "NEUTRAL · VIX 14.2 · US10Y 4.68%",
+        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
+      ],
+      "filing": [
+        "13F: 기관지분율 +7.56%p",
+        "13F: 보유기관 405곳 · 지분율 70.2% (2026Q3)",
+        "Form 4: 매도 우세 P0/S23",
+        "* FMP 실시간 공시 반영"
+      ],
+      "value": [
+        "PER 69.8 · 극심 프리미엄",
+        "PBR 9.0 · 부담",
+        "PEG 7.95 · 성장률 대비 부담",
+        "FCF Yield 6.5% · 우수"
+      ]
+    }
+  },
+  {
+    "t": "AFG",
+    "n": "American Financial Group, Inc.",
+    "m": "US",
+    "sec": "금융",
+    "tech": 91,
+    "macro": 60,
+    "filing": 63,
+    "value": 60,
+    "total": 72,
+    "consensus": 1,
+    "signal": "HOLD",
+    "ev": 0.92,
+    "target": 11,
+    "hitl": false,
+    "reasons": {
+      "tech": [
+        "이동평균 완벽 정배열 (P>143.8>139.7>132.2)",
+        "RSI 55 · 강세 지속 구간",
+        "MACD 골든크로스 · 히스토 +0.04",
+        "3개월 수익률 +7.8%"
+      ],
+      "macro": [
+        "NEUTRAL · VIX 14.2 · US10Y 4.68%",
+        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
+      ],
+      "filing": [
+        "13F: 기관지분율 +4.65%p",
+        "P/C비율 하락 -63% (헤지 완화)",
+        "13F: 보유기관 516곳 · 지분율 72.0% (2026Q3)",
+        "* FMP 실시간 공시 반영"
+      ],
+      "value": [
+        "PER 12.8 · 저평가"
+      ]
+    }
+  },
+  {
+    "t": "PNW",
+    "n": "Pinnacle West Capital Corporation",
+    "m": "US",
+    "sec": "유틸리티",
+    "tech": 25,
+    "macro": 60,
+    "filing": 63,
+    "value": 37,
+    "total": 45,
+    "consensus": 0,
+    "signal": "HOLD",
+    "ev": -0.17,
+    "target": -2,
+    "hitl": false,
+    "reasons": {
+      "tech": [
+        "단기 역배열 (P<101.9<103.6)",
+        "MACD 데드크로스 · 히스토 -0.06"
+      ],
+      "macro": [
+        "NEUTRAL · VIX 14.2 · US10Y 4.68%",
+        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
+      ],
+      "filing": [
+        "13F: 기관지분율 +6.74%p",
+        "13F: 보유기관 723곳 · 지분율 109.6% (2026Q3)",
+        "8-K: 최근 60일 이벤트 5건 (활발)",
+        "* FMP 실시간 공시 반영"
+      ],
+      "value": [
+        "PER 19.5 · 적정",
+        "PEG 3.60 · 성장률 대비 부담",
+        "FCF 음수 · 현금유출"
+      ]
+    }
+  },
+  {
+    "t": "MDGL",
+    "n": "Madrigal Pharmaceuticals, Inc.",
+    "m": "US",
+    "sec": "제약/바이오",
+    "tech": 80,
+    "macro": 65,
+    "filing": 40,
+    "value": 26,
+    "total": 57,
+    "consensus": 1,
+    "signal": "HOLD",
+    "ev": 0.34,
+    "target": 4,
+    "hitl": false,
+    "reasons": {
+      "tech": [
+        "이동평균 완벽 정배열 (P>521.0>518.9>511.8)",
+        "RSI 47 · 중립",
+        "MACD 골든크로스 · 히스토 +0.31"
+      ],
+      "macro": [
+        "NEUTRAL · VIX 14.2 · US10Y 4.68%",
+        "DXY 99.6 약세 · 성장주 유리",
+        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
+      ],
+      "filing": [
+        "13F: 기관지분율 -24.16%p",
+        "13F: 보유기관 431곳 · 지분율 81.8% (2026Q3)",
+        "Form 4: 매도 우세 P0/S23",
+        "* FMP 실시간 공시 반영"
+      ],
+      "value": [
+        "PER 54.5 · 프리미엄",
+        "PBR 23.1 · 부담",
+        "FCF 음수 · 현금유출"
+      ]
+    }
+  },
+  {
+    "t": "DRS",
+    "n": "Leonardo DRS, Inc.",
+    "m": "US",
+    "sec": "산업재",
+    "tech": 36,
+    "macro": 60,
+    "filing": 53,
+    "value": 50,
+    "total": 48,
+    "consensus": 0,
+    "signal": "HOLD",
+    "ev": -0.01,
+    "target": 0,
+    "hitl": false,
+    "reasons": {
+      "tech": [
+        "RSI 29 · 과매도",
+        "MACD 데드크로스 · 히스토 -0.09",
+        "3개월 수익률 +6.3%"
+      ],
+      "macro": [
+        "NEUTRAL · VIX 14.2 · US10Y 4.68%",
+        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
+      ],
+      "filing": [
+        "13F: 기관지분율 +1.00%p",
+        "13F: 보유기관 381곳 · 지분율 26.9% (2026Q3)",
+        "Form 4: 매도 우세 P0/S8",
+        "8-K: 최근 60일 이벤트 3건 (활발)",
+        "* FMP 실시간 공시 반영"
+      ],
+      "value": [
+        "PER 38.1 · 적정"
+      ]
+    }
+  },
+  {
+    "t": "EHC",
+    "n": "Encompass Health Corporation",
+    "m": "US",
+    "sec": "제약/바이오",
+    "tech": 91,
+    "macro": 65,
+    "filing": 40,
+    "value": 58,
+    "total": 66,
+    "consensus": 1,
+    "signal": "HOLD",
+    "ev": 0.8,
+    "target": 10,
+    "hitl": false,
+    "reasons": {
+      "tech": [
+        "이동평균 완벽 정배열 (P>117.1>109.5>106.5)",
+        "RSI 61 · 강세 지속 구간",
+        "MACD 골든크로스 · 히스토 +0.41",
+        "3개월 수익률 +15.2%"
+      ],
+      "macro": [
+        "NEUTRAL · VIX 14.2 · US10Y 4.68%",
+        "DXY 99.6 약세 · 성장주 유리",
+        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
+      ],
+      "filing": [
+        "P/C비율 급등 +64% (헤지 강화)",
+        "13F: 보유기관 606곳 · 지분율 97.1% (2026Q3)",
+        "Form 4: 매도 우세 P0/S4",
+        "* FMP 실시간 공시 반영"
+      ],
+      "value": [
+        "PER 20.6 · 적정",
+        "PEG 0.41 · 성장률 대비 저평가"
+      ]
+    }
+  },
+  {
+    "t": "AMH",
+    "n": "American Homes 4 Rent",
+    "m": "US",
+    "sec": "리츠",
+    "tech": 47,
+    "macro": 60,
+    "filing": 75,
+    "value": 58,
+    "total": 60,
+    "consensus": 1,
+    "signal": "HOLD",
+    "ev": 0.41,
+    "target": 5,
+    "hitl": false,
+    "reasons": {
+      "tech": [
+        "RSI 48 · 중립",
+        "MACD 데드크로스 · 히스토 -0.07",
+        "3개월 수익률 +6.5%"
+      ],
+      "macro": [
+        "NEUTRAL · VIX 14.2 · US10Y 4.68%",
+        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
+      ],
+      "filing": [
+        "13F: 기관지분율 +8.62%p",
+        "P/C비율 하락 -398% (헤지 완화)",
+        "13F: 보유기관 486곳 · 지분율 90.8% (2026Q3)",
+        "Form 4: 실제매수 클러스터 P6/S0 (90일)",
+        "* FMP 실시간 공시 반영"
+      ],
+      "value": [
+        "PER 27.1 · 적정",
+        "FCF Yield 6.0% · 우수"
+      ]
+    }
+  },
+  {
+    "t": "BJ",
+    "n": "BJ's Wholesale Club Holdings, Inc.",
+    "m": "US",
+    "sec": "소매",
+    "tech": 43,
+    "macro": 60,
+    "filing": 50,
+    "value": 50,
+    "total": 50,
+    "consensus": 0,
+    "signal": "HOLD",
+    "ev": -0.05,
+    "target": -1,
+    "hitl": false,
+    "reasons": {
+      "tech": [
+        "RSI 49 · 중립",
+        "MACD 데드크로스 · 히스토 -0.57"
+      ],
+      "macro": [
+        "NEUTRAL · VIX 14.2 · US10Y 4.68%",
+        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
+      ],
+      "filing": [
+        "13F: 기관지분율 +4.69%p",
+        "13F: 보유기관 652곳 · 지분율 108.1% (2026Q3)",
+        "Form 4: 매도 우세 P0/S7",
+        "8-K: 최근 60일 이벤트 없음",
+        "* FMP 실시간 공시 반영"
+      ],
+      "value": [
+        "PER 21.5 · 적정"
+      ]
+    }
+  },
+  {
+    "t": "IT",
+    "n": "Gartner, Inc.",
+    "m": "US",
+    "sec": "산업재",
+    "tech": 84,
+    "macro": 60,
+    "filing": 50,
+    "value": 84,
+    "total": 69,
+    "consensus": 2,
+    "signal": "WATCH",
+    "ev": 0.86,
+    "target": 10,
+    "hitl": false,
+    "reasons": {
+      "tech": [
+        "단기 정배열 (P>165.6>149.6)",
+        "RSI 63 · 강세 지속 구간",
+        "MACD 골든크로스 · 히스토 +0.75",
+        "3개월 수익률 +15.3%"
+      ],
+      "macro": [
+        "NEUTRAL · VIX 14.2 · US10Y 4.68%",
+        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
+      ],
+      "filing": [
+        "P/C비율 급등 +51% (헤지 강화)",
+        "13F: 보유기관 674곳 · 지분율 107.7% (2026Q3)",
+        "* FMP 실시간 공시 반영"
+      ],
+      "value": [
+        "PER 16.3 · 저평가",
+        "Forward PER 10.8 · 이익 성장 반영",
+        "PEG 0.80 · 성장률 대비 저평가",
+        "FCF Yield 9.3% · 우수"
+      ]
+    }
+  },
+  {
+    "t": "LFUS",
+    "n": "Littelfuse, Inc.",
+    "m": "US",
+    "sec": "IT",
+    "tech": 61,
+    "macro": 60,
+    "filing": 45,
+    "value": 50,
+    "total": 54,
+    "consensus": 0,
+    "signal": "HOLD",
+    "ev": 0.28,
+    "target": 3,
+    "hitl": false,
+    "reasons": {
+      "tech": [
+        "RSI 82 · 과매수 경계",
+        "MACD 골든크로스 · 히스토 +3.28",
+        "3개월 수익률 +8.4%"
+      ],
+      "macro": [
+        "NEUTRAL · VIX 14.2 · US10Y 4.68%",
+        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
+      ],
+      "filing": [
+        "13F: 기관지분율 +1.35%p",
+        "P/C비율 급등 +649% (헤지 강화)",
+        "13F: 보유기관 614곳 · 지분율 102.2% (2026Q3)",
+        "Form 4: 매도 우세 P0/S9",
+        "* FMP 실시간 공시 반영"
+      ],
+      "value": [
+        "PER 23.5 · 적정"
+      ]
+    }
+  },
+  {
+    "t": "CHYM",
+    "n": "Chime Financial, Inc. Class A Common Sto",
+    "m": "US",
+    "sec": "금융",
+    "tech": 88,
+    "macro": 60,
+    "filing": 40,
+    "value": 62,
+    "total": 64,
+    "consensus": 1,
+    "signal": "HOLD",
+    "ev": 0.74,
+    "target": 9,
+    "hitl": false,
+    "reasons": {
+      "tech": [
+        "이동평균 완벽 정배열 (P>26.2>22.1>21.8)",
+        "RSI 80 · 과매수 경계",
+        "MACD 골든크로스 · 히스토 +0.55",
+        "거래량 급증 · 최근 20일 평균 1.7배",
+        "3개월 수익률 +79.2% · 강한 상승"
+      ],
+      "macro": [
+        "NEUTRAL · VIX 14.2 · US10Y 4.68%",
+        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
+      ],
+      "filing": [
+        "13F: 기관지분율 -1.52%p",
+        "13F: 보유기관 292곳 · 지분율 75.9% (2026Q3)",
+        "Form 4: 매도 우세 P0/S57",
+        "* FMP 실시간 공시 반영"
+      ],
+      "value": [
+        "PER 6.0 · 극심 저평가",
+        "PBR 8.5 · 부담"
+      ]
+    }
+  },
+  {
+    "t": "TFII",
+    "n": "TFI International Inc.",
+    "m": "US",
+    "sec": "산업재",
+    "tech": 65,
+    "macro": 60,
+    "filing": 63,
+    "value": 66,
+    "total": 64,
+    "consensus": 0,
+    "signal": "HOLD",
+    "ev": 0.51,
+    "target": 6,
+    "hitl": false,
+    "reasons": {
+      "tech": [
+        "RSI 47 · 중립",
+        "MACD 골든크로스 · 히스토 +0.84"
+      ],
+      "macro": [
+        "NEUTRAL · VIX 14.2 · US10Y 4.68%",
+        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
+      ],
+      "filing": [
+        "13F: 기관지분율 +1.95%p",
+        "P/C비율 하락 -74% (헤지 완화)",
+        "13F: 보유기관 305곳 · 지분율 70.5% (2026Q3)",
+        "8-K: 최근 60일 이벤트 없음",
+        "* FMP 실시간 공시 반영"
+      ],
+      "value": [
+        "PER 36.0 · 적정",
+        "Forward PER 18.4 · 이익 성장 반영",
+        "FCF Yield 5.2% · 우수"
+      ]
+    }
+  },
+  {
+    "t": "GLPI",
+    "n": "Gaming and Leisure Properties, Inc.",
+    "m": "US",
+    "sec": "리츠",
+    "tech": 28,
+    "macro": 60,
+    "filing": 60,
+    "value": 60,
+    "total": 49,
+    "consensus": 0,
+    "signal": "HOLD",
+    "ev": -0.2,
+    "target": -2,
+    "hitl": false,
+    "reasons": {
+      "tech": [
+        "단기 역배열 (P<44.3<44.8)",
+        "MACD 데드크로스 · 히스토 -0.18",
+        "Bollinger 하단 근접 · 반등 여지"
+      ],
+      "macro": [
+        "NEUTRAL · VIX 14.2 · US10Y 4.68%",
+        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
+      ],
+      "filing": [
+        "13F: 기관지분율 +2.01%p",
+        "13F: 보유기관 632곳 · 지분율 100.0% (2026Q3)",
+        "* FMP 실시간 공시 반영"
+      ],
+      "value": [
+        "PER 12.7 · 저평가"
+      ]
+    }
+  },
+  {
+    "t": "UDR",
+    "n": "UDR, Inc.",
+    "m": "US",
+    "sec": "리츠",
+    "tech": 28,
+    "macro": 60,
+    "filing": 60,
+    "value": 53,
+    "total": 48,
+    "consensus": 0,
+    "signal": "HOLD",
+    "ev": -0.12,
+    "target": -1,
+    "hitl": false,
+    "reasons": {
+      "tech": [
+        "단기 역배열 (P<38.4<38.9)",
+        "MACD 데드크로스 · 히스토 -0.12",
+        "Bollinger 하단 근접 · 반등 여지"
+      ],
+      "macro": [
+        "NEUTRAL · VIX 14.2 · US10Y 4.68%",
+        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
+      ],
+      "filing": [
+        "13F: 기관지분율 +5.25%p",
+        "13F: 보유기관 524곳 · 지분율 104.5% (2026Q3)",
+        "* FMP 실시간 공시 반영"
+      ],
+      "value": [
+        "PER 23.6 · 적정",
+        "PEG 8.17 · 성장률 대비 부담",
+        "FCF Yield 5.7% · 우수"
+      ]
+    }
+  },
+  {
+    "t": "KTOS",
+    "n": "Kratos Defense & Security Solutions, Inc",
+    "m": "US",
+    "sec": "산업재",
+    "tech": 69,
+    "macro": 60,
+    "filing": 40,
+    "value": 30,
+    "total": 53,
+    "consensus": 0,
+    "signal": "HOLD",
+    "ev": 0.36,
+    "target": 4,
+    "hitl": false,
+    "reasons": {
+      "tech": [
+        "단기 정배열 (P>54.1>52.7)",
+        "RSI 75 · 과매수 경계",
+        "MACD 골든크로스 · 히스토 +1.48",
+        "3개월 수익률 +16.7%"
+      ],
+      "macro": [
+        "NEUTRAL · VIX 14.2 · US10Y 4.68%",
+        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
+      ],
+      "filing": [
+        "13F: 기관지분율 -7.18%p",
+        "13F: 보유기관 667곳 · 지분율 87.2% (2026Q3)",
+        "Form 4: 매도 우세 P0/S52",
+        "* FMP 실시간 공시 반영"
+      ],
+      "value": [
+        "PER 395.6 · 극심 프리미엄",
+        "Forward PER 56.8 · 이익 성장 반영",
+        "PEG 36.41 · 성장률 대비 부담",
+        "FCF 음수 · 현금유출"
+      ]
+    }
+  },
+  {
+    "t": "RTO",
+    "n": "Rentokil Initial plc",
+    "m": "US",
+    "sec": "산업재",
+    "tech": 15,
+    "macro": 60,
+    "filing": 55,
+    "value": 74,
+    "total": 45,
+    "consensus": 1,
+    "signal": "HOLD",
+    "ev": -0.48,
+    "target": -6,
+    "hitl": false,
+    "reasons": {
+      "tech": [
+        "단기 역배열 (P<25.7<27.9)",
+        "RSI 26 · 과매도",
+        "MACD 데드크로스 · 히스토 -0.07",
+        "거래량 급증 · 최근 20일 평균 2.0배",
+        "3개월 수익률 -26.2% · 급락"
+      ],
+      "macro": [
+        "NEUTRAL · VIX 14.2 · US10Y 4.68%",
+        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
+      ],
+      "filing": [
+        "8-K: 최근 60일 이벤트 없음",
+        "* FMP 실시간 공시 반영"
+      ],
+      "value": [
+        "PER 37.4 · 적정",
+        "Forward PER 15.2 · 이익 성장 반영",
+        "PEG 0.90 · 성장률 대비 저평가",
+        "FCF Yield 8.9% · 우수"
+      ]
+    }
+  },
+  {
+    "t": "BTSG",
+    "n": "BrightSpring Health Services, Inc. Commo",
+    "m": "US",
+    "sec": "제약/바이오",
+    "tech": 29,
+    "macro": 65,
+    "filing": 40,
+    "value": 58,
+    "total": 44,
+    "consensus": 0,
+    "signal": "AVOID",
+    "ev": -0.17,
+    "target": -2,
+    "hitl": true,
+    "reasons": {
+      "tech": [
+        "단기 역배열 (P<65.1<66.3)",
+        "MACD 데드크로스 · 히스토 -0.55",
+        "3개월 수익률 +7.5%"
+      ],
+      "macro": [
+        "NEUTRAL · VIX 14.2 · US10Y 4.68%",
+        "DXY 99.6 약세 · 성장주 유리",
+        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
+      ],
+      "filing": [
+        "P/C비율 급등 +49% (헤지 강화)",
+        "13F: 보유기관 429곳 · 지분율 102.3% (2026Q3)",
+        "Form 4: 매도 우세 P0/S6",
+        "* FMP 실시간 공시 반영"
+      ],
+      "value": [
+        "PER 55.4 · 프리미엄",
+        "Forward PER 26.5 · 이익 성장 반영",
+        "FCF Yield 8.6% · 우수"
+      ]
+    }
+  },
+  {
+    "t": "KNX",
+    "n": "Knight-Swift Transportation Holdings Inc",
+    "m": "US",
+    "sec": "산업재",
+    "tech": 76,
+    "macro": 60,
+    "filing": 63,
+    "value": 51,
+    "total": 65,
+    "consensus": 1,
+    "signal": "HOLD",
+    "ev": 0.65,
+    "target": 8,
+    "hitl": false,
+    "reasons": {
+      "tech": [
+        "RSI 58 · 강세 지속 구간",
+        "MACD 골든크로스 · 히스토 +0.43",
+        "3개월 수익률 +5.4%"
+      ],
+      "macro": [
+        "NEUTRAL · VIX 14.2 · US10Y 4.68%",
+        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
+      ],
+      "filing": [
+        "13F: 신규진입 +66곳",
+        "13F: 기관지분율 +2.07%p",
+        "P/C비율 하락 -42% (헤지 완화)",
+        "13F: 보유기관 653곳 · 지분율 100.6% (2026Q3)",
+        "Form 4: 매도 우세 P0/S5"
+      ],
+      "value": [
+        "PER 269.6 · 극심 프리미엄",
+        "Forward PER 18.2 · 이익 성장 반영",
+        "PEG 0.51 · 성장률 대비 저평가"
+      ]
+    }
+  },
+  {
+    "t": "ELAN",
+    "n": "Elanco Animal Health Incorporated",
+    "m": "US",
+    "sec": "제약/바이오",
+    "tech": 52,
+    "macro": 65,
+    "filing": 72,
+    "value": 53,
+    "total": 61,
+    "consensus": 1,
+    "signal": "HOLD",
+    "ev": 0.57,
+    "target": 7,
+    "hitl": false,
+    "reasons": {
+      "tech": [
+        "MACD 데드크로스 · 히스토 -0.24",
+        "거래량 급증 · 최근 20일 평균 1.5배",
+        "3개월 수익률 +18.5%"
+      ],
+      "macro": [
+        "NEUTRAL · VIX 14.2 · US10Y 4.68%",
+        "DXY 99.6 약세 · 성장주 유리",
+        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
+      ],
+      "filing": [
+        "13F: 기관지분율 +4.54%p",
+        "13F: 보유기관 525곳 · 지분율 114.4% (2026Q3)",
+        "Form 4: 실제매수 클러스터 P3/S0 (90일)",
+        "* FMP 실시간 공시 반영"
+      ],
+      "value": [
+        "PER 18.7 · 적정",
+        "PEG 4.04 · 성장률 대비 부담",
+        "FCF Yield 7.0% · 우수"
+      ]
+    }
+  },
+  {
+    "t": "EVR",
+    "n": "Evercore Inc.",
+    "m": "US",
+    "sec": "금융",
+    "tech": 25,
+    "macro": 60,
+    "filing": 63,
+    "value": 68,
+    "total": 50,
+    "consensus": 0,
+    "signal": "HOLD",
+    "ev": -0.19,
+    "target": -2,
+    "hitl": false,
+    "reasons": {
+      "tech": [
+        "단기 역배열 (P<318.3<336.8)",
+        "MACD 데드크로스 · 히스토 -0.54"
+      ],
+      "macro": [
+        "NEUTRAL · VIX 14.2 · US10Y 4.68%",
+        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
+      ],
+      "filing": [
+        "13F: 기관지분율 +1.62%p",
+        "P/C비율 하락 -71% (헤지 완화)",
+        "13F: 보유기관 730곳 · 지분율 92.6% (2026Q3)",
+        "* FMP 실시간 공시 반영"
+      ],
+      "value": [
+        "PER 17.3 · 저평가",
+        "Forward PER 13.4 · 이익 성장 반영"
+      ]
+    }
+  },
+  {
+    "t": "APC",
+    "n": "ARKO Petroleum Corp. Class A Common Stoc",
+    "m": "US",
+    "sec": "에너지",
+    "tech": 43,
+    "macro": 60,
+    "filing": 55,
+    "value": 58,
+    "total": 52,
+    "consensus": 0,
+    "signal": "HOLD",
+    "ev": -0.04,
+    "target": 0,
+    "hitl": false,
+    "reasons": {
+      "tech": [
+        "RSI 43 · 중립",
+        "MACD 데드크로스 · 히스토 -0.12"
+      ],
+      "macro": [
+        "NEUTRAL · VIX 14.2 · US10Y 4.68%",
+        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
+      ],
+      "filing": [
+        "* FMP 실시간 공시 반영"
+      ],
+      "value": [
+        "PER 23.8 · 적정",
+        "Forward PER 16.3 · 이익 성장 반영"
+      ]
+    }
+  },
+  {
+    "t": "ENLT",
+    "n": "Enlight Renewable Energy Ltd",
+    "m": "US",
+    "sec": "유틸리티",
+    "tech": 50,
+    "macro": 60,
+    "filing": 40,
+    "value": 35,
+    "total": 47,
+    "consensus": 0,
+    "signal": "HOLD",
+    "ev": -0.07,
+    "target": -1,
+    "hitl": false,
+    "reasons": {
+      "tech": [
+        "단기 역배열 (P<85.8<87.4)",
+        "RSI 46 · 중립",
+        "MACD 골든크로스 · 히스토 +0.04"
+      ],
+      "macro": [
+        "NEUTRAL · VIX 14.2 · US10Y 4.68%",
+        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
+      ],
+      "filing": [
+        "13F: 기관지분율 -3.41%p",
+        "13F: 보유기관 183곳 · 지분율 32.4% (2026Q3)",
+        "Form 4: 매도 우세 P0/S23",
+        "8-K: 최근 60일 이벤트 없음",
+        "* FMP 실시간 공시 반영"
+      ],
+      "value": [
+        "PER 139.2 · 극심 프리미엄",
+        "Forward PER 107.1 · 이익 성장 반영",
+        "FCF 음수 · 현금유출"
+      ]
+    }
+  },
+  {
+    "t": "MICC",
+    "n": "The Magnum Ice Cream Company N.V.",
+    "m": "US",
+    "sec": "소매",
+    "tech": 83,
+    "macro": 60,
+    "filing": 63,
+    "value": 50,
+    "total": 67,
+    "consensus": 1,
+    "signal": "HOLD",
+    "ev": 0.87,
+    "target": 10,
+    "hitl": false,
+    "reasons": {
+      "tech": [
+        "단기 정배열 (P>18.7>18.2)",
+        "RSI 56 · 강세 지속 구간",
+        "MACD 골든크로스 · 히스토 +0.04",
+        "거래량 감소 · 0.5배",
+        "3개월 수익률 +20.8% · 강한 상승"
+      ],
+      "macro": [
+        "NEUTRAL · VIX 14.2 · US10Y 4.68%",
+        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
+      ],
+      "filing": [
+        "13F: 기관지분율 +3.80%p",
+        "P/C비율 하락 -430% (헤지 완화)",
+        "13F: 보유기관 486곳 · 지분율 44.2% (2026Q3)",
+        "8-K: 최근 60일 이벤트 없음",
+        "* FMP 실시간 공시 반영"
+      ],
+      "value": [
+        "PER 55.9 · 프리미엄",
+        "Forward PER 15.0 · 이익 성장 반영",
+        "PBR 9.3 · 부담",
+        "PEG 0.82 · 성장률 대비 저평가"
+      ]
+    }
+  },
+  {
+    "t": "SANM",
+    "n": "Sanmina Corporation",
+    "m": "US",
+    "sec": "IT",
+    "tech": 62,
+    "macro": 60,
+    "filing": 55,
+    "value": 58,
+    "total": 59,
+    "consensus": 0,
+    "signal": "HOLD",
+    "ev": 0.27,
+    "target": 3,
+    "hitl": false,
+    "reasons": {
+      "tech": [
+        "MACD 골든크로스 · 히스토 +3.53"
+      ],
+      "macro": [
+        "NEUTRAL · VIX 14.2 · US10Y 4.68%",
+        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
+      ],
+      "filing": [
+        "13F: 신규진입 +90곳",
+        "13F: 기관지분율 -4.77%p",
+        "P/C비율 급등 +58% (헤지 강화)",
+        "13F: 보유기관 592곳 · 지분율 93.3% (2026Q3)",
+        "* FMP 실시간 공시 반영"
+      ],
+      "value": [
+        "PER 38.8 · 적정",
+        "Forward PER 15.6 · 이익 성장 반영",
+        "PEG 0.72 · 성장률 대비 저평가",
+        "FCF 음수 · 현금유출"
+      ]
+    }
+  },
+  {
+    "t": "RRX",
+    "n": "Regal Rexnord Corporation",
+    "m": "US",
+    "sec": "산업재",
+    "tech": 25,
+    "macro": 60,
+    "filing": 63,
+    "value": 58,
+    "total": 48,
+    "consensus": 0,
+    "signal": "HOLD",
+    "ev": -0.21,
+    "target": -3,
+    "hitl": false,
+    "reasons": {
+      "tech": [
+        "단기 역배열 (P<193.8<207.0)",
+        "MACD 데드크로스 · 히스토 -2.11"
+      ],
+      "macro": [
+        "NEUTRAL · VIX 14.2 · US10Y 4.68%",
+        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
+      ],
+      "filing": [
+        "13F: 기관지분율 +4.78%p",
+        "P/C비율 하락 -72% (헤지 완화)",
+        "13F: 보유기관 616곳 · 지분율 108.1% (2026Q3)",
+        "* FMP 실시간 공시 반영"
+      ],
+      "value": [
+        "PER 36.1 · 적정",
+        "Forward PER 13.3 · 이익 성장 반영"
+      ]
+    }
+  },
+  {
+    "t": "XPEV",
+    "n": "XPeng Inc.",
+    "m": "US",
+    "sec": "소비재",
+    "tech": 40,
+    "macro": 60,
+    "filing": 60,
+    "value": 50,
+    "total": 52,
+    "consensus": 0,
+    "signal": "HOLD",
+    "ev": -0.16,
+    "target": -2,
+    "hitl": false,
+    "reasons": {
+      "tech": [
+        "단기 역배열 (P<12.4<13.1)",
+        "RSI 42 · 중립",
+        "MACD 골든크로스 · 히스토 +0.02",
+        "3개월 수익률 -19.0% · 급락"
+      ],
+      "macro": [
+        "NEUTRAL · VIX 14.2 · US10Y 4.68%",
+        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
+      ],
+      "filing": [
+        "13F: 기관지분율 +1.65%p",
+        "13F: 보유기관 263곳 · 지분율 26.8% (2026Q3)",
+        "8-K: 최근 60일 이벤트 없음",
+        "* FMP 실시간 공시 반영"
+      ],
+      "value": [
+        "PER 31.9 · 적정"
+      ]
+    }
+  },
+  {
+    "t": "UMBF",
+    "n": "UMB Financial Corporation",
+    "m": "US",
+    "sec": "금융",
+    "tech": 92,
+    "macro": 60,
+    "filing": 50,
+    "value": 60,
+    "total": 68,
+    "consensus": 1,
+    "signal": "HOLD",
+    "ev": 0.89,
+    "target": 11,
+    "hitl": false,
+    "reasons": {
+      "tech": [
+        "이동평균 완벽 정배열 (P>146.0>142.3>124.8)",
+        "RSI 70 · 강세 지속 구간",
+        "MACD 골든크로스 · 히스토 +0.42",
+        "3개월 수익률 +20.2% · 강한 상승",
+        "Bollinger 상단 접근 (92%)"
+      ],
+      "macro": [
+        "NEUTRAL · VIX 14.2 · US10Y 4.68%",
+        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
+      ],
+      "filing": [
+        "13F: 기관지분율 +5.00%p",
+        "13F: 보유기관 483곳 · 지분율 97.0% (2026Q3)",
+        "Form 4: 매도 우세 P0/S15",
+        "* FMP 실시간 공시 반영"
+      ],
+      "value": [
+        "PER 12.6 · 저평가"
+      ]
+    }
+  },
+  {
+    "t": "MOD",
+    "n": "Modine Manufacturing Company",
+    "m": "US",
+    "sec": "산업재",
+    "tech": 65,
+    "macro": 60,
+    "filing": 40,
+    "value": 35,
+    "total": 52,
+    "consensus": 0,
+    "signal": "HOLD",
+    "ev": -0.04,
+    "target": 0,
+    "hitl": false,
+    "reasons": {
+      "tech": [
+        "RSI 54 · 중립",
+        "MACD 골든크로스 · 히스토 +3.33"
+      ],
+      "macro": [
+        "NEUTRAL · VIX 14.2 · US10Y 4.68%",
+        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
+      ],
+      "filing": [
+        "13F: 기관지분율 -6.43%p",
+        "13F: 보유기관 659곳 · 지분율 98.5% (2026Q3)",
+        "Form 4: 매도 우세 P0/S28",
+        "* FMP 실시간 공시 반영"
+      ],
+      "value": [
+        "PER 78.2 · 극심 프리미엄",
+        "Forward PER 19.4 · 이익 성장 반영",
+        "PBR 9.6 · 부담",
+        "PEG 0.71 · 성장률 대비 저평가"
+      ]
+    }
+  },
+  {
+    "t": "VICR",
+    "n": "Vicor Corporation",
+    "m": "US",
+    "sec": "IT",
+    "tech": 54,
+    "macro": 60,
+    "filing": 60,
+    "value": 35,
+    "total": 54,
+    "consensus": 0,
+    "signal": "HOLD",
+    "ev": 0.2,
+    "target": 2,
+    "hitl": false,
+    "reasons": {
+      "tech": [
+        "RSI 75 · 과매수 경계",
+        "MACD 골든크로스 · 히스토 +7.08",
+        "Bollinger 상단 접근 (100%)"
+      ],
+      "macro": [
+        "NEUTRAL · VIX 14.2 · US10Y 4.68%",
+        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
+      ],
+      "filing": [
+        "13F: 신규진입 +81곳",
+        "13F: 기관지분율 +1.91%p",
+        "13F: 보유기관 534곳 · 지분율 48.4% (2026Q3)",
+        "Form 4: 매도 우세 P0/S84",
+        "* FMP 실시간 공시 반영"
+      ],
+      "value": [
+        "PER 75.2 · 극심 프리미엄",
+        "Forward PER 45.6 · 이익 성장 반영",
+        "PBR 14.0 · 부담"
+      ]
+    }
+  },
+  {
+    "t": "CART",
+    "n": "Maplebear Inc.",
+    "m": "US",
+    "sec": "IT",
+    "tech": 95,
+    "macro": 60,
+    "filing": 50,
+    "value": 66,
+    "total": 70,
+    "consensus": 1,
+    "signal": "HOLD",
+    "ev": 0.96,
+    "target": 12,
+    "hitl": false,
+    "reasons": {
+      "tech": [
+        "이동평균 완벽 정배열 (P>46.2>45.6>41.4)",
+        "RSI 66 · 강세 지속 구간",
+        "MACD 골든크로스 · 히스토 +0.37",
+        "3개월 수익률 +23.0% · 강한 상승"
+      ],
+      "macro": [
+        "NEUTRAL · VIX 14.2 · US10Y 4.68%",
+        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
+      ],
+      "filing": [
+        "13F: 기관지분율 +7.29%p",
+        "13F: 보유기관 525곳 · 지분율 81.1% (2026Q3)",
+        "Form 4: 매도 우세 P0/S6",
+        "* FMP 실시간 공시 반영"
+      ],
+      "value": [
+        "PER 26.7 · 적정",
+        "Forward PER 10.0 · 이익 성장 반영",
+        "FCF Yield 8.1% · 우수"
+      ]
+    }
+  },
+  {
+    "t": "GMED",
+    "n": "Globus Medical, Inc.",
+    "m": "US",
+    "sec": "제약/바이오",
+    "tech": 84,
+    "macro": 65,
+    "filing": 60,
+    "value": 58,
+    "total": 69,
+    "consensus": 1,
+    "signal": "HOLD",
+    "ev": 0.82,
+    "target": 10,
+    "hitl": false,
+    "reasons": {
+      "tech": [
+        "단기 정배열 (P>81.2>80.1)",
+        "RSI 65 · 강세 지속 구간",
+        "MACD 골든크로스 · 히스토 +0.59",
+        "3개월 수익률 +7.8%"
+      ],
+      "macro": [
+        "NEUTRAL · VIX 14.2 · US10Y 4.68%",
+        "DXY 99.6 약세 · 성장주 유리",
+        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
+      ],
+      "filing": [
+        "13F: 기관지분율 +7.68%p",
+        "13F: 보유기관 606곳 · 지분율 88.7% (2026Q3)",
+        "* FMP 실시간 공시 반영"
+      ],
+      "value": [
+        "PER 22.0 · 적정",
+        "Forward PER 15.9 · 이익 성장 반영"
+      ]
+    }
+  },
+  {
+    "t": "FROG",
+    "n": "JFrog Ltd.",
+    "m": "US",
+    "sec": "IT",
+    "tech": 67,
+    "macro": 60,
+    "filing": 60,
+    "value": 27,
+    "total": 58,
+    "consensus": 0,
+    "signal": "HOLD",
+    "ev": 0.53,
+    "target": 6,
+    "hitl": false,
+    "reasons": {
+      "tech": [
+        "MACD 골든크로스 · 히스토 +1.43",
+        "3개월 수익률 +39.4% · 강한 상승",
+        "Bollinger 상단 접근 (92%)"
+      ],
+      "macro": [
+        "NEUTRAL · VIX 14.2 · US10Y 4.68%",
+        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
+      ],
+      "filing": [
+        "13F: 신규진입 +65곳",
+        "13F: 기관지분율 +9.27%p",
+        "13F: 보유기관 433곳 · 지분율 95.0% (2026Q3)",
+        "Form 4: 매도 우세 P0/S67",
+        "* FMP 실시간 공시 반영"
+      ],
+      "value": [
+        "PER 82.7 · 극심 프리미엄",
+        "PBR 12.1 · 부담"
+      ]
+    }
+  },
+  {
+    "t": "MANH",
+    "n": "Manhattan Associates, Inc.",
+    "m": "US",
+    "sec": "IT",
+    "tech": 100,
+    "macro": 60,
+    "filing": 50,
+    "value": 42,
+    "total": 68,
+    "consensus": 1,
+    "signal": "HOLD",
+    "ev": 0.94,
+    "target": 11,
+    "hitl": false,
+    "reasons": {
+      "tech": [
+        "이동평균 완벽 정배열 (P>182.7>160.9>155.5)",
+        "RSI 68 · 강세 지속 구간",
+        "MACD 골든크로스 · 히스토 +0.01",
+        "거래량 급증 · 최근 20일 평균 1.5배",
+        "3개월 수익률 +43.7% · 강한 상승"
+      ],
+      "macro": [
+        "NEUTRAL · VIX 14.2 · US10Y 4.68%",
+        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
+      ],
+      "filing": [
+        "13F: 기관지분율 +1.10%p",
+        "13F: 보유기관 507곳 · 지분율 107.4% (2026Q3)",
+        "Form 4: 매도 우세 P0/S4",
+        "* FMP 실시간 공시 반영"
+      ],
+      "value": [
+        "PER 56.5 · 프리미엄",
+        "Forward PER 32.1 · 이익 성장 반영",
+        "PBR 72.7 · 부담"
+      ]
+    }
+  },
+  {
+    "t": "ERIE",
+    "n": "Erie Indemnity Company",
+    "m": "US",
+    "sec": "금융",
+    "tech": 77,
+    "macro": 60,
+    "filing": 72,
+    "value": 58,
+    "total": 69,
+    "consensus": 2,
+    "signal": "WATCH",
+    "ev": 0.87,
+    "target": 10,
+    "hitl": false,
+    "reasons": {
+      "tech": [
+        "단기 정배열 (P>241.3>236.2)",
+        "RSI 54 · 중립",
+        "MACD 골든크로스 · 히스토 +0.79",
+        "3개월 수익률 +12.5%"
+      ],
+      "macro": [
+        "NEUTRAL · VIX 14.2 · US10Y 4.68%",
+        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
+      ],
+      "filing": [
+        "13F: 기관지분율 +3.61%p",
+        "13F: 보유기관 444곳 · 지분율 46.6% (2026Q3)",
+        "Form 4: 실제매수 클러스터 P3/S0 (90일)",
+        "* FMP 실시간 공시 반영"
+      ],
+      "value": [
+        "PER 23.3 · 적정",
+        "Forward PER 17.7 · 이익 성장 반영"
+      ]
+    }
+  },
+  {
+    "t": "DOCU",
+    "n": "DocuSign, Inc.",
+    "m": "US",
+    "sec": "IT",
+    "tech": 88,
+    "macro": 60,
+    "filing": 50,
+    "value": 74,
+    "total": 69,
+    "consensus": 2,
+    "signal": "WATCH",
+    "ev": 0.89,
+    "target": 11,
+    "hitl": false,
+    "reasons": {
+      "tech": [
+        "단기 정배열 (P>56.1>50.3)",
+        "RSI 57 · 강세 지속 구간",
+        "MACD 골든크로스 · 히스토 +0.27",
+        "3개월 수익률 +22.0% · 강한 상승"
+      ],
+      "macro": [
+        "NEUTRAL · VIX 14.2 · US10Y 4.68%",
+        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
+      ],
+      "filing": [
+        "13F: 기관지분율 +1.44%p",
+        "13F: 보유기관 697곳 · 지분율 90.8% (2026Q3)",
+        "Form 4: 매도 우세 P0/S14",
+        "8-K: 최근 60일 이벤트 없음",
+        "* FMP 실시간 공시 반영"
+      ],
+      "value": [
+        "PER 38.8 · 적정",
+        "Forward PER 11.7 · 이익 성장 반영",
+        "PEG 0.73 · 성장률 대비 저평가",
+        "FCF Yield 10.9% · 우수"
+      ]
+    }
+  },
+  {
+    "t": "NIO",
+    "n": "NIO Inc.",
+    "m": "US",
+    "sec": "소비재",
+    "tech": 18,
+    "macro": 60,
+    "filing": 50,
+    "value": 42,
+    "total": 40,
+    "consensus": 0,
+    "signal": "AVOID",
+    "ev": -0.61,
+    "target": -7,
+    "hitl": true,
+    "reasons": {
+      "tech": [
+        "단기 역배열 (P<4.7<4.9)",
+        "RSI 46 · 중립",
+        "MACD 데드크로스 · 히스토 -0.00",
+        "3개월 수익률 -21.8% · 급락"
+      ],
+      "macro": [
+        "NEUTRAL · VIX 14.2 · US10Y 4.68%",
+        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
+      ],
+      "filing": [
+        "P/C비율 급등 +103% (헤지 강화)",
+        "13F: 보유기관 461곳 · 지분율 11.0% (2026Q3)",
+        "8-K: 최근 60일 이벤트 없음",
+        "* FMP 실시간 공시 반영"
+      ],
+      "value": [
+        "PER 26.4 · 적정",
+        "PBR 17.7 · 부담"
+      ]
+    }
+  },
+  {
+    "t": "VIAV",
+    "n": "Viavi Solutions Inc.",
+    "m": "US",
+    "sec": "IT",
+    "tech": 59,
+    "macro": 60,
+    "filing": 50,
+    "value": 50,
+    "total": 55,
+    "consensus": 0,
+    "signal": "HOLD",
+    "ev": 0.1,
+    "target": 1,
+    "hitl": false,
+    "reasons": {
+      "tech": [
+        "MACD 골든크로스 · 히스토 +1.17",
+        "Bollinger 상단 접근 (100%)"
+      ],
+      "macro": [
+        "NEUTRAL · VIX 14.2 · US10Y 4.68%",
+        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
+      ],
+      "filing": [
+        "P/C비율 급등 +36% (헤지 강화)",
+        "13F: 보유기관 589곳 · 지분율 104.1% (2026Q3)",
+        "* FMP 실시간 공시 반영"
+      ],
+      "value": [
+        "PER 23.7 · 적정"
+      ]
+    }
+  },
+  {
+    "t": "DVA",
+    "n": "DaVita Inc.",
+    "m": "US",
+    "sec": "제약/바이오",
+    "tech": 20,
+    "macro": 65,
+    "filing": 43,
+    "value": 84,
+    "total": 46,
+    "consensus": 1,
+    "signal": "HOLD",
+    "ev": -0.42,
+    "target": -5,
+    "hitl": false,
+    "reasons": {
+      "tech": [
+        "단기 역배열 (P<211.5<215.9)",
+        "RSI 12 · 과매도",
+        "MACD 데드크로스 · 히스토 -4.92",
+        "Bollinger 하단 근접 · 반등 여지"
+      ],
+      "macro": [
+        "NEUTRAL · VIX 14.2 · US10Y 4.68%",
+        "DXY 99.6 약세 · 성장주 유리",
+        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
+      ],
+      "filing": [
+        "13F: 기관지분율 -4.09%p",
+        "P/C비율 하락 -35% (헤지 완화)",
+        "13F: 보유기관 655곳 · 지분율 88.0% (2026Q3)",
+        "Form 4: 매도 우세 P0/S5",
+        "* FMP 실시간 공시 반영"
+      ],
+      "value": [
+        "PER 15.3 · 저평가",
+        "Forward PER 10.4 · 이익 성장 반영",
+        "PEG 0.56 · 성장률 대비 저평가",
+        "FCF Yield 9.2% · 우수"
+      ]
+    }
+  },
+  {
+    "t": "WMS",
+    "n": "Advanced Drainage Systems, Inc.",
+    "m": "US",
+    "sec": "산업재",
+    "tech": 76,
+    "macro": 60,
+    "filing": 50,
+    "value": 58,
+    "total": 62,
+    "consensus": 1,
+    "signal": "HOLD",
+    "ev": 0.59,
+    "target": 7,
+    "hitl": false,
+    "reasons": {
+      "tech": [
+        "RSI 55 · 강세 지속 구간",
+        "MACD 골든크로스 · 히스토 +0.59",
+        "3개월 수익률 +9.3%"
+      ],
+      "macro": [
+        "NEUTRAL · VIX 14.2 · US10Y 4.68%",
+        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
+      ],
+      "filing": [
+        "P/C비율 급등 +121% (헤지 강화)",
+        "13F: 보유기관 555곳 · 지분율 89.5% (2026Q3)",
+        "* FMP 실시간 공시 반영"
+      ],
+      "value": [
+        "PER 25.2 · 적정",
+        "Forward PER 19.7 · 이익 성장 반영"
+      ]
+    }
+  },
+  {
+    "t": "TECH",
+    "n": "Bio-Techne Corporation",
+    "m": "US",
+    "sec": "제약/바이오",
+    "tech": 73,
+    "macro": 65,
+    "filing": 71,
+    "value": 51,
+    "total": 68,
+    "consensus": 2,
+    "signal": "WATCH",
+    "ev": 0.85,
+    "target": 10,
+    "hitl": false,
+    "reasons": {
+      "tech": [
+        "이동평균 완벽 정배열 (P>72.0>67.3>60.0)",
+        "RSI 62 · 강세 지속 구간",
+        "MACD 데드크로스 · 히스토 -0.39",
+        "3개월 수익률 +62.9% · 강한 상승"
+      ],
+      "macro": [
+        "NEUTRAL · VIX 14.2 · US10Y 4.68%",
+        "DXY 99.6 약세 · 성장주 유리",
+        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
+      ],
+      "filing": [
+        "13F: 신규진입 +56곳",
+        "P/C비율 하락 -275% (헤지 완화)",
+        "13F: 보유기관 604곳 · 지분율 113.2% (2026Q3)",
+        "8-K: 최근 60일 이벤트 3건 (활발)",
+        "* FMP 실시간 공시 반영"
+      ],
+      "value": [
+        "PER 62.4 · 극심 프리미엄",
+        "Forward PER 31.2 · 이익 성장 반영",
+        "PEG 0.97 · 성장률 대비 저평가"
+      ]
+    }
+  },
+  {
+    "t": "AHR",
+    "n": "American Healthcare REIT, Inc.",
+    "m": "US",
+    "sec": "리츠",
+    "tech": 44,
+    "macro": 60,
+    "filing": 58,
+    "value": 43,
+    "total": 51,
+    "consensus": 0,
+    "signal": "HOLD",
+    "ev": 0.17,
+    "target": 2,
+    "hitl": false,
+    "reasons": {
+      "tech": [
+        "MACD 데드크로스 · 히스토 -0.40",
+        "3개월 수익률 +9.7%"
+      ],
+      "macro": [
+        "NEUTRAL · VIX 14.2 · US10Y 4.68%",
+        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
+      ],
+      "filing": [
+        "13F: 기관지분율 +7.75%p",
+        "P/C비율 급등 +30% (헤지 강화)",
+        "13F: 보유기관 567곳 · 지분율 121.1% (2026Q3)",
+        "8-K: 최근 60일 이벤트 5건 (활발)",
+        "* FMP 실시간 공시 반영"
+      ],
+      "value": [
+        "PER 80.4 · 극심 프리미엄",
+        "Forward PER 60.8 · 이익 성장 반영"
+      ]
+    }
+  },
+  {
+    "t": "BPOP",
+    "n": "Popular, Inc.",
+    "m": "US",
+    "sec": "금융",
+    "tech": 73,
+    "macro": 60,
+    "filing": 53,
+    "value": 60,
+    "total": 62,
+    "consensus": 1,
+    "signal": "HOLD",
+    "ev": 0.66,
+    "target": 8,
+    "hitl": false,
+    "reasons": {
+      "tech": [
+        "이동평균 완벽 정배열 (P>174.5>168.6>141.1)",
+        "RSI 57 · 강세 지속 구간",
+        "MACD 데드크로스 · 히스토 -0.20",
+        "3개월 수익률 +21.4% · 강한 상승"
+      ],
+      "macro": [
+        "NEUTRAL · VIX 14.2 · US10Y 4.68%",
+        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
+      ],
+      "filing": [
+        "13F: 기관지분율 +1.92%p",
+        "13F: 보유기관 474곳 · 지분율 92.1% (2026Q3)",
+        "Form 4: 매도 우세 P0/S6",
+        "8-K: 최근 60일 이벤트 3건 (활발)",
+        "* FMP 실시간 공시 반영"
+      ],
+      "value": [
+        "PER 12.0 · 저평가"
+      ]
+    }
+  },
+  {
+    "t": "WTRG",
+    "n": "Essential Utilities, Inc.",
+    "m": "US",
+    "sec": "유틸리티",
+    "tech": 84,
+    "macro": 60,
+    "filing": 60,
+    "value": 37,
+    "total": 65,
+    "consensus": 1,
+    "signal": "HOLD",
+    "ev": 0.71,
+    "target": 9,
+    "hitl": false,
+    "reasons": {
+      "tech": [
+        "이동평균 완벽 정배열 (P>39.6>38.5>38.2)",
+        "RSI 45 · 중립",
+        "MACD 골든크로스 · 히스토 +0.01",
+        "3개월 수익률 +7.9%"
+      ],
+      "macro": [
+        "NEUTRAL · VIX 14.2 · US10Y 4.68%",
+        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
+      ],
+      "filing": [
+        "13F: 기관지분율 +3.14%p",
+        "13F: 보유기관 695곳 · 지분율 79.6% (2026Q3)",
+        "* FMP 실시간 공시 반영"
+      ],
+      "value": [
+        "PER 20.4 · 적정",
+        "PEG 3.84 · 성장률 대비 부담",
+        "FCF 음수 · 현금유출"
+      ]
+    }
+  },
+  {
+    "t": "SCI",
+    "n": "Service Corporation International",
+    "m": "US",
+    "sec": "소비재",
+    "tech": 44,
+    "macro": 60,
+    "filing": 48,
+    "value": 50,
+    "total": 49,
+    "consensus": 0,
+    "signal": "HOLD",
+    "ev": 0.03,
+    "target": 0,
+    "hitl": false,
+    "reasons": {
+      "tech": [
+        "MACD 데드크로스 · 히스토 -0.46",
+        "3개월 수익률 +5.2%"
+      ],
+      "macro": [
+        "NEUTRAL · VIX 14.2 · US10Y 4.68%",
+        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
+      ],
+      "filing": [
+        "13F: 기관지분율 +3.68%p",
+        "P/C비율 급등 +37% (헤지 강화)",
+        "13F: 보유기관 557곳 · 지분율 93.8% (2026Q3)",
+        "Form 4: 매도 우세 P0/S4",
+        "8-K: 최근 60일 이벤트 3건 (활발)"
+      ],
+      "value": [
+        "PER 21.9 · 적정"
+      ]
+    }
+  },
+  {
+    "t": "ARW",
+    "n": "Arrow Electronics, Inc.",
+    "m": "US",
+    "sec": "IT",
+    "tech": 76,
+    "macro": 60,
+    "filing": 50,
+    "value": 84,
+    "total": 66,
+    "consensus": 2,
+    "signal": "WATCH",
+    "ev": 0.63,
+    "target": 8,
+    "hitl": false,
+    "reasons": {
+      "tech": [
+        "RSI 56 · 강세 지속 구간",
+        "MACD 골든크로스 · 히스토 +0.15",
+        "3개월 수익률 +6.0%"
+      ],
+      "macro": [
+        "NEUTRAL · VIX 14.2 · US10Y 4.68%",
+        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
+      ],
+      "filing": [
+        "13F: 기관지분율 -1.97%p",
+        "13F: 보유기관 640곳 · 지분율 102.7% (2026Q3)",
+        "* FMP 실시간 공시 반영"
+      ],
+      "value": [
+        "PER 13.7 · 저평가",
+        "Forward PER 9.2 · 이익 성장 반영",
+        "PEG 0.95 · 성장률 대비 저평가",
+        "FCF Yield 6.5% · 우수"
+      ]
+    }
+  },
+  {
+    "t": "VSAT",
+    "n": "Viasat, Inc.",
+    "m": "US",
+    "sec": "IT",
+    "tech": 91,
+    "macro": 60,
+    "filing": 45,
+    "value": 43,
+    "total": 64,
+    "consensus": 1,
+    "signal": "HOLD",
+    "ev": 0.75,
+    "target": 9,
+    "hitl": false,
+    "reasons": {
+      "tech": [
+        "이동평균 완벽 정배열 (P>79.1>73.7>54.8)",
+        "RSI 59 · 강세 지속 구간",
+        "MACD 골든크로스 · 히스토 +0.11",
+        "3개월 수익률 +13.8%"
+      ],
+      "macro": [
+        "NEUTRAL · VIX 14.2 · US10Y 4.68%",
+        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
+      ],
+      "filing": [
+        "13F: 기관지분율 +7.59%p",
+        "P/C비율 급등 +60% (헤지 강화)",
+        "13F: 보유기관 514곳 · 지분율 106.5% (2026Q3)",
+        "Form 4: 매도 우세 P0/S22",
+        "* FMP 실시간 공시 반영"
+      ],
+      "value": [
+        "PER 488.5 · 극심 프리미엄",
+        "PEG 0.26 · 성장률 대비 저평가"
+      ]
+    }
+  },
+  {
+    "t": "AR",
+    "n": "Antero Resources Corporation",
+    "m": "US",
+    "sec": "에너지",
+    "tech": 80,
+    "macro": 60,
+    "filing": 55,
+    "value": 86,
+    "total": 69,
+    "consensus": 2,
+    "signal": "WATCH",
+    "ev": 0.6,
+    "target": 7,
+    "hitl": false,
+    "reasons": {
+      "tech": [
+        "단기 정배열 (P>35.4>34.9)",
+        "RSI 62 · 강세 지속 구간",
+        "MACD 골든크로스 · 히스토 +0.21"
+      ],
+      "macro": [
+        "NEUTRAL · VIX 14.2 · US10Y 4.68%",
+        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
+      ],
+      "filing": [
+        "13F: 기관지분율 +2.23%p",
+        "P/C비율 급등 +178% (헤지 강화)",
+        "13F: 보유기관 671곳 · 지분율 89.9% (2026Q3)",
+        "* FMP 실시간 공시 반영"
+      ],
+      "value": [
+        "PER 10.7 · 극심 저평가",
+        "Forward PER 8.4 · 이익 성장 반영",
+        "PEG 0.49 · 성장률 대비 저평가"
+      ]
+    }
+  },
+  {
+    "t": "PSKY",
+    "n": "Paramount Skydance Corporation Class B C",
+    "m": "US",
+    "sec": "인터넷",
+    "tech": 66,
+    "macro": 65,
+    "filing": 63,
+    "value": 69,
+    "total": 65,
+    "consensus": 0,
+    "signal": "HOLD",
+    "ev": 0.6,
+    "target": 7,
+    "hitl": false,
+    "reasons": {
+      "tech": [
+        "RSI 90 · 과매수 경계",
+        "MACD 골든크로스 · 히스토 +0.26",
+        "거래량 급증 · 최근 20일 평균 1.4배",
+        "3개월 수익률 +5.2%",
+        "Bollinger 상단 접근 (100%)"
+      ],
+      "macro": [
+        "NEUTRAL · VIX 14.2 · US10Y 4.68%",
+        "DXY 99.6 약세 · 성장주 유리",
+        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
+      ],
+      "filing": [
+        "13F: 기관지분율 +1.71%p",
+        "13F: 보유기관 581곳 · 지분율 51.4% (2026Q3)",
+        "8-K: 최근 60일 이벤트 8건 (활발)",
+        "* FMP 실시간 공시 반영"
+      ],
+      "value": [
+        "PER 342.7 · 극심 프리미엄",
+        "Forward PER 12.0 · 이익 성장 반영",
+        "PBR 0.98 · 자산가치 이하",
+        "PEG 0.97 · 성장률 대비 저평가"
+      ]
+    }
+  },
+  {
+    "t": "AXSM",
+    "n": "Axsome Therapeutics, Inc.",
+    "m": "US",
+    "sec": "제약/바이오",
+    "tech": 25,
+    "macro": 65,
+    "filing": 50,
+    "value": 26,
+    "total": 41,
+    "consensus": 0,
+    "signal": "AVOID",
+    "ev": -0.39,
+    "target": -5,
+    "hitl": true,
+    "reasons": {
+      "tech": [
+        "단기 역배열 (P<223.3<234.6)",
+        "MACD 데드크로스 · 히스토 -0.16"
+      ],
+      "macro": [
+        "NEUTRAL · VIX 14.2 · US10Y 4.68%",
+        "DXY 99.6 약세 · 성장주 유리",
+        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
+      ],
+      "filing": [
+        "13F: 신규진입 +67곳",
+        "13F: 기관지분율 -1.12%p",
+        "13F: 보유기관 530곳 · 지분율 75.1% (2026Q3)",
+        "Form 4: 매도 우세 P0/S13",
+        "* FMP 실시간 공시 반영"
+      ],
+      "value": [
+        "PER 43.0 · 프리미엄",
+        "PBR 135.8 · 부담",
+        "FCF 음수 · 현금유출"
+      ]
+    }
+  },
+  {
+    "t": "JEF",
+    "n": "Jefferies Financial Group Inc.",
+    "m": "US",
+    "sec": "금융",
+    "tech": 32,
+    "macro": 60,
+    "filing": 50,
+    "value": 68,
+    "total": 48,
+    "consensus": 0,
+    "signal": "HOLD",
+    "ev": -0.05,
+    "target": -1,
+    "hitl": false,
+    "reasons": {
+      "tech": [
+        "단기 역배열 (P<55.7<55.8)",
+        "MACD 데드크로스 · 히스토 -0.15",
+        "3개월 수익률 +5.2%",
+        "Bollinger 하단 근접 · 반등 여지"
+      ],
+      "macro": [
+        "NEUTRAL · VIX 14.2 · US10Y 4.68%",
+        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
+      ],
+      "filing": [
+        "13F: 기관지분율 -1.21%p",
+        "P/C비율 급등 +95% (헤지 강화)",
+        "13F: 보유기관 609곳 · 지분율 64.2% (2026Q3)",
+        "Form 4: 순매수 P1/S0",
+        "8-K: 최근 60일 이벤트 없음"
+      ],
+      "value": [
+        "PER 15.4 · 저평가",
+        "Forward PER 12.0 · 이익 성장 반영"
+      ]
+    }
+  },
+  {
+    "t": "DPZ",
+    "n": "Domino's Pizza, Inc.",
+    "m": "US",
+    "sec": "소비재",
+    "tech": 47,
+    "macro": 60,
+    "filing": 53,
+    "value": 50,
+    "total": 52,
+    "consensus": 0,
+    "signal": "HOLD",
+    "ev": 0.19,
+    "target": 2,
+    "hitl": false,
+    "reasons": {
+      "tech": [
+        "RSI 42 · 중립",
+        "MACD 데드크로스 · 히스토 -2.97",
+        "3개월 수익률 +9.6%"
+      ],
+      "macro": [
+        "NEUTRAL · VIX 14.2 · US10Y 4.68%",
+        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
+      ],
+      "filing": [
+        "13F: 기관지분율 +2.78%p",
+        "13F: 보유기관 764곳 · 지분율 109.0% (2026Q3)",
+        "Form 4: 매도 우세 P0/S12",
+        "8-K: 최근 60일 이벤트 3건 (활발)",
+        "* FMP 실시간 공시 반영"
+      ],
+      "value": [
+        "PER 19.6 · 적정"
+      ]
+    }
+  },
+  {
+    "t": "CGNX",
+    "n": "Cognex Corporation",
+    "m": "US",
+    "sec": "IT",
+    "tech": 54,
+    "macro": 60,
+    "filing": 45,
+    "value": 43,
+    "total": 51,
+    "consensus": 0,
+    "signal": "HOLD",
+    "ev": 0.15,
+    "target": 2,
+    "hitl": false,
+    "reasons": {
+      "tech": [
+        "RSI 59 · 강세 지속 구간",
+        "MACD 데드크로스 · 히스토 -0.01",
+        "3개월 수익률 +7.7%"
+      ],
+      "macro": [
+        "NEUTRAL · VIX 14.2 · US10Y 4.68%",
+        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
+      ],
+      "filing": [
+        "13F: 기관지분율 +11.56%p",
+        "P/C비율 급등 +45% (헤지 강화)",
+        "13F: 보유기관 671곳 · 지분율 106.1% (2026Q3)",
+        "Form 4: 매도 우세 P0/S6",
+        "* FMP 실시간 공시 반영"
+      ],
+      "value": [
+        "PER 63.4 · 극심 프리미엄",
+        "Forward PER 32.9 · 이익 성장 반영"
+      ]
+    }
+  },
+  {
+    "t": "HUBS",
+    "n": "HubSpot, Inc.",
+    "m": "US",
+    "sec": "IT",
+    "tech": 43,
+    "macro": 60,
+    "filing": 50,
+    "value": 59,
+    "total": 51,
+    "consensus": 0,
+    "signal": "HOLD",
+    "ev": 0.05,
+    "target": 1,
+    "hitl": false,
+    "reasons": {
+      "tech": [
+        "RSI 44 · 중립",
+        "MACD 데드크로스 · 히스토 -2.04"
+      ],
+      "macro": [
+        "NEUTRAL · VIX 14.2 · US10Y 4.68%",
+        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
+      ],
+      "filing": [
+        "P/C비율 급등 +31% (헤지 강화)",
+        "13F: 보유기관 629곳 · 지분율 93.2% (2026Q3)",
+        "* FMP 실시간 공시 반영"
+      ],
+      "value": [
+        "PER 80.0 · 극심 프리미엄",
+        "Forward PER 13.0 · 이익 성장 반영",
+        "PEG 0.35 · 성장률 대비 저평가",
+        "FCF Yield 6.1% · 우수"
+      ]
+    }
+  },
+  {
+    "t": "MGM",
+    "n": "MGM Resorts International",
+    "m": "US",
+    "sec": "소비재",
+    "tech": 27,
+    "macro": 60,
+    "filing": 63,
+    "value": 74,
+    "total": 51,
+    "consensus": 1,
+    "signal": "HOLD",
+    "ev": 0.17,
+    "target": 2,
+    "hitl": false,
+    "reasons": {
+      "tech": [
+        "단기 역배열 (P<44.9<46.3)",
+        "MACD 데드크로스 · 히스토 -0.11",
+        "거래량 감소 · 0.5배",
+        "3개월 수익률 +18.0%",
+        "Bollinger 하단 근접 · 반등 여지"
+      ],
+      "macro": [
+        "NEUTRAL · VIX 14.2 · US10Y 4.68%",
+        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
+      ],
+      "filing": [
+        "13F: 기관지분율 +2.85%p",
+        "P/C비율 하락 -45% (헤지 완화)",
+        "13F: 보유기관 699곳 · 지분율 66.9% (2026Q3)",
+        "* FMP 실시간 공시 반영"
+      ],
+      "value": [
+        "PER 26.5 · 적정",
+        "Forward PER 21.1 · 이익 성장 반영",
+        "PEG 0.61 · 성장률 대비 저평가",
+        "FCF Yield 7.8% · 우수"
+      ]
+    }
+  },
+  {
+    "t": "IAG",
+    "n": "Iamgold Corporation",
+    "m": "US",
+    "sec": "소재",
+    "tech": 66,
+    "macro": 60,
+    "filing": 55,
+    "value": 73,
+    "total": 63,
+    "consensus": 1,
+    "signal": "HOLD",
+    "ev": 0.59,
+    "target": 7,
+    "hitl": false,
+    "reasons": {
+      "tech": [
+        "단기 정배열 (P>16.0>15.9)",
+        "RSI 82 · 과매수 경계",
+        "MACD 골든크로스 · 히스토 +0.41",
+        "3개월 수익률 +12.2%",
+        "Bollinger 상단 접근 (93%)"
+      ],
+      "macro": [
+        "NEUTRAL · VIX 14.2 · US10Y 4.68%",
+        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
+      ],
+      "filing": [
+        "13F: 보유기관 336곳 · 지분율 64.6% (2026Q3)",
+        "8-K: 최근 60일 이벤트 없음",
+        "* FMP 실시간 공시 반영"
+      ],
+      "value": [
+        "PER 9.2 · 극심 저평가",
+        "PEG 13.52 · 성장률 대비 부담",
+        "FCF Yield 11.2% · 우수"
+      ]
+    }
+  },
+  {
+    "t": "DCI",
+    "n": "Donaldson Company, Inc.",
+    "m": "US",
+    "sec": "산업재",
+    "tech": 55,
+    "macro": 60,
+    "filing": 63,
+    "value": 50,
+    "total": 58,
+    "consensus": 0,
+    "signal": "HOLD",
+    "ev": 0.48,
+    "target": 6,
+    "hitl": false,
+    "reasons": {
+      "tech": [
+        "단기 정배열 (P>94.6>90.2)",
+        "RSI 49 · 중립",
+        "MACD 데드크로스 · 히스토 -0.33",
+        "3개월 수익률 +15.6%"
+      ],
+      "macro": [
+        "NEUTRAL · VIX 14.2 · US10Y 4.68%",
+        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
+      ],
+      "filing": [
+        "13F: 기관지분율 +3.47%p",
+        "P/C비율 하락 -40% (헤지 완화)",
+        "13F: 보유기관 627곳 · 지분율 90.8% (2026Q3)",
+        "* FMP 실시간 공시 반영"
+      ],
+      "value": [
+        "PER 25.9 · 적정"
+      ]
+    }
+  },
+  {
+    "t": "GKOS",
+    "n": "Glaukos Corporation",
+    "m": "US",
+    "sec": "제약/바이오",
+    "tech": 80,
+    "macro": 65,
+    "filing": 45,
+    "value": 27,
+    "total": 59,
+    "consensus": 1,
+    "signal": "HOLD",
+    "ev": 0.59,
+    "target": 7,
+    "hitl": false,
+    "reasons": {
+      "tech": [
+        "이동평균 완벽 정배열 (P>169.2>151.9>122.7)",
+        "RSI 85 · 과매수 경계",
+        "MACD 골든크로스 · 히스토 +1.04",
+        "3개월 수익률 +30.6% · 강한 상승"
+      ],
+      "macro": [
+        "NEUTRAL · VIX 14.2 · US10Y 4.68%",
+        "DXY 99.6 약세 · 성장주 유리",
+        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
+      ],
+      "filing": [
+        "13F: 기관지분율 +4.95%p",
+        "P/C비율 급등 +55% (헤지 강화)",
+        "13F: 보유기관 375곳 · 지분율 105.8% (2026Q3)",
+        "Form 4: 매도 우세 P0/S9",
+        "* FMP 실시간 공시 반영"
+      ],
+      "value": [
+        "PER 368.1 · 극심 프리미엄",
+        "PBR 16.0 · 부담"
+      ]
+    }
+  },
+  {
+    "t": "EGP",
+    "n": "EastGroup Properties, Inc.",
+    "m": "US",
+    "sec": "리츠",
+    "tech": 48,
+    "macro": 60,
+    "filing": 63,
+    "value": 45,
+    "total": 54,
+    "consensus": 0,
+    "signal": "HOLD",
+    "ev": 0.18,
+    "target": 2,
+    "hitl": false,
+    "reasons": {
+      "tech": [
+        "MACD 데드크로스 · 히스토 -0.56",
+        "거래량 급증 · 최근 20일 평균 1.4배"
+      ],
+      "macro": [
+        "NEUTRAL · VIX 14.2 · US10Y 4.68%",
+        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
+      ],
+      "filing": [
+        "13F: 기관지분율 +5.30%p",
+        "P/C비율 하락 -264% (헤지 완화)",
+        "13F: 보유기관 544곳 · 지분율 103.9% (2026Q3)",
+        "* FMP 실시간 공시 반영"
+      ],
+      "value": [
+        "PER 35.7 · 적정",
+        "PEG 8.42 · 성장률 대비 부담"
+      ]
+    }
+  },
+  {
+    "t": "RMBS",
+    "n": "Rambus Inc.",
+    "m": "US",
+    "sec": "반도체",
+    "tech": 62,
+    "macro": 65,
+    "filing": 50,
+    "value": 45,
+    "total": 56,
+    "consensus": 0,
+    "signal": "HOLD",
+    "ev": 0.06,
+    "target": 1,
+    "hitl": false,
+    "reasons": {
+      "tech": [
+        "RSI 65 · 강세 지속 구간",
+        "MACD 골든크로스 · 히스토 +1.89",
+        "3개월 수익률 -18.7% · 급락"
+      ],
+      "macro": [
+        "NEUTRAL · VIX 14.2 · US10Y 4.68%",
+        "DXY 99.6 약세 · 성장주 유리",
+        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
+      ],
+      "filing": [
+        "13F: 신규진입 +56곳",
+        "13F: 기관지분율 -1.39%p",
+        "13F: 보유기관 640곳 · 지분율 94.0% (2026Q3)",
+        "Form 4: 매도 우세 P0/S9",
+        "* FMP 실시간 공시 반영"
+      ],
+      "value": [
+        "PER 46.4 · 프리미엄",
+        "Forward PER 27.2 · 이익 성장 반영",
+        "PEG 3.80 · 성장률 대비 부담"
+      ]
+    }
+  },
+  {
+    "t": "SPXC",
+    "n": "SPX Technologies, Inc.",
+    "m": "US",
+    "sec": "소재",
+    "tech": 76,
+    "macro": 60,
+    "filing": 53,
+    "value": 58,
+    "total": 63,
+    "consensus": 1,
+    "signal": "HOLD",
+    "ev": 0.61,
+    "target": 7,
+    "hitl": false,
+    "reasons": {
+      "tech": [
+        "RSI 58 · 강세 지속 구간",
+        "MACD 골든크로스 · 히스토 +1.08",
+        "3개월 수익률 +8.6%"
+      ],
+      "macro": [
+        "NEUTRAL · VIX 14.2 · US10Y 4.68%",
+        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
+      ],
+      "filing": [
+        "13F: 기관지분율 -4.19%p",
+        "13F: 보유기관 516곳 · 지분율 95.8% (2026Q3)",
+        "8-K: 최근 60일 이벤트 3건 (활발)",
+        "* FMP 실시간 공시 반영"
+      ],
+      "value": [
+        "PER 38.2 · 적정",
+        "Forward PER 22.2 · 이익 성장 반영"
+      ]
+    }
+  },
+  {
+    "t": "CPT",
+    "n": "Camden Property Trust",
+    "m": "US",
+    "sec": "리츠",
+    "tech": 28,
+    "macro": 60,
+    "filing": 63,
+    "value": 45,
+    "total": 47,
+    "consensus": 0,
+    "signal": "HOLD",
+    "ev": -0.06,
+    "target": -1,
+    "hitl": false,
+    "reasons": {
+      "tech": [
+        "단기 역배열 (P<111.5<112.5)",
+        "MACD 데드크로스 · 히스토 -0.37",
+        "Bollinger 하단 근접 · 반등 여지"
+      ],
+      "macro": [
+        "NEUTRAL · VIX 14.2 · US10Y 4.68%",
+        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
+      ],
+      "filing": [
+        "13F: 기관지분율 +3.74%p",
+        "P/C비율 하락 -54% (헤지 완화)",
+        "13F: 보유기관 575곳 · 지분율 100.7% (2026Q3)",
+        "* FMP 실시간 공시 반영"
+      ],
+      "value": [
+        "PER 35.7 · 적정",
+        "PEG 9.17 · 성장률 대비 부담"
+      ]
+    }
+  },
+  {
+    "t": "WTFC",
+    "n": "Wintrust Financial Corporation",
+    "m": "US",
+    "sec": "금융",
+    "tech": 84,
+    "macro": 60,
+    "filing": 63,
+    "value": 60,
+    "total": 69,
+    "consensus": 1,
+    "signal": "HOLD",
+    "ev": 0.85,
+    "target": 10,
+    "hitl": false,
+    "reasons": {
+      "tech": [
+        "이동평균 완벽 정배열 (P>160.0>159.3>146.1)",
+        "RSI 51 · 중립",
+        "MACD 골든크로스 · 히스토 +0.07",
+        "3개월 수익률 +10.0%"
+      ],
+      "macro": [
+        "NEUTRAL · VIX 14.2 · US10Y 4.68%",
+        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
+      ],
+      "filing": [
+        "13F: 기관지분율 +1.50%p",
+        "P/C비율 하락 -360% (헤지 완화)",
+        "13F: 보유기관 589곳 · 지분율 97.5% (2026Q3)",
+        "* FMP 실시간 공시 반영"
+      ],
+      "value": [
+        "PER 13.1 · 저평가"
+      ]
+    }
+  },
+  {
+    "t": "MUSA",
+    "n": "Murphy USA Inc.",
+    "m": "US",
+    "sec": "소비재",
+    "tech": 58,
+    "macro": 60,
+    "filing": 58,
+    "value": 52,
+    "total": 57,
+    "consensus": 0,
+    "signal": "HOLD",
+    "ev": 0.32,
+    "target": 4,
+    "hitl": false,
+    "reasons": {
+      "tech": [
+        "이동평균 완벽 정배열 (P>584.9>578.8>479.9)",
+        "RSI 46 · 중립",
+        "MACD 데드크로스 · 히스토 -1.95"
+      ],
+      "macro": [
+        "NEUTRAL · VIX 14.2 · US10Y 4.68%",
+        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
+      ],
+      "filing": [
+        "P/C비율 하락 -75% (헤지 완화)",
+        "13F: 보유기관 617곳 · 지분율 83.4% (2026Q3)",
+        "* FMP 실시간 공시 반영"
+      ],
+      "value": [
+        "PER 17.4 · 저평가",
+        "PBR 13.8 · 부담"
+      ]
+    }
+  },
+  {
+    "t": "AYI",
+    "n": "Acuity Brands, Inc.",
+    "m": "US",
+    "sec": "산업재",
+    "tech": 95,
+    "macro": 60,
+    "filing": 60,
+    "value": 58,
+    "total": 72,
+    "consensus": 1,
+    "signal": "HOLD",
+    "ev": 1.03,
+    "target": 12,
+    "hitl": false,
+    "reasons": {
+      "tech": [
+        "이동평균 완벽 정배열 (P>345.2>333.8>320.4)",
+        "RSI 61 · 강세 지속 구간",
+        "MACD 골든크로스 · 히스토 +1.04",
+        "3개월 수익률 +27.6% · 강한 상승"
+      ],
+      "macro": [
+        "NEUTRAL · VIX 14.2 · US10Y 4.68%",
+        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
+      ],
+      "filing": [
+        "13F: 기관지분율 +5.39%p",
+        "13F: 보유기관 642곳 · 지분율 99.6% (2026Q3)",
+        "* FMP 실시간 공시 반영"
+      ],
+      "value": [
+        "PER 23.8 · 적정",
+        "Forward PER 16.6 · 이익 성장 반영"
+      ]
+    }
+  },
+  {
+    "t": "FORM",
+    "n": "FormFactor, Inc.",
+    "m": "US",
+    "sec": "반도체",
+    "tech": 58,
+    "macro": 65,
+    "filing": 50,
+    "value": 35,
+    "total": 54,
+    "consensus": 0,
+    "signal": "HOLD",
+    "ev": 0.36,
+    "target": 4,
+    "hitl": false,
+    "reasons": {
+      "tech": [
+        "RSI 81 · 과매수 경계",
+        "MACD 골든크로스 · 히스토 +4.03",
+        "3개월 수익률 +17.7%",
+        "Bollinger 상단 접근 (96%)"
+      ],
+      "macro": [
+        "NEUTRAL · VIX 14.2 · US10Y 4.68%",
+        "DXY 99.6 약세 · 성장주 유리",
+        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
+      ],
+      "filing": [
+        "13F: 신규진입 +51곳",
+        "13F: 기관지분율 -3.27%p",
+        "13F: 보유기관 522곳 · 지분율 93.2% (2026Q3)",
+        "Form 4: 매도 우세 P0/S22",
+        "* FMP 실시간 공시 반영"
+      ],
+      "value": [
+        "PER 95.3 · 극심 프리미엄",
+        "Forward PER 39.8 · 이익 성장 반영",
+        "PBR 9.7 · 부담"
+      ]
+    }
+  },
+  {
+    "t": "DAR",
+    "n": "Darling Ingredients Inc.",
+    "m": "US",
+    "sec": "소매",
+    "tech": 78,
+    "macro": 60,
+    "filing": 60,
+    "value": 53,
+    "total": 65,
+    "consensus": 1,
+    "signal": "HOLD",
+    "ev": 0.7,
+    "target": 8,
+    "hitl": false,
+    "reasons": {
+      "tech": [
+        "이동평균 완벽 정배열 (P>62.0>59.3>51.3)",
+        "MACD 골든크로스 · 히스토 +0.69",
+        "3개월 수익률 +8.9%",
+        "Bollinger 상단 접근 (100%)"
+      ],
+      "macro": [
+        "NEUTRAL · VIX 14.2 · US10Y 4.68%",
+        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
+      ],
+      "filing": [
+        "13F: 기관지분율 +1.87%p",
+        "13F: 보유기관 634곳 · 지분율 105.2% (2026Q3)",
+        "* FMP 실시간 공시 반영"
+      ],
+      "value": [
+        "PER 18.2 · 적정",
+        "Forward PER 11.1 · 이익 성장 반영",
+        "PEG 4.31 · 성장률 대비 부담"
+      ]
+    }
+  },
+  {
+    "t": "SSB",
+    "n": "SouthState Bank Corp.",
+    "m": "US",
+    "sec": "금융",
+    "tech": 85,
+    "macro": 60,
+    "filing": 53,
+    "value": 70,
+    "total": 68,
+    "consensus": 2,
+    "signal": "WATCH",
+    "ev": 0.86,
+    "target": 10,
+    "hitl": false,
+    "reasons": {
+      "tech": [
+        "이동평균 완벽 정배열 (P>106.8>101.9>96.0)",
+        "MACD 골든크로스 · 히스토 +0.22",
+        "3개월 수익률 +20.1% · 강한 상승"
+      ],
+      "macro": [
+        "NEUTRAL · VIX 14.2 · US10Y 4.68%",
+        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
+      ],
+      "filing": [
+        "13F: 기관지분율 +4.73%p",
+        "13F: 보유기관 551곳 · 지분율 87.4% (2026Q3)",
+        "Form 4: 매도 우세 P0/S5",
+        "8-K: 최근 60일 이벤트 3건 (활발)",
+        "* FMP 실시간 공시 반영"
+      ],
+      "value": [
+        "PER 11.7 · 극심 저평가"
+      ]
+    }
+  },
+  {
+    "t": "GSAT",
+    "n": "Globalstar, Inc.",
+    "m": "US",
+    "sec": "인터넷",
+    "tech": 77,
+    "macro": 65,
+    "filing": 53,
+    "value": 27,
+    "total": 60,
+    "consensus": 1,
+    "signal": "HOLD",
+    "ev": 0.46,
+    "target": 6,
+    "hitl": false,
+    "reasons": {
+      "tech": [
+        "이동평균 완벽 정배열 (P>81.7>80.9>70.2)",
+        "MACD 골든크로스 · 히스토 +0.05"
+      ],
+      "macro": [
+        "NEUTRAL · VIX 14.2 · US10Y 4.68%",
+        "DXY 99.6 약세 · 성장주 유리",
+        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
+      ],
+      "filing": [
+        "13F: 기관지분율 +1.03%p",
+        "P/C비율 하락 -42% (헤지 완화)",
+        "13F: 보유기관 350곳 · 지분율 25.7% (2026Q3)",
+        "Form 4: 매도 우세 P0/S8",
+        "* FMP 실시간 공시 반영"
+      ],
+      "value": [
+        "PER 271.1 · 극심 프리미엄",
+        "PBR 31.1 · 부담",
+        "PEG 0.50 · 성장률 대비 저평가",
+        "FCF 음수 · 현금유출"
+      ]
+    }
+  },
+  {
+    "t": "PAC",
+    "n": "Grupo Aeroportuario del Pacífico, S.A.B.",
+    "m": "US",
+    "sec": "산업재",
+    "tech": 18,
+    "macro": 60,
+    "filing": 60,
+    "value": 50,
+    "total": 44,
+    "consensus": 0,
+    "signal": "AVOID",
+    "ev": -0.47,
+    "target": -6,
+    "hitl": true,
+    "reasons": {
+      "tech": [
+        "단기 역배열 (P<216.1<229.9)",
+        "MACD 데드크로스 · 히스토 -0.50",
+        "3개월 수익률 -15.5% · 급락",
+        "Bollinger 하단 근접 · 반등 여지"
+      ],
+      "macro": [
+        "NEUTRAL · VIX 14.2 · US10Y 4.68%",
+        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
+      ],
+      "filing": [
+        "13F: 기관지분율 +1.37%p",
+        "13F: 보유기관 187곳 · 지분율 17.1% (2026Q3)",
+        "8-K: 최근 60일 이벤트 없음",
+        "* FMP 실시간 공시 반영"
+      ],
+      "value": [
+        "PER 19.2 · 적정",
+        "PBR 577.3 · 부담",
+        "FCF Yield 56.4% · 우수"
+      ]
+    }
+  },
+  {
+    "t": "TX",
+    "n": "Ternium S.A.",
+    "m": "US",
+    "sec": "소재",
+    "tech": 100,
+    "macro": 60,
+    "filing": 60,
+    "value": 78,
+    "total": 77,
+    "consensus": 2,
+    "signal": "WATCH",
+    "ev": 1.17,
+    "target": 14,
+    "hitl": false,
+    "reasons": {
+      "tech": [
+        "이동평균 완벽 정배열 (P>50.8>47.5>41.9)",
+        "RSI 68 · 강세 지속 구간",
+        "MACD 골든크로스 · 히스토 +0.28",
+        "거래량 급증 · 최근 20일 평균 1.6배",
+        "3개월 수익률 +26.8% · 강한 상승"
+      ],
+      "macro": [
+        "NEUTRAL · VIX 14.2 · US10Y 4.68%",
+        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
+      ],
+      "filing": [
+        "13F: 기관지분율 +2.01%p",
+        "13F: 보유기관 170곳 · 지분율 14.4% (2026Q3)",
+        "8-K: 최근 60일 이벤트 없음",
+        "* FMP 실시간 공시 반영"
+      ],
+      "value": [
+        "PER 15.1 · 저평가",
+        "Forward PER 8.2 · 이익 성장 반영",
+        "PBR 0.87 · 자산가치 이하",
+        "PEG 0.13 · 성장률 대비 저평가"
+      ]
+    }
+  },
+  {
+    "t": "WYNN",
+    "n": "Wynn Resorts, Limited",
+    "m": "US",
+    "sec": "소비재",
+    "tech": 76,
+    "macro": 60,
+    "filing": 50,
+    "value": 58,
+    "total": 62,
+    "consensus": 1,
+    "signal": "HOLD",
+    "ev": 0.57,
+    "target": 7,
+    "hitl": false,
+    "reasons": {
+      "tech": [
+        "RSI 63 · 강세 지속 구간",
+        "MACD 골든크로스 · 히스토 +0.44",
+        "3개월 수익률 +7.9%"
+      ],
+      "macro": [
+        "NEUTRAL · VIX 14.2 · US10Y 4.68%",
+        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
+      ],
+      "filing": [
+        "13F: 기관지분율 +3.58%p",
+        "13F: 보유기관 542곳 · 지분율 72.5% (2026Q3)",
+        "Form 4: 매도 우세 P0/S29",
+        "* FMP 실시간 공시 반영"
+      ],
+      "value": [
+        "PER 24.6 · 적정",
+        "PEG 0.76 · 성장률 대비 저평가"
+      ]
+    }
+  },
+  {
+    "t": "BMNR",
+    "n": "Bitmine Immersion Technologies, Inc.",
+    "m": "US",
+    "sec": "금융",
+    "tech": 80,
+    "macro": 60,
+    "filing": 63,
+    "value": 52,
+    "total": 67,
+    "consensus": 1,
+    "signal": "HOLD",
+    "ev": 0.63,
+    "target": 8,
+    "hitl": false,
+    "reasons": {
+      "tech": [
+        "단기 정배열 (P>17.8>16.3)",
+        "RSI 58 · 강세 지속 구간",
+        "MACD 골든크로스 · 히스토 +0.03"
+      ],
+      "macro": [
+        "NEUTRAL · VIX 14.2 · US10Y 4.68%",
+        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
+      ],
+      "filing": [
+        "13F: 기관지분율 +11.94%p",
+        "13F: 보유기관 493곳 · 지분율 55.6% (2026Q3)",
+        "8-K: 최근 60일 이벤트 11건 (활발)",
+        "* FMP 실시간 공시 반영"
+      ],
+      "value": [
+        "PER 19.9 · 적정",
+        "PBR 0.94 · 자산가치 이하",
+        "FCF 음수 · 현금유출"
+      ]
+    }
+  },
+  {
+    "t": "JKHY",
+    "n": "Jack Henry & Associates, Inc.",
+    "m": "US",
+    "sec": "IT",
+    "tech": 39,
+    "macro": 60,
+    "filing": 50,
+    "value": 50,
+    "total": 48,
+    "consensus": 0,
+    "signal": "HOLD",
+    "ev": 0.03,
+    "target": 0,
+    "hitl": false,
+    "reasons": {
+      "tech": [
+        "MACD 데드크로스 · 히스토 -1.06",
+        "거래량 감소 · 0.5배",
+        "3개월 수익률 +8.2%"
+      ],
+      "macro": [
+        "NEUTRAL · VIX 14.2 · US10Y 4.68%",
+        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
+      ],
+      "filing": [
+        "13F: 기관지분율 -3.02%p",
+        "13F: 보유기관 708곳 · 지분율 97.0% (2026Q3)",
+        "* FMP 실시간 공시 반영"
+      ],
+      "value": [
+        "PER 21.4 · 적정"
+      ]
+    }
+  },
+  {
+    "t": "BXP",
+    "n": "BXP, Inc.",
+    "m": "US",
+    "sec": "리츠",
+    "tech": 47,
+    "macro": 60,
+    "filing": 53,
+    "value": 53,
+    "total": 52,
+    "consensus": 0,
+    "signal": "HOLD",
+    "ev": 0.24,
+    "target": 3,
+    "hitl": false,
+    "reasons": {
+      "tech": [
+        "MACD 데드크로스 · 히스토 -0.48",
+        "3개월 수익률 +12.5%",
+        "Bollinger 하단 근접 · 반등 여지"
+      ],
+      "macro": [
+        "NEUTRAL · VIX 14.2 · US10Y 4.68%",
+        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
+      ],
+      "filing": [
+        "13F: 기관지분율 +7.15%p",
+        "P/C비율 하락 -89% (헤지 완화)",
+        "13F: 보유기관 561곳 · 지분율 113.5% (2026Q3)",
+        "Form 4: 매도 우세 P0/S4",
+        "* FMP 실시간 공시 반영"
+      ],
+      "value": [
+        "PER 36.8 · 적정",
+        "PEG 3.13 · 성장률 대비 부담",
+        "FCF Yield 7.3% · 우수"
+      ]
+    }
+  },
+  {
+    "t": "NYT",
+    "n": "The New York Times Company",
+    "m": "US",
+    "sec": "인터넷",
+    "tech": 17,
+    "macro": 65,
+    "filing": 63,
+    "value": 53,
+    "total": 46,
+    "consensus": 0,
+    "signal": "HOLD",
+    "ev": -0.4,
+    "target": -5,
+    "hitl": false,
+    "reasons": {
+      "tech": [
+        "단기 역배열 (P<69.8<71.9)",
+        "RSI 27 · 과매도",
+        "MACD 데드크로스 · 히스토 -0.65"
+      ],
+      "macro": [
+        "NEUTRAL · VIX 14.2 · US10Y 4.68%",
+        "DXY 99.6 약세 · 성장주 유리",
+        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
+      ],
+      "filing": [
+        "13F: 기관지분율 +3.78%p",
+        "P/C비율 하락 -1233% (헤지 완화)",
+        "13F: 보유기관 645곳 · 지분율 103.7% (2026Q3)",
+        "* FMP 실시간 공시 반영"
+      ],
+      "value": [
+        "PER 27.2 · 적정",
+        "Forward PER 20.8 · 이익 성장 반영",
+        "PEG 3.79 · 성장률 대비 부담"
+      ]
+    }
+  },
+  {
+    "t": "MOH",
+    "n": "Molina Healthcare, Inc.",
+    "m": "US",
+    "sec": "제약/바이오",
+    "tech": 69,
+    "macro": 65,
+    "filing": 63,
+    "value": 51,
+    "total": 64,
+    "consensus": 0,
+    "signal": "HOLD",
+    "ev": 0.64,
+    "target": 8,
+    "hitl": false,
+    "reasons": {
+      "tech": [
+        "RSI 52 · 중립",
+        "MACD 골든크로스 · 히스토 +1.32",
+        "3개월 수익률 +9.8%"
+      ],
+      "macro": [
+        "NEUTRAL · VIX 14.2 · US10Y 4.68%",
+        "DXY 99.6 약세 · 성장주 유리",
+        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
+      ],
+      "filing": [
+        "13F: 기관지분율 +2.04%p",
+        "P/C비율 하락 -65% (헤지 완화)",
+        "13F: 보유기관 626곳 · 지분율 111.0% (2026Q3)",
+        "* FMP 실시간 공시 반영"
+      ],
+      "value": [
+        "PER 1269.1 · 극심 프리미엄",
+        "Forward PER 20.8 · 이익 성장 반영",
+        "FCF Yield 6.6% · 우수"
+      ]
+    }
+  },
+  {
+    "t": "APTV",
+    "n": "Aptiv PLC",
+    "m": "US",
+    "sec": "소비재",
+    "tech": 17,
+    "macro": 60,
+    "filing": 72,
+    "value": 74,
+    "total": 51,
+    "consensus": 2,
+    "signal": "HOLD",
+    "ev": -0.15,
+    "target": -2,
+    "hitl": false,
+    "reasons": {
+      "tech": [
+        "단기 역배열 (P<53.1<58.5)",
+        "RSI 28 · 과매도",
+        "MACD 데드크로스 · 히스토 -0.07"
+      ],
+      "macro": [
+        "NEUTRAL · VIX 14.2 · US10Y 4.68%",
+        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
+      ],
+      "filing": [
+        "13F: 기관지분율 +8.97%p",
+        "13F: 보유기관 671곳 · 지분율 98.6% (2026Q3)",
+        "Form 4: 실제매수 클러스터 P6/S2 (90일)",
+        "* FMP 실시간 공시 반영"
+      ],
+      "value": [
+        "PER 22.4 · 적정",
+        "Forward PER 7.7 · 이익 성장 반영",
+        "PEG 0.95 · 성장률 대비 저평가",
+        "FCF Yield 15.6% · 우수"
+      ]
+    }
+  },
+  {
+    "t": "ENSG",
+    "n": "The Ensign Group, Inc.",
+    "m": "US",
+    "sec": "제약/바이오",
+    "tech": 46,
+    "macro": 65,
+    "filing": 45,
+    "value": 58,
+    "total": 51,
+    "consensus": 0,
+    "signal": "HOLD",
+    "ev": 0.06,
+    "target": 1,
+    "hitl": false,
+    "reasons": {
+      "tech": [
+        "단기 정배열 (P>178.4>168.8)",
+        "RSI 46 · 중립",
+        "MACD 데드크로스 · 히스토 -0.14",
+        "거래량 감소 · 0.5배"
+      ],
+      "macro": [
+        "NEUTRAL · VIX 14.2 · US10Y 4.68%",
+        "DXY 99.6 약세 · 성장주 유리",
+        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
+      ],
+      "filing": [
+        "13F: 보유기관 551곳 · 지분율 92.3% (2026Q3)",
+        "Form 4: 매도 우세 P0/S5",
+        "* FMP 실시간 공시 반영"
+      ],
+      "value": [
+        "PER 28.5 · 적정",
+        "Forward PER 21.2 · 이익 성장 반영"
+      ]
+    }
+  },
+  {
+    "t": "SAIL",
+    "n": "SailPoint, Inc.",
+    "m": "US",
+    "sec": "IT",
+    "tech": 88,
+    "macro": 60,
+    "filing": 60,
+    "value": 42,
+    "total": 67,
+    "consensus": 1,
+    "signal": "HOLD",
+    "ev": 0.88,
+    "target": 11,
+    "hitl": false,
+    "reasons": {
+      "tech": [
+        "단기 정배열 (P>17.1>15.7)",
+        "RSI 69 · 강세 지속 구간",
+        "MACD 골든크로스 · 히스토 +0.17",
+        "3개월 수익률 +27.4% · 강한 상승"
+      ],
+      "macro": [
+        "NEUTRAL · VIX 14.2 · US10Y 4.68%",
+        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
+      ],
+      "filing": [
+        "13F: 기관지분율 +3.89%p",
+        "13F: 보유기관 253곳 · 지분율 102.7% (2026Q3)",
+        "* FMP 실시간 공시 반영"
+      ],
+      "value": [
+        "PER 46.5 · 프리미엄"
+      ]
+    }
+  },
+  {
+    "t": "ALSN",
+    "n": "Allison Transmission Holdings, Inc.",
+    "m": "US",
+    "sec": "소비재",
+    "tech": 88,
+    "macro": 60,
+    "filing": 60,
+    "value": 66,
+    "total": 71,
+    "consensus": 1,
+    "signal": "HOLD",
+    "ev": 0.92,
+    "target": 11,
+    "hitl": false,
+    "reasons": {
+      "tech": [
+        "이동평균 완벽 정배열 (P>120.3>118.1>111.2)",
+        "RSI 58 · 강세 지속 구간",
+        "MACD 골든크로스 · 히스토 +0.86",
+        "3개월 수익률 +11.4%",
+        "Bollinger 상단 접근 (94%)"
+      ],
+      "macro": [
+        "NEUTRAL · VIX 14.2 · US10Y 4.68%",
+        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
+      ],
+      "filing": [
+        "13F: 기관지분율 +1.59%p",
+        "13F: 보유기관 565곳 · 지분율 101.8% (2026Q3)",
+        "* FMP 실시간 공시 반영"
+      ],
+      "value": [
+        "PER 19.9 · 적정",
+        "Forward PER 11.1 · 이익 성장 반영",
+        "PEG 0.66 · 성장률 대비 저평가"
+      ]
+    }
+  },
+  {
+    "t": "BEP",
+    "n": "Brookfield Renewable Partners L.P.",
+    "m": "US",
+    "sec": "유틸리티",
+    "tech": 80,
+    "macro": 60,
+    "filing": 50,
+    "value": 45,
+    "total": 62,
+    "consensus": 1,
+    "signal": "HOLD",
+    "ev": 0.49,
+    "target": 6,
+    "hitl": false,
+    "reasons": {
+      "tech": [
+        "RSI 66 · 강세 지속 구간",
+        "MACD 골든크로스 · 히스토 +0.30",
+        "거래량 급증 · 최근 20일 평균 1.3배"
+      ],
+      "macro": [
+        "NEUTRAL · VIX 14.2 · US10Y 4.68%",
+        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
+      ],
+      "filing": [
+        "P/C비율 급등 +53% (헤지 강화)",
+        "13F: 보유기관 265곳 · 지분율 61.3% (2026Q3)",
+        "8-K: 최근 60일 이벤트 없음",
+        "* FMP 실시간 공시 반영"
+      ],
+      "value": [
+        "Forward PER -22.5 · 이익 성장 반영",
+        "PEG 3.51 · 성장률 대비 부담",
+        "FCF 음수 · 현금유출"
+      ]
+    }
+  },
+  {
+    "t": "AES",
+    "n": "The AES Corporation",
+    "m": "US",
+    "sec": "유틸리티",
+    "tech": 52,
+    "macro": 60,
+    "filing": 58,
+    "value": 70,
+    "total": 58,
+    "consensus": 1,
+    "signal": "HOLD",
+    "ev": 0.29,
+    "target": 3,
+    "hitl": false,
+    "reasons": {
+      "tech": [
+        "이동평균 완벽 정배열 (P>14.7>14.6>14.2)",
+        "MACD 데드크로스 · 히스토 -0.00",
+        "Bollinger 상단 접근 (100%)"
+      ],
+      "macro": [
+        "NEUTRAL · VIX 14.2 · US10Y 4.68%",
+        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
+      ],
+      "filing": [
+        "13F: 기관지분율 +2.12%p",
+        "P/C비율 급등 +188% (헤지 강화)",
+        "13F: 보유기관 736곳 · 지분율 90.2% (2026Q3)",
+        "8-K: 최근 60일 이벤트 3건 (활발)",
+        "* FMP 실시간 공시 반영"
+      ],
+      "value": [
+        "PER 5.5 · 극심 저평가",
+        "PEG 0.81 · 성장률 대비 저평가",
+        "FCF 음수 · 현금유출"
+      ]
+    }
+  },
+  {
+    "t": "EGO",
+    "n": "Eldorado Gold Corporation",
+    "m": "US",
+    "sec": "소재",
+    "tech": 78,
+    "macro": 60,
+    "filing": 55,
+    "value": 55,
+    "total": 64,
+    "consensus": 1,
+    "signal": "HOLD",
+    "ev": 0.73,
+    "target": 9,
+    "hitl": false,
+    "reasons": {
+      "tech": [
+        "단기 정배열 (P>34.8>32.4)",
+        "MACD 골든크로스 · 히스토 +0.67",
+        "3개월 수익률 +27.6% · 강한 상승"
+      ],
+      "macro": [
+        "NEUTRAL · VIX 14.2 · US10Y 4.68%",
+        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
+      ],
+      "filing": [
+        "8-K: 최근 60일 이벤트 없음",
+        "* FMP 실시간 공시 반영"
+      ],
+      "value": [
+        "PER 14.1 · 저평가",
+        "Forward PER 7.5 · 이익 성장 반영",
+        "PEG 5.96 · 성장률 대비 부담",
+        "FCF 음수 · 현금유출"
+      ]
+    }
+  },
+  {
+    "t": "AM",
+    "n": "Antero Midstream Corporation",
+    "m": "US",
+    "sec": "에너지",
+    "tech": 87,
+    "macro": 60,
+    "filing": 60,
+    "value": 58,
+    "total": 69,
+    "consensus": 1,
+    "signal": "HOLD",
+    "ev": 0.75,
+    "target": 9,
+    "hitl": false,
+    "reasons": {
+      "tech": [
+        "이동평균 완벽 정배열 (P>22.0>21.9>20.2)",
+        "RSI 55 · 강세 지속 구간",
+        "MACD 골든크로스 · 히스토 +0.06"
+      ],
+      "macro": [
+        "NEUTRAL · VIX 14.2 · US10Y 4.68%",
+        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
+      ],
+      "filing": [
+        "13F: 기관지분율 +2.40%p",
+        "13F: 보유기관 544곳 · 지분율 60.9% (2026Q3)",
+        "* FMP 실시간 공시 반영"
+      ],
+      "value": [
+        "PER 27.0 · 적정",
+        "Forward PER 13.7 · 이익 성장 반영"
+      ]
+    }
+  },
+  {
+    "t": "PRAX",
+    "n": "Praxis Precision Medicines, Inc.",
+    "m": "US",
+    "sec": "제약/바이오",
+    "tech": 76,
+    "macro": 65,
+    "filing": 48,
+    "value": 50,
+    "total": 61,
+    "consensus": 1,
+    "signal": "HOLD",
+    "ev": 0.65,
+    "target": 8,
+    "hitl": false,
+    "reasons": {
+      "tech": [
+        "이동평균 완벽 정배열 (P>334.9>313.9>295.2)",
+        "RSI 76 · 과매수 경계",
+        "MACD 골든크로스 · 히스토 +5.13",
+        "3개월 수익률 +17.4%"
+      ],
+      "macro": [
+        "NEUTRAL · VIX 14.2 · US10Y 4.68%",
+        "DXY 99.6 약세 · 성장주 유리",
+        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
+      ],
+      "filing": [
+        "13F: 기관지분율 +7.32%p",
+        "P/C비율 급등 +150% (헤지 강화)",
+        "13F: 보유기관 326곳 · 지분율 117.4% (2026Q3)",
+        "Form 4: 매도 우세 P0/S12",
+        "8-K: 최근 60일 이벤트 5건 (활발)"
+      ],
+      "value": [
+        "Forward PER -39.9 · 이익 성장 반영",
+        "FCF 음수 · 현금유출"
+      ]
+    }
+  },
+  {
+    "t": "ZION",
+    "n": "Zions Bancorporation, National Associati",
+    "m": "US",
+    "sec": "금융",
+    "tech": 91,
+    "macro": 60,
+    "filing": 53,
+    "value": 65,
+    "total": 70,
+    "consensus": 1,
+    "signal": "HOLD",
+    "ev": 0.93,
+    "target": 11,
+    "hitl": false,
+    "reasons": {
+      "tech": [
+        "이동평균 완벽 정배열 (P>70.0>68.9>60.4)",
+        "RSI 66 · 강세 지속 구간",
+        "MACD 골든크로스 · 히스토 +0.09",
+        "3개월 수익률 +19.9%"
+      ],
+      "macro": [
+        "NEUTRAL · VIX 14.2 · US10Y 4.68%",
+        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
+      ],
+      "filing": [
+        "13F: 기관지분율 +5.03%p",
+        "P/C비율 하락 -39% (헤지 완화)",
+        "13F: 보유기관 613곳 · 지분율 83.5% (2026Q3)",
+        "Form 4: 매도 우세 P0/S8",
+        "* FMP 실시간 공시 반영"
+      ],
+      "value": [
+        "PER 9.1 · 극심 저평가",
+        "PEG 4.73 · 성장률 대비 부담"
+      ]
+    }
+  },
+  {
+    "t": "CFR",
+    "n": "Cullen/Frost Bankers, Inc.",
+    "m": "US",
+    "sec": "금융",
+    "tech": 66,
+    "macro": 60,
+    "filing": 60,
+    "value": 55,
+    "total": 61,
+    "consensus": 0,
+    "signal": "HOLD",
+    "ev": 0.62,
+    "target": 7,
+    "hitl": false,
+    "reasons": {
+      "tech": [
+        "이동평균 완벽 정배열 (P>165.9>157.6>139.4)",
+        "RSI 52 · 중립",
+        "MACD 데드크로스 · 히스토 -0.28",
+        "3개월 수익률 +22.9% · 강한 상승"
+      ],
+      "macro": [
+        "NEUTRAL · VIX 14.2 · US10Y 4.68%",
+        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
+      ],
+      "filing": [
+        "13F: 기관지분율 +4.36%p",
+        "13F: 보유기관 559곳 · 지분율 90.2% (2026Q3)",
+        "* FMP 실시간 공시 반영"
+      ],
+      "value": [
+        "PER 16.1 · 저평가",
+        "PEG 3.82 · 성장률 대비 부담"
+      ]
+    }
+  },
+  {
+    "t": "ONON",
+    "n": "On Holding AG",
+    "m": "US",
+    "sec": "소비재",
+    "tech": 26,
+    "macro": 60,
+    "filing": 65,
+    "value": 66,
+    "total": 50,
+    "consensus": 0,
+    "signal": "HOLD",
+    "ev": -0.25,
+    "target": -3,
+    "hitl": false,
+    "reasons": {
+      "tech": [
+        "단기 역배열 (P<35.8<36.7)",
+        "MACD 데드크로스 · 히스토 -0.68",
+        "거래량 급증 · 최근 20일 평균 1.5배",
+        "3개월 수익률 -17.8% · 급락",
+        "Bollinger 하단 근접 · 반등 여지"
+      ],
+      "macro": [
+        "NEUTRAL · VIX 14.2 · US10Y 4.68%",
+        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
+      ],
+      "filing": [
+        "13F: 기관지분율 +1.10%p",
+        "13F: 보유기관 541곳 · 지분율 63.2% (2026Q3)",
+        "Form 4: 순매수 P2/S1",
+        "8-K: 최근 60일 이벤트 없음",
+        "* FMP 실시간 공시 반영"
+      ],
+      "value": [
+        "PER 22.2 · 적정",
+        "Forward PER 15.2 · 이익 성장 반영",
+        "PEG 0.61 · 성장률 대비 저평가"
+      ]
+    }
+  },
+  {
+    "t": "MP",
+    "n": "MP Materials Corp.",
+    "m": "US",
+    "sec": "소재",
+    "tech": 54,
+    "macro": 60,
+    "filing": 50,
+    "value": 27,
+    "total": 50,
+    "consensus": 0,
+    "signal": "HOLD",
+    "ev": 0.09,
+    "target": 1,
+    "hitl": false,
+    "reasons": {
+      "tech": [
+        "RSI 81 · 과매수 경계",
+        "MACD 골든크로스 · 히스토 +1.93",
+        "Bollinger 상단 접근 (93%)"
+      ],
+      "macro": [
+        "NEUTRAL · VIX 14.2 · US10Y 4.68%",
+        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
+      ],
+      "filing": [
+        "13F: 기관지분율 +5.10%p",
+        "13F: 보유기관 800곳 · 지분율 83.0% (2026Q3)",
+        "Form 4: 매도 우세 P1/S12",
+        "* FMP 실시간 공시 반영"
+      ],
+      "value": [
+        "PER 66.6 · 극심 프리미엄",
+        "FCF 음수 · 현금유출"
+      ]
+    }
+  },
+  {
+    "t": "FLS",
+    "n": "Flowserve Corporation",
+    "m": "US",
+    "sec": "산업재",
+    "tech": 78,
+    "macro": 60,
+    "filing": 66,
+    "value": 58,
+    "total": 68,
+    "consensus": 1,
+    "signal": "HOLD",
+    "ev": 0.86,
+    "target": 10,
+    "hitl": false,
+    "reasons": {
+      "tech": [
+        "단기 정배열 (P>76.3>74.7)",
+        "MACD 골든크로스 · 히스토 +0.53",
+        "3개월 수익률 +23.2% · 강한 상승"
+      ],
+      "macro": [
+        "NEUTRAL · VIX 14.2 · US10Y 4.68%",
+        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
+      ],
+      "filing": [
+        "13F: 기관지분율 +14.22%p",
+        "P/C비율 하락 -73% (헤지 완화)",
+        "13F: 보유기관 596곳 · 지분율 112.3% (2026Q3)",
+        "8-K: 최근 60일 이벤트 3건 (활발)",
+        "* FMP 실시간 공시 반영"
+      ],
+      "value": [
+        "PER 28.2 · 적정",
+        "Forward PER 17.4 · 이익 성장 반영"
+      ]
+    }
+  },
+  {
+    "t": "EAT",
+    "n": "Brinker International, Inc.",
+    "m": "US",
+    "sec": "소비재",
+    "tech": 85,
+    "macro": 60,
+    "filing": 53,
+    "value": 50,
+    "total": 65,
+    "consensus": 1,
+    "signal": "HOLD",
+    "ev": 0.79,
+    "target": 9,
+    "hitl": false,
+    "reasons": {
+      "tech": [
+        "이동평균 완벽 정배열 (P>215.5>187.8>154.8)",
+        "MACD 골든크로스 · 히스토 +1.21",
+        "3개월 수익률 +82.7% · 강한 상승"
+      ],
+      "macro": [
+        "NEUTRAL · VIX 14.2 · US10Y 4.68%",
+        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
+      ],
+      "filing": [
+        "13F: 기관지분율 +3.42%p",
+        "P/C비율 하락 -39% (헤지 완화)",
+        "13F: 보유기관 520곳 · 지분율 110.2% (2026Q3)",
+        "Form 4: 매도 우세 P0/S9",
+        "* FMP 실시간 공시 반영"
+      ],
+      "value": [
+        "PER 21.8 · 적정",
+        "Forward PER 16.8 · 이익 성장 반영",
+        "PBR 23.2 · 부담"
+      ]
+    }
+  },
+  {
+    "t": "ONB",
+    "n": "Old National Bancorp",
+    "m": "US",
+    "sec": "금융",
+    "tech": 62,
+    "macro": 60,
+    "filing": 53,
+    "value": 68,
+    "total": 60,
+    "consensus": 0,
+    "signal": "HOLD",
+    "ev": 0.53,
+    "target": 6,
+    "hitl": false,
+    "reasons": {
+      "tech": [
+        "이동평균 완벽 정배열 (P>26.7>26.0>23.6)",
+        "RSI 53 · 중립",
+        "MACD 데드크로스 · 히스토 -0.01",
+        "3개월 수익률 +16.0%"
+      ],
+      "macro": [
+        "NEUTRAL · VIX 14.2 · US10Y 4.68%",
+        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
+      ],
+      "filing": [
+        "13F: 기관지분율 -9.65%p",
+        "13F: 보유기관 451곳 · 지분율 86.1% (2026Q3)",
+        "8-K: 최근 60일 이벤트 3건 (활발)",
+        "* FMP 실시간 공시 반영"
+      ],
+      "value": [
+        "PER 12.0 · 저평가",
+        "Forward PER 9.4 · 이익 성장 반영"
+      ]
+    }
+  },
+  {
+    "t": "ORI",
+    "n": "Old Republic International Corporation",
+    "m": "US",
+    "sec": "금융",
+    "tech": 36,
+    "macro": 60,
+    "filing": 60,
+    "value": 78,
+    "total": 54,
+    "consensus": 1,
+    "signal": "HOLD",
+    "ev": 0.17,
+    "target": 2,
+    "hitl": false,
+    "reasons": {
+      "tech": [
+        "RSI 24 · 과매도",
+        "MACD 데드크로스 · 히스토 -0.19",
+        "3개월 수익률 +7.0%"
+      ],
+      "macro": [
+        "NEUTRAL · VIX 14.2 · US10Y 4.68%",
+        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
+      ],
+      "filing": [
+        "13F: 기관지분율 +3.29%p",
+        "13F: 보유기관 658곳 · 지분율 79.3% (2026Q3)",
+        "* FMP 실시간 공시 반영"
+      ],
+      "value": [
+        "PER 9.4 · 극심 저평가",
+        "FCF Yield 13.8% · 우수"
+      ]
+    }
+  },
+  {
+    "t": "UHS",
+    "n": "Universal Health Services, Inc.",
+    "m": "US",
+    "sec": "제약/바이오",
+    "tech": 58,
+    "macro": 65,
+    "filing": 63,
+    "value": 70,
+    "total": 63,
+    "consensus": 1,
+    "signal": "HOLD",
+    "ev": 0.44,
+    "target": 5,
+    "hitl": false,
+    "reasons": {
+      "tech": [
+        "단기 정배열 (P>165.5>155.4)",
+        "RSI 56 · 강세 지속 구간",
+        "MACD 데드크로스 · 히스토 -0.04"
+      ],
+      "macro": [
+        "NEUTRAL · VIX 14.2 · US10Y 4.68%",
+        "DXY 99.6 약세 · 성장주 유리",
+        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
+      ],
+      "filing": [
+        "13F: 기관지분율 +5.42%p",
+        "13F: 보유기관 604곳 · 지분율 86.1% (2026Q3)",
+        "8-K: 최근 60일 이벤트 4건 (활발)",
+        "* FMP 실시간 공시 반영"
+      ],
+      "value": [
+        "PER 6.9 · 극심 저평가"
+      ]
+    }
+  },
+  {
+    "t": "SAIA",
+    "n": "Saia, Inc.",
+    "m": "US",
+    "sec": "산업재",
+    "tech": 63,
+    "macro": 60,
+    "filing": 63,
+    "value": 58,
+    "total": 62,
+    "consensus": 0,
+    "signal": "HOLD",
+    "ev": 0.22,
+    "target": 3,
+    "hitl": false,
+    "reasons": {
+      "tech": [
+        "RSI 42 · 중립",
+        "MACD 골든크로스 · 히스토 +3.27",
+        "거래량 급증 · 최근 20일 평균 1.3배",
+        "3개월 수익률 -15.9% · 급락"
+      ],
+      "macro": [
+        "NEUTRAL · VIX 14.2 · US10Y 4.68%",
+        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
+      ],
+      "filing": [
+        "13F: 기관지분율 +2.22%p",
+        "P/C비율 하락 -58% (헤지 완화)",
+        "13F: 보유기관 524곳 · 지분율 106.7% (2026Q3)",
+        "* FMP 실시간 공시 반영"
+      ],
+      "value": [
+        "PER 37.0 · 적정",
+        "Forward PER 27.2 · 이익 성장 반영"
+      ]
+    }
+  },
+  {
+    "t": "SUN",
+    "n": "Sunoco LP",
+    "m": "US",
+    "sec": "에너지",
+    "tech": 62,
+    "macro": 60,
+    "filing": 58,
+    "value": 63,
+    "total": 61,
+    "consensus": 0,
+    "signal": "HOLD",
+    "ev": 0.47,
+    "target": 6,
+    "hitl": false,
+    "reasons": {
+      "tech": [
+        "이동평균 완벽 정배열 (P>74.1>69.5>61.2)",
+        "RSI 48 · 중립",
+        "MACD 데드크로스 · 히스토 -0.13",
+        "3개월 수익률 +7.3%"
+      ],
+      "macro": [
+        "NEUTRAL · VIX 14.2 · US10Y 4.68%",
+        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
+      ],
+      "filing": [
+        "13F: 보유기관 307곳 · 지분율 48.5% (2026Q3)",
+        "8-K: 최근 60일 이벤트 3건 (활발)",
+        "* FMP 실시간 공시 반영"
+      ],
+      "value": [
+        "PER 16.7 · 저평가",
+        "PEG 8.54 · 성장률 대비 부담",
+        "FCF Yield 6.5% · 우수"
+      ]
+    }
+  },
+  {
+    "t": "PNR",
+    "n": "Pentair plc",
+    "m": "US",
+    "sec": "산업재",
+    "tech": 50,
+    "macro": 60,
+    "filing": 58,
+    "value": 76,
+    "total": 58,
+    "consensus": 1,
+    "signal": "HOLD",
+    "ev": 0.08,
+    "target": 1,
+    "hitl": false,
+    "reasons": {
+      "tech": [
+        "단기 역배열 (P<65.8<70.1)",
+        "RSI 41 · 중립",
+        "MACD 골든크로스 · 히스토 +0.10"
+      ],
+      "macro": [
+        "NEUTRAL · VIX 14.2 · US10Y 4.68%",
+        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
+      ],
+      "filing": [
+        "P/C비율 하락 -63% (헤지 완화)",
+        "13F: 보유기관 731곳 · 지분율 94.9% (2026Q3)",
+        "* FMP 실시간 공시 반영"
+      ],
+      "value": [
+        "PER 17.0 · 저평가",
+        "Forward PER 12.4 · 이익 성장 반영",
+        "FCF Yield 5.5% · 우수"
+      ]
+    }
+  },
+  {
+    "t": "PTGX",
+    "n": "Protagonist Therapeutics, Inc.",
+    "m": "US",
+    "sec": "제약/바이오",
+    "tech": 82,
+    "macro": 65,
+    "filing": 35,
+    "value": 35,
+    "total": 57,
+    "consensus": 1,
+    "signal": "HOLD",
+    "ev": 0.54,
+    "target": 6,
+    "hitl": false,
+    "reasons": {
+      "tech": [
+        "이동평균 완벽 정배열 (P>141.9>130.0>101.2)",
+        "MACD 골든크로스 · 히스토 +1.25",
+        "3개월 수익률 +57.5% · 강한 상승",
+        "Bollinger 상단 접근 (100%)"
+      ],
+      "macro": [
+        "NEUTRAL · VIX 14.2 · US10Y 4.68%",
+        "DXY 99.6 약세 · 성장주 유리",
+        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
+      ],
+      "filing": [
+        "13F: 기관지분율 -6.63%p",
+        "P/C비율 급등 +36% (헤지 강화)",
+        "13F: 보유기관 353곳 · 지분율 117.2% (2026Q3)",
+        "Form 4: 매도 우세 P0/S5",
+        "* FMP 실시간 공시 반영"
+      ],
+      "value": [
+        "PER 155.5 · 극심 프리미엄",
+        "Forward PER -1134.5 · 이익 성장 반영",
+        "PBR 12.2 · 부담"
+      ]
+    }
+  },
+  {
+    "t": "HSIC",
+    "n": "Henry Schein, Inc.",
+    "m": "US",
+    "sec": "제약/바이오",
+    "tech": 95,
+    "macro": 65,
+    "filing": 60,
+    "value": 58,
+    "total": 73,
+    "consensus": 1,
+    "signal": "HOLD",
+    "ev": 1.07,
+    "target": 13,
+    "hitl": false,
+    "reasons": {
+      "tech": [
+        "이동평균 완벽 정배열 (P>87.3>84.8>77.7)",
+        "RSI 68 · 강세 지속 구간",
+        "MACD 골든크로스 · 히스토 +0.08",
+        "3개월 수익률 +23.2% · 강한 상승"
+      ],
+      "macro": [
+        "NEUTRAL · VIX 14.2 · US10Y 4.68%",
+        "DXY 99.6 약세 · 성장주 유리",
+        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
+      ],
+      "filing": [
+        "13F: 기관지분율 +5.16%p",
+        "13F: 보유기관 562곳 · 지분율 107.7% (2026Q3)",
+        "* FMP 실시간 공시 반영"
+      ],
+      "value": [
+        "PER 26.2 · 적정",
+        "Forward PER 14.9 · 이익 성장 반영"
+      ]
+    }
+  },
+  {
+    "t": "FRT",
+    "n": "Federal Realty Investment Trust",
+    "m": "US",
+    "sec": "리츠",
+    "tech": 17,
+    "macro": 60,
+    "filing": 63,
+    "value": 45,
+    "total": 44,
+    "consensus": 0,
+    "signal": "AVOID",
+    "ev": -0.22,
+    "target": -3,
+    "hitl": true,
+    "reasons": {
+      "tech": [
+        "단기 역배열 (P<122.0<122.2)",
+        "RSI 21 · 과매도",
+        "MACD 데드크로스 · 히스토 -0.60"
+      ],
+      "macro": [
+        "NEUTRAL · VIX 14.2 · US10Y 4.68%",
+        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
+      ],
+      "filing": [
+        "13F: 기관지분율 +9.85%p",
+        "P/C비율 하락 -91% (헤지 완화)",
+        "13F: 보유기관 619곳 · 지분율 101.1% (2026Q3)",
+        "* FMP 실시간 공시 반영"
+      ],
+      "value": [
+        "PER 23.8 · 적정",
+        "PEG 3.59 · 성장률 대비 부담"
+      ]
+    }
+  },
+  {
+    "t": "SMMT",
+    "n": "Summit Therapeutics Inc.",
+    "m": "US",
+    "sec": "제약/바이오",
+    "tech": 43,
+    "macro": 65,
+    "filing": 78,
+    "value": 42,
+    "total": 58,
+    "consensus": 1,
+    "signal": "HOLD",
+    "ev": 0.07,
+    "target": 1,
+    "hitl": false,
+    "reasons": {
+      "tech": [
+        "단기 역배열 (P<13.8<14.2)",
+        "RSI 52 · 중립",
+        "MACD 골든크로스 · 히스토 +0.01",
+        "3개월 수익률 -20.2% · 급락",
+        "Bollinger 하단 근접 · 반등 여지"
+      ],
+      "macro": [
+        "NEUTRAL · VIX 14.2 · US10Y 4.68%",
+        "DXY 99.6 약세 · 성장주 유리",
+        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
+      ],
+      "filing": [
+        "13F: 기관지분율 +2.30%p",
+        "P/C비율 하락 -39% (헤지 완화)",
+        "13F: 보유기관 266곳 · 지분율 17.6% (2026Q3)",
+        "Form 4: 실제매수 클러스터 P6/S0 (90일)",
+        "8-K: 최근 60일 이벤트 4건 (활발)"
+      ],
+      "value": [
+        "Forward PER -10.6 · 이익 성장 반영",
+        "PBR 18.2 · 부담",
+        "FCF 음수 · 현금유출"
+      ]
+    }
+  },
+  {
+    "t": "SWKS",
+    "n": "Skyworks Solutions, Inc.",
+    "m": "US",
+    "sec": "반도체",
+    "tech": 72,
+    "macro": 65,
+    "filing": 66,
+    "value": 53,
+    "total": 66,
+    "consensus": 1,
+    "signal": "HOLD",
+    "ev": 0.55,
+    "target": 7,
+    "hitl": false,
+    "reasons": {
+      "tech": [
+        "RSI 57 · 강세 지속 구간",
+        "MACD 골든크로스 · 히스토 +0.64"
+      ],
+      "macro": [
+        "NEUTRAL · VIX 14.2 · US10Y 4.68%",
+        "DXY 99.6 약세 · 성장주 유리",
+        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
+      ],
+      "filing": [
+        "13F: 기관지분율 +14.20%p",
+        "P/C비율 하락 -73% (헤지 완화)",
+        "13F: 보유기관 733곳 · 지분율 125.3% (2026Q3)",
+        "8-K: 최근 60일 이벤트 5건 (활발)",
+        "* FMP 실시간 공시 반영"
+      ],
+      "value": [
+        "PER 36.0 · 적정",
+        "Forward PER 13.6 · 이익 성장 반영",
+        "PEG 9.86 · 성장률 대비 부담"
+      ]
+    }
+  },
+  {
+    "t": "BSY",
+    "n": "Bentley Systems, Incorporated",
+    "m": "US",
+    "sec": "IT",
+    "tech": 51,
+    "macro": 60,
+    "filing": 60,
+    "value": 50,
+    "total": 55,
+    "consensus": 0,
+    "signal": "HOLD",
+    "ev": 0.25,
+    "target": 3,
+    "hitl": false,
+    "reasons": {
+      "tech": [
+        "단기 정배열 (P>34.7>32.5)",
+        "RSI 44 · 중립",
+        "MACD 데드크로스 · 히스토 -0.08"
+      ],
+      "macro": [
+        "NEUTRAL · VIX 14.2 · US10Y 4.68%",
+        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
+      ],
+      "filing": [
+        "13F: 기관지분율 +2.26%p",
+        "13F: 보유기관 404곳 · 지분율 50.3% (2026Q3)",
+        "* FMP 실시간 공시 반영"
+      ],
+      "value": [
+        "PER 38.6 · 적정",
+        "Forward PER 22.1 · 이익 성장 반영",
+        "PBR 9.0 · 부담"
+      ]
+    }
+  },
+  {
+    "t": "R",
+    "n": "Ryder System, Inc.",
+    "m": "US",
+    "sec": "산업재",
+    "tech": 76,
+    "macro": 60,
+    "filing": 60,
+    "value": 74,
+    "total": 68,
+    "consensus": 2,
+    "signal": "WATCH",
+    "ev": 0.81,
+    "target": 10,
+    "hitl": false,
+    "reasons": {
+      "tech": [
+        "RSI 57 · 강세 지속 구간",
+        "MACD 골든크로스 · 히스토 +0.03",
+        "3개월 수익률 +14.3%"
+      ],
+      "macro": [
+        "NEUTRAL · VIX 14.2 · US10Y 4.68%",
+        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
+      ],
+      "filing": [
+        "13F: 기관지분율 +5.07%p",
+        "13F: 보유기관 588곳 · 지분율 89.2% (2026Q3)",
+        "* FMP 실시간 공시 반영"
+      ],
+      "value": [
+        "PER 21.5 · 적정",
+        "Forward PER 14.9 · 이익 성장 반영",
+        "PEG 0.86 · 성장률 대비 저평가",
+        "FCF Yield 9.4% · 우수"
+      ]
+    }
+  },
+  {
+    "t": "PAYP",
+    "n": "PayPay Corporation",
+    "m": "US",
+    "sec": "IT",
+    "tech": 33,
+    "macro": 60,
+    "filing": 55,
+    "value": 68,
+    "total": 50,
+    "consensus": 0,
+    "signal": "HOLD",
+    "ev": -0.25,
+    "target": -3,
+    "hitl": false,
+    "reasons": {
+      "tech": [
+        "RSI 43 · 중립",
+        "MACD 데드크로스 · 히스토 -0.09",
+        "3개월 수익률 -22.4% · 급락"
+      ],
+      "macro": [
+        "NEUTRAL · VIX 14.2 · US10Y 4.68%",
+        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
+      ],
+      "filing": [
+        "8-K: 최근 60일 이벤트 없음",
+        "* FMP 실시간 공시 반영"
+      ],
+      "value": [
+        "PER 13.0 · 저평가",
+        "FCF Yield 464.9% · 우수"
+      ]
+    }
+  },
+  {
+    "t": "LTH",
+    "n": "Life Time Group Holdings, Inc.",
+    "m": "US",
+    "sec": "소비재",
+    "tech": 66,
+    "macro": 60,
+    "filing": 48,
+    "value": 42,
+    "total": 56,
+    "consensus": 0,
+    "signal": "HOLD",
+    "ev": 0.44,
+    "target": 5,
+    "hitl": false,
+    "reasons": {
+      "tech": [
+        "이동평균 완벽 정배열 (P>44.0>40.8>31.1)",
+        "RSI 49 · 중립",
+        "MACD 데드크로스 · 히스토 -0.15",
+        "3개월 수익률 +36.4% · 강한 상승"
+      ],
+      "macro": [
+        "NEUTRAL · VIX 14.2 · US10Y 4.68%",
+        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
+      ],
+      "filing": [
+        "P/C비율 하락 -229% (헤지 완화)",
+        "13F: 보유기관 373곳 · 지분율 92.5% (2026Q3)",
+        "Form 4: 매도 우세 P0/S24",
+        "* FMP 실시간 공시 반영"
+      ],
+      "value": [
+        "PER 24.8 · 적정",
+        "FCF 음수 · 현금유출"
+      ]
+    }
+  },
+  {
+    "t": "BEPH",
+    "n": "Brookfield BRP Holdings (Canada) Inc 4.6",
+    "m": "US",
+    "sec": "리츠",
+    "tech": 55,
+    "macro": 60,
+    "filing": 55,
+    "value": 50,
+    "total": 55,
+    "consensus": 0,
+    "signal": "HOLD",
+    "ev": 0.25,
+    "target": 3,
+    "hitl": false,
+    "reasons": {
+      "tech": [
+        "이동평균 완벽 정배열 (P>15.1>14.8>14.6)",
+        "RSI 49 · 중립",
+        "MACD 데드크로스 · 히스토 -0.02",
+        "Bollinger 상단 접근 (100%)"
+      ],
+      "macro": [
+        "NEUTRAL · VIX 14.2 · US10Y 4.68%",
+        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
+      ],
+      "filing": [
+        "8-K: 최근 60일 이벤트 없음",
+        "* FMP 실시간 공시 반영"
+      ],
+      "value": [
+        "밸류 데이터 미확인"
+      ]
+    }
+  },
+  {
+    "t": "FPS",
+    "n": "Forgent Power Solutions, Inc.",
+    "m": "US",
+    "sec": "산업재",
+    "tech": 72,
+    "macro": 60,
+    "filing": 60,
+    "value": 43,
+    "total": 62,
+    "consensus": 1,
+    "signal": "HOLD",
+    "ev": 0.32,
+    "target": 4,
+    "hitl": false,
+    "reasons": {
+      "tech": [
+        "RSI 65 · 강세 지속 구간",
+        "MACD 골든크로스 · 히스토 +0.89"
+      ],
+      "macro": [
+        "NEUTRAL · VIX 14.2 · US10Y 4.68%",
+        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
+      ],
+      "filing": [
+        "13F: 기관지분율 +17.48%p",
+        "13F: 보유기관 383곳 · 지분율 56.0% (2026Q3)",
+        "* FMP 실시간 공시 반영"
+      ],
+      "value": [
+        "PER 1941.5 · 극심 프리미엄",
+        "Forward PER 33.2 · 이익 성장 반영",
+        "PBR 21.2 · 부담",
+        "PEG 0.46 · 성장률 대비 저평가"
+      ]
+    }
+  },
+  {
+    "t": "BEPI",
+    "n": "Brookfield BRP Holdings (Canada",
+    "m": "US",
+    "sec": "리츠",
+    "tech": 70,
+    "macro": 60,
+    "filing": 55,
+    "value": 50,
+    "total": 60,
+    "consensus": 1,
+    "signal": "HOLD",
+    "ev": 0.49,
+    "target": 6,
+    "hitl": false,
+    "reasons": {
+      "tech": [
+        "이동평균 완벽 정배열 (P>16.1>15.6>15.3)",
+        "RSI 54 · 중립",
+        "MACD 데드크로스 · 히스토 -0.02",
+        "거래량 급증 · 최근 20일 평균 1.8배",
+        "3개월 수익률 +6.9%"
+      ],
+      "macro": [
+        "NEUTRAL · VIX 14.2 · US10Y 4.68%",
+        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
+      ],
+      "filing": [
+        "8-K: 최근 60일 이벤트 없음",
+        "* FMP 실시간 공시 반영"
+      ],
+      "value": [
+        "밸류 데이터 미확인"
+      ]
+    }
+  },
+  {
+    "t": "RDY",
+    "n": "Dr. Reddy's Laboratories Limited",
+    "m": "US",
+    "sec": "제약/바이오",
+    "tech": 72,
+    "macro": 65,
+    "filing": 55,
+    "value": 42,
+    "total": 61,
+    "consensus": 1,
+    "signal": "HOLD",
+    "ev": 0.3,
+    "target": 4,
+    "hitl": false,
+    "reasons": {
+      "tech": [
+        "RSI 64 · 강세 지속 구간",
+        "MACD 골든크로스 · 히스토 +0.09"
+      ],
+      "macro": [
+        "NEUTRAL · VIX 14.2 · US10Y 4.68%",
+        "DXY 99.6 약세 · 성장주 유리",
+        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
+      ],
+      "filing": [
+        "13F: 보유기관 240곳 · 지분율 15.1% (2026Q3)",
+        "8-K: 최근 60일 이벤트 없음",
+        "* FMP 실시간 공시 반영"
+      ],
+      "value": [
+        "PER 29.5 · 적정",
+        "Forward PER 18.6 · 이익 성장 반영",
+        "PBR 15.0 · 부담",
+        "FCF 음수 · 현금유출"
+      ]
+    }
+  },
+  {
+    "t": "WLK",
+    "n": "Westlake Corporation",
+    "m": "US",
+    "sec": "소재",
+    "tech": 72,
+    "macro": 60,
+    "filing": 50,
+    "value": 50,
+    "total": 60,
+    "consensus": 1,
+    "signal": "HOLD",
+    "ev": 0.19,
+    "target": 2,
+    "hitl": false,
+    "reasons": {
+      "tech": [
+        "RSI 62 · 강세 지속 구간",
+        "MACD 골든크로스 · 히스토 +0.69"
+      ],
+      "macro": [
+        "NEUTRAL · VIX 14.2 · US10Y 4.68%",
+        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
+      ],
+      "filing": [
+        "13F: 기관지분율 -2.95%p",
+        "13F: 보유기관 361곳 · 지분율 31.3% (2026Q3)",
+        "* FMP 실시간 공시 반영"
+      ],
+      "value": [
+        "PER 23.3 · 적정"
+      ]
+    }
+  },
+  {
+    "t": "005930.KS",
+    "n": "삼성전자",
+    "m": "KR",
+    "sec": "미분류",
+    "tech": 69,
+    "macro": 60,
+    "filing": 55,
+    "value": 78,
+    "total": 64,
+    "consensus": 1,
+    "signal": "HOLD",
+    "ev": 0.49,
+    "target": 6,
+    "hitl": false,
+    "reasons": {
+      "tech": [
+        "RSI 69 · 강세 지속 구간",
+        "MACD 골든크로스 · 히스토 +7507.61",
+        "Bollinger 상단 접근 (93%)"
+      ],
+      "macro": [
+        "NEUTRAL · VIX 14.2 · US10Y 4.68%",
+        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
+      ],
+      "filing": [
+        "* DART 실시간 공시 반영"
+      ],
+      "value": [
+        "PER 4.2 · 극심 저평가",
+        "PEG 0.19 · 성장률 대비 저평가"
+      ]
+    }
+  },
+  {
+    "t": "000660.KS",
+    "n": "SK하이닉스",
+    "m": "KR",
+    "sec": "미분류",
+    "tech": 72,
+    "macro": 60,
+    "filing": 47,
+    "value": 78,
+    "total": 63,
+    "consensus": 2,
+    "signal": "WATCH",
+    "ev": 0.39,
+    "target": 5,
+    "hitl": false,
+    "reasons": {
+      "tech": [
+        "RSI 57 · 강세 지속 구간",
+        "MACD 골든크로스 · 히스토 +41258.28"
+      ],
+      "macro": [
+        "NEUTRAL · VIX 14.2 · US10Y 4.68%",
+        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
+      ],
+      "filing": [
+        "유상증자 결정 1건 (희석 리스크)",
+        "* DART 실시간 공시 반영"
+      ],
+      "value": [
+        "PER 3.9 · 극심 저평가",
+        "PEG 0.23 · 성장률 대비 저평가"
+      ]
+    }
+  },
+  {
+    "t": "373220.KS",
+    "n": "LG에너지솔루션",
+    "m": "KR",
+    "sec": "미분류",
+    "tech": 67,
+    "macro": 60,
+    "filing": 55,
+    "value": 29,
+    "total": 56,
+    "consensus": 0,
+    "signal": "HOLD",
+    "ev": 0.13,
+    "target": 2,
+    "hitl": false,
+    "reasons": {
+      "tech": [
+        "RSI 67 · 강세 지속 구간",
+        "MACD 골든크로스 · 히스토 +5710.35",
+        "거래량 감소 · 0.6배"
+      ],
+      "macro": [
+        "NEUTRAL · VIX 14.2 · US10Y 4.68%",
+        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
+      ],
+      "filing": [
+        "* DART 실시간 공시 반영"
+      ],
+      "value": [
+        "PER 46.2 · 프리미엄",
+        "PEG 7.45 · 성장률 대비 부담",
+        "FCF 음수 · 현금유출"
+      ]
+    }
+  },
+  {
+    "t": "207940.KS",
+    "n": "삼성바이오로직스",
+    "m": "KR",
+    "sec": "미분류",
+    "tech": 77,
+    "macro": 60,
+    "filing": 55,
+    "value": 50,
+    "total": 63,
+    "consensus": 1,
+    "signal": "HOLD",
+    "ev": 0.64,
+    "target": 8,
+    "hitl": false,
+    "reasons": {
+      "tech": [
+        "단기 정배열 (P>1504150.0>1417720.0)",
+        "RSI 49 · 중립",
+        "MACD 골든크로스 · 히스토 +1397.78",
+        "3개월 수익률 +10.8%"
+      ],
+      "macro": [
+        "NEUTRAL · VIX 14.2 · US10Y 4.68%",
+        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
+      ],
+      "filing": [
+        "* DART 실시간 공시 반영"
+      ],
+      "value": [
+        "PER 31.2 · 적정"
+      ]
+    }
+  },
+  {
+    "t": "005380.KS",
+    "n": "현대차",
+    "m": "KR",
+    "sec": "미분류",
+    "tech": 39,
+    "macro": 60,
+    "filing": 55,
+    "value": 65,
+    "total": 52,
+    "consensus": 0,
+    "signal": "HOLD",
+    "ev": -0.18,
+    "target": -2,
+    "hitl": false,
+    "reasons": {
+      "tech": [
+        "RSI 81 · 과매수 경계",
+        "MACD 골든크로스 · 히스토 +12971.30",
+        "거래량 감소 · 0.5배",
+        "3개월 수익률 -31.3% · 급락",
+        "Bollinger 상단 접근 (99%)"
+      ],
+      "macro": [
+        "NEUTRAL · VIX 14.2 · US10Y 4.68%",
+        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
+      ],
+      "filing": [
+        "* DART 실시간 공시 반영"
+      ],
+      "value": [
+        "PER 9.3 · 극심 저평가",
+        "PEG 4.13 · 성장률 대비 부담"
+      ]
+    }
+  },
+  {
+    "t": "000270.KS",
+    "n": "기아",
+    "m": "KR",
+    "sec": "미분류",
+    "tech": 57,
+    "macro": 60,
+    "filing": 55,
+    "value": 78,
+    "total": 60,
+    "consensus": 1,
+    "signal": "HOLD",
+    "ev": 0.14,
+    "target": 2,
+    "hitl": false,
+    "reasons": {
+      "tech": [
+        "RSI 81 · 과매수 경계",
+        "MACD 골든크로스 · 히스토 +1879.33"
+      ],
+      "macro": [
+        "NEUTRAL · VIX 14.2 · US10Y 4.68%",
+        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
+      ],
+      "filing": [
+        "* DART 실시간 공시 반영"
+      ],
+      "value": [
+        "PER 5.9 · 극심 저평가",
+        "PEG 0.42 · 성장률 대비 저평가"
+      ]
+    }
+  },
+  {
+    "t": "035420.KS",
+    "n": "NAVER",
+    "m": "KR",
+    "sec": "미분류",
+    "tech": 84,
+    "macro": 60,
+    "filing": 47,
+    "value": 55,
+    "total": 64,
+    "consensus": 1,
+    "signal": "HOLD",
+    "ev": 0.69,
+    "target": 8,
+    "hitl": false,
+    "reasons": {
+      "tech": [
+        "단기 정배열 (P>213705.0>212422.0)",
+        "RSI 57 · 강세 지속 구간",
+        "MACD 골든크로스 · 히스토 +1581.26",
+        "3개월 수익률 +11.5%"
+      ],
+      "macro": [
+        "NEUTRAL · VIX 14.2 · US10Y 4.68%",
+        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
+      ],
+      "filing": [
+        "유상증자 결정 1건 (희석 리스크)",
+        "* DART 실시간 공시 반영"
+      ],
+      "value": [
+        "PER 15.1 · 저평가",
+        "PEG 25.82 · 성장률 대비 부담"
+      ]
+    }
+  },
+  {
+    "t": "068270.KS",
+    "n": "셀트리온",
+    "m": "KR",
+    "sec": "미분류",
+    "tech": 84,
+    "macro": 60,
+    "filing": 63,
+    "value": 58,
+    "total": 69,
+    "consensus": 1,
+    "signal": "HOLD",
+    "ev": 0.89,
+    "target": 11,
+    "hitl": false,
+    "reasons": {
+      "tech": [
+        "단기 정배열 (P>188590.0>179096.0)",
+        "RSI 67 · 강세 지속 구간",
+        "MACD 골든크로스 · 히스토 +1094.64",
+        "3개월 수익률 +13.7%"
+      ],
+      "macro": [
+        "NEUTRAL · VIX 14.2 · US10Y 4.68%",
+        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
+      ],
+      "filing": [
+        "자기주식 취득 결정 1건 (오버행 해소)",
+        "* DART 실시간 공시 반영"
+      ],
+      "value": [
+        "PER 26.2 · 적정",
+        "PEG 0.85 · 성장률 대비 저평가"
+      ]
+    }
+  },
+  {
+    "t": "105560.KS",
+    "n": "KB금융",
+    "m": "KR",
+    "sec": "미분류",
+    "tech": 47,
+    "macro": 60,
+    "filing": 55,
+    "value": 78,
+    "total": 57,
+    "consensus": 1,
+    "signal": "HOLD",
+    "ev": 0.31,
+    "target": 4,
+    "hitl": false,
+    "reasons": {
+      "tech": [
+        "RSI 55 · 중립",
+        "MACD 데드크로스 · 히스토 -551.97",
+        "3개월 수익률 +10.2%"
+      ],
+      "macro": [
+        "NEUTRAL · VIX 14.2 · US10Y 4.68%",
+        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
+      ],
+      "filing": [
+        "* DART 실시간 공시 반영"
+      ],
+      "value": [
+        "PER 8.4 · 극심 저평가",
+        "PEG 0.74 · 성장률 대비 저평가"
+      ]
+    }
+  },
+  {
+    "t": "005490.KS",
+    "n": "POSCO홀딩스",
+    "m": "KR",
+    "sec": "미분류",
+    "tech": 57,
+    "macro": 60,
+    "filing": 55,
+    "value": 78,
+    "total": 60,
+    "consensus": 1,
+    "signal": "HOLD",
+    "ev": 0.12,
+    "target": 1,
+    "hitl": false,
+    "reasons": {
+      "tech": [
+        "RSI 67 · 강세 지속 구간",
+        "MACD 골든크로스 · 히스토 +3941.00",
+        "거래량 감소 · 0.6배",
+        "3개월 수익률 -28.0% · 급락"
+      ],
+      "macro": [
+        "NEUTRAL · VIX 14.2 · US10Y 4.68%",
+        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
+      ],
+      "filing": [
+        "* DART 실시간 공시 반영"
+      ],
+      "value": [
+        "PER 11.2 · 극심 저평가",
+        "PEG 0.90 · 성장률 대비 저평가"
+      ]
+    }
+  },
+  {
+    "t": "055550.KS",
+    "n": "신한지주",
+    "m": "KR",
+    "sec": "미분류",
+    "tech": 91,
+    "macro": 60,
+    "filing": 63,
+    "value": 65,
+    "total": 72,
+    "consensus": 1,
+    "signal": "HOLD",
+    "ev": 1.02,
+    "target": 12,
+    "hitl": false,
+    "reasons": {
+      "tech": [
+        "이동평균 완벽 정배열 (P>103926.4>102224.5>90265.7)",
+        "RSI 60 · 강세 지속 구간",
+        "MACD 골든크로스 · 히스토 +122.72",
+        "3개월 수익률 +13.9%"
+      ],
+      "macro": [
+        "NEUTRAL · VIX 14.2 · US10Y 4.68%",
+        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
+      ],
+      "filing": [
+        "자기주식 취득 결정 1건 (오버행 해소)",
+        "* DART 실시간 공시 반영"
+      ],
+      "value": [
+        "PER 7.7 · 극심 저평가",
+        "PEG 5.14 · 성장률 대비 부담"
+      ]
+    }
+  },
+  {
+    "t": "012330.KS",
+    "n": "현대모비스",
+    "m": "KR",
+    "sec": "미분류",
+    "tech": 49,
+    "macro": 60,
+    "filing": 55,
+    "value": 78,
+    "total": 57,
+    "consensus": 1,
+    "signal": "HOLD",
+    "ev": 0.15,
+    "target": 2,
+    "hitl": false,
+    "reasons": {
+      "tech": [
+        "RSI 81 · 과매수 경계",
+        "MACD 골든크로스 · 히스토 +9555.21",
+        "거래량 감소 · 0.4배",
+        "Bollinger 상단 접근 (95%)"
+      ],
+      "macro": [
+        "NEUTRAL · VIX 14.2 · US10Y 4.68%",
+        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
+      ],
+      "filing": [
+        "* DART 실시간 공시 반영"
+      ],
+      "value": [
+        "PER 10.3 · 극심 저평가",
+        "PEG 0.09 · 성장률 대비 저평가"
+      ]
+    }
+  },
+  {
+    "t": "035720.KS",
+    "n": "카카오",
+    "m": "KR",
+    "sec": "미분류",
+    "tech": 80,
+    "macro": 60,
+    "filing": 55,
+    "value": 58,
+    "total": 65,
+    "consensus": 1,
+    "signal": "HOLD",
+    "ev": 0.45,
+    "target": 5,
+    "hitl": false,
+    "reasons": {
+      "tech": [
+        "단기 정배열 (P>37785.0>36981.0)",
+        "RSI 65 · 강세 지속 구간",
+        "MACD 골든크로스 · 히스토 +244.42"
+      ],
+      "macro": [
+        "NEUTRAL · VIX 14.2 · US10Y 4.68%",
+        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
+      ],
+      "filing": [
+        "* DART 실시간 공시 반영"
+      ],
+      "value": [
+        "PER 20.9 · 적정",
+        "FCF Yield 18.4% · 우수"
+      ]
+    }
+  },
+  {
+    "t": "006400.KS",
+    "n": "삼성SDI",
+    "m": "KR",
+    "sec": "미분류",
+    "tech": 39,
+    "macro": 60,
+    "filing": 55,
+    "value": 45,
+    "total": 49,
+    "consensus": 0,
+    "signal": "HOLD",
+    "ev": -0.25,
+    "target": -3,
+    "hitl": false,
+    "reasons": {
+      "tech": [
+        "RSI 76 · 과매수 경계",
+        "MACD 골든크로스 · 히스토 +14785.50",
+        "거래량 감소 · 0.6배",
+        "3개월 수익률 -16.8% · 급락",
+        "Bollinger 상단 접근 (91%)"
+      ],
+      "macro": [
+        "NEUTRAL · VIX 14.2 · US10Y 4.68%",
+        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
+      ],
+      "filing": [
+        "* DART 실시간 공시 반영"
+      ],
+      "value": [
+        "PER 28.0 · 적정",
+        "PEG 12.29 · 성장률 대비 부담"
+      ]
+    }
+  },
+  {
+    "t": "028260.KS",
+    "n": "삼성물산",
+    "m": "KR",
+    "sec": "미분류",
+    "tech": 69,
+    "macro": 60,
+    "filing": 55,
+    "value": 50,
+    "total": 60,
+    "consensus": 0,
+    "signal": "HOLD",
+    "ev": 0.33,
+    "target": 4,
+    "hitl": false,
+    "reasons": {
+      "tech": [
+        "RSI 69 · 강세 지속 구간",
+        "MACD 골든크로스 · 히스토 +9378.03",
+        "Bollinger 상단 접근 (93%)"
+      ],
+      "macro": [
+        "NEUTRAL · VIX 14.2 · US10Y 4.68%",
+        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
+      ],
+      "filing": [
+        "* DART 실시간 공시 반영"
+      ],
+      "value": [
+        "PER 21.1 · 적정"
+      ]
+    }
+  },
+  {
+    "t": "015760.KS",
+    "n": "한국전력",
+    "m": "KR",
+    "sec": "미분류",
+    "tech": 31,
+    "macro": 60,
+    "filing": 55,
+    "value": 70,
+    "total": 50,
+    "consensus": 1,
+    "signal": "HOLD",
+    "ev": -0.25,
+    "target": -3,
+    "hitl": false,
+    "reasons": {
+      "tech": [
+        "단기 역배열 (P<34590.0<36072.0)",
+        "RSI 45 · 중립",
+        "MACD 데드크로스 · 히스토 -88.40",
+        "Bollinger 하단 근접 · 반등 여지"
+      ],
+      "macro": [
+        "NEUTRAL · VIX 14.2 · US10Y 4.68%",
+        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
+      ],
+      "filing": [
+        "* DART 실시간 공시 반영"
+      ],
+      "value": [
+        "PER 2.6 · 극심 저평가"
+      ]
+    }
+  },
+  {
+    "t": "010130.KS",
+    "n": "고려아연",
+    "m": "KR",
+    "sec": "미분류",
+    "tech": 62,
+    "macro": 60,
+    "filing": 55,
+    "value": 42,
+    "total": 56,
+    "consensus": 0,
+    "signal": "HOLD",
+    "ev": 0.09,
+    "target": 1,
+    "hitl": false,
+    "reasons": {
+      "tech": [
+        "MACD 골든크로스 · 히스토 +25243.10"
+      ],
+      "macro": [
+        "NEUTRAL · VIX 14.2 · US10Y 4.68%",
+        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
+      ],
+      "filing": [
+        "* DART 실시간 공시 반영"
+      ],
+      "value": [
+        "PER 22.4 · 적정",
+        "FCF 음수 · 현금유출"
+      ]
+    }
+  },
+  {
+    "t": "034730.KS",
+    "n": "SK",
+    "m": "KR",
+    "sec": "미분류",
+    "tech": 76,
+    "macro": 60,
+    "filing": 50,
+    "value": 78,
+    "total": 65,
+    "consensus": 2,
+    "signal": "WATCH",
+    "ev": 0.73,
+    "target": 9,
+    "hitl": false,
+    "reasons": {
+      "tech": [
+        "RSI 59 · 강세 지속 구간",
+        "MACD 골든크로스 · 히스토 +11456.24",
+        "3개월 수익률 +16.2%"
+      ],
+      "macro": [
+        "NEUTRAL · VIX 14.2 · US10Y 4.68%",
+        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
+      ],
+      "filing": [
+        "CB 발행 1건 (희석 잠재)",
+        "* DART 실시간 공시 반영"
+      ],
+      "value": [
+        "PER 4.9 · 극심 저평가",
+        "FCF Yield 12.8% · 우수"
+      ]
+    }
+  },
+  {
+    "t": "003670.KS",
+    "n": "포스코퓨처엠",
+    "m": "KR",
+    "sec": "미분류",
+    "tech": 52,
+    "macro": 60,
+    "filing": 55,
+    "value": 22,
+    "total": 50,
+    "consensus": 0,
+    "signal": "HOLD",
+    "ev": -0.15,
+    "target": -2,
+    "hitl": false,
+    "reasons": {
+      "tech": [
+        "MACD 골든크로스 · 히스토 +4928.47",
+        "3개월 수익률 -27.3% · 급락"
+      ],
+      "macro": [
+        "NEUTRAL · VIX 14.2 · US10Y 4.68%",
+        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
+      ],
+      "filing": [
+        "* DART 실시간 공시 반영"
+      ],
+      "value": [
+        "PER 159.9 · 극심 프리미엄",
+        "PEG 4.51 · 성장률 대비 부담",
+        "FCF 음수 · 현금유출"
+      ]
+    }
+  },
+  {
+    "t": "018260.KS",
+    "n": "삼성에스디에스",
+    "m": "KR",
+    "sec": "미분류",
+    "tech": 80,
+    "macro": 60,
+    "filing": 55,
+    "value": 50,
+    "total": 64,
+    "consensus": 1,
+    "signal": "HOLD",
+    "ev": 0.74,
+    "target": 9,
+    "hitl": false,
+    "reasons": {
+      "tech": [
+        "이동평균 완벽 정배열 (P>217875.0>211656.0>184437.2)",
+        "MACD 골든크로스 · 히스토 +3103.87",
+        "거래량 감소 · 0.5배",
+        "3개월 수익률 +32.9% · 강한 상승"
+      ],
+      "macro": [
+        "NEUTRAL · VIX 14.2 · US10Y 4.68%",
+        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
+      ],
+      "filing": [
+        "* DART 실시간 공시 반영"
+      ],
+      "value": [
+        "PER 21.0 · 적정"
+      ]
+    }
+  },
+  {
+    "t": "032830.KS",
+    "n": "삼성생명",
+    "m": "KR",
+    "sec": "미분류",
+    "tech": 72,
+    "macro": 60,
+    "filing": 55,
+    "value": 62,
+    "total": 63,
+    "consensus": 1,
+    "signal": "HOLD",
+    "ev": 0.48,
+    "target": 6,
+    "hitl": false,
+    "reasons": {
+      "tech": [
+        "RSI 58 · 강세 지속 구간",
+        "MACD 골든크로스 · 히스토 +5717.75"
+      ],
+      "macro": [
+        "NEUTRAL · VIX 14.2 · US10Y 4.68%",
+        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
+      ],
+      "filing": [
+        "* DART 실시간 공시 반영"
+      ],
+      "value": [
+        "PER 11.7 · 극심 저평가",
+        "FCF 음수 · 현금유출"
+      ]
+    }
+  },
+  {
+    "t": "138040.KS",
+    "n": "메리츠금융지주",
+    "m": "KR",
+    "sec": "미분류",
+    "tech": 47,
+    "macro": 60,
+    "filing": 55,
+    "value": 70,
+    "total": 55,
+    "consensus": 1,
+    "signal": "HOLD",
+    "ev": 0.28,
+    "target": 3,
+    "hitl": false,
+    "reasons": {
+      "tech": [
+        "RSI 48 · 중립",
+        "MACD 데드크로스 · 히스토 -1040.85",
+        "3개월 수익률 +9.9%"
+      ],
+      "macro": [
+        "NEUTRAL · VIX 14.2 · US10Y 4.68%",
+        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
+      ],
+      "filing": [
+        "* DART 실시간 공시 반영"
+      ],
+      "value": [
+        "PER 6.5 · 극심 저평가"
+      ]
+    }
+  },
+  {
+    "t": "011200.KS",
+    "n": "HMM",
+    "m": "KR",
+    "sec": "미분류",
+    "tech": 73,
+    "macro": 60,
+    "filing": 55,
+    "value": 60,
+    "total": 63,
+    "consensus": 1,
+    "signal": "HOLD",
+    "ev": 0.66,
+    "target": 8,
+    "hitl": false,
+    "reasons": {
+      "tech": [
+        "이동평균 완벽 정배열 (P>21062.5>20177.4>20127.4)",
+        "RSI 76 · 과매수 경계",
+        "MACD 골든크로스 · 히스토 +72.47",
+        "3개월 수익률 +13.7%",
+        "Bollinger 상단 접근 (100%)"
+      ],
+      "macro": [
+        "NEUTRAL · VIX 14.2 · US10Y 4.68%",
+        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
+      ],
+      "filing": [
+        "* DART 실시간 공시 반영"
+      ],
+      "value": [
+        "PER 17.1 · 저평가"
+      ]
+    }
+  },
+  {
+    "t": "086790.KS",
+    "n": "하나금융지주",
+    "m": "KR",
+    "sec": "미분류",
+    "tech": 91,
+    "macro": 60,
+    "filing": 63,
+    "value": 65,
+    "total": 72,
+    "consensus": 1,
+    "signal": "HOLD",
+    "ev": 1.03,
+    "target": 12,
+    "hitl": false,
+    "reasons": {
+      "tech": [
+        "이동평균 완벽 정배열 (P>128432.6>124470.1>109543.6)",
+        "RSI 64 · 강세 지속 구간",
+        "MACD 골든크로스 · 히스토 +127.32",
+        "3개월 수익률 +15.6%"
+      ],
+      "macro": [
+        "NEUTRAL · VIX 14.2 · US10Y 4.68%",
+        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
+      ],
+      "filing": [
+        "자기주식 취득 결정 1건 (오버행 해소)",
+        "* DART 실시간 공시 반영"
+      ],
+      "value": [
+        "PER 7.3 · 극심 저평가",
+        "PEG 4.79 · 성장률 대비 부담"
+      ]
+    }
+  },
+  {
+    "t": "017670.KS",
+    "n": "SK텔레콤",
+    "m": "KR",
+    "sec": "미분류",
+    "tech": 67,
+    "macro": 60,
+    "filing": 55,
+    "value": 68,
+    "total": 62,
+    "consensus": 0,
+    "signal": "HOLD",
+    "ev": 0.47,
+    "target": 6,
+    "hitl": false,
+    "reasons": {
+      "tech": [
+        "MACD 골든크로스 · 히스토 +1827.00",
+        "거래량 급증 · 최근 20일 평균 1.4배",
+        "Bollinger 상단 접근 (95%)"
+      ],
+      "macro": [
+        "NEUTRAL · VIX 14.2 · US10Y 4.68%",
+        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
+      ],
+      "filing": [
+        "* DART 실시간 공시 반영"
+      ],
+      "value": [
+        "PER 16.2 · 저평가",
+        "PEG 0.57 · 성장률 대비 저평가"
+      ]
+    }
+  },
+  {
+    "t": "011170.KS",
+    "n": "롯데케미칼",
+    "m": "KR",
+    "sec": "미분류",
+    "tech": 35,
+    "macro": 60,
+    "filing": 55,
+    "value": 50,
+    "total": 48,
+    "consensus": 0,
+    "signal": "HOLD",
+    "ev": -0.29,
+    "target": -3,
+    "hitl": false,
+    "reasons": {
+      "tech": [
+        "단기 역배열 (P<58005.0<64150.0)",
+        "RSI 50 · 중립",
+        "MACD 골든크로스 · 히스토 +488.67",
+        "거래량 감소 · 0.5배",
+        "3개월 수익률 -32.1% · 급락"
+      ],
+      "macro": [
+        "NEUTRAL · VIX 14.2 · US10Y 4.68%",
+        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
+      ],
+      "filing": [
+        "* DART 실시간 공시 반영"
+      ],
+      "value": [
+        "Forward PER -10.3 · 이익 성장 반영",
+        "FCF 음수 · 현금유출"
+      ]
+    }
+  },
+  {
+    "t": "267260.KS",
+    "n": "HD현대일렉트릭",
+    "m": "KR",
+    "sec": "미분류",
+    "tech": 62,
+    "macro": 60,
+    "filing": 55,
+    "value": 50,
+    "total": 58,
+    "consensus": 0,
+    "signal": "HOLD",
+    "ev": 0.09,
+    "target": 1,
+    "hitl": false,
+    "reasons": {
+      "tech": [
+        "RSI 62 · 강세 지속 구간",
+        "MACD 골든크로스 · 히스토 +20225.58",
+        "3개월 수익률 -29.1% · 급락"
+      ],
+      "macro": [
+        "NEUTRAL · VIX 14.2 · US10Y 4.68%",
+        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
+      ],
+      "filing": [
+        "* DART 실시간 공시 반영"
+      ],
+      "value": [
+        "PER 23.5 · 적정"
+      ]
+    }
+  },
+  {
+    "t": "090430.KS",
+    "n": "아모레퍼시픽",
+    "m": "KR",
+    "sec": "미분류",
+    "tech": 62,
+    "macro": 60,
+    "filing": 55,
+    "value": 50,
+    "total": 58,
+    "consensus": 0,
+    "signal": "HOLD",
+    "ev": 0.42,
+    "target": 5,
+    "hitl": false,
+    "reasons": {
+      "tech": [
+        "단기 정배열 (P>129270.0>119168.0)",
+        "RSI 64 · 강세 지속 구간",
+        "MACD 데드크로스 · 히스토 -185.41",
+        "3개월 수익률 +9.6%"
+      ],
+      "macro": [
+        "NEUTRAL · VIX 14.2 · US10Y 4.68%",
+        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
+      ],
+      "filing": [
+        "* DART 실시간 공시 반영"
+      ],
+      "value": [
+        "PER 19.2 · 적정"
+      ]
+    }
+  },
+  {
+    "t": "267250.KS",
+    "n": "HD현대중공업",
+    "m": "KR",
+    "sec": "미분류",
+    "tech": 57,
+    "macro": 60,
+    "filing": 55,
+    "value": 78,
+    "total": 60,
+    "consensus": 1,
+    "signal": "HOLD",
+    "ev": 0.16,
+    "target": 2,
+    "hitl": false,
+    "reasons": {
+      "tech": [
+        "RSI 83 · 과매수 경계",
+        "MACD 골든크로스 · 히스토 +4038.55"
+      ],
+      "macro": [
+        "NEUTRAL · VIX 14.2 · US10Y 4.68%",
+        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
+      ],
+      "filing": [
+        "* DART 실시간 공시 반영"
+      ],
+      "value": [
+        "PER 8.3 · 극심 저평가",
+        "FCF Yield 16.7% · 우수"
+      ]
+    }
+  },
+  {
+    "t": "323410.KS",
+    "n": "카카오뱅크",
+    "m": "KR",
+    "sec": "미분류",
+    "tech": 57,
+    "macro": 60,
+    "filing": 55,
+    "value": 60,
+    "total": 57,
+    "consensus": 0,
+    "signal": "HOLD",
+    "ev": 0.23,
+    "target": 3,
+    "hitl": false,
+    "reasons": {
+      "tech": [
+        "단기 역배열 (P<21877.5<22166.0)",
+        "RSI 58 · 강세 지속 구간",
+        "MACD 골든크로스 · 히스토 +35.26"
+      ],
+      "macro": [
+        "NEUTRAL · VIX 14.2 · US10Y 4.68%",
+        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
+      ],
+      "filing": [
+        "* DART 실시간 공시 반영"
+      ],
+      "value": [
+        "PER 15.5 · 저평가"
+      ]
+    }
+  },
+  {
+    "t": "000810.KS",
+    "n": "삼성화재",
+    "m": "KR",
+    "sec": "미분류",
+    "tech": 27,
+    "macro": 60,
+    "filing": 55,
+    "value": 62,
+    "total": 47,
+    "consensus": 0,
+    "signal": "HOLD",
+    "ev": 0.01,
+    "target": 0,
+    "hitl": false,
+    "reasons": {
+      "tech": [
+        "단기 역배열 (P<626750.0<642380.0)",
+        "RSI 54 · 중립",
+        "MACD 데드크로스 · 히스토 -1194.36",
+        "거래량 감소 · 0.6배",
+        "3개월 수익률 +12.5%"
+      ],
+      "macro": [
+        "NEUTRAL · VIX 14.2 · US10Y 4.68%",
+        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
+      ],
+      "filing": [
+        "* DART 실시간 공시 반영"
+      ],
+      "value": [
+        "PER 9.6 · 극심 저평가",
+        "FCF 음수 · 현금유출"
+      ]
+    }
+  },
+  {
+    "t": "010950.KS",
+    "n": "S-Oil",
+    "m": "KR",
+    "sec": "미분류",
+    "tech": 82,
+    "macro": 60,
+    "filing": 55,
+    "value": 70,
+    "total": 68,
+    "consensus": 2,
+    "signal": "WATCH",
+    "ev": 0.84,
+    "target": 10,
+    "hitl": false,
+    "reasons": {
+      "tech": [
+        "이동평균 완벽 정배열 (P>136485.0>124462.0>106109.8)",
+        "MACD 골든크로스 · 히스토 +1375.22",
+        "3개월 수익률 +36.3% · 강한 상승",
+        "Bollinger 상단 접근 (91%)"
+      ],
+      "macro": [
+        "NEUTRAL · VIX 14.2 · US10Y 4.68%",
+        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
+      ],
+      "filing": [
+        "* DART 실시간 공시 반영"
+      ],
+      "value": [
+        "PER 9.5 · 극심 저평가"
+      ]
+    }
+  },
+  {
+    "t": "011070.KS",
+    "n": "LG이노텍",
+    "m": "KR",
+    "sec": "미분류",
+    "tech": 67,
+    "macro": 60,
+    "filing": 55,
+    "value": 55,
+    "total": 60,
+    "consensus": 0,
+    "signal": "HOLD",
+    "ev": 0.23,
+    "target": 3,
+    "hitl": false,
+    "reasons": {
+      "tech": [
+        "RSI 68 · 강세 지속 구간",
+        "MACD 골든크로스 · 히스토 +29150.46",
+        "거래량 감소 · 0.6배"
+      ],
+      "macro": [
+        "NEUTRAL · VIX 14.2 · US10Y 4.68%",
+        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
+      ],
+      "filing": [
+        "* DART 실시간 공시 반영"
+      ],
+      "value": [
+        "PER 14.5 · 저평가",
+        "PEG 19.39 · 성장률 대비 부담"
+      ]
+    }
+  },
+  {
+    "t": "010140.KS",
+    "n": "삼성중공업",
+    "m": "KR",
+    "sec": "미분류",
+    "tech": 57,
+    "macro": 60,
+    "filing": 55,
+    "value": 76,
+    "total": 60,
+    "consensus": 1,
+    "signal": "HOLD",
+    "ev": 0.11,
+    "target": 1,
+    "hitl": false,
+    "reasons": {
+      "tech": [
+        "RSI 58 · 강세 지속 구간",
+        "MACD 골든크로스 · 히스토 +204.44",
+        "거래량 감소 · 0.5배",
+        "3개월 수익률 -26.1% · 급락"
+      ],
+      "macro": [
+        "NEUTRAL · VIX 14.2 · US10Y 4.68%",
+        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
+      ],
+      "filing": [
+        "* DART 실시간 공시 반영"
+      ],
+      "value": [
+        "PER 12.9 · 저평가",
+        "PEG 0.11 · 성장률 대비 저평가",
+        "FCF Yield 15.6% · 우수"
+      ]
+    }
+  },
+  {
+    "t": "329180.KS",
+    "n": "HD현대미포",
+    "m": "KR",
+    "sec": "미분류",
+    "tech": 57,
+    "macro": 60,
+    "filing": 55,
+    "value": 60,
+    "total": 57,
+    "consensus": 0,
+    "signal": "HOLD",
+    "ev": 0.06,
+    "target": 1,
+    "hitl": false,
+    "reasons": {
+      "tech": [
+        "RSI 64 · 강세 지속 구간",
+        "MACD 골든크로스 · 히스토 +7762.76",
+        "거래량 감소 · 0.5배",
+        "3개월 수익률 -17.9% · 급락"
+      ],
+      "macro": [
+        "NEUTRAL · VIX 14.2 · US10Y 4.68%",
+        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
+      ],
+      "filing": [
+        "* DART 실시간 공시 반영"
+      ],
+      "value": [
+        "PER 14.0 · 저평가"
+      ]
+    }
+  },
+  {
+    "t": "024110.KS",
+    "n": "기업은행",
+    "m": "KR",
+    "sec": "미분류",
+    "tech": 28,
+    "macro": 60,
+    "filing": 55,
+    "value": 70,
+    "total": 49,
+    "consensus": 1,
+    "signal": "HOLD",
+    "ev": -0.12,
+    "target": -1,
+    "hitl": false,
+    "reasons": {
+      "tech": [
+        "단기 역배열 (P<20419.3<20638.9)",
+        "RSI 52 · 중립",
+        "MACD 데드크로스 · 히스토 -7.93"
+      ],
+      "macro": [
+        "NEUTRAL · VIX 14.2 · US10Y 4.68%",
+        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
+      ],
+      "filing": [
+        "* DART 실시간 공시 반영"
+      ],
+      "value": [
+        "PER 5.6 · 극심 저평가"
+      ]
+    }
+  },
+  {
+    "t": "009150.KS",
+    "n": "삼성전기",
+    "m": "KR",
+    "sec": "미분류",
+    "tech": 77,
+    "macro": 60,
+    "filing": 55,
+    "value": 50,
+    "total": 63,
+    "consensus": 1,
+    "signal": "HOLD",
+    "ev": 0.7,
+    "target": 8,
+    "hitl": false,
+    "reasons": {
+      "tech": [
+        "RSI 69 · 강세 지속 구간",
+        "MACD 골든크로스 · 히스토 +61464.53",
+        "3개월 수익률 +51.6% · 강한 상승",
+        "Bollinger 상단 접근 (93%)"
+      ],
+      "macro": [
+        "NEUTRAL · VIX 14.2 · US10Y 4.68%",
+        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
+      ],
+      "filing": [
+        "* DART 실시간 공시 반영"
+      ],
+      "value": [
+        "PER 37.9 · 적정"
+      ]
+    }
+  },
+  {
+    "t": "042660.KS",
+    "n": "한화오션",
+    "m": "KR",
+    "sec": "미분류",
+    "tech": 62,
+    "macro": 60,
+    "filing": 55,
+    "value": 60,
+    "total": 59,
+    "consensus": 0,
+    "signal": "HOLD",
+    "ev": 0.13,
+    "target": 2,
+    "hitl": false,
+    "reasons": {
+      "tech": [
+        "RSI 63 · 강세 지속 구간",
+        "MACD 골든크로스 · 히스토 +1822.12",
+        "3개월 수익률 -18.8% · 급락"
+      ],
+      "macro": [
+        "NEUTRAL · VIX 14.2 · US10Y 4.68%",
+        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
+      ],
+      "filing": [
+        "* DART 실시간 공시 반영"
+      ],
+      "value": [
+        "PER 14.7 · 저평가",
+        "PEG 0.44 · 성장률 대비 저평가",
+        "FCF 음수 · 현금유출"
+      ]
+    }
+  },
+  {
+    "t": "128940.KS",
+    "n": "한미약품",
+    "m": "KR",
+    "sec": "미분류",
+    "tech": 67,
+    "macro": 60,
+    "filing": 55,
+    "value": 50,
+    "total": 59,
+    "consensus": 0,
+    "signal": "HOLD",
+    "ev": 0.24,
+    "target": 3,
+    "hitl": false,
+    "reasons": {
+      "tech": [
+        "RSI 55 · 강세 지속 구간",
+        "MACD 골든크로스 · 히스토 +5405.48",
+        "거래량 감소 · 0.6배"
+      ],
+      "macro": [
+        "NEUTRAL · VIX 14.2 · US10Y 4.68%",
+        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
+      ],
+      "filing": [
+        "* DART 실시간 공시 반영"
+      ],
+      "value": [
+        "PER 23.3 · 적정"
+      ]
+    }
+  },
+  {
+    "t": "247540.KS",
+    "n": "에코프로비엠",
+    "m": "KR",
+    "sec": "미분류",
+    "tech": 55,
+    "macro": 60,
+    "filing": 47,
+    "value": 50,
+    "total": 53,
+    "consensus": 0,
+    "signal": "HOLD",
+    "ev": -0.09,
+    "target": -1,
+    "hitl": false,
+    "reasons": {
+      "tech": [
+        "RSI 55 · 중립",
+        "MACD 골든크로스 · 히스토 +3740.51",
+        "3개월 수익률 -38.7% · 급락"
+      ],
+      "macro": [
+        "NEUTRAL · VIX 14.2 · US10Y 4.68%",
+        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
+      ],
+      "filing": [
+        "유상증자 결정 1건 (희석 리스크)",
+        "* DART 실시간 공시 반영"
+      ],
+      "value": [
+        "밸류 데이터 미확인"
+      ]
+    }
+  },
+  {
+    "t": "251270.KS",
+    "n": "넷마블",
+    "m": "KR",
+    "sec": "미분류",
+    "tech": 50,
+    "macro": 60,
+    "filing": 55,
+    "value": 78,
+    "total": 58,
+    "consensus": 1,
+    "signal": "HOLD",
+    "ev": 0.08,
+    "target": 1,
+    "hitl": false,
+    "reasons": {
+      "tech": [
+        "단기 역배열 (P<38148.8<38433.5)",
+        "RSI 55 · 중립",
+        "MACD 골든크로스 · 히스토 +98.33"
+      ],
+      "macro": [
+        "NEUTRAL · VIX 14.2 · US10Y 4.68%",
+        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
+      ],
+      "filing": [
+        "* DART 실시간 공시 반영"
+      ],
+      "value": [
+        "PER 9.9 · 극심 저평가",
+        "FCF Yield 15.8% · 우수"
+      ]
+    }
+  },
+  {
+    "t": "036570.KS",
+    "n": "엔씨소프트",
+    "m": "KR",
+    "sec": "미분류",
+    "tech": 45,
+    "macro": 60,
+    "filing": 55,
+    "value": 70,
+    "total": 55,
+    "consensus": 1,
+    "signal": "HOLD",
+    "ev": -0.0,
+    "target": 0,
+    "hitl": false,
+    "reasons": {
+      "tech": [
+        "단기 역배열 (P<234700.0<244760.0)",
+        "RSI 55 · 중립",
+        "MACD 골든크로스 · 히스토 +1617.52",
+        "거래량 감소 · 0.5배"
+      ],
+      "macro": [
+        "NEUTRAL · VIX 14.2 · US10Y 4.68%",
+        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
+      ],
+      "filing": [
+        "* DART 실시간 공시 반영"
+      ],
+      "value": [
+        "PER 10.2 · 극심 저평가"
+      ]
+    }
+  },
+  {
+    "t": "018880.KS",
+    "n": "한온시스템",
+    "m": "KR",
+    "sec": "미분류",
+    "tech": 57,
+    "macro": 60,
+    "filing": 55,
+    "value": 60,
+    "total": 57,
+    "consensus": 0,
+    "signal": "HOLD",
+    "ev": 0.06,
+    "target": 1,
+    "hitl": false,
+    "reasons": {
+      "tech": [
+        "RSI 66 · 강세 지속 구간",
+        "MACD 골든크로스 · 히스토 +67.42",
+        "거래량 감소 · 0.2배",
+        "3개월 수익률 -24.1% · 급락"
+      ],
+      "macro": [
+        "NEUTRAL · VIX 14.2 · US10Y 4.68%",
+        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
+      ],
+      "filing": [
+        "* DART 실시간 공시 반영"
+      ],
+      "value": [
+        "PER 13.3 · 저평가"
+      ]
+    }
+  },
+  {
+    "t": "000720.KS",
+    "n": "현대건설",
+    "m": "KR",
+    "sec": "미분류",
+    "tech": 57,
+    "macro": 60,
+    "filing": 50,
+    "value": 52,
+    "total": 55,
+    "consensus": 0,
+    "signal": "HOLD",
+    "ev": -0.02,
+    "target": 0,
+    "hitl": false,
+    "reasons": {
+      "tech": [
+        "RSI 68 · 강세 지속 구간",
+        "MACD 골든크로스 · 히스토 +2562.21",
+        "거래량 감소 · 0.6배",
+        "3개월 수익률 -21.6% · 급락"
+      ],
+      "macro": [
+        "NEUTRAL · VIX 14.2 · US10Y 4.68%",
+        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
+      ],
+      "filing": [
+        "CB 발행 1건 (희석 잠재)",
+        "* DART 실시간 공시 반영"
+      ],
+      "value": [
+        "PER 17.7 · 저평가",
+        "FCF 음수 · 현금유출"
+      ]
+    }
+  },
+  {
+    "t": "139480.KS",
+    "n": "이마트",
+    "m": "KR",
+    "sec": "미분류",
+    "tech": 16,
+    "macro": 60,
+    "filing": 55,
+    "value": 70,
+    "total": 45,
+    "consensus": 1,
+    "signal": "HOLD",
+    "ev": -0.48,
+    "target": -6,
+    "hitl": false,
+    "reasons": {
+      "tech": [
+        "단기 역배열 (P<80067.5<82223.0)",
+        "RSI 43 · 중립",
+        "MACD 데드크로스 · 히스토 -17.35",
+        "거래량 감소 · 0.6배",
+        "3개월 수익률 -22.3% · 급락"
+      ],
+      "macro": [
+        "NEUTRAL · VIX 14.2 · US10Y 4.68%",
+        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
+      ],
+      "filing": [
+        "* DART 실시간 공시 반영"
+      ],
+      "value": [
+        "PER 8.6 · 극심 저평가"
+      ]
+    }
+  },
+  {
+    "t": "000100.KS",
+    "n": "유한양행",
+    "m": "KR",
+    "sec": "미분류",
+    "tech": 70,
+    "macro": 60,
+    "filing": 55,
+    "value": 42,
+    "total": 59,
+    "consensus": 1,
+    "signal": "HOLD",
+    "ev": 0.35,
+    "target": 4,
+    "hitl": false,
+    "reasons": {
+      "tech": [
+        "단기 정배열 (P>76360.0>73896.0)",
+        "MACD 골든크로스 · 히스토 +943.54"
+      ],
+      "macro": [
+        "NEUTRAL · VIX 14.2 · US10Y 4.68%",
+        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
+      ],
+      "filing": [
+        "* DART 실시간 공시 반영"
+      ],
+      "value": [
+        "PER 29.3 · 적정",
+        "FCF 음수 · 현금유출"
+      ]
+    }
+  },
+  {
+    "t": "032640.KS",
+    "n": "LG유플러스",
+    "m": "KR",
+    "sec": "미분류",
+    "tech": 80,
+    "macro": 60,
+    "filing": 55,
+    "value": 78,
+    "total": 68,
+    "consensus": 2,
+    "signal": "WATCH",
+    "ev": 0.61,
+    "target": 7,
+    "hitl": false,
+    "reasons": {
+      "tech": [
+        "단기 정배열 (P>14654.7>14559.0)",
+        "RSI 58 · 강세 지속 구간",
+        "MACD 골든크로스 · 히스토 +43.50"
+      ],
+      "macro": [
+        "NEUTRAL · VIX 14.2 · US10Y 4.68%",
+        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
+      ],
+      "filing": [
+        "* DART 실시간 공시 반영"
+      ],
+      "value": [
+        "PER 7.7 · 극심 저평가",
+        "PEG 0.73 · 성장률 대비 저평가"
+      ]
+    }
+  },
+  {
+    "t": "375500.KS",
+    "n": "DL이앤씨",
+    "m": "KR",
+    "sec": "미분류",
+    "tech": 52,
+    "macro": 60,
+    "filing": 55,
+    "value": 78,
+    "total": 58,
+    "consensus": 1,
+    "signal": "HOLD",
+    "ev": 0.15,
+    "target": 2,
+    "hitl": false,
+    "reasons": {
+      "tech": [
+        "RSI 79 · 과매수 경계",
+        "MACD 골든크로스 · 히스토 +1372.53",
+        "거래량 감소 · 0.4배"
+      ],
+      "macro": [
+        "NEUTRAL · VIX 14.2 · US10Y 4.68%",
+        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
+      ],
+      "filing": [
+        "* DART 실시간 공시 반영"
+      ],
+      "value": [
+        "PER 6.3 · 극심 저평가",
+        "FCF Yield 5.9% · 우수"
+      ]
+    }
+  },
+  {
+    "t": "096770.KS",
+    "n": "SK이노베이션",
+    "m": "KR",
+    "sec": "미분류",
+    "tech": 81,
+    "macro": 60,
+    "filing": 55,
+    "value": 68,
+    "total": 67,
+    "consensus": 1,
+    "signal": "HOLD",
+    "ev": 0.71,
+    "target": 9,
+    "hitl": false,
+    "reasons": {
+      "tech": [
+        "단기 정배열 (P>118675.0>109318.0)",
+        "RSI 68 · 강세 지속 구간",
+        "MACD 골든크로스 · 히스토 +1414.25",
+        "3개월 수익률 +6.8%",
+        "Bollinger 상단 접근 (91%)"
+      ],
+      "macro": [
+        "NEUTRAL · VIX 14.2 · US10Y 4.68%",
+        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
+      ],
+      "filing": [
+        "* DART 실시간 공시 반영"
+      ],
+      "value": [
+        "PER 15.5 · 저평가",
+        "FCF Yield 15.2% · 우수"
+      ]
+    }
+  },
+  {
+    "t": "079550.KS",
+    "n": "LIG넥스원",
+    "m": "KR",
+    "sec": "미분류",
+    "tech": 67,
+    "macro": 60,
+    "filing": 47,
+    "value": 42,
+    "total": 56,
+    "consensus": 0,
+    "signal": "HOLD",
+    "ev": 0.22,
+    "target": 3,
+    "hitl": false,
+    "reasons": {
+      "tech": [
+        "RSI 60 · 강세 지속 구간",
+        "MACD 골든크로스 · 히스토 +14606.21",
+        "거래량 감소 · 0.6배"
+      ],
+      "macro": [
+        "NEUTRAL · VIX 14.2 · US10Y 4.68%",
+        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
+      ],
+      "filing": [
+        "유상증자 결정 1건 (희석 리스크)",
+        "* DART 실시간 공시 반영"
+      ],
+      "value": [
+        "PER 34.1 · 적정",
+        "FCF 음수 · 현금유출"
+      ]
+    }
+  },
+  {
+    "t": "006360.KS",
+    "n": "GS건설",
+    "m": "KR",
+    "sec": "미분류",
+    "tech": 84,
+    "macro": 60,
+    "filing": 55,
+    "value": 78,
+    "total": 70,
+    "consensus": 2,
+    "signal": "WATCH",
+    "ev": 0.86,
+    "target": 10,
+    "hitl": false,
+    "reasons": {
+      "tech": [
+        "이동평균 완벽 정배열 (P>30070.0>28693.0>25405.8)",
+        "RSI 75 · 과매수 경계",
+        "MACD 골든크로스 · 히스토 +844.62",
+        "거래량 급증 · 최근 20일 평균 1.7배",
+        "3개월 수익률 +11.9%"
+      ],
+      "macro": [
+        "NEUTRAL · VIX 14.2 · US10Y 4.68%",
+        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
+      ],
+      "filing": [
+        "* DART 실시간 공시 반영"
+      ],
+      "value": [
+        "PER 7.8 · 극심 저평가",
+        "FCF Yield 20.0% · 우수"
+      ]
+    }
+  },
+  {
+    "t": "078930.KS",
+    "n": "GS",
+    "m": "KR",
+    "sec": "미분류",
+    "tech": 85,
+    "macro": 60,
+    "filing": 55,
+    "value": 70,
+    "total": 69,
+    "consensus": 2,
+    "signal": "WATCH",
+    "ev": 0.88,
+    "target": 11,
+    "hitl": false,
+    "reasons": {
+      "tech": [
+        "이동평균 완벽 정배열 (P>95355.0>82348.0>68071.4)",
+        "RSI 79 · 과매수 경계",
+        "MACD 골든크로스 · 히스토 +2182.94",
+        "거래량 급증 · 최근 20일 평균 1.7배",
+        "3개월 수익률 +58.3% · 강한 상승"
+      ],
+      "macro": [
+        "NEUTRAL · VIX 14.2 · US10Y 4.68%",
+        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
+      ],
+      "filing": [
+        "* DART 실시간 공시 반영"
+      ],
+      "value": [
+        "PER 11.4 · 극심 저평가"
+      ]
+    }
+  },
+  {
+    "t": "036460.KS",
+    "n": "한국가스공사",
+    "m": "KR",
+    "sec": "미분류",
+    "tech": 80,
+    "macro": 60,
+    "filing": 55,
+    "value": 78,
+    "total": 68,
+    "consensus": 2,
+    "signal": "WATCH",
+    "ev": 0.59,
+    "target": 7,
+    "hitl": false,
+    "reasons": {
+      "tech": [
+        "단기 정배열 (P>34770.0>34023.0)",
+        "RSI 67 · 강세 지속 구간",
+        "MACD 골든크로스 · 히스토 +229.82"
+      ],
+      "macro": [
+        "NEUTRAL · VIX 14.2 · US10Y 4.68%",
+        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
+      ],
+      "filing": [
+        "* DART 실시간 공시 반영"
+      ],
+      "value": [
+        "PER 3.6 · 극심 저평가",
+        "FCF Yield 42.3% · 우수"
+      ]
+    }
+  },
+  {
+    "t": "016360.KS",
+    "n": "삼성증권",
+    "m": "KR",
+    "sec": "미분류",
+    "tech": 40,
+    "macro": 60,
+    "filing": 55,
+    "value": 70,
+    "total": 53,
+    "consensus": 1,
+    "signal": "HOLD",
+    "ev": -0.15,
+    "target": -2,
+    "hitl": false,
+    "reasons": {
+      "tech": [
+        "단기 역배열 (P<95920.0<105966.0)",
+        "RSI 49 · 중립",
+        "MACD 골든크로스 · 히스토 +257.01",
+        "3개월 수익률 -23.3% · 급락"
+      ],
+      "macro": [
+        "NEUTRAL · VIX 14.2 · US10Y 4.68%",
+        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
+      ],
+      "filing": [
+        "* DART 실시간 공시 반영"
+      ],
+      "value": [
+        "PER 5.8 · 극심 저평가"
+      ]
+    }
+  },
+  {
+    "t": "005940.KS",
+    "n": "NH투자증권",
+    "m": "KR",
+    "sec": "미분류",
+    "tech": 45,
+    "macro": 60,
+    "filing": 47,
+    "value": 70,
+    "total": 52,
+    "consensus": 1,
+    "signal": "HOLD",
+    "ev": -0.12,
+    "target": -1,
+    "hitl": false,
+    "reasons": {
+      "tech": [
+        "단기 역배열 (P<28295.0<29679.0)",
+        "RSI 54 · 중립",
+        "MACD 골든크로스 · 히스토 +146.79",
+        "거래량 감소 · 0.6배"
+      ],
+      "macro": [
+        "NEUTRAL · VIX 14.2 · US10Y 4.68%",
+        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
+      ],
+      "filing": [
+        "유상증자 결정 1건 (희석 리스크)",
+        "* DART 실시간 공시 반영"
+      ],
+      "value": [
+        "PER 7.2 · 극심 저평가"
+      ]
+    }
+  },
+  {
+    "t": "026960.KS",
+    "n": "동서",
+    "m": "KR",
+    "sec": "미분류",
+    "tech": 43,
+    "macro": 60,
+    "filing": 55,
+    "value": 50,
+    "total": 51,
+    "consensus": 0,
+    "signal": "HOLD",
+    "ev": 0.07,
+    "target": 1,
+    "hitl": false,
+    "reasons": {
+      "tech": [
+        "RSI 46 · 중립",
+        "MACD 데드크로스 · 히스토 -21.97"
+      ],
+      "macro": [
+        "NEUTRAL · VIX 14.2 · US10Y 4.68%",
+        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
+      ],
+      "filing": [
+        "* DART 실시간 공시 반영"
+      ],
+      "value": [
+        "밸류 데이터 미확인"
+      ]
+    }
+  },
+  {
+    "t": "010060.KS",
+    "n": "OCI홀딩스",
+    "m": "KR",
+    "sec": "미분류",
+    "tech": 72,
+    "macro": 60,
+    "filing": 55,
+    "value": 52,
+    "total": 62,
+    "consensus": 1,
+    "signal": "HOLD",
+    "ev": 0.29,
+    "target": 3,
+    "hitl": false,
+    "reasons": {
+      "tech": [
+        "이동평균 완벽 정배열 (P>232322.5>231341.0>190865.8)",
+        "RSI 76 · 과매수 경계",
+        "MACD 골든크로스 · 히스토 +8221.96"
+      ],
+      "macro": [
+        "NEUTRAL · VIX 14.2 · US10Y 4.68%",
+        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
+      ],
+      "filing": [
+        "* DART 실시간 공시 반영"
+      ],
+      "value": [
+        "PER 14.7 · 저평가",
+        "FCF 음수 · 현금유출"
+      ]
+    }
+  },
+  {
+    "t": "000210.KS",
+    "n": "DL",
+    "m": "KR",
+    "sec": "미분류",
+    "tech": 80,
+    "macro": 60,
+    "filing": 55,
+    "value": 78,
+    "total": 68,
+    "consensus": 2,
+    "signal": "WATCH",
+    "ev": 0.51,
+    "target": 6,
+    "hitl": false,
+    "reasons": {
+      "tech": [
+        "단기 정배열 (P>48445.0>47625.0)",
+        "RSI 66 · 강세 지속 구간",
+        "MACD 골든크로스 · 히스토 +542.65"
+      ],
+      "macro": [
+        "NEUTRAL · VIX 14.2 · US10Y 4.68%",
+        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
+      ],
+      "filing": [
+        "* DART 실시간 공시 반영"
+      ],
+      "value": [
+        "PER 3.9 · 극심 저평가",
+        "FCF Yield 27.6% · 우수"
+      ]
+    }
+  },
+  {
+    "t": "006800.KS",
+    "n": "미래에셋증권",
+    "m": "KR",
+    "sec": "미분류",
+    "tech": 57,
+    "macro": 60,
+    "filing": 63,
+    "value": 70,
+    "total": 61,
+    "consensus": 1,
+    "signal": "HOLD",
+    "ev": 0.17,
+    "target": 2,
+    "hitl": false,
+    "reasons": {
+      "tech": [
+        "RSI 61 · 강세 지속 구간",
+        "MACD 골든크로스 · 히스토 +939.27",
+        "거래량 감소 · 0.5배",
+        "3개월 수익률 -47.3% · 급락"
+      ],
+      "macro": [
+        "NEUTRAL · VIX 14.2 · US10Y 4.68%",
+        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
+      ],
+      "filing": [
+        "자기주식 취득 결정 1건 (오버행 해소)",
+        "* DART 실시간 공시 반영"
+      ],
+      "value": [
+        "PER 9.9 · 극심 저평가"
+      ]
+    }
+  },
+  {
+    "t": "064350.KS",
+    "n": "현대로템",
+    "m": "KR",
+    "sec": "미분류",
+    "tech": 62,
+    "macro": 60,
+    "filing": 55,
+    "value": 60,
+    "total": 59,
+    "consensus": 0,
+    "signal": "HOLD",
+    "ev": 0.13,
+    "target": 2,
+    "hitl": false,
+    "reasons": {
+      "tech": [
+        "RSI 70 · 강세 지속 구간",
+        "MACD 골든크로스 · 히스토 +3044.85",
+        "3개월 수익률 -26.4% · 급락"
+      ],
+      "macro": [
+        "NEUTRAL · VIX 14.2 · US10Y 4.68%",
+        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
+      ],
+      "filing": [
+        "* DART 실시간 공시 반영"
+      ],
+      "value": [
+        "PER 12.7 · 저평가"
+      ]
+    }
+  },
+  {
+    "t": "005830.KS",
+    "n": "DB손해보험",
+    "m": "KR",
+    "sec": "미분류",
+    "tech": 88,
+    "macro": 60,
+    "filing": 55,
+    "value": 62,
+    "total": 69,
+    "consensus": 1,
+    "signal": "HOLD",
+    "ev": 0.86,
+    "target": 10,
+    "hitl": false,
+    "reasons": {
+      "tech": [
+        "이동평균 완벽 정배열 (P>163000.0>153204.0>148505.6)",
+        "RSI 67 · 강세 지속 구간",
+        "MACD 골든크로스 · 히스토 +1558.85",
+        "3개월 수익률 +12.5%",
+        "Bollinger 상단 접근 (100%)"
+      ],
+      "macro": [
+        "NEUTRAL · VIX 14.2 · US10Y 4.68%",
+        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
+      ],
+      "filing": [
+        "* DART 실시간 공시 반영"
+      ],
+      "value": [
+        "PER 6.0 · 극심 저평가",
+        "FCF 음수 · 현금유출"
+      ]
+    }
+  },
+  {
+    "t": "002380.KS",
+    "n": "KCC",
+    "m": "KR",
+    "sec": "미분류",
+    "tech": 57,
+    "macro": 60,
+    "filing": 55,
+    "value": 78,
+    "total": 60,
+    "consensus": 1,
+    "signal": "HOLD",
+    "ev": 0.18,
+    "target": 2,
+    "hitl": false,
+    "reasons": {
+      "tech": [
+        "MACD 골든크로스 · 히스토 +10743.84",
+        "거래량 감소 · 0.6배"
+      ],
+      "macro": [
+        "NEUTRAL · VIX 14.2 · US10Y 4.68%",
+        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
+      ],
+      "filing": [
+        "* DART 실시간 공시 반영"
+      ],
+      "value": [
+        "PER 7.2 · 극심 저평가",
+        "FCF Yield 13.1% · 우수"
+      ]
+    }
+  },
+  {
+    "t": "011790.KS",
+    "n": "SKC",
+    "m": "KR",
+    "sec": "미분류",
+    "tech": 47,
+    "macro": 60,
+    "filing": 55,
+    "value": 50,
+    "total": 52,
+    "consensus": 0,
+    "signal": "HOLD",
+    "ev": -0.12,
+    "target": -1,
+    "hitl": false,
+    "reasons": {
+      "tech": [
+        "MACD 골든크로스 · 히스토 +3011.84",
+        "거래량 감소 · 0.3배",
+        "3개월 수익률 -34.6% · 급락"
+      ],
+      "macro": [
+        "NEUTRAL · VIX 14.2 · US10Y 4.68%",
+        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
+      ],
+      "filing": [
+        "* DART 실시간 공시 반영"
+      ],
+      "value": [
+        "Forward PER -39.2 · 이익 성장 반영",
+        "FCF 음수 · 현금유출"
+      ]
+    }
+  },
+  {
+    "t": "006650.KS",
+    "n": "대한유화",
+    "m": "KR",
+    "sec": "미분류",
+    "tech": 40,
+    "macro": 60,
+    "filing": 55,
+    "value": 78,
+    "total": 54,
+    "consensus": 1,
+    "signal": "HOLD",
+    "ev": -0.12,
+    "target": -1,
+    "hitl": false,
+    "reasons": {
+      "tech": [
+        "단기 역배열 (P<91755.0<105706.0)",
+        "RSI 46 · 중립",
+        "MACD 골든크로스 · 히스토 +948.53",
+        "3개월 수익률 -35.7% · 급락"
+      ],
+      "macro": [
+        "NEUTRAL · VIX 14.2 · US10Y 4.68%",
+        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
+      ],
+      "filing": [
+        "* DART 실시간 공시 반영"
+      ],
+      "value": [
+        "PER 4.0 · 극심 저평가",
+        "FCF Yield 50.8% · 우수"
+      ]
+    }
+  },
+  {
+    "t": "000670.KS",
+    "n": "영풍",
+    "m": "KR",
+    "sec": "미분류",
+    "tech": 52,
+    "macro": 60,
+    "filing": 55,
+    "value": 58,
+    "total": 55,
+    "consensus": 0,
+    "signal": "HOLD",
+    "ev": -0.02,
+    "target": 0,
+    "hitl": false,
+    "reasons": {
+      "tech": [
+        "MACD 골든크로스 · 히스토 +753.31",
+        "3개월 수익률 -33.8% · 급락"
+      ],
+      "macro": [
+        "NEUTRAL · VIX 14.2 · US10Y 4.68%",
+        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
+      ],
+      "filing": [
+        "* DART 실시간 공시 반영"
+      ],
+      "value": [
+        "FCF Yield 40.7% · 우수"
+      ]
+    }
+  },
+  {
+    "t": "138930.KS",
+    "n": "BNK금융지주",
+    "m": "KR",
+    "sec": "미분류",
+    "tech": 17,
+    "macro": 60,
+    "filing": 55,
+    "value": 70,
+    "total": 45,
+    "consensus": 1,
+    "signal": "HOLD",
+    "ev": -0.44,
+    "target": -5,
+    "hitl": false,
+    "reasons": {
+      "tech": [
+        "단기 역배열 (P<15709.5<16691.9)",
+        "RSI 26 · 과매도",
+        "MACD 데드크로스 · 히스토 -5.07"
+      ],
+      "macro": [
+        "NEUTRAL · VIX 14.2 · US10Y 4.68%",
+        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
+      ],
+      "filing": [
+        "* DART 실시간 공시 반영"
+      ],
+      "value": [
+        "PER 5.0 · 극심 저평가"
+      ]
+    }
+  },
+  {
+    "t": "006260.KS",
+    "n": "LS",
+    "m": "KR",
+    "sec": "미분류",
+    "tech": 62,
+    "macro": 60,
+    "filing": 55,
+    "value": 52,
+    "total": 58,
+    "consensus": 0,
+    "signal": "HOLD",
+    "ev": 0.1,
+    "target": 1,
+    "hitl": false,
+    "reasons": {
+      "tech": [
+        "RSI 67 · 강세 지속 구간",
+        "MACD 골든크로스 · 히스토 +9003.41",
+        "3개월 수익률 -34.0% · 급락"
+      ],
+      "macro": [
+        "NEUTRAL · VIX 14.2 · US10Y 4.68%",
+        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
+      ],
+      "filing": [
+        "* DART 실시간 공시 반영"
+      ],
+      "value": [
+        "PER 15.7 · 저평가",
+        "FCF 음수 · 현금유출"
+      ]
+    }
+  },
+  {
+    "t": "008770.KS",
+    "n": "호텔신라",
+    "m": "KR",
+    "sec": "미분류",
+    "tech": 55,
+    "macro": 60,
+    "filing": 55,
+    "value": 68,
+    "total": 58,
+    "consensus": 0,
+    "signal": "HOLD",
+    "ev": 0.06,
+    "target": 1,
+    "hitl": false,
+    "reasons": {
+      "tech": [
+        "RSI 44 · 중립",
+        "MACD 골든크로스 · 히스토 +457.06",
+        "3개월 수익률 -25.0% · 급락"
+      ],
+      "macro": [
+        "NEUTRAL · VIX 14.2 · US10Y 4.68%",
+        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
+      ],
+      "filing": [
+        "* DART 실시간 공시 반영"
+      ],
+      "value": [
+        "PER 12.3 · 저평가",
+        "FCF Yield 10.2% · 우수"
+      ]
+    }
+  },
+  {
+    "t": "009830.KS",
+    "n": "한화솔루션",
+    "m": "KR",
+    "sec": "미분류",
+    "tech": 55,
+    "macro": 60,
+    "filing": 55,
+    "value": 70,
+    "total": 58,
+    "consensus": 1,
+    "signal": "HOLD",
+    "ev": 0.06,
+    "target": 1,
+    "hitl": false,
+    "reasons": {
+      "tech": [
+        "RSI 81 · 과매수 경계",
+        "MACD 골든크로스 · 히스토 +1212.66",
+        "거래량 급증 · 최근 20일 평균 1.9배",
+        "3개월 수익률 -18.0% · 급락"
+      ],
+      "macro": [
+        "NEUTRAL · VIX 14.2 · US10Y 4.68%",
+        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
+      ],
+      "filing": [
+        "* DART 실시간 공시 반영"
+      ],
+      "value": [
+        "PER 10.6 · 극심 저평가"
+      ]
+    }
+  },
+  {
+    "t": "139130.KS",
+    "n": "DGB금융지주",
+    "m": "KR",
+    "sec": "미분류",
+    "tech": 28,
+    "macro": 60,
+    "filing": 55,
+    "value": 70,
+    "total": 49,
+    "consensus": 1,
+    "signal": "HOLD",
+    "ev": -0.17,
+    "target": -2,
+    "hitl": false,
+    "reasons": {
+      "tech": [
+        "단기 역배열 (P<17281.0<17354.4)",
+        "RSI 54 · 중립",
+        "MACD 데드크로스 · 히스토 -0.71"
+      ],
+      "macro": [
+        "NEUTRAL · VIX 14.2 · US10Y 4.68%",
+        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
+      ],
+      "filing": [
+        "* DART 실시간 공시 반영"
+      ],
+      "value": [
+        "PER 5.1 · 극심 저평가"
+      ]
+    }
+  },
+  {
+    "t": "011780.KS",
+    "n": "금호석유",
+    "m": "KR",
+    "sec": "미분류",
+    "tech": 80,
+    "macro": 60,
+    "filing": 55,
+    "value": 86,
+    "total": 69,
+    "consensus": 2,
+    "signal": "WATCH",
+    "ev": 0.52,
+    "target": 6,
+    "hitl": false,
+    "reasons": {
+      "tech": [
+        "단기 정배열 (P>121310.0>120392.0)",
+        "RSI 64 · 강세 지속 구간",
+        "MACD 골든크로스 · 히스토 +1329.61"
+      ],
+      "macro": [
+        "NEUTRAL · VIX 14.2 · US10Y 4.68%",
+        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
+      ],
+      "filing": [
+        "* DART 실시간 공시 반영"
+      ],
+      "value": [
+        "PER 7.4 · 극심 저평가",
+        "PEG 0.43 · 성장률 대비 저평가",
+        "FCF Yield 13.5% · 우수"
+      ]
+    }
+  },
+  {
+    "t": "079160.KS",
+    "n": "CJ CGV",
+    "m": "KR",
+    "sec": "미분류",
+    "tech": 70,
+    "macro": 60,
+    "filing": 55,
+    "value": 66,
+    "total": 63,
+    "consensus": 1,
+    "signal": "HOLD",
+    "ev": 0.54,
+    "target": 6,
+    "hitl": false,
+    "reasons": {
+      "tech": [
+        "단기 정배열 (P>5135.8>4731.3)",
+        "RSI 58 · 강세 지속 구간",
+        "MACD 데드크로스 · 히스토 -3.33",
+        "거래량 급증 · 최근 20일 평균 1.5배",
+        "3개월 수익률 +6.4%"
+      ],
+      "macro": [
+        "NEUTRAL · VIX 14.2 · US10Y 4.68%",
+        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
+      ],
+      "filing": [
+        "* DART 실시간 공시 반영"
+      ],
+      "value": [
+        "Forward PER -24.3 · 이익 성장 반영",
+        "FCF Yield 16.9% · 우수"
+      ]
+    }
+  },
+  {
+    "t": "033780.KS",
+    "n": "KT&G",
+    "m": "KR",
+    "sec": "미분류",
+    "tech": 43,
+    "macro": 60,
+    "filing": 55,
+    "value": 55,
+    "total": 52,
+    "consensus": 0,
+    "signal": "HOLD",
+    "ev": 0.02,
+    "target": 0,
+    "hitl": false,
+    "reasons": {
+      "tech": [
+        "RSI 43 · 중립",
+        "MACD 데드크로스 · 히스토 -809.07"
+      ],
+      "macro": [
+        "NEUTRAL · VIX 14.2 · US10Y 4.68%",
+        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
+      ],
+      "filing": [
+        "* DART 실시간 공시 반영"
+      ],
+      "value": [
+        "PER 12.6 · 저평가",
+        "PEG 3.72 · 성장률 대비 부담"
+      ]
+    }
+  },
+  {
+    "t": "005810.KS",
+    "n": "풍산",
+    "m": "KR",
+    "sec": "미분류",
+    "tech": 75,
+    "macro": 60,
+    "filing": 63,
+    "value": 78,
+    "total": 69,
+    "consensus": 2,
+    "signal": "WATCH",
+    "ev": 0.55,
+    "target": 7,
+    "hitl": false,
+    "reasons": {
+      "tech": [
+        "단기 정배열 (P>35740.0>35469.0)",
+        "RSI 66 · 강세 지속 구간",
+        "MACD 골든크로스 · 히스토 +423.27",
+        "거래량 감소 · 0.6배"
+      ],
+      "macro": [
+        "NEUTRAL · VIX 14.2 · US10Y 4.68%",
+        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
+      ],
+      "filing": [
+        "자기주식 취득 결정 1건 (오버행 해소)",
+        "* DART 실시간 공시 반영"
+      ],
+      "value": [
+        "PER 4.4 · 극심 저평가",
+        "FCF Yield 10.4% · 우수"
+      ]
+    }
+  },
+  {
+    "t": "002960.KS",
+    "n": "한국쉘석유",
+    "m": "KR",
+    "sec": "미분류",
+    "tech": 60,
+    "macro": 60,
+    "filing": 55,
+    "value": 58,
+    "total": 58,
+    "consensus": 0,
+    "signal": "HOLD",
+    "ev": 0.26,
+    "target": 3,
+    "hitl": false,
+    "reasons": {
+      "tech": [
+        "RSI 51 · 중립",
+        "MACD 골든크로스 · 히스토 +337.60",
+        "거래량 감소 · 0.5배"
+      ],
+      "macro": [
+        "NEUTRAL · VIX 14.2 · US10Y 4.68%",
+        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
+      ],
+      "filing": [
+        "기관 보유 7% · 낮음",
+        "내부자 보유 53.8%",
+        "* DART 최근 공시 없음 · 프록시 보조"
+      ],
+      "value": [
+        "FCF Yield 5.4% · 우수"
+      ]
+    }
+  },
+  {
+    "t": "000120.KS",
+    "n": "CJ대한통운",
+    "m": "KR",
+    "sec": "미분류",
+    "tech": 40,
+    "macro": 60,
+    "filing": 55,
+    "value": 78,
+    "total": 54,
+    "consensus": 1,
+    "signal": "HOLD",
+    "ev": -0.12,
+    "target": -1,
+    "hitl": false,
+    "reasons": {
+      "tech": [
+        "단기 역배열 (P<75215.0<76170.0)",
+        "RSI 54 · 중립",
+        "MACD 골든크로스 · 히스토 +184.56",
+        "3개월 수익률 -16.1% · 급락"
+      ],
+      "macro": [
+        "NEUTRAL · VIX 14.2 · US10Y 4.68%",
+        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
+      ],
+      "filing": [
+        "* DART 실시간 공시 반영"
+      ],
+      "value": [
+        "PER 6.2 · 극심 저평가",
+        "FCF Yield 21.3% · 우수"
+      ]
+    }
+  },
+  {
+    "t": "120110.KS",
+    "n": "코오롱인더",
+    "m": "KR",
+    "sec": "미분류",
+    "tech": 57,
+    "macro": 60,
+    "filing": 55,
+    "value": 78,
+    "total": 60,
+    "consensus": 1,
+    "signal": "HOLD",
+    "ev": 0.12,
+    "target": 1,
+    "hitl": false,
+    "reasons": {
+      "tech": [
+        "RSI 66 · 강세 지속 구간",
+        "MACD 골든크로스 · 히스토 +1008.62",
+        "거래량 감소 · 0.6배",
+        "3개월 수익률 -26.9% · 급락"
+      ],
+      "macro": [
+        "NEUTRAL · VIX 14.2 · US10Y 4.68%",
+        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
+      ],
+      "filing": [
+        "* DART 실시간 공시 반영"
+      ],
+      "value": [
+        "PER 7.9 · 극심 저평가",
+        "FCF Yield 14.1% · 우수"
+      ]
+    }
+  },
+  {
+    "t": "069620.KS",
+    "n": "대웅제약",
+    "m": "KR",
+    "sec": "미분류",
+    "tech": 43,
+    "macro": 60,
+    "filing": 55,
+    "value": 62,
+    "total": 53,
+    "consensus": 0,
+    "signal": "HOLD",
+    "ev": -0.07,
+    "target": -1,
+    "hitl": false,
+    "reasons": {
+      "tech": [
+        "RSI 44 · 중립",
+        "MACD 데드크로스 · 히스토 -181.56"
+      ],
+      "macro": [
+        "NEUTRAL · VIX 14.2 · US10Y 4.68%",
+        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
+      ],
+      "filing": [
+        "* DART 실시간 공시 반영"
+      ],
+      "value": [
+        "PER 6.8 · 극심 저평가",
+        "FCF 음수 · 현금유출"
+      ]
+    }
+  },
+  {
+    "t": "185750.KS",
+    "n": "종근당",
+    "m": "KR",
+    "sec": "미분류",
+    "tech": 40,
+    "macro": 60,
+    "filing": 55,
+    "value": 78,
+    "total": 54,
+    "consensus": 1,
+    "signal": "HOLD",
+    "ev": -0.12,
+    "target": -1,
+    "hitl": false,
+    "reasons": {
+      "tech": [
+        "단기 역배열 (P<67970.0<68706.0)",
+        "RSI 50 · 중립",
+        "MACD 골든크로스 · 히스토 +147.80",
+        "3개월 수익률 -15.3% · 급락"
+      ],
+      "macro": [
+        "NEUTRAL · VIX 14.2 · US10Y 4.68%",
+        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
+      ],
+      "filing": [
+        "* DART 실시간 공시 반영"
+      ],
+      "value": [
+        "PER 11.3 · 극심 저평가",
+        "FCF Yield 8.7% · 우수"
+      ]
+    }
+  },
+  {
+    "t": "006840.KS",
+    "n": "AK홀딩스",
+    "m": "KR",
+    "sec": "미분류",
+    "tech": 65,
+    "macro": 60,
+    "filing": 55,
+    "value": 42,
+    "total": 58,
+    "consensus": 0,
+    "signal": "HOLD",
+    "ev": 0.19,
+    "target": 2,
+    "hitl": false,
+    "reasons": {
+      "tech": [
+        "단기 정배열 (P>6902.0>6378.2)",
+        "RSI 77 · 과매수 경계",
+        "MACD 골든크로스 · 히스토 +33.98"
+      ],
+      "macro": [
+        "NEUTRAL · VIX 14.2 · US10Y 4.68%",
+        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
+      ],
+      "filing": [
+        "* DART 실시간 공시 반영"
+      ],
+      "value": [
+        "FCF 음수 · 현금유출"
+      ]
+    }
+  },
+  {
+    "t": "008930.KS",
+    "n": "한미사이언스",
+    "m": "KR",
+    "sec": "미분류",
+    "tech": 81,
+    "macro": 60,
+    "filing": 55,
+    "value": 50,
+    "total": 64,
+    "consensus": 1,
+    "signal": "HOLD",
+    "ev": 0.76,
+    "target": 9,
+    "hitl": false,
+    "reasons": {
+      "tech": [
+        "단기 정배열 (P>39022.5>33933.0)",
+        "RSI 77 · 과매수 경계",
+        "MACD 골든크로스 · 히스토 +380.24",
+        "거래량 급증 · 최근 20일 평균 1.4배",
+        "3개월 수익률 +26.8% · 강한 상승"
+      ],
+      "macro": [
+        "NEUTRAL · VIX 14.2 · US10Y 4.68%",
+        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
+      ],
+      "filing": [
+        "* DART 실시간 공시 반영"
+      ],
+      "value": [
+        "밸류 데이터 미확인"
+      ]
+    }
+  },
+  {
+    "t": "002790.KS",
+    "n": "아모레G",
+    "m": "KR",
+    "sec": "미분류",
+    "tech": 50,
+    "macro": 60,
+    "filing": 55,
+    "value": 78,
+    "total": 58,
+    "consensus": 1,
+    "signal": "HOLD",
+    "ev": 0.26,
+    "target": 3,
+    "hitl": false,
+    "reasons": {
+      "tech": [
+        "RSI 57 · 강세 지속 구간",
+        "MACD 데드크로스 · 히스토 -61.81"
+      ],
+      "macro": [
+        "NEUTRAL · VIX 14.2 · US10Y 4.68%",
+        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
+      ],
+      "filing": [
+        "* DART 실시간 공시 반영"
+      ],
+      "value": [
+        "PER 6.0 · 극심 저평가",
+        "FCF Yield 21.3% · 우수"
+      ]
+    }
+  },
+  {
+    "t": "069260.KS",
+    "n": "휴켐스",
+    "m": "KR",
+    "sec": "미분류",
+    "tech": 57,
+    "macro": 60,
+    "filing": 55,
+    "value": 78,
+    "total": 60,
+    "consensus": 1,
+    "signal": "HOLD",
+    "ev": 0.21,
+    "target": 3,
+    "hitl": false,
+    "reasons": {
+      "tech": [
+        "MACD 골든크로스 · 히스토 +145.65",
+        "거래량 감소 · 0.4배"
+      ],
+      "macro": [
+        "NEUTRAL · VIX 14.2 · US10Y 4.68%",
+        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
+      ],
+      "filing": [
+        "* DART 실시간 공시 반영"
+      ],
+      "value": [
+        "PER 8.8 · 극심 저평가",
+        "FCF Yield 11.6% · 우수"
+      ]
+    }
+  },
+  {
+    "t": "000080.KS",
+    "n": "하이트진로",
+    "m": "KR",
+    "sec": "미분류",
+    "tech": 73,
+    "macro": 60,
+    "filing": 55,
+    "value": 70,
+    "total": 65,
+    "consensus": 2,
+    "signal": "WATCH",
+    "ev": 0.43,
+    "target": 5,
+    "hitl": false,
+    "reasons": {
+      "tech": [
+        "단기 정배열 (P>15335.0>15266.6)",
+        "RSI 53 · 중립",
+        "MACD 골든크로스 · 히스토 +35.03"
+      ],
+      "macro": [
+        "NEUTRAL · VIX 14.2 · US10Y 4.68%",
+        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
+      ],
+      "filing": [
+        "* DART 실시간 공시 반영"
+      ],
+      "value": [
+        "PER 9.9 · 극심 저평가"
+      ]
+    }
+  },
+  {
+    "t": "030200.KS",
+    "n": "KT",
+    "m": "KR",
+    "sec": "미분류",
+    "tech": 62,
+    "macro": 60,
+    "filing": 63,
+    "value": 65,
+    "total": 62,
+    "consensus": 0,
+    "signal": "HOLD",
+    "ev": 0.38,
+    "target": 5,
+    "hitl": false,
+    "reasons": {
+      "tech": [
+        "RSI 51 · 중립",
+        "MACD 골든크로스 · 히스토 +137.69",
+        "Bollinger 상단 접근 (90%)"
+      ],
+      "macro": [
+        "NEUTRAL · VIX 14.2 · US10Y 4.68%",
+        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
+      ],
+      "filing": [
+        "자기주식 취득 결정 1건 (오버행 해소)",
+        "* DART 실시간 공시 반영"
+      ],
+      "value": [
+        "PER 8.4 · 극심 저평가",
+        "PEG 4.32 · 성장률 대비 부담"
+      ]
+    }
+  },
+  {
+    "t": "012450.KS",
+    "n": "한화에어로스페이스",
+    "m": "KR",
+    "sec": "미분류",
+    "tech": 62,
+    "macro": 60,
+    "filing": 55,
+    "value": 42,
+    "total": 56,
+    "consensus": 0,
+    "signal": "HOLD",
+    "ev": 0.19,
+    "target": 2,
+    "hitl": false,
+    "reasons": {
+      "tech": [
+        "MACD 골든크로스 · 히스토 +28787.89"
+      ],
+      "macro": [
+        "NEUTRAL · VIX 14.2 · US10Y 4.68%",
+        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
+      ],
+      "filing": [
+        "* DART 실시간 공시 반영"
+      ],
+      "value": [
+        "PER 19.9 · 적정",
+        "FCF 음수 · 현금유출"
+      ]
+    }
+  },
+  {
+    "t": "047810.KS",
+    "n": "한국항공우주",
+    "m": "KR",
+    "sec": "미분류",
+    "tech": 65,
+    "macro": 60,
+    "filing": 55,
+    "value": 50,
+    "total": 59,
+    "consensus": 0,
+    "signal": "HOLD",
+    "ev": 0.18,
+    "target": 2,
+    "hitl": false,
+    "reasons": {
+      "tech": [
+        "RSI 50 · 중립",
+        "MACD 골든크로스 · 히스토 +1014.88"
+      ],
+      "macro": [
+        "NEUTRAL · VIX 14.2 · US10Y 4.68%",
+        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
+      ],
+      "filing": [
+        "* DART 실시간 공시 반영"
+      ],
+      "value": [
+        "PER 31.4 · 적정",
+        "PEG 0.47 · 성장률 대비 저평가",
+        "FCF 음수 · 현금유출"
+      ]
+    }
+  },
+  {
+    "t": "051910.KS",
+    "n": "LG화학",
+    "m": "KR",
+    "sec": "미분류",
+    "tech": 47,
+    "macro": 60,
+    "filing": 55,
+    "value": 52,
+    "total": 53,
+    "consensus": 0,
+    "signal": "HOLD",
+    "ev": -0.11,
+    "target": -1,
+    "hitl": false,
+    "reasons": {
+      "tech": [
+        "MACD 골든크로스 · 히스토 +4882.95",
+        "거래량 감소 · 0.5배",
+        "3개월 수익률 -25.2% · 급락"
+      ],
+      "macro": [
+        "NEUTRAL · VIX 14.2 · US10Y 4.68%",
+        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
+      ],
+      "filing": [
+        "* DART 실시간 공시 반영"
+      ],
+      "value": [
+        "PER 12.8 · 저평가",
+        "FCF 음수 · 현금유출"
+      ]
+    }
+  },
+  {
+    "t": "051900.KS",
+    "n": "LG생활건강",
+    "m": "KR",
+    "sec": "미분류",
+    "tech": 92,
+    "macro": 60,
+    "filing": 55,
+    "value": 45,
+    "total": 67,
+    "consensus": 1,
+    "signal": "HOLD",
+    "ev": 0.89,
+    "target": 11,
+    "hitl": false,
+    "reasons": {
+      "tech": [
+        "단기 정배열 (P>285199.6>256864.5)",
+        "RSI 67 · 강세 지속 구간",
+        "MACD 골든크로스 · 히스토 +226.60",
+        "거래량 급증 · 최근 20일 평균 1.8배",
+        "3개월 수익률 +16.0%"
+      ],
+      "macro": [
+        "NEUTRAL · VIX 14.2 · US10Y 4.68%",
+        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
+      ],
+      "filing": [
+        "* DART 실시간 공시 반영"
+      ],
+      "value": [
+        "PER 18.4 · 적정",
+        "PEG 4.44 · 성장률 대비 부담"
+      ]
+    }
+  },
+  {
+    "t": "066570.KS",
+    "n": "LG전자",
+    "m": "KR",
+    "sec": "미분류",
+    "tech": 49,
+    "macro": 60,
+    "filing": 55,
+    "value": 68,
+    "total": 56,
+    "consensus": 0,
+    "signal": "HOLD",
+    "ev": 0.18,
+    "target": 2,
+    "hitl": false,
+    "reasons": {
+      "tech": [
+        "RSI 77 · 과매수 경계",
+        "MACD 골든크로스 · 히스토 +7162.04",
+        "거래량 감소 · 0.4배",
+        "Bollinger 상단 접근 (99%)"
+      ],
+      "macro": [
+        "NEUTRAL · VIX 14.2 · US10Y 4.68%",
+        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
+      ],
+      "filing": [
+        "* DART 실시간 공시 반영"
+      ],
+      "value": [
+        "PER 13.4 · 저평가",
+        "FCF Yield 6.0% · 우수"
+      ]
+    }
+  },
+  {
+    "t": "003550.KS",
+    "n": "LG",
+    "m": "KR",
+    "sec": "미분류",
+    "tech": 49,
+    "macro": 60,
+    "filing": 55,
+    "value": 70,
+    "total": 56,
+    "consensus": 1,
+    "signal": "HOLD",
+    "ev": 0.19,
+    "target": 2,
+    "hitl": false,
+    "reasons": {
+      "tech": [
+        "RSI 78 · 과매수 경계",
+        "MACD 골든크로스 · 히스토 +2087.14",
+        "거래량 감소 · 0.4배",
+        "Bollinger 상단 접근 (92%)"
+      ],
+      "macro": [
+        "NEUTRAL · VIX 14.2 · US10Y 4.68%",
+        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
+      ],
+      "filing": [
+        "* DART 실시간 공시 반영"
+      ],
+      "value": [
+        "PER 11.1 · 극심 저평가"
+      ]
+    }
+  },
+  {
+    "t": "000150.KS",
+    "n": "두산",
+    "m": "KR",
+    "sec": "미분류",
+    "tech": 62,
+    "macro": 60,
+    "filing": 55,
+    "value": 50,
+    "total": 58,
+    "consensus": 0,
+    "signal": "HOLD",
+    "ev": 0.09,
+    "target": 1,
+    "hitl": false,
+    "reasons": {
+      "tech": [
+        "RSI 66 · 강세 지속 구간",
+        "MACD 골든크로스 · 히스토 +29033.40",
+        "3개월 수익률 -17.6% · 급락"
+      ],
+      "macro": [
+        "NEUTRAL · VIX 14.2 · US10Y 4.68%",
+        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
+      ],
+      "filing": [
+        "* DART 실시간 공시 반영"
+      ],
+      "value": [
+        "PER 29.1 · 적정"
+      ]
+    }
+  },
+  {
+    "t": "034020.KS",
+    "n": "두산에너빌리티",
+    "m": "KR",
+    "sec": "미분류",
+    "tech": 47,
+    "macro": 60,
+    "filing": 55,
+    "value": 35,
+    "total": 50,
+    "consensus": 0,
+    "signal": "HOLD",
+    "ev": -0.17,
+    "target": -2,
+    "hitl": false,
+    "reasons": {
+      "tech": [
+        "RSI 76 · 과매수 경계",
+        "MACD 골든크로스 · 히스토 +2148.96",
+        "3개월 수익률 -27.0% · 급락"
+      ],
+      "macro": [
+        "NEUTRAL · VIX 14.2 · US10Y 4.68%",
+        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
+      ],
+      "filing": [
+        "* DART 실시간 공시 반영"
+      ],
+      "value": [
+        "PER 78.6 · 극심 프리미엄"
+      ]
+    }
+  },
+  {
+    "t": "241560.KS",
+    "n": "두산밥캣",
+    "m": "KR",
+    "sec": "미분류",
+    "tech": 67,
+    "macro": 60,
+    "filing": 55,
+    "value": 70,
+    "total": 62,
+    "consensus": 1,
+    "signal": "HOLD",
+    "ev": 0.38,
+    "target": 5,
+    "hitl": false,
+    "reasons": {
+      "tech": [
+        "RSI 64 · 강세 지속 구간",
+        "MACD 골든크로스 · 히스토 +466.83",
+        "거래량 감소 · 0.5배"
+      ],
+      "macro": [
+        "NEUTRAL · VIX 14.2 · US10Y 4.68%",
+        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
+      ],
+      "filing": [
+        "* DART 실시간 공시 반영"
+      ],
+      "value": [
+        "PER 9.8 · 극심 저평가"
+      ]
+    }
+  },
+  {
+    "t": "035250.KS",
+    "n": "강원랜드",
+    "m": "KR",
+    "sec": "미분류",
+    "tech": 60,
+    "macro": 60,
+    "filing": 55,
+    "value": 70,
+    "total": 60,
+    "consensus": 1,
+    "signal": "HOLD",
+    "ev": 0.21,
+    "target": 3,
+    "hitl": false,
+    "reasons": {
+      "tech": [
+        "RSI 53 · 중립",
+        "MACD 골든크로스 · 히스토 +25.26",
+        "거래량 감소 · 0.6배"
+      ],
+      "macro": [
+        "NEUTRAL · VIX 14.2 · US10Y 4.68%",
+        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
+      ],
+      "filing": [
+        "* DART 실시간 공시 반영"
+      ],
+      "value": [
+        "PER 9.8 · 극심 저평가"
+      ]
+    }
+  },
+  {
+    "t": "114090.KS",
+    "n": "GKL",
+    "m": "KR",
+    "sec": "미분류",
+    "tech": 35,
+    "macro": 60,
+    "filing": 55,
+    "value": 86,
+    "total": 54,
+    "consensus": 1,
+    "signal": "HOLD",
+    "ev": -0.16,
+    "target": -2,
+    "hitl": false,
+    "reasons": {
+      "tech": [
+        "단기 역배열 (P<9384.0<10260.4)",
+        "RSI 50 · 중립",
+        "MACD 골든크로스 · 히스토 +62.45",
+        "거래량 감소 · 0.3배",
+        "3개월 수익률 -23.6% · 급락"
+      ],
+      "macro": [
+        "NEUTRAL · VIX 14.2 · US10Y 4.68%",
+        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
+      ],
+      "filing": [
+        "* DART 실시간 공시 반영"
+      ],
+      "value": [
+        "PER 9.2 · 극심 저평가",
+        "PEG 0.59 · 성장률 대비 저평가",
+        "FCF Yield 12.6% · 우수"
+      ]
+    }
+  },
+  {
+    "t": "020150.KS",
+    "n": "롯데에너지머티리얼즈",
+    "m": "KR",
+    "sec": "미분류",
+    "tech": 47,
+    "macro": 60,
+    "filing": 55,
+    "value": 27,
+    "total": 49,
+    "consensus": 0,
+    "signal": "HOLD",
+    "ev": -0.2,
+    "target": -2,
+    "hitl": false,
+    "reasons": {
+      "tech": [
+        "MACD 골든크로스 · 히스토 +1284.41",
+        "거래량 감소 · 0.5배",
+        "3개월 수익률 -43.6% · 급락"
+      ],
+      "macro": [
+        "NEUTRAL · VIX 14.2 · US10Y 4.68%",
+        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
+      ],
+      "filing": [
+        "* DART 실시간 공시 반영"
+      ],
+      "value": [
+        "PER 71.7 · 극심 프리미엄",
+        "FCF 음수 · 현금유출"
+      ]
+    }
+  },
+  {
+    "t": "004020.KS",
+    "n": "현대제철",
+    "m": "KR",
+    "sec": "미분류",
+    "tech": 57,
+    "macro": 60,
+    "filing": 55,
+    "value": 78,
+    "total": 60,
+    "consensus": 1,
+    "signal": "HOLD",
+    "ev": 0.12,
+    "target": 1,
+    "hitl": false,
+    "reasons": {
+      "tech": [
+        "RSI 67 · 강세 지속 구간",
+        "MACD 골든크로스 · 히스토 +539.45",
+        "거래량 감소 · 0.5배",
+        "3개월 수익률 -32.2% · 급락"
+      ],
+      "macro": [
+        "NEUTRAL · VIX 14.2 · US10Y 4.68%",
+        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
+      ],
+      "filing": [
+        "* DART 실시간 공시 반영"
+      ],
+      "value": [
+        "PER 11.7 · 극심 저평가",
+        "FCF Yield 7.6% · 우수"
+      ]
+    }
+  },
+  {
+    "t": "069960.KS",
+    "n": "현대백화점",
+    "m": "KR",
+    "sec": "미분류",
+    "tech": 17,
+    "macro": 60,
+    "filing": 55,
+    "value": 78,
+    "total": 46,
+    "consensus": 1,
+    "signal": "HOLD",
+    "ev": -0.36,
+    "target": -4,
+    "hitl": false,
+    "reasons": {
+      "tech": [
+        "단기 역배열 (P<116165.0<154036.0)",
+        "RSI 26 · 과매도",
+        "MACD 데드크로스 · 히스토 -65.70"
+      ],
+      "macro": [
+        "NEUTRAL · VIX 14.2 · US10Y 4.68%",
+        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
+      ],
+      "filing": [
+        "* DART 실시간 공시 반영"
+      ],
+      "value": [
+        "PER 6.3 · 극심 저평가",
+        "FCF Yield 23.8% · 우수"
+      ]
+    }
+  },
+  {
+    "t": "023530.KS",
+    "n": "롯데쇼핑",
+    "m": "KR",
+    "sec": "미분류",
+    "tech": 37,
+    "macro": 60,
+    "filing": 55,
+    "value": 70,
+    "total": 52,
+    "consensus": 1,
+    "signal": "HOLD",
+    "ev": -0.19,
+    "target": -2,
+    "hitl": false,
+    "reasons": {
+      "tech": [
+        "단기 역배열 (P<114255.0<148657.6)",
+        "MACD 골든크로스 · 히스토 +279.96",
+        "3개월 수익률 -34.7% · 급락"
+      ],
+      "macro": [
+        "NEUTRAL · VIX 14.2 · US10Y 4.68%",
+        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
+      ],
+      "filing": [
+        "* DART 실시간 공시 반영"
+      ],
+      "value": [
+        "PER 7.3 · 극심 저평가"
+      ]
+    }
+  },
+  {
+    "t": "012750.KS",
+    "n": "에스원",
+    "m": "KR",
+    "sec": "미분류",
+    "tech": 74,
+    "macro": 60,
+    "filing": 55,
+    "value": 68,
+    "total": 65,
+    "consensus": 1,
+    "signal": "HOLD",
+    "ev": 0.65,
+    "target": 8,
+    "hitl": false,
+    "reasons": {
+      "tech": [
+        "단기 정배열 (P>73925.0>73502.0)",
+        "MACD 골든크로스 · 히스토 +526.62",
+        "3개월 수익률 +9.4%"
+      ],
+      "macro": [
+        "NEUTRAL · VIX 14.2 · US10Y 4.68%",
+        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
+      ],
+      "filing": [
+        "* DART 실시간 공시 반영"
+      ],
+      "value": [
+        "PER 13.8 · 저평가",
+        "FCF Yield 5.2% · 우수"
+      ]
+    }
+  },
+  {
+    "t": "035150.KS",
+    "n": "백광산업",
+    "m": "KR",
+    "sec": "미분류",
+    "tech": 75,
+    "macro": 60,
+    "filing": 55,
+    "value": 58,
+    "total": 63,
+    "consensus": 1,
+    "signal": "HOLD",
+    "ev": 0.35,
+    "target": 4,
+    "hitl": false,
+    "reasons": {
+      "tech": [
+        "단기 정배열 (P>10095.0>10090.4)",
+        "RSI 62 · 강세 지속 구간",
+        "MACD 골든크로스 · 히스토 +57.82",
+        "거래량 감소 · 0.5배"
+      ],
+      "macro": [
+        "NEUTRAL · VIX 14.2 · US10Y 4.68%",
+        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
+      ],
+      "filing": [
+        "* DART 실시간 공시 반영"
+      ],
+      "value": [
+        "FCF Yield 6.8% · 우수"
+      ]
+    }
+  },
+  {
+    "t": "018670.KS",
+    "n": "삼성E&A",
+    "m": "KR",
+    "sec": "미분류",
+    "tech": 80,
+    "macro": 60,
+    "filing": 55,
+    "value": 62,
+    "total": 66,
+    "consensus": 1,
+    "signal": "HOLD",
+    "ev": 0.57,
+    "target": 7,
+    "hitl": false,
+    "reasons": {
+      "tech": [
+        "단기 정배열 (P>229375.7>220579.1)",
+        "RSI 58 · 강세 지속 구간",
+        "MACD 골든크로스 · 히스토 +2168.39"
+      ],
+      "macro": [
+        "NEUTRAL · VIX 14.2 · US10Y 4.68%",
+        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
+      ],
+      "filing": [
+        "* DART 실시간 공시 반영"
+      ],
+      "value": [
+        "PER 6.3 · 극심 저평가",
+        "FCF 음수 · 현금유출"
+      ]
+    }
+  },
+  {
+    "t": "003490.KS",
+    "n": "대한항공",
+    "m": "KR",
+    "sec": "미분류",
+    "tech": 50,
+    "macro": 60,
+    "filing": 55,
+    "value": 62,
+    "total": 55,
+    "consensus": 0,
+    "signal": "HOLD",
+    "ev": 0.17,
+    "target": 2,
+    "hitl": false,
+    "reasons": {
+      "tech": [
+        "단기 역배열 (P<26017.5<26793.0)",
+        "RSI 53 · 중립",
+        "MACD 골든크로스 · 히스토 +5.91"
+      ],
+      "macro": [
+        "NEUTRAL · VIX 14.2 · US10Y 4.68%",
+        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
+      ],
+      "filing": [
+        "* DART 실시간 공시 반영"
+      ],
+      "value": [
+        "PER 7.9 · 극심 저평가",
+        "FCF 음수 · 현금유출"
+      ]
+    }
+  },
+  {
+    "t": "020560.KS",
+    "n": "아시아나항공",
+    "m": "KR",
+    "sec": "미분류",
+    "tech": 45,
+    "macro": 60,
+    "filing": 55,
+    "value": 50,
+    "total": 52,
+    "consensus": 0,
+    "signal": "HOLD",
+    "ev": -0.03,
+    "target": 0,
+    "hitl": false,
+    "reasons": {
+      "tech": [
+        "단기 역배열 (P<7025.5<7188.6)",
+        "RSI 51 · 중립",
+        "MACD 골든크로스 · 히스토 +7.71",
+        "거래량 감소 · 0.4배"
+      ],
+      "macro": [
+        "NEUTRAL · VIX 14.2 · US10Y 4.68%",
+        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
+      ],
+      "filing": [
+        "* DART 실시간 공시 반영"
+      ],
+      "value": [
+        "밸류 데이터 미확인"
+      ]
+    }
+  },
+  {
+    "t": "047040.KS",
+    "n": "대우건설",
+    "m": "KR",
+    "sec": "미분류",
+    "tech": 47,
+    "macro": 60,
+    "filing": 55,
+    "value": 60,
+    "total": 54,
+    "consensus": 0,
+    "signal": "HOLD",
+    "ev": -0.08,
+    "target": -1,
+    "hitl": false,
+    "reasons": {
+      "tech": [
+        "MACD 골든크로스 · 히스토 +637.74",
+        "거래량 감소 · 0.4배",
+        "3개월 수익률 -38.9% · 급락"
+      ],
+      "macro": [
+        "NEUTRAL · VIX 14.2 · US10Y 4.68%",
+        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
+      ],
+      "filing": [
+        "* DART 실시간 공시 반영"
+      ],
+      "value": [
+        "PER 15.4 · 저평가"
+      ]
+    }
+  },
+  {
+    "t": "088980.KS",
+    "n": "맥쿼리인프라",
+    "m": "KR",
+    "sec": "미분류",
+    "tech": 28,
+    "macro": 60,
+    "filing": 55,
+    "value": 50,
+    "total": 46,
+    "consensus": 0,
+    "signal": "HOLD",
+    "ev": -0.34,
+    "target": -4,
+    "hitl": false,
+    "reasons": {
+      "tech": [
+        "단기 역배열 (P<9939.0<10146.8)",
+        "MACD 데드크로스 · 히스토 -34.01",
+        "Bollinger 하단 근접 · 반등 여지"
+      ],
+      "macro": [
+        "NEUTRAL · VIX 14.2 · US10Y 4.68%",
+        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
+      ],
+      "filing": [
+        "* DART 실시간 공시 반영"
+      ],
+      "value": [
+        "밸류 데이터 미확인"
+      ]
+    }
+  },
+  {
+    "t": "161390.KS",
+    "n": "한국타이어앤테크놀로지",
+    "m": "KR",
+    "sec": "미분류",
+    "tech": 69,
+    "macro": 60,
+    "filing": 55,
+    "value": 62,
+    "total": 62,
+    "consensus": 0,
+    "signal": "HOLD",
+    "ev": 0.58,
+    "target": 7,
+    "hitl": false,
+    "reasons": {
+      "tech": [
+        "RSI 54 · 중립",
+        "MACD 골든크로스 · 히스토 +77.80",
+        "3개월 수익률 +11.0%"
+      ],
+      "macro": [
+        "NEUTRAL · VIX 14.2 · US10Y 4.68%",
+        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
+      ],
+      "filing": [
+        "* DART 실시간 공시 반영"
+      ],
+      "value": [
+        "PER 5.4 · 극심 저평가",
+        "FCF 음수 · 현금유출"
+      ]
+    }
+  },
+  {
+    "t": "161890.KS",
+    "n": "한국콜마",
+    "m": "KR",
+    "sec": "미분류",
+    "tech": 88,
+    "macro": 60,
+    "filing": 55,
+    "value": 60,
+    "total": 68,
+    "consensus": 1,
+    "signal": "HOLD",
+    "ev": 0.89,
+    "target": 11,
+    "hitl": false,
+    "reasons": {
+      "tech": [
+        "이동평균 완벽 정배열 (P>107555.0>101210.0>80361.4)",
+        "RSI 76 · 과매수 경계",
+        "MACD 골든크로스 · 히스토 +3527.23",
+        "거래량 급증 · 최근 20일 평균 1.4배",
+        "3개월 수익률 +40.0% · 강한 상승"
+      ],
+      "macro": [
+        "NEUTRAL · VIX 14.2 · US10Y 4.68%",
+        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
+      ],
+      "filing": [
+        "* DART 실시간 공시 반영"
+      ],
+      "value": [
+        "PER 15.8 · 저평가"
       ]
     }
   }
