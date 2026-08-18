@@ -422,9 +422,8 @@
 
   <!-- Disclaimer -->
   <div class="disclaimer">
-    ⚠️ <strong>Disclaimer:</strong> 본 대시보드는 xlsx v5 문서의 11-에이전트 스코어링 로직을 데모 데이터로 시연한 것입니다.
-    실제 매매 전에는 반드시 Risk Manager, AI Auditor 검증과 HITL 승인 절차를 거쳐야 하며, 이 도구만으로 투자 결정을 내려서는 안됩니다.
-    데이터를 실시간으로 갱신하려면 yfinance + FMP + DART API 연동이 필요합니다.
+    ⚠️ <strong>Disclaimer:</strong> 본 대시보드의 데이터는 <strong>yfinance + FMP + DART + FRED API</strong>로 매일 KST 06:00에 자동 갱신되는 실시간 데이터입니다.
+    다만 xlsx v5 문서의 11-에이전트 스코어링 로직은 시연 수준이므로, 실제 매매 전에는 반드시 Risk Manager · AI Auditor 검증과 HITL 승인 절차를 거쳐야 하며, 이 도구만으로 투자 결정을 내려서는 안됩니다.
   </div>
 
   <div class="footer">
@@ -780,9 +779,16 @@ function resetFilters() {
   document.getElementById('searchInput').value = '';
   applyFilters();
 }
+const SIGNAL_RANK = { STRONG_BUY: 0, BUY: 1, WATCH: 2, HOLD: 3, AVOID: 4 };
 function sortAndRender() {
   const { key, dir } = currentSort;
   filteredStocks.sort((a,b) => {
+    if (key === 'signal') {
+      const va = SIGNAL_RANK[a.signal] ?? 99;
+      const vb = SIGNAL_RANK[b.signal] ?? 99;
+      // desc: STRONG_BUY 위 (강→약) · asc: AVOID 위 (약→강)
+      return dir==='desc' ? va - vb : vb - va;
+    }
     let va = a[key], vb = b[key];
     if (typeof va === 'string') { va = va.toLowerCase(); vb = vb.toLowerCase(); }
     return dir==='asc' ? (va>vb?1:-1) : (va<vb?1:-1);
