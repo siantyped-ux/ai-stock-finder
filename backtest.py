@@ -101,11 +101,14 @@ def run(pattern: str = "history/*.csv", params: er.Params = None,
                   if any(r["signal"] in ts.BUY_SIGNALS for r in rs)}
 
     trades, failed = [], []
+    newest_bar = None
     for ticker in sorted(candidates):
         bars = fetch_bars(ticker)
         if not bars:
             failed.append(ticker)
             continue
+        latest = max(bars)
+        newest_bar = latest if newest_bar is None else max(newest_bar, latest)
         rs = by_ticker[ticker]
         market = rs[0]["market"]
         prepared = [{"date": r["date"], "signal": r["signal"],
@@ -124,6 +127,11 @@ def run(pattern: str = "history/*.csv", params: er.Params = None,
         "backfill_rows": sum(1 for s in sources if s == "backfill"),
         "candidates": sorted(candidates),
         "failed": failed,
+        "newest_bar": newest_bar,
+        # 전환은 났지만 진입할 세션이 아직 없어 트레이드가 안 생긴 종목.
+        # 이 줄이 없으면 "후보 N 인데 트레이드 M" 이 결함처럼 보인다.
+        "never_entered": sorted(candidates - {t.ticker for t in trades}
+                                - set(failed)),
     }
 
 
@@ -148,6 +156,13 @@ def report(result: dict) -> None:
         print(f"  !! backfill 이 섞여 있다 (전체의 {back/(back+live)*100:.0f}%).")
     if result["failed"]:
         print(f"  시세 조회 실패: {', '.join(result['failed'])}")
+
+    traded = len(result["candidates"]) - len(result["never_entered"])         - len(result["failed"])
+    print(f"  BUY 후보 {len(result['candidates'])}종목 중 {traded}종목 진입")
+    if result["newest_bar"]:
+        print(f"  최신 봉 {result['newest_bar']} (아카이브 마지막 {dates[-1]})")
+    if result["never_entered"]:
+        print(f"  전환 후 세션이 없어 대기 중: {', '.join(result['never_entered'])}")
 
     print()
     print(f"[닫힌 트레이드] {s['closed']}건")
