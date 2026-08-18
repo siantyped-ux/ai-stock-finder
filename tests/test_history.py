@@ -1,6 +1,8 @@
 import csv
 from datetime import datetime, timedelta, timezone
 
+import pandas as pd
+
 import history
 
 
@@ -71,3 +73,52 @@ def test_write_snapshot_rejects_unknown_field(tmp_path):
 def test_kst_now_has_offset():
     now = history.kst_now()
     assert now.utcoffset() == timedelta(hours=9)
+
+
+def _hist_df(n=60):
+    """등차로 오르는 합성 일봉. high-low = 2.0 고정이라 ATR이 정확히 2.0이 된다."""
+    idx = pd.date_range("2026-06-01", periods=n, freq="D")
+    close = [100.0 + i for i in range(n)]
+    return pd.DataFrame(
+        {
+            "Open": close,
+            "High": [c + 1.0 for c in close],
+            "Low": [c - 1.0 for c in close],
+            "Close": close,
+            "Volume": [1000 + i for i in range(n)],
+        },
+        index=idx,
+    )
+
+
+def test_price_fields_basic():
+    df = _hist_df()
+    got = history.price_fields(df, {"marketCap": 123456})
+
+    assert got["bar_date"] == "2026-07-30"
+    assert got["close"] == 159.0
+    assert got["volume"] == 1059
+    assert got["market_cap"] == 123456
+    assert got["avg_vol20"] == round(sum(range(1040, 1060)) / 20, 2)
+
+
+def test_price_fields_atr_is_true_range_average():
+    df = _hist_df()
+    got = history.price_fields(df, {})
+    # high-low = 2.0, 전일종가 대비 갭 1.0 -> TR = max(2.0, 2.0, 0.0) = 2.0
+    assert got["atr14"] == 2.0
+
+
+def test_price_fields_short_history_returns_none_for_indicators():
+    df = _hist_df(n=5)
+    got = history.price_fields(df, {})
+
+    assert got["close"] == 104.0        # 종가는 있음
+    assert got["atr14"] is None         # 14봉 미만
+    assert got["avg_vol20"] is None     # 20봉 미만
+
+
+def test_price_fields_no_info():
+    df = _hist_df()
+    got = history.price_fields(df, None)
+    assert got["market_cap"] is None

@@ -8,6 +8,9 @@ from __future__ import annotations
 import csv
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
+from typing import Optional
+
+import numpy as np
 
 KST = timezone(timedelta(hours=9))
 
@@ -31,6 +34,44 @@ def kst_now() -> datetime:
     다른 값을 낸다. 항상 명시 변환한다.
     """
     return datetime.now(timezone.utc).astimezone(KST)
+
+
+def _atr(high, low, close, period: int = 14) -> Optional[float]:
+    """단순평균 ATR. 봉 수가 period+1 미만이면 None."""
+    if len(close) < period + 1:
+        return None
+    prev_close = close[:-1]
+    tr = np.maximum.reduce([
+        high[1:] - low[1:],
+        np.abs(high[1:] - prev_close),
+        np.abs(low[1:] - prev_close),
+    ])
+    return round(float(np.mean(tr[-period:])), 4)
+
+
+def price_fields(hist_df, info: Optional[dict] = None) -> dict:
+    """이력 행의 가격 관련 필드를 산출한다.
+
+    스캔이 이미 받아온 데이터에서 뽑으므로 API 호출이 늘지 않는다.
+    산출 불가한 값은 None으로 두고 호출자가 그대로 넘긴다.
+    """
+    info = info or {}
+    close = hist_df["Close"].values.astype(float)
+    high = hist_df["High"].values.astype(float)
+    low = hist_df["Low"].values.astype(float)
+    volume = hist_df["Volume"].values.astype(float)
+
+    last_index = hist_df.index[-1]
+    avg_vol20 = round(float(np.mean(volume[-20:])), 2) if len(volume) >= 20 else None
+
+    return {
+        "bar_date": f"{last_index:%Y-%m-%d}",
+        "close": round(float(close[-1]), 4),
+        "volume": int(volume[-1]),
+        "avg_vol20": avg_vol20,
+        "atr14": _atr(high, low, close),
+        "market_cap": info.get("marketCap"),
+    }
 
 
 def write_snapshot(rows: list[dict], scan_ts: datetime, out_dir="history") -> Path:
