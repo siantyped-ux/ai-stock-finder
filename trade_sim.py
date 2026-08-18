@@ -49,3 +49,62 @@ def cost_r(entry_price: float, r_unit: float, market: str,
 
     pct += costs.slippage_pct * 2
     return (entry_price * pct / 100.0) / r_unit
+
+
+BUY_SIGNALS = ("BUY", "STRONG_BUY")
+
+
+@dataclass(frozen=True)
+class Trade:
+    ticker: str
+    market: str
+    source: str
+    entry_date: str
+    entry_price: float
+    r_unit: float
+    exit_date: Optional[str]
+    exit_price: Optional[float]
+    exit_reason: Optional[str]
+    bars_held: int
+    is_open: bool
+    gross_r: float
+    cost_r: float
+    net_r: float
+
+
+@dataclass(frozen=True)
+class EntryState:
+    """진입 판정에 필요한 상태. 봉 유무와 무관하게 날짜마다 갱신한다."""
+    was_buy: bool = False
+    pending: bool = False
+
+
+@dataclass(frozen=True)
+class EntryStep:
+    state: EntryState
+    should_enter: bool
+
+
+def step_entry(state: EntryState, signal: str) -> EntryStep:
+    """아카이브 하루치를 소화해 진입 대기 여부를 갱신한다.
+
+    BUY 로 전환되는 순간에만 pending 이 선다. 봉이 없는 날(주말·휴장)에도
+    호출해야 한다 - 그러지 않으면 토요일에 전환된 종목이 월요일에는 이미
+    전환이 아니어서 영영 진입하지 못한다.
+    """
+    is_buy = signal in BUY_SIGNALS
+
+    if not is_buy:
+        pending = False
+    elif not state.was_buy:
+        pending = True           # 전환
+    else:
+        pending = state.pending  # 계속 BUY - 기존 pending 유지
+
+    return EntryStep(EntryState(was_buy=is_buy, pending=pending),
+                     should_enter=pending)
+
+
+def consume(state: EntryState) -> EntryState:
+    """진입이 일어났으니 대기를 해제한다."""
+    return replace(state, pending=False)

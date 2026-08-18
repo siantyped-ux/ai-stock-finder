@@ -38,3 +38,56 @@ def test_bigger_r_absorbs_cost():
 def test_unknown_market_is_rejected():
     with pytest.raises(ValueError):
         ts.cost_r(100.0, 6.0, "JP", C)
+
+
+def test_entry_fires_only_on_transition_into_buy():
+    # 연속 BUY 에서는 첫날만 진입 신호다. 상태를 이어받아야 한다 -
+    # 매번 초기 상태로 호출하면 매일 전환으로 보인다.
+    st = ts.EntryState()
+    got = []
+    for sig in ("HOLD", "BUY", "BUY", "BUY"):
+        step = ts.step_entry(st, sig)
+        got.append(step.should_enter)
+        st = ts.consume(step.state) if step.should_enter else step.state
+    assert got == [False, True, False, False]
+
+
+def test_pending_survives_a_day_without_a_bar():
+    # 토요일에 전환됐지만 세션이 없으면, 다음 세션까지 pending 이 유지된다.
+    st = ts.EntryState()
+    r1 = ts.step_entry(st, "BUY")            # 토요일 전환
+    assert r1.should_enter is True
+    r2 = ts.step_entry(r1.state, "BUY")      # 봉 없어 진입 못 함
+    assert r2.should_enter is True
+
+
+def test_pending_clears_when_the_signal_leaves_buy():
+    st = ts.EntryState()
+    r1 = ts.step_entry(st, "BUY")
+    r2 = ts.step_entry(r1.state, "WATCH")
+    assert r2.should_enter is False
+
+
+def test_pending_clears_once_consumed():
+    st = ts.EntryState()
+    r1 = ts.step_entry(st, "BUY")
+    r2 = ts.step_entry(ts.consume(r1.state), "BUY")
+    assert r2.should_enter is False
+
+
+def test_strong_buy_counts_as_buy():
+    st = ts.EntryState()
+    got = ts.step_entry(st, "STRONG_BUY")
+    assert got.should_enter is True
+
+
+def test_reentry_needs_a_fresh_transition():
+    # BUY 를 벗어났다 돌아와야 다시 진입 신호가 난다.
+    st = ts.EntryState()
+    r = ts.step_entry(st, "BUY")
+    r = ts.step_entry(ts.consume(r.state), "BUY")
+    assert r.should_enter is False
+    r = ts.step_entry(r.state, "HOLD")
+    assert r.should_enter is False
+    r = ts.step_entry(r.state, "BUY")
+    assert r.should_enter is True
