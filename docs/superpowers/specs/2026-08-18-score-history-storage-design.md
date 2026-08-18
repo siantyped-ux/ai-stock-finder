@@ -5,7 +5,7 @@
 
 ## 배경
 
-`stock_finder.py`는 매일 KST 06:00에 1,100여 종목을 스코어링해 `dashboard_data.js`를 덮어쓴다.
+`stock_finder.py`는 매일 KST 07:00에 1,100여 종목을 스코어링해 `dashboard_data.js`를 덮어쓴다.
 결과가 매번 덮어써지므로 과거 시점의 스코어가 남지 않고, 따라서 이 스코어에 실제 투자 엣지가
 있는지 검증할 방법이 없다.
 
@@ -86,8 +86,8 @@ tech, macro, filing, value, total, consensus, signal, ev, target, hitl, source
 ### 날짜 기준: KST
 
 스캔 시각 관련 열(`scan_ts_kst`, `date`)과 파일명은 **모두 KST 기준**이다.
-스캔은 UTC 21:00에 실행되는데 이는 KST로 익일 06:00이므로, UTC를 쓰면 파일명이 하루
-앞선 날짜가 되어 사람이 읽을 때 계속 어긋난다. KST 기준이면 "KST 06:00에 돈 스캔"과
+스캔은 UTC 22:00에 실행되는데 이는 KST로 익일 07:00이므로, UTC를 쓰면 파일명이 하루
+앞선 날짜가 되어 사람이 읽을 때 계속 어긋난다. KST 기준이면 "KST 07:00에 돈 스캔"과
 "그날짜 CSV"가 직관적으로 일치한다.
 
 `scan_ts_kst`는 같은 KST 날짜에 여러 번 실행된 경우를 구분한다.
