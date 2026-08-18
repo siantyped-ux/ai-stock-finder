@@ -130,3 +130,56 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v5
+
+  # 스캔이 실패하면 그날 스코어는 영구히 사라진다. 시점 데이터라 나중에
+  # 재계산할 수 없고, 소급 적재도 dashboard_data.js 스냅샷이 있어야 하는데
+  # 스캔이 안 돌면 그 스냅샷 자체가 없다. 조용히 넘어가지 않도록 이슈를 연다.
+  notify-failure:
+    needs: scan
+    if: always() && needs.scan.result == 'failure'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      issues: write
+
+    steps:
+      - name: Open an issue for the lost day
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REPO: ${{ github.repository }}
+          RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+        run: |
+          # KST 는 서머타임이 없어 UTC+9 고정
+          KST_DATE=$(date -u -d '+9 hours' +'%Y-%m-%d')
+          TITLE="스캔 실패 ${KST_DATE} (KST) - 그날 스코어 유실"
+
+          # 같은 날 재실행으로 이슈가 중복되지 않게 한다
+          EXISTING=$(gh issue list --repo "$REPO" --state open \
+            --search "\"$TITLE\" in:title" --json number --jq 'length')
+          if [ "$EXISTING" != "0" ]; then
+            echo "이미 열린 이슈가 있다. 건너뛴다."
+            exit 0
+          fi
+
+          gh issue create --repo "$REPO" --title "$TITLE" --body "$(cat <<EOB
+          ${KST_DATE} (KST) 자동 스캔이 실패했습니다.
+
+          **이 날짜의 스코어는 복원할 수 없습니다.** 스코어는 시점 데이터라
+          나중에 다시 계산할 수 없고, 소급 적재는 \`dashboard_data.js\` 커밋
+          스냅샷에서 복원하는 방식인데 스캔이 실패하면 그 스냅샷도 없습니다.
+
+          실행 로그: ${RUN_URL}
+
+          ## 확인할 것
+
+          - **수집률 미달** — 로그에 \`수집률 ... 기준\` 이 있으면 완결성 가드가
+            부분 데이터를 막은 것입니다. yfinance rate limit(429)이 흔한 원인이며,
+            \`--workers\` 를 낮추면 완화됩니다.
+          - **API 키 만료** — FMP / DART / FRED 중 하나가 죽으면 스캔이 멈춥니다.
+          - **timeout** — 120분 상한에 걸렸는지 확인하세요.
+          - **push 실패** — rebase 재시도 3회를 모두 소진했는지 확인하세요.
+
+          복구되면 이 이슈를 닫아 주세요. 하루치 공백은 남지만, 며칠씩 조용히
+          비는 것을 막는 것이 이 알림의 목적입니다.
+          EOB
+          )"
