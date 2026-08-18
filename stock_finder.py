@@ -1221,18 +1221,33 @@ def fetch_macro() -> tuple[float, float, float]:
     return float(vix), float(dxy), float(us10y)
 
 
-def fetch_stock(ticker: str) -> Optional[dict]:
-    try:
-        t = yf.Ticker(ticker)
-        hist = t.history(period="1y", auto_adjust=True)
-        if hist.empty or len(hist) < 60:
-            print(f"[!] {ticker}: 히스토리 부족")
+def fetch_stock(ticker: str, retries: int = 4) -> Optional[dict]:
+    """yfinance 조회. 429(rate limit) 시 지수 백오프로 재시도.
+
+    병렬 스캔에서는 429가 필연적으로 발생하므로, 재시도 없이는 종목이
+    조용히 누락된다. 백오프로 흡수해 유니버스 완결성을 보장한다.
+    """
+    backoff = 5.0
+    for attempt in range(retries):
+        try:
+            t = yf.Ticker(ticker)
+            hist = t.history(period="1y", auto_adjust=True)
+            if hist.empty or len(hist) < 60:
+                print(f"[!] {ticker}: 히스토리 부족")
+                return None
+            info = t.info if hasattr(t, "info") else {}
+            return {"hist": hist, "info": info}
+        except Exception as e:
+            msg = str(e)
+            rate_limited = ("Too Many Requests" in msg or "Rate limited" in msg
+                            or "429" in msg)
+            if rate_limited and attempt < retries - 1:
+                time.sleep(backoff)
+                backoff *= 2.2
+                continue
+            print(f"[!] {ticker}: {msg[:70]}")
             return None
-        info = t.info if hasattr(t, "info") else {}
-        return {"hist": hist, "info": info}
-    except Exception as e:
-        print(f"[!] {ticker}: {e}")
-        return None
+    return None
 
 
 def _save_intermediate(results: list, vix: float, dxy: float, us10y: float,
@@ -1280,8 +1295,10 @@ def parse_args():
                    help="테스트 모드 (기존 34개 폴백 종목)")
     p.add_argument("--sleep", type=float, default=0.3,
                    help="종목간 대기 (초, 기본 0.3 · 워커 스레드별로 적용)")
-    p.add_argument("--workers", type=int, default=6,
-                   help="동시 조회 스레드 수 (기본 6, 1=순차 실행)")
+    p.add_argument("--workers", type=int, default=4,
+                   help="동시 조회 스레드 수 (기본 4, 1=순차 실행)")
+    p.add_argument("--min-success", type=float, default=0.90,
+                   help="최소 수집률 (기본 0.90 · 미달 시 저장 없이 실패)")
     p.add_argument("--all", action="store_true",
                    help="시총 필터 없이 진짜 모든 종목 (매우 오래 걸림)")
     return p.parse_args()
@@ -1448,6 +1465,15 @@ def main():
     results = [r for _, r in sorted(collected, key=lambda x: x[0])]
 
     print()  # 진행률 라인 개행
+
+    # 완결성 가드 - rate limit 등으로 대량 유실된 결과를 배포하지 않도록 차단
+    ok_rate = len(results) / total_n if total_n else 0
+    print(f"[*] 수집 {len(results)}/{total_n}종목 ({ok_rate*100:.1f}%)")
+    if ok_rate < args.min_success:
+        print(f"[!] 수집률 {ok_rate*100:.1f}% < 기준 {args.min_success*100:.0f}% · "
+              f"결과를 저장하지 않고 실패 처리합니다 (--workers 를 낮추세요)")
+        sys.exit(1)
+
 
     output_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "dashboard_data.js")
     fred_json = json.dumps(fred_data, ensure_ascii=False)

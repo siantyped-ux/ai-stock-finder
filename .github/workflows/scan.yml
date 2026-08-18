@@ -66,7 +66,7 @@ jobs:
             --min-us-cap ${{ github.event.inputs.min_us_cap || '1e10' }} \
             --min-kr-cap ${{ github.event.inputs.min_kr_cap || '3e11' }} \
             --sleep 0.2 \
-            --workers 6
+            --workers 4
 
       - name: Commit and push dashboard_data.js
         run: |
