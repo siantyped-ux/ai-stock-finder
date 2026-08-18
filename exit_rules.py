@@ -52,6 +52,7 @@ class Position:
     initial_stop: float
     r_unit: float
     high_since_entry: float
+    stop: float
     bars_held: int
 
 
@@ -83,6 +84,7 @@ def open_position(ticker: str, date: str, entry_price: float,
         initial_stop=initial_stop,
         r_unit=entry_price - initial_stop,
         high_since_entry=entry_price,
+        stop=initial_stop,
         bars_held=0,
     )
 
@@ -95,20 +97,20 @@ def current_stop(position: Position, params: Params,
     (Chandelier 표준) — 3개월간 변동성이 크게 바뀌므로 진입 시점 값에 묶어두면
     뒤로 갈수록 부정확해진다.
 
-    하한은 초기 손절선이다. 직전 손절선이 아니라는 점에 주의할 것 — 고점이
-    그대로인 채 ATR 이 확대되면 트레일 손절선은 전날보다 내려갈 수 있다
-    (실측: 고점 120, ATR 2.0 에서 114 였다가 ATR 4.0 에서 108). Position 이
-    직전 손절선을 저장하지 않아서다.
+    손절선은 한 방향으로만 움직이는 래칫이다. 하한은 초기 손절선이 아니라
+    Position 에 저장된 직전 손절선이다 — 고점이 그대로인 채 ATR 이 확대돼도
+    이미 확보한 손절선은 절대 후퇴하지 않는다. ATR 이 없거나 트레일링이 아직
+    켜지지 않았으면 저장된 손절선을 그대로 돌려준다.
     """
     if atr is None:
-        return position.initial_stop
+        return position.stop
 
     trail_active = position.high_since_entry >= position.entry_price + position.r_unit
     if not trail_active:
-        return position.initial_stop
+        return position.stop
 
     trailed = position.high_since_entry - params.trail_atr_mult * atr
-    return max(position.initial_stop, trailed)
+    return max(position.stop, trailed)
 
 
 def advance(position: Position, bar: Bar) -> Position:
@@ -116,10 +118,18 @@ def advance(position: Position, bar: Bar) -> Position:
 
     반드시 evaluate 다음에 호출할 것. 먼저 호출하면 오늘 고가로 계산한 손절선이
     오늘 장중에 체결되는 셈이 되어 룩어헤드가 된다.
+
+    고점을 먼저 갱신한 다음 그 새 고점으로 손절선을 다시 래칫한다 — 순서를
+    바꾸면 오늘 고가가 오늘 손절선에 반영되어 버린다. advance 는 params 를
+    받지 않으므로 트레일 배수는 Params 기본값(3.0)을 쓴다.
     """
+    new_high = max(position.high_since_entry, bar.high)
+    with_new_high = replace(position, high_since_entry=new_high)
+    new_stop = current_stop(with_new_high, Params(), bar.atr14)
     return replace(
         position,
-        high_since_entry=max(position.high_since_entry, bar.high),
+        high_since_entry=new_high,
+        stop=new_stop,
         bars_held=position.bars_held + 1,
     )
 

@@ -258,3 +258,59 @@ def test_time_does_not_fire_one_bar_before_the_cap():
                  atr14=2.0, total=75)
 
     assert er.evaluate(pos, bar, P) is None
+
+
+def test_stop_does_not_retreat_when_atr_widens():
+    # 확정된 리뷰 결함. 고점이 그대로인데 ATR 이 확대되면 손절선이 후퇴했었다.
+    pos = _pos()
+    up = er.Bar("2026-08-20", open=101.0, high=140.0, low=100.0, close=139.0,
+                atr14=2.0, total=75)
+    pos = er.advance(pos, up)
+    assert pos.stop == 134.0            # 140 - 3.0 * 2.0
+
+    calm = er.Bar("2026-08-21", open=139.0, high=140.0, low=138.0, close=139.0,
+                  atr14=10.0, total=75)
+    pos = er.advance(pos, calm)
+
+    assert pos.stop == 134.0            # 110 으로 내려가지 않는다
+
+
+def test_stop_holds_through_a_missing_atr_bar():
+    pos = _pos()
+    up = er.Bar("2026-08-20", open=101.0, high=140.0, low=100.0, close=139.0,
+                atr14=2.0, total=75)
+    pos = er.advance(pos, up)
+
+    gap = er.Bar("2026-08-21", open=139.0, high=139.5, low=138.0, close=139.0,
+                 atr14=None, total=75)
+    pos = er.advance(pos, gap)
+
+    assert pos.stop == 134.0            # 초기 손절 94 로 원복하지 않는다
+
+
+def test_current_stop_returns_the_stored_stop_when_atr_is_missing():
+    pos = _pos()
+    up = er.Bar("2026-08-20", open=101.0, high=140.0, low=100.0, close=139.0,
+                atr14=2.0, total=75)
+    pos = er.advance(pos, up)
+
+    assert er.current_stop(pos, P, atr=None) == 134.0
+
+
+def test_open_position_seeds_the_stop_at_the_initial_stop():
+    pos = _pos()
+    assert pos.stop == pos.initial_stop == 94.0
+
+
+def test_evaluate_uses_the_ratcheted_stop():
+    pos = _pos()
+    up = er.Bar("2026-08-20", open=101.0, high=140.0, low=100.0, close=139.0,
+                atr14=2.0, total=75)
+    pos = er.advance(pos, up)   # stop = 134
+
+    drop = er.Bar("2026-08-21", open=139.0, high=139.0, low=133.0, close=134.0,
+                  atr14=10.0, total=75)
+    got = er.evaluate(pos, drop, P)
+
+    assert got.reason == "TRAIL"
+    assert got.price == 134.0
