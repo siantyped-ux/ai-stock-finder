@@ -1385,6 +1385,7 @@ def main():
 
     results = []
     start_time = time.time()
+    scan_started_kst = history.kst_now()
     total_n = len(universe)
 
     n_workers = max(1, args.workers)
@@ -1495,6 +1496,13 @@ def main():
               f"결과를 저장하지 않고 실패 처리합니다 (--workers 를 낮추세요)")
         sys.exit(1)
 
+    # 이력 적재 - 가드를 통과한 결과만 기록한다
+    try:
+        hist_path = history.write_snapshot(history_rows, scan_started_kst)
+        print(f"[*] 이력 기록: {hist_path} ({len(history_rows)}행)")
+    except Exception as e:
+        print(f"[!] 이력 기록 실패: {e}")
+        sys.exit(1)
 
     output_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "dashboard_data.js")
     fred_json = json.dumps(fred_data, ensure_ascii=False)
