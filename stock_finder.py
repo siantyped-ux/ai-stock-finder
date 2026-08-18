@@ -1230,6 +1230,17 @@ def is_scan_complete(n_collected: int, n_total: int, min_rate: float) -> bool:
     return (n_collected / n_total) >= min_rate
 
 
+def drop_unsettled_bars(hist_df):
+    """종가가 NaN인 미확정 봉을 제거한다.
+
+    yfinance는 미국 종목에 대해 OHLC가 NaN이고 거래량만 채워진 마지막 봉을
+    붙여 보내는 경우가 잦다. 이 봉을 그대로 두면 calc_tech_score의 종가
+    배열이 오염돼 이동평균·MACD 판정이 통째로 무너지고(NVDA 실측 tech 72->45),
+    이력 CSV에는 종가 없이 거래량만 있는 행이 남는다.
+    """
+    return hist_df[hist_df["Close"].notna()]
+
+
 def fetch_stock(ticker: str, retries: int = 4) -> Optional[dict]:
     """yfinance 조회. 429(rate limit) 시 지수 백오프로 재시도.
 
@@ -1241,6 +1252,7 @@ def fetch_stock(ticker: str, retries: int = 4) -> Optional[dict]:
         try:
             t = yf.Ticker(ticker)
             hist = t.history(period="1y", auto_adjust=True)
+            hist = drop_unsettled_bars(hist)
             if hist.empty or len(hist) < 60:
                 print(f"[!] {ticker}: 히스토리 부족")
                 return None
@@ -1427,14 +1439,19 @@ def main():
                     "filing": filing_r, "value": value_r,
                 }
             }
-            hist_row = {
-                "ticker": ticker, "name": name, "market": market, "sector": sector,
-                "tech": tech, "macro": macro, "filing": filing, "value": value,
-                "total": total, "consensus": cons, "signal": signal,
-                "ev": ev, "target": target, "hitl": hitl,
-                "source": "live",
-                **history.price_fields(hist, info),
-            }
+            # 이력 행 생성 실패가 이미 완성된 대시보드 행을 버리지 않도록 격리한다
+            try:
+                hist_row = {
+                    "ticker": ticker, "name": name, "market": market, "sector": sector,
+                    "tech": tech, "macro": macro, "filing": filing, "value": value,
+                    "total": total, "consensus": cons, "signal": signal,
+                    "ev": ev, "target": target, "hitl": hitl,
+                    "source": "live",
+                    **history.price_fields(hist, info),
+                }
+            except Exception as e:
+                print(f"[!] {ticker}: 이력 행 생성 실패 {str(e)[:60]}")
+                hist_row = None
             return dash_row, hist_row
         except Exception as e:
             print(f"[!] {ticker}: 스코어링 실패 {str(e)[:60]}")
@@ -1460,7 +1477,8 @@ def main():
                 done = state["done"]
                 if res:
                     collected.append((i, res[0]))
-                    hist_rows.append((i, res[1]))
+                    if res[1] is not None:
+                        hist_rows.append((i, res[1]))
                 # 중간 저장 (200종목마다) - 크래시 방지
                 snapshot = None
                 if done % 200 == 0 and done < total_n:
@@ -1495,6 +1513,10 @@ def main():
         print(f"[!] 수집률 {ok_rate*100:.1f}% < 기준 {args.min_success*100:.0f}% · "
               f"결과를 저장하지 않고 실패 처리합니다 (--workers 를 낮추세요)")
         sys.exit(1)
+
+    if len(history_rows) != len(results):
+        print(f"[!] 이력 행 {len(history_rows)}개 < 스코어 {len(results)}개 · "
+              f"{len(results) - len(history_rows)}종목 가격 필드 산출 실패")
 
     # 이력 적재 - 가드를 통과한 결과만 기록한다
     try:
