@@ -1,3 +1,4 @@
+import inspect
 from dataclasses import replace
 
 import pytest
@@ -233,3 +234,18 @@ def test_todays_high_does_not_set_todays_stop():
     after = er.advance(pos, bar)
     assert after.high_since_entry == 120.0
     assert er.current_stop(after, P, atr=2.0) == 114.0
+
+
+def test_module_has_no_io_dependencies():
+    # 순환 의존과 숨은 I/O 를 막는다. 2단계 하네스가 어떤 출처의 가격이든
+    # 넘길 수 있어야 하고, 규칙 모듈이 스스로 데이터를 읽으면 그 계약이 깨진다.
+    src = inspect.getsource(er)
+    for banned in ("import history", "import stock_finder", "import yfinance",
+                   "import requests", "open(", "subprocess"):
+        assert banned not in src, f"exit_rules 가 {banned} 를 쓰면 안 된다"
+
+
+def test_params_has_exactly_four_fields():
+    # v5 설계서가 파라미터 5개 초과를 금지한다.
+    import dataclasses
+    assert len(dataclasses.fields(er.Params)) == 4
