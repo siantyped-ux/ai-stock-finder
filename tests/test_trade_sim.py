@@ -1,4 +1,5 @@
 import pytest
+import inspect
 
 import trade_sim as ts
 import exit_rules as er
@@ -281,3 +282,12 @@ def test_weekend_gap_then_a_one_day_dropout():
     assert mon.should_enter is False
     tue = ts.step_entry(mon.state, "BUY")
     assert tue.should_enter is True
+
+
+def test_module_has_no_io_dependencies():
+    # 하네스가 어떤 출처의 가격이든 넘길 수 있어야 하고, history/stock_finder 를
+    # 임포트하면 순환 의존이 생긴다.
+    src = inspect.getsource(ts)
+    for banned in ("import history", "import stock_finder", "import yfinance",
+                   "import requests", "open(", "subprocess", "csv"):
+        assert banned not in src, f"trade_sim 이 {banned} 를 쓰면 안 된다"
