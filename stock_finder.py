@@ -30,6 +30,8 @@ from concurrent.futures import ThreadPoolExecutor, as_completed
 from datetime import datetime, timedelta
 from typing import Optional
 
+import history
+
 # Windows 콘솔 UTF-8 강제 (cp949 인코딩 오류 방지)
 if sys.platform == "win32":
     try:
@@ -1391,6 +1393,7 @@ def main():
     state = {"done": 0}
     state_lock = threading.Lock()
     collected = []   # (universe 인덱스, 결과) — 마지막에 원래 순서로 정렬
+    hist_rows = []   # (universe 인덱스, 이력 행)
 
     def _scan_one(ticker: str, name: str, market: str, sector: str):
         """종목 1개 스코어링. 실패 시 None 반환. (워커 스레드에서 실행)"""
@@ -1413,7 +1416,7 @@ def main():
             hitl = calc_hitl(signal, total, tech)
             ev, target = calc_ev_and_target(tech, macro, filing, value, r3m)
 
-            return {
+            dash_row = {
                 "t": ticker, "n": name, "m": market, "sec": sector,
                 "tech": tech, "macro": macro, "filing": filing, "value": value,
                 "total": total, "consensus": cons, "signal": signal,
@@ -1423,6 +1426,15 @@ def main():
                     "filing": filing_r, "value": value_r,
                 }
             }
+            hist_row = {
+                "ticker": ticker, "name": name, "market": market, "sector": sector,
+                "tech": tech, "macro": macro, "filing": filing, "value": value,
+                "total": total, "consensus": cons, "signal": signal,
+                "ev": ev, "target": target, "hitl": hitl,
+                "source": "live",
+                **history.price_fields(hist, info),
+            }
+            return dash_row, hist_row
         except Exception as e:
             print(f"[!] {ticker}: 스코어링 실패 {str(e)[:60]}")
             return None
@@ -1446,7 +1458,8 @@ def main():
                 state["done"] += 1
                 done = state["done"]
                 if res:
-                    collected.append((i, res))
+                    collected.append((i, res[0]))
+                    hist_rows.append((i, res[1]))
                 # 중간 저장 (200종목마다) - 크래시 방지
                 snapshot = None
                 if done % 200 == 0 and done < total_n:
@@ -1470,6 +1483,7 @@ def main():
 
     # 스레드 완료 순서가 아니라 유니버스 원래 순서로 복원
     results = [r for _, r in sorted(collected, key=lambda x: x[0])]
+    history_rows = [r for _, r in sorted(hist_rows, key=lambda x: x[0])]
 
     print()  # 진행률 라인 개행
 
