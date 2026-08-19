@@ -263,3 +263,51 @@ def write_xlsx(path, built: dict) -> None:
     path = Path(path)
     path.parent.mkdir(parents=True, exist_ok=True)
     wb.save(path)
+
+
+def fetch_fx(start: str, end: str) -> dict:
+    """USDKRW=X 일봉 종가를 {YYYY-MM-DD: 환율} 로 받는다.
+
+    실패하면 예외를 올린다. 고정환율로 대체하면 조용히 틀린 금액이
+    리포에 커밋된다 - 리포트가 없는 편이 낫다.
+    """
+    df = yf.Ticker("USDKRW=X").history(start=start, end=end, auto_adjust=False)
+    if df is None or df.empty:
+        raise RuntimeError(f"USDKRW=X 환율 조회 실패 ({start} ~ {end})")
+
+    # NaN 종가는 버린다. fx_on 이 직전 영업일로 소급한다.
+    return {d.strftime("%Y-%m-%d"): float(c)
+            for d, c in zip(df.index, df["Close"]) if c == c}
+
+
+def main():
+    console.force_utf8()
+    p = argparse.ArgumentParser(description="가상매매 성과 누적 리포트")
+    p.add_argument("--history", default="history/*.csv")
+    p.add_argument("--out-dir", default="reports")
+    p.add_argument("--capital", type=int, default=CAPITAL_KRW)
+    args = p.parse_args()
+
+    result = backtest.run(args.history)
+    if not result["dates"]:
+        raise SystemExit("아카이브가 비어 있다")
+
+    # 첫 진입일이 환율 휴일이어도 소급할 값이 있도록 10일 앞에서 시작한다.
+    fx_start = (datetime.strptime(result["dates"][0], "%Y-%m-%d")
+                - timedelta(days=10)).strftime("%Y-%m-%d")
+    fx_end = (history.kst_now() + timedelta(days=1)).strftime("%Y-%m-%d")
+    fx = fetch_fx(fx_start, fx_end)
+
+    built = build_rows(result, fx, args.capital)
+    stamp = history.kst_now().strftime("%Y-%m-%d")
+    path = Path(args.out_dir) / f"perf_{stamp}.xlsx"
+    write_xlsx(path, built)
+
+    s = built["summary"]
+    print(f"{path} 작성 완료")
+    print(f"  청산완료 {s['closed_n']}건 · 누적 순수익 {s['net_krw']:+,.0f}원")
+    print(f"  미결 {s['open_n']}건 · 평가 순손익 {s['open_net_krw']:+,.0f}원")
+
+
+if __name__ == "__main__":
+    main()
