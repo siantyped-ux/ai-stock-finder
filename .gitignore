@@ -11,8 +11,9 @@ scan_log.txt
 
 # 원본 설계 문서 (비공개 유지)
 *.xlsx
-# 단 성과 리포트는 워크플로가 매영업일 커밋한다
-!reports/*.xlsx
+# 성과 리포트는 저장소가 public 이라 커밋하지 않는다.
+# 워크플로가 Actions artifact 로만 올린다 (report.yml 참조).
+reports/
 
 # Python
 __pycache__/

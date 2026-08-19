@@ -11,8 +11,9 @@ on:
     - cron: '0 1 * * 1-5'
   workflow_dispatch:
 
+# 리포트를 커밋하지 않으므로 쓰기 권한이 필요 없다.
 permissions:
-  contents: write
+  contents: read
 
 jobs:
   report:
@@ -22,9 +23,6 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v7
-        with:
-          # rebase가 필요하므로 shallow clone 대신 전체 히스토리를 가져옴
-          fetch-depth: 0
 
       - name: Setup Python 3.11
         uses: actions/setup-python@v6
@@ -36,27 +34,24 @@ jobs:
         run: pip install -r requirements.txt
 
       - name: Build the performance report
-        run: python perf_report.py
-
-      - name: Commit and push the report
+        id: build
         run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add reports/
-          if git diff --staged --quiet; then
-            echo "No report change to commit"
-          else
-            # KST 는 서머타임이 없어 UTC+9 고정. TZ=Asia/Seoul 은 tzdata 가 없는
-            # 환경에서 조용히 UTC 를 KST 라고 찍으므로 오프셋으로 계산한다.
-            git commit -m "Perf report: $(date -u -d '+9 hours' +'%Y-%m-%d KST')"
-            for i in 1 2 3; do
-              git pull --rebase origin main && git push && exit 0
-              echo "push retry $i"
-              sleep 5
-            done
-            echo "::error::Failed to push the report after 3 attempts"
-            exit 1
-          fi
+          python perf_report.py
+          # KST 는 서머타임이 없어 UTC+9 고정. TZ=Asia/Seoul 은 tzdata 가 없는
+          # 환경에서 조용히 UTC 를 KST 라고 찍으므로 오프셋으로 계산한다.
+          echo "kst_date=$(date -u -d '+9 hours' +'%Y-%m-%d')" >> "$GITHUB_OUTPUT"
+
+      # 저장소가 public 이라 리포트를 커밋하지 않는다. 손익 금액이 영구히
+      # 공개 이력에 남기 때문이다. 대신 artifact 로만 올린다 - 90일 뒤
+      # 만료되지만, 원천 데이터(history/*.csv)가 남아 있으므로 언제든
+      # `python perf_report.py` 로 같은 리포트를 다시 만들 수 있다.
+      - name: Upload the report as an artifact
+        uses: actions/upload-artifact@v7
+        with:
+          name: perf-report-${{ steps.build.outputs.kst_date }}
+          path: reports/*.xlsx
+          retention-days: 90
+          if-no-files-found: error
 
   # 리포트가 실패하면 그날 성과 스냅샷이 비는데, 스캔과 달리 원천 데이터는
   # 남아 있으므로 재실행으로 복구된다. 그래도 조용히 넘어가면 며칠씩 비는
@@ -105,6 +100,7 @@ jobs:
             첫 진입일보다 충분히 앞서지 않은 경우입니다.
           - **시세 조회 실패** — 요약 시트의 \`시세 조회 실패\` 항목을 보세요.
             일부 종목 실패는 리포트를 막지 않습니다.
-          - **push 실패** — rebase 재시도 3회를 모두 소진했는지 확인하세요.
+          - **artifact 업로드 실패** — \`if-no-files-found: error\` 이므로
+            \`reports/\` 가 비면 여기서 멈춥니다. 앞선 빌드 스텝의 로그를 보세요.
           EOB
           )"
