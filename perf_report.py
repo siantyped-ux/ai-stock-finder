@@ -48,3 +48,47 @@ def fx_on(fx: dict, date: str, market: str) -> float:
     if not earlier:
         raise ValueError(f"{date} 이전의 환율이 없다 (조회 범위를 늘려야 한다)")
     return fx[max(earlier)]
+
+
+def to_row(trade, fx_entry: float, fx_exit: float,
+           capital: int = CAPITAL_KRW, costs: ts.Costs = None) -> dict:
+    """트레이드 1건을 원화 손익 행으로 환산한다.
+
+    미결 포지션은 청산가 자리에 평가가격(mark_price)이 들어오고 매도비용도
+    똑같이 뺀다 - 지금 팔면 손에 남는 돈이 평가액이다.
+
+    두 퍼센트의 분모는 모두 투자원금이다. 순수익%의 분모에 매수비용을
+    더하면 두 컬럼을 나란히 비교할 수 없다.
+    """
+    costs = costs or ts.Costs()
+
+    entry_krw = trade.entry_price * fx_entry
+    # 0주면 손익이 0이라 트레이드가 조용히 사라진다. 1주로 올린다.
+    qty = max(1, int(capital // entry_krw))
+    principal = entry_krw * qty
+
+    exit_price = (trade.exit_price if trade.exit_price is not None
+                  else trade.mark_price)
+    gross = exit_price * fx_exit * qty - principal
+
+    buy_side, sell_side = ts.cost_amount(trade.entry_price, exit_price,
+                                         trade.market, costs)
+    cost = buy_side * fx_entry * qty + sell_side * fx_exit * qty
+    net = gross - cost
+
+    return {
+        "ticker": trade.ticker,
+        "entry_date": trade.entry_date,
+        "entry_price": trade.entry_price,
+        "exit_date": trade.exit_date,
+        "exit_price": exit_price,
+        "gross_krw": gross,
+        "gross_pct": gross / principal * 100.0,
+        "net_krw": net,
+        "net_pct": net / principal * 100.0,
+        "qty": qty,
+        "fx_entry": fx_entry,
+        "fx_exit": fx_exit,
+        "reason": trade.exit_reason,
+        "bars_held": trade.bars_held,
+    }

@@ -38,3 +38,63 @@ def test_fx_on_raises_when_nothing_earlier_exists():
 
 def test_fx_on_is_one_for_kr_tickers():
     assert pr.fx_on(FX, "2026-08-01", "KR") == 1.0
+
+
+def test_quantity_floors_to_whole_shares():
+    # 1,000만원 / (100 x 1300) = 76.9 -> 76주. 잔액은 미투자.
+    assert pr.to_row(_trade(), 1300.0, 1300.0)["qty"] == 76
+
+
+def test_quantity_is_at_least_one_share():
+    # 원화진입가가 정액보다 크면 0주가 되고 트레이드가 조용히 사라진다.
+    assert pr.to_row(_trade(entry_price=10000.0), 1300.0, 1300.0)["qty"] == 1
+
+
+def test_us_trade_converts_with_both_fx_rates():
+    # 원금 100x1300x76 = 9,880,000 / 회수 110x1350x76 = 11,286,000
+    # 매수비용 0.15x1300x76 = 14,820 / 매도비용 0.165x1350x76 = 16,929
+    row = pr.to_row(_trade(), 1300.0, 1350.0)
+
+    assert row["qty"] == 76
+    assert row["gross_krw"] == pytest.approx(1_406_000.0)
+    assert row["gross_pct"] == pytest.approx(14.2308, abs=1e-4)
+    assert row["net_krw"] == pytest.approx(1_374_251.0)
+    assert row["net_pct"] == pytest.approx(13.9094, abs=1e-4)
+
+
+def test_loss_stays_negative_and_costs_make_it_worse():
+    row = pr.to_row(_trade(exit_price=90.0, mark_price=90.0), 1300.0, 1300.0)
+
+    assert row["gross_krw"] < 0
+    assert row["net_krw"] < row["gross_krw"]
+
+
+def test_kr_trade_needs_no_fx():
+    # 1,000만원 / 50,000 = 200주. 원금 정확히 1,000만원.
+    row = pr.to_row(_trade(market="KR", entry_price=50000.0,
+                           exit_price=55000.0, mark_price=55000.0),
+                    1.0, 1.0)
+
+    assert row["qty"] == 200
+    assert row["gross_krw"] == pytest.approx(1_000_000.0)
+
+
+def test_krw_cost_agrees_with_cost_r():
+    # 환율 1.0, 1주면 원화 비용은 cost_r x r_unit 과 같아야 한다.
+    # 요율 분기가 두 곳에 복제되면 이 등식이 깨진다.
+    t = _trade(market="KR", entry_price=50000.0, exit_price=55000.0,
+               mark_price=55000.0, r_unit=3000.0)
+    row = pr.to_row(t, 1.0, 1.0, capital=50000)
+
+    assert row["qty"] == 1
+    expected = ts.cost_r(50000.0, 55000.0, 3000.0, "KR", ts.Costs()) * 3000.0
+    assert row["gross_krw"] - row["net_krw"] == pytest.approx(expected)
+
+
+def test_open_position_uses_the_mark_price_and_still_pays_the_sell_side():
+    t = _trade(is_open=True, exit_date=None, exit_price=None, mark_price=105.0)
+    row = pr.to_row(t, 1300.0, 1300.0)
+
+    assert row["exit_price"] == 105.0
+    # 매도비용을 빼지 않으면 net == gross 가 된다
+    assert row["net_krw"] < row["gross_krw"]
