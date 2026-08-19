@@ -13,6 +13,7 @@ from collections import defaultdict
 import numpy as np
 import yfinance as yf
 
+import console
 import exit_rules as er
 import trade_sim as ts
 
@@ -198,6 +199,7 @@ def report(result: dict) -> None:
 
 
 def main():
+    console.force_utf8()
     p = argparse.ArgumentParser(description="스코어 아카이브 백테스트")
     p.add_argument("--history", default="history/*.csv")
     p.add_argument("--stop-atr-mult", type=float, default=3.0)

@@ -16,6 +16,7 @@ from pathlib import Path
 
 import yfinance as yf
 
+import console
 import history
 from stock_finder import drop_unsettled_bars
 
@@ -133,6 +134,7 @@ def slice_to_date(df, bar_limit: str):
 
 
 def main():
+    console.force_utf8()
     p = argparse.ArgumentParser(description="스캔 스코어 이력 소급 적재")
     p.add_argument("--workers", type=int, default=4)
     p.add_argument("--out-dir", default="history")

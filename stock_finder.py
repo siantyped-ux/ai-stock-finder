@@ -30,15 +30,10 @@ from concurrent.futures import ThreadPoolExecutor, as_completed
 from datetime import datetime, timedelta
 from typing import Optional
 
+import console
 import history
 
-# Windows 콘솔 UTF-8 강제 (cp949 인코딩 오류 방지)
-if sys.platform == "win32":
-    try:
-        sys.stdout.reconfigure(encoding="utf-8")
-        sys.stderr.reconfigure(encoding="utf-8")
-    except Exception:
-        pass
+console.force_utf8()
 
 # yfinance 상장폐지 종목에 대한 반복 ERROR 로그 억제
 logging.getLogger("yfinance").setLevel(logging.CRITICAL)
