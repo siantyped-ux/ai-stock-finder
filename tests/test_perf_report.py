@@ -98,3 +98,66 @@ def test_open_position_uses_the_mark_price_and_still_pays_the_sell_side():
     assert row["exit_price"] == 105.0
     # 매도비용을 빼지 않으면 net == gross 가 된다
     assert row["net_krw"] < row["gross_krw"]
+
+
+def _result(trades, **kw):
+    base = dict(
+        trades=trades, dates=["2026-08-03", "2026-08-05"],
+        live_rows=10, backfill_rows=90, failed=[],
+        newest_bar="2026-08-05",
+    )
+    base.update(kw)
+    return base
+
+
+def test_open_positions_never_land_in_the_closed_sheet():
+    built = pr.build_rows(_result([
+        _trade(),
+        _trade(ticker="BBB", is_open=True, exit_date=None,
+               exit_price=None, mark_price=105.0),
+    ]), FX)
+
+    assert [r["ticker"] for r in built["closed"]] == ["AAA"]
+    assert [r["ticker"] for r in built["open"]] == ["BBB"]
+
+
+def test_open_position_is_marked_to_the_newest_bar_date():
+    built = pr.build_rows(_result([
+        _trade(is_open=True, exit_date=None, exit_price=None, mark_price=105.0),
+    ]), FX)
+
+    assert built["open"][0]["exit_date"] == "2026-08-05"
+
+
+def test_win_rate_ignores_open_positions():
+    # 닫힌 2건 중 1승. 미결은 큰 이익이지만 승률에 들어가면 안 된다 -
+    # "아직 손절되지 않았을 뿐" 인 포지션이다.
+    built = pr.build_rows(_result([
+        _trade(ticker="WIN"),
+        _trade(ticker="LOSS", exit_price=90.0, mark_price=90.0),
+        _trade(ticker="OPEN", is_open=True, exit_date=None,
+               exit_price=None, mark_price=200.0),
+    ]), FX)
+    s = built["summary"]
+
+    assert s["closed_n"] == 2
+    assert s["win_rate"] == pytest.approx(50.0)
+    assert s["open_n"] == 1
+
+
+def test_closed_rows_sort_by_exit_date_then_ticker():
+    built = pr.build_rows(_result([
+        _trade(ticker="ZZZ", exit_date="2026-08-05"),
+        _trade(ticker="AAA", exit_date="2026-08-05"),
+        _trade(ticker="MMM", exit_date="2026-08-03"),
+    ]), FX)
+
+    assert [r["ticker"] for r in built["closed"]] == ["MMM", "AAA", "ZZZ"]
+
+
+def test_summary_survives_zero_closed_trades():
+    s = pr.build_rows(_result([]), FX)["summary"]
+
+    assert s["closed_n"] == 0
+    assert s["win_rate"] is None
+    assert s["avg_net_pct"] is None

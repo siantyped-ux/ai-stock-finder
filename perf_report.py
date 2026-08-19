@@ -92,3 +92,57 @@ def to_row(trade, fx_entry: float, fx_exit: float,
         "reason": trade.exit_reason,
         "bars_held": trade.bars_held,
     }
+
+
+def build_rows(result: dict, fx: dict, capital: int = CAPITAL_KRW,
+               costs: ts.Costs = None) -> dict:
+    """청산완료·미결·요약 세 덩어리로 나눈다.
+
+    미결을 승률에 섞지 않는다. trade_sim.summarize 와 같은 원칙이다.
+    """
+    costs = costs or ts.Costs()
+    mark_date = result["newest_bar"]
+
+    closed, opened = [], []
+    for t in result["trades"]:
+        fx_entry = fx_on(fx, t.entry_date, t.market)
+        if t.is_open:
+            row = to_row(t, fx_entry, fx_on(fx, mark_date, t.market),
+                         capital, costs)
+            # 미결은 청산일이 없다. 평가 시점을 대신 넣는다.
+            row["exit_date"] = mark_date
+            opened.append(row)
+        else:
+            fx_exit = fx_on(fx, t.exit_date, t.market)
+            closed.append(to_row(t, fx_entry, fx_exit, capital, costs))
+
+    closed.sort(key=lambda r: (r["exit_date"], r["ticker"]))
+    opened.sort(key=lambda r: (r["entry_date"], r["ticker"]))
+
+    wins = sum(1 for r in closed if r["net_krw"] > 0)
+    total_rows = result["live_rows"] + result["backfill_rows"]
+    return {
+        "closed": closed,
+        "open": opened,
+        "summary": {
+            "generated": history.kst_now().strftime("%Y-%m-%d %H:%M KST"),
+            "archive_from": result["dates"][0],
+            "archive_to": result["dates"][-1],
+            "live_rows": result["live_rows"],
+            "backfill_rows": result["backfill_rows"],
+            "backfill_pct": (result["backfill_rows"] / total_rows * 100.0)
+                            if total_rows else 0.0,
+            "mark_date": mark_date,
+            "failed": result["failed"],
+            "closed_n": len(closed),
+            "win_rate": (wins / len(closed) * 100.0) if closed else None,
+            "gross_krw": sum(r["gross_krw"] for r in closed),
+            "net_krw": sum(r["net_krw"] for r in closed),
+            # 트레이드별 순수익률의 단순평균이다. 금액 가중이 아니다.
+            "avg_net_pct": (sum(r["net_pct"] for r in closed) / len(closed))
+                           if closed else None,
+            "open_n": len(opened),
+            "open_net_krw": sum(r["net_krw"] for r in opened),
+            "capital": capital,
+        },
+    }
