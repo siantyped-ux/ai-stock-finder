@@ -146,3 +146,120 @@ def build_rows(result: dict, fx: dict, capital: int = CAPITAL_KRW,
             "capital": capital,
         },
     }
+
+
+# (헤더, 행 키, 숫자서식). 앞 9개가 요청받은 컬럼이고, 뒤 4개는 검증용이다 -
+# 원화 손익은 가격 x 수량 x 환율의 곱이라 셋이 다 보여야 검산이 된다.
+CLOSED_COLS = [
+    ("상품티커", "ticker", None),
+    ("진입일자", "entry_date", None),
+    ("진입가격", "entry_price", PRICE_FMT),
+    ("청산일자", "exit_date", None),
+    ("청산가격", "exit_price", PRICE_FMT),
+    ("총수익(원)", "gross_krw", MONEY_FMT),
+    ("총수익(%)", "gross_pct", PCT_FMT),
+    ("순수익(원)", "net_krw", MONEY_FMT),
+    ("순수익(%)", "net_pct", PCT_FMT),
+    ("수량", "qty", QTY_FMT),
+    ("진입환율", "fx_entry", RATE_FMT),
+    ("청산환율", "fx_exit", RATE_FMT),
+    ("청산사유", "reason", None),
+]
+
+OPEN_COLS = [
+    ("상품티커", "ticker", None),
+    ("진입일자", "entry_date", None),
+    ("진입가격", "entry_price", PRICE_FMT),
+    ("평가기준일", "exit_date", None),
+    ("현재가", "exit_price", PRICE_FMT),
+    ("평가 총수익(원)", "gross_krw", MONEY_FMT),
+    ("평가 총수익(%)", "gross_pct", PCT_FMT),
+    ("평가 순수익(원)", "net_krw", MONEY_FMT),
+    ("평가 순수익(%)", "net_pct", PCT_FMT),
+    ("수량", "qty", QTY_FMT),
+    ("진입환율", "fx_entry", RATE_FMT),
+    ("평가환율", "fx_exit", RATE_FMT),
+    ("보유봉수", "bars_held", QTY_FMT),
+]
+
+
+def _write_sheet(ws, cols, rows) -> None:
+    """헤더 + 데이터 행 + 열별 숫자서식. 행이 없어도 헤더는 쓴다."""
+    ws.append([title for title, _key, _fmt in cols])
+    for cell in ws[1]:
+        cell.font = Font(bold=True)
+    ws.freeze_panes = "A2"
+
+    for row in rows:
+        ws.append([row[key] for _title, key, _fmt in cols])
+
+    for i, (title, _key, fmt) in enumerate(cols, start=1):
+        letter = get_column_letter(i)
+        if fmt:
+            for cell in ws[letter][1:]:
+                cell.number_format = fmt
+        ws.column_dimensions[letter].width = max(len(title) + 4, 12)
+
+
+def _write_summary(ws, s: dict) -> None:
+    """라벨-값 2열. 경고를 맨 위에 고정한다."""
+    lines = [
+        ("!! 경고", "이 리포트는 파이프라인 검증용이다. 시그널 성능의 근거가 아니다."),
+        ("", f"아카이브의 {s['backfill_pct']:.0f}% 가 backfill 이라 "
+             "스코어가 미확정 봉 결함에 오염돼 있다."),
+        ("", "보유 상한 60거래일을 채운 표본이 나오기 전까지 승률·평균은 무의미하다."),
+        ("", ""),
+        ("리포트 생성", s["generated"]),
+        ("아카이브 기간", f"{s['archive_from']} ~ {s['archive_to']}"),
+        ("live 행수", s["live_rows"]),
+        ("backfill 행수", s["backfill_rows"]),
+        ("평가기준일", s["mark_date"]),
+        ("시세 조회 실패", ", ".join(s["failed"]) if s["failed"] else "없음"),
+        ("", ""),
+        ("[청산완료]", ""),
+        ("건수", s["closed_n"]),
+        ("승률(%)", s["win_rate"]),
+        ("누적 총수익(원)", s["gross_krw"]),
+        ("누적 순수익(원)", s["net_krw"]),
+        ("평균 순수익률(%)", s["avg_net_pct"]),
+        ("", ""),
+        ("[미결포지션]", ""),
+        ("보유 건수", s["open_n"]),
+        ("평가 순손익(원)", s["open_net_krw"]),
+        ("", ""),
+        ("[가정]", ""),
+        ("종목당 투자금(원)", s["capital"]),
+        ("매수 수량", "정액 ÷ 원화진입가, 소수점 내림 (최소 1주)"),
+        ("비용", "미국 편도 0.10% · 한국 편도 0.02% + 거래세 0.15% · "
+                 "슬리피지 편도 0.05%"),
+        ("환율", "yfinance USDKRW=X 일봉 종가. 휴일은 직전 영업일로 소급"),
+        ("승률·평균", "청산완료만으로 계산한다. 미결은 제외"),
+    ]
+
+    for label, value in lines:
+        ws.append([label, value])
+
+    for row in ws.iter_rows(min_col=1, max_col=2):
+        label = row[0].value or ""
+        if label.endswith("(원)"):
+            row[1].number_format = MONEY_FMT
+        elif label.endswith("(%)"):
+            row[1].number_format = PCT_FMT
+
+    ws["A1"].font = Font(bold=True)
+    ws.column_dimensions["A"].width = 20
+    ws.column_dimensions["B"].width = 80
+
+
+def write_xlsx(path, built: dict) -> None:
+    """청산완료 / 미결포지션 / 요약 3시트를 쓴다."""
+    wb = Workbook()
+    closed_ws = wb.active
+    closed_ws.title = "청산완료"
+    _write_sheet(closed_ws, CLOSED_COLS, built["closed"])
+    _write_sheet(wb.create_sheet("미결포지션"), OPEN_COLS, built["open"])
+    _write_summary(wb.create_sheet("요약"), built["summary"])
+
+    path = Path(path)
+    path.parent.mkdir(parents=True, exist_ok=True)
+    wb.save(path)

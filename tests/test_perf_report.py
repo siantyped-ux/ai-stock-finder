@@ -161,3 +161,75 @@ def test_summary_survives_zero_closed_trades():
     assert s["closed_n"] == 0
     assert s["win_rate"] is None
     assert s["avg_net_pct"] is None
+
+
+def test_xlsx_has_three_sheets_with_the_requested_columns_first(tmp_path):
+    path = tmp_path / "r.xlsx"
+    pr.write_xlsx(path, pr.build_rows(_result([_trade()]), FX))
+
+    wb = load_workbook(path)
+    assert wb.sheetnames == ["청산완료", "미결포지션", "요약"]
+
+    header = [c.value for c in wb["청산완료"][1]]
+    assert header[:9] == ["상품티커", "진입일자", "진입가격",
+                          "청산일자", "청산가격", "총수익(원)",
+                          "총수익(%)", "순수익(원)", "순수익(%)"]
+    assert header[9:] == ["수량", "진입환율", "청산환율", "청산사유"]
+
+
+def test_negative_money_renders_with_a_minus_sign(tmp_path):
+    path = tmp_path / "r.xlsx"
+    pr.write_xlsx(path, pr.build_rows(
+        _result([_trade(exit_price=90.0, mark_price=90.0)]), FX))
+
+    cell = load_workbook(path)["청산완료"]["F2"]
+
+    assert cell.value < 0
+    assert cell.number_format == "#,##0;-#,##0"
+    # 회계 서식의 괄호 표기여서는 안 된다
+    assert "(" not in cell.number_format
+
+
+def test_percent_cells_store_the_readable_number_not_a_fraction(tmp_path):
+    # 값이 0.1423 이면 셀을 직접 읽는 쪽이 100배 틀린다.
+    path = tmp_path / "r.xlsx"
+    pr.write_xlsx(path, pr.build_rows(_result([_trade()]), FX))
+
+    cell = load_workbook(path)["청산완료"]["G2"]
+
+    assert cell.value > 1.0
+    assert cell.number_format == '0.00"%";-0.00"%"'
+
+
+def test_closed_sheet_keeps_its_header_when_there_are_no_trades(tmp_path):
+    # 시트가 없으면 파일이 깨진 것인지 트레이드가 없는 것인지 구분되지 않는다.
+    path = tmp_path / "r.xlsx"
+    pr.write_xlsx(path, pr.build_rows(_result([]), FX))
+
+    ws = load_workbook(path)["청산완료"]
+
+    assert ws.max_row == 1
+    assert ws["A1"].value == "상품티커"
+
+
+def test_open_sheet_labels_the_valuation_columns(tmp_path):
+    path = tmp_path / "r.xlsx"
+    pr.write_xlsx(path, pr.build_rows(_result([
+        _trade(is_open=True, exit_date=None, exit_price=None, mark_price=105.0),
+    ]), FX))
+
+    header = [c.value for c in load_workbook(path)["미결포지션"][1]]
+
+    assert header[3] == "평가기준일"
+    assert header[4] == "현재가"
+    assert header[12] == "보유봉수"
+
+
+def test_summary_leads_with_the_contamination_warning(tmp_path):
+    path = tmp_path / "r.xlsx"
+    pr.write_xlsx(path, pr.build_rows(_result([_trade()]), FX))
+
+    ws = load_workbook(path)["요약"]
+
+    assert ws["A1"].value == "!! 경고"
+    assert "파이프라인 검증용" in ws["B1"].value
