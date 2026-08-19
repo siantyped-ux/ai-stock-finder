@@ -16,6 +16,7 @@ def _trade(**kw):
         exit_date="2026-08-05", exit_price=110.0, mark_price=110.0,
         exit_reason="TRAIL", bars_held=2, is_open=False,
         gross_r=1.67, cost_r=0.05, net_r=1.62,
+        initial_stop=94.0, high_since_entry=110.0, stop=94.0,
     )
     base.update(kw)
     return ts.Trade(**base)

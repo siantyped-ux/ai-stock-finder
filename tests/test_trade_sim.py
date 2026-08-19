@@ -204,6 +204,7 @@ def _trade(net_r, is_open=False, reason="STOP"):
         bars_held=1, is_open=is_open,
         gross_r=net_r + 0.05, cost_r=0.05, net_r=net_r,
         mark_price=106.0,
+        initial_stop=94.0, high_since_entry=106.0, stop=94.0,
     )
 
 
@@ -369,3 +370,29 @@ def test_open_trade_exposes_its_mark_price():
 def test_closed_trade_mark_price_equals_its_exit_price():
     t = _trade(1.0)
     assert t.mark_price == t.exit_price
+
+
+def test_trade_carries_the_stop_state():
+    # stops.py 가 시뮬레이션 루프를 복사하지 않고도 "지금 어디서 잘리는가" 를
+    # 답할 수 있어야 한다. 복사하면 규칙이 두 벌이 되어 갈라진다.
+    rows = [_row("d1", "BUY"), _row("d2", "BUY")]
+    bars = {"d1": _bar("d1", 100.0, 101.0, 99.0, 100.5),
+            "d2": _bar("d2", 100.5, 102.0, 100.0, 101.5)}
+
+    t = ts.simulate_ticker("X", "US", rows, bars, P, C)[0]
+
+    assert t.initial_stop == pytest.approx(94.0)     # 100 - 3.0 * 2.0
+    assert t.high_since_entry == 102.0               # d1 101 -> d2 102
+    assert t.stop == pytest.approx(94.0)             # +1R(106) 미달이라 트레일 off
+
+
+def test_stop_ratchets_to_breakeven_when_the_high_hits_one_r():
+    # 손절 배수와 트레일 배수가 같아서 +1R 도달 시 손절선이 정확히 진입가가 된다.
+    rows = [_row("d1", "BUY"), _row("d2", "BUY")]
+    bars = {"d1": _bar("d1", 100.0, 101.0, 99.0, 100.5),
+            "d2": _bar("d2", 100.5, 106.0, 100.0, 105.0)}
+
+    t = ts.simulate_ticker("X", "US", rows, bars, P, C)[0]
+
+    assert t.high_since_entry == 106.0
+    assert t.stop == pytest.approx(100.0)            # 106 - 3.0*2.0 = 진입가

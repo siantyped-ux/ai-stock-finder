@@ -90,6 +90,11 @@ class Trade:
     # 미결 포지션의 평가 가격. 청산된 트레이드에서는 exit_price 와 같다.
     # 기본값을 두지 않는다 - 값을 빠뜨린 생성이 조용히 통과하면 안 된다.
     mark_price: float
+    # 청산·평가 시점의 손절 상태. 이 세 값이 있어야 stops.py 가
+    # simulate_ticker 의 재생 루프를 복사하지 않고 손절선을 답할 수 있다.
+    initial_stop: float
+    high_since_entry: float
+    stop: float
 
 
 @dataclass(frozen=True)
@@ -151,6 +156,9 @@ def _make_trade(pos: er.Position, market: str, source: str,
         cost_r=cost,
         net_r=gross - cost,
         mark_price=exit_price,
+        initial_stop=pos.initial_stop,
+        high_since_entry=pos.high_since_entry,
+        stop=pos.stop,
     )
 
 
