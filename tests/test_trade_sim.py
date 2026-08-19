@@ -321,3 +321,32 @@ def test_no_entry_on_the_bar_a_position_closed():
 
     entries = [t.entry_date for t in trades]
     assert "d3" not in entries
+
+
+def test_cost_amount_returns_each_side_at_its_own_price():
+    # 진입 100, 청산 130. 매수측 (0.10+0.05)% x 100, 매도측 (0.10+0.05)% x 130
+    buy, sell = ts.cost_amount(entry_price=100.0, exit_price=130.0,
+                               market="US", costs=C)
+
+    assert buy == pytest.approx(0.15)
+    assert sell == pytest.approx(0.195)
+
+
+def test_cost_amount_charges_kr_transfer_tax_on_the_sell_side_only():
+    buy, sell = ts.cost_amount(entry_price=100.0, exit_price=130.0,
+                               market="KR", costs=C)
+
+    assert buy == pytest.approx((0.02 + 0.05) / 100 * 100.0)
+    assert sell == pytest.approx((0.02 + 0.15 + 0.05) / 100 * 130.0)
+
+
+def test_cost_amount_rejects_unknown_market():
+    with pytest.raises(ValueError):
+        ts.cost_amount(100.0, 130.0, "JP", C)
+
+
+def test_cost_r_is_cost_amount_divided_by_r_unit():
+    # 요율 분기가 복제되면 이 등식이 깨진다.
+    buy, sell = ts.cost_amount(100.0, 130.0, "US", C)
+
+    assert ts.cost_r(100.0, 130.0, 6.0, "US", C) == pytest.approx((buy + sell) / 6.0)
