@@ -1,0 +1,235 @@
+import pytest
+from openpyxl import load_workbook
+
+import perf_report as pr
+import trade_sim as ts
+
+
+FX = {"2026-08-03": 1300.0, "2026-08-05": 1350.0}
+
+
+def _trade(**kw):
+    """기본은 AAA 를 08-03 @100 에 사서 08-05 @110 에 판 트레이드."""
+    base = dict(
+        ticker="AAA", market="US", source="live",
+        entry_date="2026-08-03", entry_price=100.0, r_unit=6.0,
+        exit_date="2026-08-05", exit_price=110.0, mark_price=110.0,
+        exit_reason="TRAIL", bars_held=2, is_open=False,
+        gross_r=1.67, cost_r=0.05, net_r=1.62,
+    )
+    base.update(kw)
+    return ts.Trade(**base)
+
+
+def test_fx_on_exact_date():
+    assert pr.fx_on(FX, "2026-08-03", "US") == 1300.0
+
+
+def test_fx_on_holiday_falls_back_to_the_previous_session():
+    # 08-04 는 환율 데이터가 없다. 08-03 으로 소급한다.
+    assert pr.fx_on(FX, "2026-08-04", "US") == 1300.0
+
+
+def test_fx_on_raises_when_nothing_earlier_exists():
+    # 조용히 아무 환율이나 쓰면 틀린 금액이 리포에 커밋된다.
+    with pytest.raises(ValueError):
+        pr.fx_on(FX, "2026-08-01", "US")
+
+
+def test_fx_on_is_one_for_kr_tickers():
+    assert pr.fx_on(FX, "2026-08-01", "KR") == 1.0
+
+
+def test_quantity_floors_to_whole_shares():
+    # 1,000만원 / (100 x 1300) = 76.9 -> 76주. 잔액은 미투자.
+    assert pr.to_row(_trade(), 1300.0, 1300.0)["qty"] == 76
+
+
+def test_quantity_is_at_least_one_share():
+    # 원화진입가가 정액보다 크면 0주가 되고 트레이드가 조용히 사라진다.
+    assert pr.to_row(_trade(entry_price=10000.0), 1300.0, 1300.0)["qty"] == 1
+
+
+def test_us_trade_converts_with_both_fx_rates():
+    # 원금 100x1300x76 = 9,880,000 / 회수 110x1350x76 = 11,286,000
+    # 매수비용 0.15x1300x76 = 14,820 / 매도비용 0.165x1350x76 = 16,929
+    row = pr.to_row(_trade(), 1300.0, 1350.0)
+
+    assert row["qty"] == 76
+    assert row["gross_krw"] == pytest.approx(1_406_000.0)
+    assert row["gross_pct"] == pytest.approx(14.2308, abs=1e-4)
+    assert row["net_krw"] == pytest.approx(1_374_251.0)
+    assert row["net_pct"] == pytest.approx(13.9094, abs=1e-4)
+
+
+def test_loss_stays_negative_and_costs_make_it_worse():
+    row = pr.to_row(_trade(exit_price=90.0, mark_price=90.0), 1300.0, 1300.0)
+
+    assert row["gross_krw"] < 0
+    assert row["net_krw"] < row["gross_krw"]
+
+
+def test_kr_trade_needs_no_fx():
+    # 1,000만원 / 50,000 = 200주. 원금 정확히 1,000만원.
+    row = pr.to_row(_trade(market="KR", entry_price=50000.0,
+                           exit_price=55000.0, mark_price=55000.0),
+                    1.0, 1.0)
+
+    assert row["qty"] == 200
+    assert row["gross_krw"] == pytest.approx(1_000_000.0)
+
+
+def test_krw_cost_agrees_with_cost_r():
+    # 환율 1.0, 1주면 원화 비용은 cost_r x r_unit 과 같아야 한다.
+    # 요율 분기가 두 곳에 복제되면 이 등식이 깨진다.
+    t = _trade(market="KR", entry_price=50000.0, exit_price=55000.0,
+               mark_price=55000.0, r_unit=3000.0)
+    row = pr.to_row(t, 1.0, 1.0, capital=50000)
+
+    assert row["qty"] == 1
+    expected = ts.cost_r(50000.0, 55000.0, 3000.0, "KR", ts.Costs()) * 3000.0
+    assert row["gross_krw"] - row["net_krw"] == pytest.approx(expected)
+
+
+def test_open_position_uses_the_mark_price_and_still_pays_the_sell_side():
+    t = _trade(is_open=True, exit_date=None, exit_price=None, mark_price=105.0)
+    row = pr.to_row(t, 1300.0, 1300.0)
+
+    assert row["exit_price"] == 105.0
+    # 매도비용을 빼지 않으면 net == gross 가 된다
+    assert row["net_krw"] < row["gross_krw"]
+
+
+def _result(trades, **kw):
+    base = dict(
+        trades=trades, dates=["2026-08-03", "2026-08-05"],
+        live_rows=10, backfill_rows=90, failed=[],
+        newest_bar="2026-08-05",
+    )
+    base.update(kw)
+    return base
+
+
+def test_open_positions_never_land_in_the_closed_sheet():
+    built = pr.build_rows(_result([
+        _trade(),
+        _trade(ticker="BBB", is_open=True, exit_date=None,
+               exit_price=None, mark_price=105.0),
+    ]), FX)
+
+    assert [r["ticker"] for r in built["closed"]] == ["AAA"]
+    assert [r["ticker"] for r in built["open"]] == ["BBB"]
+
+
+def test_open_position_is_marked_to_the_newest_bar_date():
+    built = pr.build_rows(_result([
+        _trade(is_open=True, exit_date=None, exit_price=None, mark_price=105.0),
+    ]), FX)
+
+    assert built["open"][0]["exit_date"] == "2026-08-05"
+
+
+def test_win_rate_ignores_open_positions():
+    # 닫힌 2건 중 1승. 미결은 큰 이익이지만 승률에 들어가면 안 된다 -
+    # "아직 손절되지 않았을 뿐" 인 포지션이다.
+    built = pr.build_rows(_result([
+        _trade(ticker="WIN"),
+        _trade(ticker="LOSS", exit_price=90.0, mark_price=90.0),
+        _trade(ticker="OPEN", is_open=True, exit_date=None,
+               exit_price=None, mark_price=200.0),
+    ]), FX)
+    s = built["summary"]
+
+    assert s["closed_n"] == 2
+    assert s["win_rate"] == pytest.approx(50.0)
+    assert s["open_n"] == 1
+
+
+def test_closed_rows_sort_by_exit_date_then_ticker():
+    built = pr.build_rows(_result([
+        _trade(ticker="ZZZ", exit_date="2026-08-05"),
+        _trade(ticker="AAA", exit_date="2026-08-05"),
+        _trade(ticker="MMM", exit_date="2026-08-03"),
+    ]), FX)
+
+    assert [r["ticker"] for r in built["closed"]] == ["MMM", "AAA", "ZZZ"]
+
+
+def test_summary_survives_zero_closed_trades():
+    s = pr.build_rows(_result([]), FX)["summary"]
+
+    assert s["closed_n"] == 0
+    assert s["win_rate"] is None
+    assert s["avg_net_pct"] is None
+
+
+def test_xlsx_has_three_sheets_with_the_requested_columns_first(tmp_path):
+    path = tmp_path / "r.xlsx"
+    pr.write_xlsx(path, pr.build_rows(_result([_trade()]), FX))
+
+    wb = load_workbook(path)
+    assert wb.sheetnames == ["청산완료", "미결포지션", "요약"]
+
+    header = [c.value for c in wb["청산완료"][1]]
+    assert header[:9] == ["상품티커", "진입일자", "진입가격",
+                          "청산일자", "청산가격", "총수익(원)",
+                          "총수익(%)", "순수익(원)", "순수익(%)"]
+    assert header[9:] == ["수량", "진입환율", "청산환율", "청산사유"]
+
+
+def test_negative_money_renders_with_a_minus_sign(tmp_path):
+    path = tmp_path / "r.xlsx"
+    pr.write_xlsx(path, pr.build_rows(
+        _result([_trade(exit_price=90.0, mark_price=90.0)]), FX))
+
+    cell = load_workbook(path)["청산완료"]["F2"]
+
+    assert cell.value < 0
+    assert cell.number_format == "#,##0;-#,##0"
+    # 회계 서식의 괄호 표기여서는 안 된다
+    assert "(" not in cell.number_format
+
+
+def test_percent_cells_store_the_readable_number_not_a_fraction(tmp_path):
+    # 값이 0.1423 이면 셀을 직접 읽는 쪽이 100배 틀린다.
+    path = tmp_path / "r.xlsx"
+    pr.write_xlsx(path, pr.build_rows(_result([_trade()]), FX))
+
+    cell = load_workbook(path)["청산완료"]["G2"]
+
+    assert cell.value > 1.0
+    assert cell.number_format == '0.00"%";-0.00"%"'
+
+
+def test_closed_sheet_keeps_its_header_when_there_are_no_trades(tmp_path):
+    # 시트가 없으면 파일이 깨진 것인지 트레이드가 없는 것인지 구분되지 않는다.
+    path = tmp_path / "r.xlsx"
+    pr.write_xlsx(path, pr.build_rows(_result([]), FX))
+
+    ws = load_workbook(path)["청산완료"]
+
+    assert ws.max_row == 1
+    assert ws["A1"].value == "상품티커"
+
+
+def test_open_sheet_labels_the_valuation_columns(tmp_path):
+    path = tmp_path / "r.xlsx"
+    pr.write_xlsx(path, pr.build_rows(_result([
+        _trade(is_open=True, exit_date=None, exit_price=None, mark_price=105.0),
+    ]), FX))
+
+    header = [c.value for c in load_workbook(path)["미결포지션"][1]]
+
+    assert header[3] == "평가기준일"
+    assert header[4] == "현재가"
+    assert header[12] == "보유봉수"
+
+
+def test_summary_leads_with_the_contamination_warning(tmp_path):
+    path = tmp_path / "r.xlsx"
+    pr.write_xlsx(path, pr.build_rows(_result([_trade()]), FX))
+
+    ws = load_workbook(path)["요약"]
+
+    assert ws["A1"].value == "!! 경고"
+    assert "파이프라인 검증용" in ws["B1"].value

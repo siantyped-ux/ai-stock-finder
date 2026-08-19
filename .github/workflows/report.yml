@@ -1,0 +1,110 @@
+name: Daily Performance Report
+
+on:
+  schedule:
+    # UTC 01:00 = KST 10:00. 스캔(22:00 UTC)이 끝난 3시간 뒤라
+    # 그날 KST 07:00 스캔 결과가 이미 아카이브에 있다.
+    # 영업일은 단순 월~금이다. 한국·미국 공휴일은 구분하지 않는다 -
+    # 휴일에는 전일과 같은 내용의 리포트가 하나 더 쌓일 뿐이고,
+    # 거래소 캘린더 의존성을 들이는 것보다 낫다.
+    # GitHub Actions 스케줄은 부하에 따라 5~30분 지연될 수 있음
+    - cron: '0 1 * * 1-5'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  report:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v7
+        with:
+          # rebase가 필요하므로 shallow clone 대신 전체 히스토리를 가져옴
+          fetch-depth: 0
+
+      - name: Setup Python 3.11
+        uses: actions/setup-python@v6
+        with:
+          python-version: '3.11'
+          cache: pip
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Build the performance report
+        run: python perf_report.py
+
+      - name: Commit and push the report
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add reports/
+          if git diff --staged --quiet; then
+            echo "No report change to commit"
+          else
+            # KST 는 서머타임이 없어 UTC+9 고정. TZ=Asia/Seoul 은 tzdata 가 없는
+            # 환경에서 조용히 UTC 를 KST 라고 찍으므로 오프셋으로 계산한다.
+            git commit -m "Perf report: $(date -u -d '+9 hours' +'%Y-%m-%d KST')"
+            for i in 1 2 3; do
+              git pull --rebase origin main && git push && exit 0
+              echo "push retry $i"
+              sleep 5
+            done
+            echo "::error::Failed to push the report after 3 attempts"
+            exit 1
+          fi
+
+  # 리포트가 실패하면 그날 성과 스냅샷이 비는데, 스캔과 달리 원천 데이터는
+  # 남아 있으므로 재실행으로 복구된다. 그래도 조용히 넘어가면 며칠씩 비는
+  # 것을 눈치채지 못하므로 이슈를 연다.
+  notify-failure:
+    needs: report
+    if: always() && needs.report.result == 'failure'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      issues: write
+
+    steps:
+      - name: Open an issue for the missing report
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REPO: ${{ github.repository }}
+          RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+        run: |
+          # KST 는 서머타임이 없어 UTC+9 고정
+          KST_DATE=$(date -u -d '+9 hours' +'%Y-%m-%d')
+          TITLE="성과 리포트 실패 ${KST_DATE} (KST)"
+
+          # 같은 날 재실행으로 이슈가 중복되지 않게 한다
+          EXISTING=$(gh issue list --repo "$REPO" --state open \
+            --search "\"$TITLE\" in:title" --json number --jq 'length')
+          if [ "$EXISTING" != "0" ]; then
+            echo "이미 열린 이슈가 있다. 건너뛴다."
+            exit 0
+          fi
+
+          gh issue create --repo "$REPO" --title "$TITLE" --body "$(cat <<EOB
+          ${KST_DATE} (KST) 성과 리포트 생성이 실패했습니다.
+
+          스캔과 달리 원천 데이터(\`history/*.csv\`)는 남아 있으므로
+          **재실행으로 복구됩니다.** 워크플로를 수동 실행하세요.
+
+          실행 로그: ${RUN_URL}
+
+          ## 확인할 것
+
+          - **환율 조회 실패** — \`USDKRW=X 환율 조회 실패\` 가 보이면 yfinance
+            rate limit 이거나 티커 응답이 빈 경우입니다. 고정환율로 대체하지
+            않고 일부러 실패시킵니다 - 조용히 틀린 금액을 커밋하지 않으려는 것입니다.
+          - **환율 소급 실패** — \`... 이전의 환율이 없다\` 는 조회 시작일이
+            첫 진입일보다 충분히 앞서지 않은 경우입니다.
+          - **시세 조회 실패** — 요약 시트의 \`시세 조회 실패\` 항목을 보세요.
+            일부 종목 실패는 리포트를 막지 않습니다.
+          - **push 실패** — rebase 재시도 3회를 모두 소진했는지 확인하세요.
+          EOB
+          )"

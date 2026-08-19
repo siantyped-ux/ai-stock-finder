@@ -11,6 +11,8 @@ scan_log.txt
 
 # 원본 설계 문서 (비공개 유지)
 *.xlsx
+# 단 성과 리포트는 워크플로가 매영업일 커밋한다
+!reports/*.xlsx
 
 # Python
 __pycache__/

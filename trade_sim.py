@@ -31,15 +31,15 @@ class Costs:
     slippage_pct: float = 0.05
 
 
-def cost_r(entry_price: float, exit_price: float, r_unit: float,
-           market: str, costs: Costs) -> float:
-    """왕복 거래비용을 R 배수로 환산한다.
+def cost_amount(entry_price: float, exit_price: float,
+                market: str, costs: Costs) -> tuple:
+    """왕복 거래비용을 (매수측, 매도측) 가격 단위로 돌려준다.
 
     매수측 비용은 진입가에, 매도측 비용은 청산가에 각각 매긴다 - 실제로
-    수수료가 부과되는 가격이 그것이기 때문이다. 미결 포지션은 마지막
-    종가를 청산가로 대신 넣어 부른다.
+    수수료가 부과되는 가격이 그것이기 때문이다.
 
-    r_unit 이 클수록(변동성이 큰 종목일수록) 비용 부담이 자동으로 작아진다.
+    시장별 요율 분기는 여기 한 곳에만 둔다. R 배수가 필요하면 cost_r 을
+    쓰고, 원화 금액이 필요하면 이 값에 수량과 환율을 곱한다.
     """
     if market == "US":
         buy_pct = costs.us_buy_pct
@@ -54,6 +54,17 @@ def cost_r(entry_price: float, exit_price: float, r_unit: float,
 
     buy_side = (buy_pct + costs.slippage_pct) / 100.0 * entry_price
     sell_side = (sell_pct + tax_pct + costs.slippage_pct) / 100.0 * exit_price
+    return buy_side, sell_side
+
+
+def cost_r(entry_price: float, exit_price: float, r_unit: float,
+           market: str, costs: Costs) -> float:
+    """왕복 거래비용을 R 배수로 환산한다.
+
+    r_unit 이 클수록(변동성이 큰 종목일수록) 비용 부담이 자동으로 작아진다.
+    미결 포지션은 마지막 종가를 청산가로 대신 넣어 부른다.
+    """
+    buy_side, sell_side = cost_amount(entry_price, exit_price, market, costs)
     return (buy_side + sell_side) / r_unit
 
 
@@ -76,6 +87,9 @@ class Trade:
     gross_r: float
     cost_r: float
     net_r: float
+    # 미결 포지션의 평가 가격. 청산된 트레이드에서는 exit_price 와 같다.
+    # 기본값을 두지 않는다 - 값을 빠뜨린 생성이 조용히 통과하면 안 된다.
+    mark_price: float
 
 
 @dataclass(frozen=True)
@@ -136,6 +150,7 @@ def _make_trade(pos: er.Position, market: str, source: str,
         gross_r=gross,
         cost_r=cost,
         net_r=gross - cost,
+        mark_price=exit_price,
     )
 
 
