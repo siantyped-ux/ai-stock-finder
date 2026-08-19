@@ -203,6 +203,7 @@ def _trade(net_r, is_open=False, reason="STOP"):
         exit_reason=None if is_open else reason,
         bars_held=1, is_open=is_open,
         gross_r=net_r + 0.05, cost_r=0.05, net_r=net_r,
+        mark_price=106.0,
     )
 
 
@@ -350,3 +351,21 @@ def test_cost_r_is_cost_amount_divided_by_r_unit():
     buy, sell = ts.cost_amount(100.0, 130.0, "US", C)
 
     assert ts.cost_r(100.0, 130.0, 6.0, "US", C) == pytest.approx((buy + sell) / 6.0)
+
+
+def test_open_trade_exposes_its_mark_price():
+    # 미결이어도 평가 가격이 밖으로 나와야 원화 평가손익을 낼 수 있다.
+    rows = [_row("d1", "BUY"), _row("d2", "BUY")]
+    bars = {"d1": _bar("d1", 100.0, 101.0, 99.0, 100.5),
+            "d2": _bar("d2", 100.5, 102.0, 100.0, 101.5)}
+
+    trades = ts.simulate_ticker("X", "US", rows, bars, P, C)
+
+    assert trades[0].is_open
+    assert trades[0].exit_price is None
+    assert trades[0].mark_price == 101.5    # 마지막 종가로 평가한다
+
+
+def test_closed_trade_mark_price_equals_its_exit_price():
+    t = _trade(1.0)
+    assert t.mark_price == t.exit_price
