@@ -234,3 +234,65 @@ def test_summary_leads_with_the_contamination_warning(tmp_path):
 
     assert ws["A1"].value == "!! 경고"
     assert "파이프라인 검증용" in ws["B1"].value
+
+
+def _held(**kw):
+    """미결 포지션 기본형. 진입 100 · 1R=6 · 손절 94 · 최고 102 · 평가 101.5."""
+    base = dict(is_open=True, exit_date=None, exit_price=None,
+                mark_price=101.5, exit_reason=None,
+                initial_stop=94.0, high_since_entry=102.0, stop=94.0)
+    base.update(kw)
+    return _trade(**base)
+
+
+def test_open_sheet_appends_the_stop_columns(tmp_path):
+    path = tmp_path / "r.xlsx"
+    pr.write_xlsx(path, pr.build_rows(_result([_held()]), FX))
+
+    header = [c.value for c in load_workbook(path)["미결포지션"][1]]
+
+    assert header[13:] == ["손절가", "손절까지(%)", "트레일 발동가", "트레일"]
+
+
+def test_stop_distance_is_negative_because_it_is_a_drop(tmp_path):
+    # (101.5 - 94) / 101.5 = 7.39% 아래. 부호가 없으면 상승 여력처럼 읽힌다.
+    path = tmp_path / "r.xlsx"
+    pr.write_xlsx(path, pr.build_rows(_result([_held()]), FX))
+
+    ws = load_workbook(path)["미결포지션"]
+
+    assert ws["N2"].value == pytest.approx(94.0)            # 손절가
+    assert ws["O2"].value == pytest.approx(-7.3892, abs=1e-4)
+    assert ws["O2"].number_format == '0.00"%";-0.00"%"'
+
+
+def test_trail_trigger_is_entry_plus_one_r(tmp_path):
+    path = tmp_path / "r.xlsx"
+    pr.write_xlsx(path, pr.build_rows(_result([_held()]), FX))
+
+    ws = load_workbook(path)["미결포지션"]
+
+    assert ws["P2"].value == pytest.approx(106.0)           # 100 + 6
+    assert ws["Q2"].value == "off"                          # 최고 102 < 106
+
+
+def test_trail_shows_on_once_the_high_reaches_the_trigger(tmp_path):
+    path = tmp_path / "r.xlsx"
+    pr.write_xlsx(path, pr.build_rows(
+        _result([_held(high_since_entry=106.0, stop=100.0)]), FX))
+
+    ws = load_workbook(path)["미결포지션"]
+
+    assert ws["Q2"].value == "ON"
+    assert ws["N2"].value == pytest.approx(100.0)           # 본전으로 올라온 손절선
+
+
+def test_closed_sheet_is_untouched_by_the_stop_columns(tmp_path):
+    # 청산된 트레이드에는 "지금 어디서 잘리는가" 가 없다.
+    path = tmp_path / "r.xlsx"
+    pr.write_xlsx(path, pr.build_rows(_result([_trade()]), FX))
+
+    header = [c.value for c in load_workbook(path)["청산완료"][1]]
+
+    assert len(header) == 13
+    assert "손절가" not in header
