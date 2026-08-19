@@ -18,7 +18,9 @@ from openpyxl.utils import get_column_letter
 
 import backtest
 import console
+import exit_rules as er
 import history
+import stops
 import trade_sim as ts
 
 CAPITAL_KRW = 10_000_000
@@ -95,12 +97,16 @@ def to_row(trade, fx_entry: float, fx_exit: float,
 
 
 def build_rows(result: dict, fx: dict, capital: int = CAPITAL_KRW,
-               costs: ts.Costs = None) -> dict:
+               costs: ts.Costs = None, params: er.Params = None) -> dict:
     """청산완료·미결·요약 세 덩어리로 나눈다.
 
     미결을 승률에 섞지 않는다. trade_sim.summarize 와 같은 원칙이다.
+
+    params 는 미결 포지션의 손절 컬럼에만 쓰인다. 트레일 판정은
+    stops.stop_view 에 맡긴다 - 여기서 다시 구현하면 두 벌이 된다.
     """
     costs = costs or ts.Costs()
+    params = params or er.Params()
     mark_date = result["newest_bar"]
 
     closed, opened = [], []
@@ -111,6 +117,12 @@ def build_rows(result: dict, fx: dict, capital: int = CAPITAL_KRW,
                          capital, costs)
             # 미결은 청산일이 없다. 평가 시점을 대신 넣는다.
             row["exit_date"] = mark_date
+            sv = stops.stop_view(t, params)
+            row["stop"] = sv["stop"]
+            # 손절선은 현재가 아래에 있다. 부호가 없으면 상승 여력처럼 읽힌다.
+            row["stop_pct"] = -sv["room_pct"]
+            row["trail_trigger"] = sv["trail_trigger"]
+            row["trail"] = "ON" if sv["trail_active"] else "off"
             opened.append(row)
         else:
             fx_exit = fx_on(fx, t.exit_date, t.market)
@@ -180,6 +192,12 @@ OPEN_COLS = [
     ("진입환율", "fx_entry", RATE_FMT),
     ("평가환율", "fx_exit", RATE_FMT),
     ("보유봉수", "bars_held", QTY_FMT),
+    # 이 전략에는 고정 익절가가 없다. 팔리는 가격은 손절선 하나뿐이고
+    # 그것도 고점과 ATR 을 따라 매일 움직이므로 리포트에 실어 둔다.
+    ("손절가", "stop", PRICE_FMT),
+    ("손절까지(%)", "stop_pct", PCT_FMT),
+    ("트레일 발동가", "trail_trigger", PRICE_FMT),
+    ("트레일", "trail", None),
 ]
 
 
