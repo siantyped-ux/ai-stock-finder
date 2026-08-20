@@ -254,7 +254,7 @@ def test_open_sheet_appends_the_stop_columns(tmp_path):
 
     header = [c.value for c in load_workbook(path)["미결포지션"][1]]
 
-    assert header[13:] == ["손절가", "손절까지(%)", "트레일 발동가", "트레일"]
+    assert header[13:17] == ["손절가", "손절까지(%)", "트레일 발동가", "트레일"]
 
 
 def test_stop_distance_is_negative_because_it_is_a_drop(tmp_path):
@@ -299,6 +299,55 @@ def test_closed_sheet_is_untouched_by_the_stop_columns(tmp_path):
 
     assert len(header) == 13
     assert "손절가" not in header
+
+
+def test_open_sheet_appends_the_target_columns(tmp_path):
+    path = tmp_path / "r.xlsx"
+    pr.write_xlsx(path, pr.build_rows(
+        _result([_held(target_price=109.0)]), FX))
+
+    header = [c.value for c in load_workbook(path)["미결포지션"][1]]
+
+    assert header[17:] == ["목표(%)", "목표가", "달성률(%)", "위험보상"]
+
+
+def test_target_progress_measures_the_way_to_the_target():
+    # 진입 100 · 목표 109 · 평가 101.5 → 목표폭 9 중 1.5 만큼 왔다.
+    # 위험보상 = 목표폭 9 / 1R 6 = 1.5
+    row = pr.build_rows(_result([_held(target_price=109.0)]), FX)["open"][0]
+
+    assert row["target_pct"] == pytest.approx(9.0)
+    assert row["target_price"] == pytest.approx(109.0)
+    assert row["target_progress_pct"] == pytest.approx(16.6667, abs=1e-4)
+    assert row["reward_risk"] == pytest.approx(1.5)
+
+
+def test_target_progress_is_negative_below_the_entry():
+    # 진입가 아래면 목표에서 멀어진 것이다. 부호가 없으면 진행처럼 읽힌다.
+    row = pr.build_rows(
+        _result([_held(mark_price=97.0, target_price=109.0)]), FX)["open"][0]
+
+    assert row["target_progress_pct"] == pytest.approx(-33.3333, abs=1e-4)
+
+
+def test_target_columns_are_blank_without_a_target():
+    row = pr.build_rows(_result([_held()]), FX)["open"][0]
+
+    assert row["target_pct"] is None
+    assert row["target_price"] is None
+    assert row["target_progress_pct"] is None
+    assert row["reward_risk"] is None
+
+
+def test_closed_sheet_is_untouched_by_the_target_columns(tmp_path):
+    path = tmp_path / "r.xlsx"
+    pr.write_xlsx(path, pr.build_rows(
+        _result([_trade(target_price=109.0)]), FX))
+
+    header = [c.value for c in load_workbook(path)["청산완료"][1]]
+
+    assert "목표가" not in header
+    assert header[-1] == "청산사유"
 
 
 SUMMARY = {

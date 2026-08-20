@@ -112,6 +112,31 @@ def to_row(trade, fx_entry: float, fx_exit: float,
     }
 
 
+def target_cols(trade) -> dict:
+    """미결 포지션의 목표가 관련 네 값. 목표가가 없으면 전부 빈칸이다.
+
+    목표(%) 는 Trade.target_price 에서 되계산한다. 아카이브의 target 정수를
+    따로 싣지 않는다 - 같은 사실을 두 곳에 두면 어긋날 수 있고, 목표가가
+    유일한 진실이어야 한다.
+
+    달성률은 목표폭 대비 어디까지 왔는지다. 진입가 아래면 음수가 나오고,
+    그것이 맞다 - 목표에서 멀어졌다는 뜻이다.
+    """
+    tp = trade.target_price
+    if tp is None:
+        return {"target_pct": None, "target_price": None,
+                "target_progress_pct": None, "reward_risk": None}
+
+    entry = trade.entry_price
+    return {
+        "target_pct": (tp / entry - 1) * 100.0,
+        "target_price": tp,
+        "target_progress_pct": (trade.mark_price - entry) / (tp - entry) * 100.0,
+        # 목표폭 ÷ 손절폭. 1 미만이면 목표를 다 채워도 손절 한 번보다 덜 번다.
+        "reward_risk": (tp - entry) / trade.r_unit,
+    }
+
+
 def build_rows(result: dict, fx: dict, capital: int = CAPITAL_KRW,
                costs: ts.Costs = None, params: er.Params = None) -> dict:
     """청산완료·미결·요약 세 덩어리로 나눈다.
@@ -139,6 +164,7 @@ def build_rows(result: dict, fx: dict, capital: int = CAPITAL_KRW,
             row["stop_pct"] = -sv["room_pct"]
             row["trail_trigger"] = sv["trail_trigger"]
             row["trail"] = "ON" if sv["trail_active"] else "off"
+            row.update(target_cols(t))
             opened.append(row)
         else:
             fx_exit = fx_on(fx, t.exit_date, t.market)
@@ -214,6 +240,12 @@ OPEN_COLS = [
     ("손절까지(%)", "stop_pct", PCT_FMT),
     ("트레일 발동가", "trail_trigger", PRICE_FMT),
     ("트레일", "trail", None),
+    # 손절선이 "어디서 잘리나" 라면 이쪽은 "어디까지 가면 되나" 다.
+    # use_target 이 꺼져 있어도 표시한다 - 규칙과 무관한 위치 정보다.
+    ("목표(%)", "target_pct", PCT_FMT),
+    ("목표가", "target_price", PRICE_FMT),
+    ("달성률(%)", "target_progress_pct", PCT_FMT),
+    ("위험보상", "reward_risk", RATE_FMT),
 ]
 
 
