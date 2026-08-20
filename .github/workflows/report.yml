@@ -94,7 +94,7 @@ jobs:
           cat > alert_body.txt <<EOB
           ${KST_DATE} (KST) 성과 리포트 생성이 실패했습니다.
 
-          스캔과 달리 원천 데이터(history/*.csv)는 남아 있으므로
+          스캔과 달리 원천 데이터(\`history/*.csv\`)는 남아 있으므로
           **재실행으로 복구됩니다.** 워크플로를 수동 실행하세요.
 
           실행 로그: ${RUN_URL}
@@ -122,7 +122,6 @@ jobs:
           KST_DATE: ${{ steps.body.outputs.kst_date }}
         run: |
           TITLE="성과 리포트 실패 ${KST_DATE} (KST)"
-          echo "title=$TITLE" >> "$GITHUB_OUTPUT"
 
           # 같은 날 재실행으로 이슈가 중복되지 않게 한다. 메일도 같이 건너뛴다 -
           # 재실행마다 같은 메일이 쌓일 이유가 없다.
@@ -139,7 +138,11 @@ jobs:
             --assignee siantyped-ux --body-file alert_body.txt
 
       - name: Send the alert mail
-        if: steps.issue.outputs.notify == 'yes'
+      # 중복이라고 명시적으로 판정됐을 때만 메일을 건너뛴다. == 'yes' 로 쓰면
+      # 안 된다 - 상태 함수가 없는 if 에는 success() 가 암묵적으로 붙어서,
+      # gh 가 실패하면 이슈도 못 열고 메일도 조용히 스킵된다. GitHub 알림을
+      # 믿을 수 없을 때 도달을 보장하는 것이 이 메일의 존재 이유다.
+        if: always() && steps.issue.outputs.notify != 'no'
         env:
           SMTP_USER: ${{ secrets.SMTP_USER }}
           SMTP_PASSWORD: ${{ secrets.SMTP_PASSWORD }}
