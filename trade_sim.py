@@ -95,6 +95,9 @@ class Trade:
     initial_stop: float
     high_since_entry: float
     stop: float
+    # 진입일 스코어로 확정한 익절가. 목표가 없는 포지션은 None 이다.
+    # 기본값을 두지 않는다 - mark_price 와 같은 규약이다.
+    target_price: Optional[float]
 
 
 @dataclass(frozen=True)
@@ -159,6 +162,7 @@ def _make_trade(pos: er.Position, market: str, source: str,
         initial_stop=pos.initial_stop,
         high_since_entry=pos.high_since_entry,
         stop=pos.stop,
+        target_price=pos.target_price,
     )
 
 
@@ -215,8 +219,11 @@ def simulate_ticker(ticker: str, market: str, rows: list, bars: dict,
         if step.should_enter and bar is not None:
             if pos is None and not closed_this_bar:
                 if bar.atr14:
+                    # 진입일 행의 target 만 쓴다. 이후 스캔에서 값이 바뀌어도
+                    # 목표가는 따라가지 않는다.
                     pos = er.open_position(ticker, row["date"], bar.open,
-                                           bar.atr14, params)
+                                           bar.atr14, params,
+                                           row.get("target"))
                     pos = er.advance(pos, bar, params)
                     open_source = row["source"]
                     last_close = bar.close

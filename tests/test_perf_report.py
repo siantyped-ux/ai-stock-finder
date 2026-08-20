@@ -3,6 +3,7 @@ import sys
 import pytest
 from openpyxl import load_workbook
 
+import exit_rules as er
 import perf_report as pr
 import trade_sim as ts
 
@@ -19,6 +20,7 @@ def _trade(**kw):
         exit_reason="TRAIL", bars_held=2, is_open=False,
         gross_r=1.67, cost_r=0.05, net_r=1.62,
         initial_stop=94.0, high_since_entry=110.0, stop=94.0,
+        target_price=None,
     )
     base.update(kw)
     return ts.Trade(**base)
@@ -253,7 +255,7 @@ def test_open_sheet_appends_the_stop_columns(tmp_path):
 
     header = [c.value for c in load_workbook(path)["미결포지션"][1]]
 
-    assert header[13:] == ["손절가", "손절까지(%)", "트레일 발동가", "트레일"]
+    assert header[13:17] == ["손절가", "손절까지(%)", "트레일 발동가", "트레일"]
 
 
 def test_stop_distance_is_negative_because_it_is_a_drop(tmp_path):
@@ -298,6 +300,78 @@ def test_closed_sheet_is_untouched_by_the_stop_columns(tmp_path):
 
     assert len(header) == 13
     assert "손절가" not in header
+
+
+def test_open_sheet_appends_the_target_columns(tmp_path):
+    path = tmp_path / "r.xlsx"
+    pr.write_xlsx(path, pr.build_rows(
+        _result([_held(target_price=109.0)]), FX))
+
+    header = [c.value for c in load_workbook(path)["미결포지션"][1]]
+
+    assert header[17:] == ["목표(%)", "목표가", "달성률(%)", "위험보상"]
+
+
+def test_target_progress_measures_the_way_to_the_target():
+    # 진입 100 · 목표 109 · 평가 101.5 → 목표폭 9 중 1.5 만큼 왔다.
+    # 위험보상 = 목표폭 9 / 1R 6 = 1.5
+    row = pr.build_rows(_result([_held(target_price=109.0)]), FX)["open"][0]
+
+    assert row["target_pct"] == pytest.approx(9.0)
+    assert row["target_price"] == pytest.approx(109.0)
+    assert row["target_progress_pct"] == pytest.approx(16.6667, abs=1e-4)
+    assert row["reward_risk"] == pytest.approx(1.5)
+
+
+def test_target_progress_is_negative_below_the_entry():
+    # 진입가 아래면 목표에서 멀어진 것이다. 부호가 없으면 진행처럼 읽힌다.
+    row = pr.build_rows(
+        _result([_held(mark_price=97.0, target_price=109.0)]), FX)["open"][0]
+
+    assert row["target_progress_pct"] == pytest.approx(-33.3333, abs=1e-4)
+
+
+def test_target_columns_are_blank_without_a_target():
+    row = pr.build_rows(_result([_held()]), FX)["open"][0]
+
+    assert row["target_pct"] is None
+    assert row["target_price"] is None
+    assert row["target_progress_pct"] is None
+    assert row["reward_risk"] is None
+
+
+def test_closed_sheet_is_untouched_by_the_target_columns(tmp_path):
+    path = tmp_path / "r.xlsx"
+    pr.write_xlsx(path, pr.build_rows(
+        _result([_trade(target_price=109.0)]), FX))
+
+    header = [c.value for c in load_workbook(path)["청산완료"][1]]
+
+    assert "목표가" not in header
+    assert header[-1] == "청산사유"
+
+
+def _summary_rows(path):
+    return {r[0].value: r[1].value
+            for r in load_workbook(path)["요약"].iter_rows(min_col=1,
+                                                          max_col=2)}
+
+
+def test_summary_says_the_target_exit_is_off_by_default(tmp_path):
+    # 컬럼은 항상 보이는데 규칙은 꺼져 있다. 어느 쪽인지 적어 두지 않으면
+    # 목표가가 익절 예고처럼 읽힌다.
+    path = tmp_path / "r.xlsx"
+    pr.write_xlsx(path, pr.build_rows(_result([_trade()]), FX))
+
+    assert _summary_rows(path)["목표가 익절"] == "사용 안 함 (--use-target 으로 켬)"
+
+
+def test_summary_says_the_target_exit_is_on_when_enabled(tmp_path):
+    path = tmp_path / "r.xlsx"
+    pr.write_xlsx(path, pr.build_rows(_result([_trade()]), FX,
+                                      params=er.Params(use_target=True)))
+
+    assert _summary_rows(path)["목표가 익절"] == "사용함 (목표가 도달 시 청산)"
 
 
 SUMMARY = {

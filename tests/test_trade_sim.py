@@ -194,6 +194,63 @@ def test_signal_exit_uses_the_row_total():
     assert trades[0].exit_price == 100.0    # 시가 체결
 
 
+def _target_row(date, target, signal="BUY"):
+    return {"date": date, "signal": signal, "total": 75,
+            "source": "live", "target": target}
+
+
+def test_target_price_reaches_the_trade():
+    rows = [_target_row("d1", 9)]
+    bars = {"d1": _bar("d1", 100.0, 101.0, 99.0, 100.5)}
+
+    trades = ts.simulate_ticker("X", "US", rows, bars, P, C)
+
+    assert trades[0].target_price == pytest.approx(109.0)
+
+
+def test_target_price_stays_fixed_when_later_scans_change_it():
+    # 진입 후 스코어가 올라 target 이 30% 가 돼도 목표가는 진입일 값이다.
+    rows = [_target_row("d1", 9), _target_row("d2", 30)]
+    bars = {"d1": _bar("d1", 100.0, 101.0, 99.0, 100.5),
+            "d2": _bar("d2", 100.5, 102.0, 100.0, 101.5)}
+
+    trades = ts.simulate_ticker("X", "US", rows, bars, P, C)
+
+    assert trades[0].target_price == pytest.approx(109.0)
+
+
+def test_missing_target_key_leaves_no_target():
+    # 예전 백필 파일에는 target 컬럼이 없을 수 있다. 죽지 않아야 한다.
+    rows = [_row("d1", "BUY")]
+    bars = {"d1": _bar("d1", 100.0, 101.0, 99.0, 100.5)}
+
+    trades = ts.simulate_ticker("X", "US", rows, bars, P, C)
+
+    assert trades[0].target_price is None
+
+
+def test_target_exit_closes_the_trade_when_enabled():
+    rows = [_target_row("d1", 9), _target_row("d2", 9)]
+    bars = {"d1": _bar("d1", 100.0, 101.0, 99.0, 100.5),
+            "d2": _bar("d2", 101.0, 110.0, 100.0, 109.0)}
+
+    trades = ts.simulate_ticker("X", "US", rows, bars,
+                                er.Params(use_target=True), C)
+
+    assert trades[0].exit_reason == "TARGET"
+    assert trades[0].exit_price == pytest.approx(109.0)
+
+
+def test_target_exit_does_nothing_by_default():
+    rows = [_target_row("d1", 9), _target_row("d2", 9)]
+    bars = {"d1": _bar("d1", 100.0, 101.0, 99.0, 100.5),
+            "d2": _bar("d2", 101.0, 110.0, 100.0, 109.0)}
+
+    trades = ts.simulate_ticker("X", "US", rows, bars, P, C)
+
+    assert trades[0].is_open is True
+
+
 def _trade(net_r, is_open=False, reason="STOP"):
     return ts.Trade(
         ticker="X", market="US", source="live", entry_date="d1",
@@ -205,6 +262,7 @@ def _trade(net_r, is_open=False, reason="STOP"):
         gross_r=net_r + 0.05, cost_r=0.05, net_r=net_r,
         mark_price=106.0,
         initial_stop=94.0, high_since_entry=106.0, stop=94.0,
+        target_price=None,
     )
 
 

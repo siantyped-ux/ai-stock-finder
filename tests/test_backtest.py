@@ -70,3 +70,60 @@ def test_run_deduplicates_repeated_ticker_dates(monkeypatch):
 
     assert len(result["trades"]) == 1
     assert result["trades"][0].bars_held == 2      # 중복이면 3 이 된다
+
+
+def _archive_row(**over):
+    row = {"ticker": "X", "date": "2026-01-02", "market": "US",
+           "signal": "BUY", "total": "75", "target": "9", "source": "live"}
+    row.update(over)
+    return row
+
+
+def _stub_bars():
+    import exit_rules as er
+    return {
+        "2026-01-02": er.Bar("2026-01-02", 100.0, 101.0, 99.0, 100.0,
+                             atr14=2.0, total=None),
+        "2026-01-03": er.Bar("2026-01-03", 100.0, 101.0, 99.0, 100.0,
+                             atr14=2.0, total=None),
+    }
+
+
+def _spy_rows(monkeypatch, rows):
+    """run() 이 simulate_ticker 에 실제로 넘긴 행을 가로챈다."""
+    import trade_sim as ts
+
+    seen = {}
+    real = ts.simulate_ticker
+
+    def spy(ticker, market, prepared, bars, params, costs):
+        seen["rows"] = prepared
+        return real(ticker, market, prepared, bars, params, costs)
+
+    monkeypatch.setattr(bt, "load_archive", lambda pattern: rows)
+    monkeypatch.setattr(bt, "fetch_bars", lambda ticker: _stub_bars())
+    monkeypatch.setattr(ts, "simulate_ticker", spy)
+    bt.run()
+    return seen["rows"]
+
+
+def test_prepared_rows_carry_the_target(monkeypatch):
+    # 아카이브의 target 이 여기서 끊기면 목표가가 조용히 전부 None 이 된다.
+    rows = _spy_rows(monkeypatch, [_archive_row()])
+
+    assert rows[0]["target"] == 9
+
+
+def test_prepared_rows_tolerate_a_missing_target_column(monkeypatch):
+    # 예전 백필 파일에는 target 컬럼이 없다. 죽지 않고 None 이어야 한다.
+    row = _archive_row()
+    del row["target"]
+    rows = _spy_rows(monkeypatch, [row])
+
+    assert rows[0]["target"] is None
+
+
+def test_prepared_rows_tolerate_an_empty_target(monkeypatch):
+    rows = _spy_rows(monkeypatch, [_archive_row(target="")])
+
+    assert rows[0]["target"] is None

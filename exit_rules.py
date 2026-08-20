@@ -14,7 +14,7 @@ from typing import Optional
 
 @dataclass(frozen=True)
 class Params:
-    """청산 파라미터 4개.
+    """청산 파라미터 5개.
 
     v5 설계서가 파라미터 5개 초과를 금지한다. 기본값은 전부 튜닝되지 않았다 —
     백테스트가 없어 맞출 수 없고, 과최적화 금지 원칙상 지금 맞춰서도 안 된다.
@@ -22,11 +22,16 @@ class Params:
     두 ATR 배수가 같은 값인 것은 우연이 아니다. 고점이 진입가+1R 에 닿는 순간
     트레일 손절선이 정확히 진입가가 되어, "1R 도달 시 본전이동"이 파라미터를
     추가하지 않고 자동으로 나온다.
+
+    use_target 은 기본이 꺼짐이다. 목표폭 대비 손절폭(위험보상비)이 1 근처라
+    목표가 익절이 기대값을 올리는지 내리는지 아직 알 수 없다. 켠 결과와 끈
+    결과를 나란히 비교할 수 있게만 해 두고, 기본값은 건드리지 않는다.
     """
     stop_atr_mult: float = 3.0
     trail_atr_mult: float = 3.0
     max_hold_days: int = 60
     exit_total: int = 60
+    use_target: bool = False
 
 
 @dataclass(frozen=True)
@@ -59,21 +64,31 @@ class Position:
     high_since_entry: float
     stop: float
     bars_held: int
+    # 진입일 스코어의 목표 상승률로 확정한 익절가. 목표를 알 수 없거나
+    # 목표가가 진입가 이하면 None 이고, 그 포지션에는 TARGET 규칙이 없다.
+    # initial_stop 과 같이 진입 시점에 고정한다 - 도중에 움직이면 "목표
+    # 달성" 의 정의가 흔들려 달성률을 비교할 수 없다.
+    target_price: Optional[float]
 
 
 @dataclass(frozen=True)
 class ExitDecision:
-    reason: str      # "TIME" | "SIGNAL" | "STOP" | "TRAIL"
+    reason: str      # "TIME" | "SIGNAL" | "STOP" | "TRAIL" | "TARGET"
     price: float
     date: str
 
 
 def open_position(ticker: str, date: str, entry_price: float,
-                  atr_at_entry: Optional[float], params: Params) -> Position:
-    """진입 시점 ATR 로 초기 손절선과 R 을 확정한다.
+                  atr_at_entry: Optional[float], params: Params,
+                  target_pct: Optional[float] = None) -> Position:
+    """진입 시점 ATR 로 초기 손절선과 R 을, 진입일 스코어로 목표가를 확정한다.
 
     초기 손절은 진입 시점 ATR 로 고정한다 — R 정의가 도중에 흔들리면 손익을
-    R 배수로 비교할 수 없게 된다.
+    R 배수로 비교할 수 없게 된다. 목표가도 같은 이유로 진입 시점에 고정한다.
+
+    target_pct 는 아카이브의 target 컬럼 값(3개월 기대 상승률 %)이다.
+    없거나 0 이하면 목표가를 두지 않는다 - 목표가가 진입가 이하이면 익절이
+    곧 손실 확정이 되어 규칙이 뒤집힌다.
     """
     if atr_at_entry is None or atr_at_entry <= 0:
         raise ValueError(
@@ -82,6 +97,8 @@ def open_position(ticker: str, date: str, entry_price: float,
         )
 
     initial_stop = entry_price - params.stop_atr_mult * atr_at_entry
+    target_price = (entry_price * (1 + target_pct / 100.0)
+                    if target_pct is not None and target_pct > 0 else None)
     return Position(
         ticker=ticker,
         entry_date=date,
@@ -91,6 +108,7 @@ def open_position(ticker: str, date: str, entry_price: float,
         high_since_entry=entry_price,
         stop=initial_stop,
         bars_held=0,
+        target_price=target_price,
     )
 
 
@@ -148,6 +166,10 @@ def evaluate(position: Position, bar: Bar,
     순서는 하루 안의 시간 순서다. TIME 과 SIGNAL 은 개장 전에 결정된다 —
     bars_held 는 결정론적이고 total 은 KST 07:00 스캔에서 이미 나와 있다.
     따라서 둘 다 시가 시장가로 나가고, 장중에 걸린 손절보다 먼저 체결된다.
+
+    TARGET 은 맨 뒤다. 고가가 목표를, 저가가 손절선을 같은 봉에서 건드리면
+    일봉만으로는 어느 쪽이 먼저였는지 알 수 없다. 백테스트가 실제보다 좋게
+    나오는 것보다 나쁘게 나오는 편이 안전하므로 손절을 먼저 잡는다.
     """
     if position.bars_held >= params.max_hold_days:
         return ExitDecision("TIME", bar.open, bar.date)
@@ -161,5 +183,11 @@ def evaluate(position: Position, bar: Bar,
         # 갭하락으로 시가가 이미 손절선 아래면 그 가격에 체결된다.
         fill = min(bar.open, stop)
         return ExitDecision("TRAIL" if trailing else "STOP", fill, bar.date)
+
+    if (params.use_target and position.target_price is not None
+            and bar.high >= position.target_price):
+        # 갭상승으로 시가가 이미 목표 위면 그 가격에 체결된다.
+        fill = max(bar.open, position.target_price)
+        return ExitDecision("TARGET", fill, bar.date)
 
     return None
