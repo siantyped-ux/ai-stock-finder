@@ -3,6 +3,7 @@ import sys
 import pytest
 from openpyxl import load_workbook
 
+import exit_rules as er
 import perf_report as pr
 import trade_sim as ts
 
@@ -348,6 +349,29 @@ def test_closed_sheet_is_untouched_by_the_target_columns(tmp_path):
 
     assert "목표가" not in header
     assert header[-1] == "청산사유"
+
+
+def _summary_rows(path):
+    return {r[0].value: r[1].value
+            for r in load_workbook(path)["요약"].iter_rows(min_col=1,
+                                                          max_col=2)}
+
+
+def test_summary_says_the_target_exit_is_off_by_default(tmp_path):
+    # 컬럼은 항상 보이는데 규칙은 꺼져 있다. 어느 쪽인지 적어 두지 않으면
+    # 목표가가 익절 예고처럼 읽힌다.
+    path = tmp_path / "r.xlsx"
+    pr.write_xlsx(path, pr.build_rows(_result([_trade()]), FX))
+
+    assert _summary_rows(path)["목표가 익절"] == "사용 안 함 (--use-target 으로 켬)"
+
+
+def test_summary_says_the_target_exit_is_on_when_enabled(tmp_path):
+    path = tmp_path / "r.xlsx"
+    pr.write_xlsx(path, pr.build_rows(_result([_trade()]), FX,
+                                      params=er.Params(use_target=True)))
+
+    assert _summary_rows(path)["목표가 익절"] == "사용함 (목표가 도달 시 청산)"
 
 
 SUMMARY = {

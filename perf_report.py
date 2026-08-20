@@ -198,6 +198,7 @@ def build_rows(result: dict, fx: dict, capital: int = CAPITAL_KRW,
             "open_n": len(opened),
             "open_net_krw": sum(r["net_krw"] for r in opened),
             "capital": capital,
+            "use_target": params.use_target,
         },
     }
 
@@ -334,6 +335,10 @@ def _write_summary(ws, s: dict) -> None:
                  "슬리피지 편도 0.05%"),
         ("환율", "yfinance USDKRW=X 일봉 종가. 휴일은 직전 영업일로 소급"),
         ("승률·평균", "청산완료만으로 계산한다. 미결은 제외"),
+        # 목표 컬럼은 규칙이 꺼져 있어도 보인다. 어느 쪽인지 밝히지 않으면
+        # 목표가가 익절 예고처럼 읽힌다.
+        ("목표가 익절", "사용함 (목표가 도달 시 청산)" if s["use_target"]
+                      else "사용 안 함 (--use-target 으로 켬)"),
     ]
 
     for label, value in lines:
@@ -388,9 +393,12 @@ def main():
     p.add_argument("--capital", type=int, default=CAPITAL_KRW)
     p.add_argument("--mail", action="store_true",
                    help="리포트를 메일로 보낸다 (SMTP_* 환경변수 필요)")
+    p.add_argument("--use-target", action="store_true",
+                   help="목표가 도달 시 익절한 결과로 리포트를 낸다")
     args = p.parse_args()
 
-    result = backtest.run(args.history)
+    params = er.Params(use_target=args.use_target)
+    result = backtest.run(args.history, params)
     if not result["dates"]:
         raise SystemExit("아카이브가 비어 있다")
 
@@ -400,7 +408,7 @@ def main():
     fx_end = (history.kst_now() + timedelta(days=1)).strftime("%Y-%m-%d")
     fx = fetch_fx(fx_start, fx_end)
 
-    built = build_rows(result, fx, args.capital)
+    built = build_rows(result, fx, args.capital, params=params)
     stamp = history.kst_now().strftime("%Y-%m-%d")
     path = Path(args.out_dir) / f"perf_{stamp}.xlsx"
     write_xlsx(path, built)
