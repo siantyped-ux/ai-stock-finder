@@ -127,6 +127,8 @@ def run(pattern: str = "history/*.csv", params: er.Params = None,
         market = rs[0]["market"]
         prepared = [{"date": r["date"], "signal": r["signal"],
                      "total": int(r["total"]) if r["total"] else None,
+                     # 목표 상승률(%). 예전 백필 파일에는 컬럼이 없을 수 있다.
+                     "target": int(r["target"]) if r.get("target") else None,
                      "source": r["source"]} for r in rs]
         trades.extend(ts.simulate_ticker(ticker, market, prepared, bars,
                                          params, costs))
@@ -206,6 +208,8 @@ def main():
     p.add_argument("--trail-atr-mult", type=float, default=3.0)
     p.add_argument("--max-hold-days", type=int, default=60)
     p.add_argument("--exit-total", type=int, default=60)
+    p.add_argument("--use-target", action="store_true",
+                   help="목표가 도달 시 익절한다 (기본: 사용 안 함)")
     args = p.parse_args()
 
     params = er.Params(
@@ -213,6 +217,7 @@ def main():
         trail_atr_mult=args.trail_atr_mult,
         max_hold_days=args.max_hold_days,
         exit_total=args.exit_total,
+        use_target=args.use_target,
     )
     report(run(args.history, params))
 
