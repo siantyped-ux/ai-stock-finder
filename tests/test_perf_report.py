@@ -1,3 +1,5 @@
+import sys
+
 import pytest
 from openpyxl import load_workbook
 
@@ -351,3 +353,48 @@ def test_summary_text_leads_with_the_warning():
     assert "파이프라인 검증용" in text
     assert "73% 가 backfill" in text
     assert "60거래일" in text
+
+
+def _stub_run(*_a, **_kw):
+    """backtest.run() 최소 결과. 트레이드 0건이라 청산 0건 경로도 탄다."""
+    return _result([])
+
+
+def test_mail_flag_sends_the_same_body_that_gets_printed(monkeypatch, tmp_path):
+    sent = []
+    monkeypatch.setattr(pr.backtest, "run", _stub_run)
+    monkeypatch.setattr(pr, "fetch_fx", lambda start, end: FX)
+    monkeypatch.setattr(pr.mailer, "send",
+                        lambda *a, **kw: sent.append((a, kw)))
+    # 실 환경변수가 없어도 되도록 자격증명 조회 자체를 스텁한다.
+    monkeypatch.setattr(pr.mailer, "creds_from_env",
+                        lambda: {"to": "a@b.c", "user": "a@b.c",
+                                 "password": "x"})
+    monkeypatch.setattr(sys, "argv",
+                        ["perf_report.py", "--mail", "--out-dir", str(tmp_path)])
+
+    pr.main()
+
+    assert len(sent) == 1
+    (subject, body, attachments), kw = sent[0]
+    assert subject.startswith("[성과리포트]")
+    assert "파이프라인 검증용" in body
+    assert "상세는 첨부된" in body
+
+    written = list(tmp_path.glob("*.xlsx"))
+    assert len(written) == 1
+    assert attachments == [written[0]]
+
+
+def test_without_mail_flag_nothing_gets_sent(monkeypatch, tmp_path):
+    sent = []
+    monkeypatch.setattr(pr.backtest, "run", _stub_run)
+    monkeypatch.setattr(pr, "fetch_fx", lambda start, end: FX)
+    monkeypatch.setattr(pr.mailer, "send",
+                        lambda *a, **kw: sent.append((a, kw)))
+    monkeypatch.setattr(sys, "argv",
+                        ["perf_report.py", "--out-dir", str(tmp_path)])
+
+    pr.main()
+
+    assert sent == []

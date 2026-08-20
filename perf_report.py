@@ -20,6 +20,7 @@ import backtest
 import console
 import exit_rules as er
 import history
+import mailer
 import stops
 import trade_sim as ts
 
@@ -339,6 +340,8 @@ def main():
     p.add_argument("--history", default="history/*.csv")
     p.add_argument("--out-dir", default="reports")
     p.add_argument("--capital", type=int, default=CAPITAL_KRW)
+    p.add_argument("--mail", action="store_true",
+                   help="리포트를 메일로 보낸다 (SMTP_* 환경변수 필요)")
     args = p.parse_args()
 
     result = backtest.run(args.history)
@@ -356,10 +359,17 @@ def main():
     path = Path(args.out_dir) / f"perf_{stamp}.xlsx"
     write_xlsx(path, built)
 
-    s = built["summary"]
+    body = summary_text(built["summary"])
     print(f"{path} 작성 완료")
-    print(f"  청산완료 {s['closed_n']}건 · 누적 순수익 {s['net_krw']:+,.0f}원")
-    print(f"  미결 {s['open_n']}건 · 평가 순손익 {s['open_net_krw']:+,.0f}원")
+    print(body)
+
+    if args.mail:
+        # 발송 실패를 삼키지 않는다. 조용히 안 보내는 것보다 잡이 실패하는
+        # 편이 낫다 - fetch_fx 가 고정환율로 대체하지 않는 것과 같다.
+        subject = f"[성과리포트] {stamp} (KST)"
+        mailer.send(subject, f"{body}\n\n상세는 첨부된 {path.name} 참고",
+                    [path], **mailer.creds_from_env())
+        print(f"메일 발송 완료: {subject}")
 
 
 if __name__ == "__main__":
