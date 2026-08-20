@@ -143,25 +143,26 @@ jobs:
       issues: write
 
     steps:
-      - name: Open an issue for the lost day
+      - name: Checkout repository
+        uses: actions/checkout@v7
+
+      - name: Setup Python 3.11
+        uses: actions/setup-python@v7
+        with:
+          python-version: '3.11'
+
+      # mailer.py 는 표준 라이브러리만 쓴다. pip install 을 하지 않는 것은
+      # 의도다 - 스캔이 의존성 설치에서 죽어도 알림은 나가야 한다.
+
+      - name: Write the alert body
+        id: body
         env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          REPO: ${{ github.repository }}
           RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
         run: |
           # KST 는 서머타임이 없어 UTC+9 고정
           KST_DATE=$(date -u -d '+9 hours' +'%Y-%m-%d')
-          TITLE="스캔 실패 ${KST_DATE} (KST) - 그날 스코어 유실"
-
-          # 같은 날 재실행으로 이슈가 중복되지 않게 한다
-          EXISTING=$(gh issue list --repo "$REPO" --state open \
-            --search "\"$TITLE\" in:title" --json number --jq 'length')
-          if [ "$EXISTING" != "0" ]; then
-            echo "이미 열린 이슈가 있다. 건너뛴다."
-            exit 0
-          fi
-
-          gh issue create --repo "$REPO" --title "$TITLE" --body "$(cat <<EOB
+          echo "kst_date=$KST_DATE" >> "$GITHUB_OUTPUT"
+          cat > alert_body.txt <<EOB
           ${KST_DATE} (KST) 자동 스캔이 실패했습니다.
 
           **이 날짜의 스코어는 복원할 수 없습니다.** 스코어는 시점 데이터라
@@ -182,4 +183,41 @@ jobs:
           복구되면 이 이슈를 닫아 주세요. 하루치 공백은 남지만, 며칠씩 조용히
           비는 것을 막는 것이 이 알림의 목적입니다.
           EOB
-          )"
+
+      - name: Open an issue for the lost day
+        id: issue
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REPO: ${{ github.repository }}
+          KST_DATE: ${{ steps.body.outputs.kst_date }}
+        run: |
+          TITLE="스캔 실패 ${KST_DATE} (KST) - 그날 스코어 유실"
+
+          # 같은 날 재실행으로 이슈가 중복되지 않게 한다. 메일도 같이 건너뛴다 -
+          # 재실행마다 같은 메일이 쌓일 이유가 없다.
+          EXISTING=$(gh issue list --repo "$REPO" --state open \
+            --search "\"$TITLE\" in:title" --json number --jq 'length')
+          if [ "$EXISTING" != "0" ]; then
+            echo "이미 열린 이슈가 있다. 건너뛴다."
+            echo "notify=no" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+
+          echo "notify=yes" >> "$GITHUB_OUTPUT"
+          gh issue create --repo "$REPO" --title "$TITLE" \
+            --assignee siantyped-ux --body-file alert_body.txt
+
+      # 중복이라고 명시적으로 판정됐을 때만 메일을 건너뛴다. == 'yes' 로 쓰면
+      # 안 된다 - 상태 함수가 없는 if 에는 success() 가 암묵적으로 붙어서,
+      # gh 가 실패하면 이슈도 못 열고 메일도 조용히 스킵된다. GitHub 알림을
+      # 믿을 수 없을 때 도달을 보장하는 것이 이 메일의 존재 이유다.
+      - name: Send the alert mail
+        if: always() && steps.issue.outputs.notify != 'no'
+        env:
+          SMTP_USER: ${{ secrets.SMTP_USER }}
+          SMTP_PASSWORD: ${{ secrets.SMTP_PASSWORD }}
+          MAIL_TO: ${{ secrets.MAIL_TO }}
+        run: |
+          python mailer.py \
+            --subject "[스캔실패] ${{ steps.body.outputs.kst_date }} (KST) - 그날 스코어 유실" \
+            --body-file alert_body.txt

@@ -33,19 +33,29 @@ jobs:
       - name: Install dependencies
         run: pip install -r requirements.txt
 
-      - name: Build the performance report
+      - name: Build and mail the performance report
         id: build
+        env:
+          SMTP_USER: ${{ secrets.SMTP_USER }}
+          SMTP_PASSWORD: ${{ secrets.SMTP_PASSWORD }}
+          MAIL_TO: ${{ secrets.MAIL_TO }}
         run: |
-          python perf_report.py
           # KST 는 서머타임이 없어 UTC+9 고정. TZ=Asia/Seoul 은 tzdata 가 없는
           # 환경에서 조용히 UTC 를 KST 라고 찍으므로 오프셋으로 계산한다.
+          # 리포트보다 먼저 찍는다 - 메일 발송이 실패해도 artifact 이름이
+          # 비지 않아야 한다.
           echo "kst_date=$(date -u -d '+9 hours' +'%Y-%m-%d')" >> "$GITHUB_OUTPUT"
+          python perf_report.py --mail
 
       # 저장소가 public 이라 리포트를 커밋하지 않는다. 손익 금액이 영구히
       # 공개 이력에 남기 때문이다. 대신 artifact 로만 올린다 - 90일 뒤
       # 만료되지만, 원천 데이터(history/*.csv)가 남아 있으므로 언제든
       # `python perf_report.py` 로 같은 리포트를 다시 만들 수 있다.
+      # 메일 발송이 실패해도 리포트는 이미 만들어져 있다. success() 로 두면
+      # 메일 하나 때문에 멀쩡한 90일치 원본이 사라진다. if-no-files-found:
+      # error 가 남아 있으므로 리포트가 정말 없을 때는 여전히 실패한다.
       - name: Upload the report as an artifact
+        if: always()
         uses: actions/upload-artifact@v7
         with:
           name: perf-report-${{ steps.build.outputs.kst_date }}
@@ -55,7 +65,10 @@ jobs:
 
   # 리포트가 실패하면 그날 성과 스냅샷이 비는데, 스캔과 달리 원천 데이터는
   # 남아 있으므로 재실행으로 복구된다. 그래도 조용히 넘어가면 며칠씩 비는
-  # 것을 눈치채지 못하므로 이슈를 연다.
+  # 것을 눈치채지 못하므로 이슈를 열고 메일을 보낸다.
+  #
+  # 이슈는 기록이고 메일이 도착 보장이다. 이슈만으로는 알림이 가지 않는다 -
+  # 저장소 Watch 인원이 0이면 봇이 연 이슈는 아무에게도 닿지 않는다.
   notify-failure:
     needs: report
     if: always() && needs.report.result == 'failure'
@@ -65,25 +78,26 @@ jobs:
       issues: write
 
     steps:
-      - name: Open an issue for the missing report
+      - name: Checkout repository
+        uses: actions/checkout@v7
+
+      - name: Setup Python 3.11
+        uses: actions/setup-python@v6
+        with:
+          python-version: '3.11'
+
+      # mailer.py 는 표준 라이브러리만 쓴다. pip install 을 하지 않는 것은
+      # 의도다 - 의존성 설치가 죽어서 실패한 경우에도 알림은 나가야 한다.
+
+      - name: Write the alert body
+        id: body
         env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          REPO: ${{ github.repository }}
           RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
         run: |
           # KST 는 서머타임이 없어 UTC+9 고정
           KST_DATE=$(date -u -d '+9 hours' +'%Y-%m-%d')
-          TITLE="성과 리포트 실패 ${KST_DATE} (KST)"
-
-          # 같은 날 재실행으로 이슈가 중복되지 않게 한다
-          EXISTING=$(gh issue list --repo "$REPO" --state open \
-            --search "\"$TITLE\" in:title" --json number --jq 'length')
-          if [ "$EXISTING" != "0" ]; then
-            echo "이미 열린 이슈가 있다. 건너뛴다."
-            exit 0
-          fi
-
-          gh issue create --repo "$REPO" --title "$TITLE" --body "$(cat <<EOB
+          echo "kst_date=$KST_DATE" >> "$GITHUB_OUTPUT"
+          cat > alert_body.txt <<EOB
           ${KST_DATE} (KST) 성과 리포트 생성이 실패했습니다.
 
           스캔과 달리 원천 데이터(\`history/*.csv\`)는 남아 있으므로
@@ -100,7 +114,46 @@ jobs:
             첫 진입일보다 충분히 앞서지 않은 경우입니다.
           - **시세 조회 실패** — 요약 시트의 \`시세 조회 실패\` 항목을 보세요.
             일부 종목 실패는 리포트를 막지 않습니다.
+          - **메일 발송 실패** — \`SMTP 환경변수가 비어 있다\` 면 시크릿이
+            빠진 것이고, 인증 오류면 앱 비밀번호가 폐기된 것입니다.
           - **artifact 업로드 실패** — \`if-no-files-found: error\` 이므로
             \`reports/\` 가 비면 여기서 멈춥니다. 앞선 빌드 스텝의 로그를 보세요.
           EOB
-          )"
+
+      - name: Open an issue for the missing report
+        id: issue
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REPO: ${{ github.repository }}
+          KST_DATE: ${{ steps.body.outputs.kst_date }}
+        run: |
+          TITLE="성과 리포트 실패 ${KST_DATE} (KST)"
+
+          # 같은 날 재실행으로 이슈가 중복되지 않게 한다. 메일도 같이 건너뛴다 -
+          # 재실행마다 같은 메일이 쌓일 이유가 없다.
+          EXISTING=$(gh issue list --repo "$REPO" --state open \
+            --search "\"$TITLE\" in:title" --json number --jq 'length')
+          if [ "$EXISTING" != "0" ]; then
+            echo "이미 열린 이슈가 있다. 건너뛴다."
+            echo "notify=no" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+
+          echo "notify=yes" >> "$GITHUB_OUTPUT"
+          gh issue create --repo "$REPO" --title "$TITLE" \
+            --assignee siantyped-ux --body-file alert_body.txt
+
+      # 중복이라고 명시적으로 판정됐을 때만 메일을 건너뛴다. == 'yes' 로 쓰면
+      # 안 된다 - 상태 함수가 없는 if 에는 success() 가 암묵적으로 붙어서,
+      # gh 가 실패하면 이슈도 못 열고 메일도 조용히 스킵된다. GitHub 알림을
+      # 믿을 수 없을 때 도달을 보장하는 것이 이 메일의 존재 이유다.
+      - name: Send the alert mail
+        if: always() && steps.issue.outputs.notify != 'no'
+        env:
+          SMTP_USER: ${{ secrets.SMTP_USER }}
+          SMTP_PASSWORD: ${{ secrets.SMTP_PASSWORD }}
+          MAIL_TO: ${{ secrets.MAIL_TO }}
+        run: |
+          python mailer.py \
+            --subject "[리포트실패] ${{ steps.body.outputs.kst_date }} (KST)" \
+            --body-file alert_body.txt

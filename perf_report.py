@@ -20,6 +20,7 @@ import backtest
 import console
 import exit_rules as er
 import history
+import mailer
 import stops
 import trade_sim as ts
 
@@ -34,6 +35,21 @@ RATE_FMT = '#,##0.00'
 # 값은 12.34 로 저장하고 서식으로 % 를 붙인다. Excel 기본 0.00% 서식은
 # 값이 0.1234 여야 해서, 셀을 직접 읽는 쪽이 100배 틀린다.
 PCT_FMT = '0.00"%";-0.00"%"'
+
+
+def warning_lines(backfill_pct: float) -> list[str]:
+    """숫자만 보고 성능으로 오독하는 것을 막는 경고문.
+
+    요약 시트와 메일 본문이 같은 문장을 써야 한다. 한쪽만 고치는 사고를
+    막으려고 여기 한 벌만 둔다. 접두사(!!, 들여쓰기)는 각 렌더러가 붙인다 -
+    시트는 라벨-값 2열, 본문은 들여쓴 텍스트라 모양이 다르다.
+    """
+    return [
+        "이 리포트는 파이프라인 검증용이다. 시그널 성능의 근거가 아니다.",
+        f"아카이브의 {backfill_pct:.0f}% 가 backfill 이라 스코어가 "
+        "미확정 봉 결함에 오염돼 있다.",
+        "보유 상한 60거래일을 채운 표본이 나오기 전까지 승률·평균은 무의미하다.",
+    ]
 
 
 def fx_on(fx: dict, date: str, market: str) -> float:
@@ -219,13 +235,47 @@ def _write_sheet(ws, cols, rows) -> None:
         ws.column_dimensions[letter].width = max(len(title) + 4, 12)
 
 
+def summary_text(s: dict) -> str:
+    """요약 딕셔너리를 콘솔·메일 공용 본문으로 만든다.
+
+    win_rate 와 avg_net_pct 는 청산완료가 0건이면 None 이다. 포맷하면
+    터지므로 건수만 적는다.
+
+    총 수익률(%) 은 싣지 않는다. capital 은 종목당 투자금이라 총 투입금
+    대비 수익률을 내려면 청산 자금을 재투자하지 않는다는 가정을 몰래
+    들여오게 된다.
+    """
+    if s["closed_n"]:
+        closed_note = (f"청산 {s['closed_n']}건, 승률 {s['win_rate']:.1f}%, "
+                       f"평균 순수익률 {s['avg_net_pct']:+.2f}%")
+    else:
+        closed_note = "청산 0건"
+
+    failed = ", ".join(s["failed"]) if s["failed"] else "없음"
+    total = s["net_krw"] + s["open_net_krw"]
+
+    warn = warning_lines(s["backfill_pct"])
+    return "\n".join([
+        f"!! {warn[0]}",
+        f"   {warn[1]}",
+        f"   {warn[2]}",
+        "",
+        f"총 손익      {total:+,.0f}원",
+        f"  └ 실현     {s['net_krw']:+,.0f}원  ({closed_note})",
+        f"  └ 미실현   {s['open_net_krw']:+,.0f}원  (보유 {s['open_n']}종목)",
+        "",
+        f"평가기준일   {s['mark_date']}",
+        f"시세 조회 실패: {failed}",
+    ])
+
+
 def _write_summary(ws, s: dict) -> None:
     """라벨-값 2열. 경고를 맨 위에 고정한다."""
+    warn = warning_lines(s["backfill_pct"])
     lines = [
-        ("!! 경고", "이 리포트는 파이프라인 검증용이다. 시그널 성능의 근거가 아니다."),
-        ("", f"아카이브의 {s['backfill_pct']:.0f}% 가 backfill 이라 "
-             "스코어가 미확정 봉 결함에 오염돼 있다."),
-        ("", "보유 상한 60거래일을 채운 표본이 나오기 전까지 승률·평균은 무의미하다."),
+        ("!! 경고", warn[0]),
+        ("", warn[1]),
+        ("", warn[2]),
         ("", ""),
         ("리포트 생성", s["generated"]),
         ("아카이브 기간", f"{s['archive_from']} ~ {s['archive_to']}"),
@@ -304,6 +354,8 @@ def main():
     p.add_argument("--history", default="history/*.csv")
     p.add_argument("--out-dir", default="reports")
     p.add_argument("--capital", type=int, default=CAPITAL_KRW)
+    p.add_argument("--mail", action="store_true",
+                   help="리포트를 메일로 보낸다 (SMTP_* 환경변수 필요)")
     args = p.parse_args()
 
     result = backtest.run(args.history)
@@ -321,10 +373,17 @@ def main():
     path = Path(args.out_dir) / f"perf_{stamp}.xlsx"
     write_xlsx(path, built)
 
-    s = built["summary"]
+    body = summary_text(built["summary"])
     print(f"{path} 작성 완료")
-    print(f"  청산완료 {s['closed_n']}건 · 누적 순수익 {s['net_krw']:+,.0f}원")
-    print(f"  미결 {s['open_n']}건 · 평가 순손익 {s['open_net_krw']:+,.0f}원")
+    print(body)
+
+    if args.mail:
+        # 발송 실패를 삼키지 않는다. 조용히 안 보내는 것보다 잡이 실패하는
+        # 편이 낫다 - fetch_fx 가 고정환율로 대체하지 않는 것과 같다.
+        subject = f"[성과리포트] {stamp} (KST)"
+        mailer.send(subject, f"{body}\n\n상세는 첨부된 {path.name} 참고",
+                    [path], **mailer.creds_from_env())
+        print(f"메일 발송 완료: {subject}")
 
 
 if __name__ == "__main__":
