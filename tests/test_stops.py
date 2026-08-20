@@ -17,6 +17,7 @@ def _open(**kw):
         exit_reason=None, bars_held=2, is_open=True,
         gross_r=0.25, cost_r=0.05, net_r=0.20,
         initial_stop=94.0, high_since_entry=102.0, stop=94.0,
+        target_price=None,
     )
     base.update(kw)
     return ts.Trade(**base)
