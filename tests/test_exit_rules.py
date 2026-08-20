@@ -16,6 +16,31 @@ def test_params_defaults_are_the_four_documented_values():
     assert P.exit_total == 60
 
 
+def test_use_target_defaults_to_off():
+    # 익절이 기대값을 올리는지 모르는 상태다. 기본값을 바꾸지 않는다.
+    assert P.use_target is False
+
+
+def test_open_position_sets_target_price_from_target_pct():
+    pos = er.open_position("NVDA", "2026-08-19", entry_price=100.0,
+                           atr_at_entry=2.0, params=P, target_pct=9)
+    assert pos.target_price == pytest.approx(109.0)
+
+
+def test_open_position_without_target_pct_has_no_target():
+    pos = er.open_position("NVDA", "2026-08-19", entry_price=100.0,
+                           atr_at_entry=2.0, params=P)
+    assert pos.target_price is None
+
+
+@pytest.mark.parametrize("bad", [0, -2, -15])
+def test_non_positive_target_pct_disables_the_target(bad):
+    # 목표가가 진입가 이하면 "익절"이 즉시 손실 확정이 된다.
+    pos = er.open_position("NVDA", "2026-08-19", entry_price=100.0,
+                           atr_at_entry=2.0, params=P, target_pct=bad)
+    assert pos.target_price is None
+
+
 def test_open_position_sets_stop_and_r_unit_from_atr():
     pos = er.open_position("NVDA", "2026-08-19", entry_price=100.0,
                            atr_at_entry=2.0, params=P)
@@ -245,10 +270,11 @@ def test_module_has_no_io_dependencies():
         assert banned not in src, f"exit_rules 가 {banned} 를 쓰면 안 된다"
 
 
-def test_params_has_exactly_four_fields():
-    # v5 설계서가 파라미터 5개 초과를 금지한다.
+def test_params_stays_within_the_five_field_cap():
+    # v5 설계서가 파라미터 5개 초과를 금지한다. use_target 으로 상한을 채웠다 -
+    # 여섯 번째를 넣으려면 먼저 기존 파라미터를 하나 접어야 한다.
     import dataclasses
-    assert len(dataclasses.fields(er.Params)) == 4
+    assert len(dataclasses.fields(er.Params)) == 5
 
 
 def test_time_does_not_fire_one_bar_before_the_cap():
