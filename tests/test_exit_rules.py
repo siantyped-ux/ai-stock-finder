@@ -360,3 +360,73 @@ def test_all_dataclasses_are_frozen():
     # 상태 변경이 다른 트레이드로 샐 수 있다.
     for cls in (er.Params, er.Bar, er.Position, er.ExitDecision):
         assert cls.__dataclass_params__.frozen, cls.__name__
+
+
+PT = er.Params(use_target=True)
+
+
+def _tp(**over):
+    """목표 9% (목표가 109) 를 단 기준 포지션. 진입 100 · 1R=6 · 손절 94."""
+    pos = er.open_position("NVDA", "2026-08-19", entry_price=100.0,
+                           atr_at_entry=2.0, params=P, target_pct=9)
+    if over:
+        pos = replace(pos, **over)
+    return pos
+
+
+def test_target_exits_when_the_high_reaches_it():
+    bar = er.Bar("d", open=105.0, high=110.0, low=104.0, close=109.5,
+                 atr14=2.0, total=75)
+    decision = er.evaluate(_tp(), bar, PT)
+
+    assert decision.reason == "TARGET"
+    # 100 * 1.09 는 109.00000000000001 이다. 목표가는 곱셈의 결과라
+    # 정확 비교하면 안 된다.
+    assert decision.price == pytest.approx(109.0)
+    assert decision.date == "d"
+
+
+def test_target_fills_at_the_open_when_the_gap_clears_it():
+    # 갭상승으로 시가가 이미 목표 위면 그 가격에 체결된다.
+    # 갭하락 시 min(open, stop) 으로 체결하는 손절 처리의 대칭이다.
+    bar = er.Bar("d", open=112.0, high=115.0, low=111.0, close=113.0,
+                 atr14=2.0, total=75)
+    assert er.evaluate(_tp(), bar, PT).price == 112.0
+
+
+def test_stop_wins_when_the_same_bar_touches_both():
+    # 고가가 목표를, 저가가 손절선을 같은 봉에서 건드린다. 일봉으로는 어느
+    # 쪽이 먼저였는지 알 수 없으므로 비관적으로 손절을 잡는다.
+    bar = er.Bar("d", open=105.0, high=110.0, low=90.0, close=95.0,
+                 atr14=2.0, total=75)
+    decision = er.evaluate(_tp(), bar, PT)
+
+    assert decision.reason == "STOP"
+    assert decision.price == 94.0
+
+
+def test_target_is_ignored_when_the_rule_is_off():
+    bar = er.Bar("d", open=105.0, high=110.0, low=104.0, close=109.5,
+                 atr14=2.0, total=75)
+    assert er.evaluate(_tp(), bar, P) is None
+
+
+def test_target_is_ignored_without_a_target_price():
+    bar = er.Bar("d", open=105.0, high=999.0, low=104.0, close=500.0,
+                 atr14=2.0, total=75)
+    assert er.evaluate(_pos(), bar, PT) is None
+
+
+def test_time_beats_target():
+    bar = er.Bar("d", open=105.0, high=110.0, low=104.0, close=109.5,
+                 atr14=2.0, total=75)
+    decision = er.evaluate(_tp(bars_held=60), bar, PT)
+
+    assert decision.reason == "TIME"
+    assert decision.price == 105.0
+
+
+def test_signal_beats_target():
+    bar = er.Bar("d", open=105.0, high=110.0, low=104.0, close=109.5,
+                 atr14=2.0, total=50)
+    assert er.evaluate(_tp(), bar, PT).reason == "SIGNAL"

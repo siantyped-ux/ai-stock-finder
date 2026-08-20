@@ -73,7 +73,7 @@ class Position:
 
 @dataclass(frozen=True)
 class ExitDecision:
-    reason: str      # "TIME" | "SIGNAL" | "STOP" | "TRAIL"
+    reason: str      # "TIME" | "SIGNAL" | "STOP" | "TRAIL" | "TARGET"
     price: float
     date: str
 
@@ -166,6 +166,10 @@ def evaluate(position: Position, bar: Bar,
     순서는 하루 안의 시간 순서다. TIME 과 SIGNAL 은 개장 전에 결정된다 —
     bars_held 는 결정론적이고 total 은 KST 07:00 스캔에서 이미 나와 있다.
     따라서 둘 다 시가 시장가로 나가고, 장중에 걸린 손절보다 먼저 체결된다.
+
+    TARGET 은 맨 뒤다. 고가가 목표를, 저가가 손절선을 같은 봉에서 건드리면
+    일봉만으로는 어느 쪽이 먼저였는지 알 수 없다. 백테스트가 실제보다 좋게
+    나오는 것보다 나쁘게 나오는 편이 안전하므로 손절을 먼저 잡는다.
     """
     if position.bars_held >= params.max_hold_days:
         return ExitDecision("TIME", bar.open, bar.date)
@@ -179,5 +183,11 @@ def evaluate(position: Position, bar: Bar,
         # 갭하락으로 시가가 이미 손절선 아래면 그 가격에 체결된다.
         fill = min(bar.open, stop)
         return ExitDecision("TRAIL" if trailing else "STOP", fill, bar.date)
+
+    if (params.use_target and position.target_price is not None
+            and bar.high >= position.target_price):
+        # 갭상승으로 시가가 이미 목표 위면 그 가격에 체결된다.
+        fill = max(bar.open, position.target_price)
+        return ExitDecision("TARGET", fill, bar.date)
 
     return None
