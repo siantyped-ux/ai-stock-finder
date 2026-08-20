@@ -355,34 +355,58 @@ def test_summary_text_leads_with_the_warning():
     assert "60거래일" in text
 
 
+def test_summary_text_renders_losses_with_a_minus_sign():
+    # 성과리포트의 핵심은 손실이다. +,.0f 서식의 부호 처리는 양수만
+    # 테스트해서는 검증되지 않는다.
+    s = dict(SUMMARY, net_krw=-1_180_000, open_net_krw=-2_240_000)
+    text = pr.summary_text(s)
+
+    assert "-3,420,000원" in text
+    assert "-1,180,000원" in text
+    assert "-2,240,000원" in text
+
+
 def _stub_run(*_a, **_kw):
     """backtest.run() 최소 결과. 트레이드 0건이라 청산 0건 경로도 탄다."""
     return _result([])
 
 
-def test_mail_flag_sends_the_same_body_that_gets_printed(monkeypatch, tmp_path):
+def test_mail_flag_sends_the_same_body_that_gets_printed(monkeypatch, tmp_path,
+                                                          capsys):
     sent = []
+    creds = {"to": "a@b.c", "user": "a@b.c", "password": "x"}
     monkeypatch.setattr(pr.backtest, "run", _stub_run)
     monkeypatch.setattr(pr, "fetch_fx", lambda start, end: FX)
     monkeypatch.setattr(pr.mailer, "send",
                         lambda *a, **kw: sent.append((a, kw)))
     # 실 환경변수가 없어도 되도록 자격증명 조회 자체를 스텁한다.
-    monkeypatch.setattr(pr.mailer, "creds_from_env",
-                        lambda: {"to": "a@b.c", "user": "a@b.c",
-                                 "password": "x"})
+    monkeypatch.setattr(pr.mailer, "creds_from_env", lambda: creds)
     monkeypatch.setattr(sys, "argv",
                         ["perf_report.py", "--mail", "--out-dir", str(tmp_path)])
 
     pr.main()
 
+    printed = capsys.readouterr().out
     assert len(sent) == 1
     (subject, body, attachments), kw = sent[0]
     assert subject.startswith("[성과리포트]")
-    assert "파이프라인 검증용" in body
-    assert "상세는 첨부된" in body
 
     written = list(tmp_path.glob("*.xlsx"))
     assert len(written) == 1
+
+    # 메일 본문은 "콘솔에 찍힌 본문 + 첨부 안내" 여야 한다. 둘이 갈라지면
+    # summary_text() 를 공유하는 이유가 사라진다 - 부분 문자열 두 개가
+    # 우연히 들어 있는 걸로는 이 관계를 못 잡는다.
+    suffix = f"\n\n상세는 첨부된 {written[0].name} 참고"
+    assert body.endswith(suffix)
+    printed_body = body[:-len(suffix)]
+    assert printed_body in printed
+
+    # creds_from_env() 가 실제로 send() 까지 전달되는지 확인한다.
+    # 스텁이 아무 kwargs 나 받아주므로, 여기서 안 짚으면 **creds_from_env()
+    # 가 통째로 빠져도 테스트가 통과한다.
+    assert kw == creds
+
     assert attachments == [written[0]]
 
 

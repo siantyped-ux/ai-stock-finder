@@ -37,6 +37,21 @@ RATE_FMT = '#,##0.00'
 PCT_FMT = '0.00"%";-0.00"%"'
 
 
+def warning_lines(backfill_pct: float) -> list[str]:
+    """숫자만 보고 성능으로 오독하는 것을 막는 경고문.
+
+    요약 시트와 메일 본문이 같은 문장을 써야 한다. 한쪽만 고치는 사고를
+    막으려고 여기 한 벌만 둔다. 접두사(!!, 들여쓰기)는 각 렌더러가 붙인다 -
+    시트는 라벨-값 2열, 본문은 들여쓴 텍스트라 모양이 다르다.
+    """
+    return [
+        "이 리포트는 파이프라인 검증용이다. 시그널 성능의 근거가 아니다.",
+        f"아카이브의 {backfill_pct:.0f}% 가 backfill 이라 스코어가 "
+        "미확정 봉 결함에 오염돼 있다.",
+        "보유 상한 60거래일을 채운 표본이 나오기 전까지 승률·평균은 무의미하다.",
+    ]
+
+
 def fx_on(fx: dict, date: str, market: str) -> float:
     """해당 날짜의 원/달러 환율. 휴일이면 직전 영업일로 소급한다.
 
@@ -239,12 +254,11 @@ def summary_text(s: dict) -> str:
     failed = ", ".join(s["failed"]) if s["failed"] else "없음"
     total = s["net_krw"] + s["open_net_krw"]
 
+    warn = warning_lines(s["backfill_pct"])
     return "\n".join([
-        "!! 이 리포트는 파이프라인 검증용이다. 시그널 성능의 근거가 아니다.",
-        f"   아카이브의 {s['backfill_pct']:.0f}% 가 backfill 이라 스코어가 "
-        "미확정 봉 결함에 오염돼 있다.",
-        "   보유 상한 60거래일을 채운 표본이 나오기 전까지 승률·평균은 "
-        "무의미하다.",
+        f"!! {warn[0]}",
+        f"   {warn[1]}",
+        f"   {warn[2]}",
         "",
         f"총 손익      {total:+,.0f}원",
         f"  └ 실현     {s['net_krw']:+,.0f}원  ({closed_note})",
@@ -257,11 +271,11 @@ def summary_text(s: dict) -> str:
 
 def _write_summary(ws, s: dict) -> None:
     """라벨-값 2열. 경고를 맨 위에 고정한다."""
+    warn = warning_lines(s["backfill_pct"])
     lines = [
-        ("!! 경고", "이 리포트는 파이프라인 검증용이다. 시그널 성능의 근거가 아니다."),
-        ("", f"아카이브의 {s['backfill_pct']:.0f}% 가 backfill 이라 "
-             "스코어가 미확정 봉 결함에 오염돼 있다."),
-        ("", "보유 상한 60거래일을 채운 표본이 나오기 전까지 승률·평균은 무의미하다."),
+        ("!! 경고", warn[0]),
+        ("", warn[1]),
+        ("", warn[2]),
         ("", ""),
         ("리포트 생성", s["generated"]),
         ("아카이브 기간", f"{s['archive_from']} ~ {s['archive_to']}"),
