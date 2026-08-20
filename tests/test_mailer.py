@@ -143,3 +143,42 @@ def test_send_lets_smtp_errors_through(fake_smtp, monkeypatch):
     with pytest.raises(smtplib.SMTPAuthenticationError):
         mailer.send("제목", "본문", **CREDS)
     assert fake_smtp.last.messages == []
+
+
+def test_cli_sends_the_body_file_as_the_body(tmp_path, fake_smtp, monkeypatch):
+    body = tmp_path / "alert_body.txt"
+    body.write_text("스캔이 실패했습니다\n로그: http://example/run/1",
+                    encoding="utf-8")
+    monkeypatch.setenv("SMTP_USER", "tx@example.com")
+    monkeypatch.setenv("SMTP_PASSWORD", "pw")
+    monkeypatch.setenv("MAIL_TO", "rx@example.com")
+    monkeypatch.setattr("sys.argv", [
+        "mailer.py", "--subject", "[스캔실패] 2026-08-20 (KST)",
+        "--body-file", str(body),
+    ])
+
+    mailer.main()
+
+    msg = fake_smtp.last.messages[0]
+    assert msg["Subject"] == "[스캔실패] 2026-08-20 (KST)"
+    assert "스캔이 실패했습니다" in msg.get_content()
+    assert not msg.is_multipart()
+
+
+def test_cli_attaches_every_attach_flag(tmp_path, fake_smtp, monkeypatch):
+    body = tmp_path / "body.txt"
+    body.write_text("본문", encoding="utf-8")
+    xlsx = tmp_path / "perf_2026-08-20.xlsx"
+    xlsx.write_bytes(b"PK\x03\x04fake")
+    monkeypatch.setenv("SMTP_USER", "tx@example.com")
+    monkeypatch.setenv("SMTP_PASSWORD", "pw")
+    monkeypatch.setenv("MAIL_TO", "rx@example.com")
+    monkeypatch.setattr("sys.argv", [
+        "mailer.py", "--subject", "제목", "--body-file", str(body),
+        "--attach", str(xlsx),
+    ])
+
+    mailer.main()
+
+    parts = list(fake_smtp.last.messages[0].iter_attachments())
+    assert [p.get_filename() for p in parts] == ["perf_2026-08-20.xlsx"]

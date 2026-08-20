@@ -10,12 +10,15 @@
 """
 from __future__ import annotations
 
+import argparse
 import os
 import smtplib
 import ssl
 from email.message import EmailMessage
 from pathlib import Path
 from typing import Sequence
+
+import console
 
 SMTP_HOST = "smtp.gmail.com"
 SMTP_PORT = 465
@@ -82,3 +85,22 @@ def send(subject: str, body: str, attachments: Sequence[Path] = (), *,
                           context=ssl.create_default_context()) as smtp:
         smtp.login(user, password)
         smtp.send_message(msg)
+
+
+def main() -> None:
+    console.force_utf8()
+    p = argparse.ArgumentParser(description="메일 한 통 발송")
+    p.add_argument("--subject", required=True)
+    p.add_argument("--body-file", required=True,
+                   help="본문 텍스트 파일 (UTF-8)")
+    p.add_argument("--attach", action="append", default=[],
+                   help="첨부 파일. 여러 번 줄 수 있다")
+    args = p.parse_args()
+
+    body = Path(args.body_file).read_text(encoding="utf-8")
+    send(args.subject, body, args.attach, **creds_from_env())
+    print(f"메일 발송 완료: {args.subject}")
+
+
+if __name__ == "__main__":
+    main()
