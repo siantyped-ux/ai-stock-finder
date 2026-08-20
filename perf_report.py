@@ -219,6 +219,41 @@ def _write_sheet(ws, cols, rows) -> None:
         ws.column_dimensions[letter].width = max(len(title) + 4, 12)
 
 
+def summary_text(s: dict) -> str:
+    """요약 딕셔너리를 콘솔·메일 공용 본문으로 만든다.
+
+    win_rate 와 avg_net_pct 는 청산완료가 0건이면 None 이다. 포맷하면
+    터지므로 건수만 적는다.
+
+    총 수익률(%) 은 싣지 않는다. capital 은 종목당 투자금이라 총 투입금
+    대비 수익률을 내려면 청산 자금을 재투자하지 않는다는 가정을 몰래
+    들여오게 된다.
+    """
+    if s["closed_n"]:
+        closed_note = (f"청산 {s['closed_n']}건, 승률 {s['win_rate']:.1f}%, "
+                       f"평균 순수익률 {s['avg_net_pct']:+.2f}%")
+    else:
+        closed_note = "청산 0건"
+
+    failed = ", ".join(s["failed"]) if s["failed"] else "없음"
+    total = s["net_krw"] + s["open_net_krw"]
+
+    return "\n".join([
+        "!! 이 리포트는 파이프라인 검증용이다. 시그널 성능의 근거가 아니다.",
+        f"   아카이브의 {s['backfill_pct']:.0f}% 가 backfill 이라 스코어가 "
+        "미확정 봉 결함에 오염돼 있다.",
+        "   보유 상한 60거래일을 채운 표본이 나오기 전까지 승률·평균은 "
+        "무의미하다.",
+        "",
+        f"총 손익      {total:+,.0f}원",
+        f"  └ 실현     {s['net_krw']:+,.0f}원  ({closed_note})",
+        f"  └ 미실현   {s['open_net_krw']:+,.0f}원  (보유 {s['open_n']}종목)",
+        "",
+        f"평가기준일   {s['mark_date']}",
+        f"시세 조회 실패: {failed}",
+    ])
+
+
 def _write_summary(ws, s: dict) -> None:
     """라벨-값 2열. 경고를 맨 위에 고정한다."""
     lines = [

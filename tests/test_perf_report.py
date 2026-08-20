@@ -296,3 +296,58 @@ def test_closed_sheet_is_untouched_by_the_stop_columns(tmp_path):
 
     assert len(header) == 13
     assert "손절가" not in header
+
+
+SUMMARY = {
+    "generated": "2026-08-20 10:00 KST",
+    "archive_from": "2026-08-01", "archive_to": "2026-08-19",
+    "live_rows": 300, "backfill_rows": 800, "backfill_pct": 72.7,
+    "mark_date": "2026-08-19", "failed": [],
+    "closed_n": 12, "win_rate": 58.333,
+    "gross_krw": 1_500_000, "net_krw": 1_180_000, "avg_net_pct": 2.1,
+    "open_n": 8, "open_net_krw": 2_240_000, "capital": 10_000_000,
+}
+
+
+def test_summary_text_totals_realised_and_unrealised():
+    text = pr.summary_text(SUMMARY)
+
+    # 총 손익 = 실현 + 미실현
+    assert "+3,420,000원" in text
+    assert "+1,180,000원" in text
+    assert "+2,240,000원" in text
+
+
+def test_summary_text_carries_the_closed_stats():
+    text = pr.summary_text(SUMMARY)
+
+    assert "청산 12건" in text
+    assert "58.3%" in text
+    assert "+2.10%" in text
+    assert "보유 8종목" in text
+
+
+def test_summary_text_survives_zero_closed_trades():
+    s = dict(SUMMARY, closed_n=0, win_rate=None, avg_net_pct=None,
+             net_krw=0)
+
+    # None 을 포맷하면 터진다. 청산 표본이 없는 지금이 바로 그 상태다.
+    text = pr.summary_text(s)
+    assert "청산 0건" in text
+    assert "None" not in text
+
+
+def test_summary_text_lists_the_failed_tickers():
+    assert "없음" in pr.summary_text(SUMMARY)
+    assert "AAA, BBB" in pr.summary_text(dict(SUMMARY, failed=["AAA", "BBB"]))
+
+
+def test_summary_text_leads_with_the_warning():
+    text = pr.summary_text(SUMMARY)
+
+    # 메일은 첨부를 안 열고 본문만 훑게 만든다. 경고가 첨부 안에만
+    # 있으면 없는 것과 같다.
+    assert text.startswith("!!")
+    assert "파이프라인 검증용" in text
+    assert "73% 가 backfill" in text
+    assert "60거래일" in text
