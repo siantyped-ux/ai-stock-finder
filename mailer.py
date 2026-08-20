@@ -10,7 +10,21 @@
 """
 from __future__ import annotations
 
+import mimetypes
 import os
+import smtplib
+import ssl
+from email.message import EmailMessage
+from pathlib import Path
+from typing import Sequence
+
+SMTP_HOST = "smtp.gmail.com"
+SMTP_PORT = 465
+
+# 일부 환경의 mimetypes 레지스트리에 xlsx 가 없다. 명시해 둔다.
+mimetypes.add_type(
+    "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+    ".xlsx")
 
 # 환경변수 이름 -> send() 의 키워드 인자 이름
 ENV_KEYS = {"SMTP_USER": "user", "SMTP_PASSWORD": "password",
@@ -35,3 +49,33 @@ def creds_from_env(env=None) -> dict:
     if missing:
         raise RuntimeError("SMTP 환경변수가 비어 있다: " + ", ".join(missing))
     return creds
+
+
+def build_message(subject: str, body: str,
+                  attachments: Sequence = (), *,
+                  to: str, user: str) -> EmailMessage:
+    """평문 UTF-8 본문 + 첨부. 발송과 분리해 두면 테스트가 쉽다."""
+    msg = EmailMessage()
+    msg["Subject"] = subject
+    msg["From"] = user
+    msg["To"] = to
+    msg.set_content(body, subtype="plain", charset="utf-8")
+
+    for path in attachments:
+        path = Path(path)
+        ctype, _ = mimetypes.guess_type(path.name)
+        maintype, _, subtype = (ctype or "application/octet-stream").partition("/")
+        msg.add_attachment(path.read_bytes(), maintype=maintype,
+                           subtype=subtype, filename=path.name)
+    return msg
+
+
+def send(subject: str, body: str, attachments: Sequence = (), *,
+         to: str, user: str, password: str,
+         host: str = SMTP_HOST, port: int = SMTP_PORT) -> None:
+    """한 통 보낸다. 실패하면 예외를 올린다 - 삼키지 않는다."""
+    msg = build_message(subject, body, attachments, to=to, user=user)
+    with smtplib.SMTP_SSL(host, port,
+                          context=ssl.create_default_context()) as smtp:
+        smtp.login(user, password)
+        smtp.send_message(msg)
