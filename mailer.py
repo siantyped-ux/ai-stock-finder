@@ -10,7 +10,6 @@
 """
 from __future__ import annotations
 
-import mimetypes
 import os
 import smtplib
 import ssl
@@ -21,10 +20,14 @@ from typing import Sequence
 SMTP_HOST = "smtp.gmail.com"
 SMTP_PORT = 465
 
-# 일부 환경의 mimetypes 레지스트리에 xlsx 가 없다. 명시해 둔다.
-mimetypes.add_type(
-    "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
-    ".xlsx")
+# 첨부 MIME 을 직접 정한다. mimetypes.guess_type 은 OS 에 깔린 프로그램에
+# 좌우된다 - 한컴오피스가 있는 머신은 .xlsx 를 application/haansoftxlsx 로
+# 준다. 전역 레지스트리를 고쳐 쓰면 mailer 를 임포트한 다른 모듈까지 영향을
+# 받으므로, 아는 확장자만 여기서 정하고 나머지는 octet-stream 으로 보낸다.
+CONTENT_TYPES = {
+    ".xlsx": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+}
+DEFAULT_CONTENT_TYPE = "application/octet-stream"
 
 # 환경변수 이름 -> send() 의 키워드 인자 이름
 ENV_KEYS = {"SMTP_USER": "user", "SMTP_PASSWORD": "password",
@@ -52,7 +55,7 @@ def creds_from_env(env=None) -> dict:
 
 
 def build_message(subject: str, body: str,
-                  attachments: Sequence = (), *,
+                  attachments: Sequence[Path] = (), *,
                   to: str, user: str) -> EmailMessage:
     """평문 UTF-8 본문 + 첨부. 발송과 분리해 두면 테스트가 쉽다."""
     msg = EmailMessage()
@@ -63,14 +66,14 @@ def build_message(subject: str, body: str,
 
     for path in attachments:
         path = Path(path)
-        ctype, _ = mimetypes.guess_type(path.name)
-        maintype, _, subtype = (ctype or "application/octet-stream").partition("/")
+        ctype = CONTENT_TYPES.get(path.suffix.lower(), DEFAULT_CONTENT_TYPE)
+        maintype, _, subtype = ctype.partition("/")
         msg.add_attachment(path.read_bytes(), maintype=maintype,
                            subtype=subtype, filename=path.name)
     return msg
 
 
-def send(subject: str, body: str, attachments: Sequence = (), *,
+def send(subject: str, body: str, attachments: Sequence[Path] = (), *,
          to: str, user: str, password: str,
          host: str = SMTP_HOST, port: int = SMTP_PORT) -> None:
     """한 통 보낸다. 실패하면 예외를 올린다 - 삼키지 않는다."""

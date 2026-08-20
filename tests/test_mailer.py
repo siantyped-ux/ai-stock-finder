@@ -77,14 +77,47 @@ def test_creds_from_env_falls_back_to_the_process_environment(monkeypatch):
         "user": "tx@example.com", "password": "pw", "to": "rx@example.com"}
 
 
-def test_send_fills_the_headers_and_a_utf8_body(fake_smtp):
-    mailer.send("제목", "본문 한글", **CREDS)
+def test_build_message_fills_the_headers_and_a_utf8_body():
+    msg = mailer.build_message("제목", "본문 한글",
+                               to="rx@example.com", user="tx@example.com")
 
-    msg = fake_smtp.last.messages[0]
     assert msg["Subject"] == "제목"
     assert msg["From"] == "tx@example.com"
     assert msg["To"] == "rx@example.com"
     assert msg.get_content().strip() == "본문 한글"
+
+
+def test_build_message_without_attachments_is_a_single_part():
+    msg = mailer.build_message("제목", "본문",
+                               to="rx@example.com", user="tx@example.com")
+    assert not msg.is_multipart()
+
+
+def test_build_message_attaches_the_xlsx_under_its_own_name(tmp_path):
+    xlsx = tmp_path / "perf_2026-08-20.xlsx"
+    xlsx.write_bytes(b"PK\x03\x04fake")
+
+    msg = mailer.build_message("제목", "본문", [xlsx],
+                               to="rx@example.com", user="tx@example.com")
+
+    parts = list(msg.iter_attachments())
+    assert len(parts) == 1
+    assert parts[0].get_filename() == "perf_2026-08-20.xlsx"
+    assert parts[0].get_content_type() == (
+        "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")
+    assert parts[0].get_payload(decode=True) == b"PK\x03\x04fake"
+
+
+def test_build_message_falls_back_to_octet_stream(tmp_path):
+    # 모르는 확장자라고 발송을 막을 이유는 없다.
+    blob = tmp_path / "notes.unknown"
+    blob.write_bytes(b"data")
+
+    msg = mailer.build_message("제목", "본문", [blob],
+                               to="rx@example.com", user="tx@example.com")
+
+    part = list(msg.iter_attachments())[0]
+    assert part.get_content_type() == "application/octet-stream"
 
 
 def test_send_logs_in_to_gmail_over_ssl(fake_smtp):
@@ -94,23 +127,10 @@ def test_send_logs_in_to_gmail_over_ssl(fake_smtp):
     assert fake_smtp.last.credentials == ("tx@example.com", "pw")
 
 
-def test_send_without_attachments_is_a_single_part(fake_smtp):
-    mailer.send("제목", "본문", **CREDS)
-    assert not fake_smtp.last.messages[0].is_multipart()
+def test_send_hands_the_built_message_to_smtp(fake_smtp):
+    mailer.send("제목", "본문 한글", **CREDS)
 
-
-def test_send_attaches_the_xlsx_under_its_own_name(tmp_path, fake_smtp):
-    xlsx = tmp_path / "perf_2026-08-20.xlsx"
-    xlsx.write_bytes(b"PK\x03\x04fake")
-
-    mailer.send("제목", "본문", [xlsx], **CREDS)
-
-    parts = list(fake_smtp.last.messages[0].iter_attachments())
-    assert len(parts) == 1
-    assert parts[0].get_filename() == "perf_2026-08-20.xlsx"
-    assert parts[0].get_content_type() == (
-        "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")
-    assert parts[0].get_payload(decode=True) == b"PK\x03\x04fake"
+    assert fake_smtp.last.messages[0]["Subject"] == "제목"
 
 
 def test_send_lets_smtp_errors_through(fake_smtp, monkeypatch):
@@ -122,3 +142,4 @@ def test_send_lets_smtp_errors_through(fake_smtp, monkeypatch):
     # 삼키면 메일이 안 갔는데 잡은 성공한다. 그게 지금 고치려는 상태다.
     with pytest.raises(smtplib.SMTPAuthenticationError):
         mailer.send("제목", "본문", **CREDS)
+    assert fake_smtp.last.messages == []
