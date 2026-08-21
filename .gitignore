@@ -3,6 +3,11 @@
 .env.local
 .env.*.local
 
+# 백업본. .env.bak 은 위 .env 패턴에 걸리지 않는다 - 시크릿 사본이
+# 추적 대상으로 남는 것을 막는다.
+*.bak
+*.orig
+
 # 생성된 데이터 파일
 # dashboard_data.js는 GitHub Actions가 자동 커밋하므로 추적함
 _sheet_overview.txt
