@@ -5,6 +5,10 @@
 
 표준 라이브러리만 쓴다. notify-failure 잡이 pip install 없이 돌아야
 하기 때문이다. 스캔이 의존성 설치에서 죽어도 알림은 나가야 한다.
+.env 파서(envfile)도 python-dotenv 대신 직접 둔 것이 같은 이유다.
+
+자격증명은 프로세스 환경이 우선이고 빈 자리를 .env 가 채운다. CI 는
+워크플로 시크릿을, 로컬은 .env 를 쓰게 된다.
 
 설계: docs/superpowers/specs/2026-08-20-report-mail-design.md
 """
@@ -19,6 +23,7 @@ from pathlib import Path
 from typing import Sequence
 
 import console
+import envfile
 
 SMTP_HOST = "smtp.gmail.com"
 SMTP_PORT = 465
@@ -36,14 +41,24 @@ DEFAULT_CONTENT_TYPE = "application/octet-stream"
 ENV_KEYS = {"SMTP_USER": "user", "SMTP_PASSWORD": "password",
             "MAIL_TO": "to"}
 
+# cwd 가 아니라 이 파일 옆에서 찾는다. 워크플로는 저장소 루트에서 부르지만
+# 로컬에서 다른 디렉터리에 있을 때도 같은 .env 를 봐야 한다.
+ENV_FILE = Path(__file__).resolve().parent / ".env"
 
-def creds_from_env(env=None) -> dict:
+
+def creds_from_env(env=None, *, env_file=ENV_FILE) -> dict:
     """SMTP 자격증명을 읽어 send() 에 그대로 펼칠 수 있는 dict 로 낸다.
 
     하나라도 비면 어느 키가 없는지 밝히고 멈춘다. 시크릿 값은 로그에
     마스킹되므로 키 이름이 유일한 단서다.
+
+    env 를 직접 주면 그게 전부다 - .env 는 보지 않는다. 인자 없이 부르면
+    프로세스 환경이 우선이고 빈 자리를 .env 가 채운다. CI 에는 .env 가
+    없으므로 워크플로 시크릿만 쓰이고, 로컬에서는 셸에 아무것도 없어도
+    .env 만으로 보낼 수 있다.
     """
-    env = os.environ if env is None else env
+    if env is None:
+        env = _merge_env(env_file)
 
     creds, missing = {}, []
     for key, name in ENV_KEYS.items():
@@ -55,6 +70,20 @@ def creds_from_env(env=None) -> dict:
     if missing:
         raise RuntimeError("SMTP 환경변수가 비어 있다: " + ", ".join(missing))
     return creds
+
+
+def _merge_env(env_file) -> dict:
+    """.env 위에 프로세스 환경을 얹는다. 빈 값은 덮어쓰지 않는다.
+
+    시크릿을 빈 값으로 등록하면 키는 있고 값만 없는데, 그 빈 값이 .env 를
+    가려 버리면 값이 바로 옆에 있는데도 "환경변수가 비어 있다" 로 죽는다.
+    """
+    merged = envfile.load(env_file)
+    for key in ENV_KEYS:
+        value = (os.environ.get(key) or "").strip()
+        if value:
+            merged[key] = value
+    return merged
 
 
 def build_message(subject: str, body: str,

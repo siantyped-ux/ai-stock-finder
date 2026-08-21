@@ -77,6 +77,77 @@ def test_creds_from_env_falls_back_to_the_process_environment(monkeypatch):
         "user": "tx@example.com", "password": "pw", "to": "rx@example.com"}
 
 
+@pytest.fixture
+def no_smtp_env(monkeypatch):
+    """프로세스 환경에서 SMTP_* 를 걷어낸다. 개발 PC 의 실제 값이 새어들어
+    테스트 결과를 바꾸지 않게 한다."""
+    for key in mailer.ENV_KEYS:
+        monkeypatch.delenv(key, raising=False)
+
+
+def write_env(tmp_path, text):
+    path = tmp_path / ".env"
+    path.write_text(text, encoding="utf-8")
+    return path
+
+
+def test_creds_from_env_reads_the_env_file(tmp_path, no_smtp_env):
+    # 로컬 실행 경로. 셸에 아무것도 없어도 .env 만으로 보낼 수 있어야 한다.
+    path = write_env(tmp_path, "SMTP_USER=tx@example.com\n"
+                               "SMTP_PASSWORD=pw\n"
+                               "MAIL_TO=rx@example.com\n")
+
+    assert mailer.creds_from_env(env_file=path) == {
+        "user": "tx@example.com", "password": "pw", "to": "rx@example.com"}
+
+
+def test_creds_from_env_prefers_the_process_environment(tmp_path, monkeypatch,
+                                                        no_smtp_env):
+    # 워크플로 시크릿이 우선이다. CI 에는 .env 가 없지만, 셸에서 한 번만
+    # 다른 계정으로 덮어쓰는 것도 되어야 한다.
+    path = write_env(tmp_path, "SMTP_USER=env파일@example.com\n"
+                               "SMTP_PASSWORD=env파일pw\n"
+                               "MAIL_TO=env파일rx@example.com\n")
+    monkeypatch.setenv("SMTP_USER", "tx@example.com")
+
+    creds = mailer.creds_from_env(env_file=path)
+    assert creds["user"] == "tx@example.com"
+    assert creds["password"] == "env파일pw"
+
+
+def test_creds_from_env_lets_the_env_file_fill_a_blank_process_value(
+        tmp_path, monkeypatch, no_smtp_env):
+    # 시크릿을 빈 값으로 등록하면 키는 있고 값만 없다. 빈 값이 .env 를
+    # 가려 버리면 "환경변수가 비어 있다" 로 죽는다 - 값이 바로 옆에 있는데도.
+    path = write_env(tmp_path, "SMTP_USER=tx@example.com\n"
+                               "SMTP_PASSWORD=pw\n"
+                               "MAIL_TO=rx@example.com\n")
+    monkeypatch.setenv("SMTP_PASSWORD", "   ")
+
+    assert mailer.creds_from_env(env_file=path)["password"] == "pw"
+
+
+def test_creds_from_env_ignores_the_env_file_for_an_explicit_mapping(tmp_path):
+    # 매핑을 직접 주면 그게 전부다. 개발 PC 의 .env 가 끼어들면 안 된다.
+    path = write_env(tmp_path, "SMTP_PASSWORD=env파일pw\n")
+    env = {"SMTP_USER": "tx@example.com", "MAIL_TO": "rx@example.com"}
+
+    with pytest.raises(RuntimeError) as e:
+        mailer.creds_from_env(env, env_file=path)
+    assert "SMTP_PASSWORD" in str(e.value)
+
+
+def test_creds_from_env_names_the_key_missing_from_both(tmp_path, monkeypatch,
+                                                        no_smtp_env):
+    path = write_env(tmp_path, "SMTP_USER=tx@example.com\n")
+    monkeypatch.setenv("MAIL_TO", "rx@example.com")
+
+    with pytest.raises(RuntimeError) as e:
+        mailer.creds_from_env(env_file=path)
+    assert "SMTP_PASSWORD" in str(e.value)
+    assert "SMTP_USER" not in str(e.value)
+
+
 def test_build_message_fills_the_headers_and_a_utf8_body():
     msg = mailer.build_message("제목", "본문 한글",
                                to="rx@example.com", user="tx@example.com")

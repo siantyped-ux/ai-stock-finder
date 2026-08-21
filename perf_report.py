@@ -392,7 +392,7 @@ def main():
     p.add_argument("--out-dir", default="reports")
     p.add_argument("--capital", type=int, default=CAPITAL_KRW)
     p.add_argument("--mail", action="store_true",
-                   help="리포트를 메일로 보낸다 (SMTP_* 환경변수 필요)")
+                   help="리포트를 메일로 보낸다 (SMTP_* 환경변수 또는 .env 필요)")
     p.add_argument("--use-target", action="store_true",
                    help="목표가 도달 시 익절한 결과로 리포트를 낸다")
     args = p.parse_args()
