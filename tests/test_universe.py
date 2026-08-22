@@ -117,3 +117,16 @@ def test_fallback_universe_rows_are_five_tuples():
 def test_kr_universe_function_is_gone():
     assert not hasattr(sf, "fetch_kr_universe")
     assert not hasattr(sf, "KOSPI_EXPANDED")
+
+
+@pytest.mark.parametrize("name", [
+    "CORP_CODE_MAP", "DART_KEY", "DART_BASE",
+    "load_dart_corpcode", "_dart_get", "fetch_dart_filing_signals",
+])
+def test_dart_symbols_are_gone(name):
+    """한국 공시(DART) 경로는 한국 종목과 함께 사라졌다.
+
+    스캔 대상이 미국 주식·ETF 뿐이라 조회할 곳이 없다. 남겨 두면 도달하지
+    않는 코드가 계속 유지보수 대상으로 남는다.
+    """
+    assert not hasattr(sf, name)

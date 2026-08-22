@@ -59,7 +59,6 @@ jobs:
       - name: Run stock finder scan
         env:
           FMP_API_KEY: ${{ secrets.FMP_API_KEY }}
-          DART_API_KEY: ${{ secrets.DART_API_KEY }}
           FRED_API_KEY: ${{ secrets.FRED_API_KEY }}
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
         run: |
@@ -196,7 +195,7 @@ jobs:
           - **수집률 미달** — 로그에 \`수집률 ... 기준\` 이 있으면 완결성 가드가
             부분 데이터를 막은 것입니다. yfinance rate limit(429)이 흔한 원인이며,
             \`--workers\` 를 낮추면 완화됩니다.
-          - **API 키 만료** — FMP / DART / FRED 중 하나가 죽으면 스캔이 멈춥니다.
+          - **API 키 만료** — FMP / FRED 중 하나가 죽으면 스캔이 멈춥니다.
           - **timeout** — 120분 상한에 걸렸는지 확인하세요.
           - **push 실패** — rebase 재시도 3회를 모두 소진했는지 확인하세요.
 

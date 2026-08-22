@@ -7,7 +7,7 @@ xlsx v5 시스템의 4축 컨센서스 로직을 실제 데이터로 적용
 
 .env 파일에 API 키 입력 (선택):
     FMP_API_KEY=xxx   # 미국 SEC 공시 (13F, Form 4, 8-K)
-    DART_API_KEY=xxx  # 한국 공시 (5%보고, 임원매매, 자기주식)
+    FRED_API_KEY=xxx  # 연준 경제 데이터
 
 실행:
     python stock_finder.py
@@ -71,28 +71,10 @@ def load_env(path: str = ".env") -> dict[str, str]:
 ENV = load_env()
 # .env 우선, 없으면 시스템 환경변수 (GitHub Actions Secrets 지원)
 FMP_KEY = (ENV.get("FMP_API_KEY") or os.environ.get("FMP_API_KEY", "")).strip()
-DART_KEY = (ENV.get("DART_API_KEY") or os.environ.get("DART_API_KEY", "")).strip()
 FRED_KEY = (ENV.get("FRED_API_KEY") or os.environ.get("FRED_API_KEY", "")).strip()
 
 FMP_BASE = "https://financialmodelingprep.com/stable"
-DART_BASE = "https://opendart.fss.or.kr/api"
 FRED_BASE = "https://api.stlouisfed.org/fred"
-
-# 한국 종목의 corp_code 매핑 (DART 조회에 필요)
-# 런타임에 load_dart_corpcode()가 opendart corpCode.xml에서 전체 상장사를 병합
-CORP_CODE_MAP: dict[str, str] = {
-    "005930.KS": "00126380",  # 삼성전자
-    "000660.KS": "00164779",  # SK하이닉스
-    "035420.KS": "00266961",  # NAVER
-    "035720.KS": "00918444",  # 카카오
-    "005380.KS": "00164742",  # 현대차
-    "373220.KS": "01515323",  # LG에너지솔루션
-    "207940.KS": "00877059",  # 삼성바이오로직스
-    "068270.KS": "00421045",  # 셀트리온
-    "105560.KS": "00688996",  # KB금융
-    "055550.KS": "00518902",  # 신한지주
-    "010130.KS": "00113059",  # 고려아연
-}
 
 
 # ─── 종목 유니버스 (폴백용 · FMP 조회 실패 시 사용) ──────────
@@ -563,173 +545,6 @@ def fetch_fmp_filing_signals(ticker: str) -> dict:
     return signals
 
 
-# ─── DART API (한국 공시) ─────────────────────────────────────
-def load_dart_corpcode() -> dict[str, str]:
-    """
-    DART OpenAPI corpCode.xml(ZIP)을 받아 티커→corp_code 매핑을 반환.
-    - stock_code가 있는 상장사만 대상 (비상장 법인 제외)
-    - KOSPI(.KS), KOSDAQ(.KQ) 두 suffix 모두 등록 (한국 단축코드는 6자리 유일)
-    - 7일 TTL로 .cache/dart_corpcode.json 캐시
-    - DART_KEY 없거나 다운로드 실패 시 빈 dict 반환 (하드코딩 매핑 폴백)
-    """
-    if not DART_KEY:
-        return {}
-
-    cache_key = "dart_corpcode"
-    cached = _load_cache(cache_key, ttl_hours=24 * 7)
-    if isinstance(cached, dict) and cached:
-        return cached
-
-    import zipfile
-    import xml.etree.ElementTree as ET
-
-    try:
-        r = requests.get(
-            f"{DART_BASE}/corpCode.xml",
-            params={"crtfc_key": DART_KEY},
-            timeout=30,
-        )
-        if r.status_code != 200:
-            print(f"    [!] DART corpCode HTTP {r.status_code}")
-            return {}
-        content = r.content
-        # ZIP 매직 넘버 확인 (에러 시 JSON 응답)
-        if content[:2] != b"PK":
-            try:
-                err = r.json()
-                print(f"    [!] DART corpCode 오류: {err.get('message', 'unknown')}")
-            except Exception:
-                print("    [!] DART corpCode: ZIP 응답 아님")
-            return {}
-
-        mapping: dict[str, str] = {}
-        with zipfile.ZipFile(io.BytesIO(content)) as zf:
-            xml_name = next(
-                (n for n in zf.namelist() if n.upper().endswith(".XML")), None
-            )
-            if xml_name is None:
-                return {}
-            with zf.open(xml_name) as xf:
-                for _ev, elem in ET.iterparse(xf, events=("end",)):
-                    if elem.tag != "list":
-                        continue
-                    stock_code = (elem.findtext("stock_code") or "").strip()
-                    corp_code = (elem.findtext("corp_code") or "").strip()
-                    if (
-                        stock_code
-                        and corp_code
-                        and stock_code.isdigit()
-                        and len(stock_code) == 6
-                    ):
-                        mapping[f"{stock_code}.KS"] = corp_code
-                        mapping[f"{stock_code}.KQ"] = corp_code
-                    elem.clear()
-
-        if mapping:
-            _save_cache(cache_key, mapping)
-            print(f"    [OK] DART 회사코드 {len(mapping) // 2}개 상장사 로드")
-        return mapping
-    except Exception as e:
-        print(f"    [!] DART corpCode 로드 실패: {str(e)[:80]}")
-        return {}
-
-
-def _dart_get(endpoint: str, params: dict = None) -> Optional[dict]:
-    if not DART_KEY:
-        return None
-    params = params or {}
-    params["crtfc_key"] = DART_KEY
-    try:
-        r = requests.get(f"{DART_BASE}{endpoint}", params=params, timeout=8)
-        if r.status_code == 200:
-            data = r.json()
-            if data.get("status") == "000":
-                return data
-        return None
-    except Exception:
-        return None
-
-
-def fetch_dart_filing_signals(ticker: str) -> dict:
-    """한국 종목의 5%보고, 임원매매, 자기주식, 증자 시그널"""
-    signals = {"available": False, "reasons": [], "score_delta": 0}
-    corp_code = CORP_CODE_MAP.get(ticker)
-    if not corp_code:
-        return signals
-
-    bgn_de = (datetime.now() - timedelta(days=90)).strftime("%Y%m%d")
-    end_de = datetime.now().strftime("%Y%m%d")
-
-    # 1) 대량보유(5%) 최근 90일
-    major = _dart_get("/majorstock.json", {"corp_code": corp_code})
-    if major and major.get("list"):
-        signals["available"] = True
-        recent = [x for x in major["list"] if x.get("rcept_dt", "0") >= bgn_de]
-        if recent:
-            new_entries = sum(1 for x in recent if "신규" in str(x.get("report_tp", "")))
-            purpose_mgmt = sum(1 for x in recent if "경영" in str(x.get("stkrt_int", "")))
-            if new_entries > 0:
-                signals["score_delta"] += 10
-                signals["reasons"].append(f"5%보고: 신규 진입 {new_entries}건 (최근 90일)")
-            if purpose_mgmt > 0:
-                signals["score_delta"] += 8
-                signals["reasons"].append(f"5%보고: 경영참여 목적 {purpose_mgmt}건 (activist 후보)")
-            elif recent:
-                signals["reasons"].append(f"5%보고: 최근 90일 {len(recent)}건")
-
-    # 2) 임원·주요주주 소유주식 (매매 클러스터)
-    elestock = _dart_get("/elestock.json", {"corp_code": corp_code})
-    if elestock and elestock.get("list"):
-        signals["available"] = True
-        recent = [x for x in elestock["list"] if x.get("rcept_dt", "0") >= bgn_de]
-        buys = sum(1 for x in recent if "취득" in str(x.get("sp_stock_lmp_cnt_tp", "")))
-        sells = sum(1 for x in recent if "처분" in str(x.get("sp_stock_lmp_cnt_tp", "")))
-        # 대안 필드: isu_dcrs_srtdt / isu_dcrs_ostk_cnt 부호로 판정
-        for x in recent:
-            delta = x.get("isu_dcrs_ostk_cnt", "0")
-            try:
-                d = int(str(delta).replace(",", "").replace("-", "-").strip() or "0")
-                if d > 0:
-                    buys += 1
-                elif d < 0:
-                    sells += 1
-            except Exception:
-                pass
-        net = buys - sells
-        if buys >= 3 and net > 0:
-            signals["score_delta"] += 10
-            signals["reasons"].append(f"임원매매: 매수 클러스터 (매수{buys}/매도{sells}, 90일)")
-        elif net < -3:
-            signals["score_delta"] -= 8
-            signals["reasons"].append(f"임원매매: 매도 우세 (매수{buys}/매도{sells})")
-
-    # 3) 자기주식 취득 (긍정 시그널)
-    treasury = _dart_get("/tsstkAqDecsn.json",
-                        {"corp_code": corp_code, "bgn_de": bgn_de, "end_de": end_de})
-    if treasury and treasury.get("list"):
-        signals["available"] = True
-        signals["score_delta"] += 8
-        signals["reasons"].append(f"자기주식 취득 결정 {len(treasury['list'])}건 (오버행 해소)")
-
-    # 4) 유상증자 (부정 시그널 - 희석)
-    piic = _dart_get("/piicDecsn.json",
-                    {"corp_code": corp_code, "bgn_de": bgn_de, "end_de": end_de})
-    if piic and piic.get("list"):
-        signals["available"] = True
-        signals["score_delta"] -= 8
-        signals["reasons"].append(f"유상증자 결정 {len(piic['list'])}건 (희석 리스크)")
-
-    # 5) 전환사채(CB) 발행 (부정 시그널)
-    cb = _dart_get("/cvbdIsDecsn.json",
-                  {"corp_code": corp_code, "bgn_de": bgn_de, "end_de": end_de})
-    if cb and cb.get("list"):
-        signals["available"] = True
-        signals["score_delta"] -= 5
-        signals["reasons"].append(f"CB 발행 {len(cb['list'])}건 (희석 잠재)")
-
-    return signals
-
-
 # ─── FRED API (연준 경제 데이터) ─────────────────────────────
 def _fred_get_series(series_id: str, limit: int = 13) -> Optional[list]:
     """FRED 시리즈 관측치 조회 (최신순)"""
@@ -1027,22 +842,23 @@ def load_universe(min_us_cap: float = 1e10,
 
 # ─── 공시 스코어 (API 우선, 실패 시 프록시) ───────────────────
 def calc_filing_score(info: dict, hist_df, ticker: str, market: str) -> tuple[int, list[str]]:
-    """API 데이터가 있으면 우선 사용, 없으면 yfinance 프록시로 대체"""
+    """API 데이터가 있으면 우선 사용, 없으면 yfinance 프록시로 대체
+
+    market 은 지금 미국뿐이라 분기하지 않는다. 인자를 남겨 두는 것은 아카이브
+    행과 호출부가 같은 값을 들고 다니기 때문이다.
+    """
     score = 55
     reasons = []
 
     # 실제 API 시그널 우선 시도
     api_signals = {}
-    if market == "US" and FMP_KEY:
+    if FMP_KEY:
         api_signals = fetch_fmp_filing_signals(ticker)
-    elif market == "KR" and DART_KEY:
-        api_signals = fetch_dart_filing_signals(ticker)
 
     if api_signals.get("available"):
         score += api_signals["score_delta"]
         reasons.extend(api_signals["reasons"])
-        source_tag = "FMP" if market == "US" else "DART"
-        reasons.append(f"* {source_tag} 실시간 공시 반영")
+        reasons.append("* FMP 실시간 공시 반영")
     else:
         # yfinance 프록시로 fallback
         inst_pct = info.get("heldPercentInstitutions")
@@ -1089,18 +905,10 @@ def calc_filing_score(info: dict, hist_df, ticker: str, market: str) -> tuple[in
                 score -= 5
                 reasons.append(f"고점 대비 {prox:.0f}%")
 
-        if market == "US":
-            if not FMP_KEY:
-                reasons.append("* FMP API 키 미설정 · 프록시 사용")
-            else:
-                reasons.append("* FMP 최근 공시 없음 · 프록시 보조")
-        elif market == "KR":
-            if not DART_KEY:
-                reasons.append("* DART API 키 미설정 · 프록시 사용")
-            elif ticker not in CORP_CODE_MAP:
-                reasons.append("* DART corp_code 매핑 없음 · 프록시 사용")
-            else:
-                reasons.append("* DART 최근 공시 없음 · 프록시 보조")
+        if not FMP_KEY:
+            reasons.append("* FMP API 키 미설정 · 프록시 사용")
+        else:
+            reasons.append("* FMP 최근 공시 없음 · 프록시 보조")
 
     if not reasons:
         reasons.append("공시 데이터 부족")
@@ -1281,7 +1089,6 @@ window.LIVE_MACRO = {{
   vix: {vix:.2f}, dxy: {dxy:.2f}, us10y: {us10y:.2f},
   generated_at: "{datetime.now().isoformat()}",
   fmp_active: {str(bool(FMP_KEY)).lower()},
-  dart_active: {str(bool(DART_KEY)).lower()},
   fred_active: {str(bool(FRED_KEY)).lower()},
   fred: {fred_json},
   intermediate: true, count: {len(results)}
@@ -1339,22 +1146,10 @@ def main():
 
     # API 키 상태 표시
     print(f"[env] FMP API : {'✓ 활성' if FMP_KEY else '✗ 미설정 (프록시 사용)'}")
-    print(f"[env] DART API: {'✓ 활성' if DART_KEY else '✗ 미설정 (프록시 사용)'}")
     print(f"[env] FRED API: {'✓ 활성 (매크로 정밀화)' if FRED_KEY else '✗ 미설정 (yfinance 사용)'}")
-    if not FMP_KEY and not DART_KEY and not FRED_KEY:
+    if not FMP_KEY and not FRED_KEY:
         print("      → .env 파일에 API 키를 추가하면 실제 시그널이 반영됩니다")
     print("-" * 65)
-
-    # DART 회사코드 매핑 확장 (전체 상장사 corp_code 자동 로드)
-    if DART_KEY:
-        print("[*] DART 회사코드 매핑 로드...")
-        dynamic_map = load_dart_corpcode()
-        if dynamic_map:
-            CORP_CODE_MAP.update(dynamic_map)
-            print(f"    총 corp_code 매핑: {len({v for v in CORP_CODE_MAP.values()})}개 상장사")
-        else:
-            print("    [!] 동적 매핑 실패 — 하드코딩 11종목만 사용")
-        print("-" * 65)
 
     # 유니버스 로드
     print("[*] 종목 유니버스 로드...")
@@ -1556,14 +1351,13 @@ def main():
     js_content = f"""// AI 3-Month Stock Finder - Live Data
 // Generated: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}
 // Macro: VIX={vix:.2f}, DXY={dxy:.2f}, US10Y={us10y:.2f}%
-// FMP: {'active' if FMP_KEY else 'off'} · DART: {'active' if DART_KEY else 'off'} · FRED: {'active' if FRED_KEY else 'off'}
+// FMP: {'active' if FMP_KEY else 'off'} · FRED: {'active' if FRED_KEY else 'off'}
 window.LIVE_MACRO = {{
   vix: {vix:.2f},
   dxy: {dxy:.2f},
   us10y: {us10y:.2f},
   generated_at: "{datetime.now().isoformat()}",
   fmp_active: {str(bool(FMP_KEY)).lower()},
-  dart_active: {str(bool(DART_KEY)).lower()},
   fred_active: {str(bool(FRED_KEY)).lower()},
   fred: {fred_json}
 }};
