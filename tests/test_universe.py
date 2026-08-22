@@ -218,6 +218,39 @@ def test_dominant_sector_handles_a_missing_weight():
     assert sf.dominant_sector([{"sector": "Technology"}]) == "미분류"
 
 
+# ─── 자산군 판정 (채권 ETF 가 섹터를 받던 문제) ──────────────
+@pytest.mark.parametrize("cls", [
+    "Equity", "Large Cap Equity", "Mid Cap Equity", "Small/Micro Cap Equity",
+    "International Equity", "Emerging Markets Equity", "Global Equity",
+    "US Equity", "Sector Equity", "Equity Income",
+])
+def test_equity_asset_classes_are_accepted(cls):
+    """실제 응답에 나온 값들. 목록 일치가 아니라 'Equity' 포함으로 본다."""
+    assert sf.is_equity_asset_class(cls) is True
+
+
+@pytest.mark.parametrize("cls", [
+    "Fixed Income", "Core Investment Grade Bond", "Government Bond",
+    "Global Bond", "Municipal Bond", "Commodities", "Alternatives",
+])
+def test_non_equity_asset_classes_are_rejected(cls):
+    """채권 ETF 의 섹터 비중은 발행 기업 업종이라 SPHY 가 '금융',
+    SJNK 가 '인터넷' 으로 잡혔다. 섹터 로테이션 대상이 아니다."""
+    assert sf.is_equity_asset_class(cls) is False
+
+
+def test_missing_asset_class_is_not_equity():
+    assert sf.is_equity_asset_class(None) is False
+    assert sf.is_equity_asset_class("") is False
+
+
+def test_leveraged_asset_class_is_detected():
+    """이름 규칙을 빠져나간 레버리지를 자산군으로 한 번 더 막는다."""
+    assert sf.is_leveraged_asset_class("Leveraged/Inverse") is True
+    assert sf.is_leveraged_asset_class("Equity") is False
+    assert sf.is_leveraged_asset_class(None) is False
+
+
 def test_dominant_sector_threshold_is_inclusive():
     w = [{"sector": "Technology", "weightPercentage": 60.0}]
     assert sf.dominant_sector(w) == "IT"

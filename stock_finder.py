@@ -823,40 +823,75 @@ def dominant_sector(weightings: list,
     return SECTOR_KR.get(best.get("sector"), "미분류")
 
 
-def fetch_etf_sectors(symbols: list, workers: int = 8) -> dict:
-    """티커 -> 한글 섹터. 조회 실패는 조용히 미분류로 둔다.
+def is_equity_asset_class(asset_class: str) -> bool:
+    """이 ETF 가 주식형인지. 섹터 로테이션은 주식에만 의미가 있다.
 
-    종목당 한 번씩 부르므로 스레드로 나눈다. 실패해도 스캔을 막지 않는다 -
-    섹터가 없으면 macro 가 중립으로 갈 뿐이고, 그건 이 변경 이전 상태다.
+    정확히 일치시키지 않고 "Equity" 포함 여부로 본다. 실제 값이
+    Equity · Large Cap Equity · International Equity · Emerging Markets
+    Equity · Sector Equity · Equity Income 처럼 갈래가 많아, 목록으로
+    관리하면 새 값이 나올 때마다 조용히 빠진다.
+
+    채권형이 걸러져야 하는 이유는 실측이다 - 채권 ETF 의 섹터 비중은 발행
+    기업 업종이라, SPHY(고수익 채권)가 '금융', SJNK(정크본드)가 '인터넷'
+    으로 잡혀 성장주 로테이션 가점을 받았다.
+    """
+    return "EQUITY" in (asset_class or "").upper()
+
+
+def is_leveraged_asset_class(asset_class: str) -> bool:
+    """assetClass 로 잡는 레버리지·인버스. 이름 규칙을 빠져나간 것을 막는다."""
+    upper = (asset_class or "").upper()
+    return "LEVERAGED" in upper or "INVERSE" in upper
+
+
+def fetch_etf_profiles(symbols: list, workers: int = 10) -> dict:
+    """티커 -> {"asset_class", "sector"}. 실패는 조용히 미분류로 둔다.
+
+    자산군을 먼저 보고 주식형일 때만 섹터 비중을 부른다 - 채권·원자재는
+    섹터 개념이 없어서 부를 이유가 없고, 호출 수도 줄어든다.
+
+    실패해도 스캔을 막지 않는다. 섹터가 없으면 macro 가 중립으로 갈 뿐이고,
+    그건 이 기능 도입 이전 상태다.
     """
     if not FMP_KEY or not symbols:
         return {}
 
-    cache_key = f"etf_sectors_{len(symbols)}"
+    cache_key = f"etf_profiles_{len(symbols)}"
     cached = _load_cache(cache_key)
     if cached:
-        print(f"    [cache] ETF 섹터 {len(cached)}건 (캐시)")
+        print(f"    [cache] ETF 프로파일 {len(cached)}건 (캐시)")
         return cached
+
+    def get(endpoint, symbol):
+        r = requests.get(f"{FMP_BASE}/{endpoint}",
+                         params={"symbol": symbol, "apikey": FMP_KEY},
+                         timeout=12)
+        data = r.json() if r.status_code == 200 else []
+        return data if isinstance(data, list) else []
 
     def one(symbol):
         try:
-            r = requests.get(f"{FMP_BASE}/etf/sector-weightings",
-                             params={"symbol": symbol, "apikey": FMP_KEY},
-                             timeout=12)
-            data = r.json() if r.status_code == 200 else []
-            return symbol, dominant_sector(data if isinstance(data, list) else [])
+            info = get("etf/info", symbol)
+            asset_class = info[0].get("assetClass") if info else None
+            if not is_equity_asset_class(asset_class):
+                return symbol, {"asset_class": asset_class, "sector": "미분류"}
+            weights = get("etf/sector-weightings", symbol)
+            return symbol, {"asset_class": asset_class,
+                            "sector": dominant_sector(weights)}
         except Exception:
-            return symbol, "미분류"
+            return symbol, {"asset_class": None, "sector": "미분류"}
 
-    print(f"    [*] ETF 섹터 비중 조회 ({len(symbols)}종목)...")
+    print(f"    [*] ETF 자산군·섹터 조회 ({len(symbols)}종목)...")
     with ThreadPoolExecutor(max_workers=workers) as pool:
-        sectors = dict(pool.map(one, symbols))
+        profiles = dict(pool.map(one, symbols))
 
-    named = sum(1 for v in sectors.values() if v != "미분류")
-    print(f"    [OK] ETF 섹터 확정 {named}/{len(sectors)}종목 "
-          f"(나머지는 분산·채권이라 미분류)")
-    _save_cache(cache_key, sectors)
-    return sectors
+    named = sum(1 for p in profiles.values() if p["sector"] != "미분류")
+    equity = sum(1 for p in profiles.values()
+                 if is_equity_asset_class(p["asset_class"]))
+    print(f"    [OK] 주식형 {equity}/{len(profiles)}종목 · "
+          f"섹터 확정 {named}종목 (나머지는 채권·원자재·분산이라 미분류)")
+    _save_cache(cache_key, profiles)
+    return profiles
 
 
 def fetch_us_etf_universe(min_aum: float = 1e9, limit: int = 3000) -> list:
@@ -868,7 +903,7 @@ def fetch_us_etf_universe(min_aum: float = 1e9, limit: int = 3000) -> list:
     """
     # v2: 미국 거래소 필터를 넣기 전 캐시에는 TSX 가 섞여 있다. 키를 바꿔
     # 그 캐시가 다시 읽히지 않게 한다.
-    cache_key = f"us_etf_universe_v4_{int(min_aum)}_{limit}"
+    cache_key = f"us_etf_universe_v5_{int(min_aum)}_{limit}"
     cached = _load_cache(cache_key)
     if cached:
         print(f"    [cache] 미국 ETF {len(cached)}종목 (캐시)")
@@ -890,12 +925,23 @@ def fetch_us_etf_universe(min_aum: float = 1e9, limit: int = 3000) -> list:
         data = r.json() if r.status_code == 200 else []
         universe = parse_etf_rows(data, min_aum)
 
-        # 섹터를 채운다. 스크리너가 주는 sector 는 운용사 업종이라 못 쓰고,
-        # 실제 노출 섹터를 종목별로 따로 받는다 (dominant_sector 참조).
-        sectors = fetch_etf_sectors([row[0] for row in universe])
-        if sectors:
-            universe = [(t, n, m, sectors.get(t, sec), at, ex)
-                        for t, n, m, sec, at, ex in universe]
+        # 자산군과 섹터를 채운다. 스크리너가 주는 sector 는 운용사 업종이라
+        # 못 쓰고, 실제 노출 섹터를 종목별로 따로 받는다 (dominant_sector).
+        profiles = fetch_etf_profiles([row[0] for row in universe])
+        if profiles:
+            # assetClass 로 잡히는 레버리지·인버스를 여기서 한 번 더 막는다.
+            # 이름 규칙(is_leveraged_or_inverse)을 빠져나간 것이 실측으로
+            # 확인됐다 (표본 120개 중 1건).
+            dropped = [t for t, *_ in universe
+                       if is_leveraged_asset_class(
+                           (profiles.get(t) or {}).get("asset_class"))]
+            if dropped:
+                print(f"    [!] 레버리지·인버스 {len(dropped)}종목 추가 제외 "
+                      f"(자산군 기준): {', '.join(dropped[:8])}")
+            universe = [(t, n, m, (profiles.get(t) or {}).get("sector", sec),
+                         at, ex)
+                        for t, n, m, sec, at, ex in universe
+                        if t not in set(dropped)]
 
         _save_cache(cache_key, universe)
         print(f"    [OK] 미국 ETF {len(universe)}종목 수집 완료")
