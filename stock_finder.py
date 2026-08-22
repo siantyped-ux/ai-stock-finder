@@ -1171,6 +1171,17 @@ def calc_hitl(signal, total, tech):
     return False
 
 
+def filter_for_output(rows: list, min_total: int) -> list:
+    """대시보드·콘솔에 낼 행만 남긴다.
+
+    아카이브(history/*.csv)에는 적용하지 않는다. exit_rules.evaluate() 가
+    보유 종목의 그날 total 이 exit_total 미만이면 SIGNAL 청산하는데, 점수가
+    떨어진 행이 아카이브에서 사라지면 그 판정을 할 수 없게 된다.
+    """
+    return [r for r in rows
+            if r.get("total") is not None and r["total"] >= min_total]
+
+
 def calc_ev_and_target(tech, macro, filing, value, r3m) -> tuple[float, int]:
     # NaN 방어: 입력값 중 하나라도 NaN/None이면 중립값(0)으로 대체
     def _safe(v):
@@ -1295,6 +1306,9 @@ def parse_args():
                    help="미국 ETF 최소 AUM USD (기본: 1e9 = $1B)")
     p.add_argument("--no-etf", action="store_true",
                    help="ETF 를 유니버스에서 제외한다")
+    p.add_argument("--min-total", type=int, default=70,
+                   help="대시보드·콘솔 출력 최소 종합점수 (기본 70).\n"
+                        "  아카이브에는 적용되지 않는다")
     p.add_argument("--limit", type=int, default=0,
                    help="종류별 상위 N개로 제한 (0=제한없음)")
     p.add_argument("--test", action="store_true",
@@ -1531,6 +1545,12 @@ def main():
         print(f"[!] 이력 기록 실패: {e}")
         sys.exit(1)
 
+    # 아카이브를 기록한 뒤에 필터한다. 순서를 바꾸면 아카이브가 잘려
+    # 백테스트의 SIGNAL 청산 판정이 불가능해진다.
+    shown = filter_for_output(results, args.min_total)
+    print(f"[*] 출력 필터: 종합점수 {args.min_total}점 이상 "
+          f"{len(shown)}/{len(results)}종목")
+
     output_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "dashboard_data.js")
     fred_json = json.dumps(fred_data, ensure_ascii=False)
     js_content = f"""// AI 3-Month Stock Finder - Live Data
@@ -1547,18 +1567,18 @@ window.LIVE_MACRO = {{
   fred_active: {str(bool(FRED_KEY)).lower()},
   fred: {fred_json}
 }};
-window.LIVE_STOCKS = {json.dumps(results, ensure_ascii=False, indent=2)};
+window.LIVE_STOCKS = {json.dumps(shown, ensure_ascii=False, indent=2)};
 """
     with open(output_path, "w", encoding="utf-8") as f:
         f.write(js_content)
 
     print()
     print("=" * 65)
-    print(f"  [완료] {len(results)}개 종목 · {os.path.basename(output_path)}")
-    print(f"  STRONG_BUY: {sum(1 for r in results if r['signal']=='STRONG_BUY')}개")
-    print(f"  BUY:        {sum(1 for r in results if r['signal']=='BUY')}개")
-    print(f"  WATCH:      {sum(1 for r in results if r['signal']=='WATCH')}개")
-    print(f"  HITL 필요:  {sum(1 for r in results if r['hitl'])}개")
+    print(f"  [완료] {len(shown)}개 종목 · {os.path.basename(output_path)}")
+    print(f"  STRONG_BUY: {sum(1 for r in shown if r['signal']=='STRONG_BUY')}개")
+    print(f"  BUY:        {sum(1 for r in shown if r['signal']=='BUY')}개")
+    print(f"  WATCH:      {sum(1 for r in shown if r['signal']=='WATCH')}개")
+    print(f"  HITL 필요:  {sum(1 for r in shown if r['hitl'])}개")
     print("=" * 65)
     print("  브라우저에서 stock_finder_dashboard.html 을 새로고침하세요")
     print("=" * 65)

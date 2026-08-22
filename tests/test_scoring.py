@@ -85,3 +85,31 @@ def test_etf_consensus_counts_two_axes():
 def test_etf_consensus_boundary_is_inclusive():
     assert sf.calc_consensus_etf(70, 70) == 2
     assert sf.calc_consensus_etf(69, 69) == 0
+
+
+# ─── 출력 필터 ─────────────────────────────────────────────
+ROWS = [
+    {"t": "AAA", "total": 77, "signal": "BUY"},
+    {"t": "BBB", "total": 70, "signal": "WATCH"},
+    {"t": "CCC", "total": 69, "signal": "WATCH"},
+    {"t": "DDD", "total": 35, "signal": "AVOID"},
+]
+
+
+def test_filter_keeps_at_and_above_threshold():
+    kept = sf.filter_for_output(ROWS, min_total=70)
+    assert [r["t"] for r in kept] == ["AAA", "BBB"]
+
+
+def test_filter_threshold_zero_keeps_everything():
+    assert len(sf.filter_for_output(ROWS, min_total=0)) == 4
+
+
+def test_filter_does_not_mutate_input():
+    sf.filter_for_output(ROWS, min_total=70)
+    assert len(ROWS) == 4
+
+
+def test_filter_drops_rows_without_total():
+    rows = [{"t": "EEE", "signal": "HOLD"}]
+    assert sf.filter_for_output(rows, min_total=70) == []
