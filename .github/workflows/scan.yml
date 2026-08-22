@@ -10,16 +10,16 @@ on:
   workflow_dispatch:
     inputs:
       min_us_cap:
-        description: '미국 최소 시가총액 (USD, 기본 1e10 = $10B)'
+        description: '미국 주식 최소 시가총액 (USD, 기본 1e10 = $10B)'
         default: '1e10'
         required: false
-      min_kr_cap:
-        description: '한국 최소 시가총액 (KRW, 기본 3e11)'
-        default: '3e11'
+      min_etf_aum:
+        description: '미국 ETF 최소 AUM (USD, 기본 1e9 = $1B)'
+        default: '1e9'
         required: false
-      market:
-        description: '스캔 시장 (US / KR / ALL)'
-        default: 'ALL'
+      min_total:
+        description: '출력 최소 종합점수 (기본 70)'
+        default: '70'
         required: false
   push:
     branches: [main]
@@ -59,14 +59,13 @@ jobs:
       - name: Run stock finder scan
         env:
           FMP_API_KEY: ${{ secrets.FMP_API_KEY }}
-          DART_API_KEY: ${{ secrets.DART_API_KEY }}
           FRED_API_KEY: ${{ secrets.FRED_API_KEY }}
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
         run: |
           python stock_finder.py \
-            --market ${{ github.event.inputs.market || 'ALL' }} \
             --min-us-cap ${{ github.event.inputs.min_us_cap || '1e10' }} \
-            --min-kr-cap ${{ github.event.inputs.min_kr_cap || '3e11' }} \
+            --min-etf-aum ${{ github.event.inputs.min_etf_aum || '1e9' }} \
+            --min-total ${{ github.event.inputs.min_total || '70' }} \
             --sleep 0.2 \
             --workers 4
 
@@ -196,7 +195,7 @@ jobs:
           - **수집률 미달** — 로그에 \`수집률 ... 기준\` 이 있으면 완결성 가드가
             부분 데이터를 막은 것입니다. yfinance rate limit(429)이 흔한 원인이며,
             \`--workers\` 를 낮추면 완화됩니다.
-          - **API 키 만료** — FMP / DART / FRED 중 하나가 죽으면 스캔이 멈춥니다.
+          - **API 키 만료** — FMP / FRED 중 하나가 죽으면 스캔이 멈춥니다.
           - **timeout** — 120분 상한에 걸렸는지 확인하세요.
           - **push 실패** — rebase 재시도 3회를 모두 소진했는지 확인하세요.
 

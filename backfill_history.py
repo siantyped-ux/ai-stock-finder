@@ -189,6 +189,10 @@ def main():
                 "value": x["value"], "total": x["total"], "consensus": x["consensus"],
                 "signal": x["signal"], "ev": x["ev"], "target": x["target"],
                 "hitl": x["hitl"], "source": "backfill",
+                # 옛 스냅샷에는 asset_type 이 없다. 그 시절 유니버스는 전부
+                # 개별주식이었으므로 STOCK 으로 채운다. ETF 가 실린 이후
+                # 스냅샷은 'at' 을 그대로 쓴다.
+                "asset_type": x.get("at", "STOCK"),
                 **price,
             })
         path = history.write_snapshot(rows, s["scan_ts"], out_dir=args.out_dir)

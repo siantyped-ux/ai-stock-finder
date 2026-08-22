@@ -85,13 +85,41 @@ def fetch_bars(ticker: str) -> dict:
     return bars
 
 
+def filter_rows(rows: list, us_only: bool = False,
+                entry_total: int = None) -> list:
+    """아카이브 행을 진입 조건에 맞게 걸러 낸다.
+
+    us_only 는 과거 아카이브에 남아 있는 한국 행을 뺀다. 7/31~8/22 데이터에는
+    KR 이 들어 있어서, 미국 단독 성과를 보려면 여기서 빼야 한다.
+
+    entry_total 은 그 점수 이상인 행의 signal 을 BUY 로 올린다. 원래 진입
+    조건은 signal in (BUY, STRONG_BUY) 이고 BUY 정의가 total>=70 and cons>=3
+    이라, consensus 를 무시했을 때 성과가 어떻게 달라지는지 보려는 것이다.
+    진입 규칙을 바꾸자는 제안이 아니라 비교용이다.
+
+    입력 행을 바꾸지 않는다. 같은 아카이브로 여러 케이스를 돌리기 때문이다.
+    """
+    out = []
+    for r in rows:
+        if us_only and r.get("market") != "US":
+            continue
+        if entry_total is not None:
+            total = r.get("total")
+            if total not in (None, "") and int(total) >= entry_total:
+                r = {**r, "signal": "BUY"}
+        out.append(r)
+    return out
+
+
 def run(pattern: str = "history/*.csv", params: er.Params = None,
-        costs: ts.Costs = None) -> dict:
+        costs: ts.Costs = None, us_only: bool = False,
+        entry_total: int = None) -> dict:
     """아카이브 전체를 시뮬레이션하고 트레이드·통계·커버리지를 돌려준다."""
     params = params or er.Params()
     costs = costs or ts.Costs()
 
-    rows = load_archive(pattern)
+    rows = filter_rows(load_archive(pattern), us_only=us_only,
+                       entry_total=entry_total)
 
     # 아카이브에 (ticker, date) 중복이 실제로 존재한다. 그대로 두면
     # simulate_ticker 가 같은 봉을 두 번 처리해 진입 봉까지 평가하게 되고
@@ -210,6 +238,10 @@ def main():
     p.add_argument("--exit-total", type=int, default=60)
     p.add_argument("--use-target", action="store_true",
                    help="목표가 도달 시 익절한다 (기본: 사용 안 함)")
+    p.add_argument("--us-only", action="store_true",
+                   help="아카이브의 한국 행을 제외한다")
+    p.add_argument("--entry-total", type=int, default=None,
+                   help="이 점수 이상이면 BUY 로 간주해 진입한다 (비교용)")
     args = p.parse_args()
 
     params = er.Params(
@@ -219,7 +251,8 @@ def main():
         exit_total=args.exit_total,
         use_target=args.use_target,
     )
-    report(run(args.history, params))
+    report(run(args.history, params, us_only=args.us_only,
+               entry_total=args.entry_total))
 
 
 if __name__ == "__main__":

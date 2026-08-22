@@ -7,7 +7,7 @@ xlsx v5 시스템의 4축 컨센서스 로직을 실제 데이터로 적용
 
 .env 파일에 API 키 입력 (선택):
     FMP_API_KEY=xxx   # 미국 SEC 공시 (13F, Form 4, 8-K)
-    DART_API_KEY=xxx  # 한국 공시 (5%보고, 임원매매, 자기주식)
+    FRED_API_KEY=xxx  # 연준 경제 데이터
 
 실행:
     python stock_finder.py
@@ -23,6 +23,7 @@ import io
 import json
 import logging
 import os
+import re
 import sys
 import threading
 import time
@@ -70,68 +71,42 @@ def load_env(path: str = ".env") -> dict[str, str]:
 ENV = load_env()
 # .env 우선, 없으면 시스템 환경변수 (GitHub Actions Secrets 지원)
 FMP_KEY = (ENV.get("FMP_API_KEY") or os.environ.get("FMP_API_KEY", "")).strip()
-DART_KEY = (ENV.get("DART_API_KEY") or os.environ.get("DART_API_KEY", "")).strip()
 FRED_KEY = (ENV.get("FRED_API_KEY") or os.environ.get("FRED_API_KEY", "")).strip()
 
 FMP_BASE = "https://financialmodelingprep.com/stable"
-DART_BASE = "https://opendart.fss.or.kr/api"
 FRED_BASE = "https://api.stlouisfed.org/fred"
 
-# 한국 종목의 corp_code 매핑 (DART 조회에 필요)
-# 런타임에 load_dart_corpcode()가 opendart corpCode.xml에서 전체 상장사를 병합
-CORP_CODE_MAP: dict[str, str] = {
-    "005930.KS": "00126380",  # 삼성전자
-    "000660.KS": "00164779",  # SK하이닉스
-    "035420.KS": "00266961",  # NAVER
-    "035720.KS": "00918444",  # 카카오
-    "005380.KS": "00164742",  # 현대차
-    "373220.KS": "01515323",  # LG에너지솔루션
-    "207940.KS": "00877059",  # 삼성바이오로직스
-    "068270.KS": "00421045",  # 셀트리온
-    "105560.KS": "00688996",  # KB금융
-    "055550.KS": "00518902",  # 신한지주
-    "010130.KS": "00113059",  # 고려아연
-}
 
-
-# ─── 종목 유니버스 (폴백용 · pykrx/FMP 실패 시 사용) ─────────
+# ─── 종목 유니버스 (폴백용 · FMP 조회 실패 시 사용) ──────────
 FALLBACK_UNIVERSE = [
     # 미국
-    ("NVDA",  "NVIDIA",              "US", "AI/반도체"),
-    ("MSFT",  "Microsoft",           "US", "Software"),
-    ("AMD",   "AMD",                 "US", "AI/반도체"),
-    ("META",  "Meta Platforms",      "US", "인터넷"),
-    ("GOOGL", "Alphabet",            "US", "인터넷"),
-    ("AMZN",  "Amazon",              "US", "E-commerce/Cloud"),
-    ("TSLA",  "Tesla",               "US", "EV/자동차"),
-    ("AVGO",  "Broadcom",            "US", "반도체"),
-    ("LLY",   "Eli Lilly",           "US", "제약/바이오"),
-    ("COST",  "Costco",              "US", "소매"),
-    ("CRWD",  "CrowdStrike",         "US", "사이버보안"),
-    ("UBER",  "Uber",                "US", "플랫폼"),
-    ("PANW",  "Palo Alto Networks",  "US", "사이버보안"),
-    ("NOW",   "ServiceNow",          "US", "Software"),
-    ("AXP",   "American Express",    "US", "금융"),
-    ("NFLX",  "Netflix",             "US", "미디어"),
-    ("ORCL",  "Oracle",              "US", "Software"),
-    ("MU",    "Micron",              "US", "반도체"),
-    ("AAPL",  "Apple",               "US", "IT하드웨어"),
-    ("JPM",   "JPMorgan",            "US", "금융"),
-    ("V",     "Visa",                "US", "금융"),
-    ("F",     "Ford Motor",          "US", "자동차"),
-    ("INTC",  "Intel",               "US", "반도체"),
-    # 한국
-    ("005930.KS", "삼성전자",           "KR", "반도체"),
-    ("000660.KS", "SK하이닉스",         "KR", "반도체"),
-    ("035420.KS", "NAVER",             "KR", "인터넷"),
-    ("035720.KS", "카카오",             "KR", "인터넷"),
-    ("005380.KS", "현대차",             "KR", "자동차"),
-    ("373220.KS", "LG에너지솔루션",     "KR", "2차전지"),
-    ("207940.KS", "삼성바이오로직스",   "KR", "바이오"),
-    ("068270.KS", "셀트리온",           "KR", "바이오"),
-    ("105560.KS", "KB금융",             "KR", "금융"),
-    ("055550.KS", "신한지주",           "KR", "금융"),
-    ("010130.KS", "고려아연",           "KR", "비철금속"),
+    ("NVDA",  "NVIDIA",              "US", "AI/반도체", "STOCK"),
+    ("MSFT",  "Microsoft",           "US", "Software", "STOCK"),
+    ("AMD",   "AMD",                 "US", "AI/반도체", "STOCK"),
+    ("META",  "Meta Platforms",      "US", "인터넷", "STOCK"),
+    ("GOOGL", "Alphabet",            "US", "인터넷", "STOCK"),
+    ("AMZN",  "Amazon",              "US", "E-commerce/Cloud", "STOCK"),
+    ("TSLA",  "Tesla",               "US", "EV/자동차", "STOCK"),
+    ("AVGO",  "Broadcom",            "US", "반도체", "STOCK"),
+    ("LLY",   "Eli Lilly",           "US", "제약/바이오", "STOCK"),
+    ("COST",  "Costco",              "US", "소매", "STOCK"),
+    ("CRWD",  "CrowdStrike",         "US", "사이버보안", "STOCK"),
+    ("UBER",  "Uber",                "US", "플랫폼", "STOCK"),
+    ("PANW",  "Palo Alto Networks",  "US", "사이버보안", "STOCK"),
+    ("NOW",   "ServiceNow",          "US", "Software", "STOCK"),
+    ("AXP",   "American Express",    "US", "금융", "STOCK"),
+    ("NFLX",  "Netflix",             "US", "미디어", "STOCK"),
+    ("ORCL",  "Oracle",              "US", "Software", "STOCK"),
+    ("MU",    "Micron",              "US", "반도체", "STOCK"),
+    ("AAPL",  "Apple",               "US", "IT하드웨어", "STOCK"),
+    ("JPM",   "JPMorgan",            "US", "금융", "STOCK"),
+    ("V",     "Visa",                "US", "금융", "STOCK"),
+    ("F",     "Ford Motor",          "US", "자동차", "STOCK"),
+    ("INTC",  "Intel",               "US", "반도체", "STOCK"),
+    # ETF. 폴백에도 ETF 를 두는 것은 의도다 - --test 로 도는 스모크 실행이
+    # ETF 분기(재정규화 점수·빈 filing/value)를 실제로 지나가야 한다.
+    ("SPY",   "SPDR S&P 500 ETF Trust", "US", "미분류", "ETF"),
+    ("QQQ",   "Invesco QQQ Trust",      "US", "미분류", "ETF"),
 ]
 
 
@@ -570,173 +545,6 @@ def fetch_fmp_filing_signals(ticker: str) -> dict:
     return signals
 
 
-# ─── DART API (한국 공시) ─────────────────────────────────────
-def load_dart_corpcode() -> dict[str, str]:
-    """
-    DART OpenAPI corpCode.xml(ZIP)을 받아 티커→corp_code 매핑을 반환.
-    - stock_code가 있는 상장사만 대상 (비상장 법인 제외)
-    - KOSPI(.KS), KOSDAQ(.KQ) 두 suffix 모두 등록 (한국 단축코드는 6자리 유일)
-    - 7일 TTL로 .cache/dart_corpcode.json 캐시
-    - DART_KEY 없거나 다운로드 실패 시 빈 dict 반환 (하드코딩 매핑 폴백)
-    """
-    if not DART_KEY:
-        return {}
-
-    cache_key = "dart_corpcode"
-    cached = _load_cache(cache_key, ttl_hours=24 * 7)
-    if isinstance(cached, dict) and cached:
-        return cached
-
-    import zipfile
-    import xml.etree.ElementTree as ET
-
-    try:
-        r = requests.get(
-            f"{DART_BASE}/corpCode.xml",
-            params={"crtfc_key": DART_KEY},
-            timeout=30,
-        )
-        if r.status_code != 200:
-            print(f"    [!] DART corpCode HTTP {r.status_code}")
-            return {}
-        content = r.content
-        # ZIP 매직 넘버 확인 (에러 시 JSON 응답)
-        if content[:2] != b"PK":
-            try:
-                err = r.json()
-                print(f"    [!] DART corpCode 오류: {err.get('message', 'unknown')}")
-            except Exception:
-                print("    [!] DART corpCode: ZIP 응답 아님")
-            return {}
-
-        mapping: dict[str, str] = {}
-        with zipfile.ZipFile(io.BytesIO(content)) as zf:
-            xml_name = next(
-                (n for n in zf.namelist() if n.upper().endswith(".XML")), None
-            )
-            if xml_name is None:
-                return {}
-            with zf.open(xml_name) as xf:
-                for _ev, elem in ET.iterparse(xf, events=("end",)):
-                    if elem.tag != "list":
-                        continue
-                    stock_code = (elem.findtext("stock_code") or "").strip()
-                    corp_code = (elem.findtext("corp_code") or "").strip()
-                    if (
-                        stock_code
-                        and corp_code
-                        and stock_code.isdigit()
-                        and len(stock_code) == 6
-                    ):
-                        mapping[f"{stock_code}.KS"] = corp_code
-                        mapping[f"{stock_code}.KQ"] = corp_code
-                    elem.clear()
-
-        if mapping:
-            _save_cache(cache_key, mapping)
-            print(f"    [OK] DART 회사코드 {len(mapping) // 2}개 상장사 로드")
-        return mapping
-    except Exception as e:
-        print(f"    [!] DART corpCode 로드 실패: {str(e)[:80]}")
-        return {}
-
-
-def _dart_get(endpoint: str, params: dict = None) -> Optional[dict]:
-    if not DART_KEY:
-        return None
-    params = params or {}
-    params["crtfc_key"] = DART_KEY
-    try:
-        r = requests.get(f"{DART_BASE}{endpoint}", params=params, timeout=8)
-        if r.status_code == 200:
-            data = r.json()
-            if data.get("status") == "000":
-                return data
-        return None
-    except Exception:
-        return None
-
-
-def fetch_dart_filing_signals(ticker: str) -> dict:
-    """한국 종목의 5%보고, 임원매매, 자기주식, 증자 시그널"""
-    signals = {"available": False, "reasons": [], "score_delta": 0}
-    corp_code = CORP_CODE_MAP.get(ticker)
-    if not corp_code:
-        return signals
-
-    bgn_de = (datetime.now() - timedelta(days=90)).strftime("%Y%m%d")
-    end_de = datetime.now().strftime("%Y%m%d")
-
-    # 1) 대량보유(5%) 최근 90일
-    major = _dart_get("/majorstock.json", {"corp_code": corp_code})
-    if major and major.get("list"):
-        signals["available"] = True
-        recent = [x for x in major["list"] if x.get("rcept_dt", "0") >= bgn_de]
-        if recent:
-            new_entries = sum(1 for x in recent if "신규" in str(x.get("report_tp", "")))
-            purpose_mgmt = sum(1 for x in recent if "경영" in str(x.get("stkrt_int", "")))
-            if new_entries > 0:
-                signals["score_delta"] += 10
-                signals["reasons"].append(f"5%보고: 신규 진입 {new_entries}건 (최근 90일)")
-            if purpose_mgmt > 0:
-                signals["score_delta"] += 8
-                signals["reasons"].append(f"5%보고: 경영참여 목적 {purpose_mgmt}건 (activist 후보)")
-            elif recent:
-                signals["reasons"].append(f"5%보고: 최근 90일 {len(recent)}건")
-
-    # 2) 임원·주요주주 소유주식 (매매 클러스터)
-    elestock = _dart_get("/elestock.json", {"corp_code": corp_code})
-    if elestock and elestock.get("list"):
-        signals["available"] = True
-        recent = [x for x in elestock["list"] if x.get("rcept_dt", "0") >= bgn_de]
-        buys = sum(1 for x in recent if "취득" in str(x.get("sp_stock_lmp_cnt_tp", "")))
-        sells = sum(1 for x in recent if "처분" in str(x.get("sp_stock_lmp_cnt_tp", "")))
-        # 대안 필드: isu_dcrs_srtdt / isu_dcrs_ostk_cnt 부호로 판정
-        for x in recent:
-            delta = x.get("isu_dcrs_ostk_cnt", "0")
-            try:
-                d = int(str(delta).replace(",", "").replace("-", "-").strip() or "0")
-                if d > 0:
-                    buys += 1
-                elif d < 0:
-                    sells += 1
-            except Exception:
-                pass
-        net = buys - sells
-        if buys >= 3 and net > 0:
-            signals["score_delta"] += 10
-            signals["reasons"].append(f"임원매매: 매수 클러스터 (매수{buys}/매도{sells}, 90일)")
-        elif net < -3:
-            signals["score_delta"] -= 8
-            signals["reasons"].append(f"임원매매: 매도 우세 (매수{buys}/매도{sells})")
-
-    # 3) 자기주식 취득 (긍정 시그널)
-    treasury = _dart_get("/tsstkAqDecsn.json",
-                        {"corp_code": corp_code, "bgn_de": bgn_de, "end_de": end_de})
-    if treasury and treasury.get("list"):
-        signals["available"] = True
-        signals["score_delta"] += 8
-        signals["reasons"].append(f"자기주식 취득 결정 {len(treasury['list'])}건 (오버행 해소)")
-
-    # 4) 유상증자 (부정 시그널 - 희석)
-    piic = _dart_get("/piicDecsn.json",
-                    {"corp_code": corp_code, "bgn_de": bgn_de, "end_de": end_de})
-    if piic and piic.get("list"):
-        signals["available"] = True
-        signals["score_delta"] -= 8
-        signals["reasons"].append(f"유상증자 결정 {len(piic['list'])}건 (희석 리스크)")
-
-    # 5) 전환사채(CB) 발행 (부정 시그널)
-    cb = _dart_get("/cvbdIsDecsn.json",
-                  {"corp_code": corp_code, "bgn_de": bgn_de, "end_de": end_de})
-    if cb and cb.get("list"):
-        signals["available"] = True
-        signals["score_delta"] -= 5
-        signals["reasons"].append(f"CB 발행 {len(cb['list'])}건 (희석 잠재)")
-
-    return signals
-
-
 # ─── FRED API (연준 경제 데이터) ─────────────────────────────
 def _fred_get_series(series_id: str, limit: int = 13) -> Optional[list]:
     """FRED 시리즈 관측치 조회 (최신순)"""
@@ -864,9 +672,35 @@ SECTOR_KR = {
 }
 
 
+# 레버리지·인버스 ETF 를 종목명으로 걸러낸다. ATR 3배 손절과 궁합이 나쁘다 -
+# 일일 변동성이 기초자산의 배수라 손절폭이 비현실적으로 벌어지고, 장기 보유
+# 시 변동성 감쇠 때문에 손익을 같은 척도로 해석할 수 없다.
+#
+# 단어 경계를 쓴다. 경계가 없으면 "Shortline" 같은 이름이 "Short" 로 걸린다.
+#
+# SHORT 뒤의 부정 전방탐색이 핵심이다. 채권 ETF 의 "Short" 는 인버스가 아니라
+# 잔존만기를 뜻한다 - 이 예외가 없으면 "iShares Short Treasury Bond ETF" 나
+# "Vanguard Short-Term Bond ETF" 같은 단기채 ETF 가 통째로 빠진다. 반면
+# "ProShares Short S&P500" 은 진짜 인버스라 걸러야 한다.
+_LEVERAGED_PATTERN = re.compile(
+    r"\b(?:\d+X|ULTRA|ULTRAPRO|ULTRASHORT|INVERSE|BEAR|BULL|LEVERAGED"
+    r"|SHORT\b(?![- ]?(?:TERM|DURATION|MATURITY|TREASURY)))\b",
+    re.IGNORECASE,
+)
+
+
+def is_leveraged_or_inverse(name: str) -> bool:
+    """종목명이 레버리지·인버스 ETF 를 가리키는지."""
+    if not name:
+        return False
+    return bool(_LEVERAGED_PATTERN.search(name))
+
+
 def fetch_us_universe(min_market_cap: float = 5e9, limit: int = 5000) -> list:
     """FMP stock-screener로 NYSE+NASDAQ 상장 종목 조회 (ETF 제외)"""
-    cache_key = f"us_universe_{int(min_market_cap)}_{limit}"
+    # v2: 유니버스 튜플이 asset_type 을 포함하는 5칸으로 늘었다. 캐시 키를
+    # 바꾸지 않으면 옛 4칸 캐시가 그대로 읽혀 스캔 루프 언패킹이 터진다.
+    cache_key = f"us_universe_v2_{int(min_market_cap)}_{limit}"
     cached = _load_cache(cache_key)
     if cached:
         print(f"    [cache] 미국 유니버스 {len(cached)}종목 (캐시)")
@@ -910,7 +744,7 @@ def fetch_us_universe(min_market_cap: float = 5e9, limit: int = 5000) -> list:
             sector_kr = SECTOR_KR.get(sector_raw, sector_raw or "기타")
             if "Semi" in industry_raw:
                 sector_kr = "반도체"
-            universe.append((symbol, name[:40], "US", sector_kr))
+            universe.append((symbol, name[:40], "US", sector_kr, "STOCK"))
 
         _save_cache(cache_key, universe)
         print(f"    [OK] 미국 {len(universe)}종목 수집 완료")
@@ -920,170 +754,111 @@ def fetch_us_universe(min_market_cap: float = 5e9, limit: int = 5000) -> list:
         return []
 
 
-# KOSPI 시총 상위 확장 리스트 (pykrx/KRX API 실패 시 폴백)
-KOSPI_EXPANDED = [
-    ("005930", "삼성전자"), ("000660", "SK하이닉스"), ("373220", "LG에너지솔루션"),
-    ("207940", "삼성바이오로직스"), ("005380", "현대차"), ("000270", "기아"),
-    ("035420", "NAVER"), ("068270", "셀트리온"), ("105560", "KB금융"),
-    ("005490", "POSCO홀딩스"), ("055550", "신한지주"), ("012330", "현대모비스"),
-    ("035720", "카카오"), ("006400", "삼성SDI"), ("028260", "삼성물산"),
-    ("015760", "한국전력"), ("010130", "고려아연"), ("034730", "SK"),
-    ("003670", "포스코퓨처엠"), ("018260", "삼성에스디에스"), ("032830", "삼성생명"),
-    ("138040", "메리츠금융지주"), ("011200", "HMM"), ("086790", "하나금융지주"),
-    ("017670", "SK텔레콤"), ("011170", "롯데케미칼"), ("267260", "HD현대일렉트릭"),
-    ("090430", "아모레퍼시픽"), ("267250", "HD현대중공업"), ("323410", "카카오뱅크"),
-    ("000810", "삼성화재"), ("010950", "S-Oil"), ("011070", "LG이노텍"),
-    ("010140", "삼성중공업"), ("329180", "HD현대미포"), ("024110", "기업은행"),
-    ("009150", "삼성전기"), ("042660", "한화오션"), ("128940", "한미약품"),
-    ("086520", "에코프로"), ("247540", "에코프로비엠"), ("251270", "넷마블"),
-    ("036570", "엔씨소프트"), ("018880", "한온시스템"), ("000720", "현대건설"),
-    ("139480", "이마트"), ("000100", "유한양행"), ("032640", "LG유플러스"),
-    ("375500", "DL이앤씨"), ("096770", "SK이노베이션"), ("079550", "LIG넥스원"),
-    ("006360", "GS건설"), ("078930", "GS"), ("036460", "한국가스공사"),
-    ("016360", "삼성증권"), ("005940", "NH투자증권"), ("026960", "동서"),
-    ("010060", "OCI홀딩스"), ("000210", "DL"),
-    # 008560 메리츠증권: 2022 상장폐지(메리츠금융지주로 통합) — 제외
-    ("006800", "미래에셋증권"), ("196170", "알테오젠"), ("064350", "현대로템"),
-    ("005830", "DB손해보험"), ("002380", "KCC"), ("011790", "SKC"),
-    ("006650", "대한유화"), ("000670", "영풍"), ("138930", "BNK금융지주"),
-    ("006260", "LS"), ("008770", "호텔신라"), ("009830", "한화솔루션"),
-    ("139130", "DGB금융지주"), ("011780", "금호석유"), ("078340", "컴투스"),
-    ("079160", "CJ CGV"), ("033780", "KT&G"), ("005810", "풍산"),
-    ("002960", "한국쉘석유"), ("000120", "CJ대한통운"),
-    ("120110", "코오롱인더"),
-    ("069620", "대웅제약"), ("185750", "종근당"),
-    ("006840", "AK홀딩스"), ("008930", "한미사이언스"), ("002790", "아모레G"),
-    ("069260", "휴켐스"), ("000080", "하이트진로"),
-    # 아래 티커는 상장폐지/합병으로 yfinance 조회 불가 — 제외:
-    # 002270 롯데푸드(2022 롯데제과에 흡수합병)
-    # 010620 HD현대미포조선(329180 HD현대미포로 대체)
-    # 003410 쌍용C&E(2024 상장폐지)
-    # 042670 두산인프라코어(HD현대인프라코어로 개편, 티커 변경)
-    # 036490 SK바이오사이언스(yfinance 데이터 이슈)
-    ("030200", "KT"), ("012450", "한화에어로스페이스"), ("047810", "한국항공우주"),
-    ("051910", "LG화학"), ("051900", "LG생활건강"), ("066570", "LG전자"),
-    ("003550", "LG"), ("000150", "두산"), ("034020", "두산에너빌리티"),
-    ("241560", "두산밥캣"), ("035250", "강원랜드"), ("114090", "GKL"),
-    ("020150", "롯데에너지머티리얼즈"), ("004020", "현대제철"),
-    # 003600 SK디스커버리: yfinance 데이터 이슈로 제외
-    ("069960", "현대백화점"), ("023530", "롯데쇼핑"),
-    # 011200 HMM 은 위(857행)에 이미 포함 — 중복 제거
-    ("012750", "에스원"), ("035150", "백광산업"), ("018670", "삼성E&A"),
-    ("003490", "대한항공"), ("020560", "아시아나항공"), ("047040", "대우건설"),
-    ("088980", "맥쿼리인프라"), ("161390", "한국타이어앤테크놀로지"), ("161890", "한국콜마"),
-]
+def parse_etf_rows(data: list, min_aum: float) -> list:
+    """FMP ETF 스크리너 응답을 유니버스 튜플 목록으로 바꾼다.
+
+    네트워크와 분리해 두면 필터 규칙을 테스트할 수 있다.
+
+    ETF 는 섹터를 '미분류' 로 둔다. calc_macro_score 가 미분류를 중립
+    처리하므로 macro 점수가 왜곡되지 않는다.
+    """
+    rows = []
+    for item in data:
+        symbol = item.get("symbol", "")
+        if not symbol:
+            continue
+        name = item.get("name") or item.get("companyName") or symbol
+        if is_leveraged_or_inverse(name):
+            continue
+        aum = item.get("marketCap")
+        if aum is None or aum < min_aum:
+            continue
+        rows.append((symbol, name[:40], "US", "미분류", "ETF"))
+    return rows
 
 
-def fetch_kr_universe(min_market_cap: float = 3e11) -> list:
+def fetch_us_etf_universe(min_aum: float = 1e9, limit: int = 3000) -> list:
+    """FMP stock-screener 로 미국 ETF 조회.
+
+    거래소 필터를 걸지 않는 것이 핵심이다. SPY·IWM 등 주요 ETF 는 NYSE Arca
+    상장이라 exchange=nyse,nasdaq 으로 조회하면 QQQ 정도만 잡히고 대부분
+    누락된다.
     """
-    한국 KOSPI 유니버스 조회
-    pykrx 우선 시도, 실패 시 KOSPI 시총 상위 확장 하드코딩 리스트 사용
-    (시가총액 필터는 yfinance info로 스캔 중 적용 - main() 참조)
-    """
-    cache_key = f"kr_universe_{int(min_market_cap)}"
+    cache_key = f"us_etf_universe_{int(min_aum)}_{limit}"
     cached = _load_cache(cache_key)
     if cached:
-        print(f"    [cache] 한국 유니버스 {len(cached)}종목 (캐시)")
-        return cached
+        print(f"    [cache] 미국 ETF {len(cached)}종목 (캐시)")
+        return [tuple(row) for row in cached]
 
-    # pykrx 시도 (인코딩 이슈 있음). pykrx 내부의 print 오류 노이즈는 억제.
+    if not FMP_KEY:
+        print("    [!] FMP API 키 없음 → ETF 건너뜀")
+        return []
+
+    print(f"    [*] FMP 미국 ETF 조회 (AUM ≥ ${min_aum/1e9:.1f}B)...")
     try:
-        from pykrx import stock as pykrx_stock
-        print(f"    [*] pykrx KOSPI 유니버스 조회 시도...")
-        cap_df = None
-        with contextlib.redirect_stdout(io.StringIO()), contextlib.redirect_stderr(io.StringIO()):
-            for delta in range(1, 30):
-                d = (datetime.now() - timedelta(days=delta)).strftime("%Y%m%d")
-                try:
-                    df = pykrx_stock.get_market_cap_by_ticker(d, market="KOSPI")
-                    if df is not None and len(df) > 100:
-                        cap_df = df
-                        break
-                except Exception:
-                    continue
-
-        if cap_df is not None and len(cap_df) > 100:
-            # 시가총액 컬럼 접근 (한글 인코딩 이슈 우회)
-            cap_col = None
-            for c in cap_df.columns:
-                if "시가총액" in str(c) or "cap" in str(c).lower() or "Mkt" in str(c):
-                    cap_col = c
-                    break
-            if cap_col is None and len(cap_df.columns) >= 2:
-                cap_col = cap_df.columns[1]  # 두 번째 컬럼이 대체로 시총
-
-            if cap_col:
-                filtered = cap_df[cap_df[cap_col] >= min_market_cap]
-                universe = []
-                for tk in filtered.index:
-                    try:
-                        name = pykrx_stock.get_market_ticker_name(tk)
-                        universe.append((f"{tk}.KS", name, "KR", "미분류"))
-                    except Exception:
-                        universe.append((f"{tk}.KS", tk, "KR", "미분류"))
-                if universe:
-                    _save_cache(cache_key, universe)
-                    print(f"    [OK] pykrx KOSPI {len(universe)}종목 수집")
-                    return universe
-        print("    [!] pykrx 조회 불가 → 확장 하드코딩 리스트 사용")
+        r = requests.get(f"{FMP_BASE}/company-screener", params={
+            "marketCapMoreThan": int(min_aum),
+            "isEtf": "true",
+            "isActivelyTrading": "true",
+            "limit": limit,
+            "apikey": FMP_KEY,
+        }, timeout=15)
+        data = r.json() if r.status_code == 200 else []
+        universe = parse_etf_rows(data, min_aum)
+        _save_cache(cache_key, universe)
+        print(f"    [OK] 미국 ETF {len(universe)}종목 수집 완료")
+        return universe
     except Exception as e:
-        print(f"    [!] pykrx 예외: {str(e)[:60]} → 확장 하드코딩 리스트 사용")
-
-    # 폴백: 확장 하드코딩 (약 120종목)
-    universe = [(f"{code}.KS", name, "KR", "미분류") for code, name in KOSPI_EXPANDED]
-    _save_cache(cache_key, universe)
-    print(f"    [OK] KOSPI 확장 리스트 {len(universe)}종목 사용")
-    return universe
+        print(f"    [!] FMP ETF 조회 실패: {e}")
+        return []
 
 
-def load_universe(market: str = "ALL",
-                  min_us_cap: float = 5e9,
-                  min_kr_cap: float = 3e11,
+def load_universe(min_us_cap: float = 1e10,
+                  min_etf_aum: float = 1e9,
+                  include_etf: bool = True,
                   test_mode: bool = False) -> list:
-    """
-    유니버스 로드
-    market: "US" | "KR" | "ALL"
-    test_mode: True 시 폴백 34개 종목 사용
+    """미국 주식 + ETF 유니버스를 로드한다.
+
+    반환 튜플은 (ticker, name, market, sector, asset_type) 5칸이다.
+    asset_type 은 "STOCK" | "ETF" 이고, 스캔 루프가 이 값으로 스코어링을
+    분기한다.
+
+    한국은 다루지 않는다. pykrx 조회가 CI 에서 매번 실패해 하드코딩 폴백
+    112종목이 고정돼 있었고, 그 리스트는 코스피 구성 변화를 반영하지 못했다.
     """
     if test_mode:
         return FALLBACK_UNIVERSE
 
-    universe = []
-    if market in ("US", "ALL"):
-        us = fetch_us_universe(min_market_cap=min_us_cap)
-        if not us:
-            us = [s for s in FALLBACK_UNIVERSE if s[2] == "US"]
-            print(f"    [폴백] 미국 하드코딩 {len(us)}종목 사용")
-        universe.extend(us)
+    universe = list(fetch_us_universe(min_market_cap=min_us_cap))
+    if not universe:
+        universe = [s for s in FALLBACK_UNIVERSE if s[4] == "STOCK"]
+        print(f"    [폴백] 미국 하드코딩 {len(universe)}종목 사용")
 
-    if market in ("KR", "ALL"):
-        kr = fetch_kr_universe(min_market_cap=min_kr_cap)
-        if not kr:
-            kr = [s for s in FALLBACK_UNIVERSE if s[2] == "KR"]
-            print(f"    [폴백] 한국 하드코딩 {len(kr)}종목 사용")
-        universe.extend(kr)
+    if include_etf:
+        universe.extend(fetch_us_etf_universe(min_aum=min_etf_aum))
 
     return universe
 
 
 # ─── 공시 스코어 (API 우선, 실패 시 프록시) ───────────────────
 def calc_filing_score(info: dict, hist_df, ticker: str, market: str) -> tuple[int, list[str]]:
-    """API 데이터가 있으면 우선 사용, 없으면 yfinance 프록시로 대체"""
+    """API 데이터가 있으면 우선 사용, 없으면 yfinance 프록시로 대체
+
+    market 은 지금 미국뿐이라 분기하지 않는다. 인자를 남겨 두는 것은 아카이브
+    행과 호출부가 같은 값을 들고 다니기 때문이다.
+    """
     score = 55
     reasons = []
 
     # 실제 API 시그널 우선 시도
     api_signals = {}
-    if market == "US" and FMP_KEY:
+    if FMP_KEY:
         api_signals = fetch_fmp_filing_signals(ticker)
-    elif market == "KR" and DART_KEY:
-        api_signals = fetch_dart_filing_signals(ticker)
 
     if api_signals.get("available"):
         score += api_signals["score_delta"]
         reasons.extend(api_signals["reasons"])
-        source_tag = "FMP" if market == "US" else "DART"
-        reasons.append(f"* {source_tag} 실시간 공시 반영")
+        reasons.append("* FMP 실시간 공시 반영")
     else:
         # yfinance 프록시로 fallback
         inst_pct = info.get("heldPercentInstitutions")
@@ -1130,18 +905,10 @@ def calc_filing_score(info: dict, hist_df, ticker: str, market: str) -> tuple[in
                 score -= 5
                 reasons.append(f"고점 대비 {prox:.0f}%")
 
-        if market == "US":
-            if not FMP_KEY:
-                reasons.append("* FMP API 키 미설정 · 프록시 사용")
-            else:
-                reasons.append("* FMP 최근 공시 없음 · 프록시 보조")
-        elif market == "KR":
-            if not DART_KEY:
-                reasons.append("* DART API 키 미설정 · 프록시 사용")
-            elif ticker not in CORP_CODE_MAP:
-                reasons.append("* DART corp_code 매핑 없음 · 프록시 사용")
-            else:
-                reasons.append("* DART 최근 공시 없음 · 프록시 보조")
+        if not FMP_KEY:
+            reasons.append("* FMP API 키 미설정 · 프록시 사용")
+        else:
+            reasons.append("* FMP 최근 공시 없음 · 프록시 보조")
 
     if not reasons:
         reasons.append("공시 데이터 부족")
@@ -1154,16 +921,50 @@ def calc_consensus(tech, macro, filing, value):
     return sum(1 for v in (tech, macro, filing, value) if v >= 70)
 
 
+def calc_consensus_etf(tech, macro):
+    """ETF 합의 개수. 축이 tech/macro 둘뿐이므로 최대 2 다.
+
+    개수를 그대로 아카이브에 저장한다. 판정은 calc_signal 이 n_axes=2 로
+    비율을 계산한다.
+    """
+    return sum(1 for v in (tech, macro) if v >= 70)
+
+
 def calc_total(tech, macro, filing, value):
     return int(round(tech * 0.35 + macro * 0.20 + filing * 0.30 + value * 0.15))
 
 
-def calc_signal(total, cons):
-    if total >= 80 and cons >= 3:
+# ETF 가중치. 주식 가중치에서 filing(0.30)·value(0.15) 를 빼고 남은 0.55 로
+# 나눈 값이다. ETF 에는 개별기업 재무·공시 데이터가 없어 두 축을 계산할 수
+# 없다. 중립값 50 으로 채우지 않는 것은 의도다 - 그러면 두 축이 22.5점으로
+# 고정돼 70점을 넘으려면 macro 70일 때 tech 95.7 이상이 필요한데, 관측된
+# 개별주식 최고점이 77인 분포에서는 사실상 나오지 않는다.
+ETF_TECH_WEIGHT = 0.35 / 0.55
+ETF_MACRO_WEIGHT = 0.20 / 0.55
+
+
+def calc_total_etf(tech, macro):
+    """ETF 종합점수. tech/macro 두 축만 쓰고 가중치를 재정규화한다."""
+    return int(round(tech * ETF_TECH_WEIGHT + macro * ETF_MACRO_WEIGHT))
+
+
+def calc_signal(total, cons, n_axes=4):
+    """종합점수와 합의 비율로 신호를 낸다.
+
+    cons 는 70점 이상인 축의 개수, n_axes 는 축의 총 개수다. 개수가 아니라
+    비율로 판정하는 것은 ETF 때문이다 - ETF 는 filing/value 데이터가 없어
+    축이 tech/macro 둘뿐이라, 개수 기준(cons>=3)으로는 BUY 가 영원히 나오지
+    않는다.
+
+    임계 0.75 / 0.50 은 주식의 3/4, 2/4 와 정확히 같다. 주식 판정은 이
+    변경으로 한 건도 바뀌지 않는다 (tests/test_scoring.py 회귀 테스트).
+    """
+    ratio = cons / n_axes if n_axes else 0.0
+    if total >= 80 and ratio >= 0.75:
         return "STRONG_BUY"
-    if total >= 70 and cons >= 3:
+    if total >= 70 and ratio >= 0.75:
         return "BUY"
-    if total >= 60 and cons >= 2:
+    if total >= 60 and ratio >= 0.50:
         return "WATCH"
     if total >= 45:
         return "HOLD"
@@ -1176,6 +977,17 @@ def calc_hitl(signal, total, tech):
     if signal == "STRONG_BUY" and tech > 85:
         return True
     return False
+
+
+def filter_for_output(rows: list, min_total: int) -> list:
+    """대시보드·콘솔에 낼 행만 남긴다.
+
+    아카이브(history/*.csv)에는 적용하지 않는다. exit_rules.evaluate() 가
+    보유 종목의 그날 total 이 exit_total 미만이면 SIGNAL 청산하는데, 점수가
+    떨어진 행이 아카이브에서 사라지면 그 판정을 할 수 없게 된다.
+    """
+    return [r for r in rows
+            if r.get("total") is not None and r["total"] >= min_total]
 
 
 def calc_ev_and_target(tech, macro, filing, value, r3m) -> tuple[float, int]:
@@ -1277,7 +1089,6 @@ window.LIVE_MACRO = {{
   vix: {vix:.2f}, dxy: {dxy:.2f}, us10y: {us10y:.2f},
   generated_at: "{datetime.now().isoformat()}",
   fmp_active: {str(bool(FMP_KEY)).lower()},
-  dart_active: {str(bool(DART_KEY)).lower()},
   fred_active: {str(bool(FRED_KEY)).lower()},
   fred: {fred_json},
   intermediate: true, count: {len(results)}
@@ -1293,22 +1104,22 @@ def parse_args():
     p = argparse.ArgumentParser(
         description="AI 3-Month Stock Finder · 전체 유가증권 스캔",
         formatter_class=argparse.RawTextHelpFormatter)
-    p.add_argument("--market", choices=["US", "KR", "ALL"], default="ALL",
-                   help="스캔 대상 시장 (기본: ALL)")
-    p.add_argument("--min-us-cap", type=float, default=5e9,
-                   help="미국 최소 시가총액 USD (기본: 5e9 = $5B)\n"
+    p.add_argument("--min-us-cap", type=float, default=1e10,
+                   help="미국 주식 최소 시가총액 USD (기본: 1e10 = $10B)\n"
                         "  1e9 = $1B (~2500종목, 2시간+)\n"
                         "  5e9 = $5B (~800종목, 30분)\n"
-                        "  1e10 = $10B (~500종목, 20분)")
-    p.add_argument("--min-kr-cap", type=float, default=3e11,
-                   help="한국 최소 시가총액 KRW (기본: 3e11 = 3000억)\n"
-                        "  1e11 = 1000억 (~500종목)\n"
-                        "  3e11 = 3000억 (~250종목)\n"
-                        "  1e12 = 1조 (~150종목)")
+                        "  1e10 = $10B (~1000종목, 15분)")
+    p.add_argument("--min-etf-aum", type=float, default=1e9,
+                   help="미국 ETF 최소 AUM USD (기본: 1e9 = $1B)")
+    p.add_argument("--no-etf", action="store_true",
+                   help="ETF 를 유니버스에서 제외한다")
+    p.add_argument("--min-total", type=int, default=70,
+                   help="대시보드·콘솔 출력 최소 종합점수 (기본 70).\n"
+                        "  아카이브에는 적용되지 않는다")
     p.add_argument("--limit", type=int, default=0,
-                   help="시장별 상위 N개로 제한 (0=제한없음)")
+                   help="종류별 상위 N개로 제한 (0=제한없음)")
     p.add_argument("--test", action="store_true",
-                   help="테스트 모드 (기존 34개 폴백 종목)")
+                   help="테스트 모드 (폴백 종목만)")
     p.add_argument("--sleep", type=float, default=0.3,
                    help="종목간 대기 (초, 기본 0.3 · 워커 스레드별로 적용)")
     p.add_argument("--workers", type=int, default=4,
@@ -1323,10 +1134,11 @@ def parse_args():
 def main():
     args = parse_args()
 
-    # --all 옵션 시 시총 필터 제거
+    # --all 옵션 시 규모 필터 제거. ETF 의 AUM 하한도 같이 푼다 - 주식만
+    # 풀고 ETF 를 남겨 두면 "전체"라는 이름과 어긋난다.
     if args.all:
         args.min_us_cap = 0
-        args.min_kr_cap = 0
+        args.min_etf_aum = 0
 
     print("=" * 65)
     print("  AI 3-Month Stock Finder v5 · 전체 유가증권 스캔")
@@ -1334,46 +1146,34 @@ def main():
 
     # API 키 상태 표시
     print(f"[env] FMP API : {'✓ 활성' if FMP_KEY else '✗ 미설정 (프록시 사용)'}")
-    print(f"[env] DART API: {'✓ 활성' if DART_KEY else '✗ 미설정 (프록시 사용)'}")
     print(f"[env] FRED API: {'✓ 활성 (매크로 정밀화)' if FRED_KEY else '✗ 미설정 (yfinance 사용)'}")
-    if not FMP_KEY and not DART_KEY and not FRED_KEY:
+    if not FMP_KEY and not FRED_KEY:
         print("      → .env 파일에 API 키를 추가하면 실제 시그널이 반영됩니다")
     print("-" * 65)
-
-    # DART 회사코드 매핑 확장 (전체 상장사 corp_code 자동 로드)
-    if DART_KEY:
-        print("[*] DART 회사코드 매핑 로드...")
-        dynamic_map = load_dart_corpcode()
-        if dynamic_map:
-            CORP_CODE_MAP.update(dynamic_map)
-            print(f"    총 corp_code 매핑: {len({v for v in CORP_CODE_MAP.values()})}개 상장사")
-        else:
-            print("    [!] 동적 매핑 실패 — 하드코딩 11종목만 사용")
-        print("-" * 65)
 
     # 유니버스 로드
     print("[*] 종목 유니버스 로드...")
     universe = load_universe(
-        market=args.market,
         min_us_cap=args.min_us_cap,
-        min_kr_cap=args.min_kr_cap,
+        min_etf_aum=args.min_etf_aum,
+        include_etf=not args.no_etf,
         test_mode=args.test,
     )
     if args.limit > 0:
-        us_only = [s for s in universe if s[2] == "US"][:args.limit]
-        kr_only = [s for s in universe if s[2] == "KR"][:args.limit]
-        universe = us_only + kr_only
-        print(f"    [limit] 시장별 상위 {args.limit}개로 제한 → 총 {len(universe)}종목")
+        stocks = [s for s in universe if s[4] == "STOCK"][:args.limit]
+        etfs = [s for s in universe if s[4] == "ETF"][:args.limit]
+        universe = stocks + etfs
+        print(f"    [limit] 종류별 상위 {args.limit}개로 제한 → 총 {len(universe)}종목")
 
     if not universe:
         print("[!] 유니버스가 비었습니다. --test 옵션으로 폴백 모드 시도")
         sys.exit(1)
 
-    n_us = sum(1 for s in universe if s[2] == "US")
-    n_kr = sum(1 for s in universe if s[2] == "KR")
+    n_stock = sum(1 for s in universe if s[4] == "STOCK")
+    n_etf = sum(1 for s in universe if s[4] == "ETF")
     est_sec = len(universe) * (2.5 + args.sleep) / max(1, args.workers)
     est_min = est_sec / 60
-    print(f"    총 {len(universe)}종목 (US: {n_us}, KR: {n_kr})")
+    print(f"    총 {len(universe)}종목 (주식: {n_stock}, ETF: {n_etf})")
     print(f"    예상 소요시간: 약 {est_min:.1f}분 ({est_sec/3600:.1f}시간)")
     print("-" * 65)
 
@@ -1403,8 +1203,13 @@ def main():
     collected = []   # (universe 인덱스, 결과) — 마지막에 원래 순서로 정렬
     hist_rows = []   # (universe 인덱스, 이력 행)
 
-    def _scan_one(ticker: str, name: str, market: str, sector: str):
-        """종목 1개 스코어링. 실패 시 None 반환. (워커 스레드에서 실행)"""
+    def _scan_one(ticker: str, name: str, market: str, sector: str,
+                  asset_type: str):
+        """종목 1개 스코어링. 실패 시 None 반환. (워커 스레드에서 실행)
+
+        ETF 는 filing/value 를 계산하지 않는다. 개별기업 재무·공시 데이터가
+        없어서다. 두 축을 빼고 tech/macro 만 재정규화해 총점을 낸다.
+        """
         try:
             data = fetch_stock(ticker)
             if not data:
@@ -1415,17 +1220,30 @@ def main():
 
             tech, tech_r, r3m = calc_tech_score(hist)
             macro, macro_r, regime = calc_macro_score(vix, dxy, us10y, sector, fred_data)
-            value, value_r = calc_value_score(info, sector)
-            filing, filing_r = calc_filing_score(info, hist, ticker, market)
 
-            total = calc_total(tech, macro, filing, value)
-            cons = calc_consensus(tech, macro, filing, value)
-            signal = calc_signal(total, cons)
+            if asset_type == "ETF":
+                value, value_r = None, []
+                filing, filing_r = None, []
+                total = calc_total_etf(tech, macro)
+                cons = calc_consensus_etf(tech, macro)
+                n_axes = 2
+                # 네 축을 받는 함수라 뒤 두 자리에 tech/macro 를 다시 넣는다.
+                # 사실상 tech/macro 평균이 되어 재정규화와 방향이 일치한다.
+                ev, target = calc_ev_and_target(tech, macro, tech, macro, r3m)
+            else:
+                value, value_r = calc_value_score(info, sector)
+                filing, filing_r = calc_filing_score(info, hist, ticker, market)
+                total = calc_total(tech, macro, filing, value)
+                cons = calc_consensus(tech, macro, filing, value)
+                n_axes = 4
+                ev, target = calc_ev_and_target(tech, macro, filing, value, r3m)
+
+            signal = calc_signal(total, cons, n_axes=n_axes)
             hitl = calc_hitl(signal, total, tech)
-            ev, target = calc_ev_and_target(tech, macro, filing, value, r3m)
 
             dash_row = {
                 "t": ticker, "n": name, "m": market, "sec": sector,
+                "at": asset_type,
                 "tech": tech, "macro": macro, "filing": filing, "value": value,
                 "total": total, "consensus": cons, "signal": signal,
                 "ev": ev, "target": target, "hitl": hitl,
@@ -1438,6 +1256,7 @@ def main():
             try:
                 hist_row = {
                     "ticker": ticker, "name": name, "market": market, "sector": sector,
+                    "asset_type": asset_type,
                     "tech": tech, "macro": macro, "filing": filing, "value": value,
                     "total": total, "consensus": cons, "signal": signal,
                     "ev": ev, "target": target, "hitl": hitl,
@@ -1459,8 +1278,8 @@ def main():
 
     with ThreadPoolExecutor(max_workers=n_workers) as pool:
         futures = {
-            pool.submit(_scan_one, ticker, name, market, sector): (i, ticker, name)
-            for i, (ticker, name, market, sector) in enumerate(universe, 1)
+            pool.submit(_scan_one, ticker, name, market, sector, asset_type): (i, ticker, name)
+            for i, (ticker, name, market, sector, asset_type) in enumerate(universe, 1)
         }
 
         for fut in as_completed(futures):
@@ -1521,34 +1340,39 @@ def main():
         print(f"[!] 이력 기록 실패: {e}")
         sys.exit(1)
 
+    # 아카이브를 기록한 뒤에 필터한다. 순서를 바꾸면 아카이브가 잘려
+    # 백테스트의 SIGNAL 청산 판정이 불가능해진다.
+    shown = filter_for_output(results, args.min_total)
+    print(f"[*] 출력 필터: 종합점수 {args.min_total}점 이상 "
+          f"{len(shown)}/{len(results)}종목")
+
     output_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "dashboard_data.js")
     fred_json = json.dumps(fred_data, ensure_ascii=False)
     js_content = f"""// AI 3-Month Stock Finder - Live Data
 // Generated: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}
 // Macro: VIX={vix:.2f}, DXY={dxy:.2f}, US10Y={us10y:.2f}%
-// FMP: {'active' if FMP_KEY else 'off'} · DART: {'active' if DART_KEY else 'off'} · FRED: {'active' if FRED_KEY else 'off'}
+// FMP: {'active' if FMP_KEY else 'off'} · FRED: {'active' if FRED_KEY else 'off'}
 window.LIVE_MACRO = {{
   vix: {vix:.2f},
   dxy: {dxy:.2f},
   us10y: {us10y:.2f},
   generated_at: "{datetime.now().isoformat()}",
   fmp_active: {str(bool(FMP_KEY)).lower()},
-  dart_active: {str(bool(DART_KEY)).lower()},
   fred_active: {str(bool(FRED_KEY)).lower()},
   fred: {fred_json}
 }};
-window.LIVE_STOCKS = {json.dumps(results, ensure_ascii=False, indent=2)};
+window.LIVE_STOCKS = {json.dumps(shown, ensure_ascii=False, indent=2)};
 """
     with open(output_path, "w", encoding="utf-8") as f:
         f.write(js_content)
 
     print()
     print("=" * 65)
-    print(f"  [완료] {len(results)}개 종목 · {os.path.basename(output_path)}")
-    print(f"  STRONG_BUY: {sum(1 for r in results if r['signal']=='STRONG_BUY')}개")
-    print(f"  BUY:        {sum(1 for r in results if r['signal']=='BUY')}개")
-    print(f"  WATCH:      {sum(1 for r in results if r['signal']=='WATCH')}개")
-    print(f"  HITL 필요:  {sum(1 for r in results if r['hitl'])}개")
+    print(f"  [완료] {len(shown)}개 종목 · {os.path.basename(output_path)}")
+    print(f"  STRONG_BUY: {sum(1 for r in shown if r['signal']=='STRONG_BUY')}개")
+    print(f"  BUY:        {sum(1 for r in shown if r['signal']=='BUY')}개")
+    print(f"  WATCH:      {sum(1 for r in shown if r['signal']=='WATCH')}개")
+    print(f"  HITL 필요:  {sum(1 for r in shown if r['hitl'])}개")
     print("=" * 65)
     print("  브라우저에서 stock_finder_dashboard.html 을 새로고침하세요")
     print("=" * 65)
