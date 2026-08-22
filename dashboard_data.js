@@ -1,17 +1,17 @@
 // AI 3-Month Stock Finder - Live Data
-// Generated: 2026-08-22 07:58:26
+// Generated: 2026-08-22 09:23:24
 // Macro: VIX=16.01, DXY=98.80, US10Y=4.69%
 // FMP: active · FRED: active
 window.LIVE_MACRO = {
   vix: 16.01,
   dxy: 98.80,
   us10y: 4.69,
-  generated_at: "2026-08-22T07:58:26.625799",
+  generated_at: "2026-08-22T09:23:24.296279",
   fmp_active: true,
   fred_active: true,
   fred: {"available": true, "vix": 16.01, "us10y": 4.69, "yield_curve": 0.5, "fed_funds": 3.63, "unemployment": 4.1, "dxy_broad": 118.9028, "core_cpi_yoy": 2.47, "unemp_3m_change": -0.2}
 };
-window.LIVE_SUMMARY = {"scanned": 1793, "shown": 70, "strong_buy": 0, "buy": 147, "watch": 161, "avoid": 110, "hitl": 110};
+window.LIVE_SUMMARY = {"scanned": 1784, "shown": 67, "strong_buy": 0, "buy": 145, "watch": 162, "avoid": 112, "hitl": 112};
 window.LIVE_STOCKS = [
   {
     "t": "TSM",
@@ -41,7 +41,7 @@ window.LIVE_STOCKS = [
         "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
       ],
       "filing": [
-        "13F: 신규진입 +138곳",
+        "13F: 신규진입 +124곳",
         "13F: 보유기관 3726곳 · 지분율 14.8% (2026Q3)",
         "Form 4: 실제매수 클러스터 P92/S1 (90일)",
         "8-K: 최근 60일 이벤트 없음",
@@ -695,8 +695,8 @@ window.LIVE_STOCKS = [
         "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
       ],
       "filing": [
-        "13F: 기관지분율 +2.42%p",
-        "13F: 보유기관 1313곳 · 지분율 32.1% (2026Q3)",
+        "13F: 기관지분율 +2.43%p",
+        "13F: 보유기관 1314곳 · 지분율 32.1% (2026Q3)",
         "Form 4: 실제매수 클러스터 P3/S0 (90일)",
         "8-K: 최근 60일 이벤트 4건 (활발)",
         "* FMP 실시간 공시 반영"
@@ -737,8 +737,8 @@ window.LIVE_STOCKS = [
       ],
       "filing": [
         "13F: 신규진입 +117곳",
-        "13F: 증량-감량 순 +649",
-        "13F: 기관지분율 +81.02%p",
+        "13F: 증량-감량 순 +648",
+        "13F: 기관지분율 +81.01%p",
         "P/C비율 하락 -42% (헤지 완화)",
         "13F: 보유기관 1533곳 · 지분율 169.4% (2026Q3)"
       ],
@@ -1922,7 +1922,7 @@ window.LIVE_STOCKS = [
     "t": "SPHY",
     "n": "State Street SPDR Portfolio High Yield B",
     "m": "US",
-    "sec": "금융",
+    "sec": "미분류",
     "at": "ETF",
     "ex": "AMEX",
     "tech": 95,
@@ -2112,38 +2112,6 @@ window.LIVE_STOCKS = [
     }
   },
   {
-    "t": "SJNK",
-    "n": "State Street SPDR Bloomberg Short Term H",
-    "m": "US",
-    "sec": "인터넷",
-    "at": "ETF",
-    "ex": "AMEX",
-    "tech": 87,
-    "macro": 65,
-    "filing": null,
-    "value": null,
-    "total": 79,
-    "consensus": 1,
-    "signal": "BUY",
-    "ev": 1.08,
-    "target": 13,
-    "hitl": false,
-    "reasons": {
-      "tech": [
-        "이동평균 완벽 정배열 (P>24.8>24.8>24.5)",
-        "RSI 61 · 강세 지속 구간",
-        "MACD 골든크로스 · 히스토 +0.00"
-      ],
-      "macro": [
-        "NEUTRAL · VIX 16.0 · US10Y 4.69%",
-        "DXY 98.8 약세 · 성장주 유리",
-        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
-      ],
-      "filing": [],
-      "value": []
-    }
-  },
-  {
     "t": "VAW",
     "n": "Vanguard Materials ETF",
     "m": "US",
@@ -2275,7 +2243,7 @@ window.LIVE_STOCKS = [
     "t": "ANGL",
     "n": "VanEck Fallen Angel High Yield Bond ETF",
     "m": "US",
-    "sec": "금융",
+    "sec": "미분류",
     "at": "ETF",
     "ex": "NASDAQ",
     "tech": 95,
@@ -2361,70 +2329,6 @@ window.LIVE_STOCKS = [
       ],
       "macro": [
         "NEUTRAL · VIX 16.0 · US10Y 4.69%",
-        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
-      ],
-      "filing": [],
-      "value": []
-    }
-  },
-  {
-    "t": "FLXR",
-    "n": "TCW Flexible Income ETF",
-    "m": "US",
-    "sec": "제약/바이오",
-    "at": "ETF",
-    "ex": "NYSE",
-    "tech": 87,
-    "macro": 65,
-    "filing": null,
-    "value": null,
-    "total": 79,
-    "consensus": 1,
-    "signal": "BUY",
-    "ev": 1.08,
-    "target": 13,
-    "hitl": false,
-    "reasons": {
-      "tech": [
-        "이동평균 완벽 정배열 (P>38.9>38.8>38.4)",
-        "RSI 61 · 강세 지속 구간",
-        "MACD 골든크로스 · 히스토 +0.01"
-      ],
-      "macro": [
-        "NEUTRAL · VIX 16.0 · US10Y 4.69%",
-        "DXY 98.8 약세 · 성장주 유리",
-        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
-      ],
-      "filing": [],
-      "value": []
-    }
-  },
-  {
-    "t": "HYS",
-    "n": "PIMCO 0-5 Year High Yield Corporate Bond",
-    "m": "US",
-    "sec": "인터넷",
-    "at": "ETF",
-    "ex": "AMEX",
-    "tech": 87,
-    "macro": 65,
-    "filing": null,
-    "value": null,
-    "total": 79,
-    "consensus": 1,
-    "signal": "BUY",
-    "ev": 1.08,
-    "target": 13,
-    "hitl": false,
-    "reasons": {
-      "tech": [
-        "이동평균 완벽 정배열 (P>92.6>92.5>91.3)",
-        "RSI 62 · 강세 지속 구간",
-        "MACD 골든크로스 · 히스토 +0.00"
-      ],
-      "macro": [
-        "NEUTRAL · VIX 16.0 · US10Y 4.69%",
-        "DXY 98.8 약세 · 성장주 유리",
         "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
       ],
       "filing": [],
