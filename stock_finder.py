@@ -95,44 +95,36 @@ CORP_CODE_MAP: dict[str, str] = {
 }
 
 
-# ─── 종목 유니버스 (폴백용 · pykrx/FMP 실패 시 사용) ─────────
+# ─── 종목 유니버스 (폴백용 · FMP 조회 실패 시 사용) ──────────
 FALLBACK_UNIVERSE = [
     # 미국
-    ("NVDA",  "NVIDIA",              "US", "AI/반도체"),
-    ("MSFT",  "Microsoft",           "US", "Software"),
-    ("AMD",   "AMD",                 "US", "AI/반도체"),
-    ("META",  "Meta Platforms",      "US", "인터넷"),
-    ("GOOGL", "Alphabet",            "US", "인터넷"),
-    ("AMZN",  "Amazon",              "US", "E-commerce/Cloud"),
-    ("TSLA",  "Tesla",               "US", "EV/자동차"),
-    ("AVGO",  "Broadcom",            "US", "반도체"),
-    ("LLY",   "Eli Lilly",           "US", "제약/바이오"),
-    ("COST",  "Costco",              "US", "소매"),
-    ("CRWD",  "CrowdStrike",         "US", "사이버보안"),
-    ("UBER",  "Uber",                "US", "플랫폼"),
-    ("PANW",  "Palo Alto Networks",  "US", "사이버보안"),
-    ("NOW",   "ServiceNow",          "US", "Software"),
-    ("AXP",   "American Express",    "US", "금융"),
-    ("NFLX",  "Netflix",             "US", "미디어"),
-    ("ORCL",  "Oracle",              "US", "Software"),
-    ("MU",    "Micron",              "US", "반도체"),
-    ("AAPL",  "Apple",               "US", "IT하드웨어"),
-    ("JPM",   "JPMorgan",            "US", "금융"),
-    ("V",     "Visa",                "US", "금융"),
-    ("F",     "Ford Motor",          "US", "자동차"),
-    ("INTC",  "Intel",               "US", "반도체"),
-    # 한국
-    ("005930.KS", "삼성전자",           "KR", "반도체"),
-    ("000660.KS", "SK하이닉스",         "KR", "반도체"),
-    ("035420.KS", "NAVER",             "KR", "인터넷"),
-    ("035720.KS", "카카오",             "KR", "인터넷"),
-    ("005380.KS", "현대차",             "KR", "자동차"),
-    ("373220.KS", "LG에너지솔루션",     "KR", "2차전지"),
-    ("207940.KS", "삼성바이오로직스",   "KR", "바이오"),
-    ("068270.KS", "셀트리온",           "KR", "바이오"),
-    ("105560.KS", "KB금융",             "KR", "금융"),
-    ("055550.KS", "신한지주",           "KR", "금융"),
-    ("010130.KS", "고려아연",           "KR", "비철금속"),
+    ("NVDA",  "NVIDIA",              "US", "AI/반도체", "STOCK"),
+    ("MSFT",  "Microsoft",           "US", "Software", "STOCK"),
+    ("AMD",   "AMD",                 "US", "AI/반도체", "STOCK"),
+    ("META",  "Meta Platforms",      "US", "인터넷", "STOCK"),
+    ("GOOGL", "Alphabet",            "US", "인터넷", "STOCK"),
+    ("AMZN",  "Amazon",              "US", "E-commerce/Cloud", "STOCK"),
+    ("TSLA",  "Tesla",               "US", "EV/자동차", "STOCK"),
+    ("AVGO",  "Broadcom",            "US", "반도체", "STOCK"),
+    ("LLY",   "Eli Lilly",           "US", "제약/바이오", "STOCK"),
+    ("COST",  "Costco",              "US", "소매", "STOCK"),
+    ("CRWD",  "CrowdStrike",         "US", "사이버보안", "STOCK"),
+    ("UBER",  "Uber",                "US", "플랫폼", "STOCK"),
+    ("PANW",  "Palo Alto Networks",  "US", "사이버보안", "STOCK"),
+    ("NOW",   "ServiceNow",          "US", "Software", "STOCK"),
+    ("AXP",   "American Express",    "US", "금융", "STOCK"),
+    ("NFLX",  "Netflix",             "US", "미디어", "STOCK"),
+    ("ORCL",  "Oracle",              "US", "Software", "STOCK"),
+    ("MU",    "Micron",              "US", "반도체", "STOCK"),
+    ("AAPL",  "Apple",               "US", "IT하드웨어", "STOCK"),
+    ("JPM",   "JPMorgan",            "US", "금융", "STOCK"),
+    ("V",     "Visa",                "US", "금융", "STOCK"),
+    ("F",     "Ford Motor",          "US", "자동차", "STOCK"),
+    ("INTC",  "Intel",               "US", "반도체", "STOCK"),
+    # ETF. 폴백에도 ETF 를 두는 것은 의도다 - --test 로 도는 스모크 실행이
+    # ETF 분기(재정규화 점수·빈 filing/value)를 실제로 지나가야 한다.
+    ("SPY",   "SPDR S&P 500 ETF Trust", "US", "미분류", "ETF"),
+    ("QQQ",   "Invesco QQQ Trust",      "US", "미분류", "ETF"),
 ]
 
 
@@ -891,7 +883,9 @@ def is_leveraged_or_inverse(name: str) -> bool:
 
 def fetch_us_universe(min_market_cap: float = 5e9, limit: int = 5000) -> list:
     """FMP stock-screener로 NYSE+NASDAQ 상장 종목 조회 (ETF 제외)"""
-    cache_key = f"us_universe_{int(min_market_cap)}_{limit}"
+    # v2: 유니버스 튜플이 asset_type 을 포함하는 5칸으로 늘었다. 캐시 키를
+    # 바꾸지 않으면 옛 4칸 캐시가 그대로 읽혀 스캔 루프 언패킹이 터진다.
+    cache_key = f"us_universe_v2_{int(min_market_cap)}_{limit}"
     cached = _load_cache(cache_key)
     if cached:
         print(f"    [cache] 미국 유니버스 {len(cached)}종목 (캐시)")
@@ -935,7 +929,7 @@ def fetch_us_universe(min_market_cap: float = 5e9, limit: int = 5000) -> list:
             sector_kr = SECTOR_KR.get(sector_raw, sector_raw or "기타")
             if "Semi" in industry_raw:
                 sector_kr = "반도체"
-            universe.append((symbol, name[:40], "US", sector_kr))
+            universe.append((symbol, name[:40], "US", sector_kr, "STOCK"))
 
         _save_cache(cache_key, universe)
         print(f"    [OK] 미국 {len(universe)}종목 수집 완료")
@@ -1004,148 +998,29 @@ def fetch_us_etf_universe(min_aum: float = 1e9, limit: int = 3000) -> list:
         return []
 
 
-# KOSPI 시총 상위 확장 리스트 (pykrx/KRX API 실패 시 폴백)
-KOSPI_EXPANDED = [
-    ("005930", "삼성전자"), ("000660", "SK하이닉스"), ("373220", "LG에너지솔루션"),
-    ("207940", "삼성바이오로직스"), ("005380", "현대차"), ("000270", "기아"),
-    ("035420", "NAVER"), ("068270", "셀트리온"), ("105560", "KB금융"),
-    ("005490", "POSCO홀딩스"), ("055550", "신한지주"), ("012330", "현대모비스"),
-    ("035720", "카카오"), ("006400", "삼성SDI"), ("028260", "삼성물산"),
-    ("015760", "한국전력"), ("010130", "고려아연"), ("034730", "SK"),
-    ("003670", "포스코퓨처엠"), ("018260", "삼성에스디에스"), ("032830", "삼성생명"),
-    ("138040", "메리츠금융지주"), ("011200", "HMM"), ("086790", "하나금융지주"),
-    ("017670", "SK텔레콤"), ("011170", "롯데케미칼"), ("267260", "HD현대일렉트릭"),
-    ("090430", "아모레퍼시픽"), ("267250", "HD현대중공업"), ("323410", "카카오뱅크"),
-    ("000810", "삼성화재"), ("010950", "S-Oil"), ("011070", "LG이노텍"),
-    ("010140", "삼성중공업"), ("329180", "HD현대미포"), ("024110", "기업은행"),
-    ("009150", "삼성전기"), ("042660", "한화오션"), ("128940", "한미약품"),
-    ("086520", "에코프로"), ("247540", "에코프로비엠"), ("251270", "넷마블"),
-    ("036570", "엔씨소프트"), ("018880", "한온시스템"), ("000720", "현대건설"),
-    ("139480", "이마트"), ("000100", "유한양행"), ("032640", "LG유플러스"),
-    ("375500", "DL이앤씨"), ("096770", "SK이노베이션"), ("079550", "LIG넥스원"),
-    ("006360", "GS건설"), ("078930", "GS"), ("036460", "한국가스공사"),
-    ("016360", "삼성증권"), ("005940", "NH투자증권"), ("026960", "동서"),
-    ("010060", "OCI홀딩스"), ("000210", "DL"),
-    # 008560 메리츠증권: 2022 상장폐지(메리츠금융지주로 통합) — 제외
-    ("006800", "미래에셋증권"), ("196170", "알테오젠"), ("064350", "현대로템"),
-    ("005830", "DB손해보험"), ("002380", "KCC"), ("011790", "SKC"),
-    ("006650", "대한유화"), ("000670", "영풍"), ("138930", "BNK금융지주"),
-    ("006260", "LS"), ("008770", "호텔신라"), ("009830", "한화솔루션"),
-    ("139130", "DGB금융지주"), ("011780", "금호석유"), ("078340", "컴투스"),
-    ("079160", "CJ CGV"), ("033780", "KT&G"), ("005810", "풍산"),
-    ("002960", "한국쉘석유"), ("000120", "CJ대한통운"),
-    ("120110", "코오롱인더"),
-    ("069620", "대웅제약"), ("185750", "종근당"),
-    ("006840", "AK홀딩스"), ("008930", "한미사이언스"), ("002790", "아모레G"),
-    ("069260", "휴켐스"), ("000080", "하이트진로"),
-    # 아래 티커는 상장폐지/합병으로 yfinance 조회 불가 — 제외:
-    # 002270 롯데푸드(2022 롯데제과에 흡수합병)
-    # 010620 HD현대미포조선(329180 HD현대미포로 대체)
-    # 003410 쌍용C&E(2024 상장폐지)
-    # 042670 두산인프라코어(HD현대인프라코어로 개편, 티커 변경)
-    # 036490 SK바이오사이언스(yfinance 데이터 이슈)
-    ("030200", "KT"), ("012450", "한화에어로스페이스"), ("047810", "한국항공우주"),
-    ("051910", "LG화학"), ("051900", "LG생활건강"), ("066570", "LG전자"),
-    ("003550", "LG"), ("000150", "두산"), ("034020", "두산에너빌리티"),
-    ("241560", "두산밥캣"), ("035250", "강원랜드"), ("114090", "GKL"),
-    ("020150", "롯데에너지머티리얼즈"), ("004020", "현대제철"),
-    # 003600 SK디스커버리: yfinance 데이터 이슈로 제외
-    ("069960", "현대백화점"), ("023530", "롯데쇼핑"),
-    # 011200 HMM 은 위(857행)에 이미 포함 — 중복 제거
-    ("012750", "에스원"), ("035150", "백광산업"), ("018670", "삼성E&A"),
-    ("003490", "대한항공"), ("020560", "아시아나항공"), ("047040", "대우건설"),
-    ("088980", "맥쿼리인프라"), ("161390", "한국타이어앤테크놀로지"), ("161890", "한국콜마"),
-]
-
-
-def fetch_kr_universe(min_market_cap: float = 3e11) -> list:
-    """
-    한국 KOSPI 유니버스 조회
-    pykrx 우선 시도, 실패 시 KOSPI 시총 상위 확장 하드코딩 리스트 사용
-    (시가총액 필터는 yfinance info로 스캔 중 적용 - main() 참조)
-    """
-    cache_key = f"kr_universe_{int(min_market_cap)}"
-    cached = _load_cache(cache_key)
-    if cached:
-        print(f"    [cache] 한국 유니버스 {len(cached)}종목 (캐시)")
-        return cached
-
-    # pykrx 시도 (인코딩 이슈 있음). pykrx 내부의 print 오류 노이즈는 억제.
-    try:
-        from pykrx import stock as pykrx_stock
-        print(f"    [*] pykrx KOSPI 유니버스 조회 시도...")
-        cap_df = None
-        with contextlib.redirect_stdout(io.StringIO()), contextlib.redirect_stderr(io.StringIO()):
-            for delta in range(1, 30):
-                d = (datetime.now() - timedelta(days=delta)).strftime("%Y%m%d")
-                try:
-                    df = pykrx_stock.get_market_cap_by_ticker(d, market="KOSPI")
-                    if df is not None and len(df) > 100:
-                        cap_df = df
-                        break
-                except Exception:
-                    continue
-
-        if cap_df is not None and len(cap_df) > 100:
-            # 시가총액 컬럼 접근 (한글 인코딩 이슈 우회)
-            cap_col = None
-            for c in cap_df.columns:
-                if "시가총액" in str(c) or "cap" in str(c).lower() or "Mkt" in str(c):
-                    cap_col = c
-                    break
-            if cap_col is None and len(cap_df.columns) >= 2:
-                cap_col = cap_df.columns[1]  # 두 번째 컬럼이 대체로 시총
-
-            if cap_col:
-                filtered = cap_df[cap_df[cap_col] >= min_market_cap]
-                universe = []
-                for tk in filtered.index:
-                    try:
-                        name = pykrx_stock.get_market_ticker_name(tk)
-                        universe.append((f"{tk}.KS", name, "KR", "미분류"))
-                    except Exception:
-                        universe.append((f"{tk}.KS", tk, "KR", "미분류"))
-                if universe:
-                    _save_cache(cache_key, universe)
-                    print(f"    [OK] pykrx KOSPI {len(universe)}종목 수집")
-                    return universe
-        print("    [!] pykrx 조회 불가 → 확장 하드코딩 리스트 사용")
-    except Exception as e:
-        print(f"    [!] pykrx 예외: {str(e)[:60]} → 확장 하드코딩 리스트 사용")
-
-    # 폴백: 확장 하드코딩 (약 120종목)
-    universe = [(f"{code}.KS", name, "KR", "미분류") for code, name in KOSPI_EXPANDED]
-    _save_cache(cache_key, universe)
-    print(f"    [OK] KOSPI 확장 리스트 {len(universe)}종목 사용")
-    return universe
-
-
-def load_universe(market: str = "ALL",
-                  min_us_cap: float = 5e9,
-                  min_kr_cap: float = 3e11,
+def load_universe(min_us_cap: float = 1e10,
+                  min_etf_aum: float = 1e9,
+                  include_etf: bool = True,
                   test_mode: bool = False) -> list:
-    """
-    유니버스 로드
-    market: "US" | "KR" | "ALL"
-    test_mode: True 시 폴백 34개 종목 사용
+    """미국 주식 + ETF 유니버스를 로드한다.
+
+    반환 튜플은 (ticker, name, market, sector, asset_type) 5칸이다.
+    asset_type 은 "STOCK" | "ETF" 이고, 스캔 루프가 이 값으로 스코어링을
+    분기한다.
+
+    한국은 다루지 않는다. pykrx 조회가 CI 에서 매번 실패해 하드코딩 폴백
+    112종목이 고정돼 있었고, 그 리스트는 코스피 구성 변화를 반영하지 못했다.
     """
     if test_mode:
         return FALLBACK_UNIVERSE
 
-    universe = []
-    if market in ("US", "ALL"):
-        us = fetch_us_universe(min_market_cap=min_us_cap)
-        if not us:
-            us = [s for s in FALLBACK_UNIVERSE if s[2] == "US"]
-            print(f"    [폴백] 미국 하드코딩 {len(us)}종목 사용")
-        universe.extend(us)
+    universe = list(fetch_us_universe(min_market_cap=min_us_cap))
+    if not universe:
+        universe = [s for s in FALLBACK_UNIVERSE if s[4] == "STOCK"]
+        print(f"    [폴백] 미국 하드코딩 {len(universe)}종목 사용")
 
-    if market in ("KR", "ALL"):
-        kr = fetch_kr_universe(min_market_cap=min_kr_cap)
-        if not kr:
-            kr = [s for s in FALLBACK_UNIVERSE if s[2] == "KR"]
-            print(f"    [폴백] 한국 하드코딩 {len(kr)}종목 사용")
-        universe.extend(kr)
+    if include_etf:
+        universe.extend(fetch_us_etf_universe(min_aum=min_etf_aum))
 
     return universe
 
@@ -1402,22 +1277,19 @@ def parse_args():
     p = argparse.ArgumentParser(
         description="AI 3-Month Stock Finder · 전체 유가증권 스캔",
         formatter_class=argparse.RawTextHelpFormatter)
-    p.add_argument("--market", choices=["US", "KR", "ALL"], default="ALL",
-                   help="스캔 대상 시장 (기본: ALL)")
-    p.add_argument("--min-us-cap", type=float, default=5e9,
-                   help="미국 최소 시가총액 USD (기본: 5e9 = $5B)\n"
+    p.add_argument("--min-us-cap", type=float, default=1e10,
+                   help="미국 주식 최소 시가총액 USD (기본: 1e10 = $10B)\n"
                         "  1e9 = $1B (~2500종목, 2시간+)\n"
                         "  5e9 = $5B (~800종목, 30분)\n"
-                        "  1e10 = $10B (~500종목, 20분)")
-    p.add_argument("--min-kr-cap", type=float, default=3e11,
-                   help="한국 최소 시가총액 KRW (기본: 3e11 = 3000억)\n"
-                        "  1e11 = 1000억 (~500종목)\n"
-                        "  3e11 = 3000억 (~250종목)\n"
-                        "  1e12 = 1조 (~150종목)")
+                        "  1e10 = $10B (~1000종목, 15분)")
+    p.add_argument("--min-etf-aum", type=float, default=1e9,
+                   help="미국 ETF 최소 AUM USD (기본: 1e9 = $1B)")
+    p.add_argument("--no-etf", action="store_true",
+                   help="ETF 를 유니버스에서 제외한다")
     p.add_argument("--limit", type=int, default=0,
-                   help="시장별 상위 N개로 제한 (0=제한없음)")
+                   help="종류별 상위 N개로 제한 (0=제한없음)")
     p.add_argument("--test", action="store_true",
-                   help="테스트 모드 (기존 34개 폴백 종목)")
+                   help="테스트 모드 (폴백 종목만)")
     p.add_argument("--sleep", type=float, default=0.3,
                    help="종목간 대기 (초, 기본 0.3 · 워커 스레드별로 적용)")
     p.add_argument("--workers", type=int, default=4,

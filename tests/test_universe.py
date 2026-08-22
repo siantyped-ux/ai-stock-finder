@@ -99,3 +99,21 @@ def test_parse_etf_rows_shape_is_five_tuple():
 def test_parse_etf_rows_handles_missing_market_cap():
     rows = sf.parse_etf_rows([{"symbol": "AAA", "name": "A ETF"}], min_aum=1e9)
     assert rows == []
+
+
+# ─── 한국 제거 ─────────────────────────────────────────────
+def test_fallback_universe_has_no_korean_tickers():
+    assert all(not t.endswith(".KS") for t, *_ in sf.FALLBACK_UNIVERSE)
+
+
+def test_fallback_universe_is_all_us():
+    assert all(row[2] == "US" for row in sf.FALLBACK_UNIVERSE)
+
+
+def test_fallback_universe_rows_are_five_tuples():
+    assert all(len(row) == 5 for row in sf.FALLBACK_UNIVERSE)
+
+
+def test_kr_universe_function_is_gone():
+    assert not hasattr(sf, "fetch_kr_universe")
+    assert not hasattr(sf, "KOSPI_EXPANDED")
