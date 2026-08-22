@@ -1158,12 +1158,23 @@ def calc_total(tech, macro, filing, value):
     return int(round(tech * 0.35 + macro * 0.20 + filing * 0.30 + value * 0.15))
 
 
-def calc_signal(total, cons):
-    if total >= 80 and cons >= 3:
+def calc_signal(total, cons, n_axes=4):
+    """종합점수와 합의 비율로 신호를 낸다.
+
+    cons 는 70점 이상인 축의 개수, n_axes 는 축의 총 개수다. 개수가 아니라
+    비율로 판정하는 것은 ETF 때문이다 - ETF 는 filing/value 데이터가 없어
+    축이 tech/macro 둘뿐이라, 개수 기준(cons>=3)으로는 BUY 가 영원히 나오지
+    않는다.
+
+    임계 0.75 / 0.50 은 주식의 3/4, 2/4 와 정확히 같다. 주식 판정은 이
+    변경으로 한 건도 바뀌지 않는다 (tests/test_scoring.py 회귀 테스트).
+    """
+    ratio = cons / n_axes if n_axes else 0.0
+    if total >= 80 and ratio >= 0.75:
         return "STRONG_BUY"
-    if total >= 70 and cons >= 3:
+    if total >= 70 and ratio >= 0.75:
         return "BUY"
-    if total >= 60 and cons >= 2:
+    if total >= 60 and ratio >= 0.50:
         return "WATCH"
     if total >= 45:
         return "HOLD"
