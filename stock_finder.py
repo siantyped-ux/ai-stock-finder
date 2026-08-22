@@ -903,7 +903,7 @@ def fetch_us_etf_universe(min_aum: float = 1e9, limit: int = 3000) -> list:
     """
     # v2: 미국 거래소 필터를 넣기 전 캐시에는 TSX 가 섞여 있다. 키를 바꿔
     # 그 캐시가 다시 읽히지 않게 한다.
-    cache_key = f"us_etf_universe_v5_{int(min_aum)}_{limit}"
+    cache_key = f"us_etf_universe_v6_{int(min_aum)}_{limit}"
     cached = _load_cache(cache_key)
     if cached:
         print(f"    [cache] 미국 ETF {len(cached)}종목 (캐시)")
@@ -938,10 +938,28 @@ def fetch_us_etf_universe(min_aum: float = 1e9, limit: int = 3000) -> list:
             if dropped:
                 print(f"    [!] 레버리지·인버스 {len(dropped)}종목 추가 제외 "
                       f"(자산군 기준): {', '.join(dropped[:8])}")
+
+            # 주식형만 남긴다. 채권 ETF 는 주가 변동성이 낮아 기술적 지표가
+            # 안정적으로 높게 나오는데, 이 스캐너의 tech 축은 그걸 강세로
+            # 읽는다. 2026-08-22 실측에서 표시된 ETF 22개 중 8개가 채권·
+            # 관리선물이었고 전부 BUY 였다 - "3개월 상승 후보" 의 근거로
+            # 삼을 수 없는 종류다.
+            #
+            # 자산군을 못 받은 종목은 남긴다. 조회 실패로 유니버스가 조용히
+            # 비는 것이 오분류보다 나쁘다.
+            skipped = [t for t, *_ in universe
+                       if t in profiles and t not in set(dropped)
+                       and not is_equity_asset_class(
+                           profiles[t].get("asset_class"))]
+            if skipped:
+                print(f"    [*] 비주식형 {len(skipped)}종목 제외 "
+                      f"(채권·원자재·대체투자)")
+
+            remove = set(dropped) | set(skipped)
             universe = [(t, n, m, (profiles.get(t) or {}).get("sector", sec),
                          at, ex)
                         for t, n, m, sec, at, ex in universe
-                        if t not in set(dropped)]
+                        if t not in remove]
 
         _save_cache(cache_key, universe)
         print(f"    [OK] 미국 ETF {len(universe)}종목 수집 완료")
