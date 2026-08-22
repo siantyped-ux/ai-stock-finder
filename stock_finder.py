@@ -995,6 +995,28 @@ def calc_hitl(signal, total, tech):
     return False
 
 
+def scan_summary(results: list, shown: list) -> dict:
+    """대시보드 지표 카드용 요약. 필터 **이전** 전체를 기준으로 센다.
+
+    출력 필터를 켜면 지표 카드가 구조적으로 0이 된다. HITL 은 AVOID 이거나
+    STRONG_BUY & tech>85 일 때만 켜지는데, AVOID 는 정의상 총점 45 미만이라
+    70점 필터를 절대 통과하지 못한다. 표시 목록만 보고 세면 검토 대기열이
+    있는데도 0으로 보인다 (2026-08-22 실측: 아카이브 151건 vs 표시 0건).
+    """
+    def count(rows, pred):
+        return sum(1 for r in rows if pred(r))
+
+    return {
+        "scanned": len(results),
+        "shown": len(shown),
+        "strong_buy": count(results, lambda r: r["signal"] == "STRONG_BUY"),
+        "buy": count(results, lambda r: r["signal"] == "BUY"),
+        "watch": count(results, lambda r: r["signal"] == "WATCH"),
+        "avoid": count(results, lambda r: r["signal"] == "AVOID"),
+        "hitl": count(results, lambda r: r["hitl"]),
+    }
+
+
 def filter_for_output(rows: list, min_total: int, min_total_etf: int) -> list:
     """대시보드·콘솔에 낼 행만 남긴다.
 
@@ -1388,6 +1410,12 @@ def main():
           f"ETF {args.min_total_etf}점 이상 → "
           f"{len(shown)}/{len(results)}종목 (주식 {n_stock}, ETF {n_etf})")
 
+    # 지표 카드는 필터 이전 전체를 기준으로 센다 (scan_summary 참조).
+    summary = scan_summary(results, shown)
+    summary_json = json.dumps(summary, ensure_ascii=False)
+    print(f"[*] 스캔 전체 기준: HITL {summary['hitl']}건 · "
+          f"AVOID {summary['avoid']}건 (표시 목록에는 안 뜬다)")
+
     output_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "dashboard_data.js")
     fred_json = json.dumps(fred_data, ensure_ascii=False)
     js_content = f"""// AI 3-Month Stock Finder - Live Data
@@ -1403,6 +1431,7 @@ window.LIVE_MACRO = {{
   fred_active: {str(bool(FRED_KEY)).lower()},
   fred: {fred_json}
 }};
+window.LIVE_SUMMARY = {summary_json};
 window.LIVE_STOCKS = {json.dumps(shown, ensure_ascii=False, indent=2)};
 """
     with open(output_path, "w", encoding="utf-8") as f:

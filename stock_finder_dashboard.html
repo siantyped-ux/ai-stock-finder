@@ -337,7 +337,7 @@
     <div class="kpi-card" style="--accent:#4ade80">
       <div class="kpi-label">스캔 종목</div>
       <div class="kpi-value" id="kpiTotal">0</div>
-      <div class="kpi-sub">S&P 500 + KOSPI 200 대상</div>
+      <div class="kpi-sub" id="kpiTotalSub">미국 주식 + ETF</div>
     </div>
     <div class="kpi-card" style="--accent:#22d3ee">
       <div class="kpi-label">STRONG BUY 시그널</div>
@@ -347,12 +347,12 @@
     <div class="kpi-card" style="--accent:#facc15">
       <div class="kpi-label">HITL 승인 대기</div>
       <div class="kpi-value" id="kpiHitl">0</div>
-      <div class="kpi-sub">신규 종목 · 대형 포지션</div>
+      <div class="kpi-sub">스캔 전체 기준 · 표시 목록에는 안 뜸</div>
     </div>
     <div class="kpi-card" style="--accent:#f87171">
       <div class="kpi-label">Auditor BLOCK</div>
       <div class="kpi-value" id="kpiBlock">0</div>
-      <div class="kpi-sub">과최적화 · 미래데이터 감지</div>
+      <div class="kpi-sub">스캔 전체 기준 · 표시 목록에는 안 뜸</div>
     </div>
     <div class="kpi-card" style="--accent:#a855f7">
       <div class="kpi-label">평균 EV (R)</div>
@@ -463,6 +463,8 @@
 // 지난 스캔 결과가 아직 남아 있는 것처럼 보였다.
 const STOCKS = (window.LIVE_STOCKS && window.LIVE_STOCKS.length > 0) ? window.LIVE_STOCKS : [];
 const IS_LIVE = STOCKS.length > 0;
+// 필터 이전 스캔 전체 요약. 지표 카드가 이걸 쓴다.
+const SUMMARY = window.LIVE_SUMMARY || null;
 
 // LIVE 거시 지표 반영
 if (window.LIVE_MACRO) {
@@ -601,11 +603,23 @@ function render() {
     </tr>
   `).join('') || '<tr><td colspan="11" style="text-align:center; padding:40px; color:#7a8199">조건에 맞는 종목이 없습니다.</td></tr>';
 
-  document.getElementById('resultCount').textContent = `${filteredStocks.length} 종목`;
-  document.getElementById('kpiTotal').textContent = STOCKS.length;
-  document.getElementById('kpiStrong').textContent = STOCKS.filter(s=>s.signal==='STRONG_BUY').length;
-  document.getElementById('kpiHitl').textContent = STOCKS.filter(s=>s.hitl).length;
-  document.getElementById('kpiBlock').textContent = STOCKS.filter(s=>s.signal==='AVOID').length;
+  document.getElementById('resultCount').textContent = SUMMARY
+    ? `${filteredStocks.length} / ${SUMMARY.scanned} 종목`
+    : `${filteredStocks.length} 종목`;
+
+  // 지표 카드는 필터 이전 전체(LIVE_SUMMARY)를 쓴다. 표시 목록만 세면 HITL 과
+  // AVOID 가 항상 0이 된다 - AVOID 는 총점 45 미만이라 점수 필터를 통과할 수
+  // 없기 때문이다. 요약이 없는 옛 데이터에서는 예전처럼 표시 목록으로 센다.
+  const basis = SUMMARY || {
+    scanned: STOCKS.length,
+    strong_buy: STOCKS.filter(s=>s.signal==='STRONG_BUY').length,
+    hitl: STOCKS.filter(s=>s.hitl).length,
+    avoid: STOCKS.filter(s=>s.signal==='AVOID').length,
+  };
+  document.getElementById('kpiTotal').textContent = basis.scanned;
+  document.getElementById('kpiStrong').textContent = basis.strong_buy;
+  document.getElementById('kpiHitl').textContent = basis.hitl;
+  document.getElementById('kpiBlock').textContent = basis.avoid;
   const avgEV = STOCKS.reduce((a,s)=>a+s.ev, 0) / STOCKS.length;
   document.getElementById('kpiEV').textContent = avgEV.toFixed(2);
 }

@@ -148,3 +148,41 @@ def test_missing_asset_type_is_treated_as_stock():
     rows = [{"t": "OLD", "total": 72, "signal": "BUY"}]
     kept = sf.filter_for_output(rows, min_total=70, min_total_etf=78)
     assert [r["t"] for r in kept] == ["OLD"]
+
+
+# ─── 지표 카드 요약 (필터 이전 전체 기준) ────────────────────
+SCANNED = [
+    {"t": "A", "at": "STOCK", "total": 75, "signal": "BUY", "hitl": False},
+    {"t": "B", "at": "STOCK", "total": 62, "signal": "WATCH", "hitl": False},
+    {"t": "C", "at": "STOCK", "total": 40, "signal": "AVOID", "hitl": True},
+    {"t": "D", "at": "STOCK", "total": 38, "signal": "AVOID", "hitl": True},
+    {"t": "E", "at": "ETF", "total": 80, "signal": "STRONG_BUY", "hitl": False},
+]
+
+
+def test_summary_counts_the_full_scan_not_the_filtered_list():
+    """이게 이 함수의 존재 이유다. 표시 목록만 세면 HITL 이 0이 된다."""
+    shown = sf.filter_for_output(SCANNED, min_total=70, min_total_etf=78)
+    got = sf.scan_summary(SCANNED, shown)
+
+    assert got["scanned"] == 5
+    assert got["shown"] == 2          # A(75) + E(80)
+    assert got["hitl"] == 2           # C, D — 둘 다 필터에서 빠졌다
+    assert got["avoid"] == 2
+
+
+def test_summary_hitl_survives_a_filter_that_excludes_every_avoid():
+    """AVOID 는 총점 45 미만이라 70점 필터를 절대 통과하지 못한다."""
+    shown = sf.filter_for_output(SCANNED, min_total=70, min_total_etf=78)
+    assert all(r["signal"] != "AVOID" for r in shown)
+    assert sf.scan_summary(SCANNED, shown)["hitl"] == 2
+
+
+def test_summary_signal_breakdown():
+    got = sf.scan_summary(SCANNED, [])
+    assert (got["strong_buy"], got["buy"], got["watch"]) == (1, 1, 1)
+
+
+def test_summary_handles_an_empty_scan():
+    got = sf.scan_summary([], [])
+    assert got["scanned"] == 0 and got["hitl"] == 0
