@@ -73,3 +73,15 @@ def test_etf_total_can_reach_the_70_filter():
 
 def test_etf_total_returns_int():
     assert isinstance(sf.calc_total_etf(71, 63), int)
+
+
+# ─── ETF 합의 개수 ─────────────────────────────────────────
+def test_etf_consensus_counts_two_axes():
+    assert sf.calc_consensus_etf(80, 75) == 2
+    assert sf.calc_consensus_etf(80, 60) == 1
+    assert sf.calc_consensus_etf(50, 60) == 0
+
+
+def test_etf_consensus_boundary_is_inclusive():
+    assert sf.calc_consensus_etf(70, 70) == 2
+    assert sf.calc_consensus_etf(69, 69) == 0

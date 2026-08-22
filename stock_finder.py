@@ -1113,6 +1113,15 @@ def calc_consensus(tech, macro, filing, value):
     return sum(1 for v in (tech, macro, filing, value) if v >= 70)
 
 
+def calc_consensus_etf(tech, macro):
+    """ETF 합의 개수. 축이 tech/macro 둘뿐이므로 최대 2 다.
+
+    개수를 그대로 아카이브에 저장한다. 판정은 calc_signal 이 n_axes=2 로
+    비율을 계산한다.
+    """
+    return sum(1 for v in (tech, macro) if v >= 70)
+
+
 def calc_total(tech, macro, filing, value):
     return int(round(tech * 0.35 + macro * 0.20 + filing * 0.30 + value * 0.15))
 
@@ -1304,10 +1313,11 @@ def parse_args():
 def main():
     args = parse_args()
 
-    # --all 옵션 시 시총 필터 제거
+    # --all 옵션 시 규모 필터 제거. ETF 의 AUM 하한도 같이 푼다 - 주식만
+    # 풀고 ETF 를 남겨 두면 "전체"라는 이름과 어긋난다.
     if args.all:
         args.min_us_cap = 0
-        args.min_kr_cap = 0
+        args.min_etf_aum = 0
 
     print("=" * 65)
     print("  AI 3-Month Stock Finder v5 · 전체 유가증권 스캔")
@@ -1335,26 +1345,26 @@ def main():
     # 유니버스 로드
     print("[*] 종목 유니버스 로드...")
     universe = load_universe(
-        market=args.market,
         min_us_cap=args.min_us_cap,
-        min_kr_cap=args.min_kr_cap,
+        min_etf_aum=args.min_etf_aum,
+        include_etf=not args.no_etf,
         test_mode=args.test,
     )
     if args.limit > 0:
-        us_only = [s for s in universe if s[2] == "US"][:args.limit]
-        kr_only = [s for s in universe if s[2] == "KR"][:args.limit]
-        universe = us_only + kr_only
-        print(f"    [limit] 시장별 상위 {args.limit}개로 제한 → 총 {len(universe)}종목")
+        stocks = [s for s in universe if s[4] == "STOCK"][:args.limit]
+        etfs = [s for s in universe if s[4] == "ETF"][:args.limit]
+        universe = stocks + etfs
+        print(f"    [limit] 종류별 상위 {args.limit}개로 제한 → 총 {len(universe)}종목")
 
     if not universe:
         print("[!] 유니버스가 비었습니다. --test 옵션으로 폴백 모드 시도")
         sys.exit(1)
 
-    n_us = sum(1 for s in universe if s[2] == "US")
-    n_kr = sum(1 for s in universe if s[2] == "KR")
+    n_stock = sum(1 for s in universe if s[4] == "STOCK")
+    n_etf = sum(1 for s in universe if s[4] == "ETF")
     est_sec = len(universe) * (2.5 + args.sleep) / max(1, args.workers)
     est_min = est_sec / 60
-    print(f"    총 {len(universe)}종목 (US: {n_us}, KR: {n_kr})")
+    print(f"    총 {len(universe)}종목 (주식: {n_stock}, ETF: {n_etf})")
     print(f"    예상 소요시간: 약 {est_min:.1f}분 ({est_sec/3600:.1f}시간)")
     print("-" * 65)
 
@@ -1384,8 +1394,13 @@ def main():
     collected = []   # (universe 인덱스, 결과) — 마지막에 원래 순서로 정렬
     hist_rows = []   # (universe 인덱스, 이력 행)
 
-    def _scan_one(ticker: str, name: str, market: str, sector: str):
-        """종목 1개 스코어링. 실패 시 None 반환. (워커 스레드에서 실행)"""
+    def _scan_one(ticker: str, name: str, market: str, sector: str,
+                  asset_type: str):
+        """종목 1개 스코어링. 실패 시 None 반환. (워커 스레드에서 실행)
+
+        ETF 는 filing/value 를 계산하지 않는다. 개별기업 재무·공시 데이터가
+        없어서다. 두 축을 빼고 tech/macro 만 재정규화해 총점을 낸다.
+        """
         try:
             data = fetch_stock(ticker)
             if not data:
@@ -1396,17 +1411,30 @@ def main():
 
             tech, tech_r, r3m = calc_tech_score(hist)
             macro, macro_r, regime = calc_macro_score(vix, dxy, us10y, sector, fred_data)
-            value, value_r = calc_value_score(info, sector)
-            filing, filing_r = calc_filing_score(info, hist, ticker, market)
 
-            total = calc_total(tech, macro, filing, value)
-            cons = calc_consensus(tech, macro, filing, value)
-            signal = calc_signal(total, cons)
+            if asset_type == "ETF":
+                value, value_r = None, []
+                filing, filing_r = None, []
+                total = calc_total_etf(tech, macro)
+                cons = calc_consensus_etf(tech, macro)
+                n_axes = 2
+                # 네 축을 받는 함수라 뒤 두 자리에 tech/macro 를 다시 넣는다.
+                # 사실상 tech/macro 평균이 되어 재정규화와 방향이 일치한다.
+                ev, target = calc_ev_and_target(tech, macro, tech, macro, r3m)
+            else:
+                value, value_r = calc_value_score(info, sector)
+                filing, filing_r = calc_filing_score(info, hist, ticker, market)
+                total = calc_total(tech, macro, filing, value)
+                cons = calc_consensus(tech, macro, filing, value)
+                n_axes = 4
+                ev, target = calc_ev_and_target(tech, macro, filing, value, r3m)
+
+            signal = calc_signal(total, cons, n_axes=n_axes)
             hitl = calc_hitl(signal, total, tech)
-            ev, target = calc_ev_and_target(tech, macro, filing, value, r3m)
 
             dash_row = {
                 "t": ticker, "n": name, "m": market, "sec": sector,
+                "at": asset_type,
                 "tech": tech, "macro": macro, "filing": filing, "value": value,
                 "total": total, "consensus": cons, "signal": signal,
                 "ev": ev, "target": target, "hitl": hitl,
@@ -1419,6 +1447,7 @@ def main():
             try:
                 hist_row = {
                     "ticker": ticker, "name": name, "market": market, "sector": sector,
+                    "asset_type": asset_type,
                     "tech": tech, "macro": macro, "filing": filing, "value": value,
                     "total": total, "consensus": cons, "signal": signal,
                     "ev": ev, "target": target, "hitl": hitl,
@@ -1440,8 +1469,8 @@ def main():
 
     with ThreadPoolExecutor(max_workers=n_workers) as pool:
         futures = {
-            pool.submit(_scan_one, ticker, name, market, sector): (i, ticker, name)
-            for i, (ticker, name, market, sector) in enumerate(universe, 1)
+            pool.submit(_scan_one, ticker, name, market, sector, asset_type): (i, ticker, name)
+            for i, (ticker, name, market, sector, asset_type) in enumerate(universe, 1)
         }
 
         for fut in as_completed(futures):
