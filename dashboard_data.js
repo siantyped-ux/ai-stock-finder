@@ -1,17 +1,17 @@
 // AI 3-Month Stock Finder - Live Data
-// Generated: 2026-08-22 06:09:16
+// Generated: 2026-08-22 06:40:06
 // Macro: VIX=16.01, DXY=98.80, US10Y=4.69%
 // FMP: active · FRED: active
 window.LIVE_MACRO = {
   vix: 16.01,
   dxy: 98.80,
   us10y: 4.69,
-  generated_at: "2026-08-22T06:09:16.628645",
+  generated_at: "2026-08-22T06:40:06.880641",
   fmp_active: true,
   fred_active: true,
   fred: {"available": true, "vix": 16.01, "us10y": 4.69, "yield_curve": 0.5, "fed_funds": 3.63, "unemployment": 4.1, "dxy_broad": 118.9028, "core_cpi_yoy": 2.47, "unemp_3m_change": -0.2}
 };
-window.LIVE_SUMMARY = {"scanned": 1788, "shown": 65, "strong_buy": 0, "buy": 2, "watch": 301, "avoid": 112, "hitl": 112};
+window.LIVE_SUMMARY = {"scanned": 1785, "shown": 67, "strong_buy": 0, "buy": 2, "watch": 300, "avoid": 114, "hitl": 114};
 window.LIVE_STOCKS = [
   {
     "t": "TSM",
@@ -1561,6 +1561,88 @@ window.LIVE_STOCKS = [
         "PER 44.0 · 프리미엄",
         "Forward PER 17.3 · 이익 성장 반영",
         "PEG 0.53 · 성장률 대비 저평가"
+      ]
+    }
+  },
+  {
+    "t": "EMBJ",
+    "n": "Embraer S.A.",
+    "m": "US",
+    "sec": "산업재",
+    "at": "STOCK",
+    "ex": "NYSE",
+    "tech": 95,
+    "macro": 60,
+    "filing": 55,
+    "value": 61,
+    "total": 71,
+    "consensus": 1,
+    "signal": "HOLD",
+    "ev": 0.99,
+    "target": 12,
+    "hitl": false,
+    "reasons": {
+      "tech": [
+        "이동평균 완벽 정배열 (P>72.6>67.0>65.2)",
+        "RSI 64 · 강세 지속 구간",
+        "MACD 골든크로스 · 히스토 +0.10",
+        "3개월 수익률 +32.4% · 강한 상승"
+      ],
+      "macro": [
+        "NEUTRAL · VIX 16.0 · US10Y 4.69%",
+        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
+      ],
+      "filing": [
+        "8-K: 최근 60일 이벤트 없음",
+        "* FMP 실시간 공시 반영"
+      ],
+      "value": [
+        "PER 30.4 · 적정",
+        "Forward PER 19.3 · 이익 성장 반영",
+        "PEG 28.22 · 성장률 대비 부담",
+        "FCF Yield 12.4% · 우수"
+      ]
+    }
+  },
+  {
+    "t": "RVTY",
+    "n": "Revvity, Inc.",
+    "m": "US",
+    "sec": "제약/바이오",
+    "at": "STOCK",
+    "ex": "NYSE",
+    "tech": 92,
+    "macro": 65,
+    "filing": 58,
+    "value": 58,
+    "total": 71,
+    "consensus": 1,
+    "signal": "HOLD",
+    "ev": 1.0,
+    "target": 12,
+    "hitl": false,
+    "reasons": {
+      "tech": [
+        "이동평균 완벽 정배열 (P>115.6>111.1>100.5)",
+        "RSI 67 · 강세 지속 구간",
+        "MACD 골든크로스 · 히스토 +0.69",
+        "3개월 수익률 +28.8% · 강한 상승",
+        "Bollinger 상단 접근 (100%)"
+      ],
+      "macro": [
+        "NEUTRAL · VIX 16.0 · US10Y 4.69%",
+        "DXY 98.8 약세 · 성장주 유리",
+        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
+      ],
+      "filing": [
+        "P/C비율 하락 -1150% (헤지 완화)",
+        "13F: 보유기관 547곳 · 지분율 102.7% (2026Q3)",
+        "* FMP 실시간 공시 반영"
+      ],
+      "value": [
+        "PER 59.4 · 프리미엄",
+        "Forward PER 21.2 · 이익 성장 반영",
+        "PEG 0.74 · 성장률 대비 저평가"
       ]
     }
   },
