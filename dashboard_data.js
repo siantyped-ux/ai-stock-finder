@@ -1,16 +1,17 @@
 // AI 3-Month Stock Finder - Live Data
-// Generated: 2026-08-22 05:32:26
+// Generated: 2026-08-22 06:09:16
 // Macro: VIX=16.01, DXY=98.80, US10Y=4.69%
 // FMP: active · FRED: active
 window.LIVE_MACRO = {
   vix: 16.01,
   dxy: 98.80,
   us10y: 4.69,
-  generated_at: "2026-08-22T05:32:26.090990",
+  generated_at: "2026-08-22T06:09:16.628645",
   fmp_active: true,
   fred_active: true,
   fred: {"available": true, "vix": 16.01, "us10y": 4.69, "yield_curve": 0.5, "fed_funds": 3.63, "unemployment": 4.1, "dxy_broad": 118.9028, "core_cpi_yoy": 2.47, "unemp_3m_change": -0.2}
 };
+window.LIVE_SUMMARY = {"scanned": 1788, "shown": 65, "strong_buy": 0, "buy": 2, "watch": 301, "avoid": 112, "hitl": 112};
 window.LIVE_STOCKS = [
   {
     "t": "TSM",
@@ -18,6 +19,7 @@ window.LIVE_STOCKS = [
     "m": "US",
     "sec": "반도체",
     "at": "STOCK",
+    "ex": "NYSE",
     "tech": 72,
     "macro": 65,
     "filing": 77,
@@ -48,7 +50,7 @@ window.LIVE_STOCKS = [
       "value": [
         "PER 31.1 · 적정",
         "Forward PER 19.2 · 이익 성장 반영",
-        "PBR 87.4 · 부담",
+        "PBR 86.2 · 부담",
         "PEG 0.98 · 성장률 대비 저평가"
       ]
     }
@@ -59,6 +61,7 @@ window.LIVE_STOCKS = [
     "m": "US",
     "sec": "제약/바이오",
     "at": "STOCK",
+    "ex": "NYSE",
     "tech": 91,
     "macro": 65,
     "filing": 71,
@@ -83,10 +86,10 @@ window.LIVE_STOCKS = [
       ],
       "filing": [
         "13F: 신규진입 +197곳",
-        "13F: 증량-감량 순 +658",
+        "13F: 증량-감량 순 +657",
         "13F: 기관지분율 +1.81%p",
         "P/C비율 하락 -74% (헤지 완화)",
-        "13F: 보유기관 4752곳 · 지분율 88.6% (2026Q3)"
+        "13F: 보유기관 4756곳 · 지분율 88.6% (2026Q3)"
       ],
       "value": [
         "PER 41.8 · 프리미엄",
@@ -101,6 +104,7 @@ window.LIVE_STOCKS = [
     "m": "US",
     "sec": "제약/바이오",
     "at": "STOCK",
+    "ex": "NYSE",
     "tech": 85,
     "macro": 65,
     "filing": 81,
@@ -142,6 +146,7 @@ window.LIVE_STOCKS = [
     "m": "US",
     "sec": "에너지",
     "at": "STOCK",
+    "ex": "NYSE",
     "tech": 88,
     "macro": 60,
     "filing": 55,
@@ -170,7 +175,7 @@ window.LIVE_STOCKS = [
         "* FMP 실시간 공시 반영"
       ],
       "value": [
-        "PER 10.3 · 극심 저평가",
+        "PER 10.4 · 극심 저평가",
         "FCF Yield 8.3% · 우수"
       ]
     }
@@ -181,6 +186,7 @@ window.LIVE_STOCKS = [
     "m": "US",
     "sec": "제약/바이오",
     "at": "STOCK",
+    "ex": "NYSE",
     "tech": 80,
     "macro": 65,
     "filing": 68,
@@ -221,6 +227,7 @@ window.LIVE_STOCKS = [
     "m": "US",
     "sec": "인터넷",
     "at": "STOCK",
+    "ex": "NYSE",
     "tech": 84,
     "macro": 65,
     "filing": 60,
@@ -245,7 +252,7 @@ window.LIVE_STOCKS = [
       ],
       "filing": [
         "13F: 기관지분율 +4.83%p",
-        "13F: 보유기관 3238곳 · 지분율 71.0% (2026Q3)",
+        "13F: 보유기관 3241곳 · 지분율 71.0% (2026Q3)",
         "* FMP 실시간 공시 반영"
       ],
       "value": [
@@ -262,6 +269,7 @@ window.LIVE_STOCKS = [
     "m": "US",
     "sec": "에너지",
     "at": "STOCK",
+    "ex": "NYSE",
     "tech": 87,
     "macro": 60,
     "filing": 55,
@@ -295,51 +303,12 @@ window.LIVE_STOCKS = [
     }
   },
   {
-    "t": "DE",
-    "n": "Deere & Company",
-    "m": "US",
-    "sec": "산업재",
-    "at": "STOCK",
-    "tech": 92,
-    "macro": 60,
-    "filing": 60,
-    "value": 50,
-    "total": 70,
-    "consensus": 1,
-    "signal": "HOLD",
-    "ev": 0.96,
-    "target": 12,
-    "hitl": false,
-    "reasons": {
-      "tech": [
-        "이동평균 완벽 정배열 (P>612.2>604.9>556.8)",
-        "RSI 64 · 강세 지속 구간",
-        "MACD 골든크로스 · 히스토 +1.07",
-        "3개월 수익률 +22.7% · 강한 상승",
-        "Bollinger 상단 접근 (100%)"
-      ],
-      "macro": [
-        "NEUTRAL · VIX 16.0 · US10Y 4.69%",
-        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
-      ],
-      "filing": [
-        "13F: 기관지분율 +3.67%p",
-        "13F: 보유기관 2716곳 · 지분율 75.6% (2026Q3)",
-        "* FMP 실시간 공시 반영"
-      ],
-      "value": [
-        "PER 36.7 · 적정",
-        "Forward PER 28.8 · 이익 성장 반영",
-        "FCF 음수 · 현금유출"
-      ]
-    }
-  },
-  {
     "t": "IBKR",
     "n": "Interactive Brokers Group, Inc.",
     "m": "US",
     "sec": "금융",
     "at": "STOCK",
+    "ex": "NASDAQ",
     "tech": 73,
     "macro": 60,
     "filing": 85,
@@ -379,6 +348,7 @@ window.LIVE_STOCKS = [
     "m": "US",
     "sec": "제약/바이오",
     "at": "STOCK",
+    "ex": "NYSE",
     "tech": 88,
     "macro": 65,
     "filing": 60,
@@ -404,7 +374,7 @@ window.LIVE_STOCKS = [
       ],
       "filing": [
         "13F: 기관지분율 +5.67%p",
-        "13F: 보유기관 2600곳 · 지분율 84.9% (2026Q3)",
+        "13F: 보유기관 2601곳 · 지분율 84.9% (2026Q3)",
         "* FMP 실시간 공시 반영"
       ],
       "value": [
@@ -420,6 +390,7 @@ window.LIVE_STOCKS = [
     "m": "US",
     "sec": "IT",
     "at": "STOCK",
+    "ex": "NASDAQ",
     "tech": 84,
     "macro": 60,
     "filing": 60,
@@ -460,6 +431,7 @@ window.LIVE_STOCKS = [
     "m": "US",
     "sec": "에너지",
     "at": "STOCK",
+    "ex": "NYSE",
     "tech": 88,
     "macro": 60,
     "filing": 55,
@@ -499,6 +471,7 @@ window.LIVE_STOCKS = [
     "m": "US",
     "sec": "제약/바이오",
     "at": "STOCK",
+    "ex": "NYSE",
     "tech": 81,
     "macro": 65,
     "filing": 66,
@@ -540,6 +513,7 @@ window.LIVE_STOCKS = [
     "m": "US",
     "sec": "제약/바이오",
     "at": "STOCK",
+    "ex": "NYSE",
     "tech": 67,
     "macro": 65,
     "filing": 85,
@@ -580,6 +554,7 @@ window.LIVE_STOCKS = [
     "m": "US",
     "sec": "소매",
     "at": "STOCK",
+    "ex": "NASDAQ",
     "tech": 91,
     "macro": 60,
     "filing": 63,
@@ -618,6 +593,7 @@ window.LIVE_STOCKS = [
     "m": "US",
     "sec": "에너지",
     "at": "STOCK",
+    "ex": "NYSE",
     "tech": 88,
     "macro": 60,
     "filing": 60,
@@ -647,7 +623,7 @@ window.LIVE_STOCKS = [
       ],
       "value": [
         "PER 11.8 · 극심 저평가",
-        "FCF Yield 5.5% · 우수"
+        "FCF Yield 5.6% · 우수"
       ]
     }
   },
@@ -657,6 +633,7 @@ window.LIVE_STOCKS = [
     "m": "US",
     "sec": "제약/바이오",
     "at": "STOCK",
+    "ex": "NYSE",
     "tech": 80,
     "macro": 65,
     "filing": 67,
@@ -696,6 +673,7 @@ window.LIVE_STOCKS = [
     "m": "US",
     "sec": "에너지",
     "at": "STOCK",
+    "ex": "NYSE",
     "tech": 81,
     "macro": 60,
     "filing": 75,
@@ -735,6 +713,7 @@ window.LIVE_STOCKS = [
     "m": "US",
     "sec": "에너지",
     "at": "STOCK",
+    "ex": "NYSE",
     "tech": 84,
     "macro": 60,
     "filing": 84,
@@ -774,6 +753,7 @@ window.LIVE_STOCKS = [
     "m": "US",
     "sec": "유틸리티",
     "at": "STOCK",
+    "ex": "NYSE",
     "tech": 92,
     "macro": 60,
     "filing": 66,
@@ -817,6 +797,7 @@ window.LIVE_STOCKS = [
     "m": "US",
     "sec": "소매",
     "at": "STOCK",
+    "ex": "NYSE",
     "tech": 87,
     "macro": 60,
     "filing": 63,
@@ -855,6 +836,7 @@ window.LIVE_STOCKS = [
     "m": "US",
     "sec": "에너지",
     "at": "STOCK",
+    "ex": "NYSE",
     "tech": 95,
     "macro": 60,
     "filing": 55,
@@ -895,6 +877,7 @@ window.LIVE_STOCKS = [
     "m": "US",
     "sec": "제약/바이오",
     "at": "STOCK",
+    "ex": "NASDAQ",
     "tech": 88,
     "macro": 65,
     "filing": 63,
@@ -936,6 +919,7 @@ window.LIVE_STOCKS = [
     "m": "US",
     "sec": "금융",
     "at": "STOCK",
+    "ex": "NYSE",
     "tech": 82,
     "macro": 60,
     "filing": 58,
@@ -975,6 +959,7 @@ window.LIVE_STOCKS = [
     "m": "US",
     "sec": "금융",
     "at": "STOCK",
+    "ex": "NYSE",
     "tech": 95,
     "macro": 60,
     "filing": 60,
@@ -1002,7 +987,7 @@ window.LIVE_STOCKS = [
         "* FMP 실시간 공시 반영"
       ],
       "value": [
-        "PER 44.3 · 프리미엄",
+        "PER 43.7 · 프리미엄",
         "Forward PER 5.9 · 이익 성장 반영",
         "PEG 0.26 · 성장률 대비 저평가",
         "FCF Yield 31.8% · 우수"
@@ -1015,6 +1000,7 @@ window.LIVE_STOCKS = [
     "m": "US",
     "sec": "제약/바이오",
     "at": "STOCK",
+    "ex": "NASDAQ",
     "tech": 95,
     "macro": 65,
     "filing": 53,
@@ -1055,6 +1041,7 @@ window.LIVE_STOCKS = [
     "m": "US",
     "sec": "에너지",
     "at": "STOCK",
+    "ex": "NASDAQ",
     "tech": 80,
     "macro": 60,
     "filing": 70,
@@ -1083,7 +1070,7 @@ window.LIVE_STOCKS = [
       ],
       "value": [
         "PER 8.3 · 극심 저평가",
-        "FCF Yield 6.4% · 우수"
+        "FCF Yield 6.6% · 우수"
       ]
     }
   },
@@ -1093,6 +1080,7 @@ window.LIVE_STOCKS = [
     "m": "US",
     "sec": "에너지",
     "at": "STOCK",
+    "ex": "NYSE",
     "tech": 79,
     "macro": 60,
     "filing": 67,
@@ -1133,6 +1121,7 @@ window.LIVE_STOCKS = [
     "m": "US",
     "sec": "에너지",
     "at": "STOCK",
+    "ex": "NYSE",
     "tech": 91,
     "macro": 60,
     "filing": 68,
@@ -1172,6 +1161,7 @@ window.LIVE_STOCKS = [
     "m": "US",
     "sec": "소재",
     "at": "STOCK",
+    "ex": "NYSE",
     "tech": 88,
     "macro": 60,
     "filing": 63,
@@ -1213,6 +1203,7 @@ window.LIVE_STOCKS = [
     "m": "US",
     "sec": "소비재",
     "at": "STOCK",
+    "ex": "NYSE",
     "tech": 88,
     "macro": 60,
     "filing": 55,
@@ -1254,6 +1245,7 @@ window.LIVE_STOCKS = [
     "m": "US",
     "sec": "제약/바이오",
     "at": "STOCK",
+    "ex": "NYSE",
     "tech": 91,
     "macro": 65,
     "filing": 63,
@@ -1296,6 +1288,7 @@ window.LIVE_STOCKS = [
     "m": "US",
     "sec": "에너지",
     "at": "STOCK",
+    "ex": "NYSE",
     "tech": 88,
     "macro": 60,
     "filing": 60,
@@ -1336,6 +1329,7 @@ window.LIVE_STOCKS = [
     "m": "US",
     "sec": "소비재",
     "at": "STOCK",
+    "ex": "NASDAQ",
     "tech": 84,
     "macro": 60,
     "filing": 75,
@@ -1375,6 +1369,7 @@ window.LIVE_STOCKS = [
     "m": "US",
     "sec": "리츠",
     "at": "STOCK",
+    "ex": "NYSE",
     "tech": 95,
     "macro": 60,
     "filing": 53,
@@ -1416,6 +1411,7 @@ window.LIVE_STOCKS = [
     "m": "US",
     "sec": "에너지",
     "at": "STOCK",
+    "ex": "NYSE",
     "tech": 92,
     "macro": 60,
     "filing": 58,
@@ -1457,6 +1453,7 @@ window.LIVE_STOCKS = [
     "m": "US",
     "sec": "제약/바이오",
     "at": "STOCK",
+    "ex": "NYSE",
     "tech": 84,
     "macro": 65,
     "filing": 58,
@@ -1495,6 +1492,7 @@ window.LIVE_STOCKS = [
     "m": "US",
     "sec": "에너지",
     "at": "STOCK",
+    "ex": "NASDAQ",
     "tech": 81,
     "macro": 60,
     "filing": 60,
@@ -1533,6 +1531,7 @@ window.LIVE_STOCKS = [
     "m": "US",
     "sec": "산업재",
     "at": "STOCK",
+    "ex": "NYSE",
     "tech": 96,
     "macro": 60,
     "filing": 55,
@@ -1566,91 +1565,12 @@ window.LIVE_STOCKS = [
     }
   },
   {
-    "t": "EMBJ",
-    "n": "Embraer S.A.",
-    "m": "US",
-    "sec": "산업재",
-    "at": "STOCK",
-    "tech": 95,
-    "macro": 60,
-    "filing": 55,
-    "value": 61,
-    "total": 71,
-    "consensus": 1,
-    "signal": "HOLD",
-    "ev": 0.99,
-    "target": 12,
-    "hitl": false,
-    "reasons": {
-      "tech": [
-        "이동평균 완벽 정배열 (P>72.6>67.0>65.2)",
-        "RSI 64 · 강세 지속 구간",
-        "MACD 골든크로스 · 히스토 +0.10",
-        "3개월 수익률 +32.4% · 강한 상승"
-      ],
-      "macro": [
-        "NEUTRAL · VIX 16.0 · US10Y 4.69%",
-        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
-      ],
-      "filing": [
-        "8-K: 최근 60일 이벤트 없음",
-        "* FMP 실시간 공시 반영"
-      ],
-      "value": [
-        "PER 30.4 · 적정",
-        "Forward PER 19.3 · 이익 성장 반영",
-        "PEG 28.22 · 성장률 대비 부담",
-        "FCF Yield 12.4% · 우수"
-      ]
-    }
-  },
-  {
-    "t": "RVTY",
-    "n": "Revvity, Inc.",
-    "m": "US",
-    "sec": "제약/바이오",
-    "at": "STOCK",
-    "tech": 92,
-    "macro": 65,
-    "filing": 58,
-    "value": 58,
-    "total": 71,
-    "consensus": 1,
-    "signal": "HOLD",
-    "ev": 1.0,
-    "target": 12,
-    "hitl": false,
-    "reasons": {
-      "tech": [
-        "이동평균 완벽 정배열 (P>115.6>111.1>100.5)",
-        "RSI 67 · 강세 지속 구간",
-        "MACD 골든크로스 · 히스토 +0.69",
-        "3개월 수익률 +28.8% · 강한 상승",
-        "Bollinger 상단 접근 (100%)"
-      ],
-      "macro": [
-        "NEUTRAL · VIX 16.0 · US10Y 4.69%",
-        "DXY 98.8 약세 · 성장주 유리",
-        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
-      ],
-      "filing": [
-        "P/C비율 하락 -1150% (헤지 완화)",
-        "13F: 보유기관 547곳 · 지분율 102.7% (2026Q3)",
-        "* FMP 실시간 공시 반영"
-      ],
-      "value": [
-        "PER 59.4 · 프리미엄",
-        "Forward PER 21.2 · 이익 성장 반영",
-        "PEG 0.74 · 성장률 대비 저평가"
-      ]
-    }
-  },
-  {
     "t": "CORT",
     "n": "Corcept Therapeutics Incorporated",
     "m": "US",
     "sec": "제약/바이오",
     "at": "STOCK",
+    "ex": "NASDAQ",
     "tech": 95,
     "macro": 65,
     "filing": 63,
@@ -1694,6 +1614,7 @@ window.LIVE_STOCKS = [
     "m": "US",
     "sec": "제약/바이오",
     "at": "STOCK",
+    "ex": "NASDAQ",
     "tech": 95,
     "macro": 65,
     "filing": 66,
@@ -1736,6 +1657,7 @@ window.LIVE_STOCKS = [
     "m": "US",
     "sec": "리츠",
     "at": "STOCK",
+    "ex": "NASDAQ",
     "tech": 91,
     "macro": 60,
     "filing": 60,
@@ -1774,6 +1696,7 @@ window.LIVE_STOCKS = [
     "m": "US",
     "sec": "IT",
     "at": "STOCK",
+    "ex": "NASDAQ",
     "tech": 95,
     "macro": 60,
     "filing": 50,
@@ -1814,6 +1737,7 @@ window.LIVE_STOCKS = [
     "m": "US",
     "sec": "제약/바이오",
     "at": "STOCK",
+    "ex": "NYSE",
     "tech": 81,
     "macro": 65,
     "filing": 63,
@@ -1854,6 +1778,7 @@ window.LIVE_STOCKS = [
     "m": "US",
     "sec": "미분류",
     "at": "ETF",
+    "ex": "AMEX",
     "tech": 91,
     "macro": 60,
     "filing": null,
@@ -1885,6 +1810,7 @@ window.LIVE_STOCKS = [
     "m": "US",
     "sec": "미분류",
     "at": "ETF",
+    "ex": "AMEX",
     "tech": 91,
     "macro": 60,
     "filing": null,
@@ -1911,11 +1837,44 @@ window.LIVE_STOCKS = [
     }
   },
   {
+    "t": "SPHY",
+    "n": "State Street SPDR Portfolio High Yield B",
+    "m": "US",
+    "sec": "미분류",
+    "at": "ETF",
+    "ex": "AMEX",
+    "tech": 95,
+    "macro": 60,
+    "filing": null,
+    "value": null,
+    "total": 82,
+    "consensus": 1,
+    "signal": "WATCH",
+    "ev": 1.22,
+    "target": 15,
+    "hitl": false,
+    "reasons": {
+      "tech": [
+        "이동평균 완벽 정배열 (P>23.2>23.2>22.9)",
+        "RSI 61 · 강세 지속 구간",
+        "MACD 골든크로스 · 히스토 +0.00",
+        "거래량 급증 · 최근 20일 평균 1.5배"
+      ],
+      "macro": [
+        "NEUTRAL · VIX 16.0 · US10Y 4.69%",
+        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
+      ],
+      "filing": [],
+      "value": []
+    }
+  },
+  {
     "t": "SPSB",
     "n": "State Street SPDR Portfolio Short Term C",
     "m": "US",
     "sec": "미분류",
     "at": "ETF",
+    "ex": "AMEX",
     "tech": 95,
     "macro": 60,
     "filing": null,
@@ -1947,6 +1906,7 @@ window.LIVE_STOCKS = [
     "m": "US",
     "sec": "미분류",
     "at": "ETF",
+    "ex": "AMEX",
     "tech": 88,
     "macro": 60,
     "filing": null,
@@ -1979,6 +1939,7 @@ window.LIVE_STOCKS = [
     "m": "US",
     "sec": "미분류",
     "at": "ETF",
+    "ex": "AMEX",
     "tech": 91,
     "macro": 60,
     "filing": null,
@@ -2010,6 +1971,7 @@ window.LIVE_STOCKS = [
     "m": "US",
     "sec": "미분류",
     "at": "ETF",
+    "ex": "AMEX",
     "tech": 91,
     "macro": 60,
     "filing": null,
@@ -2041,6 +2003,7 @@ window.LIVE_STOCKS = [
     "m": "US",
     "sec": "미분류",
     "at": "ETF",
+    "ex": "AMEX",
     "tech": 88,
     "macro": 60,
     "filing": null,
@@ -2072,6 +2035,7 @@ window.LIVE_STOCKS = [
     "m": "US",
     "sec": "미분류",
     "at": "ETF",
+    "ex": "AMEX",
     "tech": 91,
     "macro": 60,
     "filing": null,
@@ -2103,6 +2067,7 @@ window.LIVE_STOCKS = [
     "m": "US",
     "sec": "미분류",
     "at": "ETF",
+    "ex": "AMEX",
     "tech": 95,
     "macro": 60,
     "filing": null,
@@ -2134,6 +2099,7 @@ window.LIVE_STOCKS = [
     "m": "US",
     "sec": "미분류",
     "at": "ETF",
+    "ex": "NASDAQ",
     "tech": 95,
     "macro": 60,
     "filing": null,
@@ -2165,6 +2131,7 @@ window.LIVE_STOCKS = [
     "m": "US",
     "sec": "미분류",
     "at": "ETF",
+    "ex": "AMEX",
     "tech": 91,
     "macro": 60,
     "filing": null,
@@ -2196,6 +2163,7 @@ window.LIVE_STOCKS = [
     "m": "US",
     "sec": "미분류",
     "at": "ETF",
+    "ex": "NASDAQ",
     "tech": 95,
     "macro": 60,
     "filing": null,
@@ -2227,6 +2195,7 @@ window.LIVE_STOCKS = [
     "m": "US",
     "sec": "미분류",
     "at": "ETF",
+    "ex": "NASDAQ",
     "tech": 95,
     "macro": 60,
     "filing": null,
@@ -2258,6 +2227,7 @@ window.LIVE_STOCKS = [
     "m": "US",
     "sec": "미분류",
     "at": "ETF",
+    "ex": "NASDAQ",
     "tech": 91,
     "macro": 60,
     "filing": null,
@@ -2289,6 +2259,7 @@ window.LIVE_STOCKS = [
     "m": "US",
     "sec": "미분류",
     "at": "ETF",
+    "ex": "AMEX",
     "tech": 95,
     "macro": 60,
     "filing": null,
@@ -2320,6 +2291,7 @@ window.LIVE_STOCKS = [
     "m": "US",
     "sec": "미분류",
     "at": "ETF",
+    "ex": "AMEX",
     "tech": 99,
     "macro": 60,
     "filing": null,
@@ -2352,6 +2324,7 @@ window.LIVE_STOCKS = [
     "m": "US",
     "sec": "미분류",
     "at": "ETF",
+    "ex": "NASDAQ",
     "tech": 91,
     "macro": 60,
     "filing": null,
@@ -2383,6 +2356,7 @@ window.LIVE_STOCKS = [
     "m": "US",
     "sec": "미분류",
     "at": "ETF",
+    "ex": "AMEX",
     "tech": 88,
     "macro": 60,
     "filing": null,
@@ -2415,6 +2389,7 @@ window.LIVE_STOCKS = [
     "m": "US",
     "sec": "미분류",
     "at": "ETF",
+    "ex": "AMEX",
     "tech": 91,
     "macro": 60,
     "filing": null,
@@ -2446,6 +2421,7 @@ window.LIVE_STOCKS = [
     "m": "US",
     "sec": "미분류",
     "at": "ETF",
+    "ex": "NASDAQ",
     "tech": 91,
     "macro": 60,
     "filing": null,
@@ -2477,6 +2453,7 @@ window.LIVE_STOCKS = [
     "m": "US",
     "sec": "미분류",
     "at": "ETF",
+    "ex": "AMEX",
     "tech": 95,
     "macro": 60,
     "filing": null,
