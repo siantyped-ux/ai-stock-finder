@@ -1,17 +1,17 @@
 // AI 3-Month Stock Finder - Live Data
-// Generated: 2026-08-22 09:23:24
+// Generated: 2026-08-22 10:57:38
 // Macro: VIX=16.01, DXY=98.80, US10Y=4.69%
 // FMP: active · FRED: active
 window.LIVE_MACRO = {
   vix: 16.01,
   dxy: 98.80,
   us10y: 4.69,
-  generated_at: "2026-08-22T09:23:24.296279",
+  generated_at: "2026-08-22T10:57:38.287882",
   fmp_active: true,
   fred_active: true,
   fred: {"available": true, "vix": 16.01, "us10y": 4.69, "yield_curve": 0.5, "fed_funds": 3.63, "unemployment": 4.1, "dxy_broad": 118.9028, "core_cpi_yoy": 2.47, "unemp_3m_change": -0.2}
 };
-window.LIVE_SUMMARY = {"scanned": 1784, "shown": 67, "strong_buy": 0, "buy": 145, "watch": 162, "avoid": 112, "hitl": 112};
+window.LIVE_SUMMARY = {"scanned": 1520, "shown": 59, "strong_buy": 0, "buy": 90, "watch": 134, "avoid": 92, "hitl": 92};
 window.LIVE_STOCKS = [
   {
     "t": "TSM",
@@ -48,9 +48,9 @@ window.LIVE_STOCKS = [
         "* FMP 실시간 공시 반영"
       ],
       "value": [
-        "PER 31.1 · 적정",
+        "PER 31.2 · 적정",
         "Forward PER 19.2 · 이익 성장 반영",
-        "PBR 86.2 · 부담",
+        "PBR 87.4 · 부담",
         "PEG 0.98 · 성장률 대비 저평가"
       ]
     }
@@ -85,9 +85,9 @@ window.LIVE_STOCKS = [
         "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
       ],
       "filing": [
-        "13F: 신규진입 +197곳",
-        "13F: 증량-감량 순 +657",
-        "13F: 기관지분율 +1.81%p",
+        "13F: 신규진입 +176곳",
+        "13F: 증량-감량 순 +642",
+        "13F: 기관지분율 +1.80%p",
         "P/C비율 하락 -74% (헤지 완화)",
         "13F: 보유기관 4756곳 · 지분율 88.6% (2026Q3)"
       ],
@@ -127,9 +127,9 @@ window.LIVE_STOCKS = [
         "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
       ],
       "filing": [
-        "13F: 신규진입 +110곳",
-        "13F: 증량-감량 순 +472",
-        "13F: 기관지분율 +3.35%p",
+        "13F: 신규진입 +91곳",
+        "13F: 증량-감량 순 +457",
+        "13F: 기관지분율 +3.33%p",
         "13F: 보유기관 4310곳 · 지분율 76.7% (2026Q3)",
         "8-K: 최근 60일 이벤트 4건 (활발)"
       ],
@@ -251,7 +251,7 @@ window.LIVE_STOCKS = [
         "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
       ],
       "filing": [
-        "13F: 기관지분율 +4.83%p",
+        "13F: 기관지분율 +4.82%p",
         "13F: 보유기관 3241곳 · 지분율 71.0% (2026Q3)",
         "* FMP 실시간 공시 반영"
       ],
@@ -303,6 +303,45 @@ window.LIVE_STOCKS = [
     }
   },
   {
+    "t": "DE",
+    "n": "Deere & Company",
+    "m": "US",
+    "sec": "산업재",
+    "at": "STOCK",
+    "ex": "NYSE",
+    "tech": 92,
+    "macro": 60,
+    "filing": 60,
+    "value": 50,
+    "total": 70,
+    "consensus": 1,
+    "signal": "HOLD",
+    "ev": 0.96,
+    "target": 12,
+    "hitl": false,
+    "reasons": {
+      "tech": [
+        "이동평균 완벽 정배열 (P>612.2>604.9>556.8)",
+        "RSI 64 · 강세 지속 구간",
+        "MACD 골든크로스 · 히스토 +1.07",
+        "3개월 수익률 +22.7% · 강한 상승",
+        "Bollinger 상단 접근 (100%)"
+      ],
+      "macro": [
+        "NEUTRAL · VIX 16.0 · US10Y 4.69%",
+        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
+      ],
+      "filing": [
+        "13F: 기관지분율 +3.67%p",
+        "13F: 보유기관 2718곳 · 지분율 75.6% (2026Q3)",
+        "* FMP 실시간 공시 반영"
+      ],
+      "value": [
+        "PER 36.0 · 적정"
+      ]
+    }
+  },
+  {
     "t": "IBKR",
     "n": "Interactive Brokers Group, Inc.",
     "m": "US",
@@ -312,11 +351,11 @@ window.LIVE_STOCKS = [
     "tech": 73,
     "macro": 60,
     "filing": 85,
-    "value": 50,
-    "total": 71,
+    "value": 58,
+    "total": 72,
     "consensus": 2,
     "signal": "WATCH",
-    "ev": 0.96,
+    "ev": 0.99,
     "target": 12,
     "hitl": false,
     "reasons": {
@@ -338,7 +377,8 @@ window.LIVE_STOCKS = [
         "8-K: 최근 60일 이벤트 3건 (활발)"
       ],
       "value": [
-        "PER 35.7 · 적정"
+        "PER 37.2 · 적정",
+        "Forward PER 29.5 · 이익 성장 반영"
       ]
     }
   },
@@ -378,7 +418,7 @@ window.LIVE_STOCKS = [
         "* FMP 실시간 공시 반영"
       ],
       "value": [
-        "PER 14.4 · 저평가",
+        "PER 14.8 · 저평가",
         "Forward PER 10.2 · 이익 성장 반영",
         "FCF Yield 5.9% · 우수"
       ]
@@ -418,7 +458,7 @@ window.LIVE_STOCKS = [
         "* FMP 실시간 공시 반영"
       ],
       "value": [
-        "PER 15.6 · 저평가",
+        "PER 15.7 · 저평가",
         "Forward PER 10.0 · 이익 성장 반영",
         "PBR 9.5 · 부담",
         "PEG 0.66 · 성장률 대비 저평가"
@@ -583,7 +623,7 @@ window.LIVE_STOCKS = [
         "* FMP 실시간 공시 반영"
       ],
       "value": [
-        "PER 23.4 · 적정"
+        "PER 23.6 · 적정"
       ]
     }
   },
@@ -623,7 +663,7 @@ window.LIVE_STOCKS = [
       ],
       "value": [
         "PER 11.8 · 극심 저평가",
-        "FCF Yield 5.6% · 우수"
+        "FCF Yield 5.5% · 우수"
       ]
     }
   },
@@ -661,7 +701,7 @@ window.LIVE_STOCKS = [
         "* FMP 실시간 공시 반영"
       ],
       "value": [
-        "PER 20.0 · 적정",
+        "PER 20.4 · 적정",
         "Forward PER 14.7 · 이익 성장 반영",
         "PEG 0.75 · 성장률 대비 저평가"
       ]
@@ -784,7 +824,7 @@ window.LIVE_STOCKS = [
         "* FMP 실시간 공시 반영"
       ],
       "value": [
-        "PER 12.9 · 저평가",
+        "PER 12.7 · 저평가",
         "Forward PER 9.8 · 이익 성장 반영",
         "PEG 0.76 · 성장률 대비 저평가",
         "FCF 음수 · 현금유출"
@@ -825,7 +865,7 @@ window.LIVE_STOCKS = [
         "* FMP 실시간 공시 반영"
       ],
       "value": [
-        "PER 22.3 · 적정",
+        "PER 21.9 · 적정",
         "Forward PER 14.1 · 이익 성장 반영"
       ]
     }
@@ -947,7 +987,7 @@ window.LIVE_STOCKS = [
         "* FMP 실시간 공시 반영"
       ],
       "value": [
-        "PER 9.8 · 극심 저평가",
+        "PER 9.9 · 극심 저평가",
         "PBR 0.00 · 자산가치 이하",
         "PEG 0.43 · 성장률 대비 저평가"
       ]
@@ -1070,7 +1110,7 @@ window.LIVE_STOCKS = [
       ],
       "value": [
         "PER 8.3 · 극심 저평가",
-        "FCF Yield 6.6% · 우수"
+        "FCF Yield 6.4% · 우수"
       ]
     }
   },
@@ -1191,7 +1231,7 @@ window.LIVE_STOCKS = [
         "* FMP 실시간 공시 반영"
       ],
       "value": [
-        "PER 9.3 · 극심 저평가",
+        "PER 9.6 · 극심 저평가",
         "PEG 0.40 · 성장률 대비 저평가",
         "FCF Yield 6.5% · 우수"
       ]
@@ -1232,7 +1272,7 @@ window.LIVE_STOCKS = [
         "* FMP 실시간 공시 반영"
       ],
       "value": [
-        "PER 25.9 · 적정",
+        "PER 26.9 · 적정",
         "Forward PER 9.4 · 이익 성장 반영",
         "PEG 0.44 · 성장률 대비 저평가",
         "FCF Yield 12.0% · 우수"
@@ -1317,7 +1357,7 @@ window.LIVE_STOCKS = [
         "* FMP 실시간 공시 반영"
       ],
       "value": [
-        "PER 18.6 · 적정",
+        "PER 18.7 · 적정",
         "Forward PER 9.1 · 이익 성장 반영",
         "FCF Yield 6.7% · 우수"
       ]
@@ -1399,7 +1439,7 @@ window.LIVE_STOCKS = [
         "* FMP 실시간 공시 반영"
       ],
       "value": [
-        "PER 18.4 · 적정",
+        "PER 18.6 · 적정",
         "Forward PER 13.7 · 이익 성장 반영",
         "FCF Yield 8.4% · 우수"
       ]
@@ -1442,7 +1482,7 @@ window.LIVE_STOCKS = [
         "* FMP 실시간 공시 반영"
       ],
       "value": [
-        "PER 8.8 · 극심 저평가",
+        "PER 9.3 · 극심 저평가",
         "FCF Yield 11.8% · 우수"
       ]
     }
@@ -1482,7 +1522,7 @@ window.LIVE_STOCKS = [
         "* FMP 실시간 공시 반영"
       ],
       "value": [
-        "PER 10.8 · 극심 저평가"
+        "PER 10.9 · 극심 저평가"
       ]
     }
   },
@@ -1558,7 +1598,7 @@ window.LIVE_STOCKS = [
         "* FMP 실시간 공시 반영"
       ],
       "value": [
-        "PER 44.0 · 프리미엄",
+        "PER 47.5 · 프리미엄",
         "Forward PER 17.3 · 이익 성장 반영",
         "PEG 0.53 · 성장률 대비 저평가"
       ]
@@ -1597,7 +1637,7 @@ window.LIVE_STOCKS = [
         "* FMP 실시간 공시 반영"
       ],
       "value": [
-        "PER 30.4 · 적정",
+        "PER 30.7 · 적정",
         "Forward PER 19.3 · 이익 성장 반영",
         "PEG 28.22 · 성장률 대비 부담",
         "FCF Yield 12.4% · 우수"
@@ -1640,7 +1680,7 @@ window.LIVE_STOCKS = [
         "* FMP 실시간 공시 반영"
       ],
       "value": [
-        "PER 59.4 · 프리미엄",
+        "PER 60.0 · 프리미엄",
         "Forward PER 21.2 · 이익 성장 반영",
         "PEG 0.74 · 성장률 대비 저평가"
       ]
@@ -1919,70 +1959,6 @@ window.LIVE_STOCKS = [
     }
   },
   {
-    "t": "SPHY",
-    "n": "State Street SPDR Portfolio High Yield B",
-    "m": "US",
-    "sec": "미분류",
-    "at": "ETF",
-    "ex": "AMEX",
-    "tech": 95,
-    "macro": 60,
-    "filing": null,
-    "value": null,
-    "total": 82,
-    "consensus": 1,
-    "signal": "BUY",
-    "ev": 1.22,
-    "target": 15,
-    "hitl": false,
-    "reasons": {
-      "tech": [
-        "이동평균 완벽 정배열 (P>23.2>23.2>22.9)",
-        "RSI 61 · 강세 지속 구간",
-        "MACD 골든크로스 · 히스토 +0.00",
-        "거래량 급증 · 최근 20일 평균 1.5배"
-      ],
-      "macro": [
-        "NEUTRAL · VIX 16.0 · US10Y 4.69%",
-        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
-      ],
-      "filing": [],
-      "value": []
-    }
-  },
-  {
-    "t": "SPSB",
-    "n": "State Street SPDR Portfolio Short Term C",
-    "m": "US",
-    "sec": "미분류",
-    "at": "ETF",
-    "ex": "AMEX",
-    "tech": 95,
-    "macro": 60,
-    "filing": null,
-    "value": null,
-    "total": 82,
-    "consensus": 1,
-    "signal": "BUY",
-    "ev": 1.22,
-    "target": 15,
-    "hitl": false,
-    "reasons": {
-      "tech": [
-        "이동평균 완벽 정배열 (P>29.9>29.8>29.6)",
-        "RSI 65 · 강세 지속 구간",
-        "MACD 골든크로스 · 히스토 +0.00",
-        "거래량 급증 · 최근 20일 평균 1.6배"
-      ],
-      "macro": [
-        "NEUTRAL · VIX 16.0 · US10Y 4.69%",
-        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
-      ],
-      "filing": [],
-      "value": []
-    }
-  },
-  {
     "t": "XLB",
     "n": "State Street Materials Select Sector SPD",
     "m": "US",
@@ -2176,38 +2152,6 @@ window.LIVE_STOCKS = [
     }
   },
   {
-    "t": "BSCS",
-    "n": "Invesco BulletShares 2028 Corporate Bond",
-    "m": "US",
-    "sec": "미분류",
-    "at": "ETF",
-    "ex": "NASDAQ",
-    "tech": 95,
-    "macro": 60,
-    "filing": null,
-    "value": null,
-    "total": 82,
-    "consensus": 1,
-    "signal": "BUY",
-    "ev": 1.22,
-    "target": 15,
-    "hitl": false,
-    "reasons": {
-      "tech": [
-        "이동평균 완벽 정배열 (P>20.4>20.3>20.2)",
-        "RSI 67 · 강세 지속 구간",
-        "MACD 골든크로스 · 히스토 +0.00",
-        "거래량 급증 · 최근 20일 평균 1.4배"
-      ],
-      "macro": [
-        "NEUTRAL · VIX 16.0 · US10Y 4.69%",
-        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
-      ],
-      "filing": [],
-      "value": []
-    }
-  },
-  {
     "t": "SPHD",
     "n": "Invesco S&P 500 High Dividend Low Volati",
     "m": "US",
@@ -2230,134 +2174,6 @@ window.LIVE_STOCKS = [
         "RSI 59 · 강세 지속 구간",
         "MACD 골든크로스 · 히스토 +0.01",
         "3개월 수익률 +6.4%"
-      ],
-      "macro": [
-        "NEUTRAL · VIX 16.0 · US10Y 4.69%",
-        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
-      ],
-      "filing": [],
-      "value": []
-    }
-  },
-  {
-    "t": "ANGL",
-    "n": "VanEck Fallen Angel High Yield Bond ETF",
-    "m": "US",
-    "sec": "미분류",
-    "at": "ETF",
-    "ex": "NASDAQ",
-    "tech": 95,
-    "macro": 60,
-    "filing": null,
-    "value": null,
-    "total": 82,
-    "consensus": 1,
-    "signal": "BUY",
-    "ev": 1.23,
-    "target": 15,
-    "hitl": false,
-    "reasons": {
-      "tech": [
-        "이동평균 완벽 정배열 (P>28.9>28.9>28.5)",
-        "RSI 61 · 강세 지속 구간",
-        "MACD 골든크로스 · 히스토 +0.00",
-        "거래량 급증 · 최근 20일 평균 1.4배"
-      ],
-      "macro": [
-        "NEUTRAL · VIX 16.0 · US10Y 4.69%",
-        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
-      ],
-      "filing": [],
-      "value": []
-    }
-  },
-  {
-    "t": "USTB",
-    "n": "VictoryShares Short-Term Bond ETF",
-    "m": "US",
-    "sec": "미분류",
-    "at": "ETF",
-    "ex": "NASDAQ",
-    "tech": 95,
-    "macro": 60,
-    "filing": null,
-    "value": null,
-    "total": 82,
-    "consensus": 1,
-    "signal": "BUY",
-    "ev": 1.22,
-    "target": 15,
-    "hitl": false,
-    "reasons": {
-      "tech": [
-        "이동평균 완벽 정배열 (P>50.4>50.3>49.8)",
-        "RSI 66 · 강세 지속 구간",
-        "MACD 골든크로스 · 히스토 +0.00",
-        "거래량 급증 · 최근 20일 평균 2.2배"
-      ],
-      "macro": [
-        "NEUTRAL · VIX 16.0 · US10Y 4.69%",
-        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
-      ],
-      "filing": [],
-      "value": []
-    }
-  },
-  {
-    "t": "QQEW",
-    "n": "First Trust Nasdaq-100 Select Equal Weig",
-    "m": "US",
-    "sec": "미분류",
-    "at": "ETF",
-    "ex": "NASDAQ",
-    "tech": 91,
-    "macro": 60,
-    "filing": null,
-    "value": null,
-    "total": 80,
-    "consensus": 1,
-    "signal": "BUY",
-    "ev": 1.23,
-    "target": 15,
-    "hitl": false,
-    "reasons": {
-      "tech": [
-        "이동평균 완벽 정배열 (P>160.6>157.8>143.9)",
-        "RSI 66 · 강세 지속 구간",
-        "MACD 골든크로스 · 히스토 +0.12",
-        "3개월 수익률 +9.2%"
-      ],
-      "macro": [
-        "NEUTRAL · VIX 16.0 · US10Y 4.69%",
-        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
-      ],
-      "filing": [],
-      "value": []
-    }
-  },
-  {
-    "t": "DBMF",
-    "n": "iMGP DBi Managed Futures Strategy ETF",
-    "m": "US",
-    "sec": "미분류",
-    "at": "ETF",
-    "ex": "AMEX",
-    "tech": 95,
-    "macro": 60,
-    "filing": null,
-    "value": null,
-    "total": 82,
-    "consensus": 1,
-    "signal": "BUY",
-    "ev": 1.23,
-    "target": 15,
-    "hitl": false,
-    "reasons": {
-      "tech": [
-        "이동평균 완벽 정배열 (P>31.1>30.9>29.8)",
-        "RSI 67 · 강세 지속 구간",
-        "MACD 골든크로스 · 히스토 +0.00",
-        "거래량 급증 · 최근 20일 평균 1.3배"
       ],
       "macro": [
         "NEUTRAL · VIX 16.0 · US10Y 4.69%",
@@ -2488,70 +2304,6 @@ window.LIVE_STOCKS = [
         "RSI 67 · 강세 지속 구간",
         "MACD 골든크로스 · 히스토 +0.04",
         "3개월 수익률 +10.0%"
-      ],
-      "macro": [
-        "NEUTRAL · VIX 16.0 · US10Y 4.69%",
-        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
-      ],
-      "filing": [],
-      "value": []
-    }
-  },
-  {
-    "t": "QQXT",
-    "n": "First Trust NASDAQ-100 Ex-Technology Sec",
-    "m": "US",
-    "sec": "미분류",
-    "at": "ETF",
-    "ex": "NASDAQ",
-    "tech": 91,
-    "macro": 60,
-    "filing": null,
-    "value": null,
-    "total": 80,
-    "consensus": 1,
-    "signal": "BUY",
-    "ev": 1.19,
-    "target": 14,
-    "hitl": false,
-    "reasons": {
-      "tech": [
-        "이동평균 완벽 정배열 (P>102.3>99.9>99.1)",
-        "RSI 69 · 강세 지속 구간",
-        "MACD 골든크로스 · 히스토 +0.10",
-        "3개월 수익률 +6.0%"
-      ],
-      "macro": [
-        "NEUTRAL · VIX 16.0 · US10Y 4.69%",
-        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
-      ],
-      "filing": [],
-      "value": []
-    }
-  },
-  {
-    "t": "LDUR",
-    "n": "PIMCO Enhanced Low Duration Active Excha",
-    "m": "US",
-    "sec": "미분류",
-    "at": "ETF",
-    "ex": "AMEX",
-    "tech": 95,
-    "macro": 60,
-    "filing": null,
-    "value": null,
-    "total": 82,
-    "consensus": 1,
-    "signal": "BUY",
-    "ev": 1.22,
-    "target": 15,
-    "hitl": false,
-    "reasons": {
-      "tech": [
-        "이동평균 완벽 정배열 (P>95.3>95.0>94.3)",
-        "RSI 66 · 강세 지속 구간",
-        "MACD 골든크로스 · 히스토 +0.00",
-        "거래량 급증 · 최근 20일 평균 2.2배"
       ],
       "macro": [
         "NEUTRAL · VIX 16.0 · US10Y 4.69%",
