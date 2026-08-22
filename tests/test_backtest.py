@@ -127,3 +127,49 @@ def test_prepared_rows_tolerate_an_empty_target(monkeypatch):
     rows = _spy_rows(monkeypatch, [_archive_row(target="")])
 
     assert rows[0]["target"] is None
+
+
+# ─── 아카이브 행 필터 (US 단독 / 70점 진입) ─────────────────
+ARCHIVE = [
+    {"ticker": "AAPL", "market": "US", "date": "2026-08-01",
+     "total": "72", "signal": "BUY", "source": "live"},
+    {"ticker": "005930.KS", "market": "KR", "date": "2026-08-01",
+     "total": "75", "signal": "BUY", "source": "live"},
+    {"ticker": "MSFT", "market": "US", "date": "2026-08-01",
+     "total": "71", "signal": "WATCH", "source": "live"},
+]
+
+
+def test_us_only_drops_korean_rows():
+    kept = bt.filter_rows(ARCHIVE, us_only=True, entry_total=None)
+    assert [r["ticker"] for r in kept] == ["AAPL", "MSFT"]
+
+
+def test_no_filters_keeps_everything():
+    kept = bt.filter_rows(ARCHIVE, us_only=False, entry_total=None)
+    assert len(kept) == 3
+
+
+def test_entry_total_promotes_high_scores_to_buy():
+    """entry_total 을 주면 그 점수 이상인 행의 signal 을 BUY 로 바꾼다."""
+    kept = bt.filter_rows(ARCHIVE, us_only=False, entry_total=70)
+    assert all(r["signal"] == "BUY" for r in kept)
+
+
+def test_entry_total_leaves_low_scores_alone():
+    rows = [{"ticker": "X", "market": "US", "date": "2026-08-01",
+             "total": "69", "signal": "HOLD", "source": "live"}]
+    kept = bt.filter_rows(rows, us_only=False, entry_total=70)
+    assert kept[0]["signal"] == "HOLD"
+
+
+def test_entry_total_handles_blank_total():
+    rows = [{"ticker": "X", "market": "US", "date": "2026-08-01",
+             "total": "", "signal": "HOLD", "source": "live"}]
+    kept = bt.filter_rows(rows, us_only=False, entry_total=70)
+    assert kept[0]["signal"] == "HOLD"
+
+
+def test_filter_does_not_mutate_the_input_rows():
+    bt.filter_rows(ARCHIVE, us_only=False, entry_total=70)
+    assert ARCHIVE[2]["signal"] == "WATCH"
