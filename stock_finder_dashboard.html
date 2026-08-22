@@ -214,6 +214,9 @@
   .venue-AMEX   { color:#22d3ee; }
   .venue-ETF    { color:#facc15; }
   .sector-tag { padding:2px 8px; border-radius:10px; font-size:10px; background:#2a3450; color:#a3aac0; }
+  /* 해당 축이 없는 칸 (ETF 의 공시·밸류에이션). 0점과 구분되어야 한다. */
+  .score-na { color:#4a5268; font-size:14px; }
+  .agent-na { color:#7a8199; font-size:13px; padding:4px 0; }
 
   /* Score bar */
   .score-cell { display:flex; align-items:center; gap:10px; }
@@ -546,15 +549,21 @@ let filteredStocks = [...STOCKS];
 // Render helpers
 function scoreClass(v) { return v>=70 ? 'hi' : v>=50 ? 'mid' : 'lo'; }
 function scoreBar(v){
+  // ETF 는 filing/value 가 null 이다 - 개별기업 재무·공시 데이터가 없어서
+  // 계산하지 않는다. 그대로 넣으면 "null" 글자와 width:null% 가 찍힌다.
+  // 0 으로 바꾸지 않는 것은 의도다 - "0점을 받았다" 와 구분되어야 한다.
+  if (v === null || v === undefined) {
+    return '<span class="score-na" title="이 종목에는 해당 축이 없습니다">—</span>';
+  }
   const cls = scoreClass(v);
   return `<div class="score-cell">
     <div class="mini-bar"><div class="mini-bar-fill ${cls}" style="width:${v}%"></div></div>
     <span class="score-num ${cls}">${v}</span>
   </div>`;
 }
-function consensusDots(n){
+function consensusDots(n, total){
   let html = '<div class="consensus">';
-  for (let i=0; i<4; i++) html += `<div class="cdot ${i<n?'on':''}"></div>`;
+  for (let i=0; i<(total||4); i++) html += `<div class="cdot ${i<n?'on':''}"></div>`;
   return html + '</div>';
 }
 function targetCell(v){
@@ -571,6 +580,25 @@ function evCell(v){
 // 티커 뒤에 붙는 상장 구분. ETF 는 어느 거래소에 상장됐든 (ETF) 로 묶는다 -
 // 개별주식과 스코어 체계가 다르므로 거래소보다 그 구분이 중요하다.
 // 거래소를 모르면(옛 데이터·조회 실패) 아무것도 붙이지 않는다.
+// 축 점수 제목. ETF 의 filing/value 는 null 이라 "(null/100)" 이 찍혔다.
+function axisScore(v) {
+  return (v === null || v === undefined) ? '(해당 없음)' : `(${v}/100)`;
+}
+
+// 축 근거 목록. 점수가 없는 축은 빈 목록 대신 이유를 밝힌다.
+function axisBody(s, key, note) {
+  if (s[key] === null || s[key] === undefined) {
+    return `<p class="agent-na">${note}</p>`;
+  }
+  const v = s[key];
+  const cls = v < 50 ? 'neg' : v < 70 ? 'neu' : '';
+  return `<ul class="agent-list">${(s.reasons[key] || [])
+    .map(r => `<li><span class="bullet ${cls}">▸</span> ${r}</li>`).join('')}</ul>`;
+}
+
+// 이 종목의 스코어 축 개수. ETF 는 filing/value 가 없어 두 축뿐이다.
+function axes(s) { return s.at === 'ETF' ? 2 : 4; }
+
 function venue(s) {
   if (s.at === 'ETF') return 'ETF';
   const ex = s.ex;
@@ -597,7 +625,7 @@ function render() {
       <td>${scoreBar(s.macro)}</td>
       <td>${scoreBar(s.filing)}</td>
       <td>${scoreBar(s.value)}</td>
-      <td>${consensusDots(s.consensus)}</td>
+      <td>${consensusDots(s.consensus, axes(s))}</td>
       <td>${evCell(s.ev)}</td>
       <td>${targetCell(s.target)}</td>
     </tr>
@@ -692,7 +720,7 @@ function showDetail(ticker) {
     <div class="detail-grid">
       <div class="detail-card"><div class="lbl">시그널</div><div class="val"><span class="signal-pill signal-${s.signal}">${s.signal.replace('_',' ')}</span></div></div>
       <div class="detail-card"><div class="lbl">종합점수</div><div class="val" style="color:${s.total>=70?'#4ade80':s.total>=50?'#facc15':'#f87171'}">${s.total} / 100</div></div>
-      <div class="detail-card"><div class="lbl">컨센서스</div><div class="val">${s.consensus} / 4 축 강세</div></div>
+      <div class="detail-card"><div class="lbl">컨센서스</div><div class="val">${s.consensus} / ${axes(s)} 축 강세</div></div>
       <div class="detail-card"><div class="lbl">기대수익 (EV)</div><div class="val">${s.ev>=0?'+':''}${s.ev.toFixed(2)}R</div></div>
     </div>
 
@@ -707,13 +735,13 @@ function showDetail(ticker) {
     </div>
 
     <div class="agent-section">
-      <h3>📄 Filings Analyst — 공시 시그널 (${s.filing}/100)</h3>
-      <ul class="agent-list">${s.reasons.filing.map(r=>`<li><span class="bullet ${s.filing<50?'neg':s.filing<70?'neu':''}">▸</span> ${r}</li>`).join('')}</ul>
+      <h3>📄 Filings Analyst — 공시 시그널 ${axisScore(s.filing)}</h3>
+      ${axisBody(s, 'filing', '개별기업 공시 데이터가 없는 상품입니다.')}
     </div>
 
     <div class="agent-section">
-      <h3>💰 Valuation — 밸류에이션 (${s.value}/100)</h3>
-      <ul class="agent-list">${s.reasons.value.map(r=>`<li><span class="bullet ${s.value<50?'neg':s.value<70?'neu':''}">▸</span> ${r}</li>`).join('')}</ul>
+      <h3>💰 Valuation — 밸류에이션 ${axisScore(s.value)}</h3>
+      ${axisBody(s, 'value', 'PER·PBR 같은 개별기업 밸류에이션 지표가 없는 상품입니다.')}
     </div>
 
     ${s.hitl ? `<div class="disclaimer" style="margin-top:0"><strong>⚠️ HITL 필요:</strong> 이 종목은 리스크 지표 or 신규 진입 or 대형 포지션으로 인해 사용자 승인이 필요합니다. Risk Manager 검토 후 진행하세요.</div>` : ''}
