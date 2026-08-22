@@ -23,6 +23,7 @@ import io
 import json
 import logging
 import os
+import re
 import sys
 import threading
 import time
@@ -862,6 +863,30 @@ SECTOR_KR = {
     "Utilities": "유틸리티", "Real Estate": "리츠",
     "Semiconductors": "반도체",
 }
+
+
+# 레버리지·인버스 ETF 를 종목명으로 걸러낸다. ATR 3배 손절과 궁합이 나쁘다 -
+# 일일 변동성이 기초자산의 배수라 손절폭이 비현실적으로 벌어지고, 장기 보유
+# 시 변동성 감쇠 때문에 손익을 같은 척도로 해석할 수 없다.
+#
+# 단어 경계를 쓴다. 경계가 없으면 "Shortline" 같은 이름이 "Short" 로 걸린다.
+#
+# SHORT 뒤의 부정 전방탐색이 핵심이다. 채권 ETF 의 "Short" 는 인버스가 아니라
+# 잔존만기를 뜻한다 - 이 예외가 없으면 "iShares Short Treasury Bond ETF" 나
+# "Vanguard Short-Term Bond ETF" 같은 단기채 ETF 가 통째로 빠진다. 반면
+# "ProShares Short S&P500" 은 진짜 인버스라 걸러야 한다.
+_LEVERAGED_PATTERN = re.compile(
+    r"\b(?:\d+X|ULTRA|ULTRAPRO|ULTRASHORT|INVERSE|BEAR|BULL|LEVERAGED"
+    r"|SHORT\b(?![- ]?(?:TERM|DURATION|MATURITY|TREASURY)))\b",
+    re.IGNORECASE,
+)
+
+
+def is_leveraged_or_inverse(name: str) -> bool:
+    """종목명이 레버리지·인버스 ETF 를 가리키는지."""
+    if not name:
+        return False
+    return bool(_LEVERAGED_PATTERN.search(name))
 
 
 def fetch_us_universe(min_market_cap: float = 5e9, limit: int = 5000) -> list:
