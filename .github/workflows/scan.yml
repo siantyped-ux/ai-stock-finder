@@ -131,6 +131,26 @@ jobs:
         id: deployment
         uses: actions/deploy-pages@v5
 
+  # 스캔이 끝나면 바로 성과 리포트를 만들어 메일로 보낸다. report.yml 이
+  # 자체 cron 을 갖지 않는 이유는 그 파일 머리말에 있다.
+  #
+  # deploy-pages 가 아니라 scan 에만 매단다. Pages 배포가 실패해도 리포트는
+  # 나가야 한다 - 서로 상관이 없다.
+  #
+  # if 를 쓰지 않는다. needs 가 성공해야만 도는 것이 기본이라, 스캔이 실패하면
+  # 리포트도 자동으로 건너뛴다. push 이벤트에서 스캔이 skip 될 때도 같이
+  # 건너뛴다 - 대시보드 파일만 밀어 넣었을 때 리포트 메일이 갈 이유가 없다.
+  #
+  # 호출된 워크플로는 여기서 준 권한을 넘지 못한다. notify-failure 가 이슈를
+  # 열어야 하므로 issues: write 를 같이 넘긴다.
+  report:
+    needs: scan
+    permissions:
+      contents: read
+      issues: write
+    uses: ./.github/workflows/report.yml
+    secrets: inherit
+
   # 스캔이 실패하면 그날 스코어는 영구히 사라진다. 시점 데이터라 나중에
   # 재계산할 수 없고, 소급 적재도 dashboard_data.js 스냅샷이 있어야 하는데
   # 스캔이 안 돌면 그 스냅샷 자체가 없다. 조용히 넘어가지 않도록 이슈를 연다.
