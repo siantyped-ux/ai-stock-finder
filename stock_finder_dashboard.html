@@ -207,6 +207,12 @@
 
   .ticker { font-weight:700; color:#fff; font-size:14px; }
   .ticker-sub { font-size:11px; color:#7a8199; margin-top:2px; }
+  /* 티커 뒤 상장 구분. ETF 는 거래소 대신 (ETF) 로 묶어 표시한다. */
+  .venue-tag { font-weight:600; font-size:11px; margin-left:5px; }
+  .venue-NASDAQ { color:#4ade80; }
+  .venue-NYSE   { color:#22d3ee; }
+  .venue-AMEX   { color:#22d3ee; }
+  .venue-ETF    { color:#facc15; }
   .sector-tag { padding:2px 8px; border-radius:10px; font-size:10px; background:#2a3450; color:#a3aac0; }
 
   /* Score bar */
@@ -362,11 +368,13 @@
       <input type="number" id="minScore" value="60" min="0" max="100" style="width:70px">
     </div>
     <div class="filter-group">
-      <label>시장:</label>
-      <select id="marketFilter">
+      <label>구분:</label>
+      <select id="venueFilter">
         <option value="ALL">전체</option>
-        <option value="US">미국</option>
-        <option value="KR">한국</option>
+        <option value="NASDAQ">NASDAQ</option>
+        <option value="NYSE">NYSE</option>
+        <option value="AMEX">AMEX</option>
+        <option value="ETF">ETF</option>
       </select>
     </div>
     <div class="filter-group">
@@ -558,13 +566,27 @@ function evCell(v){
   return `<span class="score-num ${cls}" style="min-width:auto">${sign}${v.toFixed(2)}R</span>`;
 }
 
+// 티커 뒤에 붙는 상장 구분. ETF 는 어느 거래소에 상장됐든 (ETF) 로 묶는다 -
+// 개별주식과 스코어 체계가 다르므로 거래소보다 그 구분이 중요하다.
+// 거래소를 모르면(옛 데이터·조회 실패) 아무것도 붙이지 않는다.
+function venue(s) {
+  if (s.at === 'ETF') return 'ETF';
+  const ex = s.ex;
+  return (ex === 'NASDAQ' || ex === 'NYSE' || ex === 'AMEX') ? ex : '';
+}
+
+function venueTag(s) {
+  const v = venue(s);
+  return v ? `<span class="venue-tag venue-${v}">(${v})</span>` : '';
+}
+
 function render() {
   const tbody = document.getElementById('tbody');
   tbody.innerHTML = filteredStocks.map((s, i) => `
     <tr class="${s.hitl?'hitl':''}" onclick="showDetail('${s.t}')">
       <td style="color:#7a8199">${i+1}</td>
       <td>
-        <div class="ticker">${s.t} ${s.hitl?'<span class="hitl-badge">HITL</span>':''}</div>
+        <div class="ticker">${s.t}${venueTag(s)} ${s.hitl?'<span class="hitl-badge">HITL</span>':''}</div>
         <div class="ticker-sub">${s.n} · <span class="sector-tag">${s.sec}</span></div>
       </td>
       <td><span class="signal-pill signal-${s.signal}">${s.signal.replace('_',' ')}</span></td>
@@ -591,14 +613,14 @@ function render() {
 // Filter/Sort
 function applyFilters() {
   const minScore = +document.getElementById('minScore').value || 0;
-  const market = document.getElementById('marketFilter').value;
+  const v = document.getElementById('venueFilter').value;
   const sector = document.getElementById('sectorFilter').value;
   const signal = document.getElementById('signalFilter').value;
   const q = document.getElementById('searchInput').value.trim().toLowerCase();
 
   filteredStocks = STOCKS.filter(s =>
     s.total >= minScore &&
-    (market==='ALL' || s.m===market) &&
+    (v==='ALL' || venue(s)===v) &&
     (sector==='ALL' || s.sec===sector) &&
     (signal==='ALL' || s.signal===signal) &&
     (!q || s.t.toLowerCase().includes(q) || s.n.toLowerCase().includes(q))
@@ -607,7 +629,7 @@ function applyFilters() {
 }
 function resetFilters() {
   document.getElementById('minScore').value = 60;
-  document.getElementById('marketFilter').value = 'ALL';
+  document.getElementById('venueFilter').value = 'ALL';
   document.getElementById('sectorFilter').value = 'ALL';
   document.getElementById('signalFilter').value = 'ALL';
   document.getElementById('searchInput').value = '';
@@ -647,7 +669,10 @@ document.querySelectorAll('th[data-sort]').forEach(th => {
 function showDetail(ticker) {
   const s = STOCKS.find(x=>x.t===ticker);
   document.getElementById('modalTitle').innerHTML = `${s.t} · ${s.n} ${s.hitl?'<span class="hitl-badge">HITL 필요</span>':''}`;
-  document.getElementById('modalSub').textContent = `${s.m==='US'?'미국':'한국'} · ${s.sec} · 3개월 목표 상승률 ${s.target>=0?'+':''}${s.target}%`;
+  // 스캔 대상이 미국뿐이라 시장 표기 대신 상장 구분을 보여준다.
+  const v = venue(s);
+  document.getElementById('modalSub').textContent =
+    `${v ? v + ' · ' : ''}${s.sec} · 3개월 목표 상승률 ${s.target>=0?'+':''}${s.target}%`;
   const body = document.getElementById('modalBody');
   body.innerHTML = `
     <div class="detail-grid">

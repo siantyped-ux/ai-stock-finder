@@ -98,9 +98,10 @@ def test_parse_etf_rows_drops_missing_symbol():
     assert all(r[0] for r in rows)
 
 
-def test_parse_etf_rows_shape_is_five_tuple():
+def test_parse_etf_rows_shape_carries_the_exchange():
+    """튜플 끝의 거래소는 대시보드 티커 라벨((NASDAQ)/(NYSE)/(ETF))에 쓴다."""
     rows = sf.parse_etf_rows(ETF_RESPONSE, min_aum=1e9)
-    assert rows[0] == ("SPY", "SPDR S&P 500 ETF Trust", "US", "미분류", "ETF")
+    assert rows[0] == ("SPY", "SPDR S&P 500 ETF Trust", "US", "미분류", "ETF", "AMEX")
 
 
 def test_parse_etf_rows_handles_missing_market_cap():
@@ -166,8 +167,12 @@ def test_fallback_universe_is_all_us():
     assert all(row[2] == "US" for row in sf.FALLBACK_UNIVERSE)
 
 
-def test_fallback_universe_rows_are_five_tuples():
-    assert all(len(row) == 5 for row in sf.FALLBACK_UNIVERSE)
+def test_fallback_universe_rows_are_six_tuples():
+    assert all(len(row) == 6 for row in sf.FALLBACK_UNIVERSE)
+
+
+def test_fallback_universe_carries_a_us_exchange():
+    assert all(row[5] in {"NASDAQ", "NYSE", "AMEX"} for row in sf.FALLBACK_UNIVERSE)
 
 
 def test_kr_universe_function_is_gone():
