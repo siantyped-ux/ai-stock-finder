@@ -993,15 +993,31 @@ def calc_hitl(signal, total, tech):
     return False
 
 
-def filter_for_output(rows: list, min_total: int) -> list:
+def filter_for_output(rows: list, min_total: int, min_total_etf: int) -> list:
     """대시보드·콘솔에 낼 행만 남긴다.
 
     아카이브(history/*.csv)에는 적용하지 않는다. exit_rules.evaluate() 가
     보유 종목의 그날 total 이 exit_total 미만이면 SIGNAL 청산하는데, 점수가
     떨어진 행이 아카이브에서 사라지면 그 판정을 할 수 없게 된다.
+
+    ETF 에 별도 임계를 두는 것은 두 점수가 같은 척도가 아니기 때문이다.
+    ETF 는 분산 효과로 변동성이 낮아 tech 점수가 높게 나오고, filing/value
+    없이 두 축만 재정규화하므로 분포가 위로 밀린다. 2026-08-22 첫 실전
+    스캔 실측으로 같은 70점 선에서 주식은 4.7%(46/981), ETF 는
+    16.8%(136/811)가 통과해 대시보드가 ETF 로 뒤덮였다.
+
+    at 키가 없으면 STOCK 으로 본다. 옛 행에는 그 시절 유니버스가 전부
+    개별주식이었다.
     """
-    return [r for r in rows
-            if r.get("total") is not None and r["total"] >= min_total]
+    out = []
+    for r in rows:
+        total = r.get("total")
+        if total is None:
+            continue
+        floor = min_total_etf if r.get("at") == "ETF" else min_total
+        if total >= floor:
+            out.append(r)
+    return out
 
 
 def calc_ev_and_target(tech, macro, filing, value, r3m) -> tuple[float, int]:
@@ -1130,6 +1146,11 @@ def parse_args():
     p.add_argument("--min-total", type=int, default=70,
                    help="대시보드·콘솔 출력 최소 종합점수 (기본 70).\n"
                         "  아카이브에는 적용되지 않는다")
+    p.add_argument("--min-total-etf", type=int, default=78,
+                   help="ETF 출력 최소 종합점수 (기본 78).\n"
+                        "  ETF 는 두 축 재정규화라 점수가 위로 밀린다.\n"
+                        "  2026-08-22 실측 기준 77점에 군집이 있고 78점부터\n"
+                        "  통과율이 주식(4.7%%)과 비슷해진다")
     p.add_argument("--limit", type=int, default=0,
                    help="종류별 상위 N개로 제한 (0=제한없음)")
     p.add_argument("--test", action="store_true",
@@ -1356,9 +1377,12 @@ def main():
 
     # 아카이브를 기록한 뒤에 필터한다. 순서를 바꾸면 아카이브가 잘려
     # 백테스트의 SIGNAL 청산 판정이 불가능해진다.
-    shown = filter_for_output(results, args.min_total)
-    print(f"[*] 출력 필터: 종합점수 {args.min_total}점 이상 "
-          f"{len(shown)}/{len(results)}종목")
+    shown = filter_for_output(results, args.min_total, args.min_total_etf)
+    n_stock = sum(1 for r in shown if r.get("at") != "ETF")
+    n_etf = len(shown) - n_stock
+    print(f"[*] 출력 필터: 주식 {args.min_total}점 이상 · "
+          f"ETF {args.min_total_etf}점 이상 → "
+          f"{len(shown)}/{len(results)}종목 (주식 {n_stock}, ETF {n_etf})")
 
     output_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "dashboard_data.js")
     fred_json = json.dumps(fred_data, ensure_ascii=False)

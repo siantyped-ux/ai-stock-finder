@@ -89,27 +89,62 @@ def test_etf_consensus_boundary_is_inclusive():
 
 # ─── 출력 필터 ─────────────────────────────────────────────
 ROWS = [
-    {"t": "AAA", "total": 77, "signal": "BUY"},
-    {"t": "BBB", "total": 70, "signal": "WATCH"},
-    {"t": "CCC", "total": 69, "signal": "WATCH"},
-    {"t": "DDD", "total": 35, "signal": "AVOID"},
+    {"t": "AAA", "at": "STOCK", "total": 77, "signal": "BUY"},
+    {"t": "BBB", "at": "STOCK", "total": 70, "signal": "WATCH"},
+    {"t": "CCC", "at": "STOCK", "total": 69, "signal": "WATCH"},
+    {"t": "DDD", "at": "STOCK", "total": 35, "signal": "AVOID"},
 ]
 
 
 def test_filter_keeps_at_and_above_threshold():
-    kept = sf.filter_for_output(ROWS, min_total=70)
+    kept = sf.filter_for_output(ROWS, min_total=70, min_total_etf=78)
     assert [r["t"] for r in kept] == ["AAA", "BBB"]
 
 
 def test_filter_threshold_zero_keeps_everything():
-    assert len(sf.filter_for_output(ROWS, min_total=0)) == 4
+    assert len(sf.filter_for_output(ROWS, min_total=0, min_total_etf=0)) == 4
 
 
 def test_filter_does_not_mutate_input():
-    sf.filter_for_output(ROWS, min_total=70)
+    sf.filter_for_output(ROWS, min_total=70, min_total_etf=78)
     assert len(ROWS) == 4
 
 
 def test_filter_drops_rows_without_total():
-    rows = [{"t": "EEE", "signal": "HOLD"}]
-    assert sf.filter_for_output(rows, min_total=70) == []
+    rows = [{"t": "EEE", "at": "STOCK", "signal": "HOLD"}]
+    assert sf.filter_for_output(rows, min_total=70, min_total_etf=78) == []
+
+
+# ─── ETF 별도 임계 ─────────────────────────────────────────
+# ETF 는 분산 효과로 변동성이 낮아 tech 점수가 높게 나온다. 같은 70점 선으로
+# 자르면 대시보드가 ETF 로 뒤덮인다 (2026-08-22 실측: 주식 4.7% 통과 vs
+# ETF 16.8%).
+MIXED = [
+    {"t": "STK", "at": "STOCK", "total": 72, "signal": "BUY"},
+    {"t": "ETF77", "at": "ETF", "total": 77, "signal": "WATCH"},
+    {"t": "ETF78", "at": "ETF", "total": 78, "signal": "BUY"},
+]
+
+
+def test_etf_uses_its_own_threshold():
+    kept = sf.filter_for_output(MIXED, min_total=70, min_total_etf=78)
+    assert [r["t"] for r in kept] == ["STK", "ETF78"]
+
+
+def test_stock_threshold_does_not_apply_to_etfs():
+    """ETF77 은 주식 기준(70)은 넘지만 ETF 기준(78)은 못 넘는다."""
+    kept = sf.filter_for_output(MIXED, min_total=70, min_total_etf=78)
+    assert "ETF77" not in [r["t"] for r in kept]
+
+
+def test_etf_threshold_does_not_apply_to_stocks():
+    rows = [{"t": "STK", "at": "STOCK", "total": 72, "signal": "BUY"}]
+    kept = sf.filter_for_output(rows, min_total=70, min_total_etf=78)
+    assert [r["t"] for r in kept] == ["STK"]
+
+
+def test_missing_asset_type_is_treated_as_stock():
+    """옛 행에는 at 키가 없다. 그 시절 유니버스는 전부 개별주식이었다."""
+    rows = [{"t": "OLD", "total": 72, "signal": "BUY"}]
+    kept = sf.filter_for_output(rows, min_total=70, min_total_etf=78)
+    assert [r["t"] for r in kept] == ["OLD"]
