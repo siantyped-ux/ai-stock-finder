@@ -945,6 +945,65 @@ def fetch_us_universe(min_market_cap: float = 5e9, limit: int = 5000) -> list:
         return []
 
 
+def parse_etf_rows(data: list, min_aum: float) -> list:
+    """FMP ETF 스크리너 응답을 유니버스 튜플 목록으로 바꾼다.
+
+    네트워크와 분리해 두면 필터 규칙을 테스트할 수 있다.
+
+    ETF 는 섹터를 '미분류' 로 둔다. calc_macro_score 가 미분류를 중립
+    처리하므로 macro 점수가 왜곡되지 않는다.
+    """
+    rows = []
+    for item in data:
+        symbol = item.get("symbol", "")
+        if not symbol:
+            continue
+        name = item.get("name") or item.get("companyName") or symbol
+        if is_leveraged_or_inverse(name):
+            continue
+        aum = item.get("marketCap")
+        if aum is None or aum < min_aum:
+            continue
+        rows.append((symbol, name[:40], "US", "미분류", "ETF"))
+    return rows
+
+
+def fetch_us_etf_universe(min_aum: float = 1e9, limit: int = 3000) -> list:
+    """FMP stock-screener 로 미국 ETF 조회.
+
+    거래소 필터를 걸지 않는 것이 핵심이다. SPY·IWM 등 주요 ETF 는 NYSE Arca
+    상장이라 exchange=nyse,nasdaq 으로 조회하면 QQQ 정도만 잡히고 대부분
+    누락된다.
+    """
+    cache_key = f"us_etf_universe_{int(min_aum)}_{limit}"
+    cached = _load_cache(cache_key)
+    if cached:
+        print(f"    [cache] 미국 ETF {len(cached)}종목 (캐시)")
+        return [tuple(row) for row in cached]
+
+    if not FMP_KEY:
+        print("    [!] FMP API 키 없음 → ETF 건너뜀")
+        return []
+
+    print(f"    [*] FMP 미국 ETF 조회 (AUM ≥ ${min_aum/1e9:.1f}B)...")
+    try:
+        r = requests.get(f"{FMP_BASE}/company-screener", params={
+            "marketCapMoreThan": int(min_aum),
+            "isEtf": "true",
+            "isActivelyTrading": "true",
+            "limit": limit,
+            "apikey": FMP_KEY,
+        }, timeout=15)
+        data = r.json() if r.status_code == 200 else []
+        universe = parse_etf_rows(data, min_aum)
+        _save_cache(cache_key, universe)
+        print(f"    [OK] 미국 ETF {len(universe)}종목 수집 완료")
+        return universe
+    except Exception as e:
+        print(f"    [!] FMP ETF 조회 실패: {e}")
+        return []
+
+
 # KOSPI 시총 상위 확장 리스트 (pykrx/KRX API 실패 시 폴백)
 KOSPI_EXPANDED = [
     ("005930", "삼성전자"), ("000660", "SK하이닉스"), ("373220", "LG에너지솔루션"),

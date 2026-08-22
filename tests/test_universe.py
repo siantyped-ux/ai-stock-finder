@@ -58,3 +58,44 @@ def test_does_not_match_inside_a_word():
 
 def test_handles_empty_name():
     assert sf.is_leveraged_or_inverse("") is False
+
+
+# ─── ETF 유니버스 파싱 (네트워크 없이 응답만 넣는다) ──────────
+ETF_RESPONSE = [
+    {"symbol": "SPY", "name": "SPDR S&P 500 ETF Trust", "marketCap": 6.2e11},
+    {"symbol": "QQQ", "name": "Invesco QQQ Trust", "marketCap": 3.5e11},
+    {"symbol": "TQQQ", "name": "ProShares UltraPro QQQ", "marketCap": 2.6e10},
+    {"symbol": "TINY", "name": "Tiny Niche ETF", "marketCap": 4.0e8},
+    {"symbol": "", "name": "No Symbol ETF", "marketCap": 9.9e10},
+]
+
+
+def test_parse_etf_rows_keeps_plain_large_etfs():
+    rows = sf.parse_etf_rows(ETF_RESPONSE, min_aum=1e9)
+    tickers = [r[0] for r in rows]
+    assert tickers == ["SPY", "QQQ"]
+
+
+def test_parse_etf_rows_drops_leveraged():
+    rows = sf.parse_etf_rows(ETF_RESPONSE, min_aum=1e9)
+    assert "TQQQ" not in [r[0] for r in rows]
+
+
+def test_parse_etf_rows_drops_below_min_aum():
+    rows = sf.parse_etf_rows(ETF_RESPONSE, min_aum=1e9)
+    assert "TINY" not in [r[0] for r in rows]
+
+
+def test_parse_etf_rows_drops_missing_symbol():
+    rows = sf.parse_etf_rows(ETF_RESPONSE, min_aum=1e9)
+    assert all(r[0] for r in rows)
+
+
+def test_parse_etf_rows_shape_is_five_tuple():
+    rows = sf.parse_etf_rows(ETF_RESPONSE, min_aum=1e9)
+    assert rows[0] == ("SPY", "SPDR S&P 500 ETF Trust", "US", "미분류", "ETF")
+
+
+def test_parse_etf_rows_handles_missing_market_cap():
+    rows = sf.parse_etf_rows([{"symbol": "AAA", "name": "A ETF"}], min_aum=1e9)
+    assert rows == []
