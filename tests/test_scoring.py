@@ -47,3 +47,29 @@ def test_signal_ratio_thresholds_match_stock_counts():
     assert sf.calc_signal(70, 2, n_axes=4) == "WATCH"
     assert sf.calc_signal(60, 2, n_axes=4) == "WATCH"
     assert sf.calc_signal(60, 1, n_axes=4) == "HOLD"
+
+
+# ─── ETF 종합점수 (tech/macro 재정규화) ─────────────────────
+def test_etf_total_renormalizes_two_axes():
+    # 0.35/0.55 = 0.63636..., 0.20/0.55 = 0.36363...
+    assert sf.calc_total_etf(100, 100) == 100
+    assert sf.calc_total_etf(0, 0) == 0
+
+
+def test_etf_total_weights_tech_more_than_macro():
+    # tech 가 높을 때가 macro 가 높을 때보다 점수가 높아야 한다.
+    assert sf.calc_total_etf(80, 40) > sf.calc_total_etf(40, 80)
+
+
+def test_etf_total_matches_hand_calculation():
+    # 80*0.63636 + 60*0.36363 = 50.909 + 21.818 = 72.727 → 73
+    assert sf.calc_total_etf(80, 60) == 73
+
+
+def test_etf_total_can_reach_the_70_filter():
+    """중립값 50 방식이었다면 못 넘었을 구간을 넘는지."""
+    assert sf.calc_total_etf(75, 62) >= 70
+
+
+def test_etf_total_returns_int():
+    assert isinstance(sf.calc_total_etf(71, 63), int)

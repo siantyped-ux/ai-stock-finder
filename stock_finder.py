@@ -1158,6 +1158,20 @@ def calc_total(tech, macro, filing, value):
     return int(round(tech * 0.35 + macro * 0.20 + filing * 0.30 + value * 0.15))
 
 
+# ETF 가중치. 주식 가중치에서 filing(0.30)·value(0.15) 를 빼고 남은 0.55 로
+# 나눈 값이다. ETF 에는 개별기업 재무·공시 데이터가 없어 두 축을 계산할 수
+# 없다. 중립값 50 으로 채우지 않는 것은 의도다 - 그러면 두 축이 22.5점으로
+# 고정돼 70점을 넘으려면 macro 70일 때 tech 95.7 이상이 필요한데, 관측된
+# 개별주식 최고점이 77인 분포에서는 사실상 나오지 않는다.
+ETF_TECH_WEIGHT = 0.35 / 0.55
+ETF_MACRO_WEIGHT = 0.20 / 0.55
+
+
+def calc_total_etf(tech, macro):
+    """ETF 종합점수. tech/macro 두 축만 쓰고 가중치를 재정규화한다."""
+    return int(round(tech * ETF_TECH_WEIGHT + macro * ETF_MACRO_WEIGHT))
+
+
 def calc_signal(total, cons, n_axes=4):
     """종합점수와 합의 비율로 신호를 낸다.
 
