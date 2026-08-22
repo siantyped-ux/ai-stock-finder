@@ -754,6 +754,13 @@ def fetch_us_universe(min_market_cap: float = 5e9, limit: int = 5000) -> list:
         return []
 
 
+# ETF 를 남길 미국 거래소. 요청 파라미터로 거래소를 거르지 않고 응답에서
+# 거르는 이유는 SPY 때문이다 - NYSE Arca 상장인데 FMP 는 AMEX 로 준다.
+# exchange=nyse,nasdaq 으로 요청하면 AMEX 로 분류된 주요 ETF 가 통째로
+# 빠진다 (2026-08-22 응답 기준 AMEX 657 · NASDAQ 207 · NYSE 10).
+US_ETF_EXCHANGES = frozenset({"AMEX", "NASDAQ", "NYSE"})
+
+
 def parse_etf_rows(data: list, min_aum: float) -> list:
     """FMP ETF 스크리너 응답을 유니버스 튜플 목록으로 바꾼다.
 
@@ -765,7 +772,12 @@ def parse_etf_rows(data: list, min_aum: float) -> list:
     rows = []
     for item in data:
         symbol = item.get("symbol", "")
-        if not symbol:
+        # 접미사가 붙은 티커는 해외 상장이다. 주식 경로와 같은 규칙을 쓴다.
+        if not symbol or "." in symbol or "-" in symbol:
+            continue
+        # 거래소를 모르면 미국이라고 가정하지 않는다. 거르지 않으면 TSX 가
+        # market=US 로 아카이브에 들어간다 (2026-08-22 실제 스캔 148건).
+        if item.get("exchangeShortName") not in US_ETF_EXCHANGES:
             continue
         name = item.get("name") or item.get("companyName") or symbol
         if is_leveraged_or_inverse(name):
@@ -784,7 +796,9 @@ def fetch_us_etf_universe(min_aum: float = 1e9, limit: int = 3000) -> list:
     상장이라 exchange=nyse,nasdaq 으로 조회하면 QQQ 정도만 잡히고 대부분
     누락된다.
     """
-    cache_key = f"us_etf_universe_{int(min_aum)}_{limit}"
+    # v2: 미국 거래소 필터를 넣기 전 캐시에는 TSX 가 섞여 있다. 키를 바꿔
+    # 그 캐시가 다시 읽히지 않게 한다.
+    cache_key = f"us_etf_universe_v2_{int(min_aum)}_{limit}"
     cached = _load_cache(cache_key)
     if cached:
         print(f"    [cache] 미국 ETF {len(cached)}종목 (캐시)")

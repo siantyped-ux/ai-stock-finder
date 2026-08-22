@@ -62,11 +62,18 @@ def test_handles_empty_name():
 
 # ─── ETF 유니버스 파싱 (네트워크 없이 응답만 넣는다) ──────────
 ETF_RESPONSE = [
-    {"symbol": "SPY", "name": "SPDR S&P 500 ETF Trust", "marketCap": 6.2e11},
-    {"symbol": "QQQ", "name": "Invesco QQQ Trust", "marketCap": 3.5e11},
-    {"symbol": "TQQQ", "name": "ProShares UltraPro QQQ", "marketCap": 2.6e10},
-    {"symbol": "TINY", "name": "Tiny Niche ETF", "marketCap": 4.0e8},
-    {"symbol": "", "name": "No Symbol ETF", "marketCap": 9.9e10},
+    # SPY 는 NYSE Arca 상장인데 FMP 가 AMEX 로 준다. 이 케이스를 놓치면
+    # 주요 ETF 가 통째로 빠진다.
+    {"symbol": "SPY", "name": "SPDR S&P 500 ETF Trust", "marketCap": 6.2e11,
+     "exchangeShortName": "AMEX"},
+    {"symbol": "QQQ", "name": "Invesco QQQ Trust", "marketCap": 3.5e11,
+     "exchangeShortName": "NASDAQ"},
+    {"symbol": "TQQQ", "name": "ProShares UltraPro QQQ", "marketCap": 2.6e10,
+     "exchangeShortName": "NASDAQ"},
+    {"symbol": "TINY", "name": "Tiny Niche ETF", "marketCap": 4.0e8,
+     "exchangeShortName": "AMEX"},
+    {"symbol": "", "name": "No Symbol ETF", "marketCap": 9.9e10,
+     "exchangeShortName": "AMEX"},
 ]
 
 
@@ -97,8 +104,57 @@ def test_parse_etf_rows_shape_is_five_tuple():
 
 
 def test_parse_etf_rows_handles_missing_market_cap():
-    rows = sf.parse_etf_rows([{"symbol": "AAA", "name": "A ETF"}], min_aum=1e9)
+    rows = sf.parse_etf_rows(
+        [{"symbol": "AAA", "name": "A ETF", "exchangeShortName": "AMEX"}],
+        min_aum=1e9)
     assert rows == []
+
+
+# ─── 미국 외 상장 제외 (2026-08-22 실제 스캔에서 148건 유입) ──
+def test_parse_etf_rows_drops_foreign_listings():
+    """FMP ETF 스크리너는 거래소를 안 걸면 TSX 를 155건 함께 준다.
+
+    2026-08-22 첫 실전 스캔에서 캐나다 ETF 148건이 market=US 로 아카이브에
+    들어갔다. 미국 유니버스라는 전제가 깨진다.
+    """
+    data = [
+        {"symbol": "VFV.TO", "name": "Vanguard S&P 500 Index ETF",
+         "marketCap": 1.5e10, "exchangeShortName": "TSX"},
+        {"symbol": "XIC.TO", "name": "iShares Core S&P TSX Capped Composite",
+         "marketCap": 1.2e10, "exchangeShortName": "TSX"},
+    ]
+    assert sf.parse_etf_rows(data, min_aum=1e9) == []
+
+
+def test_parse_etf_rows_keeps_all_three_us_exchanges():
+    data = [
+        {"symbol": "AAA", "name": "A ETF", "marketCap": 2e9,
+         "exchangeShortName": "AMEX"},
+        {"symbol": "BBB", "name": "B ETF", "marketCap": 2e9,
+         "exchangeShortName": "NASDAQ"},
+        {"symbol": "CCC", "name": "C ETF", "marketCap": 2e9,
+         "exchangeShortName": "NYSE"},
+    ]
+    assert [r[0] for r in sf.parse_etf_rows(data, min_aum=1e9)] == ["AAA", "BBB", "CCC"]
+
+
+def test_parse_etf_rows_drops_suffixed_symbols_even_on_a_us_exchange():
+    """거래소 값이 잘못 와도 접미사 티커는 막는다. 주식 경로와 같은 규칙이다."""
+    data = [{"symbol": "ZZZ.TO", "name": "Z ETF", "marketCap": 2e9,
+             "exchangeShortName": "AMEX"}]
+    assert sf.parse_etf_rows(data, min_aum=1e9) == []
+
+
+def test_parse_etf_rows_drops_unknown_exchange():
+    data = [{"symbol": "AAA", "name": "A ETF", "marketCap": 2e9,
+             "exchangeShortName": "LSE"}]
+    assert sf.parse_etf_rows(data, min_aum=1e9) == []
+
+
+def test_parse_etf_rows_drops_missing_exchange():
+    """거래소를 알 수 없으면 미국이라고 가정하지 않는다."""
+    data = [{"symbol": "AAA", "name": "A ETF", "marketCap": 2e9}]
+    assert sf.parse_etf_rows(data, min_aum=1e9) == []
 
 
 # ─── 한국 제거 ─────────────────────────────────────────────
