@@ -18,7 +18,7 @@ def _row(**over):
         "avg_vol20": 38500000.0, "atr14": 4.81, "market_cap": 4500000000000,
         "tech": 72, "macro": 65, "filing": 71, "value": 58, "total": 68,
         "consensus": 2, "signal": "WATCH", "ev": 0.66, "target": 8,
-        "hitl": False, "source": "live",
+        "hitl": False, "source": "live", "asset_type": "STOCK",
     }
     row.update(over)
     return row
@@ -241,3 +241,51 @@ def test_atr_uses_the_gap_branch_not_just_the_daily_range():
     # 마지막 봉 TR = max(101.0-100.5, |101.0-100.0|, |100.5-100.0|) = 1.0
     # 나머지 봉 TR = 0.5 -> 14봉 평균 = (0.5*13 + 1.0) / 14
     assert got["atr14"] == round((0.5 * 13 + 1.0) / 14, 4)
+
+
+# ─── asset_type 컬럼 (ETF 편입) ────────────────────────────
+def test_fields_end_with_asset_type():
+    """컬럼은 끝에만 추가한다. 중간에 넣으면 기존 CSV 와 호환이 깨진다."""
+    assert history.FIELDS[-1] == "asset_type"
+
+
+def test_filing_and_value_are_nullable_for_etfs():
+    """ETF 는 filing/value 를 계산할 수 없어 빈 값으로 기록된다."""
+    assert "filing" in history._NULLABLE_FIELDS
+    assert "value" in history._NULLABLE_FIELDS
+
+
+def test_etf_row_writes_with_blank_filing_and_value(tmp_path):
+    row = {
+        "ticker": "SPY", "name": "SPDR S&P 500 ETF Trust", "market": "US",
+        "sector": "미분류", "asset_type": "ETF",
+        "tech": 78, "macro": 64, "filing": None, "value": None,
+        "total": 73, "consensus": 2, "signal": "BUY",
+        "ev": 1.2, "target": 14, "hitl": False, "source": "live",
+        "bar_date": "2026-08-22", "close": 640.0, "volume": 1000,
+        "avg_vol20": 900.0, "atr14": 5.0, "market_cap": 6.2e11,
+    }
+    path = history.write_snapshot([row], history.kst_now(), out_dir=tmp_path)
+
+    written = list(csv.DictReader(open(path, encoding="utf-8")))
+    assert written[0]["asset_type"] == "ETF"
+    assert written[0]["filing"] == ""
+    assert written[0]["value"] == ""
+
+
+def test_stock_row_still_requires_filing_and_value_values(tmp_path):
+    """주식 행은 여전히 두 축을 채워야 한다 - 빈 값은 계산 실패를 뜻한다."""
+    row = {
+        "ticker": "AAPL", "name": "Apple Inc.", "market": "US",
+        "sector": "IT", "asset_type": "STOCK",
+        "tech": 70, "macro": 60, "filing": 65, "value": 55,
+        "total": 64, "consensus": 1, "signal": "WATCH",
+        "ev": 0.8, "target": 10, "hitl": False, "source": "live",
+        "bar_date": "2026-08-22", "close": 230.0, "volume": 1000,
+        "avg_vol20": 900.0, "atr14": 3.0, "market_cap": 3.4e12,
+    }
+    path = history.write_snapshot([row], history.kst_now(), out_dir=tmp_path)
+
+    written = list(csv.DictReader(open(path, encoding="utf-8")))
+    assert written[0]["asset_type"] == "STOCK"
+    assert written[0]["filing"] == "65"

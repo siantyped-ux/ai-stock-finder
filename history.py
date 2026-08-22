@@ -23,7 +23,7 @@ FIELDS = (
     "scan_ts_kst", "date", "ticker", "name", "market", "sector",
     "bar_date", "close", "volume", "avg_vol20", "atr14", "market_cap",
     "tech", "macro", "filing", "value", "total", "consensus", "signal",
-    "ev", "target", "hitl", "source",
+    "ev", "target", "hitl", "source", "asset_type",
 )
 
 # write_snapshot이 채우므로 호출자가 넘기지 않는 열
@@ -41,8 +41,11 @@ def kst_now() -> datetime:
 
 
 # 값이 비어도 되는 열. 시세 조회 실패나 소급 적재에서는 정상적으로 빈다.
+# filing/value 는 ETF 때문에 비워질 수 있다 - ETF 에는 개별기업 재무·공시
+# 데이터가 없다. 0 을 넣지 않는 것은 "0점을 받았다" 와 구분하기 위해서다.
 _NULLABLE_FIELDS = frozenset({
     "bar_date", "close", "volume", "avg_vol20", "atr14", "market_cap",
+    "filing", "value",
 })
 _REQUIRED_FIELDS = tuple(f for f in _ROW_FIELDS if f not in _NULLABLE_FIELDS)
 
