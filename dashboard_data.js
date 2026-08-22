@@ -1,17 +1,17 @@
 // AI 3-Month Stock Finder - Live Data
-// Generated: 2026-08-22 10:57:38
+// Generated: 2026-08-22 22:39:12
 // Macro: VIX=16.01, DXY=98.80, US10Y=4.69%
 // FMP: active · FRED: active
 window.LIVE_MACRO = {
   vix: 16.01,
   dxy: 98.80,
   us10y: 4.69,
-  generated_at: "2026-08-22T10:57:38.287882",
+  generated_at: "2026-08-22T22:39:12.273002",
   fmp_active: true,
   fred_active: true,
   fred: {"available": true, "vix": 16.01, "us10y": 4.69, "yield_curve": 0.5, "fed_funds": 3.63, "unemployment": 4.1, "dxy_broad": 118.9028, "core_cpi_yoy": 2.47, "unemp_3m_change": -0.2}
 };
-window.LIVE_SUMMARY = {"scanned": 1520, "shown": 59, "strong_buy": 0, "buy": 90, "watch": 134, "avoid": 92, "hitl": 92};
+window.LIVE_SUMMARY = {"scanned": 1512, "shown": 59, "strong_buy": 0, "buy": 90, "watch": 129, "avoid": 89, "hitl": 89};
 window.LIVE_STOCKS = [
   {
     "t": "TSM",
@@ -23,12 +23,12 @@ window.LIVE_STOCKS = [
     "tech": 72,
     "macro": 65,
     "filing": 77,
-    "value": 66,
-    "total": 71,
+    "value": 58,
+    "total": 70,
     "consensus": 2,
     "signal": "WATCH",
-    "ev": 0.8,
-    "target": 10,
+    "ev": 0.78,
+    "target": 9,
     "hitl": false,
     "reasons": {
       "tech": [
@@ -50,8 +50,8 @@ window.LIVE_STOCKS = [
       "value": [
         "PER 31.2 · 적정",
         "Forward PER 19.2 · 이익 성장 반영",
-        "PBR 87.4 · 부담",
-        "PEG 0.98 · 성장률 대비 저평가"
+        "PBR 86.2 · 부담",
+        "FCF Yield 33.6% · 우수"
       ]
     }
   },
@@ -92,7 +92,7 @@ window.LIVE_STOCKS = [
         "13F: 보유기관 4756곳 · 지분율 88.6% (2026Q3)"
       ],
       "value": [
-        "PER 41.8 · 프리미엄",
+        "PER 42.2 · 프리미엄",
         "Forward PER 26.6 · 이익 성장 반영",
         "PBR 33.0 · 부담"
       ]
@@ -134,9 +134,9 @@ window.LIVE_STOCKS = [
         "8-K: 최근 60일 이벤트 4건 (활발)"
       ],
       "value": [
-        "PER 74.0 · 극심 프리미엄",
+        "PER 74.6 · 극심 프리미엄",
         "Forward PER 16.3 · 이익 성장 반영",
-        "PEG 0.44 · 성장률 대비 저평가"
+        "PEG 0.43 · 성장률 대비 저평가"
       ]
     }
   },
@@ -175,7 +175,7 @@ window.LIVE_STOCKS = [
         "* FMP 실시간 공시 반영"
       ],
       "value": [
-        "PER 10.4 · 극심 저평가",
+        "PER 10.3 · 극심 저평가",
         "FCF Yield 8.3% · 우수"
       ]
     }
@@ -216,7 +216,7 @@ window.LIVE_STOCKS = [
         "* FMP 실시간 공시 반영"
       ],
       "value": [
-        "PER 24.6 · 적정",
+        "PER 24.9 · 적정",
         "Forward PER 14.6 · 이익 성장 반영"
       ]
     }
@@ -256,7 +256,7 @@ window.LIVE_STOCKS = [
         "* FMP 실시간 공시 반영"
       ],
       "value": [
-        "PER 12.8 · 저평가",
+        "PER 12.9 · 저평가",
         "Forward PER 9.4 · 이익 성장 반영",
         "PEG 0.93 · 성장률 대비 저평가",
         "FCF Yield 8.5% · 우수"
@@ -296,8 +296,8 @@ window.LIVE_STOCKS = [
         "* FMP 실시간 공시 반영"
       ],
       "value": [
-        "PER 11.4 · 극심 저평가",
-        "PEG 0.73 · 성장률 대비 저평가",
+        "PER 11.3 · 극심 저평가",
+        "PEG 0.72 · 성장률 대비 저평가",
         "FCF Yield 6.8% · 우수"
       ]
     }
@@ -461,7 +461,7 @@ window.LIVE_STOCKS = [
         "PER 15.7 · 저평가",
         "Forward PER 10.0 · 이익 성장 반영",
         "PBR 9.5 · 부담",
-        "PEG 0.66 · 성장률 대비 저평가"
+        "PEG 0.67 · 성장률 대비 저평가"
       ]
     }
   },
@@ -543,7 +543,7 @@ window.LIVE_STOCKS = [
         "* FMP 실시간 공시 반영"
       ],
       "value": [
-        "PER 13.6 · 저평가"
+        "PER 14.4 · 저평가"
       ]
     }
   },
@@ -583,7 +583,7 @@ window.LIVE_STOCKS = [
         "13F: 보유기관 1659곳 · 지분율 91.1% (2026Q3)"
       ],
       "value": [
-        "PER 17.5 · 저평가",
+        "PER 17.7 · 저평가",
         "Forward PER 13.5 · 이익 성장 반영"
       ]
     }
@@ -662,8 +662,8 @@ window.LIVE_STOCKS = [
         "* FMP 실시간 공시 반영"
       ],
       "value": [
-        "PER 11.8 · 극심 저평가",
-        "FCF Yield 5.5% · 우수"
+        "PER 11.9 · 극심 저평가",
+        "FCF Yield 5.6% · 우수"
       ]
     }
   },
@@ -703,7 +703,7 @@ window.LIVE_STOCKS = [
       "value": [
         "PER 20.4 · 적정",
         "Forward PER 14.7 · 이익 성장 반영",
-        "PEG 0.75 · 성장률 대비 저평가"
+        "PEG 0.72 · 성장률 대비 저평가"
       ]
     }
   },
@@ -904,7 +904,7 @@ window.LIVE_STOCKS = [
         "* FMP 실시간 공시 반영"
       ],
       "value": [
-        "PER 11.5 · 극심 저평가",
+        "PER 11.2 · 극심 저평가",
         "PBR 0.01 · 자산가치 이하",
         "PEG 0.77 · 성장률 대비 저평가",
         "FCF Yield 33714.1% · 우수"
@@ -948,7 +948,7 @@ window.LIVE_STOCKS = [
         "* FMP 실시간 공시 반영"
       ],
       "value": [
-        "PER 38.0 · 적정",
+        "PER 38.4 · 적정",
         "Forward PER 13.1 · 이익 성장 반영"
       ]
     }
@@ -1027,9 +1027,9 @@ window.LIVE_STOCKS = [
         "* FMP 실시간 공시 반영"
       ],
       "value": [
-        "PER 43.7 · 프리미엄",
+        "PER 44.3 · 프리미엄",
         "Forward PER 5.9 · 이익 성장 반영",
-        "PEG 0.26 · 성장률 대비 저평가",
+        "PEG 0.27 · 성장률 대비 저평가",
         "FCF Yield 31.8% · 우수"
       ]
     }
@@ -1110,7 +1110,7 @@ window.LIVE_STOCKS = [
       ],
       "value": [
         "PER 8.3 · 극심 저평가",
-        "FCF Yield 6.4% · 우수"
+        "FCF Yield 6.6% · 우수"
       ]
     }
   },
@@ -1124,11 +1124,11 @@ window.LIVE_STOCKS = [
     "tech": 79,
     "macro": 60,
     "filing": 67,
-    "value": 86,
-    "total": 73,
+    "value": 74,
+    "total": 71,
     "consensus": 2,
     "signal": "WATCH",
-    "ev": 0.87,
+    "ev": 0.83,
     "target": 10,
     "hitl": false,
     "reasons": {
@@ -1149,7 +1149,8 @@ window.LIVE_STOCKS = [
         "* FMP 실시간 공시 반영"
       ],
       "value": [
-        "PER 9.0 · 극심 저평가",
+        "PER 27.1 · 적정",
+        "Forward PER 9.0 · 이익 성장 반영",
         "PEG 0.10 · 성장률 대비 저평가",
         "FCF Yield 6200.0% · 우수"
       ]
@@ -1191,7 +1192,7 @@ window.LIVE_STOCKS = [
         "* FMP 실시간 공시 반영"
       ],
       "value": [
-        "PER 15.4 · 저평가"
+        "PER 15.3 · 저평가"
       ]
     }
   },
@@ -1232,7 +1233,7 @@ window.LIVE_STOCKS = [
       ],
       "value": [
         "PER 9.6 · 극심 저평가",
-        "PEG 0.40 · 성장률 대비 저평가",
+        "PEG 0.44 · 성장률 대비 저평가",
         "FCF Yield 6.5% · 우수"
       ]
     }
@@ -1315,9 +1316,9 @@ window.LIVE_STOCKS = [
         "* FMP 실시간 공시 반영"
       ],
       "value": [
-        "PER 24.0 · 적정",
+        "PER 24.5 · 적정",
         "Forward PER 11.1 · 이익 성장 반영",
-        "PEG 0.67 · 성장률 대비 저평가",
+        "PEG 0.68 · 성장률 대비 저평가",
         "FCF Yield 5.7% · 우수"
       ]
     }
@@ -1559,8 +1560,8 @@ window.LIVE_STOCKS = [
         "* FMP 실시간 공시 반영"
       ],
       "value": [
-        "PER 9.4 · 극심 저평가",
-        "PEG 0.83 · 성장률 대비 저평가",
+        "PER 9.2 · 극심 저평가",
+        "PEG 0.82 · 성장률 대비 저평가",
         "FCF Yield 14.1% · 우수"
       ]
     }
@@ -1600,7 +1601,7 @@ window.LIVE_STOCKS = [
       "value": [
         "PER 47.5 · 프리미엄",
         "Forward PER 17.3 · 이익 성장 반영",
-        "PEG 0.53 · 성장률 대비 저평가"
+        "PEG 0.62 · 성장률 대비 저평가"
       ]
     }
   },
@@ -1682,7 +1683,7 @@ window.LIVE_STOCKS = [
       "value": [
         "PER 60.0 · 프리미엄",
         "Forward PER 21.2 · 이익 성장 반영",
-        "PEG 0.74 · 성장률 대비 저평가"
+        "PEG 0.77 · 성장률 대비 저평가"
       ]
     }
   },
@@ -1769,7 +1770,7 @@ window.LIVE_STOCKS = [
       "value": [
         "PER 180.3 · 극심 프리미엄",
         "Forward PER 10.3 · 이익 성장 반영",
-        "PEG 0.54 · 성장률 대비 저평가"
+        "PEG 0.52 · 성장률 대비 저평가"
       ]
     }
   },
@@ -1847,7 +1848,7 @@ window.LIVE_STOCKS = [
         "* FMP 실시간 공시 반영"
       ],
       "value": [
-        "PER 28.0 · 적정",
+        "PER 27.2 · 적정",
         "Forward PER 10.2 · 이익 성장 반영",
         "FCF Yield 8.0% · 우수"
       ]
@@ -1890,7 +1891,7 @@ window.LIVE_STOCKS = [
         "* FMP 실시간 공시 반영"
       ],
       "value": [
-        "PER 7.1 · 극심 저평가"
+        "PER 7.2 · 극심 저평가"
       ]
     }
   },
