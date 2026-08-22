@@ -531,31 +531,18 @@ if (window.LIVE_MACRO) {
   }
 }
 
-// 컨센서스 규칙: 4축 중 몇 축이 70+ 인가
-function calcConsensus(s){
-  return [s.tech, s.macro, s.filing, s.value].filter(v=>v>=70).length;
-}
-// 종합 점수: 가중 평균 (Tech 35, Filing 30, Macro 20, Value 15)
-function calcTotal(s){
-  return Math.round(s.tech*0.35 + s.macro*0.20 + s.filing*0.30 + s.value*0.15);
-}
-// 시그널 판정
-function calcSignal(s){
-  const total = calcTotal(s);
-  const cons = calcConsensus(s);
-  if (total >= 80 && cons >= 3) return "STRONG_BUY";
-  if (total >= 70 && cons >= 3) return "BUY";
-  if (total >= 60 && cons >= 2) return "WATCH";
-  if (total >= 45) return "HOLD";
-  return "AVOID";
-}
-
-// Enrich data
-STOCKS.forEach(s => {
-  s.total = calcTotal(s);
-  s.consensus = calcConsensus(s);
-  s.signal = calcSignal(s);
-});
+// 점수·컨센서스·시그널은 stock_finder.py 가 계산해서 준 값을 그대로 쓴다.
+// 여기서 다시 계산하지 않는다.
+//
+// 예전에는 이 자리에 4축 공식(tech 35 · macro 20 · filing 30 · value 15)을
+// 복사해 두고 STOCKS 를 순회하며 total/consensus/signal 을 덮어썼다. 데모
+// 데이터에 그 필드가 없던 시절의 잔재인데, ETF 가 들어오면서 조용히
+// 망가졌다 - ETF 는 filing/value 가 null 이고 JS 에서 null*0.30 은 0 이라
+// 스캐너가 낸 80점이 44점으로 붕괴했다(0.35×91 + 0.20×60 = 43.85). 기본
+// 최소점수 60 미만이 되어 ETF 가 화면에서 통째로 사라졌고, signal 도 BUY
+// 에서 HOLD 로 뒤집혔다.
+//
+// 스코어링 규칙을 두 곳에 두면 반드시 갈라진다. 단일 출처는 파이썬이다.
 
 // State
 let currentSort = { key:'total', dir:'desc' };
