@@ -40,6 +40,33 @@ def test_etf_signal_uses_ratio(total, cons, expected):
     assert sf.calc_signal(total, cons, n_axes=2) == expected
 
 
+# ─── ETF BUY 임계 완화 (1/2 로도 BUY) ──────────────────────
+# macro 축이 NEUTRAL 국면에서 최대 65 라 70 문턱을 못 넘는다. ETF 는 축이
+# 둘뿐이라 그 순간 1/2 로 고정되어 BUY 가 구조적으로 불가능했다.
+def test_etf_reaches_buy_with_one_of_two_axes():
+    got = sf.calc_signal(82, 1, n_axes=2, buy_ratio=sf.ETF_BUY_RATIO)
+    assert got == "BUY"
+
+
+def test_etf_strong_buy_still_needs_both_axes():
+    """최상위 등급은 완화하지 않는다. 1/2 로 열면 ETF 대부분이 STRONG_BUY 가
+    되고 HITL 까지 전부 켜진다."""
+    assert sf.calc_signal(85, 1, n_axes=2, buy_ratio=sf.ETF_BUY_RATIO) == "BUY"
+    assert sf.calc_signal(85, 2, n_axes=2, buy_ratio=sf.ETF_BUY_RATIO) == "STRONG_BUY"
+
+
+def test_etf_low_total_still_fails_regardless_of_ratio():
+    """완화한 것은 합의 비율이지 점수 문턱이 아니다."""
+    assert sf.calc_signal(69, 2, n_axes=2, buy_ratio=sf.ETF_BUY_RATIO) == "WATCH"
+    assert sf.calc_signal(44, 2, n_axes=2, buy_ratio=sf.ETF_BUY_RATIO) == "AVOID"
+
+
+def test_relaxed_ratio_does_not_leak_into_stock_judgement():
+    """주식은 기본값을 쓴다. 2/4 로 BUY 가 나오면 안 된다."""
+    assert sf.calc_signal(75, 2) == "WATCH"
+    assert sf.calc_signal(75, 2, n_axes=4, buy_ratio=sf.STOCK_BUY_RATIO) == "WATCH"
+
+
 def test_signal_ratio_thresholds_match_stock_counts():
     """비율 임계가 기존 개수 임계와 정확히 대응하는지."""
     # 주식 3/4 = 0.75 (BUY 기준), 2/4 = 0.50 (WATCH 기준)

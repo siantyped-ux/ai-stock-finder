@@ -791,6 +791,74 @@ def parse_etf_rows(data: list, min_aum: float) -> list:
     return rows
 
 
+# ETF 를 그 섹터로 볼 최소 비중(%). 스크리너의 sector 필드는 못 쓴다 -
+# 운용사 업종이라 874건 전부 "Financial Services" 로 온다. 실제 노출은
+# etf/sector-weightings 에 있다.
+#
+# 60% 로 잡은 근거는 실측이다. 광범위 지수는 최대 섹터가 VOO 38.6% ·
+# SPY 37.4% · VTI 36.1% 수준이라 "IT ETF" 로 부르면 macro 로테이션 가점을
+# 부당하게 받는다. 반면 QQQ 60.3% · XLB 83.8% 는 진짜 편중이다.
+ETF_SECTOR_MIN_WEIGHT = 60.0
+
+
+def dominant_sector(weightings: list,
+                    min_weight: float = ETF_SECTOR_MIN_WEIGHT) -> str:
+    """ETF 섹터 비중에서 지배 섹터를 고른다. 쏠림이 약하면 '미분류'.
+
+    SECTOR_KR 에 없는 값("Cash & Others" 등 채권·현금)도 미분류로 둔다.
+    섹터 로테이션은 주식 섹터에 대한 것이라 채권 ETF 에 적용할 수 없다.
+    """
+    if not weightings:
+        return "미분류"
+
+    def weight(item):
+        try:
+            return float(item.get("weightPercentage") or 0)
+        except (TypeError, ValueError):
+            return 0.0
+
+    best = max(weightings, key=weight)
+    if weight(best) < min_weight:
+        return "미분류"
+    return SECTOR_KR.get(best.get("sector"), "미분류")
+
+
+def fetch_etf_sectors(symbols: list, workers: int = 8) -> dict:
+    """티커 -> 한글 섹터. 조회 실패는 조용히 미분류로 둔다.
+
+    종목당 한 번씩 부르므로 스레드로 나눈다. 실패해도 스캔을 막지 않는다 -
+    섹터가 없으면 macro 가 중립으로 갈 뿐이고, 그건 이 변경 이전 상태다.
+    """
+    if not FMP_KEY or not symbols:
+        return {}
+
+    cache_key = f"etf_sectors_{len(symbols)}"
+    cached = _load_cache(cache_key)
+    if cached:
+        print(f"    [cache] ETF 섹터 {len(cached)}건 (캐시)")
+        return cached
+
+    def one(symbol):
+        try:
+            r = requests.get(f"{FMP_BASE}/etf/sector-weightings",
+                             params={"symbol": symbol, "apikey": FMP_KEY},
+                             timeout=12)
+            data = r.json() if r.status_code == 200 else []
+            return symbol, dominant_sector(data if isinstance(data, list) else [])
+        except Exception:
+            return symbol, "미분류"
+
+    print(f"    [*] ETF 섹터 비중 조회 ({len(symbols)}종목)...")
+    with ThreadPoolExecutor(max_workers=workers) as pool:
+        sectors = dict(pool.map(one, symbols))
+
+    named = sum(1 for v in sectors.values() if v != "미분류")
+    print(f"    [OK] ETF 섹터 확정 {named}/{len(sectors)}종목 "
+          f"(나머지는 분산·채권이라 미분류)")
+    _save_cache(cache_key, sectors)
+    return sectors
+
+
 def fetch_us_etf_universe(min_aum: float = 1e9, limit: int = 3000) -> list:
     """FMP stock-screener 로 미국 ETF 조회.
 
@@ -800,7 +868,7 @@ def fetch_us_etf_universe(min_aum: float = 1e9, limit: int = 3000) -> list:
     """
     # v2: 미국 거래소 필터를 넣기 전 캐시에는 TSX 가 섞여 있다. 키를 바꿔
     # 그 캐시가 다시 읽히지 않게 한다.
-    cache_key = f"us_etf_universe_v3_{int(min_aum)}_{limit}"
+    cache_key = f"us_etf_universe_v4_{int(min_aum)}_{limit}"
     cached = _load_cache(cache_key)
     if cached:
         print(f"    [cache] 미국 ETF {len(cached)}종목 (캐시)")
@@ -821,6 +889,14 @@ def fetch_us_etf_universe(min_aum: float = 1e9, limit: int = 3000) -> list:
         }, timeout=15)
         data = r.json() if r.status_code == 200 else []
         universe = parse_etf_rows(data, min_aum)
+
+        # 섹터를 채운다. 스크리너가 주는 sector 는 운용사 업종이라 못 쓰고,
+        # 실제 노출 섹터를 종목별로 따로 받는다 (dominant_sector 참조).
+        sectors = fetch_etf_sectors([row[0] for row in universe])
+        if sectors:
+            universe = [(t, n, m, sectors.get(t, sec), at, ex)
+                        for t, n, m, sec, at, ex in universe]
+
         _save_cache(cache_key, universe)
         print(f"    [OK] 미국 ETF {len(universe)}종목 수집 완료")
         return universe
@@ -964,7 +1040,22 @@ def calc_total_etf(tech, macro):
     return int(round(tech * ETF_TECH_WEIGHT + macro * ETF_MACRO_WEIGHT))
 
 
-def calc_signal(total, cons, n_axes=4):
+# BUY 에 필요한 합의 비율. 주식 0.75 는 기존 cons>=3 (3/4) 과 정확히 같다.
+#
+# ETF 를 0.50 (1/2) 으로 낮춘 것은 macro 축이 사실상 죽어 있기 때문이다.
+# 2026-08-22 실측: 국면이 NEUTRAL 이면 섹터 로테이션 가점(+12)이 발동하지
+# 않아 macro 가 최대 65 에 머문다. 그날 스캔한 주식 45종목도 전원 65 이하였다.
+# 주식은 tech·filing·value 로 3/4 를 채워 BUY 가 나오지만 ETF 는 축이 둘뿐이라
+# macro 가 죽는 순간 1/2 로 고정되어 BUY 가 구조적으로 불가능해진다.
+#
+# STRONG_BUY 는 완화하지 않는다. 최상위 등급까지 1/2 로 열면 오늘 기준
+# ETF 대부분이 STRONG_BUY 가 되고, HITL 까지 전부 켜진다. ETF 가 STRONG_BUY
+# 를 받으려면 여전히 두 축 모두 70 이상이어야 한다.
+STOCK_BUY_RATIO = 0.75
+ETF_BUY_RATIO = 0.50
+
+
+def calc_signal(total, cons, n_axes=4, buy_ratio=STOCK_BUY_RATIO):
     """종합점수와 합의 비율로 신호를 낸다.
 
     cons 는 70점 이상인 축의 개수, n_axes 는 축의 총 개수다. 개수가 아니라
@@ -972,13 +1063,13 @@ def calc_signal(total, cons, n_axes=4):
     축이 tech/macro 둘뿐이라, 개수 기준(cons>=3)으로는 BUY 가 영원히 나오지
     않는다.
 
-    임계 0.75 / 0.50 은 주식의 3/4, 2/4 와 정확히 같다. 주식 판정은 이
-    변경으로 한 건도 바뀌지 않는다 (tests/test_scoring.py 회귀 테스트).
+    주식 판정은 이 변경으로 한 건도 바뀌지 않는다 - 기본 buy_ratio 0.75 와
+    WATCH 임계 0.50 이 각각 3/4, 2/4 와 같다 (tests/test_scoring.py 회귀).
     """
     ratio = cons / n_axes if n_axes else 0.0
-    if total >= 80 and ratio >= 0.75:
+    if total >= 80 and ratio >= STOCK_BUY_RATIO:
         return "STRONG_BUY"
-    if total >= 70 and ratio >= 0.75:
+    if total >= 70 and ratio >= buy_ratio:
         return "BUY"
     if total >= 60 and ratio >= 0.50:
         return "WATCH"
@@ -1286,6 +1377,7 @@ def main():
                 total = calc_total_etf(tech, macro)
                 cons = calc_consensus_etf(tech, macro)
                 n_axes = 2
+                buy_ratio = ETF_BUY_RATIO
                 # 네 축을 받는 함수라 뒤 두 자리에 tech/macro 를 다시 넣는다.
                 # 사실상 tech/macro 평균이 되어 재정규화와 방향이 일치한다.
                 ev, target = calc_ev_and_target(tech, macro, tech, macro, r3m)
@@ -1295,9 +1387,10 @@ def main():
                 total = calc_total(tech, macro, filing, value)
                 cons = calc_consensus(tech, macro, filing, value)
                 n_axes = 4
+                buy_ratio = STOCK_BUY_RATIO
                 ev, target = calc_ev_and_target(tech, macro, filing, value, r3m)
 
-            signal = calc_signal(total, cons, n_axes=n_axes)
+            signal = calc_signal(total, cons, n_axes=n_axes, buy_ratio=buy_ratio)
             hitl = calc_hitl(signal, total, tech)
 
             dash_row = {

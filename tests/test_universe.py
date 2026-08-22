@@ -180,6 +180,51 @@ def test_kr_universe_function_is_gone():
     assert not hasattr(sf, "KOSPI_EXPANDED")
 
 
+# ─── ETF 지배 섹터 ─────────────────────────────────────────
+# 스크리너의 sector 필드는 운용사 업종이라 874건 전부 Financial Services 다.
+# 실제 노출은 etf/sector-weightings 로 따로 받는다.
+def test_dominant_sector_takes_a_concentrated_holding():
+    # XLB 실측: Basic Materials 83.8% / Consumer Cyclical 16.2%
+    w = [{"sector": "Basic Materials", "weightPercentage": 83.81},
+         {"sector": "Consumer Cyclical", "weightPercentage": 16.19}]
+    assert sf.dominant_sector(w) == "소재"
+
+
+def test_dominant_sector_rejects_a_broad_index():
+    """VOO 실측 38.6%. 광범위 지수를 'IT ETF' 로 부르면 로테이션 가점을
+    부당하게 받는다."""
+    w = [{"sector": "Technology", "weightPercentage": 38.6},
+         {"sector": "Financial Services", "weightPercentage": 13.2}]
+    assert sf.dominant_sector(w) == "미분류"
+
+
+def test_dominant_sector_accepts_qqq_at_its_measured_weight():
+    # QQQ 실측 60.3% — 임계 60 을 막 넘는다
+    w = [{"sector": "Technology", "weightPercentage": 60.3}]
+    assert sf.dominant_sector(w) == "IT"
+
+
+def test_dominant_sector_rejects_bond_and_cash_funds():
+    """BND 실측: Cash & Others 100%. 섹터 로테이션은 주식 섹터 개념이다."""
+    w = [{"sector": "Cash & Others", "weightPercentage": 100.0}]
+    assert sf.dominant_sector(w) == "미분류"
+
+
+def test_dominant_sector_handles_an_empty_response():
+    assert sf.dominant_sector([]) == "미분류"
+
+
+def test_dominant_sector_handles_a_missing_weight():
+    assert sf.dominant_sector([{"sector": "Technology"}]) == "미분류"
+
+
+def test_dominant_sector_threshold_is_inclusive():
+    w = [{"sector": "Technology", "weightPercentage": 60.0}]
+    assert sf.dominant_sector(w) == "IT"
+    w = [{"sector": "Technology", "weightPercentage": 59.9}]
+    assert sf.dominant_sector(w) == "미분류"
+
+
 @pytest.mark.parametrize("name", [
     "CORP_CODE_MAP", "DART_KEY", "DART_BASE",
     "load_dart_corpcode", "_dart_get", "fetch_dart_filing_signals",
