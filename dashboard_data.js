@@ -1,17 +1,17 @@
 // AI 3-Month Stock Finder - Live Data
-// Generated: 2026-08-22 22:39:12
-// Macro: VIX=16.01, DXY=98.80, US10Y=4.69%
+// Generated: 2026-08-23 22:40:10
+// Macro: VIX=16.01, DXY=98.84, US10Y=4.69%
 // FMP: active · FRED: active
 window.LIVE_MACRO = {
   vix: 16.01,
-  dxy: 98.80,
+  dxy: 98.84,
   us10y: 4.69,
-  generated_at: "2026-08-22T22:39:12.273002",
+  generated_at: "2026-08-23T22:40:10.119743",
   fmp_active: true,
   fred_active: true,
   fred: {"available": true, "vix": 16.01, "us10y": 4.69, "yield_curve": 0.5, "fed_funds": 3.63, "unemployment": 4.1, "dxy_broad": 118.9028, "core_cpi_yoy": 2.47, "unemp_3m_change": -0.2}
 };
-window.LIVE_SUMMARY = {"scanned": 1512, "shown": 59, "strong_buy": 0, "buy": 90, "watch": 129, "avoid": 89, "hitl": 89};
+window.LIVE_SUMMARY = {"scanned": 1524, "shown": 59, "strong_buy": 0, "buy": 90, "watch": 131, "avoid": 94, "hitl": 94};
 window.LIVE_STOCKS = [
   {
     "t": "TSM",
@@ -50,7 +50,7 @@ window.LIVE_STOCKS = [
       "value": [
         "PER 31.2 · 적정",
         "Forward PER 19.2 · 이익 성장 반영",
-        "PBR 86.2 · 부담",
+        "PBR 87.4 · 부담",
         "FCF Yield 33.6% · 우수"
       ]
     }
@@ -663,7 +663,7 @@ window.LIVE_STOCKS = [
       ],
       "value": [
         "PER 11.9 · 극심 저평가",
-        "FCF Yield 5.6% · 우수"
+        "FCF Yield 5.5% · 우수"
       ]
     }
   },
@@ -796,13 +796,13 @@ window.LIVE_STOCKS = [
     "ex": "NYSE",
     "tech": 92,
     "macro": 60,
-    "filing": 66,
+    "filing": 63,
     "value": 68,
-    "total": 74,
+    "total": 73,
     "consensus": 1,
     "signal": "HOLD",
-    "ev": 0.98,
-    "target": 12,
+    "ev": 0.95,
+    "target": 11,
     "hitl": false,
     "reasons": {
       "tech": [
@@ -820,7 +820,6 @@ window.LIVE_STOCKS = [
         "13F: 기관지분율 +1.91%p",
         "P/C비율 하락 -38% (헤지 완화)",
         "13F: 보유기관 1001곳 · 지분율 98.1% (2026Q3)",
-        "8-K: 최근 60일 이벤트 3건 (활발)",
         "* FMP 실시간 공시 반영"
       ],
       "value": [
@@ -1110,7 +1109,7 @@ window.LIVE_STOCKS = [
       ],
       "value": [
         "PER 8.3 · 극심 저평가",
-        "FCF Yield 6.6% · 우수"
+        "FCF Yield 6.4% · 우수"
       ]
     }
   },
