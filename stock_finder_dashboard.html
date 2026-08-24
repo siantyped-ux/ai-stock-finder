@@ -418,7 +418,7 @@
             <th data-sort="signal">시그널</th>
             <th data-sort="total" class="sort-active">종합점수 ↓</th>
             <th data-sort="tech">기술적</th>
-            <th data-sort="macro">거시</th>
+            <th data-sort="flow">수급</th>
             <th data-sort="filing">공시</th>
             <th data-sort="value">밸류에이션</th>
             <th data-sort="consensus">컨센서스</th>
@@ -534,7 +534,11 @@ if (window.LIVE_MACRO) {
 // 점수·컨센서스·시그널은 stock_finder.py 가 계산해서 준 값을 그대로 쓴다.
 // 여기서 다시 계산하지 않는다.
 //
-// 예전에는 이 자리에 4축 공식(tech 35 · macro 20 · filing 30 · value 15)을
+// 현재 축은 tech 30 · flow 20 · filing 30 · value 20 이고 ETF 는 tech 60 ·
+// flow 40 이다. 그 숫자를 여기 적어 두는 것은 참고용이며, 이 파일은 계산에
+// 쓰지 않는다.
+//
+// 예전에는 이 자리에 4축 공식(당시 tech 35 · macro 20 · filing 30 · value 15)을
 // 복사해 두고 STOCKS 를 순회하며 total/consensus/signal 을 덮어썼다. 데모
 // 데이터에 그 필드가 없던 시절의 잔재인데, ETF 가 들어오면서 조용히
 // 망가졌다 - ETF 는 filing/value 가 null 이고 JS 에서 null*0.30 은 0 이라
@@ -601,6 +605,24 @@ function axisBody(s, key, note) {
 // 이 종목의 스코어 축 개수. ETF 는 filing/value 가 없어 두 축뿐이다.
 function axes(s) { return s.at === 'ETF' ? 2 : 4; }
 
+// 거시 환경. 2026-08-24 부터 점수 축이 아니다 - 시장 전체 점수라 종목을
+// 가르지 못했다(그날 아카이브 1,520행에서 macro >= 70 이 0건). 표 열에서
+// 빼고 여기에만 남기되, 총점에 안 들어간다는 사실을 반드시 같이 적는다.
+// 그러지 않으면 다른 축들과 나란히 놓인 숫자로 읽혀 예전과 똑같이 오해된다.
+function macroSection(s) {
+  if (s.macro === null || s.macro === undefined) return '';
+  const regime = s.regime ? ` · 국면 ${s.regime}` : '';
+  const list = (s.reasons.macro || [])
+    .map(r => `<li><span class="bullet neu">▸</span> ${r}</li>`).join('');
+  return `
+    <div class="agent-section">
+      <h3>📰 Macro — 거시 환경 (${s.macro}/100${regime})</h3>
+      <p class="agent-na">종합점수와 컨센서스에 반영되지 않습니다. 시장 전체에
+      매기는 값이라 종목 간 순위를 가르지 못합니다. 진입 국면 판단에만 씁니다.</p>
+      ${list ? `<ul class="agent-list">${list}</ul>` : ''}
+    </div>`;
+}
+
 function venue(s) {
   if (s.at === 'ETF') return 'ETF';
   const ex = s.ex;
@@ -624,7 +646,7 @@ function render() {
       <td><span class="signal-pill signal-${s.signal}">${s.signal.replace('_',' ')}</span></td>
       <td>${scoreBar(s.total)}</td>
       <td>${scoreBar(s.tech)}</td>
-      <td>${scoreBar(s.macro)}</td>
+      <td>${scoreBar(s.flow)}</td>
       <td>${scoreBar(s.filing)}</td>
       <td>${scoreBar(s.value)}</td>
       <td>${consensusDots(s.consensus, axes(s))}</td>
@@ -732,8 +754,8 @@ function showDetail(ticker) {
     </div>
 
     <div class="agent-section">
-      <h3>📰 Macro Analyst — 거시 환경 (${s.macro}/100)</h3>
-      <ul class="agent-list">${s.reasons.macro.map(r=>`<li><span class="bullet ${s.macro<50?'neg':s.macro<70?'neu':''}">▸</span> ${r}</li>`).join('')}</ul>
+      <h3>🌊 Flow Analyst — 수급 ${axisScore(s.flow)}</h3>
+      ${axisBody(s, 'flow', '수급 축이 없는 옛 스캔 데이터입니다. 다음 스캔부터 채워집니다.')}
     </div>
 
     <div class="agent-section">
@@ -746,8 +768,10 @@ function showDetail(ticker) {
       ${axisBody(s, 'value', 'PER·PBR 같은 개별기업 밸류에이션 지표가 없는 상품입니다.')}
     </div>
 
+    ${macroSection(s)}
+
     ${s.hitl ? `<div class="disclaimer" style="margin-top:0"><strong>⚠️ HITL 필요:</strong> 이 종목은 리스크 지표 or 신규 진입 or 대형 포지션으로 인해 사용자 승인이 필요합니다. Risk Manager 검토 후 진행하세요.</div>` : ''}
-    ${s.signal==='AVOID' ? `<div class="disclaimer" style="margin-top:12px"><strong>❌ AVOID:</strong> AI Auditor가 리스크 이슈를 감지했거나 4축 컨센서스가 미달합니다. 진입 금지 권고.</div>` : ''}
+    ${s.signal==='AVOID' ? `<div class="disclaimer" style="margin-top:12px"><strong>❌ AVOID:</strong> AI Auditor가 리스크 이슈를 감지했거나 ${axes(s)}축 컨센서스가 미달합니다. 진입 금지 권고.</div>` : ''}
   `;
   document.getElementById('modal').classList.add('show');
 }
