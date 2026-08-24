@@ -15,6 +15,7 @@ import yfinance as yf
 
 import console
 import exit_rules as er
+import portfolio as pf
 import trade_sim as ts
 
 
@@ -113,7 +114,7 @@ def filter_rows(rows: list, us_only: bool = False,
 
 def run(pattern: str = "history/*.csv", params: er.Params = None,
         costs: ts.Costs = None, us_only: bool = False,
-        entry_total: int = None) -> dict:
+        entry_total: int = None, limits: pf.Limits = None) -> dict:
     """아카이브 전체를 시뮬레이션하고 트레이드·통계·커버리지를 돌려준다."""
     params = params or er.Params()
     costs = costs or ts.Costs()
@@ -144,6 +145,7 @@ def run(pattern: str = "history/*.csv", params: er.Params = None,
 
     trades, failed = [], []
     newest_bar = None
+    prepared_by_ticker, bars_by_ticker, markets = {}, {}, {}
     for ticker in sorted(candidates):
         bars = fetch_bars(ticker)
         if not bars:
@@ -152,14 +154,32 @@ def run(pattern: str = "history/*.csv", params: er.Params = None,
         latest = max(bars)
         newest_bar = latest if newest_bar is None else max(newest_bar, latest)
         rs = by_ticker[ticker]
-        market = rs[0]["market"]
         prepared = [{"date": r["date"], "signal": r["signal"],
                      "total": int(r["total"]) if r["total"] else None,
                      # 목표 상승률(%). 예전 백필 파일에는 컬럼이 없을 수 있다.
                      "target": int(r["target"]) if r.get("target") else None,
                      "source": r["source"]} for r in rs]
-        trades.extend(ts.simulate_ticker(ticker, market, prepared, bars,
-                                         params, costs))
+        prepared_by_ticker[ticker] = prepared
+        bars_by_ticker[ticker] = bars
+        markets[ticker] = rs[0]["market"]
+
+    # 제약이 없으면 종목별 시뮬레이션을 그대로 쓴다. 포트폴리오 경로와 결과가
+    # 같아야 하지만(tests/test_portfolio.py 회귀), 굳이 우회할 이유도 없다.
+    rejected = {"capacity": 0, "correlation": 0}
+    rejected_pairs = []
+    if limits is None or (not limits.max_positions and limits.max_correlation >= 1.0):
+        for ticker, prepared in prepared_by_ticker.items():
+            trades.extend(ts.simulate_ticker(ticker, markets[ticker], prepared,
+                                             bars_by_ticker[ticker], params, costs))
+    else:
+        correlator = pf.build_correlator(
+            {t: [b.close for b in sorted(bs.values(), key=lambda x: x.date)]
+             for t, bs in bars_by_ticker.items()})
+        out = pf.simulate(prepared_by_ticker, bars_by_ticker, markets,
+                          params, costs, limits, correlator)
+        trades = out["trades"]
+        rejected = out["rejected"]
+        rejected_pairs = out["rejected_pairs"]
 
     dates = sorted({r["date"] for r in rows})
     sources = [r["source"] for r in rows]
@@ -176,6 +196,9 @@ def run(pattern: str = "history/*.csv", params: er.Params = None,
         # 이 줄이 없으면 "후보 N 인데 트레이드 M" 이 결함처럼 보인다.
         "never_entered": sorted(candidates - {t.ticker for t in trades}
                                 - set(failed)),
+        # 상한이 조용히 기회를 죽이면 알 수 없으므로 무엇을 왜 막았는지 센다
+        "rejected": rejected,
+        "rejected_pairs": rejected_pairs,
     }
 
 
@@ -207,6 +230,14 @@ def report(result: dict) -> None:
         print(f"  최신 봉 {result['newest_bar']} (아카이브 마지막 {dates[-1]})")
     if result["never_entered"]:
         print(f"  전환 후 세션이 없어 대기 중: {', '.join(result['never_entered'])}")
+
+    # 상한이 조용히 기회를 죽이면 결과만 보고는 알 수 없다
+    rej = result.get("rejected") or {}
+    if rej.get("capacity") or rej.get("correlation"):
+        print(f"  진입 거절: 자리부족 {rej.get('capacity', 0)}건 · "
+              f"상관중복 {rej.get('correlation', 0)}건")
+        for date, blocked, held, rho in (result.get("rejected_pairs") or [])[:8]:
+            print(f"    {date} {blocked} 차단 (보유 {held} 와 rho={rho})")
 
     print()
     print(f"[닫힌 트레이드] {s['closed']}건")
@@ -242,6 +273,12 @@ def main():
                    help="아카이브의 한국 행을 제외한다")
     p.add_argument("--entry-total", type=int, default=None,
                    help="이 점수 이상이면 BUY 로 간주해 진입한다 (비교용)")
+    p.add_argument("--max-positions", type=int, default=0,
+                   help="동시 보유 상한 (0=무제한, 기본).\n"
+                        "  자리가 모자라면 그날 총점이 높은 종목이 가져간다")
+    p.add_argument("--max-correlation", type=float, default=1.0,
+                   help="이미 보유한 종목과의 일간수익률 상관 상한 (1.0=끔).\n"
+                        "  0.90 이면 XLV·VHT·IYH 같은 사실상 같은 베팅을 막는다")
     args = p.parse_args()
 
     params = er.Params(
@@ -251,8 +288,10 @@ def main():
         exit_total=args.exit_total,
         use_target=args.use_target,
     )
+    limits = pf.Limits(max_positions=args.max_positions,
+                       max_correlation=args.max_correlation)
     report(run(args.history, params, us_only=args.us_only,
-               entry_total=args.entry_total))
+               entry_total=args.entry_total, limits=limits))
 
 
 if __name__ == "__main__":
