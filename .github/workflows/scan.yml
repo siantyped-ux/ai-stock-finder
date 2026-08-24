@@ -57,15 +57,22 @@ jobs:
           pip install -r requirements.txt
 
       - name: Run stock finder scan
+        # workflow_dispatch 입력은 env 로 받아 셸 변수로 넘긴다. run 본문에
+        # ${{ }} 를 직접 넣으면 셸이 돌기 전에 워크플로 텍스트로 치환되어,
+        # 입력에 따옴표와 세미콜론을 섞으면 임의 명령이 실행된다. 이 스텝은
+        # FMP·FRED·Anthropic 키를 전부 들고 있다.
         env:
           FMP_API_KEY: ${{ secrets.FMP_API_KEY }}
           FRED_API_KEY: ${{ secrets.FRED_API_KEY }}
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          MIN_US_CAP: ${{ github.event.inputs.min_us_cap || '1e10' }}
+          MIN_ETF_AUM: ${{ github.event.inputs.min_etf_aum || '1e9' }}
+          MIN_TOTAL: ${{ github.event.inputs.min_total || '70' }}
         run: |
           python stock_finder.py \
-            --min-us-cap ${{ github.event.inputs.min_us_cap || '1e10' }} \
-            --min-etf-aum ${{ github.event.inputs.min_etf_aum || '1e9' }} \
-            --min-total ${{ github.event.inputs.min_total || '70' }} \
+            --min-us-cap "$MIN_US_CAP" \
+            --min-etf-aum "$MIN_ETF_AUM" \
+            --min-total "$MIN_TOTAL" \
             --sleep 0.2 \
             --workers 4
 

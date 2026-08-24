@@ -51,11 +51,14 @@ jobs:
           pip install -r requirements.txt
 
       - name: Verify quote endpoint
+        # 입력을 env 로 받아 셸 변수로 쓴다. run 본문에 ${{ }} 를 직접 넣으면
+        # 셸이 돌기 전에 워크플로 텍스트로 치환되므로, 입력에 따옴표와 세미콜론을
+        # 섞어 임의 명령을 실행시킬 수 있다. 이 러너는 FMP 키를 들고 있다.
         env:
           FMP_API_KEY: ${{ secrets.FMP_API_KEY }}
+          SAMPLE: ${{ github.event.inputs.sample || '200' }}
         run: |
-          python verify_quotes.py --sample "${{ github.event.inputs.sample || '200' }}" \
-            2>&1 | tee verify_quotes_output.txt
+          python verify_quotes.py --sample "$SAMPLE" 2>&1 | tee verify_quotes_output.txt
 
       - name: Publish result to job summary
         # 실패해도 결과를 남긴다. 판정이 [실패] 로 나오는 것 자체가 알아야 할
