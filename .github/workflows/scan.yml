@@ -18,12 +18,8 @@ on:
         default: '1e9'
         required: false
       min_total:
-        description: '주식 출력 최소 종합점수 (기본 70)'
+        description: '출력 최소 종합점수 (기본 70 · 주식과 ETF 공통)'
         default: '70'
-        required: false
-      min_total_etf:
-        description: 'ETF 출력 최소 종합점수 (기본 78)'
-        default: '78'
         required: false
   push:
     branches: [main]
@@ -70,7 +66,6 @@ jobs:
             --min-us-cap ${{ github.event.inputs.min_us_cap || '1e10' }} \
             --min-etf-aum ${{ github.event.inputs.min_etf_aum || '1e9' }} \
             --min-total ${{ github.event.inputs.min_total || '70' }} \
-            --min-total-etf ${{ github.event.inputs.min_total_etf || '78' }} \
             --sleep 0.2 \
             --workers 4
 

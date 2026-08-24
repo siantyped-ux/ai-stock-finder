@@ -27,6 +27,7 @@ from __future__ import annotations
 
 import csv
 import json
+import os
 import statistics as st
 import time
 import urllib.error
@@ -34,6 +35,16 @@ import urllib.request
 from datetime import datetime, timedelta, timezone
 
 import envfile
+
+
+def api_key() -> str:
+    """.env 우선, 없으면 환경변수. GitHub Actions Secrets 로 돌리기 위해서다.
+
+    CI 에는 .env 가 없다. envfile.load 는 그 경우 빈 dict 를 내므로 여기서
+    환경변수로 넘어간다 (stock_finder.FMP_KEY 와 같은 규칙).
+    """
+    return (envfile.load(".env").get("FMP_API_KEY")
+            or os.environ.get("FMP_API_KEY", "")).strip()
 
 BASE = "https://financialmodelingprep.com/stable"
 ET = timezone(timedelta(hours=-4))    # EDT. 겨울(EST)에는 -5 로 바꿀 것
@@ -51,7 +62,7 @@ STALE_MINUTES = 5
 def get(path: str, **params) -> tuple:
     """stable 엔드포인트 호출. (데이터, 오류) 를 낸다."""
     qs = "&".join(f"{k}={v}" for k, v in params.items())
-    key = envfile.load(".env").get("FMP_API_KEY", "")
+    key = api_key()
     try:
         with urllib.request.urlopen(f"{BASE}/{path}?{qs}&apikey={key}", timeout=30) as r:
             return json.loads(r.read().decode()), None
@@ -226,6 +237,12 @@ def main() -> None:
     p.add_argument("--sample", type=int, default=200,
                    help="자산군별 표본 종목 수 (기본 200 · 0=전체)")
     args = p.parse_args()
+
+    # 키가 없으면 커버리지가 0으로 나와 "FMP 가 이 종목들을 모른다" 처럼 보인다.
+    # CI 에서 시크릿이 빠졌을 때 그 오독을 막으려고 먼저 끊는다.
+    if not api_key():
+        print("[!] FMP_API_KEY 가 없다 (.env 또는 환경변수)")
+        raise SystemExit(1)
 
     archive = args.archive
     if not archive:

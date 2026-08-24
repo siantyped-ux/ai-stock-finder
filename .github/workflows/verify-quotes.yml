@@ -1,0 +1,79 @@
+name: Verify FMP Quotes
+
+# 이 워크플로가 답하려는 질문은 하나다.
+#   "aftermarket" 이라는 이름의 FMP 호가 엔드포인트가 정규장에도 갱신되는가?
+#
+# 장외에 돌리면 답이 나오지 않는다. 호가창이 비어 스프레드가 구조적으로
+# 벌어지기 때문이다 (2026-08-24 휴장 중 실측: 주식 중앙 1.515% · ETF 4.172%).
+# 그래서 미국 정규장 안에서 도는 것이 이 파일의 전부다.
+#
+# 로컬에서 돌리려면 개발자 PC 가 KST 22:30~05:00 사이에 켜져 있어야 한다.
+# GitHub 러너는 그럴 필요가 없다.
+
+on:
+  schedule:
+    # 15:00 UTC = 11:00 ET = 정규장(09:30~16:00 ET) 한복판.
+    # 한복판을 고른 것은 GitHub Actions 스케줄이 부하에 따라 5~30분 지연되기
+    # 때문이다. 개장 직후를 노리면 지연이 장 밖으로 밀어낼 수 있지만,
+    # 11:00 ET 는 마감까지 5시간 여유가 있다.
+    # 서머타임(EDT) 기준이다. 표준시(EST) 기간에는 12:00 ET 가 되는데 그래도
+    # 정규장 안이다.
+    # 주말은 뺀다 - 휴장이면 스크립트가 판정을 보류할 뿐이라 낭비다.
+    - cron: '0 15 * * 1-5'
+  workflow_dispatch:
+    inputs:
+      sample:
+        description: '자산군별 표본 종목 수 (0=유니버스 전체)'
+        default: '200'
+        required: false
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v7
+
+      - name: Setup Python 3.11
+        uses: actions/setup-python@v7
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Verify quote endpoint
+        env:
+          FMP_API_KEY: ${{ secrets.FMP_API_KEY }}
+        run: |
+          python verify_quotes.py --sample "${{ github.event.inputs.sample || '200' }}" \
+            2>&1 | tee verify_quotes_output.txt
+
+      - name: Publish result to job summary
+        # 실패해도 결과를 남긴다. 판정이 [실패] 로 나오는 것 자체가 알아야 할
+        # 정보이며, 그 경우 Polygon.io 나 IBKR 로 가야 한다는 뜻이다.
+        if: always()
+        run: |
+          {
+            echo '## FMP 호가 엔드포인트 검증'
+            echo
+            echo '```'
+            cat verify_quotes_output.txt
+            echo '```'
+          } >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Upload output
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: verify-quotes-output
+          path: verify_quotes_output.txt
+          retention-days: 14
