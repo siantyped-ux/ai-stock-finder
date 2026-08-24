@@ -138,7 +138,7 @@ def consume(state: EntryState) -> EntryState:
     return replace(state, pending=False)
 
 
-def _make_trade(pos: er.Position, market: str, source: str,
+def make_trade(pos: er.Position, market: str, source: str,
                 exit_price: float, exit_date: Optional[str],
                 exit_reason: Optional[str], costs: Costs) -> Trade:
     gross = (exit_price - pos.entry_price) / pos.r_unit
@@ -205,7 +205,7 @@ def simulate_ticker(ticker: str, market: str, rows: list, bars: dict,
         if pos is not None and bar is not None:
             decision = er.evaluate(pos, bar, params)
             if decision is not None:
-                trades.append(_make_trade(pos, market, open_source,
+                trades.append(make_trade(pos, market, open_source,
                                           decision.price, decision.date,
                                           decision.reason, costs))
                 pos = None
@@ -235,7 +235,7 @@ def simulate_ticker(ticker: str, market: str, rows: list, bars: dict,
         state = consume(step.state) if entered else step.state
 
     if pos is not None and last_close is not None:
-        trades.append(_make_trade(pos, market, open_source, last_close,
+        trades.append(make_trade(pos, market, open_source, last_close,
                                   None, None, costs))
 
     return trades

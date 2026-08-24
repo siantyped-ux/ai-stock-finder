@@ -32,6 +32,7 @@ from datetime import datetime, timedelta
 from typing import Optional
 
 import console
+import flow
 import history
 
 console.force_utf8()
@@ -173,10 +174,8 @@ def bollinger_position(close: np.ndarray, period: int = 20) -> float:
 
 # ─── 스코어링 ─────────────────────────────────────────────────
 def calc_tech_score(hist_df) -> tuple[int, list[str], float]:
+    # 종가만 쓴다. 고저는 원래부터 쓰지 않았고, 거래량은 flow 축으로 옮겼다.
     close = hist_df["Close"].values.astype(float)
-    high = hist_df["High"].values.astype(float)
-    low = hist_df["Low"].values.astype(float)
-    vol = hist_df["Volume"].values.astype(float)
 
     if len(close) < 60:
         return 40, ["데이터 부족 (60봉 미만)"], 0.0
@@ -222,17 +221,8 @@ def calc_tech_score(hist_df) -> tuple[int, list[str], float]:
         score -= 10
         reasons.append(f"MACD 데드크로스 · 히스토 {h:.2f}")
 
-    if len(vol) >= 80:
-        recent_vol = np.mean(vol[-20:])
-        prev_vol = np.mean(vol[-80:-20])
-        if prev_vol > 0:
-            vol_ratio = recent_vol / prev_vol
-            if vol_ratio > 1.3:
-                score += 8
-                reasons.append(f"거래량 급증 · 최근 20일 평균 {vol_ratio:.1f}배")
-            elif vol_ratio < 0.6:
-                score -= 5
-                reasons.append(f"거래량 감소 · {vol_ratio:.1f}배")
+    # 거래량 항목은 flow 축으로 옮겼다. 여기에 두면 flow 의 유동성·수급
+    # 컴포넌트와 중복 계상되어 거래량이 총점에 두 번 반영된다.
 
     if r3m > 20:
         score += 8
@@ -1073,50 +1063,59 @@ def calc_filing_score(info: dict, hist_df, ticker: str, market: str) -> tuple[in
 
 
 # ─── 종합 판정 ────────────────────────────────────────────────
-def calc_consensus(tech, macro, filing, value):
-    return sum(1 for v in (tech, macro, filing, value) if v >= 70)
+def calc_consensus(tech, flow_, filing, value):
+    return sum(1 for v in (tech, flow_, filing, value) if v >= 70)
 
 
-def calc_consensus_etf(tech, macro):
-    """ETF 합의 개수. 축이 tech/macro 둘뿐이므로 최대 2 다.
+def calc_consensus_etf(tech, flow_):
+    """ETF 합의 개수. 축이 tech/flow 둘뿐이므로 최대 2 다.
 
     개수를 그대로 아카이브에 저장한다. 판정은 calc_signal 이 n_axes=2 로
     비율을 계산한다.
     """
-    return sum(1 for v in (tech, macro) if v >= 70)
+    return sum(1 for v in (tech, flow_) if v >= 70)
 
 
-def calc_total(tech, macro, filing, value):
-    return int(round(tech * 0.35 + macro * 0.20 + filing * 0.30 + value * 0.15))
+def calc_total(tech, flow_, filing, value):
+    """주식 종합점수. 네 축 모두 실측값이다.
+
+    macro 는 축이 아니다 - 시장 전체 점수라 종목 변별력이 0 이다. 2026-08-22
+    아카이브 1,520행에서 macro >= 70 인 행이 한 건도 없었다. 국면 판정은
+    매매 계층의 게이트로 쓰고 점수에서는 뺀다.
+    """
+    return int(round(tech * 0.30 + flow_ * 0.20 + filing * 0.30 + value * 0.20))
 
 
-# ETF 가중치. 주식 가중치에서 filing(0.30)·value(0.15) 를 빼고 남은 0.55 로
-# 나눈 값이다. ETF 에는 개별기업 재무·공시 데이터가 없어 두 축을 계산할 수
-# 없다. 중립값 50 으로 채우지 않는 것은 의도다 - 그러면 두 축이 22.5점으로
-# 고정돼 70점을 넘으려면 macro 70일 때 tech 95.7 이상이 필요한데, 관측된
-# 개별주식 최고점이 77인 분포에서는 사실상 나오지 않는다.
-ETF_TECH_WEIGHT = 0.35 / 0.55
-ETF_MACRO_WEIGHT = 0.20 / 0.55
-
-
-def calc_total_etf(tech, macro):
-    """ETF 종합점수. tech/macro 두 축만 쓰고 가중치를 재정규화한다."""
-    return int(round(tech * ETF_TECH_WEIGHT + macro * ETF_MACRO_WEIGHT))
-
-
-# BUY 에 필요한 합의 비율. 주식 0.75 는 기존 cons>=3 (3/4) 과 정확히 같다.
+# ETF 가중치. 주식 가중치에서 filing(0.30)·value(0.20) 를 빼고 남은 0.50 으로
+# 나눈 값이다. ETF 에는 개별기업 재무·공시 데이터가 없어 두 축을 계산할 수 없다.
 #
-# ETF 를 0.50 (1/2) 으로 낮춘 것은 macro 축이 사실상 죽어 있기 때문이다.
-# 2026-08-22 실측: 국면이 NEUTRAL 이면 섹터 로테이션 가점(+12)이 발동하지
-# 않아 macro 가 최대 65 에 머문다. 그날 스캔한 주식 45종목도 전원 65 이하였다.
-# 주식은 tech·filing·value 로 3/4 를 채워 BUY 가 나오지만 ETF 는 축이 둘뿐이라
-# macro 가 죽는 순간 1/2 로 고정되어 BUY 가 구조적으로 불가능해진다.
+# 재정규화를 유지하는 근거는 실측이다. 결측 축을 상수 50 으로 채우면 총점
+# 분산이 압축되어 ETF 총점 최대가 66점에 그친다 - 70점 문턱에 영원히 닿지
+# 못해 사실상 배제가 된다 (2026-08-24 표본 120종목).
 #
-# STRONG_BUY 는 완화하지 않는다. 최상위 등급까지 1/2 로 열면 오늘 기준
-# ETF 대부분이 STRONG_BUY 가 되고, HITL 까지 전부 켜진다. ETF 가 STRONG_BUY
-# 를 받으려면 여전히 두 축 모두 70 이상이어야 한다.
+# 재정규화가 예전에 문제였던 것은 대상이 tech 와 죽은 macro 였기 때문이다.
+# 살아 있는 축이 tech 하나뿐이라 ETF 에 유리한 tech 편향이 그대로 총점 편향이
+# 되었다. tech·flow 로 바꾸면 두 축의 자산군 편향이 부호가 반대라 상쇄된다 -
+# 실측 격차 tech +7.7 · flow -8.0, 그 결과 총점 평균이 ETF 57.2 · 주식 56.7 로
+# 맞는다.
+ETF_TECH_WEIGHT = 0.30 / 0.50
+ETF_FLOW_WEIGHT = 0.20 / 0.50
+
+
+def calc_total_etf(tech, flow_):
+    """ETF 종합점수. tech/flow 두 축만 쓰고 가중치를 재정규화한다."""
+    return int(round(tech * ETF_TECH_WEIGHT + flow_ * ETF_FLOW_WEIGHT))
+
+
+# BUY 에 필요한 합의 비율. 0.75 는 기존 cons>=3 (3/4) 과 정확히 같다.
+#
+# 자산군별로 다른 값을 쓰지 않는다. ETF 전용 완화(0.50)는 macro 가 죽어 있어
+# ETF 가 구조적으로 BUY 를 못 받던 것을 풀려던 것이었는데, 그 순간 ETF 판정이
+# tech 단일 축 도장으로 붕괴했다 - 2026-08-22 실측 BUY 88건 전부 tech 하나로만
+# 통과했다. macro 를 축에서 빼고 flow 를 넣으면 두 축 다 살아 있으므로 완화가
+# 필요 없다. ETF 는 가진 축의 100%(2/2)가 70 이상이어야 BUY 이며, 이는 주식의
+# 75%(3/4)보다 엄격하다.
 STOCK_BUY_RATIO = 0.75
-ETF_BUY_RATIO = 0.50
 
 
 def calc_signal(total, cons, n_axes=4, buy_ratio=STOCK_BUY_RATIO):
@@ -1124,11 +1123,8 @@ def calc_signal(total, cons, n_axes=4, buy_ratio=STOCK_BUY_RATIO):
 
     cons 는 70점 이상인 축의 개수, n_axes 는 축의 총 개수다. 개수가 아니라
     비율로 판정하는 것은 ETF 때문이다 - ETF 는 filing/value 데이터가 없어
-    축이 tech/macro 둘뿐이라, 개수 기준(cons>=3)으로는 BUY 가 영원히 나오지
+    축이 tech/flow 둘뿐이라, 개수 기준(cons>=3)으로는 BUY 가 영원히 나오지
     않는다.
-
-    주식 판정은 이 변경으로 한 건도 바뀌지 않는다 - 기본 buy_ratio 0.75 와
-    WATCH 임계 0.50 이 각각 3/4, 2/4 와 같다 (tests/test_scoring.py 회귀).
     """
     ratio = cons / n_axes if n_axes else 0.0
     if total >= 80 and ratio >= STOCK_BUY_RATIO:
@@ -1172,34 +1168,27 @@ def scan_summary(results: list, shown: list) -> dict:
     }
 
 
-def filter_for_output(rows: list, min_total: int, min_total_etf: int) -> list:
+def filter_for_output(rows: list, min_total: int) -> list:
     """대시보드·콘솔에 낼 행만 남긴다.
 
     아카이브(history/*.csv)에는 적용하지 않는다. exit_rules.evaluate() 가
     보유 종목의 그날 total 이 exit_total 미만이면 SIGNAL 청산하는데, 점수가
     떨어진 행이 아카이브에서 사라지면 그 판정을 할 수 없게 된다.
 
-    ETF 에 별도 임계를 두는 것은 두 점수가 같은 척도가 아니기 때문이다.
-    ETF 는 분산 효과로 변동성이 낮아 tech 점수가 높게 나오고, filing/value
-    없이 두 축만 재정규화하므로 분포가 위로 밀린다. 2026-08-22 첫 실전
-    스캔 실측으로 같은 70점 선에서 주식은 4.7%(46/981), ETF 는
-    16.8%(136/811)가 통과해 대시보드가 ETF 로 뒤덮였다.
-
-    at 키가 없으면 STOCK 으로 본다. 옛 행에는 그 시절 유니버스가 전부
-    개별주식이었다.
+    ETF 에 별도 임계(min_total_etf=78)를 두던 것은 제거했다. 그것은 두 점수가
+    같은 척도가 아니어서 생긴 증상을 표시 단계에서 가리던 땜질이었고, 순위는
+    고치지 못했다 - 주식 최고점이 77인데 77점 ETF 는 여전히 전 종목 위에 섰다.
+    flow 축으로 척도를 맞춘 지금은 한 임계로 충분하다.
     """
-    out = []
-    for r in rows:
-        total = r.get("total")
-        if total is None:
-            continue
-        floor = min_total_etf if r.get("at") == "ETF" else min_total
-        if total >= floor:
-            out.append(r)
-    return out
+    return [r for r in rows
+            if r.get("total") is not None and r["total"] >= min_total]
 
 
-def calc_ev_and_target(tech, macro, filing, value, r3m) -> tuple[float, int]:
+def calc_ev_and_target(tech, flow_, filing, value, r3m) -> tuple[float, int]:
+    """기대값과 목표 수익률. macro 자리를 flow 가 받았다.
+
+    macro 는 전 종목이 같은 값을 받아 종목 간 기대값을 벌리지 못했다.
+    """
     # NaN 방어: 입력값 중 하나라도 NaN/None이면 중립값(0)으로 대체
     def _safe(v):
         if v is None:
@@ -1210,8 +1199,8 @@ def calc_ev_and_target(tech, macro, filing, value, r3m) -> tuple[float, int]:
         except (TypeError, ValueError):
             pass
         return v
-    tech, macro, filing, value, r3m = _safe(tech), _safe(macro), _safe(filing), _safe(value), _safe(r3m)
-    strength = (tech * 0.4 + filing * 0.3 + macro * 0.2 + value * 0.1) / 100
+    tech, flow_, filing, value, r3m = _safe(tech), _safe(flow_), _safe(filing), _safe(value), _safe(r3m)
+    strength = (tech * 0.4 + filing * 0.3 + flow_ * 0.2 + value * 0.1) / 100
     momentum_adj = np.clip(r3m / 30, -0.5, 0.5)
     ev = round((strength - 0.5) * 3.5 + momentum_adj * 0.4, 2)
     if np.isnan(ev):
@@ -1324,12 +1313,9 @@ def parse_args():
                    help="ETF 를 유니버스에서 제외한다")
     p.add_argument("--min-total", type=int, default=70,
                    help="대시보드·콘솔 출력 최소 종합점수 (기본 70).\n"
+                        "  주식·ETF 에 같은 값을 쓴다 - flow 축으로 두 척도를\n"
+                        "  맞췄으므로 자산군별 임계가 필요 없다.\n"
                         "  아카이브에는 적용되지 않는다")
-    p.add_argument("--min-total-etf", type=int, default=78,
-                   help="ETF 출력 최소 종합점수 (기본 78).\n"
-                        "  ETF 는 두 축 재정규화라 점수가 위로 밀린다.\n"
-                        "  2026-08-22 실측 기준 77점에 군집이 있고 78점부터\n"
-                        "  통과율이 주식(4.7%%)과 비슷해진다")
     p.add_argument("--limit", type=int, default=0,
                    help="종류별 상위 N개로 제한 (0=제한없음)")
     p.add_argument("--test", action="store_true",
@@ -1422,7 +1408,10 @@ def main():
         """종목 1개 스코어링. 실패 시 None 반환. (워커 스레드에서 실행)
 
         ETF 는 filing/value 를 계산하지 않는다. 개별기업 재무·공시 데이터가
-        없어서다. 두 축을 빼고 tech/macro 만 재정규화해 총점을 낸다.
+        없어서다. 두 축을 빼고 tech/flow 만 재정규화해 총점을 낸다.
+
+        macro 는 계속 계산해 아카이브에 남기지만 총점에는 넣지 않는다.
+        regime 도 함께 남긴다 - 매매 계층의 국면 게이트가 그 값을 읽는다.
         """
         try:
             data = fetch_stock(ticker)
@@ -1433,38 +1422,39 @@ def main():
             info = data["info"]
 
             tech, tech_r, r3m = calc_tech_score(hist)
+            flow_score, flow_r = flow.calc_flow_score(hist)
             macro, macro_r, regime = calc_macro_score(vix, dxy, us10y, sector, fred_data)
 
             if asset_type == "ETF":
                 value, value_r = None, []
                 filing, filing_r = None, []
-                total = calc_total_etf(tech, macro)
-                cons = calc_consensus_etf(tech, macro)
+                total = calc_total_etf(tech, flow_score)
+                cons = calc_consensus_etf(tech, flow_score)
                 n_axes = 2
-                buy_ratio = ETF_BUY_RATIO
-                # 네 축을 받는 함수라 뒤 두 자리에 tech/macro 를 다시 넣는다.
-                # 사실상 tech/macro 평균이 되어 재정규화와 방향이 일치한다.
-                ev, target = calc_ev_and_target(tech, macro, tech, macro, r3m)
+                # 네 축을 받는 함수라 뒤 두 자리에 tech/flow 를 다시 넣는다.
+                # 사실상 tech/flow 평균이 되어 재정규화와 방향이 일치한다.
+                ev, target = calc_ev_and_target(tech, flow_score, tech, flow_score, r3m)
             else:
                 value, value_r = calc_value_score(info, sector)
                 filing, filing_r = calc_filing_score(info, hist, ticker, market)
-                total = calc_total(tech, macro, filing, value)
-                cons = calc_consensus(tech, macro, filing, value)
+                total = calc_total(tech, flow_score, filing, value)
+                cons = calc_consensus(tech, flow_score, filing, value)
                 n_axes = 4
-                buy_ratio = STOCK_BUY_RATIO
-                ev, target = calc_ev_and_target(tech, macro, filing, value, r3m)
+                ev, target = calc_ev_and_target(tech, flow_score, filing, value, r3m)
 
-            signal = calc_signal(total, cons, n_axes=n_axes, buy_ratio=buy_ratio)
+            signal = calc_signal(total, cons, n_axes=n_axes)
             hitl = calc_hitl(signal, total, tech)
 
             dash_row = {
                 "t": ticker, "n": name, "m": market, "sec": sector,
                 "at": asset_type, "ex": exchange,
-                "tech": tech, "macro": macro, "filing": filing, "value": value,
+                "tech": tech, "flow": flow_score, "macro": macro,
+                "filing": filing, "value": value,
                 "total": total, "consensus": cons, "signal": signal,
                 "ev": ev, "target": target, "hitl": hitl,
+                "regime": regime,
                 "reasons": {
-                    "tech": tech_r, "macro": macro_r,
+                    "tech": tech_r, "flow": flow_r, "macro": macro_r,
                     "filing": filing_r, "value": value_r,
                 }
             }
@@ -1476,7 +1466,7 @@ def main():
                     "tech": tech, "macro": macro, "filing": filing, "value": value,
                     "total": total, "consensus": cons, "signal": signal,
                     "ev": ev, "target": target, "hitl": hitl,
-                    "source": "live",
+                    "source": "live", "flow": flow_score, "regime": regime,
                     **history.price_fields(hist, info),
                 }
             except Exception as e:
@@ -1560,11 +1550,10 @@ def main():
 
     # 아카이브를 기록한 뒤에 필터한다. 순서를 바꾸면 아카이브가 잘려
     # 백테스트의 SIGNAL 청산 판정이 불가능해진다.
-    shown = filter_for_output(results, args.min_total, args.min_total_etf)
+    shown = filter_for_output(results, args.min_total)
     n_stock = sum(1 for r in shown if r.get("at") != "ETF")
     n_etf = len(shown) - n_stock
-    print(f"[*] 출력 필터: 주식 {args.min_total}점 이상 · "
-          f"ETF {args.min_total_etf}점 이상 → "
+    print(f"[*] 출력 필터: {args.min_total}점 이상 → "
           f"{len(shown)}/{len(results)}종목 (주식 {n_stock}, ETF {n_etf})")
 
     # 지표 카드는 필터 이전 전체를 기준으로 센다 (scan_summary 참조).
