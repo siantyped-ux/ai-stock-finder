@@ -184,6 +184,25 @@ def test_missing_regime_becomes_blank_not_none():
     assert out["regime"] == ""
 
 
+# ─── 출력 ───────────────────────────────────────────────────
+def test_describe_handles_an_even_row_count():
+    """행 수가 짝수면 중앙값이 float 이 된다. 정수 포맷으로 찍으면 터진다.
+
+    파일 두 개만 재계산할 때 처음 드러났다 - 그전에는 981·539 로 홀수라
+    우연히 통과하고 있었다.
+    """
+    rows = [{"total": t} for t in (50, 60, 70, 80)]
+    rh.describe("이후", rows)          # 예외가 나면 실패다
+
+
+def test_describe_survives_an_empty_list():
+    rh.describe("이후", [])
+
+
+def test_describe_skips_blank_totals():
+    rh.describe("이후", [{"total": ""}, {"total": 70}])
+
+
 # ─── 출력 스키마 ────────────────────────────────────────────
 def test_recompute_preserves_every_input_column():
     """재기록은 history.FIELDS 로 쓴다. 입력에 있던 열이 사라지면 그 값이

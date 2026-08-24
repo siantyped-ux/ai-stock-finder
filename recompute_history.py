@@ -232,10 +232,11 @@ def describe(label: str, rows: list[dict], key: str = "total") -> None:
     if not vals:
         print(f"    {label}: 없음")
         return
+    # 중앙값은 행 수가 짝수면 float 이 된다. 정수 포맷으로 찍으면 터진다.
     v = sorted(vals)
-    print(f"    {label}: 평균 {st.mean(v):5.1f} · 중앙 {st.median(v):3d} "
-          f"· 최대 {max(v):3d} · 70이상 {sum(1 for x in v if x >= 70):>5}"
-          f" ({sum(1 for x in v if x >= 70)/len(v)*100:.1f}%)")
+    over = sum(1 for x in v if x >= 70)
+    print(f"    {label}: 평균 {st.mean(v):5.1f} · 중앙 {st.median(v):5.1f} "
+          f"· 최대 {max(v):3d} · 70이상 {over:>5} ({over/len(v)*100:.1f}%)")
 
 
 def compare(before: list[dict], after: list[dict]) -> None:
@@ -283,7 +284,11 @@ def main() -> None:
     p.add_argument("--workers", type=int, default=6)
     p.add_argument("--refresh", action="store_true", help="일봉 캐시를 무시하고 다시 받는다")
     p.add_argument("--pattern", default="history/*.csv")
+    p.add_argument("--backup-dir", default=str(BACKUP_DIR),
+                   help="원본 백업 폴더 (기본 history_pre_flow).\n"
+                        "  이미 있으면 거부한다 - 앞선 백업을 덮으면 되돌릴 곳이 없다")
     args = p.parse_args()
+    backup_dir = Path(args.backup_dir)
 
     files = archive_files(args.pattern)
     if not files:
@@ -321,14 +326,14 @@ def main() -> None:
         print("\n[*] dry-run 입니다. 기록하려면 --apply 를 주세요.")
         return
 
-    if BACKUP_DIR.exists():
-        print(f"\n[!] 백업 폴더 {BACKUP_DIR} 가 이미 있습니다. "
-              f"먼저 옮기거나 지운 뒤 다시 실행하세요.")
+    if backup_dir.exists():
+        print(f"\n[!] 백업 폴더 {backup_dir} 가 이미 있습니다. "
+              f"--backup-dir 로 다른 경로를 주거나 먼저 옮기세요.")
         sys.exit(1)
-    BACKUP_DIR.mkdir(parents=True)
+    backup_dir.mkdir(parents=True)
     for f in files:
-        shutil.copy2(f, BACKUP_DIR / f.name)
-    print(f"\n[*] 원본 {len(files)}개를 {BACKUP_DIR} 로 백업")
+        shutil.copy2(f, backup_dir / f.name)
+    print(f"\n[*] 원본 {len(files)}개를 {backup_dir} 로 백업")
 
     for f, rows in after_per_file.items():
         with open(f, "w", encoding="utf-8", newline="") as fh:

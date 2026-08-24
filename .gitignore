@@ -40,3 +40,4 @@ cache/
 
 # 재계산 전 아카이브 백업. git 에 원본이 있으므로 추적하지 않는다.
 history_pre_flow/
+history_pre_flow_0824/
