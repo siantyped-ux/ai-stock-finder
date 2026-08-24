@@ -1,7 +1,10 @@
 """종합점수·합의·신호 판정 순수 함수 테스트.
 
-ETF 편입으로 판정 로직에 손을 대므로, 주식 판정이 한 건도 바뀌지 않는지를
-회귀 테스트로 고정한다. 설계: docs/superpowers/specs/2026-08-22-us-etf-universe-design.md
+신호 판정(calc_signal)의 총점·비율 임계는 변하지 않았다. 바뀐 것은 축 구성과
+가중치이며, 그 회귀는 calc_total / calc_total_etf 쪽에 고정한다.
+
+설계: docs/superpowers/specs/2026-08-24-flow-axis-design.md
+      docs/superpowers/specs/2026-08-22-us-etf-universe-design.md (선행)
 """
 import pytest
 
@@ -40,28 +43,36 @@ def test_etf_signal_uses_ratio(total, cons, expected):
     assert sf.calc_signal(total, cons, n_axes=2) == expected
 
 
-# ─── ETF BUY 임계 완화 (1/2 로도 BUY) ──────────────────────
-# macro 축이 NEUTRAL 국면에서 최대 65 라 70 문턱을 못 넘는다. ETF 는 축이
-# 둘뿐이라 그 순간 1/2 로 고정되어 BUY 가 구조적으로 불가능했다.
-def test_etf_reaches_buy_with_one_of_two_axes():
-    got = sf.calc_signal(82, 1, n_axes=2, buy_ratio=sf.ETF_BUY_RATIO)
-    assert got == "BUY"
+# ─── ETF BUY 문턱 (완화 철회) ──────────────────────────────
+def test_etf_buy_requires_both_axes():
+    """완화(0.50)를 되돌렸다. ETF 는 가진 축 100% 가 70 이상이어야 BUY 다.
+
+    완화가 있던 동안 ETF 판정은 tech 단일 축 도장으로 붕괴했다 - 2026-08-22
+    실측 BUY 88건 전부 tech 하나로만 통과했고 macro >= 70 은 0건이었다.
+    macro 를 빼고 flow 를 넣어 두 축 다 살렸으므로 완화가 필요 없다.
+    """
+    assert sf.calc_signal(82, 1, n_axes=2) == "WATCH"
+    assert sf.calc_signal(82, 2, n_axes=2) == "STRONG_BUY"
 
 
-def test_etf_strong_buy_still_needs_both_axes():
-    """최상위 등급은 완화하지 않는다. 1/2 로 열면 ETF 대부분이 STRONG_BUY 가
-    되고 HITL 까지 전부 켜진다."""
-    assert sf.calc_signal(85, 1, n_axes=2, buy_ratio=sf.ETF_BUY_RATIO) == "BUY"
-    assert sf.calc_signal(85, 2, n_axes=2, buy_ratio=sf.ETF_BUY_RATIO) == "STRONG_BUY"
+def test_etf_bar_is_stricter_than_stock():
+    """ETF 2/2(100%) 는 주식 3/4(75%) 보다 엄격하다."""
+    assert sf.calc_signal(72, 1, n_axes=2) == "WATCH"   # 1/2 = 0.50
+    assert sf.calc_signal(72, 3, n_axes=4) == "BUY"     # 3/4 = 0.75
 
 
 def test_etf_low_total_still_fails_regardless_of_ratio():
-    """완화한 것은 합의 비율이지 점수 문턱이 아니다."""
-    assert sf.calc_signal(69, 2, n_axes=2, buy_ratio=sf.ETF_BUY_RATIO) == "WATCH"
-    assert sf.calc_signal(44, 2, n_axes=2, buy_ratio=sf.ETF_BUY_RATIO) == "AVOID"
+    """합의를 다 채워도 점수 문턱은 따로 넘어야 한다."""
+    assert sf.calc_signal(69, 2, n_axes=2) == "WATCH"
+    assert sf.calc_signal(44, 2, n_axes=2) == "AVOID"
 
 
-def test_relaxed_ratio_does_not_leak_into_stock_judgement():
+def test_no_asset_class_specific_buy_ratio_remains():
+    """ETF_BUY_RATIO 상수는 제거되었다. 자산군별 완화가 되살아나면 실패한다."""
+    assert not hasattr(sf, "ETF_BUY_RATIO")
+
+
+def test_stock_judgement_uses_the_default_ratio():
     """주식은 기본값을 쓴다. 2/4 로 BUY 가 나오면 안 된다."""
     assert sf.calc_signal(75, 2) == "WATCH"
     assert sf.calc_signal(75, 2, n_axes=4, buy_ratio=sf.STOCK_BUY_RATIO) == "WATCH"
@@ -76,30 +87,44 @@ def test_signal_ratio_thresholds_match_stock_counts():
     assert sf.calc_signal(60, 1, n_axes=4) == "HOLD"
 
 
-# ─── ETF 종합점수 (tech/macro 재정규화) ─────────────────────
+# ─── ETF 종합점수 (tech/flow 재정규화) ──────────────────────
 def test_etf_total_renormalizes_two_axes():
-    # 0.35/0.55 = 0.63636..., 0.20/0.55 = 0.36363...
+    # 0.30/0.50 = 0.60, 0.20/0.50 = 0.40
     assert sf.calc_total_etf(100, 100) == 100
     assert sf.calc_total_etf(0, 0) == 0
 
 
-def test_etf_total_weights_tech_more_than_macro():
-    # tech 가 높을 때가 macro 가 높을 때보다 점수가 높아야 한다.
+def test_etf_total_weights_tech_more_than_flow():
     assert sf.calc_total_etf(80, 40) > sf.calc_total_etf(40, 80)
 
 
 def test_etf_total_matches_hand_calculation():
-    # 80*0.63636 + 60*0.36363 = 50.909 + 21.818 = 72.727 → 73
-    assert sf.calc_total_etf(80, 60) == 73
+    # 80*0.60 + 60*0.40 = 48 + 24 = 72
+    assert sf.calc_total_etf(80, 60) == 72
 
 
-def test_etf_total_can_reach_the_70_filter():
-    """중립값 50 방식이었다면 못 넘었을 구간을 넘는지."""
-    assert sf.calc_total_etf(75, 62) >= 70
+def test_etf_total_matches_stock_scale():
+    """두 축이 모두 70 이면 주식이 네 축 모두 70 일 때와 같은 70 이 나온다.
+
+    척도 통일이 이 축 설계의 목적이다. 중립 50 대입 방식이었다면 같은
+    입력에서 45점이 나와 ETF 가 70 문턱에 영영 닿지 못했다.
+    """
+    assert sf.calc_total_etf(70, 70) == sf.calc_total(70, 70, 70, 70) == 70
 
 
 def test_etf_total_returns_int():
     assert isinstance(sf.calc_total_etf(71, 63), int)
+
+
+# ─── 주식 종합점수 (macro 제거 · flow 신설) ──────────────────
+def test_stock_total_matches_hand_calculation():
+    # 80*0.30 + 60*0.20 + 70*0.30 + 50*0.20 = 24 + 12 + 21 + 10 = 67
+    assert sf.calc_total(80, 60, 70, 50) == 67
+
+
+def test_stock_total_weights_sum_to_one():
+    assert sf.calc_total(100, 100, 100, 100) == 100
+    assert sf.calc_total(0, 0, 0, 0) == 0
 
 
 # ─── ETF 합의 개수 ─────────────────────────────────────────
@@ -124,57 +149,44 @@ ROWS = [
 
 
 def test_filter_keeps_at_and_above_threshold():
-    kept = sf.filter_for_output(ROWS, min_total=70, min_total_etf=78)
+    kept = sf.filter_for_output(ROWS, min_total=70)
     assert [r["t"] for r in kept] == ["AAA", "BBB"]
 
 
 def test_filter_threshold_zero_keeps_everything():
-    assert len(sf.filter_for_output(ROWS, min_total=0, min_total_etf=0)) == 4
+    assert len(sf.filter_for_output(ROWS, min_total=0)) == 4
 
 
 def test_filter_does_not_mutate_input():
-    sf.filter_for_output(ROWS, min_total=70, min_total_etf=78)
+    sf.filter_for_output(ROWS, min_total=70)
     assert len(ROWS) == 4
 
 
 def test_filter_drops_rows_without_total():
     rows = [{"t": "EEE", "at": "STOCK", "signal": "HOLD"}]
-    assert sf.filter_for_output(rows, min_total=70, min_total_etf=78) == []
+    assert sf.filter_for_output(rows, min_total=70) == []
 
 
-# ─── ETF 별도 임계 ─────────────────────────────────────────
-# ETF 는 분산 효과로 변동성이 낮아 tech 점수가 높게 나온다. 같은 70점 선으로
-# 자르면 대시보드가 ETF 로 뒤덮인다 (2026-08-22 실측: 주식 4.7% 통과 vs
-# ETF 16.8%).
+# ─── 단일 임계 (자산군별 임계 제거) ──────────────────────────
+# min_total_etf=78 은 척도가 어긋난 것을 표시 단계에서 가리던 땜질이었고
+# 순위는 고치지 못했다 - 주식 최고점이 77인데 77점 ETF 가 전 종목 위에 섰다.
+# flow 축으로 척도를 맞췄으므로 임계는 하나다.
 MIXED = [
     {"t": "STK", "at": "STOCK", "total": 72, "signal": "BUY"},
     {"t": "ETF77", "at": "ETF", "total": 77, "signal": "WATCH"},
-    {"t": "ETF78", "at": "ETF", "total": 78, "signal": "BUY"},
+    {"t": "ETF69", "at": "ETF", "total": 69, "signal": "WATCH"},
 ]
 
 
-def test_etf_uses_its_own_threshold():
-    kept = sf.filter_for_output(MIXED, min_total=70, min_total_etf=78)
-    assert [r["t"] for r in kept] == ["STK", "ETF78"]
+def test_same_threshold_applies_to_both_asset_classes():
+    kept = sf.filter_for_output(MIXED, min_total=70)
+    assert [r["t"] for r in kept] == ["STK", "ETF77"]
 
 
-def test_stock_threshold_does_not_apply_to_etfs():
-    """ETF77 은 주식 기준(70)은 넘지만 ETF 기준(78)은 못 넘는다."""
-    kept = sf.filter_for_output(MIXED, min_total=70, min_total_etf=78)
-    assert "ETF77" not in [r["t"] for r in kept]
-
-
-def test_etf_threshold_does_not_apply_to_stocks():
-    rows = [{"t": "STK", "at": "STOCK", "total": 72, "signal": "BUY"}]
-    kept = sf.filter_for_output(rows, min_total=70, min_total_etf=78)
-    assert [r["t"] for r in kept] == ["STK"]
-
-
-def test_missing_asset_type_is_treated_as_stock():
-    """옛 행에는 at 키가 없다. 그 시절 유니버스는 전부 개별주식이었다."""
-    rows = [{"t": "OLD", "total": 72, "signal": "BUY"}]
-    kept = sf.filter_for_output(rows, min_total=70, min_total_etf=78)
-    assert [r["t"] for r in kept] == ["OLD"]
+def test_filter_does_not_read_asset_type():
+    """자산군별 분기가 되살아나면 실패한다."""
+    rows = [{"t": "NOAT", "total": 72, "signal": "BUY"}]
+    assert [r["t"] for r in sf.filter_for_output(rows, min_total=70)] == ["NOAT"]
 
 
 # ─── 지표 카드 요약 (필터 이전 전체 기준) ────────────────────
@@ -189,7 +201,7 @@ SCANNED = [
 
 def test_summary_counts_the_full_scan_not_the_filtered_list():
     """이게 이 함수의 존재 이유다. 표시 목록만 세면 HITL 이 0이 된다."""
-    shown = sf.filter_for_output(SCANNED, min_total=70, min_total_etf=78)
+    shown = sf.filter_for_output(SCANNED, min_total=70)
     got = sf.scan_summary(SCANNED, shown)
 
     assert got["scanned"] == 5
@@ -200,7 +212,7 @@ def test_summary_counts_the_full_scan_not_the_filtered_list():
 
 def test_summary_hitl_survives_a_filter_that_excludes_every_avoid():
     """AVOID 는 총점 45 미만이라 70점 필터를 절대 통과하지 못한다."""
-    shown = sf.filter_for_output(SCANNED, min_total=70, min_total_etf=78)
+    shown = sf.filter_for_output(SCANNED, min_total=70)
     assert all(r["signal"] != "AVOID" for r in shown)
     assert sf.scan_summary(SCANNED, shown)["hitl"] == 2
 

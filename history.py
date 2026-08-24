@@ -19,11 +19,15 @@ import numpy as np
 KST = timezone(timedelta(hours=9))
 
 # 열 순서 고정. 변경 시 기존 CSV와 호환이 깨지므로 끝에만 추가할 것.
+#
+# flow 는 2026-08-24 신설된 수급 축이다. macro 는 총점에서 빠졌지만 열은
+# 남긴다 - 과거 행과의 연속성이 끊기고, 국면 분석에는 계속 쓸 수 있다.
+# regime 은 매매 계층의 국면 게이트가 읽는다.
 FIELDS = (
     "scan_ts_kst", "date", "ticker", "name", "market", "sector",
     "bar_date", "close", "volume", "avg_vol20", "atr14", "market_cap",
     "tech", "macro", "filing", "value", "total", "consensus", "signal",
-    "ev", "target", "hitl", "source", "asset_type",
+    "ev", "target", "hitl", "source", "asset_type", "flow", "regime",
 )
 
 # write_snapshot이 채우므로 호출자가 넘기지 않는 열
@@ -43,9 +47,13 @@ def kst_now() -> datetime:
 # 값이 비어도 되는 열. 시세 조회 실패나 소급 적재에서는 정상적으로 빈다.
 # filing/value 는 ETF 때문에 비워질 수 있다 - ETF 에는 개별기업 재무·공시
 # 데이터가 없다. 0 을 넣지 않는 것은 "0점을 받았다" 와 구분하기 위해서다.
+#
+# flow/regime 이 비어도 되는 이유는 소급 적재 때문이다. backfill_history 는
+# git 에 남은 dashboard_data.js 스냅샷을 재생하는데, 그 시절 스냅샷에는 두
+# 값이 아예 없다. 라이브 스캔은 항상 채운다.
 _NULLABLE_FIELDS = frozenset({
     "bar_date", "close", "volume", "avg_vol20", "atr14", "market_cap",
-    "filing", "value",
+    "filing", "value", "flow", "regime",
 })
 _REQUIRED_FIELDS = tuple(f for f in _ROW_FIELDS if f not in _NULLABLE_FIELDS)
 

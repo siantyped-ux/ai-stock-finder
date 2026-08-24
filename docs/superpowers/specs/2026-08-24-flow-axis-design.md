@@ -206,21 +206,42 @@ ETF에서 상관이 0에 가까운 것은 flow 가 tech 와 중복이 아니라 
 ## 마이그레이션
 
 주식 스코어링이 바뀌므로(macro .20 제거 · flow .20 신설 · tech .35→.30 · value .15→.20)
-과거 아카이브와 총점 비교가 깨진다. `exit_rules` 의 `exit_total=60` 판정이 흔들린다.
+과거 아카이브와 총점 비교가 깨진다. `exit_rules.evaluate()` 는 보유 종목의 그날 total 이
+`exit_total=60` 미만이면 청산하는데, 진입일은 구 척도 · 청산 판정일은 신 척도가 되어
+서로 다른 자로 잰 값을 비교하게 된다. `backtest.py` 도 아카이브 전체를 재생하므로 같은
+문제를 겪는다.
 
-**`backfill_history.py` 로 과거 21일치(2026-07-31 ~ 08-22) 재계산이 필수 선행 작업이다.**
+**`backfill_history.py` 는 이 일을 할 수 없다.** 그 스크립트는 git 에 남은
+`dashboard_data.js` 스냅샷을 **재생**할 뿐 점수를 재계산하지 않는다(2026-08-24 확인).
+게다가 옛 스냅샷에는 flow 를 만들 재료가 없다.
 
-`--min-total-etf` 임계 땜질은 제거한다.
+**필요한 것은 새 스크립트 `recompute_history.py` 다.** 다행히 재료는 다 있다.
+
+- `history/*.csv` 각 행에 `tech` · `macro` · `filing` · `value` 가 남아 있다 —
+  비싼 FMP 조회(filing/value)를 다시 할 필요가 없다
+- flow 만 새로 계산하면 되고, 그 재료는 OHLCV 다. `bar_date` 까지 잘라 쓰면
+  룩어헤드가 없다 (`backfill_history.slice_to_date` 재사용)
+- 그 다음 `calc_total` · `calc_consensus` · `calc_signal` · `calc_ev_and_target` 를
+  신 산식으로 다시 돌려 CSV 를 재기록한다
+
+`regime` 은 소급 복원할 수 있다 — 그날의 VIX/US10Y 로 `calc_macro_score` 를 다시 돌리면
+된다. 다만 국면 게이트는 앞으로의 진입에만 쓰이므로 소급이 필수는 아니다.
+
+`--min-total-etf` 임계 땜질은 제거했다.
 
 ## 구현 순서
 
 1. `flow.py` + `tests/test_flow.py` — **완료** (21 테스트 통과)
-2. `stock_finder.py` 통합: 가중치 변경 · macro 게이트화 · `ETF_BUY_RATIO` 제거 ·
-   tech 의 `vol_ratio` 제거 · `min_total_etf` 제거
-3. `backfill_history.py` 로 과거 21일치 재계산
+2. `stock_finder.py` 통합 — **완료**: 가중치 변경 · macro 를 총점/합의에서 제거 ·
+   `ETF_BUY_RATIO` 제거 · tech 의 거래량 항목을 flow 로 이관 · `--min-total-etf` 제거 ·
+   `history` 에 `flow`/`regime` 열 추가. 전체 352 테스트 통과, `--test` 스캔 검증 완료
+   (SPY 63→52점)
+3. `recompute_history.py` 신규 작성 후 과거 21일치(2026-07-31 ~ 08-22) 재계산
 4. 백테스트로 신·구 산식 R 통계 비교
-5. ETF 파이프라인 4항목
+5. ETF 파이프라인 4항목 (국면 게이트를 `trade_sim` 에 붙이는 것도 여기)
 6. 실행 레이어 (`verify_quotes.py` 정규장 판정 통과가 전제)
+
+3번을 하기 전까지 `backtest.py` 결과는 두 척도가 섞인 값이므로 신뢰할 수 없다.
 
 ## 미결 사항
 

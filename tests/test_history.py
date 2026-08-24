@@ -244,9 +244,19 @@ def test_atr_uses_the_gap_branch_not_just_the_daily_range():
 
 
 # ─── asset_type 컬럼 (ETF 편입) ────────────────────────────
-def test_fields_end_with_asset_type():
-    """컬럼은 끝에만 추가한다. 중간에 넣으면 기존 CSV 와 호환이 깨진다."""
-    assert history.FIELDS[-1] == "asset_type"
+def test_new_columns_are_appended_at_the_end():
+    """컬럼은 끝에만 추가한다. 중간에 넣으면 기존 CSV 와 호환이 깨진다.
+
+    flow/regime 은 2026-08-24 에 asset_type 뒤로 붙였다.
+    """
+    assert history.FIELDS[-3:] == ("asset_type", "flow", "regime")
+
+
+def test_flow_and_regime_are_nullable():
+    """소급 적재는 두 값을 만들어낼 수 없다. backfill_history 는 옛
+    dashboard_data.js 스냅샷을 재생하는데 그 시절 스냅샷에는 없던 값이다."""
+    assert "flow" in history._NULLABLE_FIELDS
+    assert "regime" in history._NULLABLE_FIELDS
 
 
 def test_filing_and_value_are_nullable_for_etfs():
