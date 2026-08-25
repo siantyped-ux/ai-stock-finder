@@ -28,6 +28,9 @@ FIELDS = (
     "bar_date", "close", "volume", "avg_vol20", "atr14", "market_cap",
     "tech", "macro", "filing", "value", "total", "consensus", "signal",
     "ev", "target", "hitl", "source", "asset_type", "flow", "regime",
+    # 2026-08-25 추가. 청산 리포트가 "어느 시장 상품인가"(NYSE·NASDAQ·ETF)를
+    # 적으려면 이력이 거래소를 들고 있어야 한다. 그 이전 행에는 없다.
+    "exchange",
 )
 
 # write_snapshot이 채우므로 호출자가 넘기지 않는 열
@@ -53,7 +56,7 @@ def kst_now() -> datetime:
 # 값이 아예 없다. 라이브 스캔은 항상 채운다.
 _NULLABLE_FIELDS = frozenset({
     "bar_date", "close", "volume", "avg_vol20", "atr14", "market_cap",
-    "filing", "value", "flow", "regime",
+    "filing", "value", "flow", "regime", "exchange",
 })
 _REQUIRED_FIELDS = tuple(f for f in _ROW_FIELDS if f not in _NULLABLE_FIELDS)
 

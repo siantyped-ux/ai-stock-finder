@@ -215,3 +215,50 @@ def test_the_only_market_never_leaves():
     rows = [_r("d1", "US"), _r("d2", "US")]
 
     assert bt.universe_exit_dates(rows) == {}
+
+
+# ─── 리포트 시작일 ───────────────────────────────────────────
+# 07-31~08-21 아카이브는 66%가 backfill 이라 스코어가 미확정 봉 결함에
+# 오염돼 있다. 깨끗한 live 구간부터 다시 세려면 그 앞을 잘라야 한다.
+
+def test_start_date_drops_earlier_rows():
+    rows = [{"ticker": "A", "market": "US", "date": "2026-08-24",
+             "total": "80", "signal": "BUY", "source": "live"},
+            {"ticker": "A", "market": "US", "date": "2026-08-25",
+             "total": "80", "signal": "BUY", "source": "live"}]
+
+    kept = bt.filter_rows(rows, start_date="2026-08-25")
+
+    assert [r["date"] for r in kept] == ["2026-08-25"]
+
+
+def test_the_start_date_itself_is_kept():
+    rows = [{"ticker": "A", "market": "US", "date": "2026-08-25",
+             "total": "80", "signal": "BUY", "source": "live"}]
+
+    assert len(bt.filter_rows(rows, start_date="2026-08-25")) == 1
+
+
+def test_no_start_date_keeps_everything():
+    rows = [{"ticker": "A", "market": "US", "date": "2026-07-31",
+             "total": "80", "signal": "BUY", "source": "live"}]
+
+    assert len(bt.filter_rows(rows)) == 1
+
+
+# ─── 시장 표시 ───────────────────────────────────────────────
+# 청산 리포트에 "어느 시장 상품인가"를 적는다. ETF 는 거래소보다 자산군이
+# 중요하다 - AMEX 라고 적혀 있으면 NYSE Arca 상장 ETF 인지 알 수 없다.
+
+def test_venue_of_an_etf_is_the_asset_class():
+    assert bt.venue_of({"asset_type": "ETF", "exchange": "AMEX"}) == "ETF"
+
+
+def test_venue_of_a_stock_is_its_exchange():
+    assert bt.venue_of({"asset_type": "STOCK", "exchange": "NASDAQ"}) == "NASDAQ"
+
+
+def test_venue_is_blank_when_the_archive_predates_the_column():
+    # 2026-08-25 이전 행에는 거래소가 없다. 지어내지 않는다.
+    assert bt.venue_of({"asset_type": "STOCK", "exchange": ""}) == ""
+    assert bt.venue_of({"asset_type": "STOCK"}) == ""

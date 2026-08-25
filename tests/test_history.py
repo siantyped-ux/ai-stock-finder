@@ -249,7 +249,7 @@ def test_new_columns_are_appended_at_the_end():
 
     flow/regime 은 2026-08-24 에 asset_type 뒤로 붙였다.
     """
-    assert history.FIELDS[-3:] == ("asset_type", "flow", "regime")
+    assert history.FIELDS[-4:] == ("asset_type", "flow", "regime", "exchange")
 
 
 def test_flow_and_regime_are_nullable():
@@ -299,3 +299,17 @@ def test_stock_row_still_requires_filing_and_value_values(tmp_path):
     written = list(csv.DictReader(open(path, encoding="utf-8")))
     assert written[0]["asset_type"] == "STOCK"
     assert written[0]["filing"] == "65"
+
+
+# ─── exchange 컬럼 (2026-08-25) ─────────────────────────────
+# 청산 리포트에 "어느 시장 상품인가"(NYSE·NASDAQ·ETF)를 적으려면 아카이브가
+# 거래소를 들고 있어야 한다. 유니버스 튜플에는 있었지만 이력에는 없었다.
+
+def test_exchange_is_appended_at_the_end():
+    """열은 끝에만 붙인다. 중간에 넣으면 기존 CSV 와 어긋난다."""
+    assert history.FIELDS[-1] == "exchange"
+
+
+def test_exchange_may_be_blank():
+    # 2026-08-25 이전 행에는 없다. 없다고 적재가 실패하면 안 된다.
+    assert "exchange" in history._NULLABLE_FIELDS

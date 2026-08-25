@@ -31,6 +31,12 @@ import trade_sim as ts
 # 내도 성과 측정에서 통째로 사라진다.
 CAPITAL_USD = 1000
 
+# 성과 집계 시작일. 이 앞의 아카이브(2026-07-31~08-21)는 66% 가 backfill 이라
+# 스코어가 미확정 봉 결함에 오염돼 있고, 한국 종목까지 섞여 있다. 깨끗한 live
+# 구간부터 다시 센다. 아카이브 자체는 지우지 않는다 - 백테스트는 여전히 전체를
+# 볼 수 있어야 한다.
+REPORT_START = "2026-08-25"
+
 # 2구획 커스텀 서식. 음수 구획에 - 를 명시하므로 회계 서식의 괄호 표기
 # (636.00) 는 나오지 않는다. 정액이 $1,000 이라 센트가 유의미하다.
 MONEY_FMT = '#,##0.00;-#,##0.00'
@@ -132,7 +138,8 @@ def target_cols(trade) -> dict:
 
 
 def build_rows(result: dict, capital: int = CAPITAL_USD,
-               costs: ts.Costs = None, params: er.Params = None) -> dict:
+               costs: ts.Costs = None, params: er.Params = None,
+               start_date: str = REPORT_START) -> dict:
     """청산완료·미결·요약 세 덩어리로 나눈다.
 
     미결을 승률에 섞지 않는다. trade_sim.summarize 와 같은 원칙이다.
@@ -143,6 +150,9 @@ def build_rows(result: dict, capital: int = CAPITAL_USD,
     costs = costs or ts.Costs()
     params = params or er.Params()
     mark_date = result["newest_bar"]
+    # 티커 -> NYSE|NASDAQ|AMEX|ETF. 2026-08-25 이전 아카이브에는 거래소 열이
+    # 없어 빈 값이 온다 - 지어내지 않고 그대로 비운다.
+    venues = result.get("venues") or {}
 
     closed, opened = [], []
     for t in result["trades"]:
@@ -157,9 +167,12 @@ def build_rows(result: dict, capital: int = CAPITAL_USD,
             row["trail_trigger"] = sv["trail_trigger"]
             row["trail"] = "ON" if sv["trail_active"] else "off"
             row.update(target_cols(t))
+            row["venue"] = venues.get(t.ticker, "")
             opened.append(row)
         else:
-            closed.append(to_row(t, capital, costs))
+            row = to_row(t, capital, costs)
+            row["venue"] = venues.get(t.ticker, "")
+            closed.append(row)
 
     closed.sort(key=lambda r: (r["exit_date"], r["ticker"]))
     opened.sort(key=lambda r: (r["entry_date"], r["ticker"]))
@@ -190,6 +203,9 @@ def build_rows(result: dict, capital: int = CAPITAL_USD,
             "open_net_usd": sum(r["net_usd"] for r in opened),
             "capital": capital,
             "use_target": params.use_target,
+            # 실제로 쓴 시작일을 담는다. 요약이 상수를 찍으면 --start-date 로
+            # 바꿔 돌렸을 때 표시가 거짓말을 한다.
+            "start_date": start_date,
         },
     }
 
@@ -198,6 +214,7 @@ def build_rows(result: dict, capital: int = CAPITAL_USD,
 # 손익은 가격 x 수량이라 둘이 다 보여야 검산이 된다.
 CLOSED_COLS = [
     ("상품티커", "ticker", None),
+    ("시장", "venue", None),
     ("진입일자", "entry_date", None),
     ("진입가격", "entry_price", PRICE_FMT),
     ("청산일자", "exit_date", None),
@@ -212,6 +229,7 @@ CLOSED_COLS = [
 
 OPEN_COLS = [
     ("상품티커", "ticker", None),
+    ("시장", "venue", None),
     ("진입일자", "entry_date", None),
     ("진입가격", "entry_price", PRICE_FMT),
     ("평가기준일", "exit_date", None),
@@ -342,6 +360,8 @@ def _write_summary(ws, by_track: dict) -> None:
         ("", warn[2]),
         ("", ""),
         ("리포트 생성", any_summary["generated"] if any_summary else "-"),
+        ("집계 시작일",
+         any_summary["start_date"] if any_summary else REPORT_START),
         ("평가기준일", c["mark_date"]),
         ("시세 조회 실패", ", ".join(c["failed"]) if c["failed"] else "없음"),
     ]
@@ -441,6 +461,8 @@ def main():
     console.force_utf8()
     p = argparse.ArgumentParser(description="가상매매 성과 누적 리포트")
     p.add_argument("--out-dir", default="reports")
+    p.add_argument("--start-date", default=REPORT_START,
+                   help=f"집계 시작일 (기본: {REPORT_START})")
     p.add_argument("--capital", type=int, default=CAPITAL_USD,
                    help="종목당 최대 진입금액 USD (기본: 1000)")
     p.add_argument("--mail", action="store_true",
@@ -458,12 +480,14 @@ def main():
         pattern = tracks.history_glob(key)
         # us_only 로 돌린다. 리포트 금액이 전부 달러라 원화로 호가되는
         # 한국 종목이 섞이면 안 된다 - 아카이브 07-31~08-21 구간에 남아 있다.
-        result = backtest.run(pattern, params, us_only=True)
+        result = backtest.run(pattern, params, us_only=True,
+                              start_date=args.start_date)
         if not result["dates"]:
             print(f"[!] {label}: 아카이브가 비어 있다 ({pattern})")
             by_track[key] = None
             continue
-        by_track[key] = build_rows(result, args.capital, params=params)
+        by_track[key] = build_rows(result, args.capital, params=params,
+                                   start_date=args.start_date)
         print(f"[*] {label}: 트레이드 {len(result['trades'])}건")
 
     if not any(by_track.values()):

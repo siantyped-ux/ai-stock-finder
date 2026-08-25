@@ -1536,6 +1536,7 @@ def main():
                     "total": total, "consensus": cons, "signal": signal,
                     "ev": ev, "target": target, "hitl": hitl,
                     "source": "live", "flow": flow_score, "regime": regime,
+                    "exchange": exchange,
                     **px,
                 }
                 # ETF 는 yfinance info 에 marketCap 이 없어 price_fields 가

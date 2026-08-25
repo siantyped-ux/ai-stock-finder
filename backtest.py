@@ -87,8 +87,13 @@ def fetch_bars(ticker: str) -> dict:
 
 
 def filter_rows(rows: list, us_only: bool = False,
-                entry_total: int = None) -> list:
+                entry_total: int = None, start_date: str = None) -> list:
     """아카이브 행을 진입 조건에 맞게 걸러 낸다.
+
+    start_date 는 그 날짜부터만 본다. 07-31~08-21 구간은 66% 가 backfill 이라
+    스코어가 미확정 봉 결함에 오염돼 있어, 깨끗한 live 구간부터 다시 세려면
+    앞을 잘라야 한다. 자르면 그 이전 BUY 전환도 함께 사라져 진입이 생기지
+    않는다 - 의도한 동작이다.
 
     us_only 는 과거 아카이브에 남아 있는 한국 행을 뺀다. 7/31~8/22 데이터에는
     KR 이 들어 있어서, 미국 단독 성과를 보려면 여기서 빼야 한다.
@@ -102,6 +107,8 @@ def filter_rows(rows: list, us_only: bool = False,
     """
     out = []
     for r in rows:
+        if start_date and r["date"] < start_date:
+            continue
         if us_only and r.get("market") != "US":
             continue
         if entry_total is not None:
@@ -110,6 +117,18 @@ def filter_rows(rows: list, us_only: bool = False,
                 r = {**r, "signal": "BUY"}
         out.append(r)
     return out
+
+
+def venue_of(row: dict) -> str:
+    """그 종목을 어느 시장 상품으로 표시할지. 모르면 빈 문자열.
+
+    ETF 는 거래소보다 자산군이 중요하다 - FMP 가 NYSE Arca 를 AMEX 로 주기
+    때문에 거래소만 적으면 무엇인지 알 수 없다. 2026-08-25 이전 아카이브에는
+    exchange 열이 없으므로 지어내지 않고 비워 둔다.
+    """
+    if row.get("asset_type") == "ETF":
+        return "ETF"
+    return row.get("exchange") or ""
 
 
 def universe_exit_dates(rows: list) -> dict:
@@ -142,13 +161,14 @@ def universe_exit_dates(rows: list) -> dict:
 
 def run(pattern: str = "history/*.csv", params: er.Params = None,
         costs: ts.Costs = None, us_only: bool = False,
-        entry_total: int = None, limits: pf.Limits = None) -> dict:
+        entry_total: int = None, limits: pf.Limits = None,
+        start_date: str = None) -> dict:
     """아카이브 전체를 시뮬레이션하고 트레이드·통계·커버리지를 돌려준다."""
     params = params or er.Params()
     costs = costs or ts.Costs()
 
     rows = filter_rows(load_archive(pattern), us_only=us_only,
-                       entry_total=entry_total)
+                       entry_total=entry_total, start_date=start_date)
 
     # 아카이브에 (ticker, date) 중복이 실제로 존재한다. 그대로 두면
     # simulate_ticker 가 같은 봉을 두 번 처리해 진입 봉까지 평가하게 되고
@@ -175,7 +195,7 @@ def run(pattern: str = "history/*.csv", params: er.Params = None,
 
     trades, failed = [], []
     newest_bar = None
-    prepared_by_ticker, bars_by_ticker, markets = {}, {}, {}
+    prepared_by_ticker, bars_by_ticker, markets, venues = {}, {}, {}, {}
     for ticker in sorted(candidates):
         bars = fetch_bars(ticker)
         if not bars:
@@ -192,6 +212,7 @@ def run(pattern: str = "history/*.csv", params: er.Params = None,
         prepared_by_ticker[ticker] = prepared
         bars_by_ticker[ticker] = bars
         markets[ticker] = rs[0]["market"]
+        venues[ticker] = venue_of(rs[0])
 
     # 제약이 없으면 종목별 시뮬레이션을 그대로 쓴다. 포트폴리오 경로와 결과가
     # 같아야 하지만(tests/test_portfolio.py 회귀), 굳이 우회할 이유도 없다.
@@ -223,6 +244,8 @@ def run(pattern: str = "history/*.csv", params: er.Params = None,
         "candidates": sorted(candidates),
         "failed": failed,
         "newest_bar": newest_bar,
+        # 티커 -> NYSE|NASDAQ|AMEX|ETF. 리포트의 시장 열이 이걸 쓴다.
+        "venues": venues,
         # 전환은 났지만 진입할 세션이 아직 없어 트레이드가 안 생긴 종목.
         # 이 줄이 없으면 "후보 N 인데 트레이드 M" 이 결함처럼 보인다.
         "never_entered": sorted(candidates - {t.ticker for t in trades}
@@ -302,6 +325,8 @@ def main():
                    help="목표가 도달 시 익절한다 (기본: 사용 안 함)")
     p.add_argument("--us-only", action="store_true",
                    help="아카이브의 한국 행을 제외한다")
+    p.add_argument("--start-date", default=None,
+                   help="이 날짜부터의 아카이브만 본다 (YYYY-MM-DD)")
     p.add_argument("--entry-total", type=int, default=None,
                    help="이 점수 이상이면 BUY 로 간주해 진입한다 (비교용)")
     p.add_argument("--max-positions", type=int, default=0,
@@ -322,7 +347,8 @@ def main():
     limits = pf.Limits(max_positions=args.max_positions,
                        max_correlation=args.max_correlation)
     report(run(args.history, params, us_only=args.us_only,
-               entry_total=args.entry_total, limits=limits))
+               entry_total=args.entry_total, limits=limits,
+               start_date=args.start_date))
 
 
 if __name__ == "__main__":

@@ -150,11 +150,11 @@ def test_closed_sheet_leads_with_the_requested_columns(tmp_path):
     _write(path, pr.build_rows(_result([_trade()])))
 
     header = [c.value for c in load_workbook(path)["주식 청산완료"][1]]
-    assert header[:9] == ["상품티커", "진입일자", "진입가격",
-                          "청산일자", "청산가격", "총수익($)",
-                          "총수익(%)", "순수익($)", "순수익(%)"]
-    # 환율 열은 사라졌다. 미국 종목만 보므로 금액이 전부 달러다.
-    assert header[9:] == ["수량", "청산사유"]
+    # 환율 열은 사라졌다(미국 종목만 보므로 금액이 전부 달러). 시장 열이
+    # 티커 옆에 붙었다.
+    assert header == ["상품티커", "시장", "진입일자", "진입가격",
+                      "청산일자", "청산가격", "총수익($)", "총수익(%)",
+                      "순수익($)", "순수익(%)", "수량", "청산사유"]
 
 
 def test_negative_money_renders_with_a_minus_sign(tmp_path):
@@ -162,7 +162,7 @@ def test_negative_money_renders_with_a_minus_sign(tmp_path):
     _write(path, pr.build_rows(
         _result([_trade(exit_price=90.0, mark_price=90.0)])))
 
-    cell = load_workbook(path)["주식 청산완료"]["F2"]
+    cell = _cell(path, "주식 청산완료", "총수익($)")
 
     assert cell.value < 0
     assert cell.number_format == "#,##0.00;-#,##0.00"
@@ -175,7 +175,7 @@ def test_percent_cells_store_the_readable_number_not_a_fraction(tmp_path):
     path = tmp_path / "r.xlsx"
     _write(path, pr.build_rows(_result([_trade()])))
 
-    cell = load_workbook(path)["주식 청산완료"]["G2"]
+    cell = _cell(path, "주식 청산완료", "총수익(%)")
 
     assert cell.value > 1.0
     assert cell.number_format == '0.00"%";-0.00"%"'
@@ -200,9 +200,10 @@ def test_open_sheet_labels_the_valuation_columns(tmp_path):
 
     header = [c.value for c in load_workbook(path)["주식 미결포지션"][1]]
 
-    assert header[3] == "평가기준일"
-    assert header[4] == "현재가"
-    assert header[10] == "보유봉수"
+    # 평가 시점 열이 청산 시트의 청산일자·청산가격 자리를 대신한다.
+    assert "평가기준일" in header and "현재가" in header
+    assert header.index("평가기준일") < header.index("현재가")
+    assert "보유봉수" in header
 
 
 def test_summary_leads_with_the_contamination_warning(tmp_path):
@@ -277,7 +278,7 @@ def test_closed_sheet_is_untouched_by_the_stop_columns(tmp_path):
 
     header = [c.value for c in load_workbook(path)["주식 청산완료"][1]]
 
-    assert len(header) == 11
+    assert len(header) == 12
     assert "손절가" not in header
 
 
@@ -569,3 +570,63 @@ def test_the_report_asks_the_backtest_for_us_rows_only(monkeypatch):
 
     assert seen, "백테스트를 부르지 않았다"
     assert all(kw.get("us_only") for kw in seen.values())
+    # 집계는 정해진 날짜부터다. 그 앞 구간은 backfill 오염이라 성과로 셀 수 없다.
+    assert all(kw.get("start_date") == pr.REPORT_START
+               for kw in seen.values())
+
+
+def test_the_summary_says_when_counting_started(tmp_path):
+    path = tmp_path / "r.xlsx"
+    _write(path, pr.build_rows(_result([_trade()])))
+
+    labels = {r[0].value: r[1].value
+              for r in load_workbook(path)["요약"].iter_rows()}
+    assert labels["집계 시작일"] == pr.REPORT_START
+
+
+def test_the_summary_reports_the_start_date_actually_used(tmp_path):
+    """상수를 찍으면 --start-date 로 바꿔 돌렸을 때 표시가 거짓말을 한다."""
+    path = tmp_path / "r.xlsx"
+    _write(path, pr.build_rows(_result([_trade()]),
+                               start_date="2026-08-01"))
+
+    labels = {r[0].value: r[1].value
+              for r in load_workbook(path)["요약"].iter_rows()}
+    assert labels["집계 시작일"] == "2026-08-01"
+
+
+# ─── 시장 열 ─────────────────────────────────────────────────
+# "어느 시장 상품인가"(NYSE·NASDAQ·ETF)가 없으면 티커만 보고 판단해야 한다.
+
+def test_closed_sheet_carries_the_venue(tmp_path):
+    path = tmp_path / "r.xlsx"
+    _write(path, pr.build_rows(
+        _result([_trade(ticker="AAA")], venues={"AAA": "NASDAQ"})))
+
+    assert _cell(path, "주식 청산완료", "시장").value == "NASDAQ"
+
+
+def test_open_sheet_carries_the_venue(tmp_path):
+    path = tmp_path / "r.xlsx"
+    _write(path, pr.build_rows(
+        _result([_held(ticker="SPY")], venues={"SPY": "ETF"})))
+
+    assert _cell(path, "주식 미결포지션", "시장").value == "ETF"
+
+
+def test_the_venue_is_blank_when_the_archive_did_not_have_it(tmp_path):
+    # 2026-08-25 이전 아카이브에는 exchange 열이 없다. 지어내지 않는다.
+    path = tmp_path / "r.xlsx"
+    _write(path, pr.build_rows(_result([_trade(ticker="AAA")])))
+
+    assert _cell(path, "주식 청산완료", "시장").value in (None, "")
+
+
+def test_the_venue_sits_next_to_the_ticker(tmp_path):
+    # 티커 옆이 아니면 무엇의 시장인지 눈으로 잇기 어렵다.
+    path = tmp_path / "r.xlsx"
+    _write(path, pr.build_rows(
+        _result([_trade(ticker="AAA")], venues={"AAA": "NYSE"})))
+
+    header = [c.value for c in load_workbook(path)["주식 청산완료"][1]]
+    assert header[:2] == ["상품티커", "시장"]
