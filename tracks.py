@@ -13,8 +13,6 @@
 """
 from __future__ import annotations
 
-from pathlib import Path
-
 TRACKS = {
     "stocks": {
         "label": "미국 주식",
@@ -23,14 +21,12 @@ TRACKS = {
         # 대시보드 전역 변수 접미사. 한 페이지가 두 파일을 함께 읽으므로
         # 이름이 같으면 나중에 로드된 쪽이 앞의 것을 덮어쓴다.
         "suffix": "",
-        "report_prefix": "perf",
     },
     "etf": {
         "label": "ETF",
         "history": "history_etf",
         "dashboard": "dashboard_data_etf.js",
         "suffix": "_ETF",
-        "report_prefix": "perf_etf",
     },
 }
 
@@ -50,12 +46,3 @@ def paths(track: str) -> dict:
 def history_glob(track: str) -> str:
     """그 트랙 아카이브의 glob 패턴."""
     return f"{paths(track)['history']}/*.csv"
-
-
-def report_path(track: str, out_dir: str, stamp: str) -> Path:
-    """그 트랙 리포트의 저장 경로.
-
-    트랙마다 접두사가 달라야 한다. 같으면 같은 날 두 리포트가 한 파일을 놓고
-    다투고, 나중에 도는 쪽만 남는다.
-    """
-    return Path(out_dir) / f"{paths(track)['report_prefix']}_{stamp}.xlsx"
