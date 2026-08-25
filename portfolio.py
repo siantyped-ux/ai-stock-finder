@@ -21,6 +21,7 @@ from dataclasses import dataclass
 from typing import Callable, Optional
 
 import exit_rules as er
+import sizing
 import trade_sim as ts
 
 
@@ -111,13 +112,15 @@ def simulate(rows_by_ticker: dict, bars_by_ticker: dict, markets: dict,
              params: er.Params = None, costs: ts.Costs = None,
              limits: Limits = None,
              correlator: Optional[Callable] = None,
-             universe_exits: dict = None) -> dict:
+             universe_exits: dict = None,
+             account: sizing.Account = None) -> dict:
     """날짜 순으로 포트폴리오를 재현한다.
 
     rows_by_ticker  티커 -> 아카이브 행 목록(date·signal·total·target·source)
     bars_by_ticker  티커 -> {날짜: exit_rules.Bar}
     markets         티커 -> 'US' | 'KR' (비용 계산용)
     universe_exits  market -> 그 시장이 빠진 것을 알아차린 첫 스캔일
+    account         계좌. 주지 않으면 자본 제약이 없다(신호가 나면 무조건 진입)
 
     반환에는 trades 와 함께 rejected 가 들어간다. 무엇을 왜 막았는지 세지
     않으면 상한이 조용히 기회를 죽여도 알 수 없다.
@@ -137,7 +140,10 @@ def simulate(rows_by_ticker: dict, bars_by_ticker: dict, markets: dict,
     sources: dict = {}         # ticker -> 진입일 source
     last_close: dict = {}
     trades = []
-    rejected = {"capacity": 0, "correlation": 0}
+    # 현금과 보유 수량. account 가 없으면 자본 개념 자체가 없다.
+    cash = account.capital if account else None
+    qty_by_ticker: dict = {}
+    rejected = {"capacity": 0, "correlation": 0, "cash": 0}
     rejected_pairs = []
 
     def bar_for(ticker: str, date: str, total=None):
@@ -161,9 +167,16 @@ def simulate(rows_by_ticker: dict, bars_by_ticker: dict, markets: dict,
                 continue
             decision = er.evaluate(positions[ticker], bar, params)
             if decision is not None:
+                qty = qty_by_ticker.pop(ticker, None)
                 trades.append(ts.make_trade(positions[ticker], markets.get(ticker, "US"),
                                             sources.get(ticker, ""), decision.price,
-                                            decision.date, decision.reason, costs))
+                                            decision.date, decision.reason, costs,
+                                            qty))
+                # 회수금은 다음 신호에 다시 쓰인다. 비용은 빼지 않는다 -
+                # make_trade 가 cost_r 로 이미 계산하고, 편도 0.15% 가 매수
+                # 가능 주 수를 바꾸는 경우는 사실상 없다.
+                if cash is not None and qty:
+                    cash += qty * decision.price
                 del positions[ticker]
                 closed_today.add(ticker)
             else:
@@ -202,6 +215,15 @@ def simulate(rows_by_ticker: dict, bars_by_ticker: dict, markets: dict,
                 continue
             pos = er.open_position(ticker, date, bar.open, bar.atr14, params,
                                    row.get("target"))
+            if account is not None:
+                # r_unit 은 open_position 이 정한 뒤에야 알 수 있다.
+                qty = sizing.shares(cash, account, bar.open, pos.r_unit)
+                if qty < 1:
+                    rejected["cash"] += 1
+                    continue
+                cash -= qty * bar.open
+                qty_by_ticker[ticker] = qty
+
             positions[ticker] = er.advance(pos, bar, params)
             sources[ticker] = row["source"]
             last_close[ticker] = bar.close
@@ -214,10 +236,14 @@ def simulate(rows_by_ticker: dict, bars_by_ticker: dict, markets: dict,
             positions[ticker], bars_by_ticker.get(ticker, {}),
             (universe_exits or {}).get(markets.get(ticker, "US")), params)
         if decision is not None:
+            qty = qty_by_ticker.pop(ticker, None)
             trades.append(ts.make_trade(positions[ticker],
                                         markets.get(ticker, "US"),
                                         sources.get(ticker, ""), decision.price,
-                                        decision.date, decision.reason, costs))
+                                        decision.date, decision.reason, costs,
+                                        qty))
+            if cash is not None and qty:
+                cash += qty * decision.price
             del positions[ticker]
 
     # ── 미결 포지션을 마지막 종가로 평가 ──
@@ -226,11 +252,15 @@ def simulate(rows_by_ticker: dict, bars_by_ticker: dict, markets: dict,
         if close is not None:
             trades.append(ts.make_trade(pos, markets.get(ticker, "US"),
                                         sources.get(ticker, ""), close,
-                                        None, None, costs))
+                                        None, None, costs,
+                                        qty_by_ticker.get(ticker)))
 
     return {
         "trades": trades,
         "summary": ts.summarize(trades),
         "rejected": rejected,
         "rejected_pairs": rejected_pairs,
+        # 리포트가 자본 사용률을 낸다. account 가 없으면 둘 다 None 이다.
+        "cash": cash,
+        "capital": account.capital if account else None,
     }
