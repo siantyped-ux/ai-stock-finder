@@ -54,7 +54,7 @@ def test_two_tickers_both_enter_without_a_cap():
     got = pf.simulate({"A": r, "B": r}, {"A": b, "B": b},
                       {"A": "US", "B": "US"})
     assert len(got["trades"]) == 2
-    assert got["rejected"] == {"capacity": 0, "correlation": 0}
+    assert got["rejected"] == {"capacity": 0, "correlation": 0, "cash": 0}
 
 
 # ─── 동시 진입 상한 ─────────────────────────────────────────
@@ -289,3 +289,86 @@ def test_universe_exit_matches_simulate_ticker():
     assert mine.exit_date == theirs.exit_date
     assert mine.exit_price == theirs.exit_price
     assert mine.net_r == pytest.approx(theirs.net_r)
+
+
+# --- capital constraint ---------------------------------------------------
+# Without capital there is no way to express "could not buy, the cash was
+# gone" - that is a statement about other positions, so it only exists at the
+# portfolio layer.
+
+import sizing
+
+
+def test_quantity_is_recorded_on_the_trade():
+    r = rows(["HOLD", "BUY", "BUY"])
+    b = bars(DATES, [100, 100, 105, 110, 115])
+
+    got = pf.simulate({"A": r}, {"A": b}, {"A": "US"},
+                      account=sizing.Account(capital=10_000))
+
+    # 1R = ATR 1.0 x 3 = 3.0. risk budget 100 / 3 = 33 shares.
+    # position cap 2,000 / 100 = 20 shares. The cap wins.
+    assert got["trades"][0].qty == 20
+
+
+def test_cash_runs_out_and_the_rest_is_skipped():
+    r = rows(["HOLD", "BUY", "BUY"])
+    b = bars(DATES, [100, 100, 105, 110, 115])
+    names = ["A", "B", "C", "D", "E", "F"]
+
+    got = pf.simulate({n: r for n in names}, {n: b for n in names},
+                      {n: "US" for n in names},
+                      account=sizing.Account(capital=10_000))
+
+    assert len(got["trades"]) == 5
+    assert got["rejected"]["cash"] == 1
+
+
+def test_the_highest_score_gets_the_cash():
+    # 자본 $10,000 에 상한 20% 면 $2,000 짜리 자리가 다섯이다. 여섯 종목이
+    # 신호를 내면 총점 높은 다섯이 가져간다.
+    b = bars(DATES, [100, 100, 105, 110, 115])
+    universe = {f"T{i}": rows(["HOLD", "BUY", "BUY"], [90 - i] * 3)
+                for i in range(6)}
+
+    got = pf.simulate(universe, {k: b for k in universe},
+                      {k: "US" for k in universe},
+                      account=sizing.Account(capital=10_000))
+
+    assert {t.ticker for t in got["trades"]} == {"T0", "T1", "T2", "T3", "T4"}
+    assert got["rejected"]["cash"] == 1
+
+
+def test_closing_returns_the_cash():
+    a_rows = rows(["HOLD", "BUY", "BUY", "AVOID", "AVOID"])
+    b_rows = rows(["HOLD", "HOLD", "HOLD", "BUY", "BUY"])
+    a_bars = bars(DATES, [100, 100, 50, 50, 50])
+    b_bars = bars(DATES, [100, 100, 100, 100, 105])
+
+    got = pf.simulate({"A": a_rows, "B": b_rows},
+                      {"A": a_bars, "B": b_bars},
+                      {"A": "US", "B": "US"},
+                      account=sizing.Account(capital=2_000))
+
+    assert {t.ticker for t in got["trades"]} == {"A", "B"}
+
+
+def test_the_report_needs_the_cash_left_over():
+    r = rows(["HOLD", "BUY", "BUY"])
+    b = bars(DATES, [100, 100, 105, 110, 115])
+
+    got = pf.simulate({"A": r}, {"A": b}, {"A": "US"},
+                      account=sizing.Account(capital=10_000))
+
+    assert got["cash"] == 8_000
+    assert got["capital"] == 10_000
+
+
+def test_without_an_account_nothing_changes():
+    r = rows(["HOLD", "BUY", "BUY", "BUY", "BUY"])
+    b = bars(DATES, [100, 100, 105, 110, 115])
+
+    got = pf.simulate({"A": r}, {"A": b}, {"A": "US"})
+
+    assert got["trades"][0].qty is None
+    assert got["cash"] is None
