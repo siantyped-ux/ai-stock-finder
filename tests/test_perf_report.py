@@ -647,3 +647,18 @@ def test_the_summary_carries_the_capital_position():
     assert built["summary"]["capital"] == 10_000
     assert built["summary"]["cash"] == 8_000
     assert built["summary"]["used_pct"] == pytest.approx(20.0)
+
+
+def test_the_summary_states_the_sizing_rule(tmp_path):
+    path = tmp_path / "r.xlsx"
+    _write(path, pr.build_rows(_result([_trade()], cash=8_000, capital=10_000)))
+
+    labels = {r[0].value: r[1].value
+              for r in load_workbook(path)["요약"].iter_rows()}
+
+    assert labels["초기 자본($)"] == 10_000
+    assert labels["잔여 현금($)"] == 8_000
+    assert labels["자본 사용률(%)"] == pytest.approx(20.0)
+    assert "1%" in labels["거래당 리스크"]
+    assert "20%" in labels["투입 상한"]
+    assert "종목당 최대 진입금액($)" not in labels
