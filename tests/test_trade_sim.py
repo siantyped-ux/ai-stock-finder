@@ -526,3 +526,25 @@ def test_universe_exit_does_not_reopen_a_closed_trade():
 
     assert len(trades) == 1
     assert trades[0].exit_reason == "SIGNAL"
+
+
+# ─── 수량 ────────────────────────────────────────────────────
+# 자본 제약이 생기면 수량은 시뮬레이션 결과여야 한다. 리포트가 사후에 지어내면
+# 진입 여부에 영향을 주지 못하고, 같은 사실이 두 곳에서 따로 계산된다.
+
+def test_a_trade_carries_no_quantity_without_capital():
+    # 자본 없는 경로에는 수량 개념이 없다. 0 이나 1 로 채우지 않는다.
+    rows = [_row("d1", "BUY"), _row("d2", "BUY")]
+    bars = {"d1": _bar("d1", 100.0, 101.0, 99.0, 100.5),
+            "d2": _bar("d2", 100.5, 102.0, 100.0, 101.5)}
+
+    t = ts.simulate_ticker("X", "US", rows, bars, P, C)[0]
+
+    assert t.qty is None
+
+
+def test_make_trade_records_the_quantity_it_was_given():
+    pos = er.open_position("X", "d1", 100.0, 2.0, P)
+    trade = ts.make_trade(pos, "US", "live", 110.0, "d2", "TRAIL", C, qty=16)
+
+    assert trade.qty == 16
