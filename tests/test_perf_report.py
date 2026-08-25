@@ -17,7 +17,7 @@ def _trade(**kw):
         exit_reason="TRAIL", bars_held=2, is_open=False,
         gross_r=1.67, cost_r=0.05, net_r=1.62,
         initial_stop=94.0, high_since_entry=110.0, stop=94.0,
-        target_price=None,
+        target_price=None, qty=10,
     )
     base.update(kw)
     return ts.Trade(**base)
@@ -26,16 +26,8 @@ def _trade(**kw):
 # 금액은 전부 달러다. 미국 종목만 보므로 원화 환산은 손익에 아무것도
 # 더해 주지 않으면서 USDKRW 조회 실패라는 실패 경로만 만들었다.
 
-def test_quantity_floors_to_whole_shares():
-    # $1,000 / $100 = 10주. 잔액은 미투자.
-    assert pr.to_row(_trade())["qty"] == 10
-
-
-def test_quantity_is_at_least_one_share():
-    # 진입가가 정액보다 크면 0주가 되고 트레이드가 조용히 사라진다.
-    # 한도를 넘더라도 1주는 산다.
-    assert pr.to_row(_trade(entry_price=1500.0))["qty"] == 1
-
+# 수량 규칙은 sizing.py 로 옮겨갔다 - 리스크로 역산하고, 못 사면 건너뛴다.
+# 여기서는 시뮬레이터가 준 값을 그대로 쓰는지만 본다.
 
 def test_a_trade_converts_at_face_value():
     # 원금 100x10 = 1,000 / 회수 110x10 = 1,100
@@ -60,8 +52,8 @@ def test_cost_agrees_with_cost_r():
     # 1주면 금액 비용은 cost_r x r_unit 과 같아야 한다. 요율 분기가 두 곳에
     # 복제되면 이 등식이 깨진다.
     t = _trade(entry_price=500.0, exit_price=550.0, mark_price=550.0,
-               r_unit=30.0)
-    row = pr.to_row(t, capital=500)
+               r_unit=30.0, qty=1)
+    row = pr.to_row(t)
 
     assert row["qty"] == 1
     expected = ts.cost_r(500.0, 550.0, 30.0, "US", ts.Costs()) * 30.0
@@ -86,7 +78,7 @@ def _result(trades, **kw):
     base = dict(
         trades=trades, dates=["2026-08-03", "2026-08-05"],
         live_rows=10, backfill_rows=90, failed=[],
-        newest_bar="2026-08-05",
+        newest_bar="2026-08-05", cash=None, capital=None,
     )
     base.update(kw)
     return base
@@ -630,3 +622,28 @@ def test_the_venue_sits_next_to_the_ticker(tmp_path):
 
     header = [c.value for c in load_workbook(path)["주식 청산완료"][1]]
     assert header[:2] == ["상품티커", "시장"]
+
+
+# --- quantity comes from the simulation -----------------------------------
+# Recomputing it here would let the report disagree with what actually got
+# bought, and the same fact would live in two places.
+
+def test_the_row_uses_the_simulated_quantity():
+    row = pr.to_row(_trade(qty=7))
+
+    assert row["qty"] == 7
+    # 원금도 그 수량으로 계산된다. 100 x 7 = 700, 회수 110 x 7 = 770.
+    assert row["gross_usd"] == pytest.approx(70.0)
+
+
+def test_a_trade_without_a_quantity_is_refused():
+    with pytest.raises(ValueError, match="수량"):
+        pr.to_row(_trade(qty=None))
+
+
+def test_the_summary_carries_the_capital_position():
+    built = pr.build_rows(_result([_trade()], cash=8_000, capital=10_000))
+
+    assert built["summary"]["capital"] == 10_000
+    assert built["summary"]["cash"] == 8_000
+    assert built["summary"]["used_pct"] == pytest.approx(20.0)
