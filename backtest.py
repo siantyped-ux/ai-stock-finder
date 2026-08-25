@@ -16,6 +16,7 @@ import yfinance as yf
 import console
 import exit_rules as er
 import portfolio as pf
+import sizing
 import trade_sim as ts
 
 
@@ -162,7 +163,7 @@ def universe_exit_dates(rows: list) -> dict:
 def run(pattern: str = "history/*.csv", params: er.Params = None,
         costs: ts.Costs = None, us_only: bool = False,
         entry_total: int = None, limits: pf.Limits = None,
-        start_date: str = None) -> dict:
+        start_date: str = None, account: sizing.Account = None) -> dict:
     """아카이브 전체를 시뮬레이션하고 트레이드·통계·커버리지를 돌려준다."""
     params = params or er.Params()
     costs = costs or ts.Costs()
@@ -216,9 +217,15 @@ def run(pattern: str = "history/*.csv", params: er.Params = None,
 
     # 제약이 없으면 종목별 시뮬레이션을 그대로 쓴다. 포트폴리오 경로와 결과가
     # 같아야 하지만(tests/test_portfolio.py 회귀), 굳이 우회할 이유도 없다.
-    rejected = {"capacity": 0, "correlation": 0}
+    # 계좌가 있으면 반드시 포트폴리오 경로다. 종목을 따로 보면 "다른 종목이
+    # 현금을 이미 썼다" 를 표현할 수 없다.
+    unconstrained = (account is None and
+                     (limits is None or (not limits.max_positions
+                                         and limits.max_correlation >= 1.0)))
+    rejected = {"capacity": 0, "correlation": 0, "cash": 0}
     rejected_pairs = []
-    if limits is None or (not limits.max_positions and limits.max_correlation >= 1.0):
+    cash = capital = None
+    if unconstrained:
         for ticker, prepared in prepared_by_ticker.items():
             trades.extend(ts.simulate_ticker(ticker, markets[ticker], prepared,
                                              bars_by_ticker[ticker], params, costs,
@@ -228,10 +235,12 @@ def run(pattern: str = "history/*.csv", params: er.Params = None,
             {t: [b.close for b in sorted(bs.values(), key=lambda x: x.date)]
              for t, bs in bars_by_ticker.items()})
         out = pf.simulate(prepared_by_ticker, bars_by_ticker, markets,
-                          params, costs, limits, correlator, exits)
+                          params, costs, limits, correlator, exits, account)
         trades = out["trades"]
         rejected = out["rejected"]
         rejected_pairs = out["rejected_pairs"]
+        cash = out["cash"]
+        capital = out["capital"]
 
     dates = sorted({r["date"] for r in rows})
     sources = [r["source"] for r in rows]
@@ -253,6 +262,9 @@ def run(pattern: str = "history/*.csv", params: er.Params = None,
         # 상한이 조용히 기회를 죽이면 알 수 없으므로 무엇을 왜 막았는지 센다
         "rejected": rejected,
         "rejected_pairs": rejected_pairs,
+        # 자본 사용률은 리포트가 낸다. account 없이 돌리면 둘 다 None 이다.
+        "cash": cash,
+        "capital": capital,
     }
 
 
@@ -287,11 +299,18 @@ def report(result: dict) -> None:
 
     # 상한이 조용히 기회를 죽이면 결과만 보고는 알 수 없다
     rej = result.get("rejected") or {}
-    if rej.get("capacity") or rej.get("correlation"):
+    if rej.get("capacity") or rej.get("correlation") or rej.get("cash"):
         print(f"  진입 거절: 자리부족 {rej.get('capacity', 0)}건 · "
-              f"상관중복 {rej.get('correlation', 0)}건")
+              f"상관중복 {rej.get('correlation', 0)}건 · "
+              f"현금부족 {rej.get('cash', 0)}건")
         for date, blocked, held, rho in (result.get("rejected_pairs") or [])[:8]:
             print(f"    {date} {blocked} 차단 (보유 {held} 와 rho={rho})")
+
+    if result.get("capital"):
+        used = result["capital"] - result["cash"]
+        print(f"  자본: ${result['capital']:,.0f} 중 ${used:,.0f} 사용 "
+              f"({used / result['capital'] * 100:.1f}%) · "
+              f"잔여 ${result['cash']:,.0f}")
 
     print()
     print(f"[닫힌 트레이드] {s['closed']}건")
@@ -327,6 +346,12 @@ def main():
                    help="아카이브의 한국 행을 제외한다")
     p.add_argument("--start-date", default=None,
                    help="이 날짜부터의 아카이브만 본다 (YYYY-MM-DD)")
+    p.add_argument("--capital", type=float, default=None,
+                   help="초기 자본 USD. 주면 자본 제약이 켜진다 (예: 10000)")
+    p.add_argument("--risk-pct", type=float, default=1.0,
+                   help="거래당 리스크 (초기 자본 대비 %%, 기본 1.0)")
+    p.add_argument("--max-weight-pct", type=float, default=20.0,
+                   help="한 종목 투입 상한 (초기 자본 대비 %%, 기본 20.0)")
     p.add_argument("--entry-total", type=int, default=None,
                    help="이 점수 이상이면 BUY 로 간주해 진입한다 (비교용)")
     p.add_argument("--max-positions", type=int, default=0,
@@ -346,9 +371,15 @@ def main():
     )
     limits = pf.Limits(max_positions=args.max_positions,
                        max_correlation=args.max_correlation)
+    account = None
+    if args.capital:
+        account = sizing.Account(capital=args.capital,
+                                 risk_pct=args.risk_pct,
+                                 max_weight_pct=args.max_weight_pct)
+
     report(run(args.history, params, us_only=args.us_only,
                entry_total=args.entry_total, limits=limits,
-               start_date=args.start_date))
+               start_date=args.start_date, account=account))
 
 
 if __name__ == "__main__":

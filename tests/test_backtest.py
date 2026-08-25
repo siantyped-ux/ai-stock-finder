@@ -262,3 +262,49 @@ def test_venue_is_blank_when_the_archive_predates_the_column():
     # 2026-08-25 이전 행에는 거래소가 없다. 지어내지 않는다.
     assert bt.venue_of({"asset_type": "STOCK", "exchange": ""}) == ""
     assert bt.venue_of({"asset_type": "STOCK"}) == ""
+
+
+# --- account --------------------------------------------------------------
+# With capital, tickers cannot be simulated independently: "no cash left" is
+# a statement about what the other names already bought.
+
+def test_an_account_forces_the_portfolio_path(monkeypatch):
+    import sizing
+    called = {}
+
+    def spy(*a, **kw):
+        called["portfolio"] = True
+        return {"trades": [], "rejected": {"capacity": 0, "correlation": 0,
+                                           "cash": 0},
+                "rejected_pairs": [], "cash": 10_000, "capital": 10_000}
+
+    monkeypatch.setattr(bt, "load_archive", lambda pattern: [
+        {"ticker": "A", "market": "US", "date": "2026-08-01", "total": "80",
+         "signal": "BUY", "source": "live", "target": "10",
+         "asset_type": "STOCK", "exchange": "NYSE"}])
+    monkeypatch.setattr(bt, "fetch_bars", lambda ticker: {
+        "2026-08-01": bt.er.Bar("2026-08-01", 100.0, 101.0, 99.0, 100.0, 2.0)})
+    monkeypatch.setattr(bt.pf, "simulate", spy)
+
+    bt.run("x/*.csv", account=sizing.Account(capital=10_000))
+
+    assert called.get("portfolio")
+
+
+def test_the_result_carries_the_cash_position(monkeypatch):
+    import sizing
+    monkeypatch.setattr(bt, "load_archive", lambda pattern: [])
+
+    result = bt.run("x/*.csv", account=sizing.Account(capital=500))
+
+    assert result["cash"] == 500
+    assert result["capital"] == 500
+
+
+def test_without_an_account_the_result_has_no_capital(monkeypatch):
+    monkeypatch.setattr(bt, "load_archive", lambda pattern: [])
+
+    result = bt.run("x/*.csv")
+
+    assert result["cash"] is None
+    assert result["capital"] is None
