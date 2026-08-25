@@ -1,14 +1,17 @@
 // AI 3-Month Stock Finder - Live Data (stocks)
+// Generated: 2026-08-25 04:05:51
+// Macro: VIX=15.13, DXY=99.04, US10Y=4.74%
+// FMP: active · FRED: active
 window.LIVE_MACRO = {
   vix: 15.13,
-  dxy: 98.98,
+  dxy: 99.04,
   us10y: 4.74,
-  generated_at: "2026-08-24T22:43:38.454170",
+  generated_at: "2026-08-25T04:05:51.767983",
   fmp_active: true,
   fred_active: true,
   fred: {"available": true, "vix": 15.13, "us10y": 4.74, "yield_curve": 0.46, "fed_funds": 3.63, "unemployment": 4.1, "dxy_broad": 118.0628, "core_cpi_yoy": 2.47, "unemp_3m_change": -0.2}
 };
-window.LIVE_SUMMARY = {"scanned": 965, "strong_buy": 0, "buy": 25, "watch": 199, "avoid": 150, "hitl": 150, "shown": 94};
+window.LIVE_SUMMARY = {"scanned": 967, "shown": 92, "strong_buy": 0, "buy": 23, "watch": 200, "avoid": 150, "hitl": 150};
 window.LIVE_STOCKS = [
   {
     "t": "LLY",
@@ -29,6 +32,9 @@ window.LIVE_STOCKS = [
     "target": 13,
     "hitl": false,
     "regime": "NEUTRAL",
+    "aum": null,
+    "turnover": 3563928540,
+    "atr_pct": 3.64,
     "reasons": {
       "tech": [
         "이동평균 완벽 정배열 (P>1199.5>1179.9>1051.5)",
@@ -54,111 +60,9 @@ window.LIVE_STOCKS = [
         "13F: 보유기관 4758곳 · 지분율 251.8% (2026Q3)"
       ],
       "value": [
-        "PER 41.9 · 프리미엄",
+        "PER 42.2 · 프리미엄",
         "Forward PER 26.4 · 이익 성장 반영",
         "PBR 32.8 · 부담"
-      ]
-    }
-  },
-  {
-    "t": "V",
-    "n": "Visa Inc.",
-    "m": "US",
-    "sec": "금융",
-    "at": "STOCK",
-    "ex": "NYSE",
-    "tech": 88,
-    "flow": 77,
-    "macro": 60,
-    "filing": 63,
-    "value": 50,
-    "total": 71,
-    "consensus": 2,
-    "signal": "WATCH",
-    "ev": 1.06,
-    "target": 13,
-    "hitl": false,
-    "regime": "NEUTRAL",
-    "reasons": {
-      "tech": [
-        "이동평균 완벽 정배열 (P>365.9>353.5>330.8)",
-        "RSI 63 · 강세 지속 구간",
-        "MACD 골든크로스 · 히스토 +0.57",
-        "3개월 수익률 +17.3%",
-        "Bollinger 상단 접근 (100%)"
-      ],
-      "flow": [
-        "CMF +0.13 · 매수 우위",
-        "가격·OBV 동반 상승 · 수급 확인",
-        "상승일 거래량 1.29배",
-        "거래대금 $2732M · 유동성 충분"
-      ],
-      "macro": [
-        "NEUTRAL · VIX 15.1 · US10Y 4.74%",
-        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
-      ],
-      "filing": [
-        "13F: 신규진입 +103곳",
-        "13F: 기관지분율 +47.97%p",
-        "13F: 보유기관 4683곳 · 지분율 124.6% (2026Q3)",
-        "Form 4: 매도 우세 P0/S6",
-        "8-K: 최근 60일 이벤트 3건 (활발)"
-      ],
-      "value": [
-        "PER 32.5 · 적정",
-        "Forward PER 25.5 · 이익 성장 반영",
-        "PBR 20.3 · 부담"
-      ]
-    }
-  },
-  {
-    "t": "MA",
-    "n": "Mastercard Incorporated",
-    "m": "US",
-    "sec": "금융",
-    "at": "STOCK",
-    "ex": "NYSE",
-    "tech": 92,
-    "flow": 83,
-    "macro": 60,
-    "filing": 53,
-    "value": 50,
-    "total": 70,
-    "consensus": 2,
-    "signal": "WATCH",
-    "ev": 1.05,
-    "target": 13,
-    "hitl": false,
-    "regime": "NEUTRAL",
-    "reasons": {
-      "tech": [
-        "이동평균 완벽 정배열 (P>570.7>539.7>527.3)",
-        "RSI 68 · 강세 지속 구간",
-        "MACD 골든크로스 · 히스토 +0.81",
-        "3개월 수익률 +21.9% · 강한 상승",
-        "Bollinger 상단 접근 (100%)"
-      ],
-      "flow": [
-        "CMF +0.10 · 매수 우위",
-        "가격·OBV 동반 상승 · 수급 확인",
-        "상승일 거래량 1.59배 · 매수 집중",
-        "거래대금 $1778M · 유동성 충분"
-      ],
-      "macro": [
-        "NEUTRAL · VIX 15.1 · US10Y 4.74%",
-        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
-      ],
-      "filing": [
-        "13F: 기관지분율 +72.60%p",
-        "P/C비율 하락 -40% (헤지 완화)",
-        "13F: 보유기관 3704곳 · 지분율 158.8% (2026Q3)",
-        "Form 4: 매도 우세 P0/S45",
-        "* FMP 실시간 공시 반영"
-      ],
-      "value": [
-        "PER 33.0 · 적정",
-        "Forward PER 26.1 · 이익 성장 반영",
-        "PBR 93.8 · 부담"
       ]
     }
   },
@@ -181,6 +85,9 @@ window.LIVE_STOCKS = [
     "target": 13,
     "hitl": false,
     "regime": "NEUTRAL",
+    "aum": null,
+    "turnover": 1414345244,
+    "atr_pct": 2.09,
     "reasons": {
       "tech": [
         "이동평균 완벽 정배열 (P>253.7>248.1>224.0)",
@@ -231,6 +138,9 @@ window.LIVE_STOCKS = [
     "target": 12,
     "hitl": false,
     "regime": "NEUTRAL",
+    "aum": null,
+    "turnover": 550318302,
+    "atr_pct": 1.57,
     "reasons": {
       "tech": [
         "이동평균 완벽 정배열 (P>90.0>84.9>80.9)",
@@ -277,6 +187,9 @@ window.LIVE_STOCKS = [
     "target": 10,
     "hitl": false,
     "regime": "NEUTRAL",
+    "aum": null,
+    "turnover": 674537502,
+    "atr_pct": 2.48,
     "reasons": {
       "tech": [
         "RSI 68 · 강세 지속 구간",
@@ -326,6 +239,9 @@ window.LIVE_STOCKS = [
     "target": 11,
     "hitl": false,
     "regime": "NEUTRAL",
+    "aum": null,
+    "turnover": 957919764,
+    "atr_pct": 1.97,
     "reasons": {
       "tech": [
         "단기 정배열 (P>109.9>100.2)",
@@ -338,7 +254,7 @@ window.LIVE_STOCKS = [
         "CMF +0.16 · 강한 매집",
         "가격·OBV 동반 상승 · 수급 확인",
         "상승일 거래량 1.65배 · 매수 집중",
-        "거래대금 $899M · 유동성 충분"
+        "거래대금 $900M · 유동성 충분"
       ],
       "macro": [
         "NEUTRAL · VIX 15.1 · US10Y 4.74%",
@@ -376,6 +292,9 @@ window.LIVE_STOCKS = [
     "target": 9,
     "hitl": false,
     "regime": "NEUTRAL",
+    "aum": null,
+    "turnover": 113678821,
+    "atr_pct": 1.73,
     "reasons": {
       "tech": [
         "이동평균 완벽 정배열 (P>87.6>83.4>78.8)",
@@ -396,7 +315,7 @@ window.LIVE_STOCKS = [
         "* FMP 실시간 공시 반영"
       ],
       "value": [
-        "PER 11.2 · 극심 저평가",
+        "PER 11.3 · 극심 저평가",
         "PEG 0.72 · 성장률 대비 저평가",
         "FCF Yield 6.8% · 우수"
       ]
@@ -421,6 +340,9 @@ window.LIVE_STOCKS = [
     "target": 13,
     "hitl": false,
     "regime": "NEUTRAL",
+    "aum": null,
+    "turnover": 1549401874,
+    "atr_pct": 3.8,
     "reasons": {
       "tech": [
         "단기 정배열 (P>74.4>73.1)",
@@ -439,14 +361,14 @@ window.LIVE_STOCKS = [
         "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
       ],
       "filing": [
-        "13F: 기관지분율 +1.67%p",
+        "13F: 기관지분율 +11.39%p",
         "P/C비율 하락 -31% (헤지 완화)",
-        "13F: 보유기관 2575곳 · 지분율 82.8% (2026Q3)",
+        "13F: 보유기관 2578곳 · 지분율 92.6% (2026Q3)",
         "8-K: 최근 60일 이벤트 3건 (활발)",
         "* FMP 실시간 공시 반영"
       ],
       "value": [
-        "PER 17.4 · 저평가",
+        "PER 17.3 · 저평가",
         "PEG 8.74 · 성장률 대비 부담"
       ]
     }
@@ -470,6 +392,9 @@ window.LIVE_STOCKS = [
     "target": 13,
     "hitl": false,
     "regime": "NEUTRAL",
+    "aum": null,
+    "turnover": 820539789,
+    "atr_pct": 2.42,
     "reasons": {
       "tech": [
         "이동평균 완벽 정배열 (P>65.0>60.6>56.3)",
@@ -490,8 +415,8 @@ window.LIVE_STOCKS = [
         "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
       ],
       "filing": [
-        "13F: 기관지분율 +5.67%p",
-        "13F: 보유기관 2601곳 · 지분율 84.9% (2026Q3)",
+        "13F: 기관지분율 +14.73%p",
+        "13F: 보유기관 2603곳 · 지분율 94.0% (2026Q3)",
         "* FMP 실시간 공시 반영"
       ],
       "value": [
@@ -520,6 +445,9 @@ window.LIVE_STOCKS = [
     "target": 10,
     "hitl": false,
     "regime": "NEUTRAL",
+    "aum": null,
+    "turnover": 372765612,
+    "atr_pct": 2.17,
     "reasons": {
       "tech": [
         "이동평균 완벽 정배열 (P>42.9>40.9>39.5)",
@@ -528,7 +456,7 @@ window.LIVE_STOCKS = [
       ],
       "flow": [
         "가격·OBV 동반 상승 · 수급 확인",
-        "거래대금 $366M · 유동성 충분"
+        "거래대금 $367M · 유동성 충분"
       ],
       "macro": [
         "NEUTRAL · VIX 15.1 · US10Y 4.74%",
@@ -540,7 +468,7 @@ window.LIVE_STOCKS = [
         "* FMP 실시간 공시 반영"
       ],
       "value": [
-        "PER 20.9 · 적정",
+        "PER 21.3 · 적정",
         "Forward PER 9.8 · 이익 성장 반영",
         "PEG 0.04 · 성장률 대비 저평가",
         "FCF Yield 11.4% · 우수"
@@ -566,6 +494,9 @@ window.LIVE_STOCKS = [
     "target": 13,
     "hitl": false,
     "regime": "NEUTRAL",
+    "aum": null,
+    "turnover": 1357554934,
+    "atr_pct": 3.64,
     "reasons": {
       "tech": [
         "단기 정배열 (P>262.4>233.9)",
@@ -615,6 +546,9 @@ window.LIVE_STOCKS = [
     "target": 11,
     "hitl": false,
     "regime": "NEUTRAL",
+    "aum": null,
+    "turnover": 872198269,
+    "atr_pct": 3.34,
     "reasons": {
       "tech": [
         "이동평균 완벽 정배열 (P>331.5>298.8>232.1)",
@@ -640,7 +574,7 @@ window.LIVE_STOCKS = [
         "* FMP 실시간 공시 반영"
       ],
       "value": [
-        "PER 12.6 · 저평가",
+        "PER 12.5 · 저평가",
         "FCF Yield 9.1% · 우수"
       ]
     }
@@ -664,6 +598,9 @@ window.LIVE_STOCKS = [
     "target": 12,
     "hitl": false,
     "regime": "NEUTRAL",
+    "aum": null,
+    "turnover": 1367771802,
+    "atr_pct": 3.57,
     "reasons": {
       "tech": [
         "단기 정배열 (P>337.6>300.8)",
@@ -705,15 +642,18 @@ window.LIVE_STOCKS = [
     "tech": 85,
     "flow": 71,
     "macro": 60,
-    "filing": 55,
+    "filing": 60,
     "value": 71,
-    "total": 70,
+    "total": 72,
     "consensus": 3,
     "signal": "BUY",
-    "ev": 0.96,
+    "ev": 1.02,
     "target": 12,
     "hitl": false,
     "regime": "NEUTRAL",
+    "aum": null,
+    "turnover": 880317420,
+    "atr_pct": 3.17,
     "reasons": {
       "tech": [
         "이동평균 완벽 정배열 (P>323.7>294.2>229.7)",
@@ -721,20 +661,21 @@ window.LIVE_STOCKS = [
         "3개월 수익률 +43.9% · 강한 상승"
       ],
       "flow": [
-        "CMF +0.13 · 매수 우위",
+        "CMF +0.14 · 매수 우위",
         "가격·OBV 동반 상승 · 수급 확인",
-        "거래대금 $815M · 유동성 충분"
+        "거래대금 $816M · 유동성 충분"
       ],
       "macro": [
         "NEUTRAL · VIX 15.1 · US10Y 4.74%",
         "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
       ],
       "filing": [
-        "13F: 보유기관 2039곳 · 지분율 83.3% (2026Q3)",
+        "13F: 기관지분율 +47.77%p",
+        "13F: 보유기관 2042곳 · 지분율 131.6% (2026Q3)",
         "* FMP 실시간 공시 반영"
       ],
       "value": [
-        "PER 14.4 · 저평가",
+        "PER 14.6 · 저평가",
         "Forward PER 11.3 · 이익 성장 반영",
         "PEG 4.08 · 성장률 대비 부담",
         "FCF Yield 8.4% · 우수"
@@ -760,6 +701,9 @@ window.LIVE_STOCKS = [
     "target": 12,
     "hitl": false,
     "regime": "NEUTRAL",
+    "aum": null,
+    "turnover": 392016673,
+    "atr_pct": 2.46,
     "reasons": {
       "tech": [
         "RSI 69 · 강세 지속 구간",
@@ -779,12 +723,12 @@ window.LIVE_STOCKS = [
       "filing": [
         "13F: 신규진입 +132곳",
         "13F: 증량-감량 순 +344",
-        "13F: 기관지분율 +2.70%p",
+        "13F: 기관지분율 +58.96%p",
         "P/C비율 급등 +37% (헤지 강화)",
-        "13F: 보유기관 1659곳 · 지분율 91.1% (2026Q3)"
+        "13F: 보유기관 1663곳 · 지분율 147.3% (2026Q3)"
       ],
       "value": [
-        "PER 17.8 · 저평가",
+        "PER 17.7 · 저평가",
         "Forward PER 13.6 · 이익 성장 반영"
       ]
     }
@@ -808,6 +752,9 @@ window.LIVE_STOCKS = [
     "target": 11,
     "hitl": false,
     "regime": "NEUTRAL",
+    "aum": null,
+    "turnover": 677058485,
+    "atr_pct": 2.38,
     "reasons": {
       "tech": [
         "단기 정배열 (P>784.1>699.9)",
@@ -832,7 +779,7 @@ window.LIVE_STOCKS = [
         "* FMP 실시간 공시 반영"
       ],
       "value": [
-        "PER 20.5 · 적정",
+        "PER 20.6 · 적정",
         "Forward PER 13.7 · 이익 성장 반영"
       ]
     }
@@ -856,6 +803,9 @@ window.LIVE_STOCKS = [
     "target": 12,
     "hitl": false,
     "regime": "NEUTRAL",
+    "aum": null,
+    "turnover": 263123294,
+    "atr_pct": 1.94,
     "reasons": {
       "tech": [
         "이동평균 완벽 정배열 (P>92.3>90.4>82.0)",
@@ -864,7 +814,7 @@ window.LIVE_STOCKS = [
         "3개월 수익률 +6.5%"
       ],
       "flow": [
-        "CMF +0.15 · 매수 우위",
+        "CMF +0.14 · 매수 우위",
         "가격·OBV 동반 상승 · 수급 확인",
         "상승일 거래량 1.17배",
         "거래대금 $255M · 유동성 충분"
@@ -880,7 +830,7 @@ window.LIVE_STOCKS = [
         "* FMP 실시간 공시 반영"
       ],
       "value": [
-        "PER 30.4 · 적정",
+        "PER 31.0 · 적정",
         "Forward PER 21.8 · 이익 성장 반영"
       ]
     }
@@ -896,14 +846,17 @@ window.LIVE_STOCKS = [
     "flow": 90,
     "macro": 60,
     "filing": 55,
-    "value": 50,
-    "total": 72,
+    "value": 42,
+    "total": 70,
     "consensus": 2,
     "signal": "WATCH",
-    "ev": 1.08,
+    "ev": 1.05,
     "target": 13,
     "hitl": false,
     "regime": "NEUTRAL",
+    "aum": null,
+    "turnover": 418629205,
+    "atr_pct": 1.87,
     "reasons": {
       "tech": [
         "이동평균 완벽 정배열 (P>281.6>276.5>270.7)",
@@ -915,7 +868,7 @@ window.LIVE_STOCKS = [
         "CMF +0.27 · 강한 매집",
         "가격·OBV 동반 상승 · 수급 확인",
         "상승일 거래량 1.60배 · 매수 집중",
-        "거래대금 $410M · 유동성 충분"
+        "거래대금 $411M · 유동성 충분"
       ],
       "macro": [
         "NEUTRAL · VIX 15.1 · US10Y 4.74%",
@@ -928,8 +881,7 @@ window.LIVE_STOCKS = [
         "* FMP 실시간 공시 반영"
       ],
       "value": [
-        "PER 38.5 · 적정",
-        "Forward PER 30.5 · 이익 성장 반영",
+        "PER 37.8 · 적정",
         "PBR 8.0 · 부담"
       ]
     }
@@ -953,6 +905,9 @@ window.LIVE_STOCKS = [
     "target": 12,
     "hitl": false,
     "regime": "NEUTRAL",
+    "aum": null,
+    "turnover": 429059093,
+    "atr_pct": 2.54,
     "reasons": {
       "tech": [
         "이동평균 완벽 정배열 (P>144.3>138.8>125.4)",
@@ -981,51 +936,53 @@ window.LIVE_STOCKS = [
     }
   },
   {
-    "t": "RACE",
-    "n": "Ferrari N.V.",
+    "t": "TGT",
+    "n": "Target Corporation",
     "m": "US",
-    "sec": "소비재",
+    "sec": "소매",
     "at": "STOCK",
     "ex": "NYSE",
-    "tech": 95,
-    "flow": 83,
+    "tech": 77,
+    "flow": 84,
     "macro": 60,
-    "filing": 60,
-    "value": 37,
-    "total": 70,
+    "filing": 63,
+    "value": 60,
+    "total": 71,
     "consensus": 2,
     "signal": "WATCH",
-    "ev": 1.12,
-    "target": 13,
+    "ev": 0.99,
+    "target": 12,
     "hitl": false,
     "regime": "NEUTRAL",
+    "aum": null,
+    "turnover": 787895455,
+    "atr_pct": 2.93,
     "reasons": {
       "tech": [
-        "이동평균 완벽 정배열 (P>409.7>385.2>362.5)",
-        "RSI 65 · 강세 지속 구간",
-        "MACD 골든크로스 · 히스토 +1.11",
-        "3개월 수익률 +28.7% · 강한 상승"
+        "이동평균 완벽 정배열 (P>151.7>140.8>117.4)",
+        "RSI 82 · 과매수 경계",
+        "MACD 골든크로스 · 히스토 +1.35",
+        "3개월 수익률 +36.5% · 강한 상승",
+        "Bollinger 상단 접근 (100%)"
       ],
       "flow": [
-        "CMF +0.14 · 매수 우위",
+        "CMF +0.22 · 강한 매집",
         "가격·OBV 동반 상승 · 수급 확인",
-        "상승일 거래량 1.81배 · 매수 집중",
-        "거래대금 $218M · 유동성 충분"
+        "상승일 거래량 1.19배",
+        "거래대금 $711M · 유동성 충분"
       ],
       "macro": [
         "NEUTRAL · VIX 15.1 · US10Y 4.74%",
         "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
       ],
       "filing": [
-        "13F: 기관지분율 +1.47%p",
-        "13F: 보유기관 752곳 · 지분율 34.4% (2026Q3)",
-        "8-K: 최근 60일 이벤트 없음",
+        "13F: 기관지분율 +25.65%p",
+        "13F: 보유기관 1970곳 · 지분율 110.0% (2026Q3)",
+        "8-K: 최근 60일 이벤트 3건 (활발)",
         "* FMP 실시간 공시 반영"
       ],
       "value": [
-        "PER 39.2 · 적정",
-        "PBR 17.6 · 부담",
-        "PEG 4.10 · 성장률 대비 부담"
+        "PER 17.2 · 저평가"
       ]
     }
   },
@@ -1048,6 +1005,9 @@ window.LIVE_STOCKS = [
     "target": 13,
     "hitl": false,
     "regime": "NEUTRAL",
+    "aum": null,
+    "turnover": 207591097,
+    "atr_pct": 1.74,
     "reasons": {
       "tech": [
         "이동평균 완벽 정배열 (P>20.6>19.8>18.1)",
@@ -1073,7 +1033,7 @@ window.LIVE_STOCKS = [
         "* FMP 실시간 공시 반영"
       ],
       "value": [
-        "PER 14.4 · 저평가",
+        "PER 14.5 · 저평가",
         "PEG 0.67 · 성장률 대비 저평가"
       ]
     }
@@ -1097,6 +1057,9 @@ window.LIVE_STOCKS = [
     "target": 11,
     "hitl": false,
     "regime": "NEUTRAL",
+    "aum": null,
+    "turnover": 369581372,
+    "atr_pct": 2.69,
     "reasons": {
       "tech": [
         "이동평균 완벽 정배열 (P>255.1>245.0>232.5)",
@@ -1116,12 +1079,12 @@ window.LIVE_STOCKS = [
         "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
       ],
       "filing": [
-        "13F: 기관지분율 +5.57%p",
-        "13F: 보유기관 1316곳 · 지분율 93.8% (2026Q3)",
+        "13F: 기관지분율 +39.08%p",
+        "13F: 보유기관 1318곳 · 지분율 127.3% (2026Q3)",
         "* FMP 실시간 공시 반영"
       ],
       "value": [
-        "PER 45.0 · 프리미엄",
+        "PER 43.7 · 프리미엄",
         "Forward PER 18.3 · 이익 성장 반영",
         "PEG 0.87 · 성장률 대비 저평가"
       ]
@@ -1146,6 +1109,9 @@ window.LIVE_STOCKS = [
     "target": 12,
     "hitl": false,
     "regime": "NEUTRAL",
+    "aum": null,
+    "turnover": 374411725,
+    "atr_pct": 4.44,
     "reasons": {
       "tech": [
         "단기 정배열 (P>94.5>86.9)",
@@ -1172,57 +1138,10 @@ window.LIVE_STOCKS = [
         "* FMP 실시간 공시 반영"
       ],
       "value": [
-        "PER 16.1 · 저평가",
+        "PER 16.3 · 저평가",
         "Forward PER 12.1 · 이익 성장 반영",
         "PEG 0.78 · 성장률 대비 저평가",
         "FCF Yield 6.5% · 우수"
-      ]
-    }
-  },
-  {
-    "t": "OXY",
-    "n": "Occidental Petroleum Corporation",
-    "m": "US",
-    "sec": "에너지",
-    "at": "STOCK",
-    "ex": "NYSE",
-    "tech": 91,
-    "flow": 40,
-    "macro": 60,
-    "filing": 65,
-    "value": 76,
-    "total": 70,
-    "consensus": 2,
-    "signal": "WATCH",
-    "ev": 0.82,
-    "target": 10,
-    "hitl": false,
-    "regime": "NEUTRAL",
-    "reasons": {
-      "tech": [
-        "이동평균 완벽 정배열 (P>57.7>54.9>51.3)",
-        "RSI 69 · 강세 지속 구간",
-        "MACD 골든크로스 · 히스토 +0.28",
-        "3개월 수익률 +5.1%"
-      ],
-      "flow": [
-        "가격↑ OBV↓ 다이버전스 · 상승 중 분산",
-        "거래대금 $476M · 유동성 충분"
-      ],
-      "macro": [
-        "NEUTRAL · VIX 15.1 · US10Y 4.74%",
-        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
-      ],
-      "filing": [
-        "13F: 기관지분율 +8.01%p",
-        "13F: 보유기관 1313곳 · 지분율 90.2% (2026Q3)",
-        "Form 4: 순매수 P1/S0",
-        "* FMP 실시간 공시 반영"
-      ],
-      "value": [
-        "PER 17.7 · 저평가",
-        "PEG 0.87 · 성장률 대비 저평가",
-        "FCF Yield 6.3% · 우수"
       ]
     }
   },
@@ -1245,6 +1164,9 @@ window.LIVE_STOCKS = [
     "target": 14,
     "hitl": false,
     "regime": "NEUTRAL",
+    "aum": null,
+    "turnover": 429530079,
+    "atr_pct": 2.57,
     "reasons": {
       "tech": [
         "이동평균 완벽 정배열 (P>265.5>255.7>235.9)",
@@ -1271,7 +1193,7 @@ window.LIVE_STOCKS = [
         "* FMP 실시간 공시 반영"
       ],
       "value": [
-        "PER 21.3 · 적정",
+        "PER 21.0 · 적정",
         "Forward PER 13.5 · 이익 성장 반영",
         "PBR 9.4 · 부담",
         "PEG 9.46 · 성장률 대비 부담"
@@ -1297,6 +1219,9 @@ window.LIVE_STOCKS = [
     "target": 9,
     "hitl": false,
     "regime": "NEUTRAL",
+    "aum": null,
+    "turnover": 480526870,
+    "atr_pct": 3.56,
     "reasons": {
       "tech": [
         "단기 정배열 (P>246.1>220.7)",
@@ -1321,7 +1246,7 @@ window.LIVE_STOCKS = [
         "* FMP 실시간 공시 반영"
       ],
       "value": [
-        "PER 37.1 · 적정",
+        "PER 37.0 · 적정",
         "Forward PER 17.9 · 이익 성장 반영",
         "PBR 16.8 · 부담",
         "PEG 0.97 · 성장률 대비 저평가"
@@ -1347,6 +1272,9 @@ window.LIVE_STOCKS = [
     "target": 13,
     "hitl": false,
     "regime": "NEUTRAL",
+    "aum": null,
+    "turnover": 524109864,
+    "atr_pct": 2.8,
     "reasons": {
       "tech": [
         "이동평균 완벽 정배열 (P>45.5>43.9>42.6)",
@@ -1372,7 +1300,7 @@ window.LIVE_STOCKS = [
         "13F: 보유기관 1534곳 · 지분율 177.9% (2026Q3)"
       ],
       "value": [
-        "PER 10.5 · 극심 저평가"
+        "PER 10.7 · 극심 저평가"
       ]
     }
   },
@@ -1395,6 +1323,9 @@ window.LIVE_STOCKS = [
     "target": 11,
     "hitl": false,
     "regime": "NEUTRAL",
+    "aum": null,
+    "turnover": 676369002,
+    "atr_pct": 2.38,
     "reasons": {
       "tech": [
         "이동평균 완벽 정배열 (P>59.6>52.4>51.2)",
@@ -1406,7 +1337,7 @@ window.LIVE_STOCKS = [
         "CMF +0.17 · 강한 매집",
         "가격·OBV 동반 상승 · 수급 확인",
         "상승일 거래량 2.24배 · 매수 집중",
-        "거래대금 $652M · 유동성 충분"
+        "거래대금 $653M · 유동성 충분"
       ],
       "macro": [
         "NEUTRAL · VIX 15.1 · US10Y 4.74%",
@@ -1419,7 +1350,7 @@ window.LIVE_STOCKS = [
         "* FMP 실시간 공시 반영"
       ],
       "value": [
-        "PER 11.7 · 극심 저평가",
+        "PER 11.6 · 극심 저평가",
         "FCF Yield 8.4% · 우수"
       ]
     }
@@ -1443,6 +1374,9 @@ window.LIVE_STOCKS = [
     "target": 12,
     "hitl": false,
     "regime": "NEUTRAL",
+    "aum": null,
+    "turnover": 374823174,
+    "atr_pct": 2.38,
     "reasons": {
       "tech": [
         "이동평균 완벽 정배열 (P>178.1>162.3>156.6)",
@@ -1468,7 +1402,7 @@ window.LIVE_STOCKS = [
         "* FMP 실시간 공시 반영"
       ],
       "value": [
-        "PER 33.0 · 적정",
+        "PER 33.2 · 적정",
         "Forward PER 14.3 · 이익 성장 반영",
         "FCF Yield 8.6% · 우수"
       ]
@@ -1493,6 +1427,9 @@ window.LIVE_STOCKS = [
     "target": 13,
     "hitl": false,
     "regime": "NEUTRAL",
+    "aum": null,
+    "turnover": 483622117,
+    "atr_pct": 2.98,
     "reasons": {
       "tech": [
         "이동평균 완벽 정배열 (P>17.5>17.3>16.7)",
@@ -1512,13 +1449,13 @@ window.LIVE_STOCKS = [
         "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
       ],
       "filing": [
-        "13F: 기관지분율 +1.91%p",
+        "13F: 기관지분율 +4.71%p",
         "P/C비율 하락 -38% (헤지 완화)",
-        "13F: 보유기관 1001곳 · 지분율 98.1% (2026Q3)",
+        "13F: 보유기관 1003곳 · 지분율 100.9% (2026Q3)",
         "* FMP 실시간 공시 반영"
       ],
       "value": [
-        "PER 13.0 · 저평가",
+        "PER 12.7 · 저평가",
         "Forward PER 10.0 · 이익 성장 반영",
         "PEG 0.76 · 성장률 대비 저평가",
         "FCF 음수 · 현금유출"
@@ -1544,6 +1481,9 @@ window.LIVE_STOCKS = [
     "target": 14,
     "hitl": false,
     "regime": "NEUTRAL",
+    "aum": null,
+    "turnover": 483421411,
+    "atr_pct": 4.32,
     "reasons": {
       "tech": [
         "이동평균 완벽 정배열 (P>297.7>274.8>230.0)",
@@ -1551,7 +1491,7 @@ window.LIVE_STOCKS = [
         "3개월 수익률 +63.1% · 강한 상승"
       ],
       "flow": [
-        "CMF +0.19 · 강한 매집",
+        "CMF +0.17 · 강한 매집",
         "가격·OBV 동반 상승 · 수급 확인",
         "상승일 거래량 1.61배 · 매수 집중",
         "거래대금 $444M · 유동성 충분",
@@ -1594,6 +1534,9 @@ window.LIVE_STOCKS = [
     "target": 12,
     "hitl": false,
     "regime": "NEUTRAL",
+    "aum": null,
+    "turnover": 553140324,
+    "atr_pct": 3.43,
     "reasons": {
       "tech": [
         "RSI 65 · 강세 지속 구간",
@@ -1617,7 +1560,7 @@ window.LIVE_STOCKS = [
         "* FMP 실시간 공시 반영"
       ],
       "value": [
-        "PER 36.6 · 적정",
+        "PER 35.8 · 적정",
         "Forward PER 23.3 · 이익 성장 반영"
       ]
     }
@@ -1641,6 +1584,9 @@ window.LIVE_STOCKS = [
     "target": 12,
     "hitl": false,
     "regime": "NEUTRAL",
+    "aum": null,
+    "turnover": 326108418,
+    "atr_pct": 2.17,
     "reasons": {
       "tech": [
         "이동평균 완벽 정배열 (P>92.2>91.3>83.7)",
@@ -1688,6 +1634,9 @@ window.LIVE_STOCKS = [
     "target": 13,
     "hitl": false,
     "regime": "NEUTRAL",
+    "aum": null,
+    "turnover": 362012322,
+    "atr_pct": 3.29,
     "reasons": {
       "tech": [
         "이동평균 완벽 정배열 (P>201.0>188.3>127.4)",
@@ -1729,15 +1678,18 @@ window.LIVE_STOCKS = [
     "tech": 73,
     "flow": 84,
     "macro": 60,
-    "filing": 63,
+    "filing": 60,
     "value": 66,
-    "total": 71,
+    "total": 70,
     "consensus": 2,
     "signal": "WATCH",
-    "ev": 0.9,
-    "target": 11,
+    "ev": 0.87,
+    "target": 10,
     "hitl": false,
     "regime": "NEUTRAL",
+    "aum": null,
+    "turnover": 416558595,
+    "atr_pct": 3.31,
     "reasons": {
       "tech": [
         "RSI 59 · 강세 지속 구간",
@@ -1746,7 +1698,7 @@ window.LIVE_STOCKS = [
         "Bollinger 상단 접근 (98%)"
       ],
       "flow": [
-        "CMF +0.14 · 매수 우위",
+        "CMF +0.13 · 매수 우위",
         "가격↓ OBV↑ 다이버전스 · 하락 중 매집",
         "상승일 거래량 1.22배",
         "거래대금 $395M · 유동성 충분"
@@ -1758,11 +1710,10 @@ window.LIVE_STOCKS = [
       "filing": [
         "13F: 기관지분율 +16.85%p",
         "13F: 보유기관 883곳 · 지분율 112.0% (2026Q3)",
-        "8-K: 최근 60일 이벤트 3건 (활발)",
         "* FMP 실시간 공시 반영"
       ],
       "value": [
-        "PER 32.8 · 적정",
+        "PER 32.5 · 적정",
         "Forward PER 12.8 · 이익 성장 반영",
         "FCF Yield 10.4% · 우수"
       ]
@@ -1787,6 +1738,9 @@ window.LIVE_STOCKS = [
     "target": 13,
     "hitl": false,
     "regime": "NEUTRAL",
+    "aum": null,
+    "turnover": 282258267,
+    "atr_pct": 2.6,
     "reasons": {
       "tech": [
         "이동평균 완벽 정배열 (P>146.5>137.9>130.9)",
@@ -1807,10 +1761,11 @@ window.LIVE_STOCKS = [
       "filing": [
         "13F: 기관지분율 +22.55%p",
         "13F: 보유기관 1159곳 · 지분율 112.3% (2026Q3)",
+        "8-K: 최근 60일 이벤트 없음",
         "* FMP 실시간 공시 반영"
       ],
       "value": [
-        "PER 30.8 · 적정",
+        "PER 32.0 · 적정",
         "Forward PER 23.2 · 이익 성장 반영"
       ]
     }
@@ -1834,6 +1789,9 @@ window.LIVE_STOCKS = [
     "target": 14,
     "hitl": false,
     "regime": "NEUTRAL",
+    "aum": null,
+    "turnover": 323599188,
+    "atr_pct": 2.38,
     "reasons": {
       "tech": [
         "단기 정배열 (P>399.2>368.2)",
@@ -1858,7 +1816,7 @@ window.LIVE_STOCKS = [
         "* FMP 실시간 공시 반영"
       ],
       "value": [
-        "PER 17.3 · 저평가",
+        "PER 17.2 · 저평가",
         "FCF Yield 5.5% · 우수"
       ]
     }
@@ -1882,6 +1840,9 @@ window.LIVE_STOCKS = [
     "target": 10,
     "hitl": false,
     "regime": "NEUTRAL",
+    "aum": null,
+    "turnover": 33066853,
+    "atr_pct": 3.28,
     "reasons": {
       "tech": [
         "이동평균 완벽 정배열 (P>17.0>16.1>13.0)",
@@ -1903,7 +1864,7 @@ window.LIVE_STOCKS = [
         "* FMP 실시간 공시 반영"
       ],
       "value": [
-        "PER 11.1 · 극심 저평가",
+        "PER 11.3 · 극심 저평가",
         "PBR 0.01 · 자산가치 이하",
         "PEG 0.77 · 성장률 대비 저평가",
         "FCF Yield 34103.2% · 우수"
@@ -1929,6 +1890,9 @@ window.LIVE_STOCKS = [
     "target": 11,
     "hitl": false,
     "regime": "NEUTRAL",
+    "aum": null,
+    "turnover": 167961681,
+    "atr_pct": 1.74,
     "reasons": {
       "tech": [
         "이동평균 완벽 정배열 (P>99.8>98.9>95.7)",
@@ -1951,7 +1915,7 @@ window.LIVE_STOCKS = [
         "* FMP 실시간 공시 반영"
       ],
       "value": [
-        "PER 7.9 · 극심 저평가",
+        "PER 7.8 · 극심 저평가",
         "FCF Yield 12.5% · 우수"
       ]
     }
@@ -1975,6 +1939,9 @@ window.LIVE_STOCKS = [
     "target": 13,
     "hitl": false,
     "regime": "NEUTRAL",
+    "aum": null,
+    "turnover": 522537793,
+    "atr_pct": 2.82,
     "reasons": {
       "tech": [
         "이동평균 완벽 정배열 (P>86.2>77.9>69.5)",
@@ -1995,14 +1962,70 @@ window.LIVE_STOCKS = [
         "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
       ],
       "filing": [
-        "13F: 기관지분율 +6.10%p",
-        "13F: 보유기관 1014곳 · 지분율 100.8% (2026Q3)",
+        "13F: 기관지분율 +16.27%p",
+        "13F: 보유기관 1016곳 · 지분율 111.0% (2026Q3)",
         "Form 4: 매도 우세 P0/S15",
         "* FMP 실시간 공시 반영"
       ],
       "value": [
-        "PER 36.0 · 적정",
+        "PER 36.4 · 적정",
         "PBR 13.1 · 부담"
+      ]
+    }
+  },
+  {
+    "t": "ILMN",
+    "n": "Illumina, Inc.",
+    "m": "US",
+    "sec": "제약/바이오",
+    "at": "STOCK",
+    "ex": "NASDAQ",
+    "tech": 92,
+    "flow": 87,
+    "macro": 65,
+    "filing": 63,
+    "value": 29,
+    "total": 70,
+    "consensus": 2,
+    "signal": "WATCH",
+    "ev": 1.11,
+    "target": 13,
+    "hitl": false,
+    "regime": "NEUTRAL",
+    "aum": null,
+    "turnover": 472682859,
+    "atr_pct": 4.08,
+    "reasons": {
+      "tech": [
+        "이동평균 완벽 정배열 (P>199.2>188.7>147.5)",
+        "RSI 66 · 강세 지속 구간",
+        "MACD 골든크로스 · 히스토 +2.40",
+        "3개월 수익률 +53.7% · 강한 상승",
+        "Bollinger 상단 접근 (100%)"
+      ],
+      "flow": [
+        "CMF +0.41 · 강한 매집",
+        "가격·OBV 동반 상승 · 수급 확인",
+        "상승일 거래량 1.40배",
+        "거래대금 $426M · 유동성 충분",
+        "거래대금 증가 1.4배 · 관심 유입"
+      ],
+      "macro": [
+        "NEUTRAL · VIX 15.1 · US10Y 4.74%",
+        "DXY 99.0 약세 · 성장주 유리",
+        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
+      ],
+      "filing": [
+        "13F: 신규진입 +69곳",
+        "13F: 기관지분율 +26.17%p",
+        "13F: 보유기관 962곳 · 지분율 128.4% (2026Q3)",
+        "Form 4: 매도 우세 P0/S73",
+        "8-K: 최근 60일 이벤트 5건 (활발)"
+      ],
+      "value": [
+        "PER 41.0 · 프리미엄",
+        "PBR 11.9 · 부담",
+        "PEG 3.11 · 성장률 대비 부담"
       ]
     }
   },
@@ -2025,6 +2048,9 @@ window.LIVE_STOCKS = [
     "target": 12,
     "hitl": false,
     "regime": "NEUTRAL",
+    "aum": null,
+    "turnover": 348927208,
+    "atr_pct": 3.12,
     "reasons": {
       "tech": [
         "단기 정배열 (P>220.8>207.2)",
@@ -2051,7 +2077,7 @@ window.LIVE_STOCKS = [
         "8-K: 최근 60일 이벤트 3건 (활발)"
       ],
       "value": [
-        "PER 22.3 · 적정",
+        "PER 22.2 · 적정",
         "Forward PER 17.6 · 이익 성장 반영"
       ]
     }
@@ -2067,14 +2093,17 @@ window.LIVE_STOCKS = [
     "flow": 84,
     "macro": 65,
     "filing": 66,
-    "value": 60,
-    "total": 74,
+    "value": 68,
+    "total": 75,
     "consensus": 2,
     "signal": "WATCH",
-    "ev": 1.12,
-    "target": 13,
+    "ev": 1.14,
+    "target": 14,
     "hitl": false,
     "regime": "NEUTRAL",
+    "aum": null,
+    "turnover": 303836242,
+    "atr_pct": 2.13,
     "reasons": {
       "tech": [
         "단기 정배열 (P>71.7>66.8)",
@@ -2094,14 +2123,15 @@ window.LIVE_STOCKS = [
         "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
       ],
       "filing": [
-        "13F: 기관지분율 +1.31%p",
+        "13F: 기관지분율 +10.28%p",
         "P/C비율 하락 -50% (헤지 완화)",
-        "13F: 보유기관 1258곳 · 지분율 87.0% (2026Q3)",
+        "13F: 보유기관 1260곳 · 지분율 96.0% (2026Q3)",
         "8-K: 최근 60일 이벤트 4건 (활발)",
         "* FMP 실시간 공시 반영"
       ],
       "value": [
-        "PER 17.1 · 저평가"
+        "PER 17.3 · 저평가",
+        "Forward PER 13.7 · 이익 성장 반영"
       ]
     }
   },
@@ -2124,6 +2154,9 @@ window.LIVE_STOCKS = [
     "target": 12,
     "hitl": false,
     "regime": "NEUTRAL",
+    "aum": null,
+    "turnover": 209016762,
+    "atr_pct": 2.52,
     "reasons": {
       "tech": [
         "이동평균 완벽 정배열 (P>209.5>205.6>188.3)",
@@ -2148,7 +2181,7 @@ window.LIVE_STOCKS = [
         "* FMP 실시간 공시 반영"
       ],
       "value": [
-        "PER 38.7 · 적정",
+        "PER 38.5 · 적정",
         "Forward PER 13.2 · 이익 성장 반영"
       ]
     }
@@ -2172,6 +2205,9 @@ window.LIVE_STOCKS = [
     "target": 9,
     "hitl": false,
     "regime": "NEUTRAL",
+    "aum": null,
+    "turnover": 28719734,
+    "atr_pct": 1.58,
     "reasons": {
       "tech": [
         "RSI 65 · 강세 지속 구간",
@@ -2220,6 +2256,9 @@ window.LIVE_STOCKS = [
     "target": 14,
     "hitl": false,
     "regime": "NEUTRAL",
+    "aum": null,
+    "turnover": 166831292,
+    "atr_pct": 2.43,
     "reasons": {
       "tech": [
         "단기 정배열 (P>71.5>67.7)",
@@ -2239,13 +2278,13 @@ window.LIVE_STOCKS = [
         "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
       ],
       "filing": [
-        "13F: 기관지분율 +1.48%p",
-        "13F: 보유기관 811곳 · 지분율 85.1% (2026Q3)",
+        "13F: 기관지분율 +9.65%p",
+        "13F: 보유기관 815곳 · 지분율 93.3% (2026Q3)",
         "Form 4: 순매수 P1/S0",
         "* FMP 실시간 공시 반영"
       ],
       "value": [
-        "PER 23.8 · 적정",
+        "PER 23.3 · 적정",
         "Forward PER 15.5 · 이익 성장 반영",
         "FCF Yield 6.6% · 우수"
       ]
@@ -2270,6 +2309,9 @@ window.LIVE_STOCKS = [
     "target": 15,
     "hitl": false,
     "regime": "NEUTRAL",
+    "aum": null,
+    "turnover": 198099458,
+    "atr_pct": 2.05,
     "reasons": {
       "tech": [
         "이동평균 완벽 정배열 (P>348.1>348.1>290.2)",
@@ -2296,7 +2338,7 @@ window.LIVE_STOCKS = [
         "* FMP 실시간 공시 반영"
       ],
       "value": [
-        "PER 45.3 · 프리미엄",
+        "PER 45.2 · 프리미엄",
         "Forward PER 35.5 · 이익 성장 반영",
         "PBR 8.3 · 부담",
         "PEG 3.03 · 성장률 대비 부담"
@@ -2322,6 +2364,9 @@ window.LIVE_STOCKS = [
     "target": 11,
     "hitl": false,
     "regime": "NEUTRAL",
+    "aum": null,
+    "turnover": 31621728,
+    "atr_pct": 3.34,
     "reasons": {
       "tech": [
         "이동평균 완벽 정배열 (P>94.4>86.2>72.4)",
@@ -2332,7 +2377,7 @@ window.LIVE_STOCKS = [
       ],
       "flow": [
         "가격·OBV 동반 상승 · 수급 확인",
-        "상승일 거래량 1.28배"
+        "상승일 거래량 1.29배"
       ],
       "macro": [
         "NEUTRAL · VIX 15.1 · US10Y 4.74%",
@@ -2369,6 +2414,9 @@ window.LIVE_STOCKS = [
     "target": 8,
     "hitl": false,
     "regime": "NEUTRAL",
+    "aum": null,
+    "turnover": 249073200,
+    "atr_pct": 2.55,
     "reasons": {
       "tech": [
         "RSI 60 · 강세 지속 구간",
@@ -2386,12 +2434,12 @@ window.LIVE_STOCKS = [
         "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
       ],
       "filing": [
-        "13F: 기관지분율 +3.38%p",
-        "13F: 보유기관 1081곳 · 지분율 85.1% (2026Q3)",
+        "13F: 기관지분율 +23.35%p",
+        "13F: 보유기관 1083곳 · 지분율 105.1% (2026Q3)",
         "* FMP 실시간 공시 반영"
       ],
       "value": [
-        "PER 13.1 · 저평가",
+        "PER 12.9 · 저평가",
         "FCF Yield 9.4% · 우수"
       ]
     }
@@ -2415,6 +2463,9 @@ window.LIVE_STOCKS = [
     "target": 15,
     "hitl": false,
     "regime": "NEUTRAL",
+    "aum": null,
+    "turnover": 301151765,
+    "atr_pct": 3.34,
     "reasons": {
       "tech": [
         "이동평균 완벽 정배열 (P>89.2>80.1>74.6)",
@@ -2439,7 +2490,7 @@ window.LIVE_STOCKS = [
         "* FMP 실시간 공시 반영"
       ],
       "value": [
-        "PER 44.7 · 프리미엄",
+        "PER 44.3 · 프리미엄",
         "Forward PER 5.9 · 이익 성장 반영",
         "PEG 0.27 · 성장률 대비 저평가",
         "FCF Yield 31.5% · 우수"
@@ -2465,6 +2516,9 @@ window.LIVE_STOCKS = [
     "target": 9,
     "hitl": false,
     "regime": "NEUTRAL",
+    "aum": null,
+    "turnover": 1932756623,
+    "atr_pct": 7.24,
     "reasons": {
       "tech": [
         "단기 정배열 (P>33.1>30.5)",
@@ -2486,7 +2540,7 @@ window.LIVE_STOCKS = [
         "* FMP 실시간 공시 반영"
       ],
       "value": [
-        "PER 10.8 · 극심 저평가",
+        "PER 11.4 · 극심 저평가",
         "Forward PER 6.6 · 이익 성장 반영",
         "PEG 0.91 · 성장률 대비 저평가",
         "FCF 음수 · 현금유출"
@@ -2503,15 +2557,18 @@ window.LIVE_STOCKS = [
     "tech": 80,
     "flow": 48,
     "macro": 60,
-    "filing": 70,
+    "filing": 75,
     "value": 78,
-    "total": 70,
+    "total": 72,
     "consensus": 3,
     "signal": "BUY",
-    "ev": 0.75,
-    "target": 9,
+    "ev": 0.8,
+    "target": 10,
     "hitl": false,
     "regime": "NEUTRAL",
+    "aum": null,
+    "turnover": 295638697,
+    "atr_pct": 2.47,
     "reasons": {
       "tech": [
         "단기 정배열 (P>94.0>90.6)",
@@ -2528,7 +2585,8 @@ window.LIVE_STOCKS = [
         "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
       ],
       "filing": [
-        "13F: 보유기관 890곳 · 지분율 91.9% (2026Q3)",
+        "13F: 기관지분율 +10.68%p",
+        "13F: 보유기관 892곳 · 지분율 102.6% (2026Q3)",
         "Form 4: 실제매수 클러스터 P3/S0 (90일)",
         "8-K: 최근 60일 이벤트 4건 (활발)",
         "* FMP 실시간 공시 반영"
@@ -2558,6 +2616,9 @@ window.LIVE_STOCKS = [
     "target": 15,
     "hitl": false,
     "regime": "NEUTRAL",
+    "aum": null,
+    "turnover": 197099344,
+    "atr_pct": 2.5,
     "reasons": {
       "tech": [
         "이동평균 완벽 정배열 (P>46.8>44.4>41.9)",
@@ -2583,7 +2644,7 @@ window.LIVE_STOCKS = [
         "* FMP 실시간 공시 반영"
       ],
       "value": [
-        "PER 20.1 · 적정",
+        "PER 20.4 · 적정",
         "Forward PER 10.6 · 이익 성장 반영",
         "FCF Yield 6.8% · 우수"
       ]
@@ -2608,6 +2669,9 @@ window.LIVE_STOCKS = [
     "target": 13,
     "hitl": false,
     "regime": "NEUTRAL",
+    "aum": null,
+    "turnover": 333152635,
+    "atr_pct": 2.5,
     "reasons": {
       "tech": [
         "단기 정배열 (P>37.8>36.5)",
@@ -2628,9 +2692,9 @@ window.LIVE_STOCKS = [
       ],
       "filing": [
         "13F: 신규진입 +52곳",
-        "13F: 기관지분율 +4.83%p",
+        "13F: 기관지분율 +10.93%p",
         "P/C비율 하락 -51% (헤지 완화)",
-        "13F: 보유기관 1380곳 · 지분율 88.9% (2026Q3)",
+        "13F: 보유기관 1382곳 · 지분율 95.0% (2026Q3)",
         "8-K: 최근 60일 이벤트 없음"
       ],
       "value": [
@@ -2659,6 +2723,9 @@ window.LIVE_STOCKS = [
     "target": 13,
     "hitl": false,
     "regime": "NEUTRAL",
+    "aum": null,
+    "turnover": 260241985,
+    "atr_pct": 2.97,
     "reasons": {
       "tech": [
         "단기 정배열 (P>168.2>153.7)",
@@ -2683,7 +2750,7 @@ window.LIVE_STOCKS = [
         "* FMP 실시간 공시 반영"
       ],
       "value": [
-        "PER 19.3 · 적정",
+        "PER 19.0 · 적정",
         "FCF Yield 5.6% · 우수"
       ]
     }
@@ -2698,15 +2765,18 @@ window.LIVE_STOCKS = [
     "tech": 88,
     "flow": 93,
     "macro": 60,
-    "filing": 53,
+    "filing": 63,
     "value": 43,
-    "total": 70,
+    "total": 72,
     "consensus": 2,
     "signal": "WATCH",
-    "ev": 1.04,
-    "target": 12,
+    "ev": 1.14,
+    "target": 14,
     "hitl": false,
     "regime": "NEUTRAL",
+    "aum": null,
+    "turnover": 180509630,
+    "atr_pct": 4.06,
     "reasons": {
       "tech": [
         "단기 정배열 (P>49.0>44.6)",
@@ -2726,13 +2796,13 @@ window.LIVE_STOCKS = [
         "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
       ],
       "filing": [
-        "13F: 기관지분율 -3.15%p",
+        "13F: 기관지분율 +1.32%p",
         "P/C비율 하락 -240% (헤지 완화)",
-        "13F: 보유기관 386곳 · 지분율 91.2% (2026Q3)",
+        "13F: 보유기관 388곳 · 지분율 95.7% (2026Q3)",
         "* FMP 실시간 공시 반영"
       ],
       "value": [
-        "PER 78.9 · 극심 프리미엄",
+        "PER 77.7 · 극심 프리미엄",
         "Forward PER 14.5 · 이익 성장 반영"
       ]
     }
@@ -2756,6 +2826,9 @@ window.LIVE_STOCKS = [
     "target": 13,
     "hitl": false,
     "regime": "NEUTRAL",
+    "aum": null,
+    "turnover": 604466123,
+    "atr_pct": 4.59,
     "reasons": {
       "tech": [
         "이동평균 완벽 정배열 (P>41.0>33.8>31.9)",
@@ -2804,6 +2877,9 @@ window.LIVE_STOCKS = [
     "target": 11,
     "hitl": false,
     "regime": "NEUTRAL",
+    "aum": null,
+    "turnover": 57197199,
+    "atr_pct": 3.85,
     "reasons": {
       "tech": [
         "이동평균 완벽 정배열 (P>50.4>49.5>42.6)",
@@ -2854,6 +2930,9 @@ window.LIVE_STOCKS = [
     "target": 13,
     "hitl": false,
     "regime": "NEUTRAL",
+    "aum": null,
+    "turnover": 312849976,
+    "atr_pct": 4.02,
     "reasons": {
       "tech": [
         "이동평균 완벽 정배열 (P>120.7>116.0>105.0)",
@@ -2885,102 +2964,52 @@ window.LIVE_STOCKS = [
     }
   },
   {
-    "t": "ZBH",
-    "n": "Zimmer Biomet Holdings, Inc.",
-    "m": "US",
-    "sec": "제약/바이오",
-    "at": "STOCK",
-    "ex": "NYSE",
-    "tech": 91,
-    "flow": 87,
-    "macro": 65,
-    "filing": 63,
-    "value": 74,
-    "total": 78,
-    "consensus": 3,
-    "signal": "BUY",
-    "ev": 1.25,
-    "target": 15,
-    "hitl": false,
-    "regime": "NEUTRAL",
-    "reasons": {
-      "tech": [
-        "이동평균 완벽 정배열 (P>97.9>92.9>90.5)",
-        "RSI 64 · 강세 지속 구간",
-        "MACD 골든크로스 · 히스토 +0.06",
-        "3개월 수익률 +19.9%"
-      ],
-      "flow": [
-        "CMF +0.25 · 강한 매집",
-        "가격·OBV 동반 상승 · 수급 확인",
-        "상승일 거래량 1.25배",
-        "거래대금 $247M · 유동성 충분",
-        "거래대금 증가 1.3배 · 관심 유입"
-      ],
-      "macro": [
-        "NEUTRAL · VIX 15.1 · US10Y 4.74%",
-        "DXY 99.0 약세 · 성장주 유리",
-        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
-      ],
-      "filing": [
-        "13F: 기관지분율 +3.88%p",
-        "13F: 보유기관 924곳 · 지분율 102.5% (2026Q3)",
-        "8-K: 최근 60일 이벤트 3건 (활발)",
-        "* FMP 실시간 공시 반영"
-      ],
-      "value": [
-        "PER 24.5 · 적정",
-        "Forward PER 11.1 · 이익 성장 반영",
-        "PEG 0.68 · 성장률 대비 저평가",
-        "FCF Yield 5.7% · 우수"
-      ]
-    }
-  },
-  {
     "t": "TSCO",
     "n": "Tractor Supply Company",
     "m": "US",
     "sec": "소비재",
     "at": "STOCK",
     "ex": "NASDAQ",
-    "tech": 88,
+    "tech": 78,
     "flow": 84,
     "macro": 60,
     "filing": 75,
     "value": 50,
-    "total": 76,
+    "total": 73,
     "consensus": 3,
     "signal": "BUY",
-    "ev": 1.23,
-    "target": 15,
+    "ev": 1.09,
+    "target": 13,
     "hitl": false,
     "regime": "NEUTRAL",
+    "aum": null,
+    "turnover": 412057717,
+    "atr_pct": 3.22,
     "reasons": {
       "tech": [
-        "단기 정배열 (P>34.0>31.9)",
-        "RSI 69 · 강세 지속 구간",
-        "MACD 골든크로스 · 히스토 +0.02",
-        "3개월 수익률 +21.5% · 강한 상승"
+        "단기 정배열 (P>33.8>31.7)",
+        "MACD 골든크로스 · 히스토 +0.04",
+        "3개월 수익률 +22.4% · 강한 상승"
       ],
       "flow": [
         "CMF +0.22 · 강한 매집",
         "가격·OBV 동반 상승 · 수급 확인",
         "상승일 거래량 1.44배",
-        "거래대금 $392M · 유동성 충분"
+        "거래대금 $389M · 유동성 충분"
       ],
       "macro": [
         "NEUTRAL · VIX 15.1 · US10Y 4.74%",
         "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
       ],
       "filing": [
-        "13F: 기관지분율 +2.19%p",
-        "13F: 보유기관 1091곳 · 지분율 94.2% (2026Q3)",
+        "13F: 기관지분율 +6.61%p",
+        "13F: 보유기관 1094곳 · 지분율 98.6% (2026Q3)",
         "Form 4: 실제매수 클러스터 P4/S0 (90일)",
         "8-K: 최근 60일 이벤트 3건 (활발)",
         "* FMP 실시간 공시 반영"
       ],
       "value": [
-        "PER 18.7 · 적정"
+        "PER 18.2 · 적정"
       ]
     }
   },
@@ -3003,6 +3032,9 @@ window.LIVE_STOCKS = [
     "target": 14,
     "hitl": false,
     "regime": "NEUTRAL",
+    "aum": null,
+    "turnover": 226168883,
+    "atr_pct": 2.77,
     "reasons": {
       "tech": [
         "이동평균 완벽 정배열 (P>62.7>58.5>51.2)",
@@ -3026,7 +3058,7 @@ window.LIVE_STOCKS = [
         "* FMP 실시간 공시 반영"
       ],
       "value": [
-        "PER 18.4 · 적정",
+        "PER 18.7 · 적정",
         "Forward PER 9.0 · 이익 성장 반영",
         "FCF Yield 6.7% · 우수"
       ]
@@ -3051,6 +3083,9 @@ window.LIVE_STOCKS = [
     "target": 12,
     "hitl": false,
     "regime": "NEUTRAL",
+    "aum": null,
+    "turnover": 142411063,
+    "atr_pct": 2.4,
     "reasons": {
       "tech": [
         "이동평균 완벽 정배열 (P>143.3>133.4>132.2)",
@@ -3074,7 +3109,7 @@ window.LIVE_STOCKS = [
         "* FMP 실시간 공시 반영"
       ],
       "value": [
-        "PER 50.2 · 프리미엄",
+        "PER 49.7 · 프리미엄",
         "Forward PER 18.4 · 이익 성장 반영",
         "PEG 0.46 · 성장률 대비 저평가"
       ]
@@ -3099,6 +3134,9 @@ window.LIVE_STOCKS = [
     "target": 11,
     "hitl": false,
     "regime": "NEUTRAL",
+    "aum": null,
+    "turnover": 221203385,
+    "atr_pct": 3.48,
     "reasons": {
       "tech": [
         "단기 정배열 (P>145.5>129.8)",
@@ -3146,6 +3184,9 @@ window.LIVE_STOCKS = [
     "target": 13,
     "hitl": false,
     "regime": "NEUTRAL",
+    "aum": null,
+    "turnover": 137583457,
+    "atr_pct": 2.74,
     "reasons": {
       "tech": [
         "이동평균 완벽 정배열 (P>367.6>336.9>323.7)",
@@ -3177,53 +3218,6 @@ window.LIVE_STOCKS = [
     }
   },
   {
-    "t": "PAA",
-    "n": "Plains All American Pipeline, L.P.",
-    "m": "US",
-    "sec": "에너지",
-    "at": "STOCK",
-    "ex": "NASDAQ",
-    "tech": 88,
-    "flow": 71,
-    "macro": 60,
-    "filing": 55,
-    "value": 66,
-    "total": 70,
-    "consensus": 2,
-    "signal": "WATCH",
-    "ev": 0.89,
-    "target": 11,
-    "hitl": false,
-    "regime": "NEUTRAL",
-    "reasons": {
-      "tech": [
-        "이동평균 완벽 정배열 (P>23.9>23.0>20.3)",
-        "RSI 66 · 강세 지속 구간",
-        "MACD 골든크로스 · 히스토 +0.10",
-        "3개월 수익률 +7.8%",
-        "Bollinger 상단 접근 (95%)"
-      ],
-      "flow": [
-        "CMF +0.05 · 매수 우위",
-        "가격·OBV 동반 상승 · 수급 확인",
-        "거래대금 $65M · 유동성 충분"
-      ],
-      "macro": [
-        "NEUTRAL · VIX 15.1 · US10Y 4.74%",
-        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
-      ],
-      "filing": [
-        "13F: 보유기관 434곳 · 지분율 41.0% (2026Q3)",
-        "* FMP 실시간 공시 반영"
-      ],
-      "value": [
-        "PER 21.3 · 적정",
-        "Forward PER 13.3 · 이익 성장 반영",
-        "FCF Yield 8.0% · 우수"
-      ]
-    }
-  },
-  {
     "t": "GEN",
     "n": "Gen Digital Inc.",
     "m": "US",
@@ -3242,6 +3236,9 @@ window.LIVE_STOCKS = [
     "target": 12,
     "hitl": false,
     "regime": "NEUTRAL",
+    "aum": null,
+    "turnover": 151962060,
+    "atr_pct": 3.52,
     "reasons": {
       "tech": [
         "이동평균 완벽 정배열 (P>28.2>26.4>24.2)",
@@ -3260,13 +3257,13 @@ window.LIVE_STOCKS = [
         "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
       ],
       "filing": [
-        "13F: 기관지분율 +3.18%p",
+        "13F: 기관지분율 +6.15%p",
         "P/C비율 하락 -34% (헤지 완화)",
-        "13F: 보유기관 701곳 · 지분율 89.6% (2026Q3)",
+        "13F: 보유기관 703곳 · 지분율 92.6% (2026Q3)",
         "* FMP 실시간 공시 반영"
       ],
       "value": [
-        "PER 17.0 · 저평가",
+        "PER 16.9 · 저평가",
         "Forward PER 8.8 · 이익 성장 반영",
         "FCF Yield 8.9% · 우수"
       ]
@@ -3282,15 +3279,18 @@ window.LIVE_STOCKS = [
     "tech": 88,
     "flow": 84,
     "macro": 65,
-    "filing": 53,
+    "filing": 58,
     "value": 66,
-    "total": 72,
+    "total": 74,
     "consensus": 2,
     "signal": "WATCH",
-    "ev": 1.06,
+    "ev": 1.11,
     "target": 13,
     "hitl": false,
     "regime": "NEUTRAL",
+    "aum": null,
+    "turnover": 118212987,
+    "atr_pct": 2.47,
     "reasons": {
       "tech": [
         "이동평균 완벽 정배열 (P>28.9>27.5>26.0)",
@@ -3311,8 +3311,7 @@ window.LIVE_STOCKS = [
         "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
       ],
       "filing": [
-        "13F: 기관지분율 -1.63%p",
-        "13F: 보유기관 648곳 · 지분율 68.1% (2026Q3)",
+        "13F: 보유기관 650곳 · 지분율 70.5% (2026Q3)",
         "8-K: 최근 60일 이벤트 17건 (활발)",
         "* FMP 실시간 공시 반영"
       ],
@@ -3342,6 +3341,9 @@ window.LIVE_STOCKS = [
     "target": 15,
     "hitl": false,
     "regime": "NEUTRAL",
+    "aum": null,
+    "turnover": 267556691,
+    "atr_pct": 3.94,
     "reasons": {
       "tech": [
         "이동평균 완벽 정배열 (P>89.8>81.7>62.7)",
@@ -3368,7 +3370,7 @@ window.LIVE_STOCKS = [
         "* FMP 실시간 공시 반영"
       ],
       "value": [
-        "PER 9.1 · 극심 저평가",
+        "PER 9.3 · 극심 저평가",
         "FCF Yield 12.0% · 우수"
       ]
     }
@@ -3392,6 +3394,9 @@ window.LIVE_STOCKS = [
     "target": 13,
     "hitl": false,
     "regime": "NEUTRAL",
+    "aum": null,
+    "turnover": 175551898,
+    "atr_pct": 3.01,
     "reasons": {
       "tech": [
         "이동평균 완벽 정배열 (P>81.1>76.3>76.2)",
@@ -3411,14 +3416,14 @@ window.LIVE_STOCKS = [
         "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
       ],
       "filing": [
-        "13F: 기관지분율 +1.28%p",
+        "13F: 기관지분율 +13.11%p",
         "P/C비율 하락 -72% (헤지 완화)",
-        "13F: 보유기관 529곳 · 지분율 111.2% (2026Q3)",
+        "13F: 보유기관 530곳 · 지분율 123.0% (2026Q3)",
         "Form 4: 매도 우세 P0/S10",
         "* FMP 실시간 공시 반영"
       ],
       "value": [
-        "PER 22.4 · 적정",
+        "PER 22.3 · 적정",
         "Forward PER 15.1 · 이익 성장 반영"
       ]
     }
@@ -3434,14 +3439,17 @@ window.LIVE_STOCKS = [
     "flow": 80,
     "macro": 60,
     "filing": 60,
-    "value": 70,
+    "value": 68,
     "total": 73,
-    "consensus": 3,
-    "signal": "BUY",
-    "ev": 0.96,
-    "target": 12,
+    "consensus": 2,
+    "signal": "WATCH",
+    "ev": 0.95,
+    "target": 11,
     "hitl": false,
     "regime": "NEUTRAL",
+    "aum": null,
+    "turnover": 157521867,
+    "atr_pct": 4.5,
     "reasons": {
       "tech": [
         "단기 정배열 (P>108.0>102.0)",
@@ -3452,7 +3460,7 @@ window.LIVE_STOCKS = [
       "flow": [
         "CMF +0.07 · 매수 우위",
         "가격·OBV 동반 상승 · 수급 확인",
-        "상승일 거래량 1.95배 · 매수 집중",
+        "상승일 거래량 1.94배 · 매수 집중",
         "거래대금 $150M · 유동성 충분",
         "거래대금 감소 0.4배 · 관심 이탈"
       ],
@@ -3461,13 +3469,65 @@ window.LIVE_STOCKS = [
         "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
       ],
       "filing": [
-        "13F: 기관지분율 +2.24%p",
-        "13F: 보유기관 358곳 · 지분율 31.9% (2026Q3)",
+        "13F: 기관지분율 +5.87%p",
+        "13F: 보유기관 359곳 · 지분율 35.5% (2026Q3)",
         "8-K: 최근 60일 이벤트 없음",
         "* FMP 실시간 공시 반영"
       ],
       "value": [
-        "PER 11.5 · 극심 저평가"
+        "PER 12.3 · 저평가",
+        "Forward PER 9.4 · 이익 성장 반영"
+      ]
+    }
+  },
+  {
+    "t": "SOLV",
+    "n": "Solventum Corporation",
+    "m": "US",
+    "sec": "제약/바이오",
+    "at": "STOCK",
+    "ex": "NYSE",
+    "tech": 88,
+    "flow": 55,
+    "macro": 65,
+    "filing": 63,
+    "value": 70,
+    "total": 70,
+    "consensus": 2,
+    "signal": "WATCH",
+    "ev": 0.97,
+    "target": 12,
+    "hitl": false,
+    "regime": "NEUTRAL",
+    "aum": null,
+    "turnover": 121740731,
+    "atr_pct": 3.21,
+    "reasons": {
+      "tech": [
+        "이동평균 완벽 정배열 (P>86.9>81.2>76.5)",
+        "RSI 59 · 강세 지속 구간",
+        "MACD 골든크로스 · 히스토 +0.23",
+        "3개월 수익률 +19.6%",
+        "Bollinger 상단 접근 (100%)"
+      ],
+      "flow": [
+        "CMF +0.19 · 강한 매집",
+        "가격↑ OBV↓ 다이버전스 · 상승 중 분산",
+        "거래대금 $116M · 유동성 충분"
+      ],
+      "macro": [
+        "NEUTRAL · VIX 15.1 · US10Y 4.74%",
+        "DXY 99.0 약세 · 성장주 유리",
+        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
+      ],
+      "filing": [
+        "13F: 기관지분율 +7.74%p",
+        "13F: 보유기관 892곳 · 지분율 81.6% (2026Q3)",
+        "8-K: 최근 60일 이벤트 3건 (활발)",
+        "* FMP 실시간 공시 반영"
+      ],
+      "value": [
+        "PER 11.0 · 극심 저평가"
       ]
     }
   },
@@ -3490,6 +3550,9 @@ window.LIVE_STOCKS = [
     "target": 9,
     "hitl": false,
     "regime": "NEUTRAL",
+    "aum": null,
+    "turnover": 85118200,
+    "atr_pct": 3.71,
     "reasons": {
       "tech": [
         "이동평균 완벽 정배열 (P>35.4>34.2>30.3)",
@@ -3514,7 +3577,7 @@ window.LIVE_STOCKS = [
         "* FMP 실시간 공시 반영"
       ],
       "value": [
-        "PER 29.4 · 적정",
+        "PER 29.6 · 적정",
         "Forward PER 14.9 · 이익 성장 반영",
         "PEG 0.57 · 성장률 대비 저평가",
         "FCF Yield 6119.9% · 우수"
@@ -3540,6 +3603,9 @@ window.LIVE_STOCKS = [
     "target": 13,
     "hitl": false,
     "regime": "NEUTRAL",
+    "aum": null,
+    "turnover": 261632629,
+    "atr_pct": 3.79,
     "reasons": {
       "tech": [
         "이동평균 완벽 정배열 (P>39.3>36.1>32.4)",
@@ -3556,12 +3622,12 @@ window.LIVE_STOCKS = [
         "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
       ],
       "filing": [
-        "13F: 기관지분율 +6.49%p",
-        "13F: 보유기관 852곳 · 지분율 104.4% (2026Q3)",
+        "13F: 기관지분율 +10.27%p",
+        "13F: 보유기관 854곳 · 지분율 108.2% (2026Q3)",
         "* FMP 실시간 공시 반영"
       ],
       "value": [
-        "PER 9.1 · 극심 저평가",
+        "PER 9.2 · 극심 저평가",
         "PEG 0.82 · 성장률 대비 저평가",
         "FCF Yield 14.3% · 우수"
       ]
@@ -3586,6 +3652,9 @@ window.LIVE_STOCKS = [
     "target": 12,
     "hitl": false,
     "regime": "NEUTRAL",
+    "aum": null,
+    "turnover": 154063027,
+    "atr_pct": 2.44,
     "reasons": {
       "tech": [
         "단기 정배열 (P>53.4>51.5)",
@@ -3604,9 +3673,10 @@ window.LIVE_STOCKS = [
         "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
       ],
       "filing": [
-        "13F: 기관지분율 +3.98%p",
+        "13F: 기관지분율 +12.26%p",
         "P/C비율 하락 -79% (헤지 완화)",
-        "13F: 보유기관 983곳 · 지분율 89.6% (2026Q3)",
+        "13F: 보유기관 985곳 · 지분율 97.8% (2026Q3)",
+        "8-K: 최근 60일 이벤트 없음",
         "* FMP 실시간 공시 반영"
       ],
       "value": [
@@ -3625,14 +3695,17 @@ window.LIVE_STOCKS = [
     "flow": 83,
     "macro": 60,
     "filing": 68,
-    "value": 66,
-    "total": 74,
+    "value": 58,
+    "total": 72,
     "consensus": 2,
     "signal": "WATCH",
-    "ev": 1.07,
-    "target": 13,
+    "ev": 1.04,
+    "target": 12,
     "hitl": false,
     "regime": "NEUTRAL",
+    "aum": null,
+    "turnover": 249004702,
+    "atr_pct": 3.57,
     "reasons": {
       "tech": [
         "이동평균 완벽 정배열 (P>232.7>207.9>204.0)",
@@ -3658,8 +3731,7 @@ window.LIVE_STOCKS = [
         "* FMP 실시간 공시 반영"
       ],
       "value": [
-        "PER 33.1 · 적정",
-        "Forward PER 26.4 · 이익 성장 반영",
+        "PER 31.5 · 적정",
         "PEG 0.98 · 성장률 대비 저평가"
       ]
     }
@@ -3683,6 +3755,9 @@ window.LIVE_STOCKS = [
     "target": 10,
     "hitl": false,
     "regime": "NEUTRAL",
+    "aum": null,
+    "turnover": 154711540,
+    "atr_pct": 2.43,
     "reasons": {
       "tech": [
         "이동평균 완벽 정배열 (P>31.2>29.4>26.5)",
@@ -3731,6 +3806,9 @@ window.LIVE_STOCKS = [
     "target": 11,
     "hitl": false,
     "regime": "NEUTRAL",
+    "aum": null,
+    "turnover": 173220434,
+    "atr_pct": 3.5,
     "reasons": {
       "tech": [
         "단기 정배열 (P>58.2>54.2)",
@@ -3779,6 +3857,9 @@ window.LIVE_STOCKS = [
     "target": 13,
     "hitl": false,
     "regime": "NEUTRAL",
+    "aum": null,
+    "turnover": 103803968,
+    "atr_pct": 3.37,
     "reasons": {
       "tech": [
         "이동평균 완벽 정배열 (P>73.0>67.4>65.3)",
@@ -3800,7 +3881,7 @@ window.LIVE_STOCKS = [
         "* FMP 실시간 공시 반영"
       ],
       "value": [
-        "PER 30.9 · 적정",
+        "PER 30.8 · 적정",
         "Forward PER 19.3 · 이익 성장 반영",
         "PEG 28.22 · 성장률 대비 부담",
         "FCF Yield 12.3% · 우수"
@@ -3826,6 +3907,9 @@ window.LIVE_STOCKS = [
     "target": 13,
     "hitl": false,
     "regime": "NEUTRAL",
+    "aum": null,
+    "turnover": 198733560,
+    "atr_pct": 2.91,
     "reasons": {
       "tech": [
         "이동평균 완벽 정배열 (P>116.3>111.6>100.6)",
@@ -3834,7 +3918,7 @@ window.LIVE_STOCKS = [
         "Bollinger 상단 접근 (94%)"
       ],
       "flow": [
-        "CMF +0.36 · 강한 매집",
+        "CMF +0.35 · 강한 매집",
         "가격·OBV 동반 상승 · 수급 확인",
         "상승일 거래량 1.46배",
         "거래대금 $188M · 유동성 충분",
@@ -3852,7 +3936,7 @@ window.LIVE_STOCKS = [
         "* FMP 실시간 공시 반영"
       ],
       "value": [
-        "PER 59.1 · 프리미엄",
+        "PER 60.0 · 프리미엄",
         "Forward PER 20.9 · 이익 성장 반영",
         "PEG 0.77 · 성장률 대비 저평가"
       ]
@@ -3869,14 +3953,17 @@ window.LIVE_STOCKS = [
     "flow": 81,
     "macro": 60,
     "filing": 55,
-    "value": 74,
-    "total": 74,
+    "value": 84,
+    "total": 76,
     "consensus": 3,
     "signal": "BUY",
-    "ev": 1.09,
+    "ev": 1.12,
     "target": 13,
     "hitl": false,
     "regime": "NEUTRAL",
+    "aum": null,
+    "turnover": 327773592,
+    "atr_pct": 4.53,
     "reasons": {
       "tech": [
         "단기 정배열 (P>179.5>153.2)",
@@ -3901,10 +3988,170 @@ window.LIVE_STOCKS = [
         "* FMP 실시간 공시 반영"
       ],
       "value": [
-        "PER 18.2 · 적정",
+        "PER 17.6 · 저평가",
         "Forward PER 12.3 · 이익 성장 반영",
         "PEG 0.87 · 성장률 대비 저평가",
         "FCF Yield 8.2% · 우수"
+      ]
+    }
+  },
+  {
+    "t": "SJM",
+    "n": "The J. M. Smucker Company",
+    "m": "US",
+    "sec": "소매",
+    "at": "STOCK",
+    "ex": "NYSE",
+    "tech": 92,
+    "flow": 69,
+    "macro": 60,
+    "filing": 50,
+    "value": 78,
+    "total": 72,
+    "consensus": 2,
+    "signal": "WATCH",
+    "ev": 1.02,
+    "target": 12,
+    "hitl": false,
+    "regime": "NEUTRAL",
+    "aum": null,
+    "turnover": 144105416,
+    "atr_pct": 2.24,
+    "reasons": {
+      "tech": [
+        "이동평균 완벽 정배열 (P>120.0>115.5>103.8)",
+        "RSI 68 · 강세 지속 구간",
+        "MACD 골든크로스 · 히스토 +0.44",
+        "3개월 수익률 +24.2% · 강한 상승",
+        "Bollinger 상단 접근 (100%)"
+      ],
+      "flow": [
+        "가격·OBV 동반 상승 · 수급 확인",
+        "상승일 거래량 1.49배",
+        "거래대금 $138M · 유동성 충분"
+      ],
+      "macro": [
+        "NEUTRAL · VIX 15.1 · US10Y 4.74%",
+        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
+      ],
+      "filing": [
+        "13F: 기관지분율 +11.45%p",
+        "13F: 보유기관 913곳 · 지분율 101.6% (2026Q3)",
+        "Form 4: 매도 우세 P0/S5",
+        "* FMP 실시간 공시 반영"
+      ],
+      "value": [
+        "PER 11.7 · 극심 저평가",
+        "FCF Yield 7.5% · 우수"
+      ]
+    }
+  },
+  {
+    "t": "CORT",
+    "n": "Corcept Therapeutics Incorporated",
+    "m": "US",
+    "sec": "제약/바이오",
+    "at": "STOCK",
+    "ex": "NASDAQ",
+    "tech": 85,
+    "flow": 93,
+    "macro": 65,
+    "filing": 63,
+    "value": 43,
+    "total": 72,
+    "consensus": 2,
+    "signal": "WATCH",
+    "ev": 1.1,
+    "target": 13,
+    "hitl": false,
+    "regime": "NEUTRAL",
+    "aum": null,
+    "turnover": 140453547,
+    "atr_pct": 2.93,
+    "reasons": {
+      "tech": [
+        "이동평균 완벽 정배열 (P>112.8>98.1>65.0)",
+        "MACD 골든크로스 · 히스토 +0.30",
+        "3개월 수익률 +104.2% · 강한 상승"
+      ],
+      "flow": [
+        "CMF +0.17 · 강한 매집",
+        "가격·OBV 동반 상승 · 수급 확인",
+        "상승일 거래량 1.55배 · 매수 집중",
+        "거래대금 $129M · 유동성 충분",
+        "거래대금 증가 1.5배 · 관심 유입"
+      ],
+      "macro": [
+        "NEUTRAL · VIX 15.1 · US10Y 4.74%",
+        "DXY 99.0 약세 · 성장주 유리",
+        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
+      ],
+      "filing": [
+        "13F: 신규진입 +63곳",
+        "13F: 기관지분율 +12.44%p",
+        "P/C비율 하락 -181% (헤지 완화)",
+        "13F: 보유기관 449곳 · 지분율 89.0% (2026Q3)",
+        "Form 4: 매도 우세 P0/S53"
+      ],
+      "value": [
+        "PER 267.9 · 극심 프리미엄",
+        "Forward PER 28.0 · 이익 성장 반영",
+        "PBR 18.8 · 부담",
+        "PEG 0.81 · 성장률 대비 저평가"
+      ]
+    }
+  },
+  {
+    "t": "GDDY",
+    "n": "GoDaddy Inc.",
+    "m": "US",
+    "sec": "IT",
+    "at": "STOCK",
+    "ex": "NYSE",
+    "tech": 84,
+    "flow": 90,
+    "macro": 60,
+    "filing": 53,
+    "value": 76,
+    "total": 74,
+    "consensus": 3,
+    "signal": "BUY",
+    "ev": 1.05,
+    "target": 13,
+    "hitl": false,
+    "regime": "NEUTRAL",
+    "aum": null,
+    "turnover": 224948682,
+    "atr_pct": 4.08,
+    "reasons": {
+      "tech": [
+        "단기 정배열 (P>94.6>89.5)",
+        "RSI 67 · 강세 지속 구간",
+        "MACD 골든크로스 · 히스토 +0.47",
+        "3개월 수익률 +13.0%"
+      ],
+      "flow": [
+        "CMF +0.29 · 강한 매집",
+        "가격·OBV 동반 상승 · 수급 확인",
+        "상승일 거래량 1.88배 · 매수 집중",
+        "거래대금 $208M · 유동성 충분"
+      ],
+      "macro": [
+        "NEUTRAL · VIX 15.1 · US10Y 4.74%",
+        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
+      ],
+      "filing": [
+        "13F: 기관지분율 +10.53%p",
+        "P/C비율 하락 -32% (헤지 완화)",
+        "13F: 보유기관 646곳 · 지분율 109.0% (2026Q3)",
+        "Form 4: 매도 우세 P0/S10",
+        "* FMP 실시간 공시 반영"
+      ],
+      "value": [
+        "PER 14.4 · 저평가",
+        "Forward PER 9.1 · 이익 성장 반영",
+        "PBR 1896.6 · 부담",
+        "PEG 0.68 · 성장률 대비 저평가"
       ]
     }
   },
@@ -3927,6 +4174,9 @@ window.LIVE_STOCKS = [
     "target": 12,
     "hitl": false,
     "regime": "NEUTRAL",
+    "aum": null,
+    "turnover": 291368438,
+    "atr_pct": 2.49,
     "reasons": {
       "tech": [
         "단기 정배열 (P>103.6>98.2)",
@@ -3945,12 +4195,12 @@ window.LIVE_STOCKS = [
         "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
       ],
       "filing": [
-        "13F: 기관지분율 +4.61%p",
-        "13F: 보유기관 1086곳 · 지분율 86.7% (2026Q3)",
+        "13F: 기관지분율 +15.90%p",
+        "13F: 보유기관 1088곳 · 지분율 98.0% (2026Q3)",
         "* FMP 실시간 공시 반영"
       ],
       "value": [
-        "PER 22.3 · 적정",
+        "PER 22.2 · 적정",
         "Forward PER 17.0 · 이익 성장 반영",
         "PBR 144.0 · 부담"
       ]
@@ -3975,6 +4225,9 @@ window.LIVE_STOCKS = [
     "target": 10,
     "hitl": false,
     "regime": "NEUTRAL",
+    "aum": null,
+    "turnover": 333098751,
+    "atr_pct": 5.23,
     "reasons": {
       "tech": [
         "RSI 60 · 강세 지속 구간",
@@ -4003,103 +4256,6 @@ window.LIVE_STOCKS = [
     }
   },
   {
-    "t": "AGNC",
-    "n": "AGNC Investment Corp.",
-    "m": "US",
-    "sec": "리츠",
-    "at": "STOCK",
-    "ex": "NASDAQ",
-    "tech": 91,
-    "flow": 61,
-    "macro": 60,
-    "filing": 60,
-    "value": 65,
-    "total": 70,
-    "consensus": 1,
-    "signal": "HOLD",
-    "ev": 0.93,
-    "target": 11,
-    "hitl": false,
-    "regime": "NEUTRAL",
-    "reasons": {
-      "tech": [
-        "이동평균 완벽 정배열 (P>10.8>10.7>10.2)",
-        "RSI 65 · 강세 지속 구간",
-        "MACD 골든크로스 · 히스토 +0.01",
-        "3개월 수익률 +8.9%"
-      ],
-      "flow": [
-        "CMF -0.07 · 매도 우위",
-        "가격·OBV 동반 상승 · 수급 확인",
-        "상승일 거래량 1.32배",
-        "거래대금 $189M · 유동성 충분"
-      ],
-      "macro": [
-        "NEUTRAL · VIX 15.1 · US10Y 4.74%",
-        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
-      ],
-      "filing": [
-        "13F: 기관지분율 +4.81%p",
-        "13F: 보유기관 737곳 · 지분율 42.9% (2026Q3)",
-        "* FMP 실시간 공시 반영"
-      ],
-      "value": [
-        "PER 5.5 · 극심 저평가",
-        "PEG 3.48 · 성장률 대비 부담"
-      ]
-    }
-  },
-  {
-    "t": "IAG",
-    "n": "Iamgold Corporation",
-    "m": "US",
-    "sec": "소재",
-    "at": "STOCK",
-    "ex": "NYSE",
-    "tech": 70,
-    "flow": 87,
-    "macro": 60,
-    "filing": 55,
-    "value": 73,
-    "total": 70,
-    "consensus": 3,
-    "signal": "BUY",
-    "ev": 0.87,
-    "target": 10,
-    "hitl": false,
-    "regime": "NEUTRAL",
-    "reasons": {
-      "tech": [
-        "단기 정배열 (P>17.4>16.4)",
-        "RSI 85 · 과매수 경계",
-        "MACD 골든크로스 · 히스토 +0.48",
-        "3개월 수익률 +26.0% · 강한 상승",
-        "Bollinger 상단 접근 (96%)"
-      ],
-      "flow": [
-        "CMF +0.25 · 강한 매집",
-        "가격·OBV 동반 상승 · 수급 확인",
-        "상승일 거래량 1.33배",
-        "거래대금 $113M · 유동성 충분",
-        "거래대금 증가 1.2배 · 관심 유입"
-      ],
-      "macro": [
-        "NEUTRAL · VIX 15.1 · US10Y 4.74%",
-        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
-      ],
-      "filing": [
-        "13F: 보유기관 338곳 · 지분율 64.6% (2026Q3)",
-        "8-K: 최근 60일 이벤트 없음",
-        "* FMP 실시간 공시 반영"
-      ],
-      "value": [
-        "PER 11.0 · 극심 저평가",
-        "PEG 13.52 · 성장률 대비 부담",
-        "FCF Yield 9.8% · 우수"
-      ]
-    }
-  },
-  {
     "t": "HUBS",
     "n": "HubSpot, Inc.",
     "m": "US",
@@ -4118,6 +4274,9 @@ window.LIVE_STOCKS = [
     "target": 12,
     "hitl": false,
     "regime": "NEUTRAL",
+    "aum": null,
+    "turnover": 530381191,
+    "atr_pct": 7.55,
     "reasons": {
       "tech": [
         "단기 정배열 (P>231.5>210.9)",
@@ -4143,7 +4302,7 @@ window.LIVE_STOCKS = [
         "* FMP 실시간 공시 반영"
       ],
       "value": [
-        "PER 86.9 · 극심 프리미엄",
+        "PER 85.4 · 극심 프리미엄",
         "Forward PER 14.7 · 이익 성장 반영",
         "PEG 0.38 · 성장률 대비 저평가",
         "FCF Yield 5.3% · 우수"
@@ -4169,6 +4328,9 @@ window.LIVE_STOCKS = [
     "target": 12,
     "hitl": false,
     "regime": "NEUTRAL",
+    "aum": null,
+    "turnover": 326668258,
+    "atr_pct": 5.85,
     "reasons": {
       "tech": [
         "이동평균 완벽 정배열 (P>28.9>23.6>22.2)",
@@ -4189,7 +4351,7 @@ window.LIVE_STOCKS = [
       "filing": [
         "13F: 신규진입 +51곳",
         "13F: 보유기관 295곳 · 지분율 76.7% (2026Q3)",
-        "Form 4: 매도 우세 P0/S78",
+        "Form 4: 매도 우세 P0/S85",
         "* FMP 실시간 공시 반영"
       ],
       "value": [
@@ -4217,6 +4379,9 @@ window.LIVE_STOCKS = [
     "target": 13,
     "hitl": false,
     "regime": "NEUTRAL",
+    "aum": null,
+    "turnover": 74107030,
+    "atr_pct": 3.15,
     "reasons": {
       "tech": [
         "단기 정배열 (P>252.6>240.0)",
@@ -4236,13 +4401,13 @@ window.LIVE_STOCKS = [
         "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
       ],
       "filing": [
-        "13F: 기관지분율 +3.66%p",
-        "13F: 보유기관 445곳 · 지분율 46.6% (2026Q3)",
+        "13F: 기관지분율 +25.77%p",
+        "13F: 보유기관 447곳 · 지분율 68.7% (2026Q3)",
         "Form 4: 실제매수 클러스터 P3/S0 (90일)",
         "* FMP 실시간 공시 반영"
       ],
       "value": [
-        "PER 24.4 · 적정",
+        "PER 24.0 · 적정",
         "Forward PER 19.2 · 이익 성장 반영"
       ]
     }
@@ -4266,6 +4431,9 @@ window.LIVE_STOCKS = [
     "target": 13,
     "hitl": false,
     "regime": "NEUTRAL",
+    "aum": null,
+    "turnover": 232860874,
+    "atr_pct": 4.36,
     "reasons": {
       "tech": [
         "이동평균 완벽 정배열 (P>48.0>46.7>41.8)",
@@ -4290,7 +4458,7 @@ window.LIVE_STOCKS = [
         "* FMP 실시간 공시 반영"
       ],
       "value": [
-        "PER 28.3 · 적정",
+        "PER 27.3 · 적정",
         "Forward PER 10.6 · 이익 성장 반영",
         "FCF Yield 7.7% · 우수"
       ]
@@ -4315,6 +4483,9 @@ window.LIVE_STOCKS = [
     "target": 12,
     "hitl": false,
     "regime": "NEUTRAL",
+    "aum": null,
+    "turnover": 164748467,
+    "atr_pct": 3.12,
     "reasons": {
       "tech": [
         "단기 정배열 (P>157.3>147.6)",
@@ -4341,7 +4512,7 @@ window.LIVE_STOCKS = [
         "* FMP 실시간 공시 반영"
       ],
       "value": [
-        "PER 24.4 · 적정"
+        "PER 23.8 · 적정"
       ]
     }
   },
@@ -4364,6 +4535,9 @@ window.LIVE_STOCKS = [
     "target": 11,
     "hitl": false,
     "regime": "NEUTRAL",
+    "aum": null,
+    "turnover": 162175995,
+    "atr_pct": 2.86,
     "reasons": {
       "tech": [
         "단기 정배열 (P>36.4>35.1)",
@@ -4381,9 +4555,9 @@ window.LIVE_STOCKS = [
         "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
       ],
       "filing": [
-        "13F: 기관지분율 +2.23%p",
+        "13F: 기관지분율 +6.11%p",
         "P/C비율 급등 +178% (헤지 강화)",
-        "13F: 보유기관 673곳 · 지분율 89.9% (2026Q3)",
+        "13F: 보유기관 674곳 · 지분율 93.7% (2026Q3)",
         "* FMP 실시간 공시 반영"
       ],
       "value": [
@@ -4411,6 +4585,9 @@ window.LIVE_STOCKS = [
     "target": 9,
     "hitl": false,
     "regime": "NEUTRAL",
+    "aum": null,
+    "turnover": 116927954,
+    "atr_pct": 3.35,
     "reasons": {
       "tech": [
         "단기 정배열 (P>83.7>80.7)",
@@ -4429,8 +4606,8 @@ window.LIVE_STOCKS = [
         "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
       ],
       "filing": [
-        "13F: 기관지분율 +7.68%p",
-        "13F: 보유기관 607곳 · 지분율 88.7% (2026Q3)",
+        "13F: 기관지분율 +15.31%p",
+        "13F: 보유기관 608곳 · 지분율 96.3% (2026Q3)",
         "* FMP 실시간 공시 반영"
       ],
       "value": [
@@ -4458,6 +4635,9 @@ window.LIVE_STOCKS = [
     "target": 12,
     "hitl": false,
     "regime": "NEUTRAL",
+    "aum": null,
+    "turnover": 150501834,
+    "atr_pct": 2.91,
     "reasons": {
       "tech": [
         "단기 정배열 (P>170.8>158.4)",
@@ -4478,8 +4658,8 @@ window.LIVE_STOCKS = [
         "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
       ],
       "filing": [
-        "13F: 기관지분율 +5.53%p",
-        "13F: 보유기관 606곳 · 지분율 86.2% (2026Q3)",
+        "13F: 기관지분율 +19.98%p",
+        "13F: 보유기관 608곳 · 지분율 100.7% (2026Q3)",
         "8-K: 최근 60일 이벤트 5건 (활발)",
         "* FMP 실시간 공시 반영"
       ],
@@ -4507,12 +4687,15 @@ window.LIVE_STOCKS = [
     "target": 12,
     "hitl": false,
     "regime": "NEUTRAL",
+    "aum": null,
+    "turnover": 228679706,
+    "atr_pct": 4.46,
     "reasons": {
       "tech": [
-        "이동평균 완벽 정배열 (P>201.1>162.5>145.7)",
-        "RSI 82 · 과매수 경계",
-        "MACD 골든크로스 · 히스토 +0.95",
-        "3개월 수익률 +72.9% · 강한 상승"
+        "이동평균 완벽 정배열 (P>200.8>162.3>145.5)",
+        "RSI 83 · 과매수 경계",
+        "MACD 골든크로스 · 히스토 +0.97",
+        "3개월 수익률 +73.2% · 강한 상승"
       ],
       "flow": [
         "CMF +0.22 · 강한 매집",
@@ -4533,7 +4716,7 @@ window.LIVE_STOCKS = [
         "* FMP 실시간 공시 반영"
       ],
       "value": [
-        "PER 24.3 · 적정",
+        "PER 24.2 · 적정",
         "Forward PER 16.5 · 이익 성장 반영",
         "PBR 17.5 · 부담"
       ]
@@ -4558,6 +4741,9 @@ window.LIVE_STOCKS = [
     "target": 12,
     "hitl": false,
     "regime": "NEUTRAL",
+    "aum": null,
+    "turnover": 101378096,
+    "atr_pct": 4.7,
     "reasons": {
       "tech": [
         "단기 정배열 (P>608.9>574.7)",
@@ -4582,7 +4768,7 @@ window.LIVE_STOCKS = [
         "* FMP 실시간 공시 반영"
       ],
       "value": [
-        "PER 14.7 · 저평가"
+        "PER 14.2 · 저평가"
       ]
     }
   }
