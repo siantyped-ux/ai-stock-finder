@@ -98,10 +98,26 @@ def test_parse_etf_rows_drops_missing_symbol():
     assert all(r[0] for r in rows)
 
 
-def test_parse_etf_rows_shape_carries_the_exchange():
-    """튜플 끝의 거래소는 대시보드 티커 라벨((NASDAQ)/(NYSE)/(ETF))에 쓴다."""
+def test_parse_etf_rows_carries_the_aum():
+    # yfinance 는 ETF 의 marketCap 을 주지 않는다(2026-08-25 실측 539개 중 1개).
+    # 스크리너가 이미 AUM 으로 거르고 있으니 그 값을 그대로 들고 간다.
+    rows = {r[0]: r for r in sf.parse_etf_rows(ETF_RESPONSE, min_aum=1e9)}
+    assert rows["SPY"][6] == 6.2e11
+    assert rows["QQQ"][6] == 3.5e11
+
+
+def test_stock_universe_rows_have_no_aum_slot_filled():
+    # 주식은 yfinance info 의 marketCap 을 쓰므로 이 칸이 비어 있어야 한다.
+    # 값이 들어 있으면 price_fields 가 계산한 시총을 덮어쓴다.
+    assert all(row[6] is None for row in sf.FALLBACK_UNIVERSE
+               if row[4] == "STOCK")
+
+
+def test_parse_etf_rows_shape_carries_the_exchange_and_aum():
+    """거래소는 대시보드 티커 라벨에, AUM 은 ETF 표의 규모 열에 쓴다."""
     rows = sf.parse_etf_rows(ETF_RESPONSE, min_aum=1e9)
-    assert rows[0] == ("SPY", "SPDR S&P 500 ETF Trust", "US", "미분류", "ETF", "AMEX")
+    assert rows[0] == ("SPY", "SPDR S&P 500 ETF Trust", "US", "미분류", "ETF",
+                       "AMEX", 6.2e11)
 
 
 def test_parse_etf_rows_handles_missing_market_cap():
@@ -167,8 +183,10 @@ def test_fallback_universe_is_all_us():
     assert all(row[2] == "US" for row in sf.FALLBACK_UNIVERSE)
 
 
-def test_fallback_universe_rows_are_six_tuples():
-    assert all(len(row) == 6 for row in sf.FALLBACK_UNIVERSE)
+def test_fallback_universe_rows_are_seven_tuples():
+    # 7번째는 ETF 전용 AUM 자리다. 스캔 루프가 그대로 언패킹하므로 길이가
+    # 어긋나면 유니버스 전체가 죽는다.
+    assert all(len(row) == 7 for row in sf.FALLBACK_UNIVERSE)
 
 
 def test_fallback_universe_carries_a_us_exchange():

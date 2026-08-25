@@ -205,6 +205,14 @@
   .track-tab .count { opacity: .65; font-weight: 400; margin-left: 6px; }
   .track-tab:disabled { opacity: .35; cursor: not-allowed; }
 
+  .dupe-note {
+    background: rgba(34,211,238,.06); border: 1px solid rgba(34,211,238,.25);
+    border-radius: 10px; padding: 12px 16px; margin-bottom: 20px;
+    font-size: 12px; color: #9aa3ba; line-height: 1.7;
+  }
+  .dupe-note strong { color: #22d3ee; font-weight: 600; }
+  .dupe-note .pairs { color: #7a8199; }
+
   th {
     text-align:left; padding:12px 16px; font-size:11px; color:#7a8199;
     text-transform:uppercase; letter-spacing:0.5px; border-bottom:1px solid #2a3450;
@@ -362,6 +370,10 @@
     </button>
   </div>
 
+  <!-- 복제본 안내. ETF 탭에서만 보인다. 찾던 티커가 목록에 없을 때 스캔이
+       실패한 것인지 복제본이라 접힌 것인지 여기서 구분된다. -->
+  <div class="dupe-note" id="dupeNote" style="display:none"></div>
+
   <!-- KPI Cards -->
   <div class="kpi-grid">
     <div class="kpi-card" style="--accent:#4ade80">
@@ -372,7 +384,7 @@
     <div class="kpi-card" style="--accent:#22d3ee">
       <div class="kpi-label">STRONG BUY 시그널</div>
       <div class="kpi-value" id="kpiStrong">0</div>
-      <div class="kpi-sub">4/4 컨센서스 통과</div>
+      <div class="kpi-sub" id="kpiStrongSub">4/4 컨센서스 통과</div>
     </div>
     <div class="kpi-card" style="--accent:#facc15">
       <div class="kpi-label">HITL 승인 대기</div>
@@ -397,7 +409,7 @@
       <label>최소 종합점수:</label>
       <input type="number" id="minScore" value="60" min="0" max="100" style="width:70px">
     </div>
-    <div class="filter-group">
+    <div class="filter-group" id="venueGroup">
       <label>구분:</label>
       <select id="venueFilter">
         <option value="ALL">전체</option>
@@ -407,7 +419,7 @@
         <option value="ETF">ETF</option>
       </select>
     </div>
-    <div class="filter-group">
+    <div class="filter-group" id="sectorGroup">
       <label>섹터:</label>
       <select id="sectorFilter">
         <option value="ALL">전체</option>
@@ -438,20 +450,10 @@
     </div>
     <div class="table-scroll">
       <table>
+        <!-- 헤더는 트랙마다 다르다. ETF 에는 공시·밸류에이션 축이 없고
+             그 자리에 규모·유동성·변동성이 들어간다. renderHead() 가 만든다. -->
         <thead>
-          <tr>
-            <th data-sort="rank">#</th>
-            <th data-sort="ticker">종목</th>
-            <th data-sort="signal">시그널</th>
-            <th data-sort="total" class="sort-active">종합점수 ↓</th>
-            <th data-sort="tech">기술적</th>
-            <th data-sort="flow">수급</th>
-            <th data-sort="filing">공시</th>
-            <th data-sort="value">밸류에이션</th>
-            <th data-sort="consensus">컨센서스</th>
-            <th data-sort="ev">EV (R)</th>
-            <th data-sort="target">목표가 상승률</th>
-          </tr>
+          <tr id="theadRow"></tr>
         </thead>
         <tbody id="tbody"></tbody>
       </table>
@@ -465,7 +467,7 @@
   </div>
 
   <div class="footer">
-    v5.0 · 11-Agent LangGraph Consensus · Score = 0.35×Tech + 0.20×Macro + 0.30×Filing + 0.15×Value
+    v5.0 · 11-Agent LangGraph Consensus · <span id="footerFormula"></span>
   </div>
 </div>
 
@@ -688,26 +690,74 @@ function venueTag(s) {
   return v ? `<span class="venue-tag venue-${v}">(${v})</span>` : '';
 }
 
+// ─── 트랙별 표 컬럼 ────────────────────────────────────────
+// ETF 는 filing·value 축이 없어 그 두 열이 통째로 빈다(2026-08-25 기준 85행
+// 전부). 대신 규모(AUM)·유동성(거래대금)·변동성(ATR 비율)을 보여준다.
+const COL = {
+  rank:      {h:'#',            td:(s,i)=>`<td style="color:#7a8199">${i+1}</td>`},
+  ticker:    {h:'종목',          td:s=>`<td>
+        <div class="ticker">${s.t}${venueTag(s)} ${s.hitl?'<span class="hitl-badge">HITL</span>':''}</div>
+        <div class="ticker-sub">${s.n} · <span class="sector-tag">${s.sec}</span></div>
+      </td>`},
+  signal:    {h:'시그널',        td:s=>`<td><span class="signal-pill signal-${s.signal}">${s.signal.replace('_',' ')}</span></td>`},
+  total:     {h:'종합점수',      td:s=>`<td>${scoreBar(s.total)}</td>`},
+  tech:      {h:'기술적',        td:s=>`<td>${scoreBar(s.tech)}</td>`},
+  flow:      {h:'수급',          td:s=>`<td>${scoreBar(s.flow)}</td>`},
+  filing:    {h:'공시',          td:s=>`<td>${scoreBar(s.filing)}</td>`},
+  value:     {h:'밸류에이션',    td:s=>`<td>${scoreBar(s.value)}</td>`},
+  aum:       {h:'AUM',          td:s=>`<td>${money(s.aum)}</td>`},
+  turnover:  {h:'거래대금',      td:s=>`<td>${money(s.turnover)}</td>`},
+  atr_pct:   {h:'변동성',        td:s=>`<td>${pctCell(s.atr_pct)}</td>`},
+  consensus: {h:'컨센서스',      td:s=>`<td>${consensusDots(s.consensus, axes(s))}</td>`},
+  ev:        {h:'EV (R)',       td:s=>`<td>${evCell(s.ev)}</td>`},
+  target:    {h:'목표가 상승률', td:s=>`<td>${targetCell(s.target)}</td>`},
+};
+const COLS = {
+  stocks: ['rank','ticker','signal','total','tech','flow','filing','value',
+           'consensus','ev','target'],
+  etf:    ['rank','ticker','signal','total','tech','flow','aum','turnover',
+           'atr_pct','consensus','ev','target'],
+};
+
+// 값이 없을 때 0 을 찍지 않는다. ETF 의 AUM 은 스캐너가 채우기 전 날짜에는
+// 비어 있는데, 0 으로 보이면 "규모가 0인 ETF" 로 읽힌다.
+function money(v) {
+  if (v == null) return '<span style="color:#4a5063">-</span>';
+  if (v >= 1e9) return `$${(v/1e9).toFixed(1)}B`;
+  if (v >= 1e6) return `$${(v/1e6).toFixed(0)}M`;
+  return `$${Math.round(v).toLocaleString()}`;
+}
+function pctCell(v) {
+  if (v == null) return '<span style="color:#4a5063">-</span>';
+  return `${v.toFixed(2)}%`;
+}
+
+function renderHead() {
+  const keys = COLS[currentTrack] || COLS.stocks;
+  document.getElementById('theadRow').innerHTML = keys.map(k => {
+    const active = currentSort.key === k;
+    const arrow = active ? (currentSort.dir === 'desc' ? ' ↓' : ' ↑') : '';
+    return `<th data-sort="${k}"${active?' class="sort-active"':''}>${COL[k].h}${arrow}</th>`;
+  }).join('');
+  // 헤더를 다시 만들 때마다 핸들러도 다시 붙인다.
+  document.querySelectorAll('#theadRow th[data-sort]').forEach(th => {
+    th.addEventListener('click', () => {
+      const key = th.dataset.sort;
+      if (currentSort.key === key) currentSort.dir = currentSort.dir==='desc'?'asc':'desc';
+      else { currentSort.key = key; currentSort.dir = 'desc'; }
+      sortAndRender();
+    });
+  });
+}
+
 function render() {
+  const keys = COLS[currentTrack] || COLS.stocks;
   const tbody = document.getElementById('tbody');
   tbody.innerHTML = filteredStocks.map((s, i) => `
     <tr class="${s.hitl?'hitl':''}" onclick="showDetail('${s.t}')">
-      <td style="color:#7a8199">${i+1}</td>
-      <td>
-        <div class="ticker">${s.t}${venueTag(s)} ${s.hitl?'<span class="hitl-badge">HITL</span>':''}</div>
-        <div class="ticker-sub">${s.n} · <span class="sector-tag">${s.sec}</span></div>
-      </td>
-      <td><span class="signal-pill signal-${s.signal}">${s.signal.replace('_',' ')}</span></td>
-      <td>${scoreBar(s.total)}</td>
-      <td>${scoreBar(s.tech)}</td>
-      <td>${scoreBar(s.flow)}</td>
-      <td>${scoreBar(s.filing)}</td>
-      <td>${scoreBar(s.value)}</td>
-      <td>${consensusDots(s.consensus, axes(s))}</td>
-      <td>${evCell(s.ev)}</td>
-      <td>${targetCell(s.target)}</td>
+      ${keys.map(k => COL[k].td(s, i)).join('')}
     </tr>
-  `).join('') || '<tr><td colspan="11" style="text-align:center; padding:40px; color:#7a8199">조건에 맞는 종목이 없습니다.</td></tr>';
+  `).join('') || `<tr><td colspan="${keys.length}" style="text-align:center; padding:40px; color:#7a8199">조건에 맞는 종목이 없습니다.</td></tr>`;
 
   document.getElementById('resultCount').textContent = SUMMARY
     ? `${filteredStocks.length} / ${SUMMARY.scanned} 종목`
@@ -769,21 +819,10 @@ function sortAndRender() {
     if (typeof va === 'string') { va = va.toLowerCase(); vb = vb.toLowerCase(); }
     return dir==='asc' ? (va>vb?1:-1) : (va<vb?1:-1);
   });
+  // 헤더도 같이 그린다. 정렬 화살표와 활성 열 표시가 여기서 갱신된다.
+  renderHead();
   render();
 }
-
-// Sort handlers
-document.querySelectorAll('th[data-sort]').forEach(th => {
-  th.addEventListener('click', () => {
-    const key = th.dataset.sort;
-    if (currentSort.key === key) currentSort.dir = currentSort.dir==='desc'?'asc':'desc';
-    else { currentSort.key = key; currentSort.dir = 'desc'; }
-    document.querySelectorAll('th').forEach(h=>h.classList.remove('sort-active'));
-    th.classList.add('sort-active');
-    th.textContent = th.textContent.replace(/[↑↓]/g,'').trim() + ' ' + (currentSort.dir==='desc'?'↓':'↑');
-    sortAndRender();
-  });
-});
 
 // Modal
 function showDetail(ticker) {
@@ -812,6 +851,20 @@ function showDetail(ticker) {
       ${axisBody(s, 'flow', '수급 축이 없는 옛 스캔 데이터입니다. 다음 스캔부터 채워집니다.')}
     </div>
 
+    ${s.at === 'ETF' ? `
+    <div class="agent-section">
+      <h3>🏦 규모 · 유동성</h3>
+      <ul class="agent-list">
+        <li><span class="bullet">▸</span> AUM ${money(s.aum)}</li>
+        <li><span class="bullet ${s.turnover != null && s.turnover < 2e6 ? 'neg' : ''}">▸</span>
+            거래대금 ${money(s.turnover)}${
+              s.turnover != null && s.turnover < 2e6
+                ? ' · $2M 미만이라 수급 지표를 신뢰할 수 없습니다' : ''}</li>
+        <li><span class="bullet">▸</span> 변동성(ATR14) ${pctCell(s.atr_pct)}</li>
+      </ul>
+      <p class="agent-na">ETF 는 공시·밸류에이션 축이 없습니다. 개별기업 재무
+        데이터가 없어 두 축을 빼고 tech·flow 만 재정규화합니다.</p>
+    </div>` : `
     <div class="agent-section">
       <h3>📄 Filings Analyst — 공시 시그널 ${axisScore(s.filing)}</h3>
       ${axisBody(s, 'filing', '개별기업 공시 데이터가 없는 상품입니다.')}
@@ -820,7 +873,7 @@ function showDetail(ticker) {
     <div class="agent-section">
       <h3>💰 Valuation — 밸류에이션 ${axisScore(s.value)}</h3>
       ${axisBody(s, 'value', 'PER·PBR 같은 개별기업 밸류에이션 지표가 없는 상품입니다.')}
-    </div>
+    </div>`}
 
     ${macroSection(s)}
 
@@ -847,6 +900,57 @@ function buildSectorOptions() {
 }
 buildSectorOptions();
 
+// 트랙에 따라 화면 구성을 맞춘다. 표 컬럼 말고도 트랙마다 뜻이 달라지는
+// 것들이 있다.
+function applyTrackChrome() {
+  const isEtf = currentTrack === 'etf';
+
+  // ETF 는 섹터의 68%가 '미분류'(60% 이상 편중된 지수만 섹터를 붙인다)이고
+  // 거래소는 76%가 AMEX(FMP 가 NYSE Arca 를 그렇게 준다)라, 두 필터가
+  // 아무것도 가르지 못한다. 켜 두면 고를 것이 없는 필터만 늘어난다.
+  document.getElementById('sectorGroup').style.display = isEtf ? 'none' : '';
+  document.getElementById('venueGroup').style.display = isEtf ? 'none' : '';
+  if (isEtf) {
+    document.getElementById('sectorFilter').value = 'ALL';
+    document.getElementById('venueFilter').value = 'ALL';
+  }
+
+  // ETF 는 tech·flow 두 축뿐이라 만장일치가 2/2 다.
+  document.getElementById('kpiStrongSub').textContent =
+    isEtf ? '2/2 컨센서스 통과' : '4/4 컨센서스 통과';
+  document.getElementById('kpiTotalSub').textContent =
+    isEtf ? '미국 ETF (복제본 제외 후)' : '미국 주식';
+
+  // 산식도 트랙마다 다르다. macro 는 2026-08-24 부터 총점에서 빠졌다.
+  document.getElementById('footerFormula').textContent = isEtf
+    ? 'ETF Score = 0.60×Tech + 0.40×Flow · 컨센서스 2/2'
+    : 'Score = 0.30×Tech + 0.20×Flow + 0.30×Filing + 0.20×Value · 컨센서스 3/4';
+
+  renderDupeNote(isEtf);
+}
+
+function renderDupeNote(isEtf) {
+  const note = document.getElementById('dupeNote');
+  const d = window.LIVE_DUPES_ETF;
+  if (!isEtf || !d || !d.excluded) { note.style.display = 'none'; return; }
+
+  // 대표별로 묶어 몇 개만 보여준다. 115개를 다 나열하면 배너가 표보다 길다.
+  // 한 대표에 20종목이 붙는 경우(SPY)가 있어 묶음 안에서도 잘라야 한다.
+  const groups = Object.entries(d.by_kept || {})
+    .sort((a, b) => b[1].length - a[1].length);
+  const sample = groups.slice(0, 4).map(([kept, folded]) => {
+    const head = folded.slice(0, 3).join('·');
+    const rest = folded.length > 3 ? ` 외 ${folded.length - 3}` : '';
+    return `${head}${rest} → ${kept}`;
+  }).join(' · ');
+  note.innerHTML =
+    `<strong>복제본 ${d.excluded}종목이 유니버스에서 접혔습니다.</strong> ` +
+    `일간수익률 상관 ${d.threshold} 이상이면 같은 지수를 다른 이름으로 담은 ` +
+    `상품으로 보고 거래대금이 큰 쪽만 남깁니다 (${d.universe} → ${d.kept}). ` +
+    `<span class="pairs">${sample}${groups.length > 4 ? ' …' : ''}</span>`;
+  note.style.display = '';
+}
+
 // 활성 탭 표시는 코드로 확정한다. HTML 의 class 속성에만 맡기면 시작 트랙이
 // 바뀌었을 때(주식 파일이 없어 ETF 로 여는 경우) 표시가 어긋난다.
 function markActiveTab() {
@@ -865,6 +969,7 @@ function switchTrack(track) {
   SUMMARY = data.summary;
   IS_LIVE = STOCKS.length > 0;
   markActiveTab();
+  applyTrackChrome();
   buildSectorOptions();
   applyFilters();
 }
@@ -885,6 +990,7 @@ function initTracks() {
   SUMMARY = start.summary;
   IS_LIVE = STOCKS.length > 0;
   markActiveTab();
+  applyTrackChrome();
   buildSectorOptions();
 }
 

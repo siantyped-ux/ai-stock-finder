@@ -114,3 +114,27 @@ def test_a_broken_file_excludes_nothing(tmp_path):
     p.write_text("{not json", encoding="utf-8")
 
     assert ed.excluded_tickers(str(p)) == set()
+
+
+# ─── 대시보드용 요약 ─────────────────────────────────────────
+# 무엇이 왜 빠졌는지 화면에 남지 않으면, 찾던 티커가 안 보일 때 스캔이 실패한
+# 것인지 복제본이라 접힌 것인지 구분할 수 없다.
+
+def test_summary_reports_what_was_folded(tmp_path):
+    p = tmp_path / "dupes.json"
+    p.write_text('{"threshold": 0.99, "kept": 424, "universe": 539,'
+                 ' "excluded": {"VOO": {"kept": "SPY", "rho": 0.9996},'
+                 ' "QQQM": {"kept": "QQQ", "rho": 0.9998}}}',
+                 encoding="utf-8")
+
+    got = ed.summary(str(p))
+
+    assert got["threshold"] == 0.99
+    assert got["excluded"] == 2
+    # 대표별로 묶어 준다. "SPY 로 접힌 것 3개" 가 개별 나열보다 읽기 쉽다.
+    assert got["by_kept"] == {"QQQ": ["QQQM"], "SPY": ["VOO"]}
+
+
+def test_summary_of_a_missing_file_is_none(tmp_path):
+    # 목록이 없어도 대시보드는 떠야 한다. 배너만 빠진다.
+    assert ed.summary(str(tmp_path / "nope.json")) is None

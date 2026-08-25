@@ -69,6 +69,32 @@ def dedupe(tickers: list, correlator: Callable, turnover: dict,
     return kept, dropped
 
 
+def summary(path: str = DUPES_PATH):
+    """대시보드 배너용 요약. 목록이 없으면 None.
+
+    무엇이 왜 빠졌는지 화면에 남지 않으면, 찾던 티커가 안 보일 때 스캔이
+    실패한 것인지 복제본이라 접힌 것인지 구분할 수 없다.
+    """
+    try:
+        with open(path, encoding="utf-8") as f:
+            data = json.load(f)
+    except (OSError, ValueError):
+        return None
+
+    excluded = data.get("excluded", {})
+    by_kept = {}
+    for ticker, info in excluded.items():
+        by_kept.setdefault(info.get("kept"), []).append(ticker)
+    return {
+        "threshold": data.get("threshold"),
+        "universe": data.get("universe"),
+        "kept": data.get("kept"),
+        "excluded": len(excluded),
+        # 대표별로 묶는다. "SPY 로 접힌 것 3개" 가 개별 나열보다 읽기 쉽다.
+        "by_kept": {k: sorted(v) for k, v in sorted(by_kept.items())},
+    }
+
+
 def excluded_tickers(path: str = DUPES_PATH) -> set:
     """제외 목록 파일을 읽는다. 없거나 깨졌으면 빈 집합.
 

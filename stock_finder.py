@@ -89,33 +89,33 @@ FRED_BASE = "https://api.stlouisfed.org/fred"
 # ─── 종목 유니버스 (폴백용 · FMP 조회 실패 시 사용) ──────────
 FALLBACK_UNIVERSE = [
     # 미국
-    ("NVDA",  "NVIDIA",              "US", "AI/반도체", "STOCK", "NASDAQ"),
-    ("MSFT",  "Microsoft",           "US", "Software", "STOCK", "NASDAQ"),
-    ("AMD",   "AMD",                 "US", "AI/반도체", "STOCK", "NASDAQ"),
-    ("META",  "Meta Platforms",      "US", "인터넷", "STOCK", "NASDAQ"),
-    ("GOOGL", "Alphabet",            "US", "인터넷", "STOCK", "NASDAQ"),
-    ("AMZN",  "Amazon",              "US", "E-commerce/Cloud", "STOCK", "NASDAQ"),
-    ("TSLA",  "Tesla",               "US", "EV/자동차", "STOCK", "NASDAQ"),
-    ("AVGO",  "Broadcom",            "US", "반도체", "STOCK", "NASDAQ"),
-    ("LLY",   "Eli Lilly",           "US", "제약/바이오", "STOCK", "NYSE"),
-    ("COST",  "Costco",              "US", "소매", "STOCK", "NASDAQ"),
-    ("CRWD",  "CrowdStrike",         "US", "사이버보안", "STOCK", "NASDAQ"),
-    ("UBER",  "Uber",                "US", "플랫폼", "STOCK", "NYSE"),
-    ("PANW",  "Palo Alto Networks",  "US", "사이버보안", "STOCK", "NASDAQ"),
-    ("NOW",   "ServiceNow",          "US", "Software", "STOCK", "NYSE"),
-    ("AXP",   "American Express",    "US", "금융", "STOCK", "NYSE"),
-    ("NFLX",  "Netflix",             "US", "미디어", "STOCK", "NASDAQ"),
-    ("ORCL",  "Oracle",              "US", "Software", "STOCK", "NYSE"),
-    ("MU",    "Micron",              "US", "반도체", "STOCK", "NASDAQ"),
-    ("AAPL",  "Apple",               "US", "IT하드웨어", "STOCK", "NASDAQ"),
-    ("JPM",   "JPMorgan",            "US", "금융", "STOCK", "NYSE"),
-    ("V",     "Visa",                "US", "금융", "STOCK", "NYSE"),
-    ("F",     "Ford Motor",          "US", "자동차", "STOCK", "NYSE"),
-    ("INTC",  "Intel",               "US", "반도체", "STOCK", "NASDAQ"),
+    ("NVDA",  "NVIDIA",              "US", "AI/반도체", "STOCK", "NASDAQ", None),
+    ("MSFT",  "Microsoft",           "US", "Software", "STOCK", "NASDAQ", None),
+    ("AMD",   "AMD",                 "US", "AI/반도체", "STOCK", "NASDAQ", None),
+    ("META",  "Meta Platforms",      "US", "인터넷", "STOCK", "NASDAQ", None),
+    ("GOOGL", "Alphabet",            "US", "인터넷", "STOCK", "NASDAQ", None),
+    ("AMZN",  "Amazon",              "US", "E-commerce/Cloud", "STOCK", "NASDAQ", None),
+    ("TSLA",  "Tesla",               "US", "EV/자동차", "STOCK", "NASDAQ", None),
+    ("AVGO",  "Broadcom",            "US", "반도체", "STOCK", "NASDAQ", None),
+    ("LLY",   "Eli Lilly",           "US", "제약/바이오", "STOCK", "NYSE", None),
+    ("COST",  "Costco",              "US", "소매", "STOCK", "NASDAQ", None),
+    ("CRWD",  "CrowdStrike",         "US", "사이버보안", "STOCK", "NASDAQ", None),
+    ("UBER",  "Uber",                "US", "플랫폼", "STOCK", "NYSE", None),
+    ("PANW",  "Palo Alto Networks",  "US", "사이버보안", "STOCK", "NASDAQ", None),
+    ("NOW",   "ServiceNow",          "US", "Software", "STOCK", "NYSE", None),
+    ("AXP",   "American Express",    "US", "금융", "STOCK", "NYSE", None),
+    ("NFLX",  "Netflix",             "US", "미디어", "STOCK", "NASDAQ", None),
+    ("ORCL",  "Oracle",              "US", "Software", "STOCK", "NYSE", None),
+    ("MU",    "Micron",              "US", "반도체", "STOCK", "NASDAQ", None),
+    ("AAPL",  "Apple",               "US", "IT하드웨어", "STOCK", "NASDAQ", None),
+    ("JPM",   "JPMorgan",            "US", "금융", "STOCK", "NYSE", None),
+    ("V",     "Visa",                "US", "금융", "STOCK", "NYSE", None),
+    ("F",     "Ford Motor",          "US", "자동차", "STOCK", "NYSE", None),
+    ("INTC",  "Intel",               "US", "반도체", "STOCK", "NASDAQ", None),
     # ETF. 폴백에도 ETF 를 두는 것은 의도다 - --test 로 도는 스모크 실행이
     # ETF 분기(재정규화 점수·빈 filing/value)를 실제로 지나가야 한다.
-    ("SPY",   "SPDR S&P 500 ETF Trust", "US", "미분류", "ETF", "AMEX"),
-    ("QQQ",   "Invesco QQQ Trust",      "US", "미분류", "ETF", "NASDAQ"),
+    ("SPY",   "SPDR S&P 500 ETF Trust", "US", "미분류", "ETF", "AMEX", None),
+    ("QQQ",   "Invesco QQQ Trust",      "US", "미분류", "ETF", "NASDAQ", None),
 ]
 
 
@@ -698,7 +698,7 @@ def fetch_us_universe(min_market_cap: float = 5e9, limit: int = 5000) -> list:
     """FMP stock-screener로 NYSE+NASDAQ 상장 종목 조회 (ETF 제외)"""
     # v2: 유니버스 튜플이 asset_type 을 포함하는 5칸으로 늘었다. 캐시 키를
     # 바꾸지 않으면 옛 4칸 캐시가 그대로 읽혀 스캔 루프 언패킹이 터진다.
-    cache_key = f"us_universe_v3_{int(min_market_cap)}_{limit}"
+    cache_key = f"us_universe_v4_{int(min_market_cap)}_{limit}"
     cached = _load_cache(cache_key)
     if cached:
         print(f"    [cache] 미국 유니버스 {len(cached)}종목 (캐시)")
@@ -742,8 +742,10 @@ def fetch_us_universe(min_market_cap: float = 5e9, limit: int = 5000) -> list:
             sector_kr = SECTOR_KR.get(sector_raw, sector_raw or "기타")
             if "Semi" in industry_raw:
                 sector_kr = "반도체"
+            # 마지막 칸은 ETF 전용 AUM 자리다. 주식은 price_fields 가
+            # yfinance info 로 시총을 채우므로 비워 둔다.
             universe.append((symbol, name[:40], "US", sector_kr, "STOCK",
-                             item.get("exchangeShortName") or "?"))
+                             item.get("exchangeShortName") or "?", None))
 
         _save_cache(cache_key, universe)
         print(f"    [OK] 미국 {len(universe)}종목 수집 완료")
@@ -785,7 +787,9 @@ def parse_etf_rows(data: list, min_aum: float) -> list:
         aum = item.get("marketCap")
         if aum is None or aum < min_aum:
             continue
-        rows.append((symbol, name[:40], "US", "미분류", "ETF", exchange))
+        # AUM 을 들고 간다. yfinance 는 ETF 의 marketCap 을 주지 않아
+        # (2026-08-25 실측 539개 중 1개) price_fields 로는 못 채운다.
+        rows.append((symbol, name[:40], "US", "미분류", "ETF", exchange, aum))
     return rows
 
 
@@ -901,7 +905,7 @@ def fetch_us_etf_universe(min_aum: float = 1e9, limit: int = 3000) -> list:
     """
     # v2: 미국 거래소 필터를 넣기 전 캐시에는 TSX 가 섞여 있다. 키를 바꿔
     # 그 캐시가 다시 읽히지 않게 한다.
-    cache_key = f"us_etf_universe_v6_{int(min_aum)}_{limit}"
+    cache_key = f"us_etf_universe_v7_{int(min_aum)}_{limit}"
     cached = _load_cache(cache_key)
     if cached:
         print(f"    [cache] 미국 ETF {len(cached)}종목 (캐시)")
@@ -955,8 +959,8 @@ def fetch_us_etf_universe(min_aum: float = 1e9, limit: int = 3000) -> list:
 
             remove = set(dropped) | set(skipped)
             universe = [(t, n, m, (profiles.get(t) or {}).get("sector", sec),
-                         at, ex)
-                        for t, n, m, sec, at, ex in universe
+                         at, ex, aum)
+                        for t, n, m, sec, at, ex, aum in universe
                         if t not in remove]
 
         _save_cache(cache_key, universe)
@@ -1455,7 +1459,7 @@ def main():
     hist_rows = []   # (universe 인덱스, 이력 행)
 
     def _scan_one(ticker: str, name: str, market: str, sector: str,
-                  asset_type: str, exchange: str):
+                  asset_type: str, exchange: str, aum=None):
         """종목 1개 스코어링. 실패 시 None 반환. (워커 스레드에서 실행)
 
         ETF 는 filing/value 를 계산하지 않는다. 개별기업 재무·공시 데이터가
@@ -1496,6 +1500,19 @@ def main():
             signal = calc_signal(total, cons, n_axes=n_axes)
             hitl = calc_hitl(signal, total, tech)
 
+            # ETF 표가 쓰는 값들. 주식 표에는 filing·value 가 있지만 ETF 는
+            # 그 두 축이 없어 열이 통째로 빈다. 대신 규모(AUM)·유동성
+            # (거래대금)·변동성(ATR 비율)을 보여준다.
+            #
+            # 셋 다 계산은 두 자산군에 다 해 둔다. 트랙마다 다른 값을 담으면
+            # 나중에 표를 바꿀 때 데이터가 없어 또 스캐너를 고쳐야 한다.
+            # 아래 이력 행도 같은 값을 쓰므로 한 번만 계산한다.
+            px = history.price_fields(hist, info)
+            close_px, vol20, atr14 = px["close"], px["avg_vol20"], px["atr14"]
+            turnover = round(close_px * vol20) if close_px and vol20 else None
+            atr_pct = (round(atr14 / close_px * 100, 2)
+                       if close_px and atr14 and close_px > 0 else None)
+
             dash_row = {
                 "t": ticker, "n": name, "m": market, "sec": sector,
                 "at": asset_type, "ex": exchange,
@@ -1504,6 +1521,7 @@ def main():
                 "total": total, "consensus": cons, "signal": signal,
                 "ev": ev, "target": target, "hitl": hitl,
                 "regime": regime,
+                "aum": aum, "turnover": turnover, "atr_pct": atr_pct,
                 "reasons": {
                     "tech": tech_r, "flow": flow_r, "macro": macro_r,
                     "filing": filing_r, "value": value_r,
@@ -1518,8 +1536,12 @@ def main():
                     "total": total, "consensus": cons, "signal": signal,
                     "ev": ev, "target": target, "hitl": hitl,
                     "source": "live", "flow": flow_score, "regime": regime,
-                    **history.price_fields(hist, info),
+                    **px,
                 }
+                # ETF 는 yfinance info 에 marketCap 이 없어 price_fields 가
+                # 비워 둔다. 스크리너가 준 AUM 으로 채운다 - 같은 "규모" 열이다.
+                if asset_type == "ETF" and aum:
+                    hist_row["market_cap"] = aum
             except Exception as e:
                 print(f"[!] {ticker}: 이력 행 생성 실패 {str(e)[:60]}")
                 hist_row = None
@@ -1536,8 +1558,8 @@ def main():
     with ThreadPoolExecutor(max_workers=n_workers) as pool:
         futures = {
             pool.submit(_scan_one, ticker, name, market, sector, asset_type,
-                        exchange): (i, ticker, name)
-            for i, (ticker, name, market, sector, asset_type, exchange)
+                        exchange, aum): (i, ticker, name)
+            for i, (ticker, name, market, sector, asset_type, exchange, aum)
             in enumerate(universe, 1)
         }
 
@@ -1633,6 +1655,14 @@ window.LIVE_MACRO{sfx} = {{
 window.LIVE_SUMMARY{sfx} = {summary_json};
 window.LIVE_STOCKS{sfx} = {json.dumps(shown, ensure_ascii=False, indent=2)};
 """
+    # ETF 트랙에는 복제본 제외 요약을 함께 싣는다. 찾던 티커가 목록에 없을 때
+    # 스캔이 실패한 것인지 복제본이라 접힌 것인지 화면에서 구분되어야 한다.
+    if args.track == "etf":
+        dupes = etf_dedupe.summary()
+        if dupes:
+            js_content += (f"window.LIVE_DUPES_ETF = "
+                           f"{json.dumps(dupes, ensure_ascii=False)};\n")
+
     with open(output_path, "w", encoding="utf-8") as f:
         f.write(js_content)
 
