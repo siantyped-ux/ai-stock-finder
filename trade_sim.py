@@ -166,13 +166,37 @@ def make_trade(pos: er.Position, market: str, source: str,
     )
 
 
+def universe_exit(pos: er.Position, bars: dict, universe_exit_date: str,
+                  params: er.Params) -> Optional[er.ExitDecision]:
+    """유니버스 이탈로 인한 청산 판정. 팔 봉이 아직 없으면 None.
+
+    이탈을 알아차린 스캔일 이후 첫 봉의 시가에 나간다. 마지막으로 등장한 날의
+    종가가 아닌 것은 그 시점에 "내일 빠진다" 를 알 수 없기 때문이다 - 그렇게
+    하면 룩어헤드가 된다.
+
+    포트폴리오 경로도 이 함수를 쓴다. 규칙이 두 벌이 되면 상한을 켜는 순간
+    결과가 갈라진다.
+    """
+    if universe_exit_date is None:
+        return None
+    after = [d for d in sorted(bars) if d >= universe_exit_date]
+    if not after:
+        return None
+    return er.evaluate(pos, replace(bars[after[0]], in_universe=False), params)
+
+
 def simulate_ticker(ticker: str, market: str, rows: list, bars: dict,
-                    params: er.Params, costs: Costs) -> list:
+                    params: er.Params, costs: Costs,
+                    universe_exit_date: str = None) -> list:
     """티커 하나의 트레이드를 재현한다.
 
     rows 는 아카이브 행(date·signal·total·source)을 날짜 오름차순으로,
     bars 는 날짜 -> exit_rules.Bar 매핑이다. 봉이 없는 날은 세션이 없었다는
     뜻이므로 보유 일수를 세지 않는다.
+
+    universe_exit_date 는 이 종목이 스캔 대상에서 빠진 것을 알아차린 첫
+    스캔일이다. 주면 그 날짜 이후 첫 봉의 시가에 UNIVERSE 로 청산한다.
+    주지 않으면 예전처럼 마지막 봉 종가로 평가한 미결 포지션이 남는다.
 
     exit_rules 의 계약대로 evaluate 를 먼저 하고 advance 를 나중에 한다.
     진입한 봉도 advance 로 접어 넣는다 - 그래야 그날 고가가 다음 봉의
@@ -233,6 +257,16 @@ def simulate_ticker(ticker: str, market: str, rows: list, bars: dict,
             entered = True
 
         state = consume(step.state) if entered else step.state
+
+    # 아카이브 행이 끊긴 뒤에도 봉은 계속 나온다. 위 루프는 rows 만 돌기
+    # 때문에, 이 처리가 없으면 유니버스에서 빠진 종목이 판정이 멈춘 채
+    # 평가손익만 갱신되는 좀비 포지션으로 남는다.
+    if pos is not None:
+        decision = universe_exit(pos, bars, universe_exit_date, params)
+        if decision is not None:
+            trades.append(make_trade(pos, market, open_source, decision.price,
+                                      decision.date, decision.reason, costs))
+            pos = None
 
     if pos is not None and last_close is not None:
         trades.append(make_trade(pos, market, open_source, last_close,

@@ -44,6 +44,10 @@ class Bar:
     atr14 는 전일 종가까지로 계산한 ATR 을 넣을 것 - 당일 고저를 포함해 계산하면
     개장 전에 정해져 있어야 할 손절선이 미래 정보를 쓰게 되어, 이 모듈이 순수해도
     호출자 쪽에서 룩어헤드가 다시 생긴다.
+
+    in_universe 는 이 봉 시점에 종목이 아직 스캔 대상이었는지다. 기본값이 True
+    인 것은 의도다 - 호출자가 매번 명시해야 한다면 빠뜨리는 곳이 생기고, 그러면
+    멀쩡한 포지션이 강제청산된다. 이 값도 개장 전에 알 수 있다(그날 스캔 결과).
     """
     date: str
     open: float
@@ -52,6 +56,7 @@ class Bar:
     close: float
     atr14: Optional[float] = None
     total: Optional[int] = None
+    in_universe: bool = True
 
 
 @dataclass(frozen=True)
@@ -73,7 +78,7 @@ class Position:
 
 @dataclass(frozen=True)
 class ExitDecision:
-    reason: str      # "TIME" | "SIGNAL" | "STOP" | "TRAIL" | "TARGET"
+    reason: str      # "TIME" | "UNIVERSE" | "SIGNAL" | "STOP" | "TRAIL" | "TARGET"
     price: float
     date: str
 
@@ -163,9 +168,15 @@ def evaluate(position: Position, bar: Bar,
              params: Params) -> Optional[ExitDecision]:
     """이 봉에서 청산이 발생하는지 판정한다. 없으면 None.
 
-    순서는 하루 안의 시간 순서다. TIME 과 SIGNAL 은 개장 전에 결정된다 —
-    bars_held 는 결정론적이고 total 은 KST 07:00 스캔에서 이미 나와 있다.
-    따라서 둘 다 시가 시장가로 나가고, 장중에 걸린 손절보다 먼저 체결된다.
+    순서는 하루 안의 시간 순서다. TIME·UNIVERSE·SIGNAL 은 개장 전에 결정된다 —
+    bars_held 는 결정론적이고, 유니버스 이탈과 total 은 KST 07:00 스캔에서 이미
+    나와 있다. 따라서 셋 다 시가 시장가로 나가고, 장중에 걸린 손절보다 먼저
+    체결된다.
+
+    UNIVERSE 가 SIGNAL 보다 앞인 것은 순서가 아니라 가용성 문제다. 유니버스에서
+    빠진 종목은 그날 스코어 자체가 없어 SIGNAL 을 판정할 수 없다. TIME 이 그보다
+    앞인 것은 기록의 정보량 때문이다 - 최대보유를 채운 날 마침 이탈했다면 보유
+    만료가 더 많은 것을 말해 주고, 체결가는 어느 쪽이든 시가라 같다.
 
     TARGET 은 맨 뒤다. 고가가 목표를, 저가가 손절선을 같은 봉에서 건드리면
     일봉만으로는 어느 쪽이 먼저였는지 알 수 없다. 백테스트가 실제보다 좋게
@@ -173,6 +184,9 @@ def evaluate(position: Position, bar: Bar,
     """
     if position.bars_held >= params.max_hold_days:
         return ExitDecision("TIME", bar.open, bar.date)
+
+    if not bar.in_universe:
+        return ExitDecision("UNIVERSE", bar.open, bar.date)
 
     if bar.total is not None and bar.total < params.exit_total:
         return ExitDecision("SIGNAL", bar.open, bar.date)

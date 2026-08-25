@@ -245,3 +245,47 @@ def test_summary_is_included():
 def test_empty_input_is_safe():
     got = pf.simulate({}, {}, {})
     assert got["trades"] == [] and got["summary"]["closed"] == 0
+
+
+# ─── 유니버스 이탈 ────────────────────────────────────────────
+# 규칙이 trade_sim 쪽에만 있으면 상한을 켜는 순간 좀비 포지션이 되살아난다.
+
+def test_universe_exit_closes_the_position_here_too():
+    r = rows(["HOLD", "BUY", "BUY"])
+    b = bars(DATES, [100, 100, 105, 110, 115])
+
+    got = pf.simulate({"A": r}, {"A": b}, {"A": "KR"},
+                      universe_exits={"KR": DATES[3]})
+
+    trade = got["trades"][0]
+    assert trade.is_open is False
+    assert trade.exit_reason == "UNIVERSE"
+    assert trade.exit_date == DATES[3]
+    assert trade.exit_price == 110
+
+
+def test_a_market_that_stayed_is_untouched():
+    r = rows(["HOLD", "BUY", "BUY"])
+    b = bars(DATES, [100, 100, 105, 110, 115])
+
+    got = pf.simulate({"A": r}, {"A": b}, {"A": "US"},
+                      universe_exits={"KR": DATES[3]})
+
+    assert got["trades"][0].is_open is True
+
+
+def test_universe_exit_matches_simulate_ticker():
+    # 상한이 없을 때 두 경로가 같아야 한다는 이 모듈의 계약은 이탈 청산에도
+    # 그대로 적용된다.
+    r = rows(["HOLD", "BUY", "BUY"])
+    b = bars(DATES, [100, 100, 105, 110, 115])
+
+    mine = pf.simulate({"A": r}, {"A": b}, {"A": "KR"},
+                       universe_exits={"KR": DATES[3]})["trades"][0]
+    theirs = ts.simulate_ticker("A", "KR", r, b, er.Params(), ts.Costs(),
+                                DATES[3])[0]
+
+    assert mine.exit_reason == theirs.exit_reason
+    assert mine.exit_date == theirs.exit_date
+    assert mine.exit_price == theirs.exit_price
+    assert mine.net_r == pytest.approx(theirs.net_r)

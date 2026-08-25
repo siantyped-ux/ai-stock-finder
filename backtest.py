@@ -112,6 +112,34 @@ def filter_rows(rows: list, us_only: bool = False,
     return out
 
 
+def universe_exit_dates(rows: list) -> dict:
+    """시장이 유니버스에서 빠진 것을 알아차린 첫 스캔일을 market -> 날짜로 낸다.
+
+    개별 종목의 결측으로는 이탈을 판정하지 않는다. 실측상 중간 결측이 최장 16
+    스캔일까지 있고 그 뒤 정상 복귀한다(KRYS 2026-08-02 -> 08-20, 1~2일 결측은
+    85건). 어떤 유예 기간을 잡아도 짧으면 멀쩡한 종목을 강제청산하고 길면
+    감지가 3주 늦는데, 25일 표본으로는 그 값을 고를 수 없다.
+
+    반면 한 시장의 행이 통째로 0 이 되는 것은 조회 실패가 아니라 유니버스
+    결정이다. 2026-08-22 에 KR 110종목이 한 번에 사라진 것이 그 경우다.
+    마지막으로 등장한 뒤 계속 없을 때만 이탈로 본다 - 하루 비었다가 돌아오면
+    그것도 조회 실패다.
+    """
+    dates = sorted({r["date"] for r in rows})
+    last_seen = {}
+    for r in rows:
+        market = r["market"]
+        if r["date"] > last_seen.get(market, ""):
+            last_seen[market] = r["date"]
+
+    out = {}
+    for market, last in last_seen.items():
+        i = dates.index(last)
+        if i + 1 < len(dates):
+            out[market] = dates[i + 1]
+    return out
+
+
 def run(pattern: str = "history/*.csv", params: er.Params = None,
         costs: ts.Costs = None, us_only: bool = False,
         entry_total: int = None, limits: pf.Limits = None) -> dict:
@@ -134,6 +162,8 @@ def run(pattern: str = "history/*.csv", params: er.Params = None,
         seen.add(key)
         deduped.append(r)
     rows = deduped
+
+    exits = universe_exit_dates(rows)
 
     by_ticker = defaultdict(list)
     for r in rows:
@@ -170,13 +200,14 @@ def run(pattern: str = "history/*.csv", params: er.Params = None,
     if limits is None or (not limits.max_positions and limits.max_correlation >= 1.0):
         for ticker, prepared in prepared_by_ticker.items():
             trades.extend(ts.simulate_ticker(ticker, markets[ticker], prepared,
-                                             bars_by_ticker[ticker], params, costs))
+                                             bars_by_ticker[ticker], params, costs,
+                                             exits.get(markets[ticker])))
     else:
         correlator = pf.build_correlator(
             {t: [b.close for b in sorted(bs.values(), key=lambda x: x.date)]
              for t, bs in bars_by_ticker.items()})
         out = pf.simulate(prepared_by_ticker, bars_by_ticker, markets,
-                          params, costs, limits, correlator)
+                          params, costs, limits, correlator, exits)
         trades = out["trades"]
         rejected = out["rejected"]
         rejected_pairs = out["rejected_pairs"]
@@ -249,7 +280,7 @@ def report(result: dict) -> None:
             if not t.is_open:
                 print(f"    {t.ticker:8s} {t.entry_date} @{t.entry_price:.2f}"
                       f" -> {t.exit_date} @{t.exit_price:.2f}"
-                      f" · {t.exit_reason:6s} · {t.net_r:+.2f}R")
+                      f" · {t.exit_reason:8s} · {t.net_r:+.2f}R")
 
     print(f"[미결 포지션] {s['open']}건 · 평가 {s['open_net_r']:+.2f}R")
     for t in result["trades"]:

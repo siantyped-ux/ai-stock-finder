@@ -106,8 +106,8 @@ def _bar(date, o, h, l, c, atr=2.0):
     return er.Bar(date, open=o, high=h, low=l, close=c, atr14=atr)
 
 
-def _row(date, signal, source="live"):
-    return {"date": date, "signal": signal, "total": 75, "source": source}
+def _row(date, signal, source="live", total=75):
+    return {"date": date, "signal": signal, "total": total, "source": source}
 
 
 def test_one_trade_opens_and_stays_open():
@@ -454,3 +454,75 @@ def test_stop_ratchets_to_breakeven_when_the_high_hits_one_r():
 
     assert t.high_since_entry == 106.0
     assert t.stop == pytest.approx(100.0)            # 106 - 3.0*2.0 = 진입가
+
+
+# --- 유니버스 이탈 -------------------------------------------------------
+
+def test_universe_exit_closes_the_position_at_the_next_bar_open():
+    # 아카이브 행이 끊긴 뒤에도 봉은 계속 나온다. rows 만 순회하면 그
+    # 시점에서 판정이 멈춰 영영 닫히지 않는 미결 포지션이 남는다.
+    rows = [_row("d1", "BUY"), _row("d2", "BUY")]
+    bars = {"d1": _bar("d1", 100.0, 101.0, 99.0, 100.5),
+            "d2": _bar("d2", 100.5, 102.0, 100.0, 101.5),
+            "d4": _bar("d4", 103.0, 104.0, 102.0, 103.5)}
+
+    t = ts.simulate_ticker("X", "US", rows, bars, P, C,
+                           universe_exit_date="d3")[0]
+
+    assert t.is_open is False
+    assert t.exit_reason == "UNIVERSE"
+    assert t.exit_date == "d4"                       # 알아차린 뒤 첫 거래봉
+    assert t.exit_price == 103.0                     # 그 봉의 시가
+
+
+def test_universe_exit_uses_the_first_bar_on_or_after_the_drop():
+    # 이탈을 알아차린 스캔일에 장이 열려 있으면 그날 시가에 나간다.
+    rows = [_row("d1", "BUY"), _row("d2", "BUY")]
+    bars = {"d1": _bar("d1", 100.0, 101.0, 99.0, 100.5),
+            "d2": _bar("d2", 100.5, 102.0, 100.0, 101.5),
+            "d3": _bar("d3", 107.0, 108.0, 106.0, 107.5)}
+
+    t = ts.simulate_ticker("X", "US", rows, bars, P, C,
+                           universe_exit_date="d3")[0]
+
+    assert t.exit_date == "d3"
+    assert t.exit_price == 107.0
+
+
+def test_a_position_stays_open_without_a_universe_exit_date():
+    # 기본 동작은 그대로다. 유니버스에 남아 있는 종목은 미결로 둔다.
+    rows = [_row("d1", "BUY"), _row("d2", "BUY")]
+    bars = {"d1": _bar("d1", 100.0, 101.0, 99.0, 100.5),
+            "d2": _bar("d2", 100.5, 102.0, 100.0, 101.5)}
+
+    t = ts.simulate_ticker("X", "US", rows, bars, P, C)[0]
+
+    assert t.is_open is True
+    assert t.exit_reason is None
+
+
+def test_universe_exit_needs_a_bar_after_the_drop():
+    # 이탈일 이후 봉이 아직 없으면 팔 수 없다. 없는 체결가를 지어내는 것보다
+    # 미결로 남기는 편이 정직하다.
+    rows = [_row("d1", "BUY"), _row("d2", "BUY")]
+    bars = {"d1": _bar("d1", 100.0, 101.0, 99.0, 100.5),
+            "d2": _bar("d2", 100.5, 102.0, 100.0, 101.5)}
+
+    t = ts.simulate_ticker("X", "US", rows, bars, P, C,
+                           universe_exit_date="d3")[0]
+
+    assert t.is_open is True
+
+
+def test_universe_exit_does_not_reopen_a_closed_trade():
+    # 아카이브 안에서 이미 청산된 트레이드는 이탈과 무관하다.
+    rows = [_row("d1", "BUY"), _row("d2", "HOLD", total=50)]
+    bars = {"d1": _bar("d1", 100.0, 101.0, 99.0, 100.5),
+            "d2": _bar("d2", 100.5, 102.0, 100.0, 101.5),
+            "d4": _bar("d4", 103.0, 104.0, 102.0, 103.5)}
+
+    trades = ts.simulate_ticker("X", "US", rows, bars, P, C,
+                                universe_exit_date="d3")
+
+    assert len(trades) == 1
+    assert trades[0].exit_reason == "SIGNAL"

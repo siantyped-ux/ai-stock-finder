@@ -430,3 +430,54 @@ def test_signal_beats_target():
     bar = er.Bar("d", open=105.0, high=110.0, low=104.0, close=109.5,
                  atr14=2.0, total=50)
     assert er.evaluate(_tp(), bar, PT).reason == "SIGNAL"
+
+
+# --- 유니버스 이탈 -------------------------------------------------------
+
+def test_bars_are_in_the_universe_by_default():
+    # 대부분의 봉은 유니버스 안에 있다. 호출자가 매번 True 를 써야 한다면
+    # 빠뜨리는 곳이 생기고, 그러면 멀쩡한 포지션이 강제청산된다.
+    bar = er.Bar("d", open=105.0, high=106.0, low=104.0, close=105.5)
+    assert bar.in_universe is True
+
+
+def test_universe_drop_exits_at_the_open():
+    # 유니버스에서 빠진 종목은 더 이상 스코어가 나오지 않는다. 청산하지 않으면
+    # 판정이 멈춘 채 평가손익만 갱신되는 좀비 포지션이 남는다.
+    bar = er.Bar("2026-08-24", open=105.0, high=106.0, low=104.0, close=105.5,
+                 atr14=2.0, in_universe=False)
+
+    got = er.evaluate(_pos(), bar, P)
+
+    assert got.reason == "UNIVERSE"
+    assert got.price == 105.0
+    assert got.date == "2026-08-24"
+
+
+def test_universe_drop_beats_the_stop():
+    # 이탈은 그날 스캔에서 개장 전에 알 수 있으므로 시가에 나간다. 장중에
+    # 걸리는 손절보다 앞선다 - TIME·SIGNAL 과 같은 계약이다.
+    bar = er.Bar("d", open=105.0, high=106.0, low=1.0, close=105.5,
+                 atr14=2.0, in_universe=False)
+
+    assert er.evaluate(_pos(), bar, P).reason == "UNIVERSE"
+
+
+def test_time_beats_a_universe_drop():
+    # 최대보유를 채운 날 마침 유니버스에서도 빠졌다면 보유기간 만료가 더 많은
+    # 정보를 담은 기록이다. 체결가는 어느 쪽이든 시가라 같다.
+    bar = er.Bar("d", open=105.0, high=106.0, low=104.0, close=105.5,
+                 atr14=2.0, total=75, in_universe=False)
+
+    got = er.evaluate(_pos(bars_held=60), bar, P)
+
+    assert got.reason == "TIME"
+    assert got.price == 105.0
+
+
+def test_a_bar_in_the_universe_is_judged_normally():
+    # 이탈 규칙이 다른 판정을 가리지 않는지 본다.
+    bar = er.Bar("d", open=105.0, high=106.0, low=104.0, close=105.5,
+                 atr14=2.0, total=50, in_universe=True)
+
+    assert er.evaluate(_pos(), bar, P).reason == "SIGNAL"

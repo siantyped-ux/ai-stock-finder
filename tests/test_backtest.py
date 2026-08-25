@@ -96,9 +96,10 @@ def _spy_rows(monkeypatch, rows):
     seen = {}
     real = ts.simulate_ticker
 
-    def spy(ticker, market, prepared, bars, params, costs):
+    def spy(ticker, market, prepared, bars, params, costs, universe_exit=None):
         seen["rows"] = prepared
-        return real(ticker, market, prepared, bars, params, costs)
+        return real(ticker, market, prepared, bars, params, costs,
+                    universe_exit)
 
     monkeypatch.setattr(bt, "load_archive", lambda pattern: rows)
     monkeypatch.setattr(bt, "fetch_bars", lambda ticker: _stub_bars())
@@ -173,3 +174,44 @@ def test_entry_total_handles_blank_total():
 def test_filter_does_not_mutate_the_input_rows():
     bt.filter_rows(ARCHIVE, us_only=False, entry_total=70)
     assert ARCHIVE[2]["signal"] == "WATCH"
+
+
+# --- 유니버스 이탈 -------------------------------------------------------
+#
+# 개별 종목의 결측으로는 이탈을 판정하지 않는다. 실측상 중간 결측이 최장 16
+# 스캔일까지 있고 그 뒤 정상 복귀한다(KRYS 2026-08-02 -> 08-20). 반면 한
+# 시장의 행이 통째로 0 이 되는 것은 데이터 실패가 아니라 유니버스 결정이다.
+
+def _r(date, market):
+    return {"date": date, "market": market}
+
+
+def test_a_market_that_disappears_leaves_on_the_next_scan():
+    rows = [_r("d1", "US"), _r("d1", "KR"),
+            _r("d2", "US"), _r("d2", "KR"),
+            _r("d3", "US")]
+
+    assert bt.universe_exit_dates(rows) == {"KR": "d3"}
+
+
+def test_a_market_present_on_the_last_scan_has_not_left():
+    rows = [_r("d1", "US"), _r("d1", "KR"),
+            _r("d2", "US"), _r("d2", "KR")]
+
+    assert bt.universe_exit_dates(rows) == {}
+
+
+def test_a_market_missing_for_one_scan_and_back_has_not_left():
+    # 하루 비었다가 돌아오는 것은 조회 실패다. 마지막 등장 이후로 계속
+    # 없을 때만 이탈로 본다.
+    rows = [_r("d1", "US"), _r("d1", "KR"),
+            _r("d2", "US"),
+            _r("d3", "US"), _r("d3", "KR")]
+
+    assert bt.universe_exit_dates(rows) == {}
+
+
+def test_the_only_market_never_leaves():
+    rows = [_r("d1", "US"), _r("d2", "US")]
+
+    assert bt.universe_exit_dates(rows) == {}

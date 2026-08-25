@@ -110,12 +110,14 @@ def _too_correlated(ticker: str, held: list, limits: Limits,
 def simulate(rows_by_ticker: dict, bars_by_ticker: dict, markets: dict,
              params: er.Params = None, costs: ts.Costs = None,
              limits: Limits = None,
-             correlator: Optional[Callable] = None) -> dict:
+             correlator: Optional[Callable] = None,
+             universe_exits: dict = None) -> dict:
     """날짜 순으로 포트폴리오를 재현한다.
 
     rows_by_ticker  티커 -> 아카이브 행 목록(date·signal·total·target·source)
     bars_by_ticker  티커 -> {날짜: exit_rules.Bar}
     markets         티커 -> 'US' | 'KR' (비용 계산용)
+    universe_exits  market -> 그 시장이 빠진 것을 알아차린 첫 스캔일
 
     반환에는 trades 와 함께 rejected 가 들어간다. 무엇을 왜 막았는지 세지
     않으면 상한이 조용히 기회를 죽여도 알 수 없다.
@@ -203,6 +205,20 @@ def simulate(rows_by_ticker: dict, bars_by_ticker: dict, markets: dict,
             positions[ticker] = er.advance(pos, bar, params)
             sources[ticker] = row["source"]
             last_close[ticker] = bar.close
+
+    # ── 유니버스에서 빠진 시장의 포지션을 청산 ──
+    # 위 날짜 루프는 아카이브에 행이 있는 날만 돈다. 이 처리가 없으면 스캔
+    # 대상에서 빠진 종목이 판정이 멈춘 채 남는다.
+    for ticker in list(positions):
+        decision = ts.universe_exit(
+            positions[ticker], bars_by_ticker.get(ticker, {}),
+            (universe_exits or {}).get(markets.get(ticker, "US")), params)
+        if decision is not None:
+            trades.append(ts.make_trade(positions[ticker],
+                                        markets.get(ticker, "US"),
+                                        sources.get(ticker, ""), decision.price,
+                                        decision.date, decision.reason, costs))
+            del positions[ticker]
 
     # ── 미결 포지션을 마지막 종가로 평가 ──
     for ticker, pos in positions.items():
