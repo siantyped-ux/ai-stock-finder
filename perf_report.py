@@ -22,14 +22,15 @@ import console
 import exit_rules as er
 import history
 import mailer
+import sizing
 import tracks
 import stops
 import trade_sim as ts
 
-# 종목당 최대 진입금액(달러). "최대" 인 것은 정수 주로 내림하기 때문이다.
-# 진입가가 이 금액보다 비싸면 1주는 산다 - 0주로 두면 고가 종목이 시그널을
-# 내도 성과 측정에서 통째로 사라진다.
-CAPITAL_USD = 1000
+# 초기 자본. 종목당 정액이 아니라 계좌 전체다 - 거래당 리스크와 투입 상한이
+# 여기서 나오고, 수량은 시뮬레이터가 정한다.
+# 근거: docs/superpowers/specs/2026-08-25-position-sizing-design.md
+ACCOUNT = sizing.Account(capital=10_000)
 
 # 성과 집계 시작일. 이 앞의 아카이브(2026-07-31~08-21)는 66% 가 backfill 이라
 # 스코어가 미확정 봉 결함에 오염돼 있고, 한국 종목까지 섞여 있다. 깨끗한 live
@@ -63,9 +64,11 @@ def warning_lines(backfill_pct: float) -> list[str]:
     ]
 
 
-def to_row(trade, capital: int = CAPITAL_USD,
-           costs: ts.Costs = None) -> dict:
+def to_row(trade, costs: ts.Costs = None) -> dict:
     """트레이드 1건을 달러 손익 행으로 환산한다.
+
+    수량은 시뮬레이터가 정한 것을 그대로 쓴다. 여기서 다시 계산하면 진입
+    여부를 좌우한 수량과 리포트의 수량이 어긋난다.
 
     미결 포지션은 청산가 자리에 평가가격(mark_price)이 들어오고 매도비용도
     똑같이 뺀다 - 지금 팔면 손에 남는 돈이 평가액이다.
@@ -80,11 +83,14 @@ def to_row(trade, capital: int = CAPITAL_USD,
         raise ValueError(
             f"{trade.ticker}: 리포트는 USD 전용인데 market={trade.market!r} "
             "이다. 백테스트를 us_only 로 돌려야 한다.")
+    if trade.qty is None:
+        raise ValueError(
+            f"{trade.ticker}: 수량이 없다. 금액 리포트를 내려면 백테스트를 "
+            "account 와 함께 돌려야 한다.")
 
     costs = costs or ts.Costs()
 
-    # 0주면 손익이 0이라 트레이드가 조용히 사라진다. 1주로 올린다.
-    qty = max(1, int(capital // trade.entry_price))
+    qty = trade.qty
     principal = trade.entry_price * qty
 
     exit_price = (trade.exit_price if trade.exit_price is not None
@@ -137,8 +143,8 @@ def target_cols(trade) -> dict:
     }
 
 
-def build_rows(result: dict, capital: int = CAPITAL_USD,
-               costs: ts.Costs = None, params: er.Params = None,
+def build_rows(result: dict, costs: ts.Costs = None,
+               params: er.Params = None,
                start_date: str = REPORT_START) -> dict:
     """청산완료·미결·요약 세 덩어리로 나눈다.
 
@@ -157,7 +163,7 @@ def build_rows(result: dict, capital: int = CAPITAL_USD,
     closed, opened = [], []
     for t in result["trades"]:
         if t.is_open:
-            row = to_row(t, capital, costs)
+            row = to_row(t, costs)
             # 미결은 청산일이 없다. 평가 시점을 대신 넣는다.
             row["exit_date"] = mark_date
             sv = stops.stop_view(t, params)
@@ -170,7 +176,7 @@ def build_rows(result: dict, capital: int = CAPITAL_USD,
             row["venue"] = venues.get(t.ticker, "")
             opened.append(row)
         else:
-            row = to_row(t, capital, costs)
+            row = to_row(t, costs)
             row["venue"] = venues.get(t.ticker, "")
             closed.append(row)
 
@@ -201,7 +207,11 @@ def build_rows(result: dict, capital: int = CAPITAL_USD,
                            if closed else None,
             "open_n": len(opened),
             "open_net_usd": sum(r["net_usd"] for r in opened),
-            "capital": capital,
+            "capital": result.get("capital"),
+            "cash": result.get("cash"),
+            "used_pct": (
+                (result["capital"] - result["cash"]) / result["capital"] * 100.0
+                if result.get("capital") else None),
             "use_target": params.use_target,
             # 실제로 쓴 시작일을 담는다. 요약이 상수를 찍으면 --start-date 로
             # 바꿔 돌렸을 때 표시가 거짓말을 한다.
@@ -463,8 +473,8 @@ def main():
     p.add_argument("--out-dir", default="reports")
     p.add_argument("--start-date", default=REPORT_START,
                    help=f"집계 시작일 (기본: {REPORT_START})")
-    p.add_argument("--capital", type=int, default=CAPITAL_USD,
-                   help="종목당 최대 진입금액 USD (기본: 1000)")
+    p.add_argument("--capital", type=float, default=ACCOUNT.capital,
+                   help=f"초기 자본 USD (기본: {ACCOUNT.capital:,.0f})")
     p.add_argument("--mail", action="store_true",
                    help="리포트를 메일로 보낸다 (SMTP_* 환경변수 또는 .env 필요)")
     p.add_argument("--use-target", action="store_true",
@@ -481,12 +491,13 @@ def main():
         # us_only 로 돌린다. 리포트 금액이 전부 달러라 원화로 호가되는
         # 한국 종목이 섞이면 안 된다 - 아카이브 07-31~08-21 구간에 남아 있다.
         result = backtest.run(pattern, params, us_only=True,
-                              start_date=args.start_date)
+                              start_date=args.start_date,
+                              account=sizing.Account(capital=args.capital))
         if not result["dates"]:
             print(f"[!] {label}: 아카이브가 비어 있다 ({pattern})")
             by_track[key] = None
             continue
-        by_track[key] = build_rows(result, args.capital, params=params,
+        by_track[key] = build_rows(result, params=params,
                                    start_date=args.start_date)
         print(f"[*] {label}: 트레이드 {len(result['trades'])}건")
 
