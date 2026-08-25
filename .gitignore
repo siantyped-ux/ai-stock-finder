@@ -42,3 +42,4 @@ cache/
 history_pre_flow/
 history_pre_flow_0824/
 history_pre_split/
+.gstack/

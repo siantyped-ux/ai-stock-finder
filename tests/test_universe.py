@@ -382,3 +382,44 @@ def test_dart_symbols_are_gone(name):
     않는 코드가 계속 유지보수 대상으로 남는다.
     """
     assert not hasattr(sf, name)
+
+
+# ─── 복제본 제외 실적 ────────────────────────────────────────
+# 대시보드 배너가 etf_dupes.json 의 숫자를 그대로 쓰면 실제 스캔과 어긋난다.
+# 목록은 아카이브 539종목으로 만들었는데 스캔은 FMP 에서 555종목을 받는다
+# (2026-08-25 실제로 "115종목 (539 → 424)" 라고 띄우고 114개를 접었다).
+
+def test_the_etf_load_records_what_it_actually_dropped(monkeypatch):
+    monkeypatch.setattr(sf, "fetch_us_etf_universe",
+                        lambda **kw: [_u("SPY"), _u("VOO"), _u("QQQ")])
+    monkeypatch.setattr(sf.etf_dedupe, "excluded_tickers", lambda *a: {"VOO"})
+
+    sf.load_universe(track="etf")
+
+    assert sf.LAST_DUPE_STATS == {"universe": 3, "excluded": 1, "kept": 2,
+                                  "dropped": ["VOO"]}
+
+
+def test_only_tickers_actually_present_count_as_dropped(monkeypatch):
+    """목록에 있어도 이번 유니버스에 없었으면 접힌 것이 아니다.
+
+    배너는 "찾던 티커가 왜 안 보이나" 에 답하는 자리다. 없던 종목을 접혔다고
+    적으면 그 질문에 거꾸로 답하게 된다.
+    """
+    monkeypatch.setattr(sf, "fetch_us_etf_universe", lambda **kw: [_u("SPY")])
+    monkeypatch.setattr(sf.etf_dedupe, "excluded_tickers",
+                        lambda *a: {"VOO", "IVV"})
+
+    sf.load_universe(track="etf")
+
+    assert sf.LAST_DUPE_STATS["dropped"] == []
+    assert sf.LAST_DUPE_STATS["excluded"] == 0
+
+
+def test_the_stats_are_empty_when_nothing_is_excluded(monkeypatch):
+    monkeypatch.setattr(sf, "fetch_us_etf_universe", lambda **kw: [_u("SPY")])
+    monkeypatch.setattr(sf.etf_dedupe, "excluded_tickers", lambda *a: set())
+
+    sf.load_universe(track="etf")
+
+    assert sf.LAST_DUPE_STATS == {}

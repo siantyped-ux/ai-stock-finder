@@ -993,6 +993,11 @@ def drop_duplicate_etfs(universe: list, excluded: set) -> list:
 TRACKS = tracks.TRACKS
 track_paths = tracks.paths
 
+# 마지막 ETF 유니버스 로드에서 복제본을 실제로 몇 개 접었는지. 대시보드 배너가
+# 이 값을 쓴다 - etf_dupes.json 의 숫자를 그대로 띄우면 어긋난다. 목록은
+# 아카이브(539종목)로 만들었는데 스캔은 FMP 에서 555종목을 받기 때문이다.
+LAST_DUPE_STATS = {}
+
 
 def load_universe(track: str = "stocks",
                   min_us_cap: float = 1e10,
@@ -1023,11 +1028,15 @@ def load_universe(track: str = "stocks",
     etfs = list(fetch_us_etf_universe(min_aum=min_etf_aum))
     # 캐시를 읽은 뒤에 거른다. 캐시 저장 전에 걸러 버리면 제외 목록을
     # 새로 만들어도 낡은 캐시가 그대로 쓰여 반영되지 않는다.
+    LAST_DUPE_STATS.clear()
     excluded = etf_dedupe.excluded_tickers()
     if excluded:
         kept = drop_duplicate_etfs(etfs, excluded)
         print(f"    [*] ETF 복제본 {len(etfs) - len(kept)}종목 제외 "
               f"({etf_dedupe.DUPES_PATH})")
+        dropped = sorted({row[0] for row in etfs} - {row[0] for row in kept})
+        LAST_DUPE_STATS.update(universe=len(etfs), excluded=len(dropped),
+                               kept=len(kept), dropped=dropped)
         etfs = kept
     return etfs
 
@@ -1661,6 +1670,17 @@ window.LIVE_STOCKS{sfx} = {json.dumps(shown, ensure_ascii=False, indent=2)};
     if args.track == "etf":
         dupes = etf_dedupe.summary()
         if dupes:
+            # 파일의 통계 대신 이번 스캔이 실제로 접은 것만 쓴다. 목록에
+            # 있어도 이번 유니버스에 없었으면 접힌 것이 아니다.
+            actual = set(LAST_DUPE_STATS.get("dropped", []))
+            dupes.update({k: v for k, v in LAST_DUPE_STATS.items()
+                          if k != "dropped"})
+            folded = {}
+            for rep, names in dupes.get("by_kept", {}).items():
+                hit = [t for t in names if t in actual]
+                if hit:
+                    folded[rep] = hit
+            dupes["by_kept"] = folded
             js_content += (f"window.LIVE_DUPES_ETF = "
                            f"{json.dumps(dupes, ensure_ascii=False)};\n")
 
