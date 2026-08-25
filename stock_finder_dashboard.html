@@ -188,6 +188,23 @@
   .table-wrap.scroll-left::before { opacity: 1; }
   .table-wrap.scroll-right::after { opacity: 1; }
 
+  /* 트랙 탭. 주식과 ETF 는 점수 척도가 달라 한 표에서 순위를 비교할 수
+     없다 - 섞으면 총점 상위가 전부 ETF 로 채워진다. 따로 본다. */
+  .track-tabs { display: flex; gap: 8px; margin: 18px 0 14px; flex-wrap: wrap; }
+  .track-tab {
+    padding: 9px 18px; border-radius: 8px; cursor: pointer;
+    background: rgba(255,255,255,.04);
+    border: 1px solid rgba(255,255,255,.08);
+    color: #7a8199; font-size: 13px; font-weight: 600;
+    transition: background .15s, border-color .15s, color .15s;
+  }
+  .track-tab:hover:not(:disabled) { color: #cbd3e6; }
+  .track-tab.active {
+    background: rgba(34,211,238,.12); border-color: #22d3ee; color: #22d3ee;
+  }
+  .track-tab .count { opacity: .65; font-weight: 400; margin-left: 6px; }
+  .track-tab:disabled { opacity: .35; cursor: not-allowed; }
+
   th {
     text-align:left; padding:12px 16px; font-size:11px; color:#7a8199;
     text-transform:uppercase; letter-spacing:0.5px; border-bottom:1px solid #2a3450;
@@ -335,6 +352,16 @@
     <div class="macro-item"><span class="label">이벤트 창:</span> <span class="val" style="color:#4ade80">진입 허용</span></div>
   </div>
 
+  <!-- 트랙 탭: 아래 KPI·표는 선택된 트랙의 것이다 (매크로 바는 공통) -->
+  <div class="track-tabs">
+    <button class="track-tab active" id="tabStocks" onclick="switchTrack('stocks')">
+      미국 주식<span class="count" id="tabStocksCount"></span>
+    </button>
+    <button class="track-tab" id="tabEtf" onclick="switchTrack('etf')">
+      ETF<span class="count" id="tabEtfCount"></span>
+    </button>
+  </div>
+
   <!-- KPI Cards -->
   <div class="kpi-grid">
     <div class="kpi-card" style="--accent:#4ade80">
@@ -460,6 +487,14 @@ document.write('<scr' + 'ipt src="dashboard_data.js?t='
   + Math.floor(Date.now() / 60000) + '"><\/scr' + 'ipt>');
 </script>
 
+<!-- ETF 트랙. 별도 스캔이 만드는 파일이라 아직 없을 수 있다 - 그때는
+     LIVE_STOCKS_ETF 가 undefined 로 남고 ETF 탭이 비활성으로 표시된다.
+     전역 이름이 _ETF 로 갈려 있어 주식 데이터를 덮어쓰지 않는다. -->
+<script>
+document.write('<scr' + 'ipt src="dashboard_data_etf.js?t='
+  + Math.floor(Date.now() / 60000) + '"><\/scr' + 'ipt>');
+</script>
+
 <!-- Detail Modal -->
 <div class="modal-overlay" id="modal" onclick="if(event.target===this) closeModal()">
   <div class="modal">
@@ -479,14 +514,33 @@ document.write('<scr' + 'ipt src="dashboard_data.js?t='
 // 스캔 결과만 표시한다. 데모 데이터 폴백은 없앴다 - dashboard_data.js 로드가
 // 실패하면 하드코딩된 31종목(그중 11개가 한국 종목)이 조용히 대신 표시돼서,
 // 지난 스캔 결과가 아직 남아 있는 것처럼 보였다.
-const STOCKS = (window.LIVE_STOCKS && window.LIVE_STOCKS.length > 0) ? window.LIVE_STOCKS : [];
-const IS_LIVE = STOCKS.length > 0;
+// 트랙별 데이터. 주식과 ETF 는 점수 척도가 달라 한 표에서 순위를 비교할 수
+// 없다 - 2026-08-25 실측에서 총점 상위 20 이 전부 ETF 였고 주식은 23위에서야
+// 나왔다. ETF 총점 표준편차가 15.1 로 주식(10.3)의 1.5배라 꼬리가 두껍기
+// 때문이다. 스캔부터 갈라 각자의 순위를 보여준다.
+const TRACK_DATA = {
+  stocks: {
+    rows: window.LIVE_STOCKS || [],
+    summary: window.LIVE_SUMMARY || null,
+  },
+  etf: {
+    rows: window.LIVE_STOCKS_ETF || [],
+    summary: window.LIVE_SUMMARY_ETF || null,
+  },
+};
+let currentTrack = 'stocks';
+let STOCKS = TRACK_DATA.stocks.rows;
 // 필터 이전 스캔 전체 요약. 지표 카드가 이걸 쓴다.
-const SUMMARY = window.LIVE_SUMMARY || null;
+let SUMMARY = TRACK_DATA.stocks.summary;
+let IS_LIVE = STOCKS.length > 0;
+
+// 거시 지표는 두 트랙이 같은 시장을 보므로 공통이다. 주식 파일이 없을 때는
+// ETF 파일 것을 쓴다 - 한쪽 스캔만 돌았다고 매크로 바가 빌 이유는 없다.
+const MACRO = window.LIVE_MACRO || window.LIVE_MACRO_ETF || null;
 
 // LIVE 거시 지표 반영
-if (window.LIVE_MACRO) {
-  const M = window.LIVE_MACRO;
+if (MACRO) {
+  const M = MACRO;
   document.getElementById('vixVal').textContent = M.vix.toFixed(2);
   document.getElementById('us10yVal').textContent = M.us10y.toFixed(2) + '%';
   document.getElementById('dxyVal').textContent = M.dxy.toFixed(2);
@@ -778,18 +832,70 @@ function showDetail(ticker) {
 function closeModal(){ document.getElementById('modal').classList.remove('show'); }
 
 // Init sector filter options
-const sectors = [...new Set(STOCKS.map(s=>s.sec))].sort();
-const sectorSelect = document.getElementById('sectorFilter');
-sectors.forEach(sec => {
-  const opt = document.createElement('option');
-  opt.value = sec; opt.textContent = sec;
-  sectorSelect.appendChild(opt);
-});
+// 트랙마다 섹터 구성이 다르므로 전환할 때 다시 만든다. 고르고 있던 값이 새
+// 트랙에도 있으면 유지한다 - 탭만 눌렀는데 필터가 풀리면 놀란다.
+function buildSectorOptions() {
+  const sel = document.getElementById('sectorFilter');
+  const keep = sel.value;
+  sel.innerHTML = '<option value="ALL">전체</option>';
+  [...new Set(STOCKS.map(s=>s.sec))].sort().forEach(sec => {
+    const opt = document.createElement('option');
+    opt.value = sec; opt.textContent = sec;
+    sel.appendChild(opt);
+  });
+  sel.value = [...sel.options].some(o => o.value === keep) ? keep : 'ALL';
+}
+buildSectorOptions();
+
+// 활성 탭 표시는 코드로 확정한다. HTML 의 class 속성에만 맡기면 시작 트랙이
+// 바뀌었을 때(주식 파일이 없어 ETF 로 여는 경우) 표시가 어긋난다.
+function markActiveTab() {
+  document.getElementById('tabStocks')
+    .classList.toggle('active', currentTrack === 'stocks');
+  document.getElementById('tabEtf')
+    .classList.toggle('active', currentTrack === 'etf');
+}
+
+// 트랙 전환. 데이터가 없는 트랙으로는 넘어가지 않는다.
+function switchTrack(track) {
+  const data = TRACK_DATA[track];
+  if (!data || data.rows.length === 0) return;
+  currentTrack = track;
+  STOCKS = data.rows;
+  SUMMARY = data.summary;
+  IS_LIVE = STOCKS.length > 0;
+  markActiveTab();
+  buildSectorOptions();
+  applyFilters();
+}
+
+function initTracks() {
+  const counts = {stocks: TRACK_DATA.stocks.rows.length,
+                  etf: TRACK_DATA.etf.rows.length};
+  for (const [track, id] of [['stocks','tabStocks'], ['etf','tabEtf']]) {
+    const btn = document.getElementById(id);
+    btn.disabled = counts[track] === 0;
+    document.getElementById(id + 'Count').textContent =
+      counts[track] ? `(${counts[track]})` : '';
+  }
+  // 주식 파일이 없고 ETF 만 있으면 ETF 로 연다. 빈 표를 먼저 보여줄 이유가 없다.
+  if (counts.stocks === 0 && counts.etf > 0) currentTrack = 'etf';
+  const start = TRACK_DATA[currentTrack];
+  STOCKS = start.rows;
+  SUMMARY = start.summary;
+  IS_LIVE = STOCKS.length > 0;
+  markActiveTab();
+  buildSectorOptions();
+}
 
 // Status badge: 데이터 유무 표시
 const badge = document.querySelector('.status-badge');
-if (IS_LIVE) {
-  const genAt = window.LIVE_MACRO ? new Date(window.LIVE_MACRO.generated_at) : new Date();
+// 한 트랙이라도 데이터가 있으면 LIVE 다. 선택된 트랙만 보면, ETF 스캔만 돈
+// 날 주식 탭이 기본이라는 이유로 "데이터 없음" 이 뜬다.
+const ANY_LIVE = TRACK_DATA.stocks.rows.length > 0
+              || TRACK_DATA.etf.rows.length > 0;
+if (ANY_LIVE) {
+  const genAt = MACRO ? new Date(MACRO.generated_at) : new Date();
   document.getElementById('cycleTime').textContent =
     `LIVE 데이터 · ${genAt.toLocaleString('ko-KR')} 생성`;
   badge.style.background = 'rgba(34,211,238,.1)';
@@ -813,6 +919,9 @@ document.getElementById('searchInput').addEventListener('keypress', e => {
 });
 
 // Initial render
+// initTracks 가 먼저다. 주식 데이터가 없으면 여기서 ETF 로 넘어가면서
+// applyFilters 까지 돌므로, 아래 호출이 두 번째 렌더가 된다.
+initTracks();
 applyFilters();
 
 // 좌우 스크롤 페이드 힌트 (콘텐츠가 잘렸는지 실시간 감지)

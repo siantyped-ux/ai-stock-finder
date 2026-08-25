@@ -10,10 +10,16 @@ xlsx v5 시스템의 4축 컨센서스 로직을 실제 데이터로 적용
     FRED_API_KEY=xxx  # 연준 경제 데이터
 
 실행:
-    python stock_finder.py
+    python stock_finder.py --track stocks      # 미국 주식
+    python stock_finder.py --track etf         # 미국 ETF
+
+두 트랙은 점수 척도가 달라 산출물을 전부 따로 둔다. 한 목록에 두면 ETF 가
+상위를 쓸어간다 (2026-08-25 실측: 총점 상위 20 이 전부 ETF). 정의는 tracks.py.
 
 출력:
-    dashboard_data.js  →  stock_finder_dashboard.html 이 자동 로드
+    dashboard_data.js      · history/       →  주식 트랙
+    dashboard_data_etf.js  · history_etf/   →  ETF 트랙
+    둘 다 stock_finder_dashboard.html 이 탭으로 함께 읽는다
 """
 
 from __future__ import annotations
@@ -32,8 +38,10 @@ from datetime import datetime, timedelta
 from typing import Optional
 
 import console
+import etf_dedupe
 import flow
 import history
+import tracks
 
 console.force_utf8()
 
@@ -959,31 +967,65 @@ def fetch_us_etf_universe(min_aum: float = 1e9, limit: int = 3000) -> list:
         return []
 
 
-def load_universe(min_us_cap: float = 1e10,
-                  min_etf_aum: float = 1e9,
-                  include_etf: bool = True,
-                  test_mode: bool = False) -> list:
-    """미국 주식 + ETF 유니버스를 로드한다.
+def drop_duplicate_etfs(universe: list, excluded: set) -> list:
+    """제외 목록에 오른 ETF 를 유니버스에서 뺀다.
 
-    반환 튜플은 (ticker, name, market, sector, asset_type) 5칸이다.
+    자산군을 확인하고 지운다. 목록은 ETF 복제본만 담고 있으므로 같은 티커의
+    주식이 있더라도 건드리면 안 된다.
+    """
+    if not excluded:
+        return universe
+    return [row for row in universe
+            if not (row[4] == "ETF" and row[0] in excluded)]
+
+
+
+# 트랙별 산출물 경로. 주식과 ETF 는 점수 척도가 달라 한 목록에 두면 순위를
+# 비교할 수 없다 - 2026-08-25 실측에서 총점 상위 20 이 전부 ETF 였고 주식은
+# 23위에서야 나왔다. ETF 총점 표준편차가 15.1 로 주식(10.3)의 1.5배라, 축이
+# 둘뿐이라 꼬리가 두꺼운 것이 원인이다. 유니버스부터 갈라 각자의 순위를 낸다.
+# 트랙 정의는 tracks.py 한 곳에 있다. 스캐너와 리포트가 각자 정의를 들면
+# 한쪽만 고쳐졌을 때 두 트랙이 같은 파일을 써서 서로를 덮어쓴다.
+TRACKS = tracks.TRACKS
+track_paths = tracks.paths
+
+
+def load_universe(track: str = "stocks",
+                  min_us_cap: float = 1e10,
+                  min_etf_aum: float = 1e9,
+                  test_mode: bool = False) -> list:
+    """트랙 하나의 유니버스를 로드한다.
+
+    반환 튜플은 (ticker, name, market, sector, asset_type, exchange) 6칸이다.
     asset_type 은 "STOCK" | "ETF" 이고, 스캔 루프가 이 값으로 스코어링을
-    분기한다.
+    분기한다. 한 트랙에는 한 자산군만 담긴다.
 
     한국은 다루지 않는다. pykrx 조회가 CI 에서 매번 실패해 하드코딩 폴백
     112종목이 고정돼 있었고, 그 리스트는 코스피 구성 변화를 반영하지 못했다.
     """
+    track_paths(track)          # 트랙 이름 검증
+
     if test_mode:
-        return FALLBACK_UNIVERSE
+        want = "ETF" if track == "etf" else "STOCK"
+        return [s for s in FALLBACK_UNIVERSE if s[4] == want]
 
-    universe = list(fetch_us_universe(min_market_cap=min_us_cap))
-    if not universe:
-        universe = [s for s in FALLBACK_UNIVERSE if s[4] == "STOCK"]
-        print(f"    [폴백] 미국 하드코딩 {len(universe)}종목 사용")
+    if track == "stocks":
+        universe = list(fetch_us_universe(min_market_cap=min_us_cap))
+        if not universe:
+            universe = [s for s in FALLBACK_UNIVERSE if s[4] == "STOCK"]
+            print(f"    [폴백] 미국 하드코딩 {len(universe)}종목 사용")
+        return universe
 
-    if include_etf:
-        universe.extend(fetch_us_etf_universe(min_aum=min_etf_aum))
-
-    return universe
+    etfs = list(fetch_us_etf_universe(min_aum=min_etf_aum))
+    # 캐시를 읽은 뒤에 거른다. 캐시 저장 전에 걸러 버리면 제외 목록을
+    # 새로 만들어도 낡은 캐시가 그대로 쓰여 반영되지 않는다.
+    excluded = etf_dedupe.excluded_tickers()
+    if excluded:
+        kept = drop_duplicate_etfs(etfs, excluded)
+        print(f"    [*] ETF 복제본 {len(etfs) - len(kept)}종목 제외 "
+              f"({etf_dedupe.DUPES_PATH})")
+        etfs = kept
+    return etfs
 
 
 # ─── 공시 스코어 (API 우선, 실패 시 프록시) ───────────────────
@@ -1277,13 +1319,19 @@ def fetch_stock(ticker: str, retries: int = 4) -> Optional[dict]:
 
 
 def _save_intermediate(results: list, vix: float, dxy: float, us10y: float,
-                       fred_data: dict) -> None:
-    """장시간 스캔 중 중간 저장 (크래시 방지)"""
-    output_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "dashboard_data.js")
+                       fred_data: dict,
+                       dashboard: str = "dashboard_data.js",
+                       sfx: str = "") -> None:
+    """장시간 스캔 중 중간 저장 (크래시 방지)
+
+    sfx 는 최종 저장과 같은 트랙 접미사여야 한다. 다르면 중간 저장이 다른
+    트랙의 전역을 덮어써서, 스캔이 도는 동안 대시보드의 반대편 탭이 빈다.
+    """
+    output_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), dashboard)
     fred_json = json.dumps(fred_data, ensure_ascii=False)
     js = f"""// AI 3-Month Stock Finder - Intermediate Save
 // Generated: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')} (진행 중)
-window.LIVE_MACRO = {{
+window.LIVE_MACRO{sfx} = {{
   vix: {vix:.2f}, dxy: {dxy:.2f}, us10y: {us10y:.2f},
   generated_at: "{datetime.now().isoformat()}",
   fmp_active: {str(bool(FMP_KEY)).lower()},
@@ -1291,7 +1339,7 @@ window.LIVE_MACRO = {{
   fred: {fred_json},
   intermediate: true, count: {len(results)}
 }};
-window.LIVE_STOCKS = {json.dumps(results, ensure_ascii=False)};
+window.LIVE_STOCKS{sfx} = {json.dumps(results, ensure_ascii=False)};
 """
     with open(output_path, "w", encoding="utf-8") as f:
         f.write(js)
@@ -1309,8 +1357,13 @@ def parse_args():
                         "  1e10 = $10B (~1000종목, 15분)")
     p.add_argument("--min-etf-aum", type=float, default=1e9,
                    help="미국 ETF 최소 AUM USD (기본: 1e9 = $1B)")
-    p.add_argument("--no-etf", action="store_true",
-                   help="ETF 를 유니버스에서 제외한다")
+    p.add_argument("--track", choices=sorted(TRACKS), default="stocks",
+                   help="스캔할 트랙 (기본: stocks)\n"
+                        "  stocks = 미국 주식 → history/ · dashboard_data.js\n"
+                        "  etf    = 미국 ETF  → history_etf/ · "
+                        "dashboard_data_etf.js\n"
+                        "두 자산군은 점수 척도가 달라 한 목록에서 순위를\n"
+                        "비교할 수 없다. 각자의 유니버스와 순위를 쓴다.")
     p.add_argument("--min-total", type=int, default=70,
                    help="대시보드·콘솔 출력 최소 종합점수 (기본 70).\n"
                         "  주식·ETF 에 같은 값을 쓴다 - flow 축으로 두 척도를\n"
@@ -1352,28 +1405,26 @@ def main():
     print("-" * 65)
 
     # 유니버스 로드
-    print("[*] 종목 유니버스 로드...")
+    paths = track_paths(args.track)
+    print(f"[*] 종목 유니버스 로드... (트랙: {args.track} → "
+          f"{paths['history']}/ · {paths['dashboard']})")
     universe = load_universe(
+        track=args.track,
         min_us_cap=args.min_us_cap,
         min_etf_aum=args.min_etf_aum,
-        include_etf=not args.no_etf,
         test_mode=args.test,
     )
     if args.limit > 0:
-        stocks = [s for s in universe if s[4] == "STOCK"][:args.limit]
-        etfs = [s for s in universe if s[4] == "ETF"][:args.limit]
-        universe = stocks + etfs
-        print(f"    [limit] 종류별 상위 {args.limit}개로 제한 → 총 {len(universe)}종목")
+        universe = universe[:args.limit]
+        print(f"    [limit] 상위 {args.limit}개로 제한 → 총 {len(universe)}종목")
 
     if not universe:
         print("[!] 유니버스가 비었습니다. --test 옵션으로 폴백 모드 시도")
         sys.exit(1)
 
-    n_stock = sum(1 for s in universe if s[4] == "STOCK")
-    n_etf = sum(1 for s in universe if s[4] == "ETF")
     est_sec = len(universe) * (2.5 + args.sleep) / max(1, args.workers)
     est_min = est_sec / 60
-    print(f"    총 {len(universe)}종목 (주식: {n_stock}, ETF: {n_etf})")
+    print(f"    총 {len(universe)}종목 ({args.track} 트랙)")
     print(f"    예상 소요시간: 약 {est_min:.1f}분 ({est_sec/3600:.1f}시간)")
     print("-" * 65)
 
@@ -1520,7 +1571,8 @@ def main():
                       flush=True)
 
             if snapshot is not None:
-                _save_intermediate(snapshot, vix, dxy, us10y, fred_data)
+                _save_intermediate(snapshot, vix, dxy, us10y, fred_data,
+                                   paths['dashboard'], paths['suffix'])
 
     # 스레드 완료 순서가 아니라 유니버스 원래 순서로 복원
     results = [r for _, r in sorted(collected, key=lambda x: x[0])]
@@ -1542,7 +1594,8 @@ def main():
 
     # 이력 적재 - 가드를 통과한 결과만 기록한다
     try:
-        hist_path = history.write_snapshot(history_rows, scan_started_kst)
+        hist_path = history.write_snapshot(history_rows, scan_started_kst,
+                                           out_dir=paths['history'])
         print(f"[*] 이력 기록: {hist_path} ({len(history_rows)}행)")
     except Exception as e:
         print(f"[!] 이력 기록 실패: {e}")
@@ -1551,10 +1604,8 @@ def main():
     # 아카이브를 기록한 뒤에 필터한다. 순서를 바꾸면 아카이브가 잘려
     # 백테스트의 SIGNAL 청산 판정이 불가능해진다.
     shown = filter_for_output(results, args.min_total)
-    n_stock = sum(1 for r in shown if r.get("at") != "ETF")
-    n_etf = len(shown) - n_stock
     print(f"[*] 출력 필터: {args.min_total}점 이상 → "
-          f"{len(shown)}/{len(results)}종목 (주식 {n_stock}, ETF {n_etf})")
+          f"{len(shown)}/{len(results)}종목 ({args.track} 트랙)")
 
     # 지표 카드는 필터 이전 전체를 기준으로 센다 (scan_summary 참조).
     summary = scan_summary(results, shown)
@@ -1562,13 +1613,15 @@ def main():
     print(f"[*] 스캔 전체 기준: HITL {summary['hitl']}건 · "
           f"AVOID {summary['avoid']}건 (표시 목록에는 안 뜬다)")
 
-    output_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "dashboard_data.js")
+    output_path = os.path.join(os.path.dirname(os.path.abspath(__file__)),
+                               paths['dashboard'])
     fred_json = json.dumps(fred_data, ensure_ascii=False)
-    js_content = f"""// AI 3-Month Stock Finder - Live Data
+    sfx = paths["suffix"]
+    js_content = f"""// AI 3-Month Stock Finder - Live Data ({args.track})
 // Generated: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}
 // Macro: VIX={vix:.2f}, DXY={dxy:.2f}, US10Y={us10y:.2f}%
 // FMP: {'active' if FMP_KEY else 'off'} · FRED: {'active' if FRED_KEY else 'off'}
-window.LIVE_MACRO = {{
+window.LIVE_MACRO{sfx} = {{
   vix: {vix:.2f},
   dxy: {dxy:.2f},
   us10y: {us10y:.2f},
@@ -1577,8 +1630,8 @@ window.LIVE_MACRO = {{
   fred_active: {str(bool(FRED_KEY)).lower()},
   fred: {fred_json}
 }};
-window.LIVE_SUMMARY = {summary_json};
-window.LIVE_STOCKS = {json.dumps(shown, ensure_ascii=False, indent=2)};
+window.LIVE_SUMMARY{sfx} = {summary_json};
+window.LIVE_STOCKS{sfx} = {json.dumps(shown, ensure_ascii=False, indent=2)};
 """
     with open(output_path, "w", encoding="utf-8") as f:
         f.write(js_content)

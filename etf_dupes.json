@@ -1,0 +1,481 @@
+{
+ "threshold": 0.99,
+ "universe": 539,
+ "priced": 528,
+ "unpriced": [
+  "AVOS",
+  "DVGR",
+  "ETFT",
+  "FEMD",
+  "GTOP",
+  "PRMR",
+  "SQS",
+  "USFE",
+  "VMSB",
+  "WSGE",
+  "XXX"
+ ],
+ "kept": 424,
+ "excluded": {
+  "AAXJ": {
+   "kept": "EEM",
+   "rho": 0.99494
+  },
+  "ACWI": {
+   "kept": "VT",
+   "rho": 0.99739
+  },
+  "ACWX": {
+   "kept": "VXUS",
+   "rho": 0.99787
+  },
+  "APUE": {
+   "kept": "SPY",
+   "rho": 0.99145
+  },
+  "AVEM": {
+   "kept": "EEM",
+   "rho": 0.99252
+  },
+  "AVLC": {
+   "kept": "AVUS",
+   "rho": 0.99262
+  },
+  "BKLC": {
+   "kept": "SPY",
+   "rho": 0.99719
+  },
+  "CATH": {
+   "kept": "SPY",
+   "rho": 0.99216
+  },
+  "CWI": {
+   "kept": "VXUS",
+   "rho": 0.99228
+  },
+  "DCOR": {
+   "kept": "DFAC",
+   "rho": 0.99597
+  },
+  "DFAE": {
+   "kept": "EEM",
+   "rho": 0.99591
+  },
+  "DFAI": {
+   "kept": "EFA",
+   "rho": 0.9922
+  },
+  "DFAT": {
+   "kept": "DFSV",
+   "rho": 0.99113
+  },
+  "DFAU": {
+   "kept": "SPY",
+   "rho": 0.99277
+  },
+  "DFAX": {
+   "kept": "VXUS",
+   "rho": 0.99223
+  },
+  "DFEM": {
+   "kept": "EEM",
+   "rho": 0.99045
+  },
+  "DFUS": {
+   "kept": "SPY",
+   "rho": 0.9962
+  },
+  "EFIV": {
+   "kept": "SNPE",
+   "rho": 0.9972
+  },
+  "ESGD": {
+   "kept": "EFA",
+   "rho": 0.99777
+  },
+  "ESGU": {
+   "kept": "SPY",
+   "rho": 0.99604
+  },
+  "FCOM": {
+   "kept": "VOX",
+   "rho": 0.99856
+  },
+  "FDIS": {
+   "kept": "XLY",
+   "rho": 0.99108
+  },
+  "FELC": {
+   "kept": "SPY",
+   "rho": 0.99203
+  },
+  "FELG": {
+   "kept": "IWF",
+   "rho": 0.9934
+  },
+  "FENY": {
+   "kept": "XLE",
+   "rho": 0.99616
+  },
+  "FHLC": {
+   "kept": "VHT",
+   "rho": 0.999
+  },
+  "FLJP": {
+   "kept": "EWJ",
+   "rho": 0.99553
+  },
+  "FLKR": {
+   "kept": "EWY",
+   "rho": 0.99706
+  },
+  "FLTW": {
+   "kept": "EWT",
+   "rho": 0.99131
+  },
+  "FNCL": {
+   "kept": "XLF",
+   "rho": 0.99347
+  },
+  "FNDB": {
+   "kept": "FNDX",
+   "rho": 0.99561
+  },
+  "FSTA": {
+   "kept": "VDC",
+   "rho": 0.99828
+  },
+  "FTEC": {
+   "kept": "XLK",
+   "rho": 0.99213
+  },
+  "FUTY": {
+   "kept": "XLU",
+   "rho": 0.99676
+  },
+  "GDXJ": {
+   "kept": "GDX",
+   "rho": 0.99026
+  },
+  "GEM": {
+   "kept": "EEM",
+   "rho": 0.99423
+  },
+  "GPIQ": {
+   "kept": "QQQ",
+   "rho": 0.99556
+  },
+  "GPIX": {
+   "kept": "SPY",
+   "rho": 0.99416
+  },
+  "GUSA": {
+   "kept": "SPY",
+   "rho": 0.99031
+  },
+  "IDEV": {
+   "kept": "EFA",
+   "rho": 0.99435
+  },
+  "IDU": {
+   "kept": "XLU",
+   "rho": 0.99362
+  },
+  "IEMG": {
+   "kept": "EEM",
+   "rho": 0.99853
+  },
+  "IEUR": {
+   "kept": "VGK",
+   "rho": 0.99828
+  },
+  "IEV": {
+   "kept": "VGK",
+   "rho": 0.99426
+  },
+  "ILCB": {
+   "kept": "SPY",
+   "rho": 0.99585
+  },
+  "ITOT": {
+   "kept": "SPY",
+   "rho": 0.99566
+  },
+  "IUSG": {
+   "kept": "SPYG",
+   "rho": 0.99522
+  },
+  "IUSV": {
+   "kept": "IVE",
+   "rho": 0.99694
+  },
+  "IVOG": {
+   "kept": "IJK",
+   "rho": 0.99086
+  },
+  "IVOO": {
+   "kept": "IJH",
+   "rho": 0.99901
+  },
+  "IVOV": {
+   "kept": "IJJ",
+   "rho": 0.99488
+  },
+  "IVV": {
+   "kept": "SPY",
+   "rho": 0.99916
+  },
+  "IVW": {
+   "kept": "SPYG",
+   "rho": 0.9963
+  },
+  "IWB": {
+   "kept": "SPY",
+   "rho": 0.99727
+  },
+  "IWL": {
+   "kept": "SPY",
+   "rho": 0.99241
+  },
+  "IWV": {
+   "kept": "SPY",
+   "rho": 0.99459
+  },
+  "IWY": {
+   "kept": "IWF",
+   "rho": 0.99755
+  },
+  "IYE": {
+   "kept": "XLE",
+   "rho": 0.99814
+  },
+  "IYH": {
+   "kept": "XLV",
+   "rho": 0.9935
+  },
+  "IYY": {
+   "kept": "SPY",
+   "rho": 0.996
+  },
+  "JEMA": {
+   "kept": "EEM",
+   "rho": 0.99148
+  },
+  "JHML": {
+   "kept": "DFAC",
+   "rho": 0.99112
+  },
+  "JIRE": {
+   "kept": "EFA",
+   "rho": 0.99416
+  },
+  "KBE": {
+   "kept": "KRE",
+   "rho": 0.9927
+  },
+  "MDY": {
+   "kept": "IJH",
+   "rho": 0.99963
+  },
+  "MDYG": {
+   "kept": "IJK",
+   "rho": 0.99844
+  },
+  "MDYV": {
+   "kept": "IJJ",
+   "rho": 0.99661
+  },
+  "MGC": {
+   "kept": "SPY",
+   "rho": 0.99253
+  },
+  "MGK": {
+   "kept": "VUG",
+   "rho": 0.99272
+  },
+  "PRF": {
+   "kept": "FNDX",
+   "rho": 0.99178
+  },
+  "PXF": {
+   "kept": "FNDF",
+   "rho": 0.99509
+  },
+  "QQQM": {
+   "kept": "QQQ",
+   "rho": 0.99977
+  },
+  "RING": {
+   "kept": "GDX",
+   "rho": 0.99528
+  },
+  "RSSL": {
+   "kept": "IWM",
+   "rho": 0.99235
+  },
+  "SCHB": {
+   "kept": "SPY",
+   "rho": 0.99537
+  },
+  "SCHE": {
+   "kept": "VWO",
+   "rho": 0.99634
+  },
+  "SCHK": {
+   "kept": "SPY",
+   "rho": 0.9968
+  },
+  "SCHX": {
+   "kept": "SPY",
+   "rho": 0.99695
+  },
+  "SLYG": {
+   "kept": "IJT",
+   "rho": 0.99845
+  },
+  "SLYV": {
+   "kept": "IJS",
+   "rho": 0.99787
+  },
+  "SOXQ": {
+   "kept": "SMH",
+   "rho": 0.9904
+  },
+  "SPDW": {
+   "kept": "VEA",
+   "rho": 0.99837
+  },
+  "SPEM": {
+   "kept": "VWO",
+   "rho": 0.99595
+  },
+  "SPGM": {
+   "kept": "VT",
+   "rho": 0.99514
+  },
+  "SPMD": {
+   "kept": "IJH",
+   "rho": 0.99538
+  },
+  "SPSM": {
+   "kept": "IJR",
+   "rho": 0.99866
+  },
+  "SPTM": {
+   "kept": "SPY",
+   "rho": 0.99696
+  },
+  "SPYM": {
+   "kept": "SPY",
+   "rho": 0.99966
+  },
+  "SPYX": {
+   "kept": "SPY",
+   "rho": 0.99537
+  },
+  "USCL": {
+   "kept": "USCA",
+   "rho": 0.99822
+  },
+  "USPX": {
+   "kept": "SPY",
+   "rho": 0.99001
+  },
+  "VCR": {
+   "kept": "XLY",
+   "rho": 0.99038
+  },
+  "VDE": {
+   "kept": "XLE",
+   "rho": 0.99585
+  },
+  "VEU": {
+   "kept": "VXUS",
+   "rho": 0.99827
+  },
+  "VFH": {
+   "kept": "XLF",
+   "rho": 0.99453
+  },
+  "VGT": {
+   "kept": "XLK",
+   "rho": 0.99194
+  },
+  "VIOG": {
+   "kept": "IJT",
+   "rho": 0.99578
+  },
+  "VIOO": {
+   "kept": "IJR",
+   "rho": 0.99857
+  },
+  "VIOV": {
+   "kept": "IJS",
+   "rho": 0.99556
+  },
+  "VIS": {
+   "kept": "XLI",
+   "rho": 0.99023
+  },
+  "VONE": {
+   "kept": "SPY",
+   "rho": 0.99624
+  },
+  "VONG": {
+   "kept": "IWF",
+   "rho": 0.99894
+  },
+  "VONV": {
+   "kept": "IWD",
+   "rho": 0.99898
+  },
+  "VOO": {
+   "kept": "SPY",
+   "rho": 0.99956
+  },
+  "VOOG": {
+   "kept": "SPYG",
+   "rho": 0.99654
+  },
+  "VOOV": {
+   "kept": "IVE",
+   "rho": 0.99687
+  },
+  "VOTE": {
+   "kept": "SPY",
+   "rho": 0.99302
+  },
+  "VPU": {
+   "kept": "XLU",
+   "rho": 0.99658
+  },
+  "VTHR": {
+   "kept": "SPY",
+   "rho": 0.99202
+  },
+  "VTI": {
+   "kept": "SPY",
+   "rho": 0.99513
+  },
+  "VTWG": {
+   "kept": "IWO",
+   "rho": 0.99839
+  },
+  "VTWO": {
+   "kept": "IWM",
+   "rho": 0.9983
+  },
+  "VTWV": {
+   "kept": "IWN",
+   "rho": 0.99714
+  },
+  "VV": {
+   "kept": "SPY",
+   "rho": 0.99776
+  },
+  "XSOE": {
+   "kept": "EEM",
+   "rho": 0.99335
+  }
+ }
+}

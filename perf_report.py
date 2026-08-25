@@ -21,6 +21,7 @@ import console
 import exit_rules as er
 import history
 import mailer
+import tracks
 import stops
 import trade_sim as ts
 
@@ -388,7 +389,11 @@ def fetch_fx(start: str, end: str) -> dict:
 def main():
     console.force_utf8()
     p = argparse.ArgumentParser(description="가상매매 성과 누적 리포트")
-    p.add_argument("--history", default="history/*.csv")
+    p.add_argument("--track", choices=sorted(tracks.TRACKS), default="stocks",
+                   help="리포트를 낼 트랙 (기본: stocks). 아카이브 경로와 "
+                        "리포트 파일명이 트랙마다 다르다")
+    p.add_argument("--history", default=None,
+                   help="아카이브 glob (기본: 트랙의 아카이브)")
     p.add_argument("--out-dir", default="reports")
     p.add_argument("--capital", type=int, default=CAPITAL_KRW)
     p.add_argument("--mail", action="store_true",
@@ -397,10 +402,13 @@ def main():
                    help="목표가 도달 시 익절한 결과로 리포트를 낸다")
     args = p.parse_args()
 
+    label = tracks.paths(args.track)["label"]
+    history_glob = args.history or tracks.history_glob(args.track)
+
     params = er.Params(use_target=args.use_target)
-    result = backtest.run(args.history, params)
+    result = backtest.run(history_glob, params)
     if not result["dates"]:
-        raise SystemExit("아카이브가 비어 있다")
+        raise SystemExit(f"아카이브가 비어 있다: {history_glob}")
 
     # 첫 진입일이 환율 휴일이어도 소급할 값이 있도록 10일 앞에서 시작한다.
     fx_start = (datetime.strptime(result["dates"][0], "%Y-%m-%d")
@@ -410,17 +418,22 @@ def main():
 
     built = build_rows(result, fx, args.capital, params=params)
     stamp = history.kst_now().strftime("%Y-%m-%d")
-    path = Path(args.out_dir) / f"perf_{stamp}.xlsx"
+    path = tracks.report_path(args.track, args.out_dir, stamp)
     write_xlsx(path, built)
 
     body = summary_text(built["summary"])
-    print(f"{path} 작성 완료")
+    print(f"{path} 작성 완료 ({label})")
     print(body)
 
     if args.mail:
         # 발송 실패를 삼키지 않는다. 조용히 안 보내는 것보다 잡이 실패하는
         # 편이 낫다 - fetch_fx 가 고정환율로 대체하지 않는 것과 같다.
-        subject = f"[성과리포트] {stamp} (KST)"
+        #
+        # 제목에 트랙을 넣는다. 두 리포트가 같은 날 도착하는데 제목이 같으면
+        # 어느 쪽인지 열어 봐야 안다.
+        subject = f"[성과리포트·{label}] {stamp} (KST)"
+        # 본문은 콘솔에 찍은 것 그대로 + 첨부 안내다. 트랙 표시를 본문 앞에
+        # 덧붙이면 그 관계가 깨진다 - 제목과 파일명에 이미 들어 있다.
         mailer.send(subject, f"{body}\n\n상세는 첨부된 {path.name} 참고",
                     [path], **mailer.creds_from_env())
         print(f"메일 발송 완료: {subject}")

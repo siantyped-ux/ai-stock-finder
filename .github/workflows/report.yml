@@ -50,7 +50,7 @@ jobs:
       # 환경에서 조용히 UTC 를 KST 라고 찍으므로 오프셋으로 계산한다.
       # kst_date 를 리포트보다 먼저 찍는 것은 메일 발송이 실패해도 artifact
       # 이름이 비지 않아야 하기 때문이다.
-      - name: Build and mail the performance report
+      - name: Build and mail the stock performance report
         id: build
         env:
           SMTP_USER: ${{ secrets.SMTP_USER }}
@@ -58,7 +58,27 @@ jobs:
           MAIL_TO: ${{ secrets.MAIL_TO }}
         run: |
           echo "kst_date=$(date -u -d '+9 hours' +'%Y-%m-%d')" >> "$GITHUB_OUTPUT"
-          python perf_report.py --mail
+          python perf_report.py --track stocks --mail
+
+      # ETF 는 별도 아카이브(history_etf/)를 읽어 별도 파일(perf_etf_<날짜>.xlsx)
+      # 로 나가고 메일 제목도 갈린다. 두 트랙은 점수 척도가 달라 한 리포트에
+      # 합치면 승률·평균이 섞여 아무 뜻도 없는 수가 된다.
+      #
+      # continue-on-error 인 것은 스캔 쪽과 같은 이유다. ETF 가 여기서 죽어도
+      # 앞서 만들어진 주식 리포트는 artifact 로 올라가야 한다. 실패 자체는
+      # 업로드가 끝난 뒤 마지막 스텝에서 잡 결과로 올려 알림에 태운다.
+      #
+      # ETF 아카이브는 2026-08-25 분리 시작이라 주식보다 이력이 짧다. 표본이
+      # 얇다는 것은 리포트 요약 시트의 경고가 그대로 말해 준다.
+      - name: Build and mail the ETF performance report
+        id: build_etf
+        continue-on-error: true
+        env:
+          SMTP_USER: ${{ secrets.SMTP_USER }}
+          SMTP_PASSWORD: ${{ secrets.SMTP_PASSWORD }}
+          MAIL_TO: ${{ secrets.MAIL_TO }}
+        run: |
+          python perf_report.py --track etf --mail
 
       # 저장소가 public 이라 리포트를 커밋하지 않는다. 손익 금액이 영구히
       # 공개 이력에 남기 때문이다. 대신 artifact 로만 올린다 - 90일 뒤
@@ -71,10 +91,20 @@ jobs:
         if: always()
         uses: actions/upload-artifact@v7
         with:
+          # 두 트랙 리포트가 한 artifact 에 담긴다. 파일명 접두사가 달라
+          # (perf_ / perf_etf_) 서로 덮어쓰지 않는다.
           name: perf-report-${{ steps.build.outputs.kst_date }}
           path: reports/*.xlsx
           retention-days: 90
           if-no-files-found: error
+
+      # 업로드가 끝난 뒤에 올린다. 여기서 실패시켜야 ETF 가 죽은 것을 알림이
+      # 잡으면서도 주식 리포트는 이미 저장돼 있다.
+      - name: Fail if the ETF report failed
+        if: steps.build_etf.outcome == 'failure'
+        run: |
+          echo "::error::ETF 리포트 실패. 주식 리포트는 정상 발송됐습니다."
+          exit 1
 
   # 리포트가 실패하면 그날 성과 스냅샷이 비는데, 스캔과 달리 원천 데이터는
   # 남아 있으므로 재실행으로 복구된다. 그래도 조용히 넘어가면 며칠씩 비는
@@ -131,6 +161,9 @@ jobs:
             빠진 것이고, 인증 오류면 앱 비밀번호가 폐기된 것입니다.
           - **artifact 업로드 실패** — \`if-no-files-found: error\` 이므로
             \`reports/\` 가 비면 여기서 멈춥니다. 앞선 빌드 스텝의 로그를 보세요.
+          - **ETF 리포트만 실패** — \`ETF 리포트 실패\` 가 보이면 주식 리포트는
+            정상 발송된 것입니다. \`history_etf/\` 가 비었는지 먼저 보세요 -
+            ETF 트랙 스캔이 실패한 날은 그 아카이브가 없어 리포트도 못 만듭니다.
           EOB
 
       - name: Open an issue for the missing report

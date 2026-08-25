@@ -27,6 +27,7 @@ on:
       - 'index.html'
       - 'stock_finder_dashboard.html'
       - 'dashboard_data.js'
+      - 'dashboard_data_etf.js'
 
 permissions:
   contents: write
@@ -70,7 +71,31 @@ jobs:
           MIN_TOTAL: ${{ github.event.inputs.min_total || '70' }}
         run: |
           python stock_finder.py \
+            --track stocks \
             --min-us-cap "$MIN_US_CAP" \
+            --min-total "$MIN_TOTAL" \
+            --sleep 0.2 \
+            --workers 4
+
+      # ETF 는 주식과 점수 척도가 달라(총점 표준편차 15.1 대 10.3) 한 목록에
+      # 두면 상위를 쓸어간다. 유니버스부터 갈라 각자의 순위를 낸다.
+      #
+      # continue-on-error 인 것은 순서 때문이다. ETF 가 여기서 죽어도 앞서
+      # 끝난 주식 트랙 결과는 커밋해야 한다 - 시점 데이터라 그날 스코어를
+      # 놓치면 영구히 복구할 수 없다. 실패 자체는 커밋이 끝난 뒤 마지막
+      # 스텝에서 워크플로 결과로 올린다.
+      - name: Run the ETF track scan
+        id: etf_scan
+        continue-on-error: true
+        env:
+          FMP_API_KEY: ${{ secrets.FMP_API_KEY }}
+          FRED_API_KEY: ${{ secrets.FRED_API_KEY }}
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          MIN_ETF_AUM: ${{ github.event.inputs.min_etf_aum || '1e9' }}
+          MIN_TOTAL: ${{ github.event.inputs.min_total || '70' }}
+        run: |
+          python stock_finder.py \
+            --track etf \
             --min-etf-aum "$MIN_ETF_AUM" \
             --min-total "$MIN_TOTAL" \
             --sleep 0.2 \
@@ -80,7 +105,7 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add dashboard_data.js history/
+          git add dashboard_data.js dashboard_data_etf.js history/ history_etf/
           if git diff --staged --quiet; then
             echo "No changes to commit"
           else
@@ -105,7 +130,16 @@ jobs:
           path: |
             scan_log.txt
             dashboard_data.js
+            dashboard_data_etf.js
           retention-days: 7
+
+      # 커밋이 끝난 뒤에 올린다. 여기서 실패시켜야 ETF 가 죽은 것을 알림이
+      # 잡으면서도 주식 트랙 결과는 이미 저장돼 있다.
+      - name: Fail if the ETF track scan failed
+        if: steps.etf_scan.outcome == 'failure'
+        run: |
+          echo "::error::ETF 트랙 스캔 실패. 주식 트랙 결과는 커밋됐습니다."
+          exit 1
 
   deploy-pages:
     needs: scan

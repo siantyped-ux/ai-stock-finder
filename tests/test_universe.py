@@ -258,6 +258,101 @@ def test_dominant_sector_threshold_is_inclusive():
     assert sf.dominant_sector(w) == "미분류"
 
 
+# ─── 트랙 분리 ────────────────────────────────────────────────
+#
+# 주식과 ETF 는 척도가 다르다. 한 유니버스에 두면 ETF 분산이 커서 상위를
+# 쓸어가고(2026-08-25 실측: 총점 상위 20 이 100% ETF), 주식은 20위 밖으로
+# 밀린다. 유니버스·아카이브·대시보드를 트랙별로 가른다.
+
+def test_stock_track_excludes_etfs(monkeypatch):
+    monkeypatch.setattr(sf, "fetch_us_universe",
+                        lambda **kw: [_u("AAPL", at="STOCK")])
+    monkeypatch.setattr(sf, "fetch_us_etf_universe",
+                        lambda **kw: [_u("SPY")])
+
+    got = sf.load_universe(track="stocks")
+
+    assert [row[4] for row in got] == ["STOCK"]
+
+
+def test_etf_track_excludes_stocks(monkeypatch):
+    monkeypatch.setattr(sf, "fetch_us_universe",
+                        lambda **kw: [_u("AAPL", at="STOCK")])
+    monkeypatch.setattr(sf, "fetch_us_etf_universe",
+                        lambda **kw: [_u("SPY")])
+
+    got = sf.load_universe(track="etf")
+
+    assert [row[0] for row in got] == ["SPY"]
+
+
+def test_the_etf_track_still_drops_duplicates(monkeypatch):
+    monkeypatch.setattr(sf, "fetch_us_etf_universe",
+                        lambda **kw: [_u("SPY"), _u("VOO")])
+    monkeypatch.setattr(sf.etf_dedupe, "excluded_tickers", lambda *a: {"VOO"})
+
+    got = sf.load_universe(track="etf")
+
+    assert [row[0] for row in got] == ["SPY"]
+
+
+def test_an_unknown_track_is_rejected():
+    # 오타를 조용히 주식 트랙으로 처리하면 ETF 스캔이 주식 아카이브를 덮어쓴다.
+    with pytest.raises(ValueError):
+        sf.load_universe(track="etfs")
+
+
+@pytest.mark.parametrize("track,history,dashboard", [
+    ("stocks", "history", "dashboard_data.js"),
+    ("etf", "history_etf", "dashboard_data_etf.js"),
+])
+def test_each_track_writes_to_its_own_paths(track, history, dashboard):
+    paths = sf.track_paths(track)
+    assert paths["history"] == history
+    assert paths["dashboard"] == dashboard
+
+
+def test_the_two_tracks_use_different_globals():
+    """대시보드가 두 파일을 함께 읽는다. 전역 이름이 같으면 덮어쓴다."""
+    assert sf.track_paths("stocks")["suffix"] == ""
+    assert sf.track_paths("etf")["suffix"] == "_ETF"
+
+
+def test_track_paths_rejects_an_unknown_track():
+    with pytest.raises(ValueError):
+        sf.track_paths("nope")
+
+
+# ─── ETF 복제본 제외 ──────────────────────────────────────────
+
+def _u(ticker, at="ETF"):
+    return (ticker, f"{ticker} Fund", "US", "미분류", at, "NYSE")
+
+
+def test_duplicate_etfs_are_removed_from_the_universe():
+    universe = [_u("SPY"), _u("VOO"), _u("QQQ")]
+
+    got = sf.drop_duplicate_etfs(universe, {"VOO"})
+
+    assert [row[0] for row in got] == ["SPY", "QQQ"]
+
+
+def test_stocks_are_never_removed_by_the_etf_list():
+    # 티커가 겹칠 일은 없지만, 제외 목록이 주식을 건드리면 유니버스가 조용히
+    # 줄어든다. 자산군을 확인하고 지운다.
+    universe = [_u("VOO", at="STOCK"), _u("VOO")]
+
+    got = sf.drop_duplicate_etfs(universe, {"VOO"})
+
+    assert [row[4] for row in got] == ["STOCK"]
+
+
+def test_an_empty_exclusion_list_changes_nothing():
+    universe = [_u("SPY"), _u("VOO")]
+
+    assert sf.drop_duplicate_etfs(universe, set()) == universe
+
+
 @pytest.mark.parametrize("name", [
     "CORP_CODE_MAP", "DART_KEY", "DART_BASE",
     "load_dart_corpcode", "_dart_get", "fetch_dart_filing_signals",

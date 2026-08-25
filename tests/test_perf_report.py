@@ -463,10 +463,13 @@ def test_mail_flag_sends_the_same_body_that_gets_printed(monkeypatch, tmp_path,
     printed = capsys.readouterr().out
     assert len(sent) == 1
     (subject, body, attachments), kw = sent[0]
-    assert subject.startswith("[성과리포트]")
+    # 제목에 트랙이 들어간다. 두 리포트가 같은 날 도착하는데 제목이 같으면
+    # 어느 쪽인지 열어 봐야 안다.
+    assert subject.startswith("[성과리포트·미국 주식]")
 
     written = list(tmp_path.glob("*.xlsx"))
     assert len(written) == 1
+    assert written[0].name.startswith("perf_2026")
 
     # 메일 본문은 "콘솔에 찍힌 본문 + 첨부 안내" 여야 한다. 둘이 갈라지면
     # summary_text() 를 공유하는 이유가 사라진다 - 부분 문자열 두 개가
