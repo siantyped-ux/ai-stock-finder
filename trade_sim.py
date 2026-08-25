@@ -98,6 +98,10 @@ class Trade:
     # 진입일 스코어로 확정한 익절가. 목표가 없는 포지션은 None 이다.
     # 기본값을 두지 않는다 - mark_price 와 같은 규약이다.
     target_price: Optional[float]
+    # 산 주 수. 자본 제약이 있을 때만 채워진다. 없으면 None 이다 - 0 이나 1 로
+    # 채우면 "안 샀다" 와 "한 주 샀다" 가 구분되지 않는다. 여기만 기본값을
+    # 두는 것은 자본 없는 경로가 이 값을 모르기 때문이다.
+    qty: Optional[int] = None
 
 
 @dataclass(frozen=True)
@@ -140,7 +144,8 @@ def consume(state: EntryState) -> EntryState:
 
 def make_trade(pos: er.Position, market: str, source: str,
                 exit_price: float, exit_date: Optional[str],
-                exit_reason: Optional[str], costs: Costs) -> Trade:
+                exit_reason: Optional[str], costs: Costs,
+                qty: Optional[int] = None) -> Trade:
     gross = (exit_price - pos.entry_price) / pos.r_unit
     cost = cost_r(pos.entry_price, exit_price, pos.r_unit, market, costs)
     return Trade(
@@ -163,6 +168,7 @@ def make_trade(pos: er.Position, market: str, source: str,
         high_since_entry=pos.high_since_entry,
         stop=pos.stop,
         target_price=pos.target_price,
+        qty=qty,
     )
 
 
