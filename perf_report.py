@@ -209,6 +209,11 @@ def build_rows(result: dict, costs: ts.Costs = None,
             "open_net_usd": sum(r["net_usd"] for r in opened),
             "capital": result.get("capital"),
             "cash": result.get("cash"),
+            # 자본이 잘라낸 시그널. 상한이 조용히 기회를 죽이면 결과만
+            # 보고는 알 수 없다 - 백테스트 콘솔에만 있고 매일 보는 리포트에
+            # 없으면 없는 것과 같다.
+            "skipped_cash_n": len(result.get("skipped_cash") or []),
+            "skipped_cash": ", ".join(result.get("skipped_cash") or []),
             "used_pct": (
                 (result["capital"] - result["cash"]) / result["capital"] * 100.0
                 if result.get("capital") else None),
@@ -313,9 +318,13 @@ def _track_line(label: str, s: dict) -> str:
             f"평균 {s['avg_net_pct']:+.2f}%"
             if s["closed_n"] else "청산 0건")
     total = s["net_usd"] + s["open_net_usd"]
+    # 거절이 0 이면 줄이지 않는다. 매일 0 을 찍으면 눈이 죽어 진짜 거절이
+    # 났을 때도 안 읽힌다.
+    dropped = (f" · 현금부족 {s['skipped_cash_n']}종목 미진입"
+               if s.get("skipped_cash_n") else "")
     return (f"  {label:5s} ${total:+,.2f}  "
             f"(실현 ${s['net_usd']:+,.2f} · 미실현 ${s['open_net_usd']:+,.2f}"
-            f" · {note} · 보유 {s['open_n']}종목)")
+            f" · {note} · 보유 {s['open_n']}종목{dropped})")
 
 
 def summary_text(by_track: dict) -> str:
@@ -398,6 +407,11 @@ def _write_summary(ws, by_track: dict) -> None:
             ("잔여 현금($)", t["cash"]),
             ("자본 사용률(%)", t["used_pct"]),
         ]
+        if t["skipped_cash_n"]:
+            lines += [
+                ("현금부족 미진입", t["skipped_cash_n"]),
+                ("현금부족 미진입 종목", t["skipped_cash"]),
+            ]
 
     lines += [
         ("", ""),

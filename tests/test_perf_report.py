@@ -662,3 +662,44 @@ def test_the_summary_states_the_sizing_rule(tmp_path):
     assert "1%" in labels["거래당 리스크"]
     assert "20%" in labels["투입 상한"]
     assert "종목당 최대 진입금액($)" not in labels
+
+
+# --- 현금부족으로 버린 시그널 ------------------------------------------------
+# $10,000 에 BUY 가 수십 개면 거절이 규칙이지 예외가 아니다. 요약이 이걸
+# 말하지 않으면 매일 보는 산출물에서 버려진 기회가 통째로 안 보인다.
+
+def test_the_summary_counts_the_signals_cash_dropped():
+    built = pr.build_rows(_result([_trade()], cash=0, capital=10_000,
+                                  skipped_cash=["AR", "INTU", "VLO"]))
+
+    assert built["summary"]["skipped_cash_n"] == 3
+    assert built["summary"]["skipped_cash"] == "AR, INTU, VLO"
+
+
+def test_the_summary_sheet_names_the_dropped_signals(tmp_path):
+    path = tmp_path / "r.xlsx"
+    _write(path, pr.build_rows(_result([_trade()], cash=0, capital=10_000,
+                                       skipped_cash=["AR", "INTU"])))
+
+    labels = {r[0].value: r[1].value
+              for r in load_workbook(path)["요약"].iter_rows()}
+
+    assert labels["현금부족 미진입"] == 2
+    assert labels["현금부족 미진입 종목"] == "AR, INTU"
+
+
+def test_the_mail_body_reports_what_cash_dropped():
+    built = pr.build_rows(_result([_trade()], cash=0, capital=10_000,
+                                  skipped_cash=["AR", "INTU"]))
+
+    body = pr.summary_text({"stocks": built, "etf": None})
+
+    assert "현금부족 2종목" in body
+
+
+def test_no_cash_shortage_says_nothing():
+    """거절이 없으면 줄을 만들지 않는다. 0 을 매일 찍으면 눈이 죽는다."""
+    built = pr.build_rows(_result([_trade()], cash=8_000, capital=10_000))
+
+    assert built["summary"]["skipped_cash_n"] == 0
+    assert "현금부족" not in pr.summary_text({"stocks": built, "etf": None})
