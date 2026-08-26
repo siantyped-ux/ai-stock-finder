@@ -224,6 +224,7 @@ def run(pattern: str = "history/*.csv", params: er.Params = None,
                                          and limits.max_correlation >= 1.0)))
     rejected = {"capacity": 0, "correlation": 0, "cash": 0}
     rejected_pairs = []
+    rejected_cash = []
     cash = capital = None
     if unconstrained:
         for ticker, prepared in prepared_by_ticker.items():
@@ -239,11 +240,14 @@ def run(pattern: str = "history/*.csv", params: er.Params = None,
         trades = out["trades"]
         rejected = out["rejected"]
         rejected_pairs = out["rejected_pairs"]
+        rejected_cash = out.get("rejected_cash") or []
         cash = out["cash"]
         capital = out["capital"]
 
     dates = sorted({r["date"] for r in rows})
     sources = [r["source"] for r in rows]
+    traded_tickers = {t.ticker for t in trades}
+    skipped_cash = {t for _, t in rejected_cash} - traded_tickers
     return {
         "trades": trades,
         "summary": ts.summarize(trades),
@@ -257,8 +261,14 @@ def run(pattern: str = "history/*.csv", params: er.Params = None,
         "venues": venues,
         # 전환은 났지만 진입할 세션이 아직 없어 트레이드가 안 생긴 종목.
         # 이 줄이 없으면 "후보 N 인데 트레이드 M" 이 결함처럼 보인다.
+        # 현금부족으로 잘린 종목은 빼야 한다 - 그쪽은 봉이 있었는데도 못 산
+        # 것이라 다음 세션을 기다리는 중이 아니다. 섞으면 죽은 시그널이
+        # 내일 진입 후보처럼 보인다.
         "never_entered": sorted(candidates - {t.ticker for t in trades}
-                                - set(failed)),
+                                - set(failed) - skipped_cash),
+        # 봉이 있었는데 돈이 모자라 끝내 못 산 종목. 나중에 자리가 나
+        # 진입했다면 트레이드가 있으므로 여기 없다.
+        "skipped_cash": sorted(skipped_cash),
         # 상한이 조용히 기회를 죽이면 알 수 없으므로 무엇을 왜 막았는지 센다
         "rejected": rejected,
         "rejected_pairs": rejected_pairs,
@@ -290,12 +300,16 @@ def report(result: dict) -> None:
     if result["failed"]:
         print(f"  시세 조회 실패: {', '.join(result['failed'])}")
 
-    traded = len(result["candidates"]) - len(result["never_entered"])         - len(result["failed"])
+    # 트레이드가 진입 종목 수를 정한다. 후보에서 빼는 식으로 세면 진입하지
+    # 못한 이유가 하나 늘 때마다 이 숫자가 조용히 틀린다.
+    traded = len({t.ticker for t in result["trades"]})
     print(f"  BUY 후보 {len(result['candidates'])}종목 중 {traded}종목 진입")
     if result["newest_bar"]:
         print(f"  최신 봉 {result['newest_bar']} (아카이브 마지막 {dates[-1]})")
     if result["never_entered"]:
         print(f"  전환 후 세션이 없어 대기 중: {', '.join(result['never_entered'])}")
+    if result.get("skipped_cash"):
+        print(f"  현금이 모자라 건너뜀: {', '.join(result['skipped_cash'])}")
 
     # 상한이 조용히 기회를 죽이면 결과만 보고는 알 수 없다
     rej = result.get("rejected") or {}

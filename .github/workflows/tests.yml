@@ -1,0 +1,46 @@
+name: Tests
+
+# 테스트가 로컬에서만 돌고 있었다. 이 저장소에서 회귀는 늦게 알아차리면
+# 되돌릴 수가 없다 - 스캐너가 매일 07:00 KST 에 그날의 시세를 아카이브에
+# 적는데, 그 실행이 깨지면 그날 시점 데이터는 나중에 다시 받을 수 없다.
+# 그래서 main 에 닿기 전에 잡는다.
+#
+# 시크릿을 주지 않는다. 테스트는 네트워크도 API 키도 쓰지 않으므로
+# (외부 호출은 전부 monkeypatch 로 막혀 있다) 키 없이 도는 것 자체가
+# 그 사실을 검증한다. 키가 있어야 통과하는 테스트가 생기면 여기서 터진다.
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+concurrency:
+  # 같은 브랜치에 연달아 밀어넣으면 앞 실행의 결과는 볼 이유가 없다.
+  group: tests-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  pytest:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v7
+
+      - name: Setup Python 3.11
+        uses: actions/setup-python@v7
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Run tests
+        run: python -m pytest -q

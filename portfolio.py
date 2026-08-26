@@ -145,6 +145,9 @@ def simulate(rows_by_ticker: dict, bars_by_ticker: dict, markets: dict,
     qty_by_ticker: dict = {}
     rejected = {"capacity": 0, "correlation": 0, "cash": 0}
     rejected_pairs = []
+    # 현금부족은 티커를 남긴다. 건수만 세면 백테스트가 이것을 "아직 진입할
+    # 세션이 없는 종목" 과 구별하지 못해 죽은 시그널을 대기 중으로 보여준다.
+    rejected_cash = []
 
     def bar_for(ticker: str, date: str, total=None):
         bar = bars_by_ticker.get(ticker, {}).get(date)
@@ -220,6 +223,7 @@ def simulate(rows_by_ticker: dict, bars_by_ticker: dict, markets: dict,
                 qty = sizing.shares(cash, account, bar.open, pos.r_unit)
                 if qty < 1:
                     rejected["cash"] += 1
+                    rejected_cash.append((date, ticker))
                     continue
                 cash -= qty * bar.open
                 qty_by_ticker[ticker] = qty
@@ -260,6 +264,7 @@ def simulate(rows_by_ticker: dict, bars_by_ticker: dict, markets: dict,
         "summary": ts.summarize(trades),
         "rejected": rejected,
         "rejected_pairs": rejected_pairs,
+        "rejected_cash": rejected_cash,
         # 리포트가 자본 사용률을 낸다. account 가 없으면 둘 다 None 이다.
         "cash": cash,
         "capital": account.capital if account else None,

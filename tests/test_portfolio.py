@@ -372,3 +372,23 @@ def test_without_an_account_nothing_changes():
 
     assert got["trades"][0].qty is None
     assert got["cash"] is None
+
+
+def test_cash_rejection_names_the_ticker():
+    """건수만 세면 백테스트가 "세션이 없어 대기 중" 과 구별하지 못한다.
+
+    현금부족은 봉이 있는데도 못 산 것이라 다음 날 진입 후보가 아니다.
+    """
+    r = rows(["HOLD", "BUY", "BUY"])
+    b = bars(DATES, [100, 100, 105, 110, 115])
+    names = ["A", "B", "C", "D", "E", "F"]
+
+    got = pf.simulate({n: r for n in names}, {n: b for n in names},
+                      {n: "US" for n in names},
+                      account=sizing.Account(capital=10_000))
+
+    # 총점이 같으면 티커 순으로 자리를 준다. 여섯 번째 F 가 남는다.
+    # 날짜는 진입을 시도한 봉이다 - BUY 를 본 그 봉에서 판정한다.
+    assert got["rejected_cash"] == [(DATES[1], "F")]
+    # 건수와 목록이 어긋나면 둘 중 하나가 거짓말이다.
+    assert len(got["rejected_cash"]) == got["rejected"]["cash"]

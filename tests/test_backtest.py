@@ -308,3 +308,61 @@ def test_without_an_account_the_result_has_no_capital(monkeypatch):
 
     assert result["cash"] is None
     assert result["capital"] is None
+
+
+# --- 진입하지 못한 이유를 구별한다 ------------------------------------------
+# 자본 제약이 생기기 전에는 이유가 하나뿐이라 한 줄이면 됐다. 이제는 "봉이
+# 아직 없다"(내일 후보)와 "돈이 없었다"(죽은 시그널)가 섞인다.
+
+def _archive_two_names():
+    return [{"ticker": t, "market": "US", "date": "2026-08-01", "total": "80",
+             "signal": "BUY", "source": "live", "target": "10",
+             "asset_type": "STOCK", "exchange": "NYSE"}
+            for t in ("RICH", "POOR")]
+
+
+def _stub_run(monkeypatch, rejected_cash):
+    import sizing
+    bar = bt.er.Bar("2026-08-01", 100.0, 101.0, 99.0, 100.0, 2.0)
+    monkeypatch.setattr(bt, "load_archive", lambda pattern: _archive_two_names())
+    monkeypatch.setattr(bt, "fetch_bars", lambda ticker: {"2026-08-01": bar})
+    monkeypatch.setattr(bt.pf, "simulate", lambda *a, **kw: {
+        "trades": [bt.ts.Trade(
+            ticker="RICH", market="US", source="live",
+            entry_date="2026-08-01", entry_price=100.0, r_unit=6.0,
+            exit_date=None, exit_price=None, exit_reason=None,
+            bars_held=1, is_open=True, gross_r=0.0, cost_r=0.0,
+            net_r=0.0, mark_price=100.0, initial_stop=94.0,
+            high_since_entry=101.0, stop=94.0, target_price=None,
+            qty=5)],
+        "rejected": {"capacity": 0, "correlation": 0,
+                     "cash": len(rejected_cash)},
+        "rejected_pairs": [], "rejected_cash": rejected_cash,
+        "cash": 0.0, "capital": 10_000})
+    return bt.run("x/*.csv", account=sizing.Account(capital=10_000))
+
+
+def test_a_cash_skipped_ticker_is_not_waiting_for_a_session(monkeypatch):
+    """봉이 있는데 못 산 종목은 내일 진입 후보가 아니다."""
+    result = _stub_run(monkeypatch, [("2026-08-01", "POOR")])
+
+    assert result["never_entered"] == []
+    assert result["skipped_cash"] == ["POOR"]
+
+
+def test_a_ticker_with_no_session_yet_still_waits(monkeypatch):
+    """현금부족이 아니면 예전처럼 대기 목록에 남는다."""
+    result = _stub_run(monkeypatch, [])
+
+    assert result["never_entered"] == ["POOR"]
+    assert result["skipped_cash"] == []
+
+
+def test_the_report_separates_the_two_reasons(monkeypatch, capsys):
+    bt.report(_stub_run(monkeypatch, [("2026-08-01", "POOR")]))
+
+    out = capsys.readouterr().out
+    assert "현금이 모자라 건너뜀: POOR" in out
+    assert "대기 중: POOR" not in out
+    # 진입 종목 수는 트레이드가 정한다.
+    assert "BUY 후보 2종목 중 1종목 진입" in out
