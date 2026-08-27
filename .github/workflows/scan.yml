@@ -159,9 +159,22 @@ jobs:
             --workers 4
 
       - name: Commit and push dashboard_data.js
+        env:
+          ETF_OUTCOME: ${{ steps.etf_scan.outcome }}
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          # ETF 트랙이 죽었으면 그 트랙의 대시보드는 커밋하지 않는다.
+          # _save_intermediate 가 중간 결과를 실제 dashboard_data_etf.js 에
+          # 쓰기 때문에, 완결성 가드에 걸려 죽은 뒤에도 잘린 파일이 남는다.
+          # 그대로 커밋하면 아카이브에는 그날 ETF 행이 없는데 대시보드만
+          # 부분 데이터로 배포된다 - 어제 것을 그대로 두는 편이 낫다.
+          if [ "$ETF_OUTCOME" = "failure" ]; then
+            echo "::warning::ETF 트랙 실패 - dashboard_data_etf.js 는 커밋하지 않습니다."
+            git checkout -- dashboard_data_etf.js || true
+          fi
+
           git add dashboard_data.js dashboard_data_etf.js history/ history_etf/
           if git diff --staged --quiet; then
             echo "No changes to commit"

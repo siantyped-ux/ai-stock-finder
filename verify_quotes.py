@@ -183,8 +183,16 @@ def report(label: str, symbols: list, rows_map: dict) -> dict:
     return summary
 
 
-def verdict(sess: str, stock: dict, etf: dict) -> None:
-    """실행 레이어에 쓸 수 있는지 최종 판정."""
+def verdict(sess: str, stock: dict, etf: dict) -> str:
+    """실행 레이어에 쓸 수 있는지 최종 판정.
+
+    'pass' / 'hold' / 'fail' 을 돌려준다. 호출부가 이 값으로 종료 코드를
+    정한다 - 판정을 화면에만 남기면 실패해도 워크플로가 초록으로 끝나고,
+    그동안 스캔은 계속 성공하면서 잘못된 가격을 아카이브에 쌓는다.
+
+    'hold' 는 실패가 아니다. 장외에는 호가창이 비어 판정 자체가 불가능하고,
+    그것 때문에 알림이 울리면 매일 오는 알림은 곧 무시된다.
+    """
     print("\n" + "=" * 68)
     print("  판정")
     print("=" * 68)
@@ -193,12 +201,12 @@ def verdict(sess: str, stock: dict, etf: dict) -> None:
         print(f"  [보류] 지금은 {sess} 이라 판정할 수 없다.")
         print("         장외에는 호가창이 비어 스프레드가 구조적으로 벌어진다.")
         print("         정규장(KST 22:30~05:00)에 다시 실행할 것.")
-        return
+        return "hold"
 
     age = stock.get("age_median")
     if age is None:
         print("  [실패] timestamp 를 읽지 못했다.")
-        return
+        return "fail"
 
     if age > STALE_MINUTES:
         print(f"  [실패] 정규장인데 호가가 {age:.0f}분 전 값이다 "
@@ -206,7 +214,7 @@ def verdict(sess: str, stock: dict, etf: dict) -> None:
         print("         batch-aftermarket-quote 는 시간외 전용이다.")
         print("         -> FMP 로는 실행 레이어를 만들 수 없다. Polygon.io 또는")
         print("            IBKR 로 가야 한다.")
-        return
+        return "fail"
 
     print(f"  [통과] 정규장 중 호가가 갱신된다 (중앙 {age:.1f}분 전).")
     med = stock.get("spread_median")
@@ -226,9 +234,10 @@ def verdict(sess: str, stock: dict, etf: dict) -> None:
           f"/ ETF {etf.get('size_unit','?')}")
     print("\n         남는 한계: 최우선호가 1단계뿐이다. 10단계 잔량이 필요하면")
     print("         IBKR(실시간) 또는 Databento(과거 검증용)가 필요하다.")
+    return "pass"
 
 
-def main() -> None:
+def main() -> int:
     import argparse
     import glob
     p = argparse.ArgumentParser(description="FMP 호가 엔드포인트 검증")
@@ -249,7 +258,7 @@ def main() -> None:
         files = sorted(glob.glob("history/*.csv"))
         if not files:
             print("[!] history/*.csv 가 없다")
-            return
+            return 1
         archive = files[-1]
 
     sess, now_et = session_now()
@@ -264,15 +273,17 @@ def main() -> None:
     stocks, etfs = universe_symbols(archive)
     if not stocks and not etfs:
         print("[!] 아카이브를 읽지 못했다")
-        return
+        return 1
     if args.sample > 0:
         stocks, etfs = stocks[:args.sample], etfs[:args.sample]
     print(f"  표본: 주식 {len(stocks)} · ETF {len(etfs)}")
 
     s_sum = report("주식", stocks, fetch_quotes(stocks)) if stocks else {}
     e_sum = report("ETF ", etfs, fetch_quotes(etfs)) if etfs else {}
-    verdict(sess, s_sum, e_sum)
+    # 판정을 종료 코드로 올린다. 워크플로가 이 코드로 실패해야
+    # notify-failure 가 이슈와 메일을 띄운다.
+    return 1 if verdict(sess, s_sum, e_sum) == "fail" else 0
 
 
 if __name__ == "__main__":
-    main()
+    raise SystemExit(main())
