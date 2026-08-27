@@ -2,11 +2,20 @@ name: AI Stock Finder Auto Scan
 
 on:
   schedule:
-    # UTC 22:00 = KST 익일 07:00 (미국 장 마감 후, 한국 장 개장 전)
-    # 21:00 은 쓰지 않는다. 표준시(EST) 기간에 미국 마감 16:00 EST 가 정확히
-    # 21:00 UTC 라 버퍼가 0이 된다. 22:00 이면 서머타임·표준시 모두 여유가 있다.
-    # GitHub Actions 스케줄은 부하에 따라 5~30분 지연될 수 있음
-    - cron: '0 22 * * *'
+    # UTC 22:xx = KST 익일 07:xx (미국 장 마감 후, 한국 장 개장 전)
+    # 21시대는 쓰지 않는다. 표준시(EST) 기간에 미국 마감 16:00 EST 가 정확히
+    # 21:00 UTC 라 버퍼가 0이 된다. 22시대면 서머타임·표준시 모두 여유가 있다.
+    #
+    # 정각(:00)을 피해 :37 에 건다. 정각은 Actions 스케줄러가 가장 붐비는
+    # 슬롯이라 지연이 길고, 길다 못해 이벤트가 버려진다. 2026-08-26 에
+    # '0 22 * * *' 이 실제로 유실됐다 - 실행이 생성조차 되지 않았다. 그 직전
+    # 나흘의 시작 시각도 22:25 → 22:26 → 22:29 → 22:31 로 계속 밀리고 있었다.
+    - cron: '37 22 * * *'
+    # 따라잡기. 본 실행이 유실되면 이 실행이 같은 스캔을 돌린다. 스코어는
+    # 시점 데이터라 그날 놓치면 영구히 복구할 수 없으므로, 크론 하나에
+    # 하루치를 걸지 않는다. 이미 그날 아카이브가 있으면 guard 잡이 막는다.
+    # 01:17 UTC = 10:17 KST, 본 실행이 최대로 밀려도 끝나 있을 시각이다.
+    - cron: '17 1 * * *'
   workflow_dispatch:
     inputs:
       min_us_cap:
@@ -32,10 +41,58 @@ on:
 permissions:
   contents: write
 
+# 크론이 둘이 되었으니 겹치는 경우를 막아야 한다. 본 실행이 크게 밀려 따라잡기
+# 시각까지 물리면 같은 날을 두 번 스캔하고, 커밋 두 개가 서로 rebase 로 부딪친다.
+# cancel-in-progress 는 false 다 - 돌고 있는 스캔을 죽이면 그날 데이터를 잃는다.
+# 뒤에 온 실행은 기다렸다가 guard 에서 아카이브를 보고 스스로 빠진다.
+concurrency:
+  group: scan-${{ github.ref }}
+  cancel-in-progress: false
+
 jobs:
-  scan:
-    # push 이벤트에서는 스캔을 건너뛰고 배포만 수행 (schedule/workflow_dispatch에서만 스캔)
+  # 그날 스캔이 이미 돌았는지 본다. 따라잡기 크론이 멀쩡히 끝난 하루를 다시
+  # 돌지 않게 하는 것이 이 잡의 전부다. 판단 근거는 scan_due.py 머리말에 있다.
+  guard:
+    # push 이벤트에서는 스캔을 건너뛰고 배포만 수행한다. 여기서 걸러 두면
+    # scan 은 needs 로 따라 skip 된다.
     if: github.event_name != 'push'
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    outputs:
+      needed: ${{ steps.check.outputs.needed }}
+      kst_date: ${{ steps.check.outputs.kst_date }}
+
+    steps:
+      # main 을 명시한다. 따라잡기 실행이 봐야 하는 것은 본 실행이 방금 밀어
+      # 넣었을 수도 있는 아카이브라, 기본값(이벤트 시점 커밋)으로는 놓친다.
+      - name: Checkout repository
+        uses: actions/checkout@v7
+        with:
+          ref: main
+
+      - name: Setup Python 3.11
+        uses: actions/setup-python@v7
+        with:
+          python-version: '3.11'
+
+      # pip install 을 하지 않는다. scan_due.py 는 표준 라이브러리만 쓴다 -
+      # 의존성 설치가 깨진 날에도 이 판단은 서야 한다.
+      - name: Decide whether today's scan still has to run
+        id: check
+        env:
+          EVENT_NAME: ${{ github.event_name }}
+        run: python scan_due.py --archive history --event "$EVENT_NAME" >> "$GITHUB_OUTPUT"
+
+      # 따라잡기가 실제로 일을 했다면 본 실행이 유실된 것이다. 복구는 되지만
+      # 조용히 넘어가면 22:37 슬롯이 계속 버려지는 것을 모른 채 지나간다.
+      - name: Say that the primary schedule was missed
+        if: github.event.schedule == '17 1 * * *' && steps.check.outputs.needed == 'true'
+        run: |
+          echo "::warning::22:37 UTC 본 실행이 유실됐습니다. 따라잡기가 ${{ steps.check.outputs.kst_date }} (KST) 스캔을 대신 돌립니다."
+
+  scan:
+    needs: guard
+    if: needs.guard.outputs.needed == 'true'
     runs-on: ubuntu-latest
     timeout-minutes: 120
 
@@ -143,8 +200,11 @@ jobs:
 
   deploy-pages:
     needs: scan
-    # scan이 성공했거나(schedule/dispatch), skip되었을 때(push) 모두 배포
-    if: always() && (needs.scan.result == 'success' || needs.scan.result == 'skipped')
+    # scan 이 성공했거나(schedule/dispatch), push 로 skip 되었을 때 배포한다.
+    # skip 을 push 로 한정하는 것은 따라잡기 때문이다 - 그날 스캔이 이미 끝나
+    # guard 가 막은 실행은 배포할 새 데이터가 없다. 조건을 열어 두면 매일
+    # 같은 내용을 한 번씩 더 배포하게 된다.
+    if: always() && (needs.scan.result == 'success' || (needs.scan.result == 'skipped' && github.event_name == 'push'))
     runs-on: ubuntu-latest
     permissions:
       pages: write
