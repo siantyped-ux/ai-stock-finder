@@ -185,13 +185,15 @@ def universe_exit_dates(rows: list) -> dict:
 def run(pattern: str = "history/*.csv", params: er.Params = None,
         costs: ts.Costs = None, us_only: bool = False,
         entry_total: int = None, limits: pf.Limits = None,
-        start_date: str = None, account: sizing.Account = None) -> dict:
+        start_date: str = None, account: sizing.Account = None,
+        min_total: int = None) -> dict:
     """아카이브 전체를 시뮬레이션하고 트레이드·통계·커버리지를 돌려준다."""
     params = params or er.Params()
     costs = costs or ts.Costs()
 
     rows = filter_rows(load_archive(pattern), us_only=us_only,
-                       entry_total=entry_total, start_date=start_date)
+                       entry_total=entry_total, start_date=start_date,
+                       min_total=min_total)
 
     # 아카이브에 (ticker, date) 중복이 실제로 존재한다. 그대로 두면
     # simulate_ticker 가 같은 봉을 두 번 처리해 진입 봉까지 평가하게 되고

@@ -428,3 +428,44 @@ def test_min_total_does_not_mutate_the_input():
 def test_no_min_total_leaves_everything_alone():
     out = bt.filter_rows([_filter_row(total="70")])
     assert out[0]["signal"] == "BUY"
+
+
+# ─── run() 이 min_total 을 넘긴다 ─────────────────────────────
+# filter_rows 에 손잡이가 생겨도 run() 이 넘겨주지 않으면 어디서도 닿지
+# 않는다. 이 절은 그 배관만 검증한다.
+
+def _band_bars(dates):
+    import exit_rules as er
+    return {d: er.Bar(d, 100.0, 101.0, 99.0, 100.0, atr14=2.0, total=None)
+            for d in dates}
+
+
+def test_run_keeps_a_weak_signal_out_of_the_book(monkeypatch):
+    rows = [
+        {"ticker": "X", "date": "2026-01-02", "market": "US", "signal": "BUY",
+         "total": "70", "source": "live"},
+    ]
+    bars = _band_bars(["2026-01-02", "2026-01-03"])
+    monkeypatch.setattr(bt, "load_archive", lambda pattern: rows)
+    monkeypatch.setattr(bt, "fetch_bars", lambda ticker: bars)
+
+    assert bt.run("x", min_total=75)["trades"] == []
+    assert bt.run("x")["trades"] != []
+
+
+def test_a_demoted_ticker_enters_when_it_later_clears_the_bar(monkeypatch):
+    # 강등은 영구 배제가 아니다. 총점이 진짜로 문턱을 넘는 날 HOLD -> BUY
+    # 전환이 새로 생겨 그날 진입한다.
+    rows = [
+        {"ticker": "X", "date": "2026-01-02", "market": "US", "signal": "BUY",
+         "total": "70", "source": "live"},
+        {"ticker": "X", "date": "2026-01-05", "market": "US", "signal": "BUY",
+         "total": "80", "source": "live"},
+    ]
+    bars = _band_bars(["2026-01-02", "2026-01-05", "2026-01-06"])
+    monkeypatch.setattr(bt, "load_archive", lambda pattern: rows)
+    monkeypatch.setattr(bt, "fetch_bars", lambda ticker: bars)
+
+    trades = bt.run("x", min_total=75)["trades"]
+
+    assert [t.entry_date for t in trades] == ["2026-01-05"]
