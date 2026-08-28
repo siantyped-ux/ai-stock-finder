@@ -6,10 +6,27 @@ on:
     # 21시대는 쓰지 않는다. 표준시(EST) 기간에 미국 마감 16:00 EST 가 정확히
     # 21:00 UTC 라 버퍼가 0이 된다. 22시대면 서머타임·표준시 모두 여유가 있다.
     #
-    # 정각(:00)을 피해 :37 에 건다. 정각은 Actions 스케줄러가 가장 붐비는
-    # 슬롯이라 지연이 길고, 길다 못해 이벤트가 버려진다. 2026-08-26 에
-    # '0 22 * * *' 이 실제로 유실됐다 - 실행이 생성조차 되지 않았다. 그 직전
-    # 나흘의 시작 시각도 22:25 → 22:26 → 22:29 → 22:31 로 계속 밀리고 있었다.
+    # 이 크론들은 폴백이다. 정시성은 저장소 밖 클라우드 루틴이 책임진다 -
+    # 07:55 KST 에 그날 아카이브를 보고 없으면 workflow_dispatch 로 직접
+    # 돌린다. schedule 에 정시성을 기대하지 않기로 한 근거는 실측이다.
+    # 2026-08-01 ~ 08-28 의 schedule 실행 32건, 예정 시각 대비 실제 지연:
+    #
+    #   '30 2 * * *'     n=17   중앙값 1h52m   (42m ~ 3h27m)
+    #   '0 22 * * *'     n=8    중앙값   29m   (26m ~ 31m)
+    #   '0 15 * * 1-5'   n=3    중앙값   41m   (40m ~ 1h17m)
+    #   '37 22' + '17 1' n=1           9h55m
+    #   '26 15 * * 1-5'  n=1           9h01m
+    #   workflow_dispatch                 0초
+    #
+    # 4주 동안 25분 미만으로 도착한 적이 한 번도 없다. GitHub 문서도 schedule
+    # 은 부하가 높으면 밀리고 "some queued jobs may be dropped" 라고 명시한다.
+    # 2026-08-26 22:00 UTC 와 2026-08-27 22:37 UTC 는 실제로 배달되지 않았다.
+    #
+    # 분(minute)을 옮기는 것으로는 풀리지 않는다. :00 을 피해 :37 로 옮긴 것은
+    # 정각이 붐빈다는 GitHub 문서 권고를 따른 것이라 근거는 타당했지만, 악화는
+    # 그 변경 하루 전인 08-26 에 구 크론에서 이미 시작됐다. 위 표에서 가장
+    # 정확했던 설정은 오히려 정각인 '0 22' 다. 표본이 작아 어느 쪽이 낫다고
+    # 말할 수 없으니, 새 근거 없이 분을 다시 만지지 말 것.
     - cron: '37 22 * * *'
     # 따라잡기. 본 실행이 유실되면 이 실행이 같은 스캔을 돌린다. 스코어는
     # 시점 데이터라 그날 놓치면 영구히 복구할 수 없으므로, 크론 하나에
@@ -158,6 +175,18 @@ jobs:
             --sleep 0.2 \
             --workers 4
 
+      # 스캔이 끝난 시각을 목표(08:15 KST)와 대조해 scan_latency.csv 에 남긴다.
+      # 여태 감시는 '그날 아카이브가 있는가' 하나뿐이라, 9시간 55분 밀려
+      # 도착한 실행도 정상으로 집계됐다. 파일은 생겼으니까. 근거는 그 모듈
+      # 머리말에 있다.
+      #
+      # 커밋 스텝 앞에 둔다. 뒤에 두면 이 파일만 다음 날 커밋에 얹혀 하루씩
+      # 밀린 채로 쌓인다.
+      - name: Record how late the scan finished
+        env:
+          EVENT_NAME: ${{ github.event_name }}
+        run: python scan_latency.py --event "$EVENT_NAME"
+
       - name: Commit and push dashboard_data.js
         env:
           ETF_OUTCOME: ${{ steps.etf_scan.outcome }}
@@ -175,7 +204,11 @@ jobs:
             git checkout -- dashboard_data_etf.js || true
           fi
 
-          git add dashboard_data.js dashboard_data_etf.js history/ history_etf/
+          # scan_latency.csv 는 history/ 밖에 둔다. history/*.csv 는 아카이브
+          # 전용 글롭이라 (verify_quotes, backtest, forward_returns,
+          # recompute_history, tracks.history_glob) 날짜가 아닌 파일을 하나
+          # 넣으면 다섯 군데가 그걸 하루치 아카이브로 읽으려 든다.
+          git add dashboard_data.js dashboard_data_etf.js history/ history_etf/ scan_latency.csv
           if git diff --staged --quiet; then
             echo "No changes to commit"
           else
