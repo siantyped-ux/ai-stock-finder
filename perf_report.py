@@ -504,6 +504,31 @@ def track_limits(track: str) -> pf.Limits:
     return pf.Limits(max_correlation=tracks.max_correlation(track))
 
 
+def track_params(track: str, use_target: bool = False) -> tuple:
+    """그 트랙의 청산 파라미터와 진입 문턱. (er.Params, min_total).
+
+    track_limits 와 같은 이유로 함수로 떼어 둔다 - main 이 너무 커서
+    테스트로 못 잡는다.
+
+    두 트랙에 같은 Params 를 쓰면 ETF 의 넓힌 밴드(진입 75 / 청산 45)가
+    리포트에 반영되지 않는다. 백테스트 CLI 에서만 보이고 매일 도는 리포트는
+    옛 값으로 도는 상태가 되어, 두 산출물이 서로 다른 규칙을 보고하게 된다.
+
+    반환형이 backtest.resolve_trade_params 와 같은 2-튜플인 것은 의도다.
+    같은 일을 하는 함수 둘이 서로 다른 모양을 내면 두 호출부가 갈라진다.
+    Params 만 돌려주면 호출자가 min_total 을 얻으려고 tracks.trade_params 를
+    한 번 더 불러야 한다.
+
+    max_hold_days 는 트랙 파라미터가 아니다. Params 기본값 60 을 쓴다.
+    """
+    p = tracks.trade_params(track)
+    params = er.Params(stop_atr_mult=p["stop_atr_mult"],
+                       trail_atr_mult=p["trail_atr_mult"],
+                       exit_total=p["exit_total"],
+                       use_target=use_target)
+    return params, p["min_total"]
+
+
 def main():
     console.force_utf8()
     p = argparse.ArgumentParser(description="가상매매 성과 누적 리포트")
@@ -518,19 +543,21 @@ def main():
                    help="목표가 도달 시 익절한 결과로 리포트를 낸다")
     args = p.parse_args()
 
-    params = er.Params(use_target=args.use_target)
-
     # 트랙마다 아카이브가 따로다. 한쪽이 비어도 나머지로 리포트를 낸다 -
     # ETF 아카이브는 2026-08-25 분리 시작이라 주식보다 이력이 짧다.
     by_track = {}
     for key, label in TRACK_SHEETS:
         pattern = tracks.history_glob(key)
         limits = track_limits(key)
+        # 청산 규칙과 진입 문턱이 트랙마다 다르다. 하나를 돌려쓰면 ETF 의
+        # 넓힌 밴드가 리포트에 반영되지 않는다.
+        params, min_total = track_params(key, args.use_target)
         # us_only 로 돌린다. 리포트 금액이 전부 달러라 원화로 호가되는
         # 한국 종목이 섞이면 안 된다 - 아카이브 07-31~08-21 구간에 남아 있다.
         result = backtest.run(pattern, params, us_only=True,
                               start_date=args.start_date, limits=limits,
-                              account=sizing.Account(capital=args.capital))
+                              account=sizing.Account(capital=args.capital),
+                              min_total=min_total)
         if not result["dates"]:
             print(f"[!] {label}: 아카이브가 비어 있다 ({pattern})")
             by_track[key] = None

@@ -703,3 +703,33 @@ def test_no_cash_shortage_says_nothing():
 
     assert built["summary"]["skipped_cash_n"] == 0
     assert "현금부족" not in pr.summary_text({"stocks": built, "etf": None})
+
+
+def test_the_report_uses_the_etf_band():
+    # main 이 두 트랙에 같은 Params 를 쓰면 ETF 의 넓힌 밴드가 리포트에
+    # 반영되지 않는다. 매일 도는 것이 이 경로다.
+    params, min_total = pr.track_params("etf")
+    assert params.exit_total == 45
+    assert min_total == 75
+
+
+def test_the_report_leaves_the_stock_track_alone():
+    params, min_total = pr.track_params("stocks")
+    assert params.exit_total == 60
+    assert min_total == 70
+
+
+def test_the_report_keeps_the_atr_multiples_coupled():
+    for key in ("stocks", "etf"):
+        params, _ = pr.track_params(key)
+        assert params.stop_atr_mult == params.trail_atr_mult, key
+
+
+def test_the_report_carries_use_target_through():
+    assert pr.track_params("etf", use_target=True)[0].use_target is True
+    assert pr.track_params("etf")[0].use_target is False
+
+
+def test_track_params_rejects_an_unknown_track():
+    with pytest.raises(ValueError):
+        pr.track_params("nope")
