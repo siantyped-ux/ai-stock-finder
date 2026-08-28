@@ -38,6 +38,31 @@
 
 아래 Task 1 본문은 이 개정을 반영해 고쳐 두었다. Task 5·7 도 마찬가지다.
 
+## 개정 2 (2026-08-28, Task 2 코드 리뷰 반영)
+
+**`filter_rows` 를 키워드 전용으로 만든다.** 위 개정은 이름 규율로 tracks →
+소비자 구간을 지켰지만, `filter_rows` 자신은 여전히 위치 인자를 받는다.
+`filter_rows(rows, False, 75)` 는 "75 이상을 BUY 로 승격" 이 되어 정확히
+그 역전이 일어난다. 실측상 호출부 21곳이 **전부 이미 키워드**를 쓰므로
+`*` 하나를 넣는 것은 무비용이고, 관례를 언어가 강제하는 규칙으로 바꾼다.
+동시에 `min_total` 을 `entry_total` 옆으로 옮긴다 - 아무도 안 쓰는 위치
+호환성 때문에 맨 뒤에 붙어 있었고, 그 사이에 `start_date` 가 끼어 있다.
+
+**잘못된 구현이 8개 테스트를 다 통과한다.** 승격 후 문턱을 *넘어서 유지되는*
+경우가 없어서, "승격된 행은 전부 강등한다" 는 그럴듯한 오독이 살아남는다.
+`entry_total=60, min_total=75, total=80` → BUY 를 테스트로 박는다.
+
+**docstring 표제가 위험을 약하게 말한다.** "대칭이지만 별개" 가 아니라
+"방향이 정반대" 라고 써야 한다. 그리고 이 손잡이가 존재하는 근거인 실측
+(`--entry-total 80` 을 줬는데 후보가 55 → 62 로 늘었다, 2026-08-28)이
+docstring 에 없다 - 위 `start_date`·`us_only` 설명과 같은 격으로 넣는다.
+
+**Task 6 은 `entry_total` 을 `kwargs` 에 숨기지 않는다.** 방향이 반대인 둘이
+한 호출에 들어가는데 하나는 `**kwargs` 뒤에 가려지고 하나만 보이면, 그
+비대칭이 의도인지 실수인지 호출부만 봐서는 알 수 없다. 아래 Task 6 본문에
+반영했다. `base_args` 도 필드를 손으로 나열하지 않고 `vars(args)` 를 펴서
+파라미터만 지운다.
+
 ---
 
 ## File Structure
@@ -961,27 +986,37 @@ Expected: PASS
 `main()` 마지막의 `report(run(...))` 를 이 블록으로 교체한다.
 
 ```python
-    kwargs = dict(us_only=args.us_only, entry_total=args.entry_total,
-                  limits=limits, start_date=args.start_date, account=account)
+    # entry_total 을 kwargs 에 숨기지 않는다. 방향이 정반대인 손잡이 둘이
+    # 한 호출에 함께 들어가므로 둘 다 눈에 보여야 한다. entry_total 은
+    # 사용자가 준 비교 플래그라 두 열에 똑같이 가고, min_total 은 트랙에서
+    # 푼 값이라 열마다 다르다 - 그 차이가 호출부에서 읽혀야 한다.
+    kwargs = dict(us_only=args.us_only, limits=limits,
+                  start_date=args.start_date, account=account)
 
     if args.compare:
-        base_args = argparse.Namespace(
-            track=args.track, stop_atr_mult=None, trail_atr_mult=None,
-            max_hold_days=args.max_hold_days, exit_total=None,
-            min_total=None, use_target=args.use_target)
+        # vars(args) 를 펴고 파라미터만 지운다("같은 인자, 기본값으로").
+        # 필드를 손으로 다시 나열하면 resolve_trade_params 가 읽는 필드가
+        # 늘어날 때 여기만 조용히 어긋난다.
+        base_args = argparse.Namespace(**{
+            **vars(args),
+            "stop_atr_mult": None, "trail_atr_mult": None,
+            "exit_total": None, "min_total": None})
         base_params, base_min = resolve_trade_params(base_args)
         if (base_params, base_min) == (params, min_total):
             raise SystemExit(
                 "--compare 는 바꿀 값이 있어야 한다. "
                 "--stop-atr-mult 같은 인자를 함께 줄 것.")
-        a = run(pattern, base_params, min_total=base_min, **kwargs)
-        b = run(pattern, params, min_total=min_total, **kwargs)
+        a = run(pattern, base_params, entry_total=args.entry_total,
+                min_total=base_min, **kwargs)
+        b = run(pattern, params, entry_total=args.entry_total,
+                min_total=min_total, **kwargs)
         compare_report(compare_row(a, base_params),
                        compare_row(b, params),
                        has_account=account is not None)
         return
 
-    report(run(pattern, params, min_total=min_total, **kwargs))
+    report(run(pattern, params, entry_total=args.entry_total,
+               min_total=min_total, **kwargs))
 ```
 
 - [ ] **Step 6: 비교가 실제로 도는지 확인한다**
