@@ -397,6 +397,53 @@ def report(result: dict) -> None:
     print("=" * 60)
 
 
+# 트랙을 지정하지 않았을 때의 값. 현행 동작을 그대로 보존한다.
+#
+# min_total 이 None 인 것은 의도다 - 트랙 없이 돌리는 기존 호출에 진입
+# 문턱을 새로 걸면 예전 결과의 의미가 조용히 바뀐다.
+DEFAULT_TRADE_PARAMS = {
+    "min_total": None,
+    "exit_total": 60,
+    "stop_atr_mult": 3.0,
+    "trail_atr_mult": 3.0,
+}
+
+
+def resolve_trade_params(args) -> tuple:
+    """CLI > 트랙 > 현행 기본값 순으로 매매 파라미터를 푼다.
+
+    (exit_rules.Params, min_total) 을 돌려준다.
+
+    --track 이 기본값만 바꾸고 명시 인자가 언제나 이기는 것은 --history 와
+    --max-correlation 에 이미 적용된 규칙이다. 그러지 않으면 트랙을 준 순간
+    사용자가 직접 준 값이 조용히 무시된다.
+
+    tracks 의 키 이름은 소비자 파라미터 이름과 1:1 이라 번역이 없다.
+    min_total 은 그대로 filter_rows(min_total=) 로 간다.
+
+    주의: args.entry_total 은 여기 있는 min_total 과 **다른 것**이다. 그쪽은
+    문턱을 내리는(BUY 로 승격) 비교용 손잡이라 방향이 정반대이고, 이 함수는
+    그것을 건드리지 않는다 - 호출자가 run() 에 따로 넘긴다.
+
+    main 이 너무 커서 테스트로 못 잡으므로 함수로 떼어 둔다
+    (perf_report.track_limits 와 같은 이유).
+    """
+    base = (tracks.trade_params(args.track) if args.track
+            else dict(DEFAULT_TRADE_PARAMS))
+
+    def pick(cli, key):
+        return cli if cli is not None else base[key]
+
+    params = er.Params(
+        stop_atr_mult=pick(args.stop_atr_mult, "stop_atr_mult"),
+        trail_atr_mult=pick(args.trail_atr_mult, "trail_atr_mult"),
+        max_hold_days=args.max_hold_days,
+        exit_total=pick(args.exit_total, "exit_total"),
+        use_target=args.use_target,
+    )
+    return params, pick(args.min_total, "min_total")
+
+
 def main():
     console.force_utf8()
     p = argparse.ArgumentParser(description="스코어 아카이브 백테스트")
@@ -405,10 +452,14 @@ def main():
                    help="트랙을 지정한다. 아카이브 경로와 상관 상한을 그 트랙의\n"
                         "  기본값으로 맞춘다 (--history / --max-correlation 을\n"
                         "  직접 주면 그쪽이 이긴다)")
-    p.add_argument("--stop-atr-mult", type=float, default=3.0)
-    p.add_argument("--trail-atr-mult", type=float, default=3.0)
+    p.add_argument("--stop-atr-mult", type=float, default=None,
+                   help="손절 ATR 배수 (생략하면 --track 값, 없으면 3.0)")
+    p.add_argument("--trail-atr-mult", type=float, default=None,
+                   help="트레일 ATR 배수 (생략하면 --track 값, 없으면 3.0)")
     p.add_argument("--max-hold-days", type=int, default=60)
-    p.add_argument("--exit-total", type=int, default=60)
+    p.add_argument("--exit-total", type=int, default=None,
+                   help="이 점수 아래로 떨어지면 청산한다\n"
+                        "  (생략하면 --track 값, 없으면 60)")
     p.add_argument("--use-target", action="store_true",
                    help="목표가 도달 시 익절한다 (기본: 사용 안 함)")
     p.add_argument("--us-only", action="store_true",
@@ -423,6 +474,14 @@ def main():
                    help="한 종목 투입 상한 (초기 자본 대비 %%, 기본 20.0)")
     p.add_argument("--entry-total", type=int, default=None,
                    help="이 점수 이상이면 BUY 로 간주해 진입한다 (비교용)")
+    p.add_argument("--min-total", type=int, default=None,
+                   help="이 점수 미만인 BUY 를 버린다 (진입 문턱을 올린다).\n"
+                        "  --entry-total 과 대칭이다 - 그쪽은 문턱을 내리고\n"
+                        "  이쪽은 올린다. 둘 다 주면 이쪽이 이긴다.\n"
+                        "  생략하면 --track 값, --track 도 없으면 안 건다.\n"
+                        "  stock_finder 의 동명 옵션과는 단계가 다르다 -\n"
+                        "  그쪽은 화면에 무엇을 보여줄지, 이쪽은 무엇을\n"
+                        "  매수할지다 (방향은 둘 다 같다)")
     p.add_argument("--max-positions", type=int, default=0,
                    help="동시 보유 상한 (0=무제한, 기본).\n"
                         "  자리가 모자라면 그날 총점이 높은 종목이 가져간다")
@@ -442,13 +501,7 @@ def main():
     else:
         max_corr = 1.0
 
-    params = er.Params(
-        stop_atr_mult=args.stop_atr_mult,
-        trail_atr_mult=args.trail_atr_mult,
-        max_hold_days=args.max_hold_days,
-        exit_total=args.exit_total,
-        use_target=args.use_target,
-    )
+    params, min_total = resolve_trade_params(args)
     limits = pf.Limits(max_positions=args.max_positions,
                        max_correlation=max_corr)
     account = None
@@ -459,7 +512,8 @@ def main():
 
     report(run(pattern, params, us_only=args.us_only,
                entry_total=args.entry_total, limits=limits,
-               start_date=args.start_date, account=account))
+               start_date=args.start_date, account=account,
+               min_total=min_total))
 
 
 if __name__ == "__main__":

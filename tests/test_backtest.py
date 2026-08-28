@@ -533,3 +533,53 @@ def test_clear_bars_cache_empties_it(monkeypatch):
     bt.fetch_bars("X")
 
     assert calls == ["X", "X"]
+
+
+def _args(**over):
+    import argparse
+    base = dict(track=None, stop_atr_mult=None, trail_atr_mult=None,
+                max_hold_days=60, exit_total=None, min_total=None,
+                use_target=False)
+    base.update(over)
+    return argparse.Namespace(**base)
+
+
+def test_resolve_falls_back_to_todays_defaults_without_a_track():
+    # 트랙을 안 주면 예전 호출과 결과가 같아야 한다.
+    params, min_total = bt.resolve_trade_params(_args())
+    assert params.stop_atr_mult == 3.0
+    assert params.trail_atr_mult == 3.0
+    assert params.exit_total == 60
+    assert min_total is None
+
+
+def test_resolve_takes_the_track_defaults():
+    params, min_total = bt.resolve_trade_params(_args(track="etf"))
+    assert params.exit_total == 45
+    assert min_total == 75
+
+
+def test_an_explicit_argument_beats_the_track():
+    # --track 은 기본값만 바꾼다. 명시한 값이 조용히 무시되면 안 된다.
+    params, _ = bt.resolve_trade_params(
+        _args(track="etf", stop_atr_mult=5.0, exit_total=55))
+    assert params.stop_atr_mult == 5.0
+    assert params.exit_total == 55
+
+
+def test_an_explicit_min_total_beats_the_track():
+    _, min_total = bt.resolve_trade_params(_args(track="etf", min_total=90))
+    assert min_total == 90
+
+
+def test_resolve_carries_use_target_through():
+    params, _ = bt.resolve_trade_params(_args(track="etf", use_target=True))
+    assert params.use_target is True
+
+
+def test_the_stock_track_resolves_to_todays_behaviour():
+    # 이번 변경으로 주식 트랙의 동작이 바뀌면 안 된다.
+    params, min_total = bt.resolve_trade_params(_args(track="stocks"))
+    assert params.exit_total == 60
+    assert params.stop_atr_mult == 3.0
+    assert min_total == 70
