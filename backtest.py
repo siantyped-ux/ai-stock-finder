@@ -17,6 +17,7 @@ import console
 import exit_rules as er
 import portfolio as pf
 import sizing
+import tracks
 import trade_sim as ts
 
 
@@ -350,6 +351,10 @@ def main():
     console.force_utf8()
     p = argparse.ArgumentParser(description="스코어 아카이브 백테스트")
     p.add_argument("--history", default="history/*.csv")
+    p.add_argument("--track", choices=sorted(tracks.TRACKS),
+                   help="트랙을 지정한다. 아카이브 경로와 상관 상한을 그 트랙의\n"
+                        "  기본값으로 맞춘다 (--history / --max-correlation 을\n"
+                        "  직접 주면 그쪽이 이긴다)")
     p.add_argument("--stop-atr-mult", type=float, default=3.0)
     p.add_argument("--trail-atr-mult", type=float, default=3.0)
     p.add_argument("--max-hold-days", type=int, default=60)
@@ -371,10 +376,21 @@ def main():
     p.add_argument("--max-positions", type=int, default=0,
                    help="동시 보유 상한 (0=무제한, 기본).\n"
                         "  자리가 모자라면 그날 총점이 높은 종목이 가져간다")
-    p.add_argument("--max-correlation", type=float, default=1.0,
+    p.add_argument("--max-correlation", type=float, default=None,
                    help="이미 보유한 종목과의 일간수익률 상관 상한 (1.0=끔).\n"
-                        "  0.90 이면 XLV·VHT·IYH 같은 사실상 같은 베팅을 막는다")
+                        "  0.90 이면 XLV·VHT·IYH 같은 사실상 같은 베팅을 막는다.\n"
+                        "  생략하면 --track 의 기본값, --track 도 없으면 1.0")
     args = p.parse_args()
+
+    # --track 은 기본값만 바꾼다. 명시된 인자가 언제나 이긴다 - 그러지 않으면
+    # 트랙을 준 순간 사용자가 직접 준 값이 조용히 무시된다.
+    pattern = tracks.history_glob(args.track) if args.track else args.history
+    if args.max_correlation is not None:
+        max_corr = args.max_correlation
+    elif args.track:
+        max_corr = tracks.max_correlation(args.track)
+    else:
+        max_corr = 1.0
 
     params = er.Params(
         stop_atr_mult=args.stop_atr_mult,
@@ -384,14 +400,14 @@ def main():
         use_target=args.use_target,
     )
     limits = pf.Limits(max_positions=args.max_positions,
-                       max_correlation=args.max_correlation)
+                       max_correlation=max_corr)
     account = None
     if args.capital:
         account = sizing.Account(capital=args.capital,
                                  risk_pct=args.risk_pct,
                                  max_weight_pct=args.max_weight_pct)
 
-    report(run(args.history, params, us_only=args.us_only,
+    report(run(pattern, params, us_only=args.us_only,
                entry_total=args.entry_total, limits=limits,
                start_date=args.start_date, account=account))
 

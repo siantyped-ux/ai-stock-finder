@@ -22,6 +22,7 @@ import console
 import exit_rules as er
 import history
 import mailer
+import portfolio as pf
 import sizing
 import tracks
 import stops
@@ -487,6 +488,22 @@ def write_xlsx(path, by_track: dict) -> None:
     wb.save(path)
 
 
+def track_limits(track: str) -> pf.Limits:
+    """그 트랙의 포트폴리오 제약.
+
+    상관 상한만 트랙마다 다르다. ETF 는 XLV·VHT·IYH·FHLC·IXJ 처럼 상관
+    0.97~0.999 인 복제본이 흔해, 끄고 두면 신호 하나를 다섯 번 세어 같은
+    베팅에 자본을 몰아넣는다. 근거와 0.90 이라는 값의 출처는 tracks 머리말에
+    있다.
+
+    max_positions 는 건드리지 않는다 - 동시 보유 상한을 몇으로 둘지는 재 본
+    적이 없고, 근거 없이 켜면 예전 결과의 의미가 조용히 바뀐다.
+
+    함수로 떼어 둔 것은 main 이 너무 커서 테스트로 못 잡기 때문이다.
+    """
+    return pf.Limits(max_correlation=tracks.max_correlation(track))
+
+
 def main():
     console.force_utf8()
     p = argparse.ArgumentParser(description="가상매매 성과 누적 리포트")
@@ -508,10 +525,11 @@ def main():
     by_track = {}
     for key, label in TRACK_SHEETS:
         pattern = tracks.history_glob(key)
+        limits = track_limits(key)
         # us_only 로 돌린다. 리포트 금액이 전부 달러라 원화로 호가되는
         # 한국 종목이 섞이면 안 된다 - 아카이브 07-31~08-21 구간에 남아 있다.
         result = backtest.run(pattern, params, us_only=True,
-                              start_date=args.start_date,
+                              start_date=args.start_date, limits=limits,
                               account=sizing.Account(capital=args.capital))
         if not result["dates"]:
             print(f"[!] {label}: 아카이브가 비어 있다 ({pattern})")
