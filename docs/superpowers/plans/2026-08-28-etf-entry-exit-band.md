@@ -758,7 +758,10 @@ def resolve_trade_params(args) -> tuple:
                    help="이 점수 미만인 BUY 를 버린다 (진입 문턱을 올린다).\n"
                         "  --entry-total 과 대칭이다 - 그쪽은 문턱을 내리고\n"
                         "  이쪽은 올린다. 둘 다 주면 이쪽이 이긴다.\n"
-                        "  생략하면 --track 값, --track 도 없으면 안 건다")
+                        "  생략하면 --track 값, --track 도 없으면 안 건다.\n"
+                        "  stock_finder 의 동명 옵션과는 단계가 다르다 -\n"
+                        "  그쪽은 화면에 무엇을 보여줄지, 이쪽은 무엇을\n"
+                        "  매수할지다 (방향은 둘 다 같다)")
 ```
 
 `--max-hold-days` 는 그대로 `default=60` 을 유지한다. 트랙 파라미터에 없다.
@@ -1178,8 +1181,10 @@ git commit -m "Record where the band values actually take effect"
 | E. `exit_total` 만 변경 (ATR 3.0 유지) | Task 1 (값), Task 1 Step 2 (회귀 테스트) |
 | 바꾸지 않는 것: `calc_signal` | 어느 태스크도 `stock_finder.py` 를 건드리지 않는다 |
 | 바꾸지 않는 것: stop/trail 결합 | Task 1 의 `test_the_two_atr_multiples_stay_coupled` |
-| 바꾸지 않는 것: 주식 트랙 | Task 5 의 `test_the_stock_track_resolves_to_todays_behaviour`, Task 8 Step 2 |
+| 바꾸지 않는 것: 주식 트랙 | Task 5 의 `test_the_stock_track_resolves_to_todays_behaviour`, Task 8 Step 2 (단서: 주식 트랙에 `min_total=70` 이 새로 걸린다. `calc_signal` 의 BUY 문턱과 같은 값이라 오늘 아카이브에서는 아무것도 안 거르지만, 구조적 무해가 아니라 데이터가 그럴 뿐이다) |
 
 **설계에 없던 것을 하나 추가했다:** Task 7 (`perf_report` 배선). 설계 문서를 쓸 때 `perf_report.main` 이 두 트랙에 같은 `Params` 를 쓴다는 것을 확인하지 못했다. 이것을 빼면 매일 도는 리포트는 옛 값으로 돌고 백테스트 CLI 만 새 값으로 돌아, 두 산출물이 서로 다른 규칙을 보고한다.
 
-**이름 일관성:** `tracks.trade_params` 는 dict 를 내고 `perf_report.track_params` 는 `er.Params` 를 낸다. 이름이 비슷하고 반환형이 달라 헷갈릴 수 있으나, 각각 `tracks.max_correlation`(스칼라)과 `perf_report.track_limits`(`pf.Limits`)의 기존 짝을 그대로 따른 것이다. 두 함수의 docstring 이 이 관계를 명시한다.
+**이름 일관성:** `tracks.trade_params` 는 dict 를 내고, `backtest.resolve_trade_params` 와 `perf_report.track_params` 는 둘 다 `(er.Params, min_total)` 2-튜플을 낸다. 매매 계층의 두 진입점이 같은 모양을 내는 것은 의도다 - 같은 일을 하는 함수 둘이 반환형이 다르면 두 호출부가 갈라진다. `tracks` 쪽만 dict 인 것은 그 모듈이 아무것도 임포트하지 않아 `er.Params` 를 만들 수 없기 때문이고, 이는 `max_correlation` 이 `pf.Limits` 대신 float 를 내는 것과 같은 제약이다.
+
+**키 이름 규칙:** `tracks` 의 키는 그것이 먹여 주는 소비자 파라미터 이름과 1:1 이다 (`min_total` → `filter_rows(min_total=)`, 나머지 셋 → `er.Params` 동명 필드). 번역 단계가 없으므로 뒤집힌 매핑이 생길 자리가 없다. 개정 절 참조.
