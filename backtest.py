@@ -89,7 +89,8 @@ def fetch_bars(ticker: str) -> dict:
 
 
 def filter_rows(rows: list, us_only: bool = False,
-                entry_total: int = None, start_date: str = None) -> list:
+                entry_total: int = None, start_date: str = None,
+                min_total: int = None) -> list:
     """아카이브 행을 진입 조건에 맞게 걸러 낸다.
 
     start_date 는 그 날짜부터만 본다. 07-31~08-21 구간은 66% 가 backfill 이라
@@ -100,10 +101,26 @@ def filter_rows(rows: list, us_only: bool = False,
     us_only 는 과거 아카이브에 남아 있는 한국 행을 뺀다. 7/31~8/22 데이터에는
     KR 이 들어 있어서, 미국 단독 성과를 보려면 여기서 빼야 한다.
 
-    entry_total 은 그 점수 이상인 행의 signal 을 BUY 로 올린다. 원래 진입
-    조건은 signal in (BUY, STRONG_BUY) 이고 BUY 정의가 total>=70 and cons>=3
-    이라, consensus 를 무시했을 때 성과가 어떻게 달라지는지 보려는 것이다.
-    진입 규칙을 바꾸자는 제안이 아니라 비교용이다.
+    entry_total 과 min_total 은 대칭이지만 별개의 손잡이다.
+
+    entry_total 은 그 점수 이상인 행의 signal 을 BUY 로 **올린다**(완화).
+    원래 진입 조건은 signal in (BUY, STRONG_BUY) 이고 BUY 정의가
+    total>=70 and cons>=3 이라, consensus 를 무시했을 때 성과가 어떻게
+    달라지는지 보려는 것이다.
+
+    min_total 은 그 점수 미만인 BUY 를 HOLD 로 **내린다**(강화). 진입 문턱을
+    실제로 올리는 유일한 경로다 - stock_finder.calc_signal 의 70/80 을
+    건드리면 과거 아카이브(70 기준)와 미래 아카이브(75 기준)의 signal 열
+    정의가 갈라져 과거 행을 재현할 수 없게 된다.
+
+    HOLD 로 내리는 이유는 trade_sim.step_entry 가 BUY 로의 **전환**을 보기
+    때문이다. 강등하면 그날의 전환이 사라지고, 나중에 총점이 진짜로 문턱을
+    넘는 날 HOLD -> BUY 전환이 새로 생겨 그 시점에 진입한다.
+
+    총점이 비어 있는 BUY 도 강등한다. 점수를 모르는 채로 통과시키면 문턱이
+    있으나 마나가 된다.
+
+    강등을 승격 뒤에 둔다. 둘 다 주면 강등이 이긴다.
 
     입력 행을 바꾸지 않는다. 같은 아카이브로 여러 케이스를 돌리기 때문이다.
     """
@@ -117,6 +134,10 @@ def filter_rows(rows: list, us_only: bool = False,
             total = r.get("total")
             if total not in (None, "") and int(total) >= entry_total:
                 r = {**r, "signal": "BUY"}
+        if min_total is not None and r["signal"] in ts.BUY_SIGNALS:
+            total = r.get("total")
+            if total in (None, "") or int(total) < min_total:
+                r = {**r, "signal": "HOLD"}
         out.append(r)
     return out
 

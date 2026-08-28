@@ -366,3 +366,65 @@ def test_the_report_separates_the_two_reasons(monkeypatch, capsys):
     assert "대기 중: POOR" not in out
     # 진입 종목 수는 트레이드가 정한다.
     assert "BUY 후보 2종목 중 1종목 진입" in out
+
+
+# ─── 진입 강화 필터 (min_total) ──────────────────────────────
+# entry_total 은 BUY 로 승격시키는 완화 도구다. 문턱을 올리는 대칭 손잡이가
+# 없어서 --entry-total 80 을 줘도 진입이 줄지 않았다.
+
+def _filter_row(**over):
+    row = {"ticker": "X", "date": "2026-01-02", "market": "US",
+           "signal": "BUY", "total": "70", "source": "live"}
+    row.update(over)
+    return row
+
+
+def test_min_total_demotes_a_buy_below_the_threshold():
+    out = bt.filter_rows([_filter_row(total="70")], min_total=75)
+    assert out[0]["signal"] == "HOLD"
+
+
+def test_min_total_keeps_a_buy_at_the_threshold():
+    out = bt.filter_rows([_filter_row(total="75")], min_total=75)
+    assert out[0]["signal"] == "BUY"
+
+
+def test_min_total_demotes_a_strong_buy_too():
+    # 규칙은 일관돼야 한다. STRONG_BUY 는 정의상 total>=80 이라 실무에서
+    # 걸릴 일이 드물지만, 예외를 두면 그 예외가 다음 버그가 된다.
+    out = bt.filter_rows([_filter_row(signal="STRONG_BUY", total="70")],
+                         min_total=75)
+    assert out[0]["signal"] == "HOLD"
+
+
+def test_min_total_demotes_a_buy_with_no_score():
+    # 점수를 모르는 채로 문턱을 통과시키면 문턱이 있으나 마나가 된다.
+    out = bt.filter_rows([_filter_row(total="")], min_total=75)
+    assert out[0]["signal"] == "HOLD"
+
+
+def test_min_total_leaves_non_buy_rows_alone():
+    out = bt.filter_rows([_filter_row(signal="WATCH", total="60")],
+                         min_total=75)
+    assert out[0]["signal"] == "WATCH"
+
+
+def test_demotion_wins_over_promotion():
+    # entry_total 로 올린 뒤 min_total 로 내린다. 둘 다 주면 강등이 이긴다 -
+    # "N 이상을 BUY 로 보되 M 미만은 버린다" 가 된다.
+    out = bt.filter_rows([_filter_row(signal="WATCH", total="65")],
+                         entry_total=60, min_total=75)
+    assert out[0]["signal"] == "HOLD"
+
+
+def test_min_total_does_not_mutate_the_input():
+    # 같은 아카이브로 여러 케이스를 돌린다. 입력을 바꾸면 두 번째 케이스가
+    # 첫 번째의 결과 위에서 돈다.
+    rows = [_filter_row(total="70")]
+    bt.filter_rows(rows, min_total=75)
+    assert rows[0]["signal"] == "BUY"
+
+
+def test_no_min_total_leaves_everything_alone():
+    out = bt.filter_rows([_filter_row(total="70")])
+    assert out[0]["signal"] == "BUY"
