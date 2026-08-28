@@ -37,7 +37,10 @@ TRACKS = {
         "suffix": "",
         # 1.0 은 검사를 끈다는 뜻이다. 머리말 참조.
         "max_correlation": 1.0,
-        "entry_total": 70,
+        # calc_signal 의 BUY 문턱과 같은 값이라 오늘 아카이브에서는 아무것도
+        # 거르지 않는다. 구조적으로 무해한 것이 아니라 데이터가 그럴 뿐이다 -
+        # total 이 빈 BUY 행이 한 건이라도 생기면 그때부터 거른다.
+        "min_total": 70,
         "exit_total": 60,
         "stop_atr_mult": 3.0,
         "trail_atr_mult": 3.0,
@@ -48,7 +51,7 @@ TRACKS = {
         "dashboard": "dashboard_data_etf.js",
         "suffix": "_ETF",
         "max_correlation": 0.90,
-        "entry_total": 75,
+        "min_total": 75,
         "exit_total": 45,
         "stop_atr_mult": 3.0,
         "trail_atr_mult": 3.0,
@@ -86,19 +89,40 @@ def max_correlation(track: str) -> float:
 def trade_params(track: str) -> dict:
     """그 트랙의 매매 파라미터 4종.
 
+    키 이름은 전부 소비자의 파라미터 이름과 1:1 이다 - min_total 은
+    backtest.filter_rows(min_total=), 나머지 셋은 exit_rules.Params 의 같은
+    이름 필드로 그대로 들어간다. 번역 단계를 두지 않는 것은 의도다.
+
+    특히 이것을 entry_total 이라 부르지 않는다. backtest.filter_rows 에 이미
+    entry_total 이 있는데 그쪽은 문턱을 **내리는**(BUY 로 승격) 비교용
+    손잡이라 방향이 정반대다. 같은 이름 둘이 한 함수 안에서 만나면 조용히
+    뒤집힌 필터가 나온다.
+
     exit_rules.Params 를 여기서 만들지 않는 것은 max_correlation 이
     portfolio.Limits 를 만들지 않는 것과 같은 이유다 - tracks 는 아무것도
     임포트하지 않는 정의 모듈이고, 스캐너가 이것을 읽는다. 여기서 매매
     계층을 끌어오면 스캔이 백테스트 전체를 함께 임포트하게 된다.
 
-    entry_total 과 exit_total 은 히스테리시스 밴드의 양끝이다. 들어갈 때는
-    까다롭게(75), 한 번 들어가면 웬만해선 안 흔들리게(45). ETF 의 밴드가
-    주식보다 넓은 것은 2026-08-28 실측 때문이다 - 7일간 ATR 손절은 한 번도
-    걸리지 않았고 유일한 청산이 exit_total 이었다.
+    min_total 과 exit_total 은 히스테리시스 밴드의 양끝이다. 들어갈 때는
+    까다롭게, 한 번 들어가면 웬만해선 안 흔들리게. ETF 가 75/45 로 주식
+    70/60 보다 넓다.
 
-    45 는 calc_signal 의 AVOID 경계다. 50 은 어느 등급 경계도 아니어서
-    "왜 50인가" 에 답할 근거가 없다.
+    ## 45 의 근거는 약하다
+
+    2026-08-28 실측이 말해 주는 것은 "exit_total 이 실제로 발동하는 유일한
+    청산이고 ATR 손절은 7일간 한 번도 안 걸렸다" 까지다. 45 라는 값 자체는
+    측정된 것이 아니라 calc_signal 의 AVOID 경계에서 고른 것이다 - exit_rules
+    가 total < exit_total 로 판정하므로 45 는 "스캔이 회피로 볼 때 나간다" 와
+    정확히 같아진다. 표본은 닫힌 트레이드 1건(SDOG)뿐이다. 아카이브가 30일을
+    넘기면 45 와 60 을 나란히 재 볼 것.
+
+    ## 두 ATR 배수는 같이 움직여야 한다
+
+    고점이 진입가+1R 에 닿는 순간 트레일 손절선이 정확히 진입가가 되어
+    "1R 도달 시 본전이동" 이 파라미터를 늘리지 않고 나온다. 한쪽만 바꾸면
+    이 성질이 깨진다. 3.0 을 유지하는 것은 발동한 적이 없어 튜닝할 근거가
+    0이기 때문이다 - 지금 올리면 효과가 포지션 축소로만 나타난다.
     """
     p = paths(track)
-    return {k: p[k] for k in ("entry_total", "exit_total",
+    return {k: p[k] for k in ("min_total", "exit_total",
                               "stop_atr_mult", "trail_atr_mult")}

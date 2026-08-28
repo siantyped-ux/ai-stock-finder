@@ -12,7 +12,7 @@ import tracks
 
 def test_every_track_defines_the_same_keys():
     keys = {"label", "history", "dashboard", "suffix", "max_correlation",
-            "entry_total", "exit_total", "stop_atr_mult", "trail_atr_mult"}
+            "min_total", "exit_total", "stop_atr_mult", "trail_atr_mult"}
     for name, spec in tracks.TRACKS.items():
         assert set(spec) == keys, name
 
@@ -76,14 +76,14 @@ def test_trade_params_gives_the_etf_band():
     # 진입 75 / 청산 45. 45 는 임의값이 아니라 calc_signal 의 AVOID 경계다 -
     # "스캔이 이 종목을 회피로 볼 때 나간다" 가 된다.
     p = tracks.trade_params("etf")
-    assert p["entry_total"] == 75
+    assert p["min_total"] == 75
     assert p["exit_total"] == 45
 
 
 def test_trade_params_leaves_the_stock_track_at_todays_values():
     # 주식 트랙의 동작은 이번 변경으로 바뀌지 않는다.
     assert tracks.trade_params("stocks") == {
-        "entry_total": 70, "exit_total": 60,
+        "min_total": 70, "exit_total": 60,
         "stop_atr_mult": 3.0, "trail_atr_mult": 3.0,
     }
 
@@ -91,8 +91,8 @@ def test_trade_params_leaves_the_stock_track_at_todays_values():
 def test_the_etf_band_is_wider_than_the_stock_band():
     etf = tracks.trade_params("etf")
     stocks = tracks.trade_params("stocks")
-    assert (etf["entry_total"] - etf["exit_total"]
-            > stocks["entry_total"] - stocks["exit_total"])
+    assert (etf["min_total"] - etf["exit_total"]
+            > stocks["min_total"] - stocks["exit_total"])
 
 
 def test_the_two_atr_multiples_stay_coupled():
@@ -113,3 +113,10 @@ def test_the_atr_multiples_are_unchanged():
 def test_trade_params_rejects_an_unknown_track():
     with pytest.raises(ValueError):
         tracks.trade_params("nope")
+
+
+def test_trade_params_hands_back_a_copy():
+    # paths() 는 살아 있는 TRACKS 항목을 그대로 준다. 이쪽이 같은 규약을
+    # 물려받으면 호출자가 값 하나를 고칠 때 프로세스 전역이 바뀐다.
+    tracks.trade_params("etf")["exit_total"] = 999
+    assert tracks.TRACKS["etf"]["exit_total"] == 45
