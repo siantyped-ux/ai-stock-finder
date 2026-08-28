@@ -11,9 +11,38 @@ import tracks
 
 
 def test_every_track_defines_the_same_keys():
-    keys = {"label", "history", "dashboard", "suffix"}
+    keys = {"label", "history", "dashboard", "suffix", "max_correlation"}
     for name, spec in tracks.TRACKS.items():
         assert set(spec) == keys, name
+
+
+def test_the_etf_track_blocks_duplicate_bets():
+    # 2026-08-22 스캔의 BUY 90건에 XLV·VHT·IYH·FHLC·IXJ 가 함께 들어 있었고
+    # 상관이 0.97~0.999 였다. 끄고 두면 신호 하나를 다섯 번 센다.
+    assert tracks.max_correlation("etf") == 0.90
+
+
+def test_the_stock_track_leaves_the_guard_off():
+    # 주식에 상관 상한이 이로운지 재 본 적이 없다. 근거 없이 켜지 않는다.
+    assert tracks.max_correlation("stocks") == 1.0
+
+
+def test_max_correlation_rejects_an_unknown_track():
+    with pytest.raises(ValueError):
+        tracks.max_correlation("nope")
+
+
+def test_the_report_applies_the_track_correlation_limit():
+    # 리포트가 트랙별 상한을 실제로 백테스트에 넘기는지. 이게 끊기면 ETF
+    # 리포트가 복제본을 다섯 개 산 포트폴리오를 성과라고 보고한다.
+    assert perf_report.track_limits("etf").max_correlation == 0.90
+    assert perf_report.track_limits("stocks").max_correlation == 1.0
+
+
+def test_the_report_does_not_silently_cap_positions():
+    # 동시 보유 상한은 재 본 적이 없다. 켜면 예전 결과의 의미가 바뀐다.
+    for key in tracks.TRACKS:
+        assert perf_report.track_limits(key).max_positions == 0
 
 
 @pytest.mark.parametrize("key", ["history", "dashboard", "suffix"])
