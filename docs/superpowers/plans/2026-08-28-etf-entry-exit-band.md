@@ -12,6 +12,34 @@
 
 ---
 
+## 개정 (2026-08-28, Task 1 코드 리뷰 반영)
+
+**`tracks` 의 진입 문턱 키 이름을 `entry_total` 이 아니라 `min_total` 로 한다.**
+
+`backtest.filter_rows` 에 이미 `entry_total` 파라미터가 있는데 그쪽은 문턱을
+**내리는** 도구다(그 점수 이상을 BUY 로 승격시키는 비교용). 우리 키는 문턱을
+**올린다**. Task 5 의 `resolve_trade_params` 에서 두 이름이 한 함수 안에
+들어오므로, 방향이 반대인 동명 식별자 둘이 15줄 안에 공존하게 된다 - 조용히
+뒤집힌 필터가 나오는 전형적인 형태다.
+
+새 원칙: **tracks 의 키는 그것이 먹여 주는 소비자 파라미터 이름과 1:1 이다.**
+
+| tracks 키 | 소비자 |
+|---|---|
+| `min_total` | `backtest.filter_rows(min_total=)` |
+| `exit_total` | `exit_rules.Params.exit_total` |
+| `stop_atr_mult` | `exit_rules.Params.stop_atr_mult` |
+| `trail_atr_mult` | `exit_rules.Params.trail_atr_mult` |
+
+번역 단계가 아예 없어진다. 밴드 언어(진입/청산)는 docstring 에만 둔다.
+
+`filter_rows` 의 기존 `entry_total`(승격)은 **그대로 둔다.** 사용자에게 노출된
+`--entry-total` 플래그를 바꾸는 것은 이 계획의 범위 밖이다.
+
+아래 Task 1 본문은 이 개정을 반영해 고쳐 두었다. Task 5·7 도 마찬가지다.
+
+---
+
 ## File Structure
 
 | 파일 | 역할 | 변경 |
@@ -40,7 +68,7 @@
 ```python
 def test_every_track_defines_the_same_keys():
     keys = {"label", "history", "dashboard", "suffix", "max_correlation",
-            "entry_total", "exit_total", "stop_atr_mult", "trail_atr_mult"}
+            "min_total", "exit_total", "stop_atr_mult", "trail_atr_mult"}
     for name, spec in tracks.TRACKS.items():
         assert set(spec) == keys, name
 ```
@@ -52,14 +80,14 @@ def test_trade_params_gives_the_etf_band():
     # 진입 75 / 청산 45. 45 는 임의값이 아니라 calc_signal 의 AVOID 경계다 -
     # "스캔이 이 종목을 회피로 볼 때 나간다" 가 된다.
     p = tracks.trade_params("etf")
-    assert p["entry_total"] == 75
+    assert p["min_total"] == 75
     assert p["exit_total"] == 45
 
 
 def test_trade_params_leaves_the_stock_track_at_todays_values():
     # 주식 트랙의 동작은 이번 변경으로 바뀌지 않는다.
     assert tracks.trade_params("stocks") == {
-        "entry_total": 70, "exit_total": 60,
+        "min_total": 70, "exit_total": 60,
         "stop_atr_mult": 3.0, "trail_atr_mult": 3.0,
     }
 
@@ -67,8 +95,8 @@ def test_trade_params_leaves_the_stock_track_at_todays_values():
 def test_the_etf_band_is_wider_than_the_stock_band():
     etf = tracks.trade_params("etf")
     stocks = tracks.trade_params("stocks")
-    assert (etf["entry_total"] - etf["exit_total"]
-            > stocks["entry_total"] - stocks["exit_total"])
+    assert (etf["min_total"] - etf["exit_total"]
+            > stocks["min_total"] - stocks["exit_total"])
 
 
 def test_the_two_atr_multiples_stay_coupled():
@@ -84,6 +112,13 @@ def test_the_atr_multiples_are_unchanged():
     # 파라미터를 튜닝하면 효과가 포지션 축소로만 나타나 되돌릴 근거가 안 남는다.
     for key in tracks.TRACKS:
         assert tracks.trade_params(key)["stop_atr_mult"] == 3.0, key
+
+
+def test_trade_params_hands_back_a_copy():
+    # paths() 는 살아 있는 TRACKS 항목을 그대로 준다. 이쪽이 같은 규약을
+    # 물려받으면 호출자가 값 하나를 고칠 때 프로세스 전역이 바뀐다.
+    tracks.trade_params("etf")["exit_total"] = 999
+    assert tracks.TRACKS["etf"]["exit_total"] == 45
 
 
 def test_trade_params_rejects_an_unknown_track():
@@ -111,7 +146,10 @@ TRACKS = {
         "suffix": "",
         # 1.0 은 검사를 끈다는 뜻이다. 머리말 참조.
         "max_correlation": 1.0,
-        "entry_total": 70,
+        # calc_signal 의 BUY 문턱과 같은 값이라 오늘 아카이브에서는 아무것도
+        # 거르지 않는다. 구조적으로 무해한 것이 아니라 데이터가 그럴 뿐이다 -
+        # total 이 빈 BUY 행이 한 건이라도 생기면 그때부터 거른다.
+        "min_total": 70,
         "exit_total": 60,
         "stop_atr_mult": 3.0,
         "trail_atr_mult": 3.0,
@@ -122,7 +160,7 @@ TRACKS = {
         "dashboard": "dashboard_data_etf.js",
         "suffix": "_ETF",
         "max_correlation": 0.90,
-        "entry_total": 75,
+        "min_total": 75,
         "exit_total": 45,
         "stop_atr_mult": 3.0,
         "trail_atr_mult": 3.0,
@@ -138,21 +176,42 @@ TRACKS = {
 def trade_params(track: str) -> dict:
     """그 트랙의 매매 파라미터 4종.
 
+    키 이름은 전부 소비자의 파라미터 이름과 1:1 이다 - min_total 은
+    backtest.filter_rows(min_total=), 나머지 셋은 exit_rules.Params 의 같은
+    이름 필드로 그대로 들어간다. 번역 단계를 두지 않는 것은 의도다.
+
+    특히 이것을 entry_total 이라 부르지 않는다. backtest.filter_rows 에 이미
+    entry_total 이 있는데 그쪽은 문턱을 **내리는**(BUY 로 승격) 비교용
+    손잡이라 방향이 정반대다. 같은 이름 둘이 한 함수 안에서 만나면 조용히
+    뒤집힌 필터가 나온다.
+
     exit_rules.Params 를 여기서 만들지 않는 것은 max_correlation 이
     portfolio.Limits 를 만들지 않는 것과 같은 이유다 - tracks 는 아무것도
     임포트하지 않는 정의 모듈이고, 스캐너가 이것을 읽는다. 여기서 매매
     계층을 끌어오면 스캔이 백테스트 전체를 함께 임포트하게 된다.
 
-    entry_total 과 exit_total 은 히스테리시스 밴드의 양끝이다. 들어갈 때는
-    까다롭게(75), 한 번 들어가면 웬만해선 안 흔들리게(45). ETF 의 밴드가
-    주식보다 넓은 것은 2026-08-28 실측 때문이다 - 7일간 ATR 손절은 한 번도
-    걸리지 않았고 유일한 청산이 exit_total 이었다.
+    min_total 과 exit_total 은 히스테리시스 밴드의 양끝이다. 들어갈 때는
+    까다롭게, 한 번 들어가면 웬만해선 안 흔들리게. ETF 가 75/45 로 주식
+    70/60 보다 넓다.
 
-    45 는 calc_signal 의 AVOID 경계다. 50 은 어느 등급 경계도 아니어서
-    "왜 50인가" 에 답할 근거가 없다.
+    ## 45 의 근거는 약하다
+
+    2026-08-28 실측이 말해 주는 것은 "exit_total 이 실제로 발동하는 유일한
+    청산이고 ATR 손절은 7일간 한 번도 안 걸렸다" 까지다. 45 라는 값 자체는
+    측정된 것이 아니라 calc_signal 의 AVOID 경계에서 고른 것이다 - exit_rules
+    가 total < exit_total 로 판정하므로 45 는 "스캔이 회피로 볼 때 나간다" 와
+    정확히 같아진다. 표본은 닫힌 트레이드 1건(SDOG)뿐이다. 아카이브가 30일을
+    넘기면 45 와 60 을 나란히 재 볼 것.
+
+    ## 두 ATR 배수는 같이 움직여야 한다
+
+    고점이 진입가+1R 에 닿는 순간 트레일 손절선이 정확히 진입가가 되어
+    "1R 도달 시 본전이동" 이 파라미터를 늘리지 않고 나온다. 한쪽만 바꾸면
+    이 성질이 깨진다. 3.0 을 유지하는 것은 발동한 적이 없어 튜닝할 근거가
+    0이기 때문이다 - 지금 올리면 효과가 포지션 축소로만 나타난다.
     """
     p = paths(track)
-    return {k: p[k] for k in ("entry_total", "exit_total",
+    return {k: p[k] for k in ("min_total", "exit_total",
                               "stop_atr_mult", "trail_atr_mult")}
 ```
 
@@ -631,10 +690,10 @@ Expected: FAIL — `AttributeError: module 'backtest' has no attribute 'resolve_
 ```python
 # 트랙을 지정하지 않았을 때의 값. 현행 동작을 그대로 보존한다.
 #
-# entry_total 이 None 인 것은 의도다 - 트랙 없이 돌리는 기존 호출에 진입
+# min_total 이 None 인 것은 의도다 - 트랙 없이 돌리는 기존 호출에 진입
 # 문턱을 새로 걸면 예전 결과의 의미가 조용히 바뀐다.
 DEFAULT_TRADE_PARAMS = {
-    "entry_total": None,
+    "min_total": None,
     "exit_total": 60,
     "stop_atr_mult": 3.0,
     "trail_atr_mult": 3.0,
@@ -650,11 +709,12 @@ def resolve_trade_params(args) -> tuple:
     --max-correlation 에 이미 적용된 규칙이다. 그러지 않으면 트랙을 준 순간
     사용자가 직접 준 값이 조용히 무시된다.
 
-    tracks 는 밴드 언어(entry_total/exit_total)를 쓰고 여기는 행 필터
-    언어(min_total)를 쓴다. 같은 값이며, tracks 의 entry_total 이 곧
-    filter_rows 의 min_total 이다 - 이름이 다른 것은 tracks 가 "어디서
-    들어가고 어디서 나가나" 를 정의하고 filter_rows 는 "어느 행을 버리나" 를
-    하기 때문이다.
+    tracks 의 키 이름은 소비자 파라미터 이름과 1:1 이라 번역이 없다.
+    min_total 은 그대로 filter_rows(min_total=) 로 간다.
+
+    주의: args.entry_total 은 여기 있는 min_total 과 **다른 것**이다. 그쪽은
+    문턱을 내리는(BUY 로 승격) 비교용 손잡이라 방향이 정반대이고, 이 함수는
+    그것을 건드리지 않는다 - 호출자가 run() 에 따로 넘긴다.
 
     main 이 너무 커서 테스트로 못 잡으므로 함수로 떼어 둔다
     (perf_report.track_limits 와 같은 이유).
@@ -672,7 +732,7 @@ def resolve_trade_params(args) -> tuple:
         exit_total=pick(args.exit_total, "exit_total"),
         use_target=args.use_target,
     )
-    return params, pick(args.min_total, "entry_total")
+    return params, pick(args.min_total, "min_total")
 ```
 
 - [ ] **Step 4: argparse 기본값을 `None` 으로 바꾸고 `--min-total` 을 추가한다**
@@ -952,22 +1012,26 @@ git commit -m "Compare two settings with exposure next to R"
 def test_the_report_uses_the_etf_band():
     # main 이 두 트랙에 같은 Params 를 쓰면 ETF 의 넓힌 밴드가 리포트에
     # 반영되지 않는다. 매일 도는 것이 이 경로다.
-    assert pr.track_params("etf").exit_total == 45
+    params, min_total = pr.track_params("etf")
+    assert params.exit_total == 45
+    assert min_total == 75
 
 
 def test_the_report_leaves_the_stock_track_alone():
-    assert pr.track_params("stocks").exit_total == 60
+    params, min_total = pr.track_params("stocks")
+    assert params.exit_total == 60
+    assert min_total == 70
 
 
 def test_the_report_keeps_the_atr_multiples_coupled():
     for key in ("stocks", "etf"):
-        p = pr.track_params(key)
-        assert p.stop_atr_mult == p.trail_atr_mult, key
+        params, _ = pr.track_params(key)
+        assert params.stop_atr_mult == params.trail_atr_mult, key
 
 
 def test_the_report_carries_use_target_through():
-    assert pr.track_params("etf", use_target=True).use_target is True
-    assert pr.track_params("etf").use_target is False
+    assert pr.track_params("etf", use_target=True)[0].use_target is True
+    assert pr.track_params("etf")[0].use_target is False
 
 
 def test_track_params_rejects_an_unknown_track():
@@ -985,8 +1049,8 @@ Expected: FAIL — `AttributeError: module 'perf_report' has no attribute 'track
 - [ ] **Step 3: `track_params` 를 `perf_report.py` 의 `track_limits` 아래에 추가한다**
 
 ```python
-def track_params(track: str, use_target: bool = False) -> er.Params:
-    """그 트랙의 청산 파라미터.
+def track_params(track: str, use_target: bool = False) -> tuple:
+    """그 트랙의 청산 파라미터와 진입 문턱. (er.Params, min_total).
 
     track_limits 와 같은 이유로 함수로 떼어 둔다 - main 이 너무 커서
     테스트로 못 잡는다.
@@ -995,13 +1059,19 @@ def track_params(track: str, use_target: bool = False) -> er.Params:
     리포트에 반영되지 않는다. 백테스트 CLI 에서만 보이고 매일 도는 리포트는
     옛 값으로 도는 상태가 되어, 두 산출물이 서로 다른 규칙을 보고하게 된다.
 
+    반환형이 backtest.resolve_trade_params 와 같은 2-튜플인 것은 의도다.
+    같은 일을 하는 함수 둘이 서로 다른 모양을 내면 두 호출부가 갈라진다.
+    Params 만 돌려주면 호출자가 min_total 을 얻으려고 tracks.trade_params 를
+    한 번 더 불러야 한다.
+
     max_hold_days 는 트랙 파라미터가 아니다. Params 기본값 60 을 쓴다.
     """
     p = tracks.trade_params(track)
-    return er.Params(stop_atr_mult=p["stop_atr_mult"],
-                     trail_atr_mult=p["trail_atr_mult"],
-                     exit_total=p["exit_total"],
-                     use_target=use_target)
+    params = er.Params(stop_atr_mult=p["stop_atr_mult"],
+                       trail_atr_mult=p["trail_atr_mult"],
+                       exit_total=p["exit_total"],
+                       use_target=use_target)
+    return params, p["min_total"]
 ```
 
 - [ ] **Step 4: `main()` 의 트랙 루프를 고친다**
@@ -1019,8 +1089,7 @@ def track_params(track: str, use_target: bool = False) -> er.Params:
         limits = track_limits(key)
         # 청산 규칙과 진입 문턱이 트랙마다 다르다. 하나를 돌려쓰면 ETF 의
         # 넓힌 밴드가 리포트에 반영되지 않는다.
-        params = track_params(key, args.use_target)
-        min_total = tracks.trade_params(key)["entry_total"]
+        params, min_total = track_params(key, args.use_target)
         # us_only 로 돌린다. 리포트 금액이 전부 달러라 원화로 호가되는
         # 한국 종목이 섞이면 안 된다 - 아카이브 07-31~08-21 구간에 남아 있다.
         result = backtest.run(pattern, params, us_only=True,
@@ -1066,6 +1135,12 @@ Expected: PASS (전부). 실패가 있으면 그 테스트가 검증하던 계�
 
 Run: `python backtest.py --track stocks --capital 10000`
 Expected: 이번 변경 **이전과 같은 결과**. 주식 트랙 값은 바뀌지 않았다.
+
+단, "같다" 는 오늘 아카이브 기준이다. 주식 트랙에 `min_total=70` 이 새로
+걸리는데 이것은 `calc_signal` 의 BUY 문턱과 같은 값이라 지금은 아무것도
+거르지 않는다 (실측: `history/` 와 `history_etf/` 의 BUY·STRONG_BUY 837행이
+전부 total>=70). 구조적 무해가 아니라 데이터가 그럴 뿐이므로, total 이 빈
+BUY 행이 생기면 그때부터 결과가 갈린다.
 
 Run: `python backtest.py --track etf --capital 10000`
 Expected: 이전 실행에 있던 `SDOG ... SIGNAL ... -0.40R` 청산이 사라지고 미결 포지션이 하나 늘어난다.
