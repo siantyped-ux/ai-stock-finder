@@ -60,8 +60,35 @@ def atr_series(hist_df, period: int = 14) -> dict:
     return out
 
 
+# 티커 -> {날짜: Bar}. 프로세스 수명이다.
+#
+# --compare 가 같은 아카이브를 두 설정으로 돌리기 때문에 필요하다. 캐시가
+# 없으면 두 번째 설정이 yfinance 를 통째로 다시 때린다 - 55종목이면 왕복이
+# 두 배가 되고, 그 사이 시세가 바뀌면 두 열이 서로 다른 데이터 위에서
+# 비교된다. 후자가 진짜 문제다.
+_BARS_CACHE: dict = {}
+
+
+def clear_bars_cache() -> None:
+    """캐시를 비운다. 테스트가 서로에게 봉을 넘기지 않도록."""
+    _BARS_CACHE.clear()
+
+
 def fetch_bars(ticker: str) -> dict:
-    """티커의 일봉을 날짜 -> exit_rules.Bar 로 반환한다. 실패하면 빈 dict."""
+    """티커의 일봉을 날짜 -> exit_rules.Bar 로 반환한다. 실패하면 빈 dict.
+
+    실패(빈 dict)도 캐시한다. 안 그러면 조회가 안 되는 티커를 설정마다 다시
+    때리고, 재시도할 때마다 같은 실패를 기다린다.
+    """
+    if ticker in _BARS_CACHE:
+        return _BARS_CACHE[ticker]
+
+    bars = _fetch_bars_uncached(ticker)
+    _BARS_CACHE[ticker] = bars
+    return bars
+
+
+def _fetch_bars_uncached(ticker: str) -> dict:
     try:
         df = yf.Ticker(ticker).history(period="1y", auto_adjust=True)
     except Exception:

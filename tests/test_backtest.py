@@ -469,3 +469,67 @@ def test_a_demoted_ticker_enters_when_it_later_clears_the_bar(monkeypatch):
     trades = bt.run("x", min_total=75)["trades"]
 
     assert [t.entry_date for t in trades] == ["2026-01-05"]
+
+
+# ─── 봉 캐시 ───────────────────────────────────────────────────
+# --compare (Task 6) 는 같은 프로세스에서 run() 을 두 번 돈다. 캐시가 없으면
+# yfinance 를 두 번 때린다.
+
+def test_fetch_bars_caches_a_ticker(monkeypatch):
+    calls = []
+
+    class _Stub:
+        def __init__(self, ticker):
+            calls.append(ticker)
+
+        def history(self, period, auto_adjust):
+            return _flat_frame(n=40)
+
+    bt.clear_bars_cache()
+    monkeypatch.setattr(bt.yf, "Ticker", _Stub)
+
+    first = bt.fetch_bars("X")
+    second = bt.fetch_bars("X")
+
+    assert calls == ["X"]
+    assert first is second
+
+
+def test_fetch_bars_caches_a_failure(monkeypatch):
+    # 실패도 캐시하지 않으면 조회가 안 되는 티커를 설정마다 다시 때린다.
+    calls = []
+
+    class _Dead:
+        def __init__(self, ticker):
+            calls.append(ticker)
+
+        def history(self, period, auto_adjust):
+            raise RuntimeError("no network")
+
+    bt.clear_bars_cache()
+    monkeypatch.setattr(bt.yf, "Ticker", _Dead)
+
+    assert bt.fetch_bars("X") == {}
+    assert bt.fetch_bars("X") == {}
+    assert calls == ["X"]
+
+
+def test_clear_bars_cache_empties_it(monkeypatch):
+    # 테스트가 서로에게 캐시를 넘기면 안 된다.
+    calls = []
+
+    class _Stub:
+        def __init__(self, ticker):
+            calls.append(ticker)
+
+        def history(self, period, auto_adjust):
+            return _flat_frame(n=40)
+
+    bt.clear_bars_cache()
+    monkeypatch.setattr(bt.yf, "Ticker", _Stub)
+
+    bt.fetch_bars("X")
+    bt.clear_bars_cache()
+    bt.fetch_bars("X")
+
+    assert calls == ["X", "X"]
