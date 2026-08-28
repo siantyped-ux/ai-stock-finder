@@ -11,7 +11,8 @@ import tracks
 
 
 def test_every_track_defines_the_same_keys():
-    keys = {"label", "history", "dashboard", "suffix", "max_correlation"}
+    keys = {"label", "history", "dashboard", "suffix", "max_correlation",
+            "entry_total", "exit_total", "stop_atr_mult", "trail_atr_mult"}
     for name, spec in tracks.TRACKS.items():
         assert set(spec) == keys, name
 
@@ -69,3 +70,46 @@ def test_the_scanner_and_the_report_share_one_definition():
 
 def test_the_scanner_still_exposes_track_paths():
     assert sf.track_paths("etf")["history"] == "history_etf"
+
+
+def test_trade_params_gives_the_etf_band():
+    # 진입 75 / 청산 45. 45 는 임의값이 아니라 calc_signal 의 AVOID 경계다 -
+    # "스캔이 이 종목을 회피로 볼 때 나간다" 가 된다.
+    p = tracks.trade_params("etf")
+    assert p["entry_total"] == 75
+    assert p["exit_total"] == 45
+
+
+def test_trade_params_leaves_the_stock_track_at_todays_values():
+    # 주식 트랙의 동작은 이번 변경으로 바뀌지 않는다.
+    assert tracks.trade_params("stocks") == {
+        "entry_total": 70, "exit_total": 60,
+        "stop_atr_mult": 3.0, "trail_atr_mult": 3.0,
+    }
+
+
+def test_the_etf_band_is_wider_than_the_stock_band():
+    etf = tracks.trade_params("etf")
+    stocks = tracks.trade_params("stocks")
+    assert (etf["entry_total"] - etf["exit_total"]
+            > stocks["entry_total"] - stocks["exit_total"])
+
+
+def test_the_two_atr_multiples_stay_coupled():
+    # 고점이 진입가+1R 에 닿는 순간 트레일 손절선이 정확히 진입가가 되는
+    # 본전이동 성질. 한쪽만 바꾸면 파라미터를 늘리지 않고 얻던 성질이 깨진다.
+    for key in tracks.TRACKS:
+        p = tracks.trade_params(key)
+        assert p["stop_atr_mult"] == p["trail_atr_mult"], key
+
+
+def test_the_atr_multiples_are_unchanged():
+    # 7일 표본에서 STOP·TRAIL 이 한 번도 걸리지 않았다. 발동한 적 없는
+    # 파라미터를 튜닝하면 효과가 포지션 축소로만 나타나 되돌릴 근거가 안 남는다.
+    for key in tracks.TRACKS:
+        assert tracks.trade_params(key)["stop_atr_mult"] == 3.0, key
+
+
+def test_trade_params_rejects_an_unknown_track():
+    with pytest.raises(ValueError):
+        tracks.trade_params("nope")

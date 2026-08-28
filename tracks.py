@@ -37,6 +37,10 @@ TRACKS = {
         "suffix": "",
         # 1.0 은 검사를 끈다는 뜻이다. 머리말 참조.
         "max_correlation": 1.0,
+        "entry_total": 70,
+        "exit_total": 60,
+        "stop_atr_mult": 3.0,
+        "trail_atr_mult": 3.0,
     },
     "etf": {
         "label": "ETF",
@@ -44,6 +48,10 @@ TRACKS = {
         "dashboard": "dashboard_data_etf.js",
         "suffix": "_ETF",
         "max_correlation": 0.90,
+        "entry_total": 75,
+        "exit_total": 45,
+        "stop_atr_mult": 3.0,
+        "trail_atr_mult": 3.0,
     },
 }
 
@@ -73,3 +81,24 @@ def max_correlation(track: str) -> float:
     계층 전체를 함께 임포트하게 된다.
     """
     return paths(track)["max_correlation"]
+
+
+def trade_params(track: str) -> dict:
+    """그 트랙의 매매 파라미터 4종.
+
+    exit_rules.Params 를 여기서 만들지 않는 것은 max_correlation 이
+    portfolio.Limits 를 만들지 않는 것과 같은 이유다 - tracks 는 아무것도
+    임포트하지 않는 정의 모듈이고, 스캐너가 이것을 읽는다. 여기서 매매
+    계층을 끌어오면 스캔이 백테스트 전체를 함께 임포트하게 된다.
+
+    entry_total 과 exit_total 은 히스테리시스 밴드의 양끝이다. 들어갈 때는
+    까다롭게(75), 한 번 들어가면 웬만해선 안 흔들리게(45). ETF 의 밴드가
+    주식보다 넓은 것은 2026-08-28 실측 때문이다 - 7일간 ATR 손절은 한 번도
+    걸리지 않았고 유일한 청산이 exit_total 이었다.
+
+    45 는 calc_signal 의 AVOID 경계다. 50 은 어느 등급 경계도 아니어서
+    "왜 50인가" 에 답할 근거가 없다.
+    """
+    p = paths(track)
+    return {k: p[k] for k in ("entry_total", "exit_total",
+                              "stop_atr_mult", "trail_atr_mult")}
