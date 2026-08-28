@@ -2,6 +2,7 @@ import pandas as pd
 import pytest
 
 import backtest as bt
+import exit_rules as er
 
 
 def _flat_frame(n=20):
@@ -616,3 +617,74 @@ def test_the_stock_track_resolves_to_todays_behaviour():
     assert params.exit_total == 60
     assert params.stop_atr_mult == 3.0
     assert min_total == 70
+
+
+# ─── --compare (노출을 R 옆에 낸다) ──────────────────────────
+# 손절 배수를 바꾸면 sizing.shares 가 수량을 줄여 종목당 투입이 작아진다.
+# R 만 보면 "손절을 넓혔더니 좋아졌다" 로 읽히지만 실제로는 베팅이 작아진
+# 것이다. 비교표는 노출을 함께 내야 한다.
+
+def _fake_result(entered, qty, net_r, closed=0):
+    import trade_sim as ts
+    trades = [
+        ts.Trade(ticker=f"T{i}", market="US", source="live",
+                 entry_date="2026-01-02", entry_price=100.0, r_unit=2.0,
+                 exit_date=None, exit_price=None, exit_reason=None,
+                 bars_held=1, is_open=True, gross_r=0.0, cost_r=0.0,
+                 net_r=0.0, mark_price=100.0, initial_stop=94.0,
+                 high_since_entry=100.0, stop=94.0, target_price=None,
+                 qty=qty)
+        for i in range(entered)
+    ]
+    return {"trades": trades,
+            "summary": {"closed": closed, "total_net_r": net_r,
+                        "open_net_r": 0.0}}
+
+
+def test_compare_row_reports_exposure():
+    row = bt.compare_row(_fake_result(2, qty=10, net_r=-1.0),
+                         er.Params(stop_atr_mult=3.0))
+    assert row["entered"] == 2
+    assert row["avg_position"] == 1000.0     # 100.0 x 10주
+
+
+def test_compare_row_has_no_exposure_without_a_capital_account():
+    # qty 는 자본 제약이 있을 때만 채워진다. 없으면 노출을 잴 수 없다.
+    row = bt.compare_row(_fake_result(2, qty=None, net_r=-1.0),
+                         er.Params())
+    assert row["avg_position"] is None
+
+
+def test_compare_warns_when_the_stop_multiple_differs(capsys):
+    a = bt.compare_row(_fake_result(1, qty=10, net_r=-1.0),
+                       er.Params(stop_atr_mult=3.0))
+    b = bt.compare_row(_fake_result(2, qty=7, net_r=-0.5),
+                       er.Params(stop_atr_mult=4.5))
+
+    bt.compare_report(a, b, has_account=True)
+
+    out = capsys.readouterr().out
+    assert "stop_atr_mult" in out
+    assert "포지션 축소" in out
+
+
+def test_compare_stays_quiet_when_the_stop_multiple_matches(capsys):
+    a = bt.compare_row(_fake_result(1, qty=10, net_r=-1.0), er.Params())
+    b = bt.compare_row(_fake_result(2, qty=10, net_r=-0.5), er.Params())
+
+    bt.compare_report(a, b, has_account=True)
+
+    assert "포지션 축소" not in capsys.readouterr().out
+
+
+def test_compare_refuses_to_guess_without_capital(capsys):
+    # --capital 이 없으면 노출을 못 재고 R 의 분모만 바뀐다. 그 두 열은
+    # 비교할 수 없으므로 그렇게 말해야 한다.
+    a = bt.compare_row(_fake_result(1, qty=None, net_r=-1.0),
+                       er.Params(stop_atr_mult=3.0))
+    b = bt.compare_row(_fake_result(1, qty=None, net_r=-0.5),
+                       er.Params(stop_atr_mult=4.5))
+
+    bt.compare_report(a, b, has_account=False)
+
+    assert "비교할 수 없다" in capsys.readouterr().out

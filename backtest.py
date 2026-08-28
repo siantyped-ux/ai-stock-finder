@@ -430,6 +430,56 @@ def report(result: dict) -> None:
     print("=" * 60)
 
 
+def compare_row(result: dict, params: er.Params) -> dict:
+    """비교표 한 열. 노출을 반드시 함께 낸다.
+
+    손절 배수를 바꾸면 sizing.shares 가 r_unit 으로 수량을 역산하므로
+    종목당 투입이 달라진다. R 만 보면 "손절을 넓혔더니 좋아졌다" 로 읽히지만
+    실제로 일어난 일은 베팅이 작아진 것이고, 상승장에서는 대칭으로 덜 번다.
+    노출을 옆에 두지 않으면 이 구분이 안 보인다.
+    """
+    trades = result["trades"]
+    invested = [t.entry_price * t.qty for t in trades if t.qty]
+    s = result["summary"]
+    return {
+        "entered": len({t.ticker for t in trades}),
+        # qty 는 자본 제약이 있을 때만 채워진다. 없으면 노출을 잴 수 없다.
+        "avg_position": sum(invested) / len(invested) if invested else None,
+        "closed": s["closed"],
+        "net_r": s["total_net_r"] + s["open_net_r"],
+        "stop_atr_mult": params.stop_atr_mult,
+    }
+
+
+def compare_report(a: dict, b: dict, has_account: bool) -> None:
+    """두 설정을 나란히 찍는다. A 가 기준, B 가 바꾼 쪽이다."""
+    def cell(v, fmt):
+        return "-" if v is None else format(v, fmt)
+
+    print("=" * 62)
+    print(f"{'':<22}{'A(기준)':>18}{'B(변경)':>18}")
+    print("-" * 62)
+    print(f"{'진입 종목':<22}{a['entered']:>18}{b['entered']:>18}")
+    print(f"{'종목당 평균 투입':<22}"
+          f"{cell(a['avg_position'], ',.0f'):>18}"
+          f"{cell(b['avg_position'], ',.0f'):>18}")
+    print(f"{'닫힌 트레이드':<22}{a['closed']:>18}{b['closed']:>18}")
+    print(f"{'합계 R (미결 포함)':<22}"
+          f"{a['net_r']:>+18.2f}{b['net_r']:>+18.2f}")
+
+    if a["stop_atr_mult"] != b["stop_atr_mult"]:
+        print()
+        print(f"  !! stop_atr_mult 가 다르다 "
+              f"({a['stop_atr_mult']} vs {b['stop_atr_mult']}).")
+        if has_account:
+            print("     R 차이에 포지션 축소 효과가 섞여 있다. 종목당 투입을")
+            print("     함께 볼 것 - 상승장에서는 대칭으로 덜 번다.")
+        else:
+            print("     --capital 이 없어 노출을 잴 수 없고 R 의 분모만 바뀐다.")
+            print("     이 두 열은 비교할 수 없다. --capital 을 주고 다시 돌릴 것.")
+    print("=" * 62)
+
+
 # 트랙을 지정하지 않았을 때의 값. 현행 동작을 그대로 보존한다.
 #
 # min_total 이 None 인 것은 의도다 - 트랙 없이 돌리는 기존 호출에 진입
@@ -522,6 +572,10 @@ def main():
                    help="이미 보유한 종목과의 일간수익률 상관 상한 (1.0=끔).\n"
                         "  0.90 이면 XLV·VHT·IYH 같은 사실상 같은 베팅을 막는다.\n"
                         "  생략하면 --track 의 기본값, --track 도 없으면 1.0")
+    p.add_argument("--compare", action="store_true",
+                   help="기준값과 지금 준 인자를 나란히 돌려 비교한다.\n"
+                        "  기준은 --track 의 값이고, --track 이 없으면\n"
+                        "  현행 기본값이다. 바꾼 인자가 하나도 없으면 거부한다")
     args = p.parse_args()
 
     # --track 은 기본값만 바꾼다. 명시된 인자가 언제나 이긴다 - 그러지 않으면
@@ -543,10 +597,37 @@ def main():
                                  risk_pct=args.risk_pct,
                                  max_weight_pct=args.max_weight_pct)
 
-    report(run(pattern, params, us_only=args.us_only,
-               entry_total=args.entry_total, limits=limits,
-               start_date=args.start_date, account=account,
-               min_total=min_total))
+    # entry_total 을 kwargs 에 숨기지 않는다. 방향이 정반대인 손잡이 둘이
+    # 한 호출에 함께 들어가므로 둘 다 눈에 보여야 한다. entry_total 은
+    # 사용자가 준 비교 플래그라 두 열에 똑같이 가고, min_total 은 트랙에서
+    # 푼 값이라 열마다 다르다 - 그 차이가 호출부에서 읽혀야 한다.
+    kwargs = dict(us_only=args.us_only, limits=limits,
+                  start_date=args.start_date, account=account)
+
+    if args.compare:
+        # vars(args) 를 펴고 파라미터만 지운다("같은 인자, 기본값으로").
+        # 필드를 손으로 다시 나열하면 resolve_trade_params 가 읽는 필드가
+        # 늘어날 때 여기만 조용히 어긋난다.
+        base_args = argparse.Namespace(**{
+            **vars(args),
+            "stop_atr_mult": None, "trail_atr_mult": None,
+            "exit_total": None, "min_total": None})
+        base_params, base_min = resolve_trade_params(base_args)
+        if (base_params, base_min) == (params, min_total):
+            raise SystemExit(
+                "--compare 는 바꿀 값이 있어야 한다. "
+                "--stop-atr-mult 같은 인자를 함께 줄 것.")
+        a = run(pattern, base_params, entry_total=args.entry_total,
+                min_total=base_min, **kwargs)
+        b = run(pattern, params, entry_total=args.entry_total,
+                min_total=min_total, **kwargs)
+        compare_report(compare_row(a, base_params),
+                       compare_row(b, params),
+                       has_account=account is not None)
+        return
+
+    report(run(pattern, params, entry_total=args.entry_total,
+               min_total=min_total, **kwargs))
 
 
 if __name__ == "__main__":
