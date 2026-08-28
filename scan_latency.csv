@@ -1,0 +1,2 @@
+kst_date,event,target_utc,finished_utc,late_minutes
+2026-08-28,workflow_dispatch,2026-08-27T23:15:00Z,2026-08-28T00:28:17Z,73
