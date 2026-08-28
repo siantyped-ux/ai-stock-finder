@@ -115,9 +115,32 @@ def _fetch_bars_uncached(ticker: str) -> dict:
     return bars
 
 
-def filter_rows(rows: list, us_only: bool = False,
-                entry_total: int = None, start_date: str = None,
-                min_total: int = None) -> list:
+def _score(row: dict):
+    """행의 총점을 int 로. 비어 있으면 None.
+
+    점수를 모르는 행은 어느 문턱도 통과하지 못한다 - 승격되지도 않고,
+    강등을 면하지도 못한다. 두 방향 다 "진입하지 않는 쪽" 으로 실패한다.
+
+    비어 있지도 숫자도 아니면 그대로 터뜨리되 어느 행인지는 말한다.
+    아카이브는 history 가 쓰기 시점에 빈 total 을 막고 calc_total 이 int 를
+    내므로 실측 32,827행에 파싱 실패가 0건이다. 다만 Task 7 이후로는 이
+    파싱이 매일 밤 두 트랙 전체를 돌게 되고, 그때 티커도 날짜도 없이 터지면
+    어느 행인지 찾을 수가 없다.
+    """
+    total = row.get("total")
+    if total in (None, ""):
+        return None
+    try:
+        return int(total)
+    except (TypeError, ValueError) as exc:
+        raise ValueError(
+            f"{row.get('ticker')} {row.get('date')}: total 이 {total!r} 라 "
+            "정수로 읽을 수 없다") from exc
+
+
+def filter_rows(rows: list, *, us_only: bool = False,
+                entry_total: int = None, min_total: int = None,
+                start_date: str = None) -> list:
     """아카이브 행을 진입 조건에 맞게 걸러 낸다.
 
     start_date 는 그 날짜부터만 본다. 07-31~08-21 구간은 66% 가 backfill 이라
@@ -128,7 +151,9 @@ def filter_rows(rows: list, us_only: bool = False,
     us_only 는 과거 아카이브에 남아 있는 한국 행을 뺀다. 7/31~8/22 데이터에는
     KR 이 들어 있어서, 미국 단독 성과를 보려면 여기서 빼야 한다.
 
-    entry_total 과 min_total 은 대칭이지만 별개의 손잡이다.
+    entry_total 과 min_total 은 방향이 정반대인 별개의 손잡이다 -
+    entry_total 은 문턱을 내리고(BUY 로 승격), min_total 은 올린다
+    (HOLD 로 강등).
 
     entry_total 은 그 점수 이상인 행의 signal 을 BUY 로 **올린다**(완화).
     원래 진입 조건은 signal in (BUY, STRONG_BUY) 이고 BUY 정의가
@@ -140,6 +165,10 @@ def filter_rows(rows: list, us_only: bool = False,
     건드리면 과거 아카이브(70 기준)와 미래 아카이브(75 기준)의 signal 열
     정의가 갈라져 과거 행을 재현할 수 없게 된다.
 
+    min_total 이 필요했던 것은 실측 때문이다. 2026-08-28 ETF 트랙에서
+    --entry-total 80 을 줬는데 진입이 줄기는커녕 후보가 55 -> 62 로 늘었다.
+    문턱을 올리는 경로가 아예 없었다.
+
     HOLD 로 내리는 이유는 trade_sim.step_entry 가 BUY 로의 **전환**을 보기
     때문이다. 강등하면 그날의 전환이 사라지고, 나중에 총점이 진짜로 문턱을
     넘는 날 HOLD -> BUY 전환이 새로 생겨 그 시점에 진입한다.
@@ -148,6 +177,10 @@ def filter_rows(rows: list, us_only: bool = False,
     있으나 마나가 된다.
 
     강등을 승격 뒤에 둔다. 둘 다 주면 강등이 이긴다.
+
+    keyword-only 다. filter_rows(rows, False, 75) 는 "75 이상을 BUY 로
+    승격" 이 되어 문턱을 올리려던 의도와 정반대로 돈다 - 위치 인자를 아예
+    막는다.
 
     입력 행을 바꾸지 않는다. 같은 아카이브로 여러 케이스를 돌리기 때문이다.
     """
@@ -158,12 +191,12 @@ def filter_rows(rows: list, us_only: bool = False,
         if us_only and r.get("market") != "US":
             continue
         if entry_total is not None:
-            total = r.get("total")
-            if total not in (None, "") and int(total) >= entry_total:
+            score = _score(r)
+            if score is not None and score >= entry_total:
                 r = {**r, "signal": "BUY"}
         if min_total is not None and r["signal"] in ts.BUY_SIGNALS:
-            total = r.get("total")
-            if total in (None, "") or int(total) < min_total:
+            score = _score(r)
+            if score is None or score < min_total:
                 r = {**r, "signal": "HOLD"}
         out.append(r)
     return out

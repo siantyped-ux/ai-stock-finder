@@ -1,4 +1,5 @@
 import pandas as pd
+import pytest
 
 import backtest as bt
 
@@ -390,8 +391,10 @@ def test_min_total_keeps_a_buy_at_the_threshold():
 
 
 def test_min_total_demotes_a_strong_buy_too():
-    # 규칙은 일관돼야 한다. STRONG_BUY 는 정의상 total>=80 이라 실무에서
-    # 걸릴 일이 드물지만, 예외를 두면 그 예외가 다음 버그가 된다.
+    # calc_signal 이 STRONG_BUY 에 total>=80 을 요구하므로, 문턱이 80 이하인
+    # 동안 이 경우는 드문 게 아니라 아예 불가능하다. 그래서 더욱 예외를 두지
+    # 않는다 - 도달 불가능한 분기에 특례를 박아 두면 문턱이 80 을 넘는 날
+    # 아무도 그 특례를 기억하지 못한다.
     out = bt.filter_rows([_filter_row(signal="STRONG_BUY", total="70")],
                          min_total=75)
     assert out[0]["signal"] == "HOLD"
@@ -428,6 +431,36 @@ def test_min_total_does_not_mutate_the_input():
 def test_no_min_total_leaves_everything_alone():
     out = bt.filter_rows([_filter_row(total="70")])
     assert out[0]["signal"] == "BUY"
+
+
+def test_promotion_survives_when_the_score_clears_both_bars():
+    # 승격 뒤에 강등을 돌리지만, 문턱을 진짜로 넘은 행은 살아남아야 한다.
+    # "승격된 행은 전부 강등한다" 는 오독이 기존 8개 테스트를 다 통과했다.
+    out = bt.filter_rows([_filter_row(signal="WATCH", total="80")],
+                         entry_total=60, min_total=75)
+    assert out[0]["signal"] == "BUY"
+
+
+def test_min_total_judges_each_row_on_its_own():
+    # 기존 min_total 테스트는 전부 1행짜리라 행별 판정이 안 박혀 있다.
+    rows = [_filter_row(ticker="LOW", total="70"),
+            _filter_row(ticker="HIGH", total="80")]
+    out = bt.filter_rows(rows, min_total=75)
+    assert [r["signal"] for r in out] == ["HOLD", "BUY"]
+
+
+def test_filter_rows_refuses_positional_knobs():
+    # filter_rows(rows, False, 75) 는 "75 이상을 BUY 로 승격" 이 되어
+    # 문턱을 올리려던 의도와 정반대로 돈다. 언어가 막게 한다.
+    with pytest.raises(TypeError):
+        bt.filter_rows([_filter_row()], False, 75)
+
+
+def test_score_says_which_row_it_choked_on():
+    # 매일 밤 두 트랙 전체를 도는 파싱이다. 어느 행인지 없이 터지면 못 찾는다.
+    with pytest.raises(ValueError, match="ZZZ"):
+        bt.filter_rows([_filter_row(ticker="ZZZ", total="70.0")],
+                       min_total=75)
 
 
 # ─── run() 이 min_total 을 넘긴다 ─────────────────────────────
