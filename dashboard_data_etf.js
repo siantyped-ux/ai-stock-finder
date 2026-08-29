@@ -1,17 +1,17 @@
 // AI 3-Month Stock Finder - Live Data (etf)
-// Generated: 2026-08-28 23:08:41
-// Macro: VIX=14.51, DXY=99.68, US10Y=4.67%
+// Generated: 2026-08-29 23:07:29
+// Macro: VIX=14.51, DXY=99.70, US10Y=4.67%
 // FMP: active · FRED: active
 window.LIVE_MACRO_ETF = {
   vix: 14.51,
-  dxy: 99.68,
+  dxy: 99.70,
   us10y: 4.67,
-  generated_at: "2026-08-28T23:08:41.759811",
+  generated_at: "2026-08-29T23:07:29.062386",
   fmp_active: true,
   fred_active: true,
   fred: {"available": true, "vix": 14.51, "us10y": 4.67, "yield_curve": 0.39, "fed_funds": 3.63, "unemployment": 4.1, "dxy_broad": 118.0628, "core_cpi_yoy": 2.47, "unemp_3m_change": -0.2}
 };
-window.LIVE_SUMMARY_ETF = {"scanned": 432, "shown": 59, "strong_buy": 10, "buy": 5, "watch": 87, "avoid": 131, "hitl": 139};
+window.LIVE_SUMMARY_ETF = {"scanned": 432, "shown": 57, "strong_buy": 9, "buy": 5, "watch": 85, "avoid": 137, "hitl": 144};
 window.LIVE_STOCKS_ETF = [
   {
     "t": "VWO",
@@ -33,7 +33,7 @@ window.LIVE_STOCKS_ETF = [
     "hitl": false,
     "regime": "NEUTRAL",
     "aum": 169717386238,
-    "turnover": 382571129,
+    "turnover": 382864538,
     "atr_pct": 0.89,
     "reasons": {
       "tech": [
@@ -75,7 +75,7 @@ window.LIVE_STOCKS_ETF = [
     "hitl": false,
     "regime": "NEUTRAL",
     "aum": 99883978688,
-    "turnover": 796338711,
+    "turnover": 796464242,
     "atr_pct": 0.87,
     "reasons": {
       "tech": [
@@ -118,7 +118,7 @@ window.LIVE_STOCKS_ETF = [
     "hitl": false,
     "regime": "NEUTRAL",
     "aum": 43964005439,
-    "turnover": 1466814508,
+    "turnover": 1466961012,
     "atr_pct": 1.53,
     "reasons": {
       "tech": [
@@ -162,7 +162,7 @@ window.LIVE_STOCKS_ETF = [
     "hitl": false,
     "regime": "NEUTRAL",
     "aum": 41284008752,
-    "turnover": 1625671645,
+    "turnover": 1625688538,
     "atr_pct": 1.66,
     "reasons": {
       "tech": [
@@ -205,7 +205,7 @@ window.LIVE_STOCKS_ETF = [
     "hitl": false,
     "regime": "NEUTRAL",
     "aum": 37051084069,
-    "turnover": 114829826,
+    "turnover": 114829766,
     "atr_pct": 0.62,
     "reasons": {
       "tech": [
@@ -248,7 +248,7 @@ window.LIVE_STOCKS_ETF = [
     "hitl": true,
     "regime": "NEUTRAL",
     "aum": 31416302013,
-    "turnover": 1175586470,
+    "turnover": 1175739902,
     "atr_pct": 1.47,
     "reasons": {
       "tech": [
@@ -290,7 +290,7 @@ window.LIVE_STOCKS_ETF = [
     "hitl": false,
     "regime": "NEUTRAL",
     "aum": 23245308637,
-    "turnover": 486904395,
+    "turnover": 486949048,
     "atr_pct": 1.33,
     "reasons": {
       "tech": [
@@ -333,7 +333,7 @@ window.LIVE_STOCKS_ETF = [
     "hitl": false,
     "regime": "NEUTRAL",
     "aum": 21476995391,
-    "turnover": 65885979,
+    "turnover": 65886669,
     "atr_pct": 1.45,
     "reasons": {
       "tech": [
@@ -377,7 +377,7 @@ window.LIVE_STOCKS_ETF = [
     "hitl": true,
     "regime": "NEUTRAL",
     "aum": 20316736325,
-    "turnover": 93786840,
+    "turnover": 93786947,
     "atr_pct": 0.86,
     "reasons": {
       "tech": [
@@ -419,7 +419,7 @@ window.LIVE_STOCKS_ETF = [
     "hitl": false,
     "regime": "NEUTRAL",
     "aum": 14768920808,
-    "turnover": 38129374,
+    "turnover": 38129438,
     "atr_pct": 0.87,
     "reasons": {
       "tech": [
@@ -459,7 +459,7 @@ window.LIVE_STOCKS_ETF = [
     "hitl": false,
     "regime": "NEUTRAL",
     "aum": 12159836250,
-    "turnover": 70079563,
+    "turnover": 70079674,
     "atr_pct": 1.18,
     "reasons": {
       "tech": [
@@ -502,7 +502,7 @@ window.LIVE_STOCKS_ETF = [
     "hitl": false,
     "regime": "NEUTRAL",
     "aum": 11598848504,
-    "turnover": 430514235,
+    "turnover": 430516684,
     "atr_pct": 1.9,
     "reasons": {
       "tech": [
@@ -544,7 +544,7 @@ window.LIVE_STOCKS_ETF = [
     "hitl": true,
     "regime": "NEUTRAL",
     "aum": 10322092389,
-    "turnover": 330985659,
+    "turnover": 331150228,
     "atr_pct": 2.14,
     "reasons": {
       "tech": [
@@ -588,7 +588,7 @@ window.LIVE_STOCKS_ETF = [
     "hitl": false,
     "regime": "NEUTRAL",
     "aum": 9372170094,
-    "turnover": 42657705,
+    "turnover": 42657720,
     "atr_pct": 0.79,
     "reasons": {
       "tech": [
@@ -629,7 +629,7 @@ window.LIVE_STOCKS_ETF = [
     "hitl": false,
     "regime": "NEUTRAL",
     "aum": 9319564432,
-    "turnover": 25668477,
+    "turnover": 25668368,
     "atr_pct": 1.83,
     "reasons": {
       "tech": [
@@ -673,7 +673,7 @@ window.LIVE_STOCKS_ETF = [
     "hitl": false,
     "regime": "NEUTRAL",
     "aum": 8746359800,
-    "turnover": 291253352,
+    "turnover": 291262095,
     "atr_pct": 2.75,
     "reasons": {
       "tech": [
@@ -715,7 +715,7 @@ window.LIVE_STOCKS_ETF = [
     "hitl": false,
     "regime": "NEUTRAL",
     "aum": 8686566156,
-    "turnover": 111059731,
+    "turnover": 111072313,
     "atr_pct": 1.2,
     "reasons": {
       "tech": [
@@ -759,7 +759,7 @@ window.LIVE_STOCKS_ETF = [
     "hitl": false,
     "regime": "NEUTRAL",
     "aum": 8595745046,
-    "turnover": 568235035,
+    "turnover": 568257549,
     "atr_pct": 1.45,
     "reasons": {
       "tech": [
@@ -799,7 +799,7 @@ window.LIVE_STOCKS_ETF = [
     "hitl": true,
     "regime": "NEUTRAL",
     "aum": 8490106662,
-    "turnover": 1363605268,
+    "turnover": 1363660745,
     "atr_pct": 2.72,
     "reasons": {
       "tech": [
@@ -843,8 +843,8 @@ window.LIVE_STOCKS_ETF = [
     "hitl": false,
     "regime": "NEUTRAL",
     "aum": 7526074744,
-    "turnover": 32891538,
-    "atr_pct": 0.95,
+    "turnover": 32891421,
+    "atr_pct": 0.96,
     "reasons": {
       "tech": [
         "이동평균 완벽 정배열 (P>52.6>51.1>48.3)",
@@ -853,9 +853,50 @@ window.LIVE_STOCKS_ETF = [
         "3개월 수익률 +7.8%"
       ],
       "flow": [
-        "CMF +0.17 · 강한 매집",
+        "CMF +0.16 · 강한 매집",
         "가격·OBV 동반 상승 · 수급 확인",
         "상승일 거래량 1.20배"
+      ],
+      "macro": [
+        "NEUTRAL · VIX 14.5 · US10Y 4.67%",
+        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
+      ],
+      "filing": [],
+      "value": []
+    }
+  },
+  {
+    "t": "DIVO",
+    "n": "Amplify CWP Enhanced Dividend Income ETF",
+    "m": "US",
+    "sec": "미분류",
+    "at": "ETF",
+    "ex": "AMEX",
+    "tech": 69,
+    "flow": 72,
+    "macro": 60,
+    "filing": null,
+    "value": null,
+    "total": 70,
+    "consensus": 1,
+    "signal": "WATCH",
+    "ev": 0.78,
+    "target": 9,
+    "hitl": false,
+    "regime": "NEUTRAL",
+    "aum": 7434637626,
+    "turnover": 35071986,
+    "atr_pct": 0.57,
+    "reasons": {
+      "tech": [
+        "이동평균 완벽 정배열 (P>48.1>46.8>44.9)",
+        "RSI 62 · 강세 지속 구간",
+        "MACD 데드크로스 · 히스토 -0.04",
+        "3개월 수익률 +6.5%"
+      ],
+      "flow": [
+        "가격·OBV 동반 상승 · 수급 확인",
+        "상승일 거래량 1.57배 · 매수 집중"
       ],
       "macro": [
         "NEUTRAL · VIX 14.5 · US10Y 4.67%",
@@ -885,7 +926,7 @@ window.LIVE_STOCKS_ETF = [
     "hitl": false,
     "regime": "NEUTRAL",
     "aum": 6151340272,
-    "turnover": 43158537,
+    "turnover": 43158556,
     "atr_pct": 1.33,
     "reasons": {
       "tech": [
@@ -925,8 +966,8 @@ window.LIVE_STOCKS_ETF = [
     "hitl": false,
     "regime": "NEUTRAL",
     "aum": 5682755587,
-    "turnover": 15898179,
-    "atr_pct": 0.86,
+    "turnover": 15898310,
+    "atr_pct": 0.87,
     "reasons": {
       "tech": [
         "이동평균 완벽 정배열 (P>50.8>49.2>48.2)",
@@ -966,8 +1007,8 @@ window.LIVE_STOCKS_ETF = [
     "hitl": false,
     "regime": "NEUTRAL",
     "aum": 5656526486,
-    "turnover": 148351549,
-    "atr_pct": 3.87,
+    "turnover": 148371437,
+    "atr_pct": 3.89,
     "reasons": {
       "tech": [
         "단기 정배열 (P>91.9>82.5)",
@@ -979,130 +1020,7 @@ window.LIVE_STOCKS_ETF = [
         "CMF +0.18 · 강한 매집",
         "가격·OBV 동반 상승 · 수급 확인",
         "상승일 거래량 1.19배",
-        "거래대금 $138M · 유동성 충분"
-      ],
-      "macro": [
-        "NEUTRAL · VIX 14.5 · US10Y 4.67%",
-        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
-      ],
-      "filing": [],
-      "value": []
-    }
-  },
-  {
-    "t": "AIA",
-    "n": "iShares Asia 50 ETF",
-    "m": "US",
-    "sec": "미분류",
-    "at": "ETF",
-    "ex": "NASDAQ",
-    "tech": 87,
-    "flow": 68,
-    "macro": 60,
-    "filing": null,
-    "value": null,
-    "total": 79,
-    "consensus": 1,
-    "signal": "WATCH",
-    "ev": 1.02,
-    "target": 12,
-    "hitl": false,
-    "regime": "NEUTRAL",
-    "aum": 5051370434,
-    "turnover": 58958002,
-    "atr_pct": 1.81,
-    "reasons": {
-      "tech": [
-        "이동평균 완벽 정배열 (P>137.2>136.6>118.7)",
-        "RSI 59 · 강세 지속 구간",
-        "MACD 골든크로스 · 히스토 +0.20"
-      ],
-      "flow": [
-        "CMF -0.12 · 매도 우위",
-        "가격↓ OBV↑ 다이버전스 · 하락 중 매집",
-        "상승일 거래량 1.19배",
-        "거래대금 $59M · 유동성 충분"
-      ],
-      "macro": [
-        "NEUTRAL · VIX 14.5 · US10Y 4.67%",
-        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
-      ],
-      "filing": [],
-      "value": []
-    }
-  },
-  {
-    "t": "GNR",
-    "n": "State Street SPDR S&P Global Natural Res",
-    "m": "US",
-    "sec": "미분류",
-    "at": "ETF",
-    "ex": "AMEX",
-    "tech": 91,
-    "flow": 87,
-    "macro": 60,
-    "filing": null,
-    "value": null,
-    "total": 89,
-    "consensus": 2,
-    "signal": "STRONG_BUY",
-    "ev": 1.48,
-    "target": 18,
-    "hitl": true,
-    "regime": "NEUTRAL",
-    "aum": 4821602563,
-    "turnover": 19463677,
-    "atr_pct": 1.23,
-    "reasons": {
-      "tech": [
-        "이동평균 완벽 정배열 (P>75.9>71.9>69.5)",
-        "RSI 68 · 강세 지속 구간",
-        "MACD 골든크로스 · 히스토 +0.09",
-        "3개월 수익률 +6.2%"
-      ],
-      "flow": [
-        "CMF +0.28 · 강한 매집",
-        "가격·OBV 동반 상승 · 수급 확인",
-        "상승일 거래량 1.64배 · 매수 집중"
-      ],
-      "macro": [
-        "NEUTRAL · VIX 14.5 · US10Y 4.67%",
-        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
-      ],
-      "filing": [],
-      "value": []
-    }
-  },
-  {
-    "t": "VAW",
-    "n": "Vanguard Materials ETF",
-    "m": "US",
-    "sec": "소재",
-    "at": "ETF",
-    "ex": "AMEX",
-    "tech": 80,
-    "flow": 58,
-    "macro": 60,
-    "filing": null,
-    "value": null,
-    "total": 71,
-    "consensus": 1,
-    "signal": "WATCH",
-    "ev": 0.86,
-    "target": 10,
-    "hitl": false,
-    "regime": "NEUTRAL",
-    "aum": 4799881549,
-    "turnover": 9511355,
-    "atr_pct": 1.34,
-    "reasons": {
-      "tech": [
-        "이동평균 완벽 정배열 (P>235.8>230.9>224.5)",
-        "RSI 51 · 중립",
-        "MACD 골든크로스 · 히스토 +0.28"
-      ],
-      "flow": [
-        "가격·OBV 동반 상승 · 수급 확인"
+        "거래대금 $139M · 유동성 충분"
       ],
       "macro": [
         "NEUTRAL · VIX 14.5 · US10Y 4.67%",
@@ -1132,7 +1050,7 @@ window.LIVE_STOCKS_ETF = [
     "hitl": false,
     "regime": "NEUTRAL",
     "aum": 4601571525,
-    "turnover": 6524270,
+    "turnover": 6524353,
     "atr_pct": 1.07,
     "reasons": {
       "tech": [
@@ -1175,7 +1093,7 @@ window.LIVE_STOCKS_ETF = [
     "hitl": false,
     "regime": "NEUTRAL",
     "aum": 4549513441,
-    "turnover": 160191300,
+    "turnover": 160201563,
     "atr_pct": 3.66,
     "reasons": {
       "tech": [
@@ -1215,7 +1133,7 @@ window.LIVE_STOCKS_ETF = [
     "hitl": false,
     "regime": "NEUTRAL",
     "aum": 4481913280,
-    "turnover": 147748618,
+    "turnover": 147752428,
     "atr_pct": 3.94,
     "reasons": {
       "tech": [
@@ -1256,7 +1174,7 @@ window.LIVE_STOCKS_ETF = [
     "hitl": false,
     "regime": "NEUTRAL",
     "aum": 4279875035,
-    "turnover": 20754036,
+    "turnover": 20753889,
     "atr_pct": 1.37,
     "reasons": {
       "tech": [
@@ -1299,7 +1217,7 @@ window.LIVE_STOCKS_ETF = [
     "hitl": false,
     "regime": "NEUTRAL",
     "aum": 3483096264,
-    "turnover": 29580380,
+    "turnover": 29580436,
     "atr_pct": 1.67,
     "reasons": {
       "tech": [
@@ -1339,7 +1257,7 @@ window.LIVE_STOCKS_ETF = [
     "hitl": false,
     "regime": "NEUTRAL",
     "aum": 3039156557,
-    "turnover": 17943783,
+    "turnover": 17943805,
     "atr_pct": 0.71,
     "reasons": {
       "tech": [
@@ -1380,7 +1298,7 @@ window.LIVE_STOCKS_ETF = [
     "hitl": false,
     "regime": "NEUTRAL",
     "aum": 2937877624,
-    "turnover": 31559356,
+    "turnover": 31559456,
     "atr_pct": 1.43,
     "reasons": {
       "tech": [
@@ -1423,7 +1341,7 @@ window.LIVE_STOCKS_ETF = [
     "hitl": false,
     "regime": "NEUTRAL",
     "aum": 2931259788,
-    "turnover": 19283838,
+    "turnover": 19283923,
     "atr_pct": 1.17,
     "reasons": {
       "tech": [
@@ -1464,7 +1382,7 @@ window.LIVE_STOCKS_ETF = [
     "hitl": false,
     "regime": "NEUTRAL",
     "aum": 2767725728,
-    "turnover": 13382559,
+    "turnover": 13382276,
     "atr_pct": 0.6,
     "reasons": {
       "tech": [
@@ -1506,7 +1424,7 @@ window.LIVE_STOCKS_ETF = [
     "hitl": false,
     "regime": "NEUTRAL",
     "aum": 2280938192,
-    "turnover": 5591030,
+    "turnover": 5590999,
     "atr_pct": 1.13,
     "reasons": {
       "tech": [
@@ -1549,7 +1467,7 @@ window.LIVE_STOCKS_ETF = [
     "hitl": false,
     "regime": "NEUTRAL",
     "aum": 2157705687,
-    "turnover": 34765795,
+    "turnover": 34765986,
     "atr_pct": 3.23,
     "reasons": {
       "tech": [
@@ -1592,7 +1510,7 @@ window.LIVE_STOCKS_ETF = [
     "hitl": false,
     "regime": "NEUTRAL",
     "aum": 2123353454,
-    "turnover": 9002478,
+    "turnover": 9002461,
     "atr_pct": 1.23,
     "reasons": {
       "tech": [
@@ -1633,8 +1551,8 @@ window.LIVE_STOCKS_ETF = [
     "hitl": false,
     "regime": "NEUTRAL",
     "aum": 1897289145,
-    "turnover": 4214636,
-    "atr_pct": 0.89,
+    "turnover": 4214618,
+    "atr_pct": 0.9,
     "reasons": {
       "tech": [
         "이동평균 완벽 정배열 (P>29.2>28.6>27.4)",
@@ -1642,7 +1560,7 @@ window.LIVE_STOCKS_ETF = [
         "MACD 골든크로스 · 히스토 +0.02"
       ],
       "flow": [
-        "CMF +0.13 · 매수 우위",
+        "CMF +0.14 · 매수 우위",
         "가격·OBV 동반 상승 · 수급 확인",
         "상승일 거래량 1.41배",
         "거래대금 감소 0.6배 · 관심 이탈"
@@ -1675,8 +1593,8 @@ window.LIVE_STOCKS_ETF = [
     "hitl": false,
     "regime": "NEUTRAL",
     "aum": 1865115020,
-    "turnover": 2319831,
-    "atr_pct": 0.96,
+    "turnover": 2319786,
+    "atr_pct": 0.97,
     "reasons": {
       "tech": [
         "이동평균 완벽 정배열 (P>63.5>63.3>61.0)",
@@ -1715,7 +1633,7 @@ window.LIVE_STOCKS_ETF = [
     "hitl": false,
     "regime": "NEUTRAL",
     "aum": 1729427592,
-    "turnover": 4523672,
+    "turnover": 4523596,
     "atr_pct": 0.81,
     "reasons": {
       "tech": [
@@ -1758,8 +1676,8 @@ window.LIVE_STOCKS_ETF = [
     "hitl": false,
     "regime": "NEUTRAL",
     "aum": 1692563394,
-    "turnover": 25053976,
-    "atr_pct": 0.86,
+    "turnover": 25054092,
+    "atr_pct": 0.88,
     "reasons": {
       "tech": [
         "이동평균 완벽 정배열 (P>121.5>118.6>109.9)",
@@ -1768,7 +1686,7 @@ window.LIVE_STOCKS_ETF = [
         "3개월 수익률 +7.6%"
       ],
       "flow": [
-        "CMF +0.28 · 강한 매집",
+        "CMF +0.27 · 강한 매집",
         "가격·OBV 동반 상승 · 수급 확인",
         "상승일 거래량 1.37배",
         "거래대금 증가 1.6배 · 관심 유입"
@@ -1801,7 +1719,7 @@ window.LIVE_STOCKS_ETF = [
     "hitl": false,
     "regime": "NEUTRAL",
     "aum": 1661822479,
-    "turnover": 12297279,
+    "turnover": 12297052,
     "atr_pct": 1.59,
     "reasons": {
       "tech": [
@@ -1844,8 +1762,8 @@ window.LIVE_STOCKS_ETF = [
     "hitl": false,
     "regime": "NEUTRAL",
     "aum": 1597544753,
-    "turnover": 11965253,
-    "atr_pct": 0.78,
+    "turnover": 11965134,
+    "atr_pct": 0.79,
     "reasons": {
       "tech": [
         "이동평균 완벽 정배열 (P>81.3>79.4>71.8)",
@@ -1854,7 +1772,7 @@ window.LIVE_STOCKS_ETF = [
         "3개월 수익률 +11.5%"
       ],
       "flow": [
-        "CMF +0.17 · 강한 매집",
+        "CMF +0.16 · 강한 매집",
         "가격·OBV 동반 상승 · 수급 확인",
         "상승일 거래량 1.96배 · 매수 집중",
         "거래대금 증가 2.4배 · 관심 유입"
@@ -1887,7 +1805,7 @@ window.LIVE_STOCKS_ETF = [
     "hitl": true,
     "regime": "NEUTRAL",
     "aum": 1589029670,
-    "turnover": 8009844,
+    "turnover": 8009869,
     "atr_pct": 1.35,
     "reasons": {
       "tech": [
@@ -1930,7 +1848,7 @@ window.LIVE_STOCKS_ETF = [
     "hitl": false,
     "regime": "NEUTRAL",
     "aum": 1475217142,
-    "turnover": 17453691,
+    "turnover": 17454262,
     "atr_pct": 1.71,
     "reasons": {
       "tech": [
@@ -1971,8 +1889,8 @@ window.LIVE_STOCKS_ETF = [
     "hitl": false,
     "regime": "NEUTRAL",
     "aum": 1375763416,
-    "turnover": 6908200,
-    "atr_pct": 0.33,
+    "turnover": 6908459,
+    "atr_pct": 0.34,
     "reasons": {
       "tech": [
         "이동평균 완벽 정배열 (P>16.2>15.9>14.9)",
@@ -2013,7 +1931,7 @@ window.LIVE_STOCKS_ETF = [
     "hitl": false,
     "regime": "NEUTRAL",
     "aum": 1358265143,
-    "turnover": 2473848,
+    "turnover": 2474161,
     "atr_pct": 0.77,
     "reasons": {
       "tech": [
@@ -2055,7 +1973,7 @@ window.LIVE_STOCKS_ETF = [
     "hitl": false,
     "regime": "NEUTRAL",
     "aum": 1313908571,
-    "turnover": 35605379,
+    "turnover": 35607694,
     "atr_pct": 3.82,
     "reasons": {
       "tech": [
@@ -2094,7 +2012,7 @@ window.LIVE_STOCKS_ETF = [
     "hitl": false,
     "regime": "NEUTRAL",
     "aum": 1292269077,
-    "turnover": 2239560,
+    "turnover": 2239368,
     "atr_pct": 0.58,
     "reasons": {
       "tech": [
@@ -2136,7 +2054,7 @@ window.LIVE_STOCKS_ETF = [
     "hitl": true,
     "regime": "NEUTRAL",
     "aum": 1246877528,
-    "turnover": 18815773,
+    "turnover": 18815832,
     "atr_pct": 0.81,
     "reasons": {
       "tech": [
@@ -2178,7 +2096,7 @@ window.LIVE_STOCKS_ETF = [
     "hitl": false,
     "regime": "NEUTRAL",
     "aum": 1196740663,
-    "turnover": 9602919,
+    "turnover": 9602934,
     "atr_pct": 0.76,
     "reasons": {
       "tech": [
@@ -2218,7 +2136,7 @@ window.LIVE_STOCKS_ETF = [
     "hitl": false,
     "regime": "NEUTRAL",
     "aum": 1174225474,
-    "turnover": 7167659,
+    "turnover": 7171725,
     "atr_pct": 1.01,
     "reasons": {
       "tech": [
@@ -2261,7 +2179,7 @@ window.LIVE_STOCKS_ETF = [
     "hitl": false,
     "regime": "NEUTRAL",
     "aum": 1107777051,
-    "turnover": 2214094,
+    "turnover": 2214440,
     "atr_pct": 0.73,
     "reasons": {
       "tech": [
@@ -2303,8 +2221,8 @@ window.LIVE_STOCKS_ETF = [
     "hitl": false,
     "regime": "NEUTRAL",
     "aum": 1106200727,
-    "turnover": 6292775,
-    "atr_pct": 0.97,
+    "turnover": 6292764,
+    "atr_pct": 0.98,
     "reasons": {
       "tech": [
         "이동평균 완벽 정배열 (P>31.1>29.9>28.4)",
@@ -2313,7 +2231,7 @@ window.LIVE_STOCKS_ETF = [
         "Bollinger 상단 접근 (93%)"
       ],
       "flow": [
-        "CMF +0.14 · 매수 우위",
+        "CMF +0.13 · 매수 우위",
         "가격·OBV 동반 상승 · 수급 확인",
         "상승일 거래량 2.36배 · 매수 집중"
       ],
@@ -2345,7 +2263,7 @@ window.LIVE_STOCKS_ETF = [
     "hitl": false,
     "regime": "NEUTRAL",
     "aum": 1104505070,
-    "turnover": 32601897,
+    "turnover": 32602319,
     "atr_pct": 0.97,
     "reasons": {
       "tech": [
@@ -2387,8 +2305,8 @@ window.LIVE_STOCKS_ETF = [
     "hitl": false,
     "regime": "NEUTRAL",
     "aum": 1044533026,
-    "turnover": 33979394,
-    "atr_pct": 1.52,
+    "turnover": 33979848,
+    "atr_pct": 1.53,
     "reasons": {
       "tech": [
         "이동평균 완벽 정배열 (P>189.5>182.9>174.2)",
@@ -2397,7 +2315,7 @@ window.LIVE_STOCKS_ETF = [
         "3개월 수익률 +5.3%"
       ],
       "flow": [
-        "CMF +0.29 · 강한 매집",
+        "CMF +0.28 · 강한 매집",
         "가격↑ OBV↓ 다이버전스 · 상승 중 분산",
         "하락일 거래량 우위 (0.71배)"
       ],
@@ -2429,7 +2347,7 @@ window.LIVE_STOCKS_ETF = [
     "hitl": false,
     "regime": "NEUTRAL",
     "aum": 1023081530,
-    "turnover": 9562334,
+    "turnover": 9562489,
     "atr_pct": 3.92,
     "reasons": {
       "tech": [
@@ -2469,7 +2387,7 @@ window.LIVE_STOCKS_ETF = [
     "hitl": true,
     "regime": "NEUTRAL",
     "aum": 1022874062,
-    "turnover": 6455355,
+    "turnover": 6455333,
     "atr_pct": 1.71,
     "reasons": {
       "tech": [
