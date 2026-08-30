@@ -1,17 +1,17 @@
 // AI 3-Month Stock Finder - Live Data (etf)
-// Generated: 2026-08-29 23:07:29
-// Macro: VIX=14.51, DXY=99.70, US10Y=4.67%
+// Generated: 2026-08-30 23:08:33
+// Macro: VIX=14.51, DXY=99.67, US10Y=4.67%
 // FMP: active · FRED: active
 window.LIVE_MACRO_ETF = {
   vix: 14.51,
-  dxy: 99.70,
+  dxy: 99.67,
   us10y: 4.67,
-  generated_at: "2026-08-29T23:07:29.062386",
+  generated_at: "2026-08-30T23:08:33.934642",
   fmp_active: true,
   fred_active: true,
   fred: {"available": true, "vix": 14.51, "us10y": 4.67, "yield_curve": 0.39, "fed_funds": 3.63, "unemployment": 4.1, "dxy_broad": 118.0628, "core_cpi_yoy": 2.47, "unemp_3m_change": -0.2}
 };
-window.LIVE_SUMMARY_ETF = {"scanned": 432, "shown": 57, "strong_buy": 9, "buy": 5, "watch": 85, "avoid": 137, "hitl": 144};
+window.LIVE_SUMMARY_ETF = {"scanned": 432, "shown": 60, "strong_buy": 10, "buy": 5, "watch": 86, "avoid": 135, "hitl": 143};
 window.LIVE_STOCKS_ETF = [
   {
     "t": "VWO",
@@ -1021,6 +1021,129 @@ window.LIVE_STOCKS_ETF = [
         "가격·OBV 동반 상승 · 수급 확인",
         "상승일 거래량 1.19배",
         "거래대금 $139M · 유동성 충분"
+      ],
+      "macro": [
+        "NEUTRAL · VIX 14.5 · US10Y 4.67%",
+        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
+      ],
+      "filing": [],
+      "value": []
+    }
+  },
+  {
+    "t": "AIA",
+    "n": "iShares Asia 50 ETF",
+    "m": "US",
+    "sec": "미분류",
+    "at": "ETF",
+    "ex": "NASDAQ",
+    "tech": 87,
+    "flow": 68,
+    "macro": 60,
+    "filing": null,
+    "value": null,
+    "total": 79,
+    "consensus": 1,
+    "signal": "WATCH",
+    "ev": 1.02,
+    "target": 12,
+    "hitl": false,
+    "regime": "NEUTRAL",
+    "aum": 5051370434,
+    "turnover": 58958168,
+    "atr_pct": 1.81,
+    "reasons": {
+      "tech": [
+        "이동평균 완벽 정배열 (P>137.2>136.6>118.7)",
+        "RSI 59 · 강세 지속 구간",
+        "MACD 골든크로스 · 히스토 +0.20"
+      ],
+      "flow": [
+        "CMF -0.12 · 매도 우위",
+        "가격↓ OBV↑ 다이버전스 · 하락 중 매집",
+        "상승일 거래량 1.19배",
+        "거래대금 $59M · 유동성 충분"
+      ],
+      "macro": [
+        "NEUTRAL · VIX 14.5 · US10Y 4.67%",
+        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
+      ],
+      "filing": [],
+      "value": []
+    }
+  },
+  {
+    "t": "GNR",
+    "n": "State Street SPDR S&P Global Natural Res",
+    "m": "US",
+    "sec": "미분류",
+    "at": "ETF",
+    "ex": "AMEX",
+    "tech": 91,
+    "flow": 87,
+    "macro": 60,
+    "filing": null,
+    "value": null,
+    "total": 89,
+    "consensus": 2,
+    "signal": "STRONG_BUY",
+    "ev": 1.48,
+    "target": 18,
+    "hitl": true,
+    "regime": "NEUTRAL",
+    "aum": 4821602563,
+    "turnover": 19463615,
+    "atr_pct": 1.23,
+    "reasons": {
+      "tech": [
+        "이동평균 완벽 정배열 (P>75.9>71.9>69.5)",
+        "RSI 68 · 강세 지속 구간",
+        "MACD 골든크로스 · 히스토 +0.09",
+        "3개월 수익률 +6.2%"
+      ],
+      "flow": [
+        "CMF +0.28 · 강한 매집",
+        "가격·OBV 동반 상승 · 수급 확인",
+        "상승일 거래량 1.64배 · 매수 집중"
+      ],
+      "macro": [
+        "NEUTRAL · VIX 14.5 · US10Y 4.67%",
+        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
+      ],
+      "filing": [],
+      "value": []
+    }
+  },
+  {
+    "t": "VAW",
+    "n": "Vanguard Materials ETF",
+    "m": "US",
+    "sec": "소재",
+    "at": "ETF",
+    "ex": "AMEX",
+    "tech": 80,
+    "flow": 58,
+    "macro": 60,
+    "filing": null,
+    "value": null,
+    "total": 71,
+    "consensus": 1,
+    "signal": "WATCH",
+    "ev": 0.86,
+    "target": 10,
+    "hitl": false,
+    "regime": "NEUTRAL",
+    "aum": 4799881549,
+    "turnover": 9510985,
+    "atr_pct": 1.34,
+    "reasons": {
+      "tech": [
+        "이동평균 완벽 정배열 (P>235.8>230.9>224.5)",
+        "RSI 51 · 중립",
+        "MACD 골든크로스 · 히스토 +0.28"
+      ],
+      "flow": [
+        "가격·OBV 동반 상승 · 수급 확인"
       ],
       "macro": [
         "NEUTRAL · VIX 14.5 · US10Y 4.67%",
