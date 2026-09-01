@@ -138,6 +138,29 @@ def _score(row: dict):
             "정수로 읽을 수 없다") from exc
 
 
+def blank_total_buys(rows: list) -> list:
+    """총점이 비어 있는 BUY·STRONG_BUY 행. 없으면 빈 목록.
+
+    filter_rows 가 이런 행을 HOLD 로 강등하기 때문에 필요하다. 강등은
+    옳은 처리다 - 점수를 모르는 행을 통과시키면 문턱이 있으나 마나가 된다.
+    문제는 조용하다는 것이다. 그날의 BUY 전환이 흔적 없이 사라지고 백테스트
+    결과가 갈리는데 로그에 아무것도 남지 않는다.
+
+    지금은 한 건도 없다 (2026-09-01 실측, BUY 968행 전부 total 이 있다).
+    그래서 min_total=70 이 주식 트랙에서 아무것도 거르지 않는데, 이는
+    **구조적 무해가 아니라 데이터가 그럴 뿐이다.** 빈 total 이 생기는 날부터
+    주식 트랙 결과가 갈린다 - 이 함수는 그날을 잡으려고 있다.
+
+    HOLD 는 세지 않는다. 어차피 진입하지 않으므로 총점이 없어도 결과가
+    갈리지 않고, 여기까지 잡으면 고칠 이유가 없는 행으로 매일 빨간불이 켜진다.
+
+    쓰레기 값은 세지 않고 _score 가 터뜨린다. 빈 값과 파싱 실패는 다른
+    고장이라 같은 통계에 섞으면 안 된다.
+    """
+    return [r for r in rows
+            if r.get("signal") in ts.BUY_SIGNALS and _score(r) is None]
+
+
 def filter_rows(rows: list, *, us_only: bool = False,
                 entry_total: int = None, min_total: int = None,
                 start_date: str = None) -> list:
