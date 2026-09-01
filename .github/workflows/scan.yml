@@ -297,6 +297,19 @@ jobs:
     uses: ./.github/workflows/report.yml
     secrets: inherit
 
+  # 아카이브가 조용히 갈리는 것을 매일 잡는다. report 와 나란히 돈다 -
+  # 서로를 막지 않는 것이 의도다. 근거는 verify-archive.yml 머리말에 있다.
+  #
+  # report 와 마찬가지로 if 를 쓰지 않는다. 스캔이 실패하거나 skip 되면
+  # 검사할 새 행도 없다.
+  verify-archive:
+    needs: scan
+    permissions:
+      contents: read
+      issues: write
+    uses: ./.github/workflows/verify-archive.yml
+    secrets: inherit
+
   # 스캔이 실패하면 그날 스코어는 영구히 사라진다. 시점 데이터라 나중에
   # 재계산할 수 없고, 소급 적재도 dashboard_data.js 스냅샷이 있어야 하는데
   # 스캔이 안 돌면 그 스냅샷 자체가 없다. 조용히 넘어가지 않도록 이슈를 연다.
