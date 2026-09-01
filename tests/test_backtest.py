@@ -1,6 +1,8 @@
 import pandas as pd
+import pytest
 
 import backtest as bt
+import exit_rules as er
 
 
 def _flat_frame(n=20):
@@ -366,3 +368,323 @@ def test_the_report_separates_the_two_reasons(monkeypatch, capsys):
     assert "대기 중: POOR" not in out
     # 진입 종목 수는 트레이드가 정한다.
     assert "BUY 후보 2종목 중 1종목 진입" in out
+
+
+# ─── 진입 강화 필터 (min_total) ──────────────────────────────
+# entry_total 은 BUY 로 승격시키는 완화 도구다. 문턱을 올리는 대칭 손잡이가
+# 없어서 --entry-total 80 을 줘도 진입이 줄지 않았다.
+
+def _filter_row(**over):
+    row = {"ticker": "X", "date": "2026-01-02", "market": "US",
+           "signal": "BUY", "total": "70", "source": "live"}
+    row.update(over)
+    return row
+
+
+def test_min_total_demotes_a_buy_below_the_threshold():
+    out = bt.filter_rows([_filter_row(total="70")], min_total=75)
+    assert out[0]["signal"] == "HOLD"
+
+
+def test_min_total_keeps_a_buy_at_the_threshold():
+    out = bt.filter_rows([_filter_row(total="75")], min_total=75)
+    assert out[0]["signal"] == "BUY"
+
+
+def test_min_total_demotes_a_strong_buy_too():
+    # calc_signal 이 STRONG_BUY 에 total>=80 을 요구하므로, 문턱이 80 이하인
+    # 동안 이 경우는 드문 게 아니라 아예 불가능하다. 그래서 더욱 예외를 두지
+    # 않는다 - 도달 불가능한 분기에 특례를 박아 두면 문턱이 80 을 넘는 날
+    # 아무도 그 특례를 기억하지 못한다.
+    out = bt.filter_rows([_filter_row(signal="STRONG_BUY", total="70")],
+                         min_total=75)
+    assert out[0]["signal"] == "HOLD"
+
+
+def test_min_total_demotes_a_buy_with_no_score():
+    # 점수를 모르는 채로 문턱을 통과시키면 문턱이 있으나 마나가 된다.
+    out = bt.filter_rows([_filter_row(total="")], min_total=75)
+    assert out[0]["signal"] == "HOLD"
+
+
+def test_min_total_leaves_non_buy_rows_alone():
+    out = bt.filter_rows([_filter_row(signal="WATCH", total="60")],
+                         min_total=75)
+    assert out[0]["signal"] == "WATCH"
+
+
+def test_demotion_wins_over_promotion():
+    # entry_total 로 올린 뒤 min_total 로 내린다. 둘 다 주면 강등이 이긴다 -
+    # "N 이상을 BUY 로 보되 M 미만은 버린다" 가 된다.
+    out = bt.filter_rows([_filter_row(signal="WATCH", total="65")],
+                         entry_total=60, min_total=75)
+    assert out[0]["signal"] == "HOLD"
+
+
+def test_min_total_does_not_mutate_the_input():
+    # 같은 아카이브로 여러 케이스를 돌린다. 입력을 바꾸면 두 번째 케이스가
+    # 첫 번째의 결과 위에서 돈다.
+    rows = [_filter_row(total="70")]
+    bt.filter_rows(rows, min_total=75)
+    assert rows[0]["signal"] == "BUY"
+
+
+def test_no_min_total_leaves_everything_alone():
+    out = bt.filter_rows([_filter_row(total="70")])
+    assert out[0]["signal"] == "BUY"
+
+
+def test_promotion_survives_when_the_score_clears_both_bars():
+    # 승격 뒤에 강등을 돌리지만, 문턱을 진짜로 넘은 행은 살아남아야 한다.
+    # "승격된 행은 전부 강등한다" 는 오독이 기존 8개 테스트를 다 통과했다.
+    out = bt.filter_rows([_filter_row(signal="WATCH", total="80")],
+                         entry_total=60, min_total=75)
+    assert out[0]["signal"] == "BUY"
+
+
+def test_min_total_judges_each_row_on_its_own():
+    # 기존 min_total 테스트는 전부 1행짜리라 행별 판정이 안 박혀 있다.
+    rows = [_filter_row(ticker="LOW", total="70"),
+            _filter_row(ticker="HIGH", total="80")]
+    out = bt.filter_rows(rows, min_total=75)
+    assert [r["signal"] for r in out] == ["HOLD", "BUY"]
+
+
+def test_filter_rows_refuses_positional_knobs():
+    # filter_rows(rows, False, 75) 는 "75 이상을 BUY 로 승격" 이 되어
+    # 문턱을 올리려던 의도와 정반대로 돈다. 언어가 막게 한다.
+    with pytest.raises(TypeError):
+        bt.filter_rows([_filter_row()], False, 75)
+
+
+def test_score_says_which_row_it_choked_on():
+    # 매일 밤 두 트랙 전체를 도는 파싱이다. 어느 행인지 없이 터지면 못 찾는다.
+    with pytest.raises(ValueError, match="ZZZ"):
+        bt.filter_rows([_filter_row(ticker="ZZZ", total="70.0")],
+                       min_total=75)
+
+
+# ─── run() 이 min_total 을 넘긴다 ─────────────────────────────
+# filter_rows 에 손잡이가 생겨도 run() 이 넘겨주지 않으면 어디서도 닿지
+# 않는다. 이 절은 그 배관만 검증한다.
+
+def _band_bars(dates):
+    import exit_rules as er
+    return {d: er.Bar(d, 100.0, 101.0, 99.0, 100.0, atr14=2.0, total=None)
+            for d in dates}
+
+
+def test_run_keeps_a_weak_signal_out_of_the_book(monkeypatch):
+    rows = [
+        {"ticker": "X", "date": "2026-01-02", "market": "US", "signal": "BUY",
+         "total": "70", "source": "live"},
+    ]
+    bars = _band_bars(["2026-01-02", "2026-01-03"])
+    monkeypatch.setattr(bt, "load_archive", lambda pattern: rows)
+    monkeypatch.setattr(bt, "fetch_bars", lambda ticker: bars)
+
+    assert bt.run("x", min_total=75)["trades"] == []
+    assert bt.run("x")["trades"] != []
+
+
+def test_a_demoted_ticker_enters_when_it_later_clears_the_bar(monkeypatch):
+    # 강등은 영구 배제가 아니다. 총점이 진짜로 문턱을 넘는 날 HOLD -> BUY
+    # 전환이 새로 생겨 그날 진입한다.
+    rows = [
+        {"ticker": "X", "date": "2026-01-02", "market": "US", "signal": "BUY",
+         "total": "70", "source": "live"},
+        {"ticker": "X", "date": "2026-01-05", "market": "US", "signal": "BUY",
+         "total": "80", "source": "live"},
+    ]
+    bars = _band_bars(["2026-01-02", "2026-01-05", "2026-01-06"])
+    monkeypatch.setattr(bt, "load_archive", lambda pattern: rows)
+    monkeypatch.setattr(bt, "fetch_bars", lambda ticker: bars)
+
+    trades = bt.run("x", min_total=75)["trades"]
+
+    assert [t.entry_date for t in trades] == ["2026-01-05"]
+
+
+# ─── 봉 캐시 ───────────────────────────────────────────────────
+# --compare (Task 6) 는 같은 프로세스에서 run() 을 두 번 돈다. 캐시가 없으면
+# yfinance 를 두 번 때린다.
+
+def test_fetch_bars_caches_a_ticker(monkeypatch):
+    calls = []
+
+    class _Stub:
+        def __init__(self, ticker):
+            calls.append(ticker)
+
+        def history(self, period, auto_adjust):
+            return _flat_frame(n=40)
+
+    bt.clear_bars_cache()
+    monkeypatch.setattr(bt.yf, "Ticker", _Stub)
+
+    first = bt.fetch_bars("X")
+    second = bt.fetch_bars("X")
+
+    assert calls == ["X"]
+    assert first is second
+
+
+def test_fetch_bars_caches_a_failure(monkeypatch):
+    # 실패도 캐시하지 않으면 조회가 안 되는 티커를 설정마다 다시 때린다.
+    calls = []
+
+    class _Dead:
+        def __init__(self, ticker):
+            calls.append(ticker)
+
+        def history(self, period, auto_adjust):
+            raise RuntimeError("no network")
+
+    bt.clear_bars_cache()
+    monkeypatch.setattr(bt.yf, "Ticker", _Dead)
+
+    assert bt.fetch_bars("X") == {}
+    assert bt.fetch_bars("X") == {}
+    assert calls == ["X"]
+
+
+def test_clear_bars_cache_empties_it(monkeypatch):
+    # 테스트가 서로에게 캐시를 넘기면 안 된다.
+    calls = []
+
+    class _Stub:
+        def __init__(self, ticker):
+            calls.append(ticker)
+
+        def history(self, period, auto_adjust):
+            return _flat_frame(n=40)
+
+    bt.clear_bars_cache()
+    monkeypatch.setattr(bt.yf, "Ticker", _Stub)
+
+    bt.fetch_bars("X")
+    bt.clear_bars_cache()
+    bt.fetch_bars("X")
+
+    assert calls == ["X", "X"]
+
+
+def _args(**over):
+    import argparse
+    base = dict(track=None, stop_atr_mult=None, trail_atr_mult=None,
+                max_hold_days=60, exit_total=None, min_total=None,
+                use_target=False)
+    base.update(over)
+    return argparse.Namespace(**base)
+
+
+def test_resolve_falls_back_to_todays_defaults_without_a_track():
+    # 트랙을 안 주면 예전 호출과 결과가 같아야 한다.
+    params, min_total = bt.resolve_trade_params(_args())
+    assert params.stop_atr_mult == 3.0
+    assert params.trail_atr_mult == 3.0
+    assert params.exit_total == 60
+    assert min_total is None
+
+
+def test_resolve_takes_the_track_defaults():
+    params, min_total = bt.resolve_trade_params(_args(track="etf"))
+    assert params.exit_total == 45
+    assert min_total == 75
+
+
+def test_an_explicit_argument_beats_the_track():
+    # --track 은 기본값만 바꾼다. 명시한 값이 조용히 무시되면 안 된다.
+    params, _ = bt.resolve_trade_params(
+        _args(track="etf", stop_atr_mult=5.0, exit_total=55))
+    assert params.stop_atr_mult == 5.0
+    assert params.exit_total == 55
+
+
+def test_an_explicit_min_total_beats_the_track():
+    _, min_total = bt.resolve_trade_params(_args(track="etf", min_total=90))
+    assert min_total == 90
+
+
+def test_resolve_carries_use_target_through():
+    params, _ = bt.resolve_trade_params(_args(track="etf", use_target=True))
+    assert params.use_target is True
+
+
+def test_the_stock_track_resolves_to_todays_behaviour():
+    # 이번 변경으로 주식 트랙의 동작이 바뀌면 안 된다.
+    params, min_total = bt.resolve_trade_params(_args(track="stocks"))
+    assert params.exit_total == 60
+    assert params.stop_atr_mult == 3.0
+    assert min_total == 70
+
+
+# ─── --compare (노출을 R 옆에 낸다) ──────────────────────────
+# 손절 배수를 바꾸면 sizing.shares 가 수량을 줄여 종목당 투입이 작아진다.
+# R 만 보면 "손절을 넓혔더니 좋아졌다" 로 읽히지만 실제로는 베팅이 작아진
+# 것이다. 비교표는 노출을 함께 내야 한다.
+
+def _fake_result(entered, qty, net_r, closed=0):
+    import trade_sim as ts
+    trades = [
+        ts.Trade(ticker=f"T{i}", market="US", source="live",
+                 entry_date="2026-01-02", entry_price=100.0, r_unit=2.0,
+                 exit_date=None, exit_price=None, exit_reason=None,
+                 bars_held=1, is_open=True, gross_r=0.0, cost_r=0.0,
+                 net_r=0.0, mark_price=100.0, initial_stop=94.0,
+                 high_since_entry=100.0, stop=94.0, target_price=None,
+                 qty=qty)
+        for i in range(entered)
+    ]
+    return {"trades": trades,
+            "summary": {"closed": closed, "total_net_r": net_r,
+                        "open_net_r": 0.0}}
+
+
+def test_compare_row_reports_exposure():
+    row = bt.compare_row(_fake_result(2, qty=10, net_r=-1.0),
+                         er.Params(stop_atr_mult=3.0))
+    assert row["entered"] == 2
+    assert row["avg_position"] == 1000.0     # 100.0 x 10주
+
+
+def test_compare_row_has_no_exposure_without_a_capital_account():
+    # qty 는 자본 제약이 있을 때만 채워진다. 없으면 노출을 잴 수 없다.
+    row = bt.compare_row(_fake_result(2, qty=None, net_r=-1.0),
+                         er.Params())
+    assert row["avg_position"] is None
+
+
+def test_compare_warns_when_the_stop_multiple_differs(capsys):
+    a = bt.compare_row(_fake_result(1, qty=10, net_r=-1.0),
+                       er.Params(stop_atr_mult=3.0))
+    b = bt.compare_row(_fake_result(2, qty=7, net_r=-0.5),
+                       er.Params(stop_atr_mult=4.5))
+
+    bt.compare_report(a, b, has_account=True)
+
+    out = capsys.readouterr().out
+    assert "stop_atr_mult" in out
+    assert "포지션 축소" in out
+
+
+def test_compare_stays_quiet_when_the_stop_multiple_matches(capsys):
+    a = bt.compare_row(_fake_result(1, qty=10, net_r=-1.0), er.Params())
+    b = bt.compare_row(_fake_result(2, qty=10, net_r=-0.5), er.Params())
+
+    bt.compare_report(a, b, has_account=True)
+
+    assert "포지션 축소" not in capsys.readouterr().out
+
+
+def test_compare_refuses_to_guess_without_capital(capsys):
+    # --capital 이 없으면 노출을 못 재고 R 의 분모만 바뀐다. 그 두 열은
+    # 비교할 수 없으므로 그렇게 말해야 한다.
+    a = bt.compare_row(_fake_result(1, qty=None, net_r=-1.0),
+                       er.Params(stop_atr_mult=3.0))
+    b = bt.compare_row(_fake_result(1, qty=None, net_r=-0.5),
+                       er.Params(stop_atr_mult=4.5))
+
+    bt.compare_report(a, b, has_account=False)
+
+    assert "비교할 수 없다" in capsys.readouterr().out

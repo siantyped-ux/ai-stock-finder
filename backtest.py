@@ -60,8 +60,35 @@ def atr_series(hist_df, period: int = 14) -> dict:
     return out
 
 
+# 티커 -> {날짜: Bar}. 프로세스 수명이다.
+#
+# --compare 가 같은 아카이브를 두 설정으로 돌리기 때문에 필요하다. 캐시가
+# 없으면 두 번째 설정이 yfinance 를 통째로 다시 때린다 - 55종목이면 왕복이
+# 두 배가 되고, 그 사이 시세가 바뀌면 두 열이 서로 다른 데이터 위에서
+# 비교된다. 후자가 진짜 문제다.
+_BARS_CACHE: dict = {}
+
+
+def clear_bars_cache() -> None:
+    """캐시를 비운다. 테스트가 서로에게 봉을 넘기지 않도록."""
+    _BARS_CACHE.clear()
+
+
 def fetch_bars(ticker: str) -> dict:
-    """티커의 일봉을 날짜 -> exit_rules.Bar 로 반환한다. 실패하면 빈 dict."""
+    """티커의 일봉을 날짜 -> exit_rules.Bar 로 반환한다. 실패하면 빈 dict.
+
+    실패(빈 dict)도 캐시한다. 안 그러면 조회가 안 되는 티커를 설정마다 다시
+    때리고, 재시도할 때마다 같은 실패를 기다린다.
+    """
+    if ticker in _BARS_CACHE:
+        return _BARS_CACHE[ticker]
+
+    bars = _fetch_bars_uncached(ticker)
+    _BARS_CACHE[ticker] = bars
+    return bars
+
+
+def _fetch_bars_uncached(ticker: str) -> dict:
     try:
         df = yf.Ticker(ticker).history(period="1y", auto_adjust=True)
     except Exception:
@@ -88,8 +115,32 @@ def fetch_bars(ticker: str) -> dict:
     return bars
 
 
-def filter_rows(rows: list, us_only: bool = False,
-                entry_total: int = None, start_date: str = None) -> list:
+def _score(row: dict):
+    """행의 총점을 int 로. 비어 있으면 None.
+
+    점수를 모르는 행은 어느 문턱도 통과하지 못한다 - 승격되지도 않고,
+    강등을 면하지도 못한다. 두 방향 다 "진입하지 않는 쪽" 으로 실패한다.
+
+    비어 있지도 숫자도 아니면 그대로 터뜨리되 어느 행인지는 말한다.
+    아카이브는 history 가 쓰기 시점에 빈 total 을 막고 calc_total 이 int 를
+    내므로 실측 32,827행에 파싱 실패가 0건이다. 다만 Task 7 이후로는 이
+    파싱이 매일 밤 두 트랙 전체를 돌게 되고, 그때 티커도 날짜도 없이 터지면
+    어느 행인지 찾을 수가 없다.
+    """
+    total = row.get("total")
+    if total in (None, ""):
+        return None
+    try:
+        return int(total)
+    except (TypeError, ValueError) as exc:
+        raise ValueError(
+            f"{row.get('ticker')} {row.get('date')}: total 이 {total!r} 라 "
+            "정수로 읽을 수 없다") from exc
+
+
+def filter_rows(rows: list, *, us_only: bool = False,
+                entry_total: int = None, min_total: int = None,
+                start_date: str = None) -> list:
     """아카이브 행을 진입 조건에 맞게 걸러 낸다.
 
     start_date 는 그 날짜부터만 본다. 07-31~08-21 구간은 66% 가 backfill 이라
@@ -100,10 +151,36 @@ def filter_rows(rows: list, us_only: bool = False,
     us_only 는 과거 아카이브에 남아 있는 한국 행을 뺀다. 7/31~8/22 데이터에는
     KR 이 들어 있어서, 미국 단독 성과를 보려면 여기서 빼야 한다.
 
-    entry_total 은 그 점수 이상인 행의 signal 을 BUY 로 올린다. 원래 진입
-    조건은 signal in (BUY, STRONG_BUY) 이고 BUY 정의가 total>=70 and cons>=3
-    이라, consensus 를 무시했을 때 성과가 어떻게 달라지는지 보려는 것이다.
-    진입 규칙을 바꾸자는 제안이 아니라 비교용이다.
+    entry_total 과 min_total 은 방향이 정반대인 별개의 손잡이다 -
+    entry_total 은 문턱을 내리고(BUY 로 승격), min_total 은 올린다
+    (HOLD 로 강등).
+
+    entry_total 은 그 점수 이상인 행의 signal 을 BUY 로 **올린다**(완화).
+    원래 진입 조건은 signal in (BUY, STRONG_BUY) 이고 BUY 정의가
+    total>=70 and cons>=3 이라, consensus 를 무시했을 때 성과가 어떻게
+    달라지는지 보려는 것이다.
+
+    min_total 은 그 점수 미만인 BUY 를 HOLD 로 **내린다**(강화). 진입 문턱을
+    실제로 올리는 유일한 경로다 - stock_finder.calc_signal 의 70/80 을
+    건드리면 과거 아카이브(70 기준)와 미래 아카이브(75 기준)의 signal 열
+    정의가 갈라져 과거 행을 재현할 수 없게 된다.
+
+    min_total 이 필요했던 것은 실측 때문이다. 2026-08-28 ETF 트랙에서
+    --entry-total 80 을 줬는데 진입이 줄기는커녕 후보가 55 -> 62 로 늘었다.
+    문턱을 올리는 경로가 아예 없었다.
+
+    HOLD 로 내리는 이유는 trade_sim.step_entry 가 BUY 로의 **전환**을 보기
+    때문이다. 강등하면 그날의 전환이 사라지고, 나중에 총점이 진짜로 문턱을
+    넘는 날 HOLD -> BUY 전환이 새로 생겨 그 시점에 진입한다.
+
+    총점이 비어 있는 BUY 도 강등한다. 점수를 모르는 채로 통과시키면 문턱이
+    있으나 마나가 된다.
+
+    강등을 승격 뒤에 둔다. 둘 다 주면 강등이 이긴다.
+
+    keyword-only 다. filter_rows(rows, False, 75) 는 "75 이상을 BUY 로
+    승격" 이 되어 문턱을 올리려던 의도와 정반대로 돈다 - 위치 인자를 아예
+    막는다.
 
     입력 행을 바꾸지 않는다. 같은 아카이브로 여러 케이스를 돌리기 때문이다.
     """
@@ -114,9 +191,13 @@ def filter_rows(rows: list, us_only: bool = False,
         if us_only and r.get("market") != "US":
             continue
         if entry_total is not None:
-            total = r.get("total")
-            if total not in (None, "") and int(total) >= entry_total:
+            score = _score(r)
+            if score is not None and score >= entry_total:
                 r = {**r, "signal": "BUY"}
+        if min_total is not None and r["signal"] in ts.BUY_SIGNALS:
+            score = _score(r)
+            if score is None or score < min_total:
+                r = {**r, "signal": "HOLD"}
         out.append(r)
     return out
 
@@ -164,13 +245,15 @@ def universe_exit_dates(rows: list) -> dict:
 def run(pattern: str = "history/*.csv", params: er.Params = None,
         costs: ts.Costs = None, us_only: bool = False,
         entry_total: int = None, limits: pf.Limits = None,
-        start_date: str = None, account: sizing.Account = None) -> dict:
+        start_date: str = None, account: sizing.Account = None,
+        min_total: int = None) -> dict:
     """아카이브 전체를 시뮬레이션하고 트레이드·통계·커버리지를 돌려준다."""
     params = params or er.Params()
     costs = costs or ts.Costs()
 
     rows = filter_rows(load_archive(pattern), us_only=us_only,
-                       entry_total=entry_total, start_date=start_date)
+                       entry_total=entry_total, start_date=start_date,
+                       min_total=min_total)
 
     # 아카이브에 (ticker, date) 중복이 실제로 존재한다. 그대로 두면
     # simulate_ticker 가 같은 봉을 두 번 처리해 진입 봉까지 평가하게 되고
@@ -347,6 +430,103 @@ def report(result: dict) -> None:
     print("=" * 60)
 
 
+def compare_row(result: dict, params: er.Params) -> dict:
+    """비교표 한 열. 노출을 반드시 함께 낸다.
+
+    손절 배수를 바꾸면 sizing.shares 가 r_unit 으로 수량을 역산하므로
+    종목당 투입이 달라진다. R 만 보면 "손절을 넓혔더니 좋아졌다" 로 읽히지만
+    실제로 일어난 일은 베팅이 작아진 것이고, 상승장에서는 대칭으로 덜 번다.
+    노출을 옆에 두지 않으면 이 구분이 안 보인다.
+    """
+    trades = result["trades"]
+    invested = [t.entry_price * t.qty for t in trades if t.qty]
+    s = result["summary"]
+    return {
+        "entered": len({t.ticker for t in trades}),
+        # qty 는 자본 제약이 있을 때만 채워진다. 없으면 노출을 잴 수 없다.
+        "avg_position": sum(invested) / len(invested) if invested else None,
+        "closed": s["closed"],
+        "net_r": s["total_net_r"] + s["open_net_r"],
+        "stop_atr_mult": params.stop_atr_mult,
+    }
+
+
+def compare_report(a: dict, b: dict, has_account: bool) -> None:
+    """두 설정을 나란히 찍는다. A 가 기준, B 가 바꾼 쪽이다."""
+    def cell(v, fmt):
+        return "-" if v is None else format(v, fmt)
+
+    print("=" * 62)
+    print(f"{'':<22}{'A(기준)':>18}{'B(변경)':>18}")
+    print("-" * 62)
+    print(f"{'진입 종목':<22}{a['entered']:>18}{b['entered']:>18}")
+    print(f"{'종목당 평균 투입':<22}"
+          f"{cell(a['avg_position'], ',.0f'):>18}"
+          f"{cell(b['avg_position'], ',.0f'):>18}")
+    print(f"{'닫힌 트레이드':<22}{a['closed']:>18}{b['closed']:>18}")
+    print(f"{'합계 R (미결 포함)':<22}"
+          f"{a['net_r']:>+18.2f}{b['net_r']:>+18.2f}")
+
+    if a["stop_atr_mult"] != b["stop_atr_mult"]:
+        print()
+        print(f"  !! stop_atr_mult 가 다르다 "
+              f"({a['stop_atr_mult']} vs {b['stop_atr_mult']}).")
+        if has_account:
+            print("     R 차이에 포지션 축소 효과가 섞여 있다. 종목당 투입을")
+            print("     함께 볼 것 - 상승장에서는 대칭으로 덜 번다.")
+        else:
+            print("     --capital 이 없어 노출을 잴 수 없고 R 의 분모만 바뀐다.")
+            print("     이 두 열은 비교할 수 없다. --capital 을 주고 다시 돌릴 것.")
+    print("=" * 62)
+
+
+# 트랙을 지정하지 않았을 때의 값. 현행 동작을 그대로 보존한다.
+#
+# min_total 이 None 인 것은 의도다 - 트랙 없이 돌리는 기존 호출에 진입
+# 문턱을 새로 걸면 예전 결과의 의미가 조용히 바뀐다.
+DEFAULT_TRADE_PARAMS = {
+    "min_total": None,
+    "exit_total": 60,
+    "stop_atr_mult": 3.0,
+    "trail_atr_mult": 3.0,
+}
+
+
+def resolve_trade_params(args) -> tuple:
+    """CLI > 트랙 > 현행 기본값 순으로 매매 파라미터를 푼다.
+
+    (exit_rules.Params, min_total) 을 돌려준다.
+
+    --track 이 기본값만 바꾸고 명시 인자가 언제나 이기는 것은 --history 와
+    --max-correlation 에 이미 적용된 규칙이다. 그러지 않으면 트랙을 준 순간
+    사용자가 직접 준 값이 조용히 무시된다.
+
+    tracks 의 키 이름은 소비자 파라미터 이름과 1:1 이라 번역이 없다.
+    min_total 은 그대로 filter_rows(min_total=) 로 간다.
+
+    주의: args.entry_total 은 여기 있는 min_total 과 **다른 것**이다. 그쪽은
+    문턱을 내리는(BUY 로 승격) 비교용 손잡이라 방향이 정반대이고, 이 함수는
+    그것을 건드리지 않는다 - 호출자가 run() 에 따로 넘긴다.
+
+    main 이 너무 커서 테스트로 못 잡으므로 함수로 떼어 둔다
+    (perf_report.track_limits 와 같은 이유).
+    """
+    base = (tracks.trade_params(args.track) if args.track
+            else dict(DEFAULT_TRADE_PARAMS))
+
+    def pick(cli, key):
+        return cli if cli is not None else base[key]
+
+    params = er.Params(
+        stop_atr_mult=pick(args.stop_atr_mult, "stop_atr_mult"),
+        trail_atr_mult=pick(args.trail_atr_mult, "trail_atr_mult"),
+        max_hold_days=args.max_hold_days,
+        exit_total=pick(args.exit_total, "exit_total"),
+        use_target=args.use_target,
+    )
+    return params, pick(args.min_total, "min_total")
+
+
 def main():
     console.force_utf8()
     p = argparse.ArgumentParser(description="스코어 아카이브 백테스트")
@@ -355,10 +535,14 @@ def main():
                    help="트랙을 지정한다. 아카이브 경로와 상관 상한을 그 트랙의\n"
                         "  기본값으로 맞춘다 (--history / --max-correlation 을\n"
                         "  직접 주면 그쪽이 이긴다)")
-    p.add_argument("--stop-atr-mult", type=float, default=3.0)
-    p.add_argument("--trail-atr-mult", type=float, default=3.0)
+    p.add_argument("--stop-atr-mult", type=float, default=None,
+                   help="손절 ATR 배수 (생략하면 --track 값, 없으면 3.0)")
+    p.add_argument("--trail-atr-mult", type=float, default=None,
+                   help="트레일 ATR 배수 (생략하면 --track 값, 없으면 3.0)")
     p.add_argument("--max-hold-days", type=int, default=60)
-    p.add_argument("--exit-total", type=int, default=60)
+    p.add_argument("--exit-total", type=int, default=None,
+                   help="이 점수 아래로 떨어지면 청산한다\n"
+                        "  (생략하면 --track 값, 없으면 60)")
     p.add_argument("--use-target", action="store_true",
                    help="목표가 도달 시 익절한다 (기본: 사용 안 함)")
     p.add_argument("--us-only", action="store_true",
@@ -373,6 +557,14 @@ def main():
                    help="한 종목 투입 상한 (초기 자본 대비 %%, 기본 20.0)")
     p.add_argument("--entry-total", type=int, default=None,
                    help="이 점수 이상이면 BUY 로 간주해 진입한다 (비교용)")
+    p.add_argument("--min-total", type=int, default=None,
+                   help="이 점수 미만인 BUY 를 버린다 (진입 문턱을 올린다).\n"
+                        "  --entry-total 과 대칭이다 - 그쪽은 문턱을 내리고\n"
+                        "  이쪽은 올린다. 둘 다 주면 이쪽이 이긴다.\n"
+                        "  생략하면 --track 값, --track 도 없으면 안 건다.\n"
+                        "  stock_finder 의 동명 옵션과는 단계가 다르다 -\n"
+                        "  그쪽은 화면에 무엇을 보여줄지, 이쪽은 무엇을\n"
+                        "  매수할지다 (방향은 둘 다 같다)")
     p.add_argument("--max-positions", type=int, default=0,
                    help="동시 보유 상한 (0=무제한, 기본).\n"
                         "  자리가 모자라면 그날 총점이 높은 종목이 가져간다")
@@ -380,6 +572,10 @@ def main():
                    help="이미 보유한 종목과의 일간수익률 상관 상한 (1.0=끔).\n"
                         "  0.90 이면 XLV·VHT·IYH 같은 사실상 같은 베팅을 막는다.\n"
                         "  생략하면 --track 의 기본값, --track 도 없으면 1.0")
+    p.add_argument("--compare", action="store_true",
+                   help="기준값과 지금 준 인자를 나란히 돌려 비교한다.\n"
+                        "  기준은 --track 의 값이고, --track 이 없으면\n"
+                        "  현행 기본값이다. 바꾼 인자가 하나도 없으면 거부한다")
     args = p.parse_args()
 
     # --track 은 기본값만 바꾼다. 명시된 인자가 언제나 이긴다 - 그러지 않으면
@@ -392,13 +588,7 @@ def main():
     else:
         max_corr = 1.0
 
-    params = er.Params(
-        stop_atr_mult=args.stop_atr_mult,
-        trail_atr_mult=args.trail_atr_mult,
-        max_hold_days=args.max_hold_days,
-        exit_total=args.exit_total,
-        use_target=args.use_target,
-    )
+    params, min_total = resolve_trade_params(args)
     limits = pf.Limits(max_positions=args.max_positions,
                        max_correlation=max_corr)
     account = None
@@ -407,9 +597,37 @@ def main():
                                  risk_pct=args.risk_pct,
                                  max_weight_pct=args.max_weight_pct)
 
-    report(run(pattern, params, us_only=args.us_only,
-               entry_total=args.entry_total, limits=limits,
-               start_date=args.start_date, account=account))
+    # entry_total 을 kwargs 에 숨기지 않는다. 방향이 정반대인 손잡이 둘이
+    # 한 호출에 함께 들어가므로 둘 다 눈에 보여야 한다. entry_total 은
+    # 사용자가 준 비교 플래그라 두 열에 똑같이 가고, min_total 은 트랙에서
+    # 푼 값이라 열마다 다르다 - 그 차이가 호출부에서 읽혀야 한다.
+    kwargs = dict(us_only=args.us_only, limits=limits,
+                  start_date=args.start_date, account=account)
+
+    if args.compare:
+        # vars(args) 를 펴고 파라미터만 지운다("같은 인자, 기본값으로").
+        # 필드를 손으로 다시 나열하면 resolve_trade_params 가 읽는 필드가
+        # 늘어날 때 여기만 조용히 어긋난다.
+        base_args = argparse.Namespace(**{
+            **vars(args),
+            "stop_atr_mult": None, "trail_atr_mult": None,
+            "exit_total": None, "min_total": None})
+        base_params, base_min = resolve_trade_params(base_args)
+        if (base_params, base_min) == (params, min_total):
+            raise SystemExit(
+                "--compare 는 바꿀 값이 있어야 한다. "
+                "--stop-atr-mult 같은 인자를 함께 줄 것.")
+        a = run(pattern, base_params, entry_total=args.entry_total,
+                min_total=base_min, **kwargs)
+        b = run(pattern, params, entry_total=args.entry_total,
+                min_total=min_total, **kwargs)
+        compare_report(compare_row(a, base_params),
+                       compare_row(b, params),
+                       has_account=account is not None)
+        return
+
+    report(run(pattern, params, entry_total=args.entry_total,
+               min_total=min_total, **kwargs))
 
 
 if __name__ == "__main__":
