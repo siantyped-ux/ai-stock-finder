@@ -1,17 +1,17 @@
 // AI 3-Month Stock Finder - Live Data (etf)
-// Generated: 2026-09-03 23:13:25
-// Macro: VIX=15.20, DXY=99.00, US10Y=4.79%
+// Generated: 2026-09-04 23:05:19
+// Macro: VIX=14.32, DXY=99.16, US10Y=4.77%
 // FMP: active · FRED: active
 window.LIVE_MACRO_ETF = {
-  vix: 15.20,
-  dxy: 99.00,
-  us10y: 4.79,
-  generated_at: "2026-09-03T23:13:25.272629",
+  vix: 14.32,
+  dxy: 99.16,
+  us10y: 4.77,
+  generated_at: "2026-09-04T23:05:19.877034",
   fmp_active: true,
   fred_active: true,
-  fred: {"available": true, "vix": 15.2, "us10y": 4.79, "yield_curve": 0.43, "fed_funds": 3.63, "unemployment": 4.1, "dxy_broad": 118.7479, "core_cpi_yoy": 2.47, "unemp_3m_change": -0.2}
+  fred: {"available": true, "vix": 14.32, "us10y": 4.77, "yield_curve": 0.41, "fed_funds": 3.63, "unemployment": 4.1, "dxy_broad": 118.7479, "core_cpi_yoy": 2.47, "unemp_3m_change": -0.2}
 };
-window.LIVE_SUMMARY_ETF = {"scanned": 431, "shown": 45, "strong_buy": 8, "buy": 3, "watch": 74, "avoid": 135, "hitl": 139};
+window.LIVE_SUMMARY_ETF = {"scanned": 439, "shown": 46, "strong_buy": 6, "buy": 6, "watch": 67, "avoid": 138, "hitl": 143};
 window.LIVE_STOCKS_ETF = [
   {
     "t": "VWO",
@@ -32,25 +32,25 @@ window.LIVE_STOCKS_ETF = [
     "target": 13,
     "hitl": false,
     "regime": "NEUTRAL",
-    "aum": 170275758951,
-    "turnover": 360696138,
+    "aum": 171532097556,
+    "turnover": 362875782,
     "atr_pct": 0.89,
     "reasons": {
       "tech": [
-        "이동평균 완벽 정배열 (P>60.4>59.5>57.2)",
-        "RSI 60 · 강세 지속 구간",
-        "MACD 골든크로스 · 히스토 +0.02",
-        "3개월 수익률 +5.2%",
-        "Bollinger 상단 접근 (91%)"
+        "이동평균 완벽 정배열 (P>60.5>59.5>57.2)",
+        "RSI 62 · 강세 지속 구간",
+        "MACD 골든크로스 · 히스토 +0.05",
+        "3개월 수익률 +5.5%",
+        "Bollinger 상단 접근 (100%)"
       ],
       "flow": [
-        "CMF -0.11 · 매도 우위",
+        "CMF -0.12 · 매도 우위",
         "가격·OBV 동반 상승 · 수급 확인",
-        "상승일 거래량 1.22배",
+        "상승일 거래량 1.31배",
         "거래대금 $357M · 유동성 충분"
       ],
       "macro": [
-        "NEUTRAL · VIX 15.2 · US10Y 4.79%",
+        "NEUTRAL · VIX 14.3 · US10Y 4.77%",
         "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
       ],
       "filing": [],
@@ -65,35 +65,35 @@ window.LIVE_STOCKS_ETF = [
     "at": "ETF",
     "ex": "AMEX",
     "tech": 69,
-    "flow": 84,
+    "flow": 77,
     "macro": 60,
     "filing": null,
     "value": null,
-    "total": 75,
+    "total": 72,
     "consensus": 1,
     "signal": "WATCH",
-    "ev": 0.95,
-    "target": 11,
+    "ev": 0.86,
+    "target": 10,
     "hitl": false,
     "regime": "NEUTRAL",
-    "aum": 100399139610,
-    "turnover": 781154378,
-    "atr_pct": 0.91,
+    "aum": 99597778176,
+    "turnover": 782038476,
+    "atr_pct": 0.92,
     "reasons": {
       "tech": [
-        "이동평균 완벽 정배열 (P>34.7>33.6>30.8)",
-        "RSI 61 · 강세 지속 구간",
-        "MACD 데드크로스 · 히스토 -0.05",
-        "3개월 수익률 +9.5%"
+        "이동평균 완벽 정배열 (P>34.8>33.6>30.8)",
+        "RSI 60 · 강세 지속 구간",
+        "MACD 데드크로스 · 히스토 -0.07",
+        "3개월 수익률 +8.6%"
       ],
       "flow": [
-        "CMF +0.19 · 강한 매집",
+        "CMF +0.10 · 매수 우위",
         "가격·OBV 동반 상승 · 수급 확인",
-        "상승일 거래량 1.38배",
-        "거래대금 $773M · 유동성 충분"
+        "상승일 거래량 1.28배",
+        "거래대금 $781M · 유동성 충분"
       ],
       "macro": [
-        "NEUTRAL · VIX 15.2 · US10Y 4.79%",
+        "NEUTRAL · VIX 14.3 · US10Y 4.77%",
         "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
       ],
       "filing": [],
@@ -108,36 +108,35 @@ window.LIVE_STOCKS_ETF = [
     "at": "ETF",
     "ex": "AMEX",
     "tech": 69,
-    "flow": 77,
+    "flow": 71,
     "macro": 65,
     "filing": null,
     "value": null,
-    "total": 72,
+    "total": 70,
     "consensus": 1,
     "signal": "WATCH",
-    "ev": 0.93,
-    "target": 11,
+    "ev": 0.86,
+    "target": 10,
     "hitl": false,
     "regime": "NEUTRAL",
-    "aum": 44503409572,
-    "turnover": 1295569184,
-    "atr_pct": 1.58,
+    "aum": 44038494581,
+    "turnover": 1265721044,
+    "atr_pct": 1.59,
     "reasons": {
       "tech": [
-        "이동평균 완벽 정배열 (P>171.0>165.4>154.4)",
-        "RSI 63 · 강세 지속 구간",
-        "MACD 데드크로스 · 히스토 -0.34",
-        "3개월 수익률 +13.7%"
+        "이동평균 완벽 정배열 (P>171.3>165.7>154.5)",
+        "RSI 59 · 강세 지속 구간",
+        "MACD 데드크로스 · 히스토 -0.44",
+        "3개월 수익률 +12.8%"
       ],
       "flow": [
-        "CMF +0.13 · 매수 우위",
+        "CMF +0.05 · 매수 우위",
         "가격·OBV 동반 상승 · 수급 확인",
-        "상승일 거래량 1.20배",
-        "거래대금 $1281M · 유동성 충분"
+        "거래대금 $1267M · 유동성 충분"
       ],
       "macro": [
-        "NEUTRAL · VIX 15.2 · US10Y 4.79%",
-        "DXY 99.0 약세 · 성장주 유리",
+        "NEUTRAL · VIX 14.3 · US10Y 4.77%",
+        "DXY 99.2 약세 · 성장주 유리",
         "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
       ],
       "filing": [],
@@ -159,28 +158,28 @@ window.LIVE_STOCKS_ETF = [
     "total": 91,
     "consensus": 2,
     "signal": "STRONG_BUY",
-    "ev": 1.6,
+    "ev": 1.57,
     "target": 19,
     "hitl": true,
     "regime": "NEUTRAL",
-    "aum": 42561784390,
-    "turnover": 1643420302,
-    "atr_pct": 1.71,
+    "aum": 42192941938,
+    "turnover": 1645181998,
+    "atr_pct": 1.76,
     "reasons": {
       "tech": [
-        "이동평균 완벽 정배열 (P>62.5>59.0>54.3)",
-        "RSI 68 · 강세 지속 구간",
-        "MACD 골든크로스 · 히스토 +0.07",
-        "3개월 수익률 +12.9%"
+        "이동평균 완벽 정배열 (P>62.9>59.2>54.4)",
+        "RSI 60 · 강세 지속 구간",
+        "MACD 골든크로스 · 히스토 +0.00",
+        "3개월 수익률 +10.6%"
       ],
       "flow": [
-        "CMF +0.22 · 강한 매집",
+        "CMF +0.24 · 강한 매집",
         "가격·OBV 동반 상승 · 수급 확인",
-        "상승일 거래량 1.68배 · 매수 집중",
-        "거래대금 $1593M · 유동성 충분"
+        "상승일 거래량 1.55배 · 매수 집중",
+        "거래대금 $1616M · 유동성 충분"
       ],
       "macro": [
-        "NEUTRAL · VIX 15.2 · US10Y 4.79%",
+        "NEUTRAL · VIX 14.3 · US10Y 4.77%",
         "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
       ],
       "filing": [],
@@ -194,80 +193,37 @@ window.LIVE_STOCKS_ETF = [
     "sec": "미분류",
     "at": "ETF",
     "ex": "AMEX",
-    "tech": 84,
+    "tech": 88,
     "flow": 59,
     "macro": 60,
     "filing": null,
     "value": null,
-    "total": 74,
+    "total": 76,
     "consensus": 1,
     "signal": "WATCH",
-    "ev": 0.99,
-    "target": 12,
+    "ev": 1.09,
+    "target": 13,
     "hitl": false,
     "regime": "NEUTRAL",
-    "aum": 31570716367,
-    "turnover": 1080670745,
-    "atr_pct": 1.42,
+    "aum": 32146260773,
+    "turnover": 1101981952,
+    "atr_pct": 1.39,
     "reasons": {
       "tech": [
-        "이동평균 완벽 정배열 (P>66.6>65.8>61.4)",
-        "RSI 55 · 중립",
-        "MACD 골든크로스 · 히스토 +0.05",
-        "3개월 수익률 +5.0%"
+        "이동평균 완벽 정배열 (P>66.8>65.8>61.4)",
+        "RSI 57 · 강세 지속 구간",
+        "MACD 골든크로스 · 히스토 +0.13",
+        "3개월 수익률 +5.0%",
+        "Bollinger 상단 접근 (100%)"
       ],
       "flow": [
-        "CMF -0.10 · 매도 우위",
+        "CMF -0.06 · 매도 우위",
         "가격↓ OBV↑ 다이버전스 · 하락 중 매집",
-        "거래대금 $1066M · 유동성 충분",
+        "거래대금 $1071M · 유동성 충분",
         "거래대금 감소 0.6배 · 관심 이탈"
       ],
       "macro": [
-        "NEUTRAL · VIX 15.2 · US10Y 4.79%",
-        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
-      ],
-      "filing": [],
-      "value": []
-    }
-  },
-  {
-    "t": "VHT",
-    "n": "Vanguard Health Care ETF",
-    "m": "US",
-    "sec": "제약/바이오",
-    "at": "ETF",
-    "ex": "AMEX",
-    "tech": 69,
-    "flow": 77,
-    "macro": 65,
-    "filing": null,
-    "value": null,
-    "total": 72,
-    "consensus": 1,
-    "signal": "WATCH",
-    "ev": 0.95,
-    "target": 11,
-    "hitl": false,
-    "regime": "NEUTRAL",
-    "aum": 21733948477,
-    "turnover": 65794801,
-    "atr_pct": 1.49,
-    "reasons": {
-      "tech": [
-        "이동평균 완벽 정배열 (P>321.2>311.0>288.4)",
-        "RSI 62 · 강세 지속 구간",
-        "MACD 데드크로스 · 히스토 -0.71",
-        "3개월 수익률 +14.7%"
-      ],
-      "flow": [
-        "CMF +0.09 · 매수 우위",
-        "가격·OBV 동반 상승 · 수급 확인",
-        "상승일 거래량 1.41배",
-        "거래대금 $65M · 유동성 충분"
-      ],
-      "macro": [
-        "NEUTRAL · VIX 15.2 · US10Y 4.79%",
-        "DXY 99.0 약세 · 성장주 유리",
+        "NEUTRAL · VIX 14.3 · US10Y 4.77%",
         "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
       ],
       "filing": [],
@@ -293,24 +249,24 @@ window.LIVE_STOCKS_ETF = [
     "target": 11,
     "hitl": false,
     "regime": "NEUTRAL",
-    "aum": 21153126392,
-    "turnover": 87268585,
+    "aum": 21133381104,
+    "turnover": 87495730,
     "atr_pct": 0.72,
     "reasons": {
       "tech": [
-        "이동평균 완벽 정배열 (P>105.0>102.6>95.8)",
-        "MACD 골든크로스 · 히스토 +0.01",
-        "3개월 수익률 +10.6%",
+        "이동평균 완벽 정배열 (P>105.1>102.8>96.0)",
+        "MACD 골든크로스 · 히스토 +0.06",
+        "3개월 수익률 +10.3%",
         "Bollinger 상단 접근 (100%)"
       ],
       "flow": [
-        "CMF -0.11 · 매도 우위",
+        "CMF -0.10 · 매도 우위",
         "가격·OBV 동반 상승 · 수급 확인",
-        "상승일 거래량 1.28배",
+        "상승일 거래량 1.17배",
         "거래대금 $86M · 유동성 충분"
       ],
       "macro": [
-        "NEUTRAL · VIX 15.2 · US10Y 4.79%",
+        "NEUTRAL · VIX 14.3 · US10Y 4.77%",
         "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
       ],
       "filing": [],
@@ -336,24 +292,24 @@ window.LIVE_STOCKS_ETF = [
     "target": 9,
     "hitl": false,
     "regime": "NEUTRAL",
-    "aum": 20542638481,
-    "turnover": 80360308,
-    "atr_pct": 0.95,
+    "aum": 20557096219,
+    "turnover": 78784860,
+    "atr_pct": 0.98,
     "reasons": {
       "tech": [
-        "이동평균 완벽 정배열 (P>111.3>107.1>102.0)",
-        "RSI 64 · 강세 지속 구간",
-        "MACD 데드크로스 · 히스토 -0.06",
-        "3개월 수익률 +8.7%",
-        "Bollinger 상단 접근 (98%)"
+        "이동평균 완벽 정배열 (P>111.5>107.3>102.1)",
+        "RSI 63 · 강세 지속 구간",
+        "MACD 데드크로스 · 히스토 -0.03",
+        "3개월 수익률 +8.5%",
+        "Bollinger 상단 접근 (94%)"
       ],
       "flow": [
         "가격·OBV 동반 상승 · 수급 확인",
-        "상승일 거래량 2.11배 · 매수 집중",
-        "거래대금 $79M · 유동성 충분"
+        "상승일 거래량 2.10배 · 매수 집중",
+        "거래대금 $77M · 유동성 충분"
       ],
       "macro": [
-        "NEUTRAL · VIX 15.2 · US10Y 4.79%",
+        "NEUTRAL · VIX 14.3 · US10Y 4.77%",
         "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
       ],
       "filing": [],
@@ -368,34 +324,35 @@ window.LIVE_STOCKS_ETF = [
     "at": "ETF",
     "ex": "AMEX",
     "tech": 69,
-    "flow": 75,
+    "flow": 83,
     "macro": 60,
     "filing": null,
     "value": null,
-    "total": 71,
+    "total": 75,
     "consensus": 1,
     "signal": "WATCH",
-    "ev": 0.82,
-    "target": 10,
+    "ev": 0.92,
+    "target": 11,
     "hitl": false,
     "regime": "NEUTRAL",
-    "aum": 12199459178,
-    "turnover": 67687588,
-    "atr_pct": 1.15,
+    "aum": 12265497391,
+    "turnover": 66590763,
+    "atr_pct": 1.14,
     "reasons": {
       "tech": [
-        "이동평균 완벽 정배열 (P>54.9>53.6>49.9)",
-        "RSI 56 · 강세 지속 구간",
+        "이동평균 완벽 정배열 (P>55.0>53.7>50.0)",
+        "RSI 62 · 강세 지속 구간",
         "MACD 데드크로스 · 히스토 -0.01",
-        "3개월 수익률 +7.0%"
+        "3개월 수익률 +8.0%"
       ],
       "flow": [
+        "CMF +0.13 · 매수 우위",
         "가격·OBV 동반 상승 · 수급 확인",
-        "상승일 거래량 1.62배 · 매수 집중",
-        "거래대금 $67M · 유동성 충분"
+        "상승일 거래량 1.63배 · 매수 집중",
+        "거래대금 $66M · 유동성 충분"
       ],
       "macro": [
-        "NEUTRAL · VIX 15.2 · US10Y 4.79%",
+        "NEUTRAL · VIX 14.3 · US10Y 4.77%",
         "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
       ],
       "filing": [],
@@ -410,37 +367,37 @@ window.LIVE_STOCKS_ETF = [
     "at": "ETF",
     "ex": "AMEX",
     "tech": 88,
-    "flow": 51,
+    "flow": 58,
     "macro": 60,
     "filing": null,
     "value": null,
-    "total": 73,
+    "total": 76,
     "consensus": 1,
     "signal": "WATCH",
-    "ev": 1.11,
-    "target": 13,
+    "ev": 1.17,
+    "target": 14,
     "hitl": false,
     "regime": "NEUTRAL",
-    "aum": 11838565206,
-    "turnover": 408521706,
-    "atr_pct": 1.79,
+    "aum": 12058932578,
+    "turnover": 425470959,
+    "atr_pct": 1.78,
     "reasons": {
       "tech": [
-        "이동평균 완벽 정배열 (P>106.2>103.1>83.7)",
-        "RSI 60 · 강세 지속 구간",
-        "MACD 골든크로스 · 히스토 +0.40",
-        "3개월 수익률 +12.3%",
-        "Bollinger 상단 접근 (92%)"
+        "이동평균 완벽 정배열 (P>106.7>103.3>83.9)",
+        "RSI 63 · 강세 지속 구간",
+        "MACD 골든크로스 · 히스토 +0.50",
+        "3개월 수익률 +11.7%",
+        "Bollinger 상단 접근 (100%)"
       ],
       "flow": [
-        "CMF -0.16 · 강한 분산",
+        "CMF -0.13 · 매도 우위",
         "가격·OBV 동반 상승 · 수급 확인",
-        "상승일 거래량 1.21배",
-        "거래대금 $394M · 유동성 충분",
+        "상승일 거래량 1.19배",
+        "거래대금 $405M · 유동성 충분",
         "거래대금 감소 0.6배 · 관심 이탈"
       ],
       "macro": [
-        "NEUTRAL · VIX 15.2 · US10Y 4.79%",
+        "NEUTRAL · VIX 14.3 · US10Y 4.77%",
         "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
       ],
       "filing": [],
@@ -466,25 +423,67 @@ window.LIVE_STOCKS_ETF = [
     "target": 13,
     "hitl": false,
     "regime": "NEUTRAL",
-    "aum": 10562175514,
-    "turnover": 342878919,
-    "atr_pct": 2.18,
+    "aum": 10468809854,
+    "turnover": 331142483,
+    "atr_pct": 2.15,
     "reasons": {
       "tech": [
-        "이동평균 완벽 정배열 (P>207.9>197.3>177.2)",
-        "RSI 67 · 강세 지속 구간",
-        "MACD 데드크로스 · 히스토 -0.32",
+        "이동평균 완벽 정배열 (P>208.6>197.9>177.5)",
+        "RSI 62 · 강세 지속 구간",
+        "MACD 데드크로스 · 히스토 -0.50",
         "3개월 수익률 +27.0% · 강한 상승"
       ],
       "flow": [
-        "CMF +0.27 · 강한 매집",
+        "CMF +0.23 · 강한 매집",
         "가격·OBV 동반 상승 · 수급 확인",
-        "상승일 거래량 1.48배",
-        "거래대금 $334M · 유동성 충분"
+        "상승일 거래량 1.39배",
+        "거래대금 $327M · 유동성 충분"
       ],
       "macro": [
-        "NEUTRAL · VIX 15.2 · US10Y 4.79%",
-        "DXY 99.0 약세 · 성장주 유리",
+        "NEUTRAL · VIX 14.3 · US10Y 4.77%",
+        "DXY 99.2 약세 · 성장주 유리",
+        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
+      ],
+      "filing": [],
+      "value": []
+    }
+  },
+  {
+    "t": "XLG",
+    "n": "Invesco S&P 500 Top 50 ETF",
+    "m": "US",
+    "sec": "미분류",
+    "at": "ETF",
+    "ex": "AMEX",
+    "tech": 80,
+    "flow": 54,
+    "macro": 60,
+    "filing": null,
+    "value": null,
+    "total": 70,
+    "consensus": 1,
+    "signal": "WATCH",
+    "ev": 0.8,
+    "target": 10,
+    "hitl": false,
+    "regime": "NEUTRAL",
+    "aum": 10455967209,
+    "turnover": 73086307,
+    "atr_pct": 0.89,
+    "reasons": {
+      "tech": [
+        "이동평균 완벽 정배열 (P>62.6>61.7>59.7)",
+        "RSI 52 · 중립",
+        "MACD 골든크로스 · 히스토 +0.03"
+      ],
+      "flow": [
+        "CMF +0.07 · 매수 우위",
+        "가격↑ OBV↓ 다이버전스 · 상승 중 분산",
+        "상승일 거래량 1.18배",
+        "거래대금 $73M · 유동성 충분"
+      ],
+      "macro": [
+        "NEUTRAL · VIX 14.3 · US10Y 4.77%",
         "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
       ],
       "filing": [],
@@ -499,80 +498,36 @@ window.LIVE_STOCKS_ETF = [
     "at": "ETF",
     "ex": "AMEX",
     "tech": 73,
-    "flow": 70,
+    "flow": 78,
     "macro": 60,
     "filing": null,
     "value": null,
-    "total": 72,
+    "total": 75,
     "consensus": 2,
     "signal": "BUY",
-    "ev": 0.87,
-    "target": 10,
+    "ev": 0.96,
+    "target": 12,
     "hitl": false,
     "regime": "NEUTRAL",
-    "aum": 9550687620,
-    "turnover": 58297039,
-    "atr_pct": 0.82,
+    "aum": 9613168754,
+    "turnover": 60299664,
+    "atr_pct": 0.84,
     "reasons": {
       "tech": [
-        "이동평균 완벽 정배열 (P>41.8>40.9>39.1)",
-        "RSI 77 · 과매수 경계",
-        "MACD 골든크로스 · 히스토 +0.08",
-        "3개월 수익률 +7.4%",
+        "이동평균 완벽 정배열 (P>41.9>41.0>39.2)",
+        "RSI 78 · 과매수 경계",
+        "MACD 골든크로스 · 히스토 +0.10",
+        "3개월 수익률 +7.6%",
         "Bollinger 상단 접근 (100%)"
       ],
       "flow": [
-        "CMF -0.07 · 매도 우위",
         "가격·OBV 동반 상승 · 수급 확인",
-        "상승일 거래량 1.69배 · 매수 집중",
-        "거래대금 $57M · 유동성 충분",
-        "거래대금 증가 1.7배 · 관심 유입"
+        "상승일 거래량 1.84배 · 매수 집중",
+        "거래대금 $59M · 유동성 충분",
+        "거래대금 증가 1.8배 · 관심 유입"
       ],
       "macro": [
-        "NEUTRAL · VIX 15.2 · US10Y 4.79%",
-        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
-      ],
-      "filing": [],
-      "value": []
-    }
-  },
-  {
-    "t": "VFLO",
-    "n": "VictoryShares Free Cash Flow ETF",
-    "m": "US",
-    "sec": "미분류",
-    "at": "ETF",
-    "ex": "NASDAQ",
-    "tech": 63,
-    "flow": 80,
-    "macro": 60,
-    "filing": null,
-    "value": null,
-    "total": 70,
-    "consensus": 1,
-    "signal": "WATCH",
-    "ev": 0.83,
-    "target": 10,
-    "hitl": false,
-    "regime": "NEUTRAL",
-    "aum": 8750552719,
-    "turnover": 120258499,
-    "atr_pct": 1.18,
-    "reasons": {
-      "tech": [
-        "이동평균 완벽 정배열 (P>54.5>50.6>43.3)",
-        "MACD 데드크로스 · 히스토 -0.10",
-        "3개월 수익률 +22.0% · 강한 상승"
-      ],
-      "flow": [
-        "CMF +0.09 · 매수 우위",
-        "가격·OBV 동반 상승 · 수급 확인",
-        "상승일 거래량 1.42배",
-        "거래대금 $117M · 유동성 충분",
-        "거래대금 증가 2.1배 · 관심 유입"
-      ],
-      "macro": [
-        "NEUTRAL · VIX 15.2 · US10Y 4.79%",
+        "NEUTRAL · VIX 14.3 · US10Y 4.77%",
         "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
       ],
       "filing": [],
@@ -594,28 +549,72 @@ window.LIVE_STOCKS_ETF = [
     "total": 80,
     "consensus": 2,
     "signal": "STRONG_BUY",
-    "ev": 1.12,
+    "ev": 1.11,
     "target": 13,
     "hitl": false,
     "regime": "NEUTRAL",
-    "aum": 8651262029,
-    "turnover": 72663676,
-    "atr_pct": 0.48,
+    "aum": 8665421214,
+    "turnover": 73006846,
+    "atr_pct": 0.49,
     "reasons": {
       "tech": [
         "이동평균 완벽 정배열 (P>18.1>17.9>17.0)",
         "MACD 골든크로스 · 히스토 +0.01",
-        "3개월 수익률 +6.1%",
-        "Bollinger 상단 접근 (99%)"
+        "3개월 수익률 +5.2%",
+        "Bollinger 상단 접근 (98%)"
       ],
       "flow": [
-        "CMF +0.43 · 강한 매집",
+        "CMF +0.45 · 강한 매집",
         "가격·OBV 동반 상승 · 수급 확인",
-        "상승일 거래량 1.44배",
+        "상승일 거래량 1.37배",
         "거래대금 $72M · 유동성 충분"
       ],
       "macro": [
-        "NEUTRAL · VIX 15.2 · US10Y 4.79%",
+        "NEUTRAL · VIX 14.3 · US10Y 4.77%",
+        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
+      ],
+      "filing": [],
+      "value": []
+    }
+  },
+  {
+    "t": "VFLO",
+    "n": "VictoryShares Free Cash Flow ETF",
+    "m": "US",
+    "sec": "미분류",
+    "at": "ETF",
+    "ex": "NASDAQ",
+    "tech": 73,
+    "flow": 80,
+    "macro": 60,
+    "filing": null,
+    "value": null,
+    "total": 76,
+    "consensus": 2,
+    "signal": "BUY",
+    "ev": 1.08,
+    "target": 13,
+    "hitl": false,
+    "regime": "NEUTRAL",
+    "aum": 8628822184,
+    "turnover": 120507519,
+    "atr_pct": 1.28,
+    "reasons": {
+      "tech": [
+        "이동평균 완벽 정배열 (P>54.6>50.7>43.4)",
+        "RSI 68 · 강세 지속 구간",
+        "MACD 데드크로스 · 히스토 -0.16",
+        "3개월 수익률 +20.1% · 강한 상승"
+      ],
+      "flow": [
+        "CMF +0.06 · 매수 우위",
+        "가격·OBV 동반 상승 · 수급 확인",
+        "상승일 거래량 1.31배",
+        "거래대금 $119M · 유동성 충분",
+        "거래대금 증가 2.1배 · 관심 유입"
+      ],
+      "macro": [
+        "NEUTRAL · VIX 14.3 · US10Y 4.77%",
         "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
       ],
       "filing": [],
@@ -630,36 +629,36 @@ window.LIVE_STOCKS_ETF = [
     "at": "ETF",
     "ex": "AMEX",
     "tech": 73,
-    "flow": 90,
+    "flow": 84,
     "macro": 65,
     "filing": null,
     "value": null,
-    "total": 80,
+    "total": 77,
     "consensus": 2,
-    "signal": "STRONG_BUY",
-    "ev": 1.18,
-    "target": 14,
+    "signal": "BUY",
+    "ev": 1.12,
+    "target": 13,
     "hitl": false,
     "regime": "NEUTRAL",
-    "aum": 8594677504,
-    "turnover": 1360220476,
-    "atr_pct": 2.77,
+    "aum": 8564874814,
+    "turnover": 1317465489,
+    "atr_pct": 2.68,
     "reasons": {
       "tech": [
-        "이동평균 완벽 정배열 (P>162.7>157.8>135.0)",
-        "RSI 59 · 강세 지속 구간",
-        "MACD 데드크로스 · 히스토 -0.36",
-        "3개월 수익률 +27.9% · 강한 상승"
+        "이동평균 완벽 정배열 (P>163.0>158.1>135.2)",
+        "RSI 56 · 강세 지속 구간",
+        "MACD 데드크로스 · 히스토 -0.47",
+        "3개월 수익률 +27.7% · 강한 상승"
       ],
       "flow": [
-        "CMF +0.26 · 강한 매집",
+        "CMF +0.24 · 강한 매집",
         "가격·OBV 동반 상승 · 수급 확인",
-        "상승일 거래량 1.57배 · 매수 집중",
-        "거래대금 $1350M · 유동성 충분"
+        "상승일 거래량 1.46배",
+        "거래대금 $1315M · 유동성 충분"
       ],
       "macro": [
-        "NEUTRAL · VIX 15.2 · US10Y 4.79%",
-        "DXY 99.0 약세 · 성장주 유리",
+        "NEUTRAL · VIX 14.3 · US10Y 4.77%",
+        "DXY 99.2 약세 · 성장주 유리",
         "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
       ],
       "filing": [],
@@ -681,27 +680,27 @@ window.LIVE_STOCKS_ETF = [
     "total": 71,
     "consensus": 1,
     "signal": "WATCH",
-    "ev": 0.81,
+    "ev": 0.8,
     "target": 10,
     "hitl": false,
     "regime": "NEUTRAL",
-    "aum": 7558636768,
-    "turnover": 31865931,
+    "aum": 7492096980,
+    "turnover": 31006497,
     "atr_pct": 0.97,
     "reasons": {
       "tech": [
-        "이동평균 완벽 정배열 (P>52.9>51.5>48.5)",
-        "RSI 56 · 강세 지속 구간",
-        "MACD 데드크로스 · 히스토 -0.06",
-        "3개월 수익률 +7.1%"
+        "이동평균 완벽 정배열 (P>52.9>51.6>48.6)",
+        "RSI 58 · 강세 지속 구간",
+        "MACD 데드크로스 · 히스토 -0.09",
+        "3개월 수익률 +6.5%"
       ],
       "flow": [
-        "CMF +0.14 · 매수 우위",
+        "CMF +0.06 · 매수 우위",
         "가격·OBV 동반 상승 · 수급 확인",
-        "상승일 거래량 1.45배"
+        "상승일 거래량 1.36배"
       ],
       "macro": [
-        "NEUTRAL · VIX 15.2 · US10Y 4.79%",
+        "NEUTRAL · VIX 14.3 · US10Y 4.77%",
         "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
       ],
       "filing": [],
@@ -709,42 +708,42 @@ window.LIVE_STOCKS_ETF = [
     }
   },
   {
-    "t": "DIVO",
-    "n": "Amplify CWP Enhanced Dividend Income ETF",
+    "t": "ESGE",
+    "n": "iShares ESG Aware MSCI EM ETF",
     "m": "US",
     "sec": "미분류",
     "at": "ETF",
-    "ex": "AMEX",
-    "tech": 66,
-    "flow": 80,
+    "ex": "NASDAQ",
+    "tech": 88,
+    "flow": 49,
     "macro": 60,
     "filing": null,
     "value": null,
     "total": 72,
     "consensus": 1,
     "signal": "WATCH",
-    "ev": 0.8,
-    "target": 10,
+    "ev": 1.0,
+    "target": 12,
     "hitl": false,
     "regime": "NEUTRAL",
-    "aum": 7474534546,
-    "turnover": 35396975,
-    "atr_pct": 0.64,
+    "aum": 7365350013,
+    "turnover": 31683934,
+    "atr_pct": 1.37,
     "reasons": {
       "tech": [
-        "이동평균 완벽 정배열 (P>48.3>47.0>45.1)",
-        "RSI 59 · 강세 지속 구간",
-        "MACD 데드크로스 · 히스토 -0.07",
-        "3개월 수익률 +7.0%",
-        "Bollinger 상단 접근 (96%)"
+        "이동평균 완벽 정배열 (P>53.7>52.8>49.3)",
+        "RSI 60 · 강세 지속 구간",
+        "MACD 골든크로스 · 히스토 +0.13",
+        "3개월 수익률 +5.9%",
+        "Bollinger 상단 접근 (100%)"
       ],
       "flow": [
-        "CMF +0.09 · 매수 우위",
-        "가격·OBV 동반 상승 · 수급 확인",
-        "상승일 거래량 1.70배 · 매수 집중"
+        "CMF +0.08 · 매수 우위",
+        "가격·OBV 동반 하락 · 수급 이탈",
+        "거래대금 감소 0.6배 · 관심 이탈"
       ],
       "macro": [
-        "NEUTRAL · VIX 15.2 · US10Y 4.79%",
+        "NEUTRAL · VIX 14.3 · US10Y 4.77%",
         "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
       ],
       "filing": [],
@@ -770,21 +769,21 @@ window.LIVE_STOCKS_ETF = [
     "target": 12,
     "hitl": false,
     "regime": "NEUTRAL",
-    "aum": 7327735664,
-    "turnover": 45411291,
-    "atr_pct": 1.04,
+    "aum": 7324886622,
+    "turnover": 44165412,
+    "atr_pct": 1.08,
     "reasons": {
       "tech": [
-        "이동평균 완벽 정배열 (P>179.3>176.7>162.0)",
-        "RSI 43 · 중립",
-        "MACD 골든크로스 · 히스토 +0.03",
-        "3개월 수익률 +7.1%"
+        "이동평균 완벽 정배열 (P>179.3>176.9>162.2)",
+        "RSI 45 · 중립",
+        "MACD 골든크로스 · 히스토 +0.02",
+        "3개월 수익률 +6.6%"
       ],
       "flow": [
         "가격·OBV 동반 상승 · 수급 확인"
       ],
       "macro": [
-        "NEUTRAL · VIX 15.2 · US10Y 4.79%",
+        "NEUTRAL · VIX 14.3 · US10Y 4.77%",
         "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
       ],
       "filing": [],
@@ -792,40 +791,168 @@ window.LIVE_STOCKS_ETF = [
     }
   },
   {
-    "t": "ESGE",
-    "n": "iShares ESG Aware MSCI EM ETF",
+    "t": "VOX",
+    "n": "Vanguard Communication Services ETF",
     "m": "US",
     "sec": "미분류",
     "at": "ETF",
-    "ex": "NASDAQ",
-    "tech": 91,
-    "flow": 41,
+    "ex": "AMEX",
+    "tech": 80,
+    "flow": 66,
     "macro": 60,
     "filing": null,
     "value": null,
-    "total": 71,
+    "total": 74,
     "consensus": 1,
     "signal": "WATCH",
-    "ev": 0.99,
-    "target": 12,
+    "ev": 0.92,
+    "target": 11,
     "hitl": false,
     "regime": "NEUTRAL",
-    "aum": 7226105910,
-    "turnover": 30749320,
-    "atr_pct": 1.4,
+    "aum": 6163410679,
+    "turnover": 41444063,
+    "atr_pct": 1.34,
     "reasons": {
       "tech": [
-        "이동평균 완벽 정배열 (P>53.6>52.8>49.2)",
+        "단기 정배열 (P>187.2>186.9)",
         "RSI 57 · 강세 지속 구간",
-        "MACD 골든크로스 · 히스토 +0.06",
-        "3개월 수익률 +5.9%"
+        "MACD 골든크로스 · 히스토 +0.30"
       ],
       "flow": [
-        "가격·OBV 동반 하락 · 수급 이탈",
-        "거래대금 감소 0.6배 · 관심 이탈"
+        "가격·OBV 동반 상승 · 수급 확인",
+        "상승일 거래량 1.47배"
       ],
       "macro": [
-        "NEUTRAL · VIX 15.2 · US10Y 4.79%",
+        "NEUTRAL · VIX 14.3 · US10Y 4.77%",
+        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
+      ],
+      "filing": [],
+      "value": []
+    }
+  },
+  {
+    "t": "RECS",
+    "n": "Columbia Research Enhanced Core ETF",
+    "m": "US",
+    "sec": "미분류",
+    "at": "ETF",
+    "ex": "AMEX",
+    "tech": 88,
+    "flow": 66,
+    "macro": 60,
+    "filing": null,
+    "value": null,
+    "total": 79,
+    "consensus": 1,
+    "signal": "WATCH",
+    "ev": 1.18,
+    "target": 14,
+    "hitl": false,
+    "regime": "NEUTRAL",
+    "aum": 6139655673,
+    "turnover": 19758869,
+    "atr_pct": 0.75,
+    "reasons": {
+      "tech": [
+        "이동평균 완벽 정배열 (P>45.3>44.6>42.1)",
+        "RSI 56 · 강세 지속 구간",
+        "MACD 골든크로스 · 히스토 +0.00",
+        "3개월 수익률 +6.2%",
+        "Bollinger 상단 접근 (93%)"
+      ],
+      "flow": [
+        "가격·OBV 동반 상승 · 수급 확인",
+        "상승일 거래량 1.45배"
+      ],
+      "macro": [
+        "NEUTRAL · VIX 14.3 · US10Y 4.77%",
+        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
+      ],
+      "filing": [],
+      "value": []
+    }
+  },
+  {
+    "t": "SIL",
+    "n": "Global X - Silver Miners ETF",
+    "m": "US",
+    "sec": "소재",
+    "at": "ETF",
+    "ex": "AMEX",
+    "tech": 66,
+    "flow": 80,
+    "macro": 60,
+    "filing": null,
+    "value": null,
+    "total": 72,
+    "consensus": 1,
+    "signal": "WATCH",
+    "ev": 0.91,
+    "target": 11,
+    "hitl": false,
+    "regime": "NEUTRAL",
+    "aum": 5665084878,
+    "turnover": 137114669,
+    "atr_pct": 4.34,
+    "reasons": {
+      "tech": [
+        "단기 정배열 (P>96.0>84.4)",
+        "RSI 60 · 강세 지속 구간",
+        "MACD 데드크로스 · 히스토 -0.34",
+        "3개월 수익률 +24.9% · 강한 상승"
+      ],
+      "flow": [
+        "CMF +0.12 · 매수 우위",
+        "가격·OBV 동반 상승 · 수급 확인",
+        "상승일 거래량 1.31배",
+        "거래대금 $133M · 유동성 충분",
+        "거래대금 증가 1.2배 · 관심 유입"
+      ],
+      "macro": [
+        "NEUTRAL · VIX 14.3 · US10Y 4.77%",
+        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
+      ],
+      "filing": [],
+      "value": []
+    }
+  },
+  {
+    "t": "FDN",
+    "n": "First Trust Dow Jones Internet Index Fun",
+    "m": "US",
+    "sec": "미분류",
+    "at": "ETF",
+    "ex": "AMEX",
+    "tech": 69,
+    "flow": 72,
+    "macro": 60,
+    "filing": null,
+    "value": null,
+    "total": 70,
+    "consensus": 1,
+    "signal": "WATCH",
+    "ev": 0.8,
+    "target": 10,
+    "hitl": false,
+    "regime": "NEUTRAL",
+    "aum": 5268473045,
+    "turnover": 53669267,
+    "atr_pct": 1.38,
+    "reasons": {
+      "tech": [
+        "이동평균 완벽 정배열 (P>289.5>278.9>264.0)",
+        "RSI 56 · 강세 지속 구간",
+        "MACD 데드크로스 · 히스토 -0.44",
+        "3개월 수익률 +7.5%"
+      ],
+      "flow": [
+        "가격·OBV 동반 상승 · 수급 확인",
+        "상승일 거래량 1.53배 · 매수 집중",
+        "거래대금 $54M · 유동성 충분",
+        "거래대금 감소 0.5배 · 관심 이탈"
+      ],
+      "macro": [
+        "NEUTRAL · VIX 14.3 · US10Y 4.77%",
         "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
       ],
       "filing": [],
@@ -839,36 +966,77 @@ window.LIVE_STOCKS_ETF = [
     "sec": "미분류",
     "at": "ETF",
     "ex": "NASDAQ",
-    "tech": 84,
-    "flow": 68,
+    "tech": 88,
+    "flow": 76,
     "macro": 60,
     "filing": null,
     "value": null,
-    "total": 78,
-    "consensus": 1,
-    "signal": "WATCH",
-    "ev": 1.09,
-    "target": 13,
-    "hitl": false,
+    "total": 83,
+    "consensus": 2,
+    "signal": "STRONG_BUY",
+    "ev": 1.28,
+    "target": 15,
+    "hitl": true,
     "regime": "NEUTRAL",
-    "aum": 5079802162,
-    "turnover": 59319093,
-    "atr_pct": 1.68,
+    "aum": 5239457253,
+    "turnover": 67944382,
+    "atr_pct": 1.69,
     "reasons": {
       "tech": [
-        "이동평균 완벽 정배열 (P>137.9>136.1>119.6)",
-        "RSI 51 · 중립",
-        "MACD 골든크로스 · 히스토 +0.07",
-        "3개월 수익률 +5.0%"
+        "이동평균 완벽 정배열 (P>138.3>136.2>119.8)",
+        "RSI 57 · 강세 지속 구간",
+        "MACD 골든크로스 · 히스토 +0.35",
+        "3개월 수익률 +5.3%",
+        "Bollinger 상단 접근 (100%)"
       ],
       "flow": [
-        "CMF -0.08 · 매도 우위",
         "가격↓ OBV↑ 다이버전스 · 하락 중 매집",
-        "상승일 거래량 1.27배",
-        "거래대금 $59M · 유동성 충분"
+        "상승일 거래량 1.28배",
+        "거래대금 $66M · 유동성 충분"
       ],
       "macro": [
-        "NEUTRAL · VIX 15.2 · US10Y 4.79%",
+        "NEUTRAL · VIX 14.3 · US10Y 4.77%",
+        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
+      ],
+      "filing": [],
+      "value": []
+    }
+  },
+  {
+    "t": "GNR",
+    "n": "State Street SPDR S&P Global Natural Res",
+    "m": "US",
+    "sec": "미분류",
+    "at": "ETF",
+    "ex": "AMEX",
+    "tech": 59,
+    "flow": 87,
+    "macro": 60,
+    "filing": null,
+    "value": null,
+    "total": 70,
+    "consensus": 1,
+    "signal": "WATCH",
+    "ev": 0.75,
+    "target": 9,
+    "hitl": false,
+    "regime": "NEUTRAL",
+    "aum": 4883576889,
+    "turnover": 19184222,
+    "atr_pct": 1.35,
+    "reasons": {
+      "tech": [
+        "이동평균 완벽 정배열 (P>77.3>73.0>70.0)",
+        "MACD 데드크로스 · 히스토 -0.08",
+        "3개월 수익률 +10.7%"
+      ],
+      "flow": [
+        "CMF +0.24 · 강한 매집",
+        "가격·OBV 동반 상승 · 수급 확인",
+        "상승일 거래량 2.13배 · 매수 집중"
+      ],
+      "macro": [
+        "NEUTRAL · VIX 14.3 · US10Y 4.77%",
         "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
       ],
       "filing": [],
@@ -894,24 +1062,24 @@ window.LIVE_STOCKS_ETF = [
     "target": 11,
     "hitl": false,
     "regime": "NEUTRAL",
-    "aum": 4578024949,
-    "turnover": 145867392,
-    "atr_pct": 4.2,
+    "aum": 4477673059,
+    "turnover": 134300368,
+    "atr_pct": 4.38,
     "reasons": {
       "tech": [
-        "단기 정배열 (P>31.0>27.6)",
-        "RSI 60 · 강세 지속 구간",
-        "MACD 데드크로스 · 히스토 -0.11",
-        "3개월 수익률 +22.9% · 강한 상승"
+        "단기 정배열 (P>31.1>27.7)",
+        "RSI 57 · 강세 지속 구간",
+        "MACD 데드크로스 · 히스토 -0.14",
+        "3개월 수익률 +20.3% · 강한 상승"
       ],
       "flow": [
-        "CMF +0.09 · 매수 우위",
+        "CMF +0.06 · 매수 우위",
         "가격·OBV 동반 상승 · 수급 확인",
-        "상승일 거래량 1.39배",
-        "거래대금 $139M · 유동성 충분"
+        "상승일 거래량 1.30배",
+        "거래대금 $132M · 유동성 충분"
       ],
       "macro": [
-        "NEUTRAL · VIX 15.2 · US10Y 4.79%",
+        "NEUTRAL · VIX 14.3 · US10Y 4.77%",
         "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
       ],
       "filing": [],
@@ -933,28 +1101,28 @@ window.LIVE_STOCKS_ETF = [
     "total": 76,
     "consensus": 1,
     "signal": "WATCH",
-    "ev": 1.01,
+    "ev": 1.0,
     "target": 12,
     "hitl": false,
     "regime": "NEUTRAL",
-    "aum": 4332163286,
-    "turnover": 20154235,
-    "atr_pct": 1.44,
+    "aum": 4285185560,
+    "turnover": 19826861,
+    "atr_pct": 1.49,
     "reasons": {
       "tech": [
-        "이동평균 완벽 정배열 (P>104.7>101.8>96.9)",
-        "RSI 63 · 강세 지속 구간",
-        "MACD 데드크로스 · 히스토 -0.19",
-        "3개월 수익률 +11.9%"
+        "이동평균 완벽 정배열 (P>104.9>101.9>96.9)",
+        "RSI 59 · 강세 지속 구간",
+        "MACD 데드크로스 · 히스토 -0.25",
+        "3개월 수익률 +11.3%"
       ],
       "flow": [
-        "CMF +0.31 · 강한 매집",
+        "CMF +0.29 · 강한 매집",
         "가격·OBV 동반 상승 · 수급 확인",
-        "상승일 거래량 1.69배 · 매수 집중"
+        "상승일 거래량 1.63배 · 매수 집중"
       ],
       "macro": [
-        "NEUTRAL · VIX 15.2 · US10Y 4.79%",
-        "DXY 99.0 약세 · 성장주 유리",
+        "NEUTRAL · VIX 14.3 · US10Y 4.77%",
+        "DXY 99.2 약세 · 성장주 유리",
         "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
       ],
       "filing": [],
@@ -969,35 +1137,35 @@ window.LIVE_STOCKS_ETF = [
     "at": "ETF",
     "ex": "NASDAQ",
     "tech": 88,
-    "flow": 64,
+    "flow": 58,
     "macro": 60,
     "filing": null,
     "value": null,
-    "total": 78,
+    "total": 76,
     "consensus": 1,
     "signal": "WATCH",
-    "ev": 1.21,
-    "target": 15,
+    "ev": 1.15,
+    "target": 14,
     "hitl": false,
     "regime": "NEUTRAL",
-    "aum": 3643521535,
-    "turnover": 29452859,
+    "aum": 3653011773,
+    "turnover": 29887256,
     "atr_pct": 0.84,
     "reasons": {
       "tech": [
-        "이동평균 완벽 정배열 (P>97.8>95.3>88.6)",
+        "이동평균 완벽 정배열 (P>97.9>95.5>88.7)",
         "RSI 66 · 강세 지속 구간",
-        "MACD 골든크로스 · 히스토 +0.01",
-        "3개월 수익률 +10.2%",
+        "MACD 골든크로스 · 히스토 +0.08",
+        "3개월 수익률 +10.0%",
         "Bollinger 상단 접근 (100%)"
       ],
       "flow": [
-        "CMF -0.11 · 매도 우위",
+        "CMF -0.08 · 매도 우위",
         "가격·OBV 동반 상승 · 수급 확인",
-        "상승일 거래량 1.51배 · 매수 집중"
+        "상승일 거래량 1.49배"
       ],
       "macro": [
-        "NEUTRAL · VIX 15.2 · US10Y 4.79%",
+        "NEUTRAL · VIX 14.3 · US10Y 4.77%",
         "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
       ],
       "filing": [],
@@ -1023,21 +1191,65 @@ window.LIVE_STOCKS_ETF = [
     "target": 12,
     "hitl": false,
     "regime": "NEUTRAL",
-    "aum": 3509486864,
-    "turnover": 28574504,
-    "atr_pct": 1.69,
+    "aum": 3500689997,
+    "turnover": 27756106,
+    "atr_pct": 1.68,
     "reasons": {
       "tech": [
-        "이동평균 완벽 정배열 (P>74.9>74.5>68.9)",
-        "RSI 51 · 중립",
-        "MACD 골든크로스 · 히스토 +0.13"
+        "이동평균 완벽 정배열 (P>75.1>74.5>69.0)",
+        "RSI 53 · 중립",
+        "MACD 골든크로스 · 히스토 +0.08"
       ],
       "flow": [
-        "CMF +0.06 · 매수 우위",
+        "CMF +0.14 · 매수 우위",
         "가격·OBV 동반 상승 · 수급 확인"
       ],
       "macro": [
-        "NEUTRAL · VIX 15.2 · US10Y 4.79%",
+        "NEUTRAL · VIX 14.3 · US10Y 4.77%",
+        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
+      ],
+      "filing": [],
+      "value": []
+    }
+  },
+  {
+    "t": "XYLD",
+    "n": "Global X - S&P 500 Covered Call ETF",
+    "m": "US",
+    "sec": "미분류",
+    "at": "ETF",
+    "ex": "AMEX",
+    "tech": 66,
+    "flow": 84,
+    "macro": 60,
+    "filing": null,
+    "value": null,
+    "total": 73,
+    "consensus": 1,
+    "signal": "WATCH",
+    "ev": 0.82,
+    "target": 10,
+    "hitl": false,
+    "regime": "NEUTRAL",
+    "aum": 3236656260,
+    "turnover": 17109237,
+    "atr_pct": 0.29,
+    "reasons": {
+      "tech": [
+        "이동평균 완벽 정배열 (P>41.4>40.9>38.9)",
+        "RSI 67 · 강세 지속 구간",
+        "MACD 데드크로스 · 히스토 -0.01",
+        "3개월 수익률 +5.5%",
+        "Bollinger 상단 접근 (100%)"
+      ],
+      "flow": [
+        "CMF +0.22 · 강한 매집",
+        "가격·OBV 동반 상승 · 수급 확인",
+        "상승일 거래량 2.02배 · 매수 집중",
+        "거래대금 감소 0.5배 · 관심 이탈"
+      ],
+      "macro": [
+        "NEUTRAL · VIX 14.3 · US10Y 4.77%",
         "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
       ],
       "filing": [],
@@ -1051,35 +1263,36 @@ window.LIVE_STOCKS_ETF = [
     "sec": "에너지",
     "at": "ETF",
     "ex": "AMEX",
-    "tech": 81,
+    "tech": 91,
     "flow": 90,
     "macro": 60,
     "filing": null,
     "value": null,
-    "total": 85,
+    "total": 91,
     "consensus": 2,
     "signal": "STRONG_BUY",
-    "ev": 1.38,
-    "target": 17,
-    "hitl": false,
+    "ev": 1.61,
+    "target": 19,
+    "hitl": true,
     "regime": "NEUTRAL",
-    "aum": 3158618088,
-    "turnover": 522541733,
-    "atr_pct": 2.06,
+    "aum": 3132012975,
+    "turnover": 509337026,
+    "atr_pct": 2.1,
     "reasons": {
       "tech": [
-        "이동평균 완벽 정배열 (P>184.1>172.9>157.2)",
-        "MACD 골든크로스 · 히스토 +0.38",
-        "3개월 수익률 +16.4%"
+        "이동평균 완벽 정배열 (P>185.4>173.6>157.6)",
+        "RSI 64 · 강세 지속 구간",
+        "MACD 골든크로스 · 히스토 +0.19",
+        "3개월 수익률 +13.8%"
       ],
       "flow": [
-        "CMF +0.23 · 강한 매집",
+        "CMF +0.25 · 강한 매집",
         "가격·OBV 동반 상승 · 수급 확인",
-        "상승일 거래량 1.65배 · 매수 집중",
-        "거래대금 $500M · 유동성 충분"
+        "상승일 거래량 1.56배 · 매수 집중",
+        "거래대금 $494M · 유동성 충분"
       ],
       "macro": [
-        "NEUTRAL · VIX 15.2 · US10Y 4.79%",
+        "NEUTRAL · VIX 14.3 · US10Y 4.77%",
         "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
       ],
       "filing": [],
@@ -1093,36 +1306,77 @@ window.LIVE_STOCKS_ETF = [
     "sec": "에너지",
     "at": "ETF",
     "ex": "AMEX",
-    "tech": 91,
+    "tech": 69,
     "flow": 84,
     "macro": 60,
     "filing": null,
     "value": null,
-    "total": 88,
-    "consensus": 2,
-    "signal": "STRONG_BUY",
-    "ev": 1.5,
-    "target": 18,
-    "hitl": true,
+    "total": 75,
+    "consensus": 1,
+    "signal": "WATCH",
+    "ev": 0.93,
+    "target": 11,
+    "hitl": false,
     "regime": "NEUTRAL",
-    "aum": 3031004743,
-    "turnover": 20399084,
-    "atr_pct": 1.51,
+    "aum": 3005279019,
+    "turnover": 25515874,
+    "atr_pct": 1.56,
     "reasons": {
       "tech": [
-        "이동평균 완벽 정배열 (P>57.3>54.5>50.6)",
-        "RSI 69 · 강세 지속 구간",
-        "MACD 골든크로스 · 히스토 +0.04",
-        "3개월 수익률 +10.1%"
+        "이동평균 완벽 정배열 (P>57.6>54.6>50.7)",
+        "RSI 59 · 강세 지속 구간",
+        "MACD 데드크로스 · 히스토 -0.01",
+        "3개월 수익률 +8.1%"
       ],
       "flow": [
-        "CMF +0.17 · 강한 매집",
+        "CMF +0.20 · 강한 매집",
         "가격·OBV 동반 상승 · 수급 확인",
-        "상승일 거래량 1.79배 · 매수 집중",
-        "거래대금 감소 0.4배 · 관심 이탈"
+        "상승일 거래량 1.54배 · 매수 집중",
+        "거래대금 감소 0.5배 · 관심 이탈"
       ],
       "macro": [
-        "NEUTRAL · VIX 15.2 · US10Y 4.79%",
+        "NEUTRAL · VIX 14.3 · US10Y 4.77%",
+        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
+      ],
+      "filing": [],
+      "value": []
+    }
+  },
+  {
+    "t": "CGNG",
+    "n": "Capital Group New Geography Equity ETF",
+    "m": "US",
+    "sec": "미분류",
+    "at": "ETF",
+    "ex": "AMEX",
+    "tech": 81,
+    "flow": 67,
+    "macro": 60,
+    "filing": null,
+    "value": null,
+    "total": 75,
+    "consensus": 1,
+    "signal": "WATCH",
+    "ev": 1.01,
+    "target": 12,
+    "hitl": false,
+    "regime": "NEUTRAL",
+    "aum": 2967084528,
+    "turnover": 19384645,
+    "atr_pct": 1.13,
+    "reasons": {
+      "tech": [
+        "이동평균 완벽 정배열 (P>36.7>36.3>34.4)",
+        "RSI 52 · 중립",
+        "MACD 골든크로스 · 히스토 +0.01",
+        "3개월 수익률 +5.1%",
+        "Bollinger 상단 접근 (98%)"
+      ],
+      "flow": [
+        "가격↓ OBV↑ 다이버전스 · 하락 중 매집"
+      ],
+      "macro": [
+        "NEUTRAL · VIX 14.3 · US10Y 4.77%",
         "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
       ],
       "filing": [],
@@ -1136,36 +1390,37 @@ window.LIVE_STOCKS_ETF = [
     "sec": "미분류",
     "at": "ETF",
     "ex": "NASDAQ",
-    "tech": 91,
-    "flow": 59,
+    "tech": 88,
+    "flow": 52,
     "macro": 60,
     "filing": null,
     "value": null,
-    "total": 78,
+    "total": 74,
     "consensus": 1,
     "signal": "WATCH",
-    "ev": 1.17,
-    "target": 14,
+    "ev": 1.03,
+    "target": 12,
     "hitl": false,
     "regime": "NEUTRAL",
-    "aum": 2303455543,
-    "turnover": 6202375,
-    "atr_pct": 1.22,
+    "aum": 2345465044,
+    "turnover": 6555635,
+    "atr_pct": 1.21,
     "reasons": {
       "tech": [
-        "이동평균 완벽 정배열 (P>115.9>114.0>105.4)",
-        "RSI 56 · 강세 지속 구간",
-        "MACD 골든크로스 · 히스토 +0.09",
-        "3개월 수익률 +5.3%"
+        "이동평균 완벽 정배열 (P>116.2>114.1>105.5)",
+        "RSI 60 · 강세 지속 구간",
+        "MACD 골든크로스 · 히스토 +0.21",
+        "3개월 수익률 +5.7%",
+        "Bollinger 상단 접근 (100%)"
       ],
       "flow": [
-        "CMF +0.07 · 매수 우위",
-        "가격·OBV 동반 하락 · 수급 이탈",
-        "상승일 거래량 1.68배 · 매수 집중",
+        "CMF +0.12 · 매수 우위",
+        "가격↑ OBV↓ 다이버전스 · 상승 중 분산",
+        "상승일 거래량 1.63배 · 매수 집중",
         "거래대금 감소 0.3배 · 관심 이탈"
       ],
       "macro": [
-        "NEUTRAL · VIX 15.2 · US10Y 4.79%",
+        "NEUTRAL · VIX 14.3 · US10Y 4.77%",
         "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
       ],
       "filing": [],
@@ -1187,27 +1442,27 @@ window.LIVE_STOCKS_ETF = [
     "total": 81,
     "consensus": 2,
     "signal": "STRONG_BUY",
-    "ev": 1.24,
+    "ev": 1.23,
     "target": 15,
     "hitl": true,
     "regime": "NEUTRAL",
-    "aum": 2146785624,
-    "turnover": 8917722,
-    "atr_pct": 1.22,
+    "aum": 2180687487,
+    "turnover": 8987378,
+    "atr_pct": 1.2,
     "reasons": {
       "tech": [
-        "이동평균 완벽 정배열 (P>42.1>41.3>38.2)",
-        "RSI 65 · 강세 지속 구간",
-        "MACD 골든크로스 · 히스토 +0.10",
-        "3개월 수익률 +6.3%",
-        "Bollinger 상단 접근 (95%)"
+        "이동평균 완벽 정배열 (P>42.2>41.4>38.3)",
+        "RSI 68 · 강세 지속 구간",
+        "MACD 골든크로스 · 히스토 +0.14",
+        "3개월 수익률 +6.2%",
+        "Bollinger 상단 접근 (100%)"
       ],
       "flow": [
         "가격↓ OBV↑ 다이버전스 · 하락 중 매집",
         "상승일 거래량 1.34배"
       ],
       "macro": [
-        "NEUTRAL · VIX 15.2 · US10Y 4.79%",
+        "NEUTRAL · VIX 14.3 · US10Y 4.77%",
         "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
       ],
       "filing": [],
@@ -1221,77 +1476,36 @@ window.LIVE_STOCKS_ETF = [
     "sec": "미분류",
     "at": "ETF",
     "ex": "AMEX",
-    "tech": 78,
+    "tech": 73,
     "flow": 85,
     "macro": 60,
     "filing": null,
     "value": null,
-    "total": 81,
-    "consensus": 2,
-    "signal": "STRONG_BUY",
-    "ev": 1.15,
-    "target": 14,
-    "hitl": false,
-    "regime": "NEUTRAL",
-    "aum": 1931364484,
-    "turnover": 4893226,
-    "atr_pct": 0.94,
-    "reasons": {
-      "tech": [
-        "이동평균 완벽 정배열 (P>29.3>28.7>27.5)",
-        "MACD 골든크로스 · 히스토 +0.06",
-        "3개월 수익률 +7.4%",
-        "Bollinger 상단 접근 (100%)"
-      ],
-      "flow": [
-        "CMF +0.23 · 강한 매집",
-        "가격·OBV 동반 상승 · 수급 확인",
-        "상승일 거래량 1.98배 · 매수 집중"
-      ],
-      "macro": [
-        "NEUTRAL · VIX 15.2 · US10Y 4.79%",
-        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
-      ],
-      "filing": [],
-      "value": []
-    }
-  },
-  {
-    "t": "DGS",
-    "n": "WisdomTree Emerging Markets SmallCap Div",
-    "m": "US",
-    "sec": "미분류",
-    "at": "ETF",
-    "ex": "AMEX",
-    "tech": 84,
-    "flow": 68,
-    "macro": 60,
-    "filing": null,
-    "value": null,
     "total": 78,
-    "consensus": 1,
-    "signal": "WATCH",
-    "ev": 1.08,
-    "target": 13,
+    "consensus": 2,
+    "signal": "BUY",
+    "ev": 1.04,
+    "target": 12,
     "hitl": false,
     "regime": "NEUTRAL",
-    "aum": 1887782357,
-    "turnover": 2045555,
-    "atr_pct": 0.93,
+    "aum": 1948080688,
+    "turnover": 5075353,
+    "atr_pct": 0.96,
     "reasons": {
       "tech": [
-        "이동평균 완벽 정배열 (P>63.9>63.3>61.1)",
-        "RSI 62 · 강세 지속 구간",
-        "MACD 골든크로스 · 히스토 +0.11",
+        "이동평균 완벽 정배열 (P>29.4>28.8>27.5)",
+        "RSI 76 · 과매수 경계",
+        "MACD 골든크로스 · 히스토 +0.08",
+        "3개월 수익률 +8.1%",
         "Bollinger 상단 접근 (100%)"
       ],
       "flow": [
-        "가격↓ OBV↑ 다이버전스 · 하락 중 매집",
-        "상승일 거래량 1.31배",
-        "거래대금 감소 0.7배 · 관심 이탈"
+        "CMF +0.25 · 강한 매집",
+        "가격·OBV 동반 상승 · 수급 확인",
+        "상승일 거래량 2.34배 · 매수 집중"
       ],
       "macro": [
-        "NEUTRAL · VIX 15.2 · US10Y 4.79%",
+        "NEUTRAL · VIX 14.3 · US10Y 4.77%",
         "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
       ],
       "filing": [],
@@ -1313,70 +1527,27 @@ window.LIVE_STOCKS_ETF = [
     "total": 70,
     "consensus": 1,
     "signal": "WATCH",
-    "ev": 0.69,
+    "ev": 0.7,
     "target": 8,
     "hitl": false,
     "regime": "NEUTRAL",
-    "aum": 1858278692,
-    "turnover": 18303361,
-    "atr_pct": 1.14,
+    "aum": 1866704137,
+    "turnover": 18462235,
+    "atr_pct": 1.13,
     "reasons": {
       "tech": [
         "이동평균 완벽 정배열 (P>19.8>19.5>18.2)",
-        "RSI 43 · 중립",
-        "MACD 데드크로스 · 히스토 -0.04",
-        "3개월 수익률 +5.5%"
-      ],
-      "flow": [
-        "CMF +0.25 · 강한 매집",
-        "가격·OBV 동반 상승 · 수급 확인",
-        "상승일 거래량 1.37배"
-      ],
-      "macro": [
-        "NEUTRAL · VIX 15.2 · US10Y 4.79%",
-        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
-      ],
-      "filing": [],
-      "value": []
-    }
-  },
-  {
-    "t": "PKW",
-    "n": "Invesco BuyBack Achievers ETF",
-    "m": "US",
-    "sec": "미분류",
-    "at": "ETF",
-    "ex": "NASDAQ",
-    "tech": 66,
-    "flow": 78,
-    "macro": 60,
-    "filing": null,
-    "value": null,
-    "total": 71,
-    "consensus": 1,
-    "signal": "WATCH",
-    "ev": 0.85,
-    "target": 10,
-    "hitl": false,
-    "regime": "NEUTRAL",
-    "aum": 1748888602,
-    "turnover": 4197433,
-    "atr_pct": 0.9,
-    "reasons": {
-      "tech": [
-        "이동평균 완벽 정배열 (P>151.3>147.2>138.3)",
-        "RSI 61 · 강세 지속 구간",
+        "RSI 46 · 중립",
         "MACD 데드크로스 · 히스토 -0.02",
-        "3개월 수익률 +12.3%",
-        "Bollinger 상단 접근 (100%)"
+        "3개월 수익률 +5.7%"
       ],
       "flow": [
-        "CMF +0.09 · 매수 우위",
+        "CMF +0.28 · 강한 매집",
         "가격·OBV 동반 상승 · 수급 확인",
-        "상승일 거래량 1.56배 · 매수 집중"
+        "상승일 거래량 1.36배"
       ],
       "macro": [
-        "NEUTRAL · VIX 15.2 · US10Y 4.79%",
+        "NEUTRAL · VIX 14.3 · US10Y 4.77%",
         "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
       ],
       "filing": [],
@@ -1390,37 +1561,79 @@ window.LIVE_STOCKS_ETF = [
     "sec": "미분류",
     "at": "ETF",
     "ex": "AMEX",
-    "tech": 66,
+    "tech": 69,
     "flow": 81,
     "macro": 60,
     "filing": null,
     "value": null,
-    "total": 72,
+    "total": 74,
     "consensus": 1,
     "signal": "WATCH",
-    "ev": 0.86,
-    "target": 10,
+    "ev": 0.93,
+    "target": 11,
     "hitl": false,
     "regime": "NEUTRAL",
-    "aum": 1627856839,
-    "turnover": 9784404,
-    "atr_pct": 0.85,
+    "aum": 1614949757,
+    "turnover": 9961477,
+    "atr_pct": 0.88,
     "reasons": {
       "tech": [
-        "이동평균 완벽 정배열 (P>81.8>79.9>72.1)",
-        "RSI 63 · 강세 지속 구간",
+        "이동평균 완벽 정배열 (P>81.9>80.0>72.2)",
+        "RSI 59 · 강세 지속 구간",
         "MACD 데드크로스 · 히스토 -0.04",
-        "3개월 수익률 +11.0%",
-        "Bollinger 상단 접근 (99%)"
+        "3개월 수익률 +10.5%"
       ],
       "flow": [
-        "CMF +0.11 · 매수 우위",
+        "CMF +0.07 · 매수 우위",
         "가격·OBV 동반 상승 · 수급 확인",
-        "상승일 거래량 2.22배 · 매수 집중",
+        "상승일 거래량 1.98배 · 매수 집중",
         "거래대금 증가 1.5배 · 관심 유입"
       ],
       "macro": [
-        "NEUTRAL · VIX 15.2 · US10Y 4.79%",
+        "NEUTRAL · VIX 14.3 · US10Y 4.77%",
+        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
+      ],
+      "filing": [],
+      "value": []
+    }
+  },
+  {
+    "t": "INFL",
+    "n": "Horizon Kinetics Inflation Beneficiaries",
+    "m": "US",
+    "sec": "미분류",
+    "at": "ETF",
+    "ex": "AMEX",
+    "tech": 69,
+    "flow": 82,
+    "macro": 60,
+    "filing": null,
+    "value": null,
+    "total": 74,
+    "consensus": 1,
+    "signal": "WATCH",
+    "ev": 0.93,
+    "target": 11,
+    "hitl": false,
+    "regime": "NEUTRAL",
+    "aum": 1594206599,
+    "turnover": 7958038,
+    "atr_pct": 1.32,
+    "reasons": {
+      "tech": [
+        "이동평균 완벽 정배열 (P>54.4>52.1>50.3)",
+        "RSI 69 · 강세 지속 구간",
+        "MACD 데드크로스 · 히스토 -0.06",
+        "3개월 수익률 +9.9%"
+      ],
+      "flow": [
+        "CMF +0.27 · 강한 매집",
+        "가격·OBV 동반 상승 · 수급 확인",
+        "상승일 거래량 2.41배 · 매수 집중",
+        "거래대금 감소 0.6배 · 관심 이탈"
+      ],
+      "macro": [
+        "NEUTRAL · VIX 14.3 · US10Y 4.77%",
         "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
       ],
       "filing": [],
@@ -1434,34 +1647,34 @@ window.LIVE_STOCKS_ETF = [
     "sec": "에너지",
     "at": "ETF",
     "ex": "AMEX",
-    "tech": 87,
-    "flow": 48,
+    "tech": 80,
+    "flow": 55,
     "macro": 60,
     "filing": null,
     "value": null,
-    "total": 71,
+    "total": 70,
     "consensus": 1,
     "signal": "WATCH",
-    "ev": 0.93,
-    "target": 11,
+    "ev": 0.78,
+    "target": 9,
     "hitl": false,
     "regime": "NEUTRAL",
-    "aum": 1557762532,
-    "turnover": 109840095,
-    "atr_pct": 2.47,
+    "aum": 1549499117,
+    "turnover": 111483236,
+    "atr_pct": 2.49,
     "reasons": {
       "tech": [
-        "이동평균 완벽 정배열 (P>416.6>393.5>376.8)",
-        "RSI 56 · 강세 지속 구간",
-        "MACD 골든크로스 · 히스토 +1.27"
+        "이동평균 완벽 정배열 (P>418.6>394.5>377.5)",
+        "RSI 51 · 중립",
+        "MACD 골든크로스 · 히스토 +0.91"
       ],
       "flow": [
-        "CMF +0.11 · 매수 우위",
+        "CMF +0.16 · 강한 매집",
         "가격↑ OBV↓ 다이버전스 · 상승 중 분산",
-        "거래대금 $107M · 유동성 충분"
+        "거래대금 $109M · 유동성 충분"
       ],
       "macro": [
-        "NEUTRAL · VIX 15.2 · US10Y 4.79%",
+        "NEUTRAL · VIX 14.3 · US10Y 4.77%",
         "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
       ],
       "filing": [],
@@ -1475,122 +1688,35 @@ window.LIVE_STOCKS_ETF = [
     "sec": "미분류",
     "at": "ETF",
     "ex": "AMEX",
-    "tech": 62,
+    "tech": 58,
     "flow": 88,
     "macro": 60,
     "filing": null,
     "value": null,
-    "total": 72,
+    "total": 70,
     "consensus": 1,
     "signal": "WATCH",
-    "ev": 0.76,
-    "target": 9,
+    "ev": 0.66,
+    "target": 8,
     "hitl": false,
     "regime": "NEUTRAL",
-    "aum": 1506587978,
-    "turnover": 6612541,
-    "atr_pct": 0.74,
+    "aum": 1502628760,
+    "turnover": 6596919,
+    "atr_pct": 0.83,
     "reasons": {
       "tech": [
         "이동평균 완벽 정배열 (P>45.5>44.8>41.9)",
-        "RSI 47 · 중립",
-        "MACD 데드크로스 · 히스토 -0.04",
-        "3개월 수익률 +5.1%"
+        "RSI 48 · 중립",
+        "MACD 데드크로스 · 히스토 -0.03"
       ],
       "flow": [
-        "CMF +0.32 · 강한 매집",
+        "CMF +0.30 · 강한 매집",
         "가격·OBV 동반 상승 · 수급 확인",
-        "상승일 거래량 8.65배 · 매수 집중",
-        "거래대금 증가 15.4배 · 관심 유입"
+        "상승일 거래량 8.21배 · 매수 집중",
+        "거래대금 증가 14.8배 · 관심 유입"
       ],
       "macro": [
-        "NEUTRAL · VIX 15.2 · US10Y 4.79%",
-        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
-      ],
-      "filing": [],
-      "value": []
-    }
-  },
-  {
-    "t": "FGD",
-    "n": "First Trust Dow Jones Global Select Divi",
-    "m": "US",
-    "sec": "미분류",
-    "at": "ETF",
-    "ex": "AMEX",
-    "tech": 66,
-    "flow": 85,
-    "macro": 60,
-    "filing": null,
-    "value": null,
-    "total": 74,
-    "consensus": 1,
-    "signal": "WATCH",
-    "ev": 0.9,
-    "target": 11,
-    "hitl": false,
-    "regime": "NEUTRAL",
-    "aum": 1462401518,
-    "turnover": 4964412,
-    "atr_pct": 0.66,
-    "reasons": {
-      "tech": [
-        "이동평균 완벽 정배열 (P>35.4>34.3>32.2)",
-        "RSI 65 · 강세 지속 구간",
-        "MACD 데드크로스 · 히스토 -0.04",
-        "3개월 수익률 +10.2%",
-        "Bollinger 상단 접근 (90%)"
-      ],
-      "flow": [
-        "CMF +0.23 · 강한 매집",
-        "가격·OBV 동반 상승 · 수급 확인",
-        "상승일 거래량 1.99배 · 매수 집중"
-      ],
-      "macro": [
-        "NEUTRAL · VIX 15.2 · US10Y 4.79%",
-        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
-      ],
-      "filing": [],
-      "value": []
-    }
-  },
-  {
-    "t": "ILCV",
-    "n": "iShares Morningstar Value ETF",
-    "m": "US",
-    "sec": "미분류",
-    "at": "ETF",
-    "ex": "AMEX",
-    "tech": 66,
-    "flow": 78,
-    "macro": 60,
-    "filing": null,
-    "value": null,
-    "total": 71,
-    "consensus": 1,
-    "signal": "WATCH",
-    "ev": 0.8,
-    "target": 10,
-    "hitl": false,
-    "regime": "NEUTRAL",
-    "aum": 1300708289,
-    "turnover": 2028504,
-    "atr_pct": 0.68,
-    "reasons": {
-      "tech": [
-        "이동평균 완벽 정배열 (P>108.1>105.6>98.5)",
-        "RSI 58 · 강세 지속 구간",
-        "MACD 데드크로스 · 히스토 -0.10",
-        "3개월 수익률 +8.8%",
-        "Bollinger 상단 접근 (100%)"
-      ],
-      "flow": [
-        "CMF +0.08 · 매수 우위",
-        "가격·OBV 동반 상승 · 수급 확인",
-        "상승일 거래량 1.94배 · 매수 집중"
-      ],
-      "macro": [
-        "NEUTRAL · VIX 15.2 · US10Y 4.79%",
+        "NEUTRAL · VIX 14.3 · US10Y 4.77%",
         "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
       ],
       "filing": [],
@@ -1605,34 +1731,34 @@ window.LIVE_STOCKS_ETF = [
     "at": "ETF",
     "ex": "NYSE",
     "tech": 69,
-    "flow": 87,
+    "flow": 80,
     "macro": 60,
     "filing": null,
     "value": null,
-    "total": 76,
+    "total": 73,
     "consensus": 1,
     "signal": "WATCH",
-    "ev": 0.97,
-    "target": 12,
+    "ev": 0.89,
+    "target": 11,
     "hitl": false,
     "regime": "NEUTRAL",
-    "aum": 1248515693,
-    "turnover": 18560588,
+    "aum": 1241026939,
+    "turnover": 17847838,
     "atr_pct": 0.88,
     "reasons": {
       "tech": [
-        "이동평균 완벽 정배열 (P>52.8>51.1>48.9)",
-        "RSI 59 · 강세 지속 구간",
-        "MACD 데드크로스 · 히스토 -0.08",
-        "3개월 수익률 +8.6%"
+        "이동평균 완벽 정배열 (P>52.8>51.2>49.0)",
+        "RSI 61 · 강세 지속 구간",
+        "MACD 데드크로스 · 히스토 -0.09",
+        "3개월 수익률 +7.9%"
       ],
       "flow": [
-        "CMF +0.18 · 강한 매집",
+        "CMF +0.14 · 매수 우위",
         "가격·OBV 동반 상승 · 수급 확인",
-        "상승일 거래량 1.75배 · 매수 집중"
+        "상승일 거래량 1.62배 · 매수 집중"
       ],
       "macro": [
-        "NEUTRAL · VIX 15.2 · US10Y 4.79%",
+        "NEUTRAL · VIX 14.3 · US10Y 4.77%",
         "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
       ],
       "filing": [],
@@ -1646,76 +1772,36 @@ window.LIVE_STOCKS_ETF = [
     "sec": "미분류",
     "at": "ETF",
     "ex": "AMEX",
-    "tech": 87,
-    "flow": 78,
+    "tech": 88,
+    "flow": 85,
     "macro": 60,
     "filing": null,
     "value": null,
-    "total": 83,
+    "total": 87,
     "consensus": 2,
     "signal": "STRONG_BUY",
-    "ev": 1.25,
-    "target": 15,
+    "ev": 1.37,
+    "target": 16,
     "hitl": true,
     "regime": "NEUTRAL",
     "aum": 1206833656,
-    "turnover": 9058611,
-    "atr_pct": 0.84,
+    "turnover": 9566216,
+    "atr_pct": 0.88,
     "reasons": {
       "tech": [
-        "이동평균 완벽 정배열 (P>24.8>24.6>24.3)",
-        "RSI 64 · 강세 지속 구간",
-        "MACD 골든크로스 · 히스토 +0.02"
+        "이동평균 완벽 정배열 (P>24.7>24.5>24.1)",
+        "RSI 69 · 강세 지속 구간",
+        "MACD 골든크로스 · 히스토 +0.04",
+        "3개월 수익률 +5.1%",
+        "Bollinger 상단 접근 (97%)"
       ],
       "flow": [
-        "CMF +0.14 · 매수 우위",
+        "CMF +0.16 · 강한 매집",
         "가격·OBV 동반 상승 · 수급 확인",
-        "상승일 거래량 1.51배 · 매수 집중"
+        "상승일 거래량 1.61배 · 매수 집중"
       ],
       "macro": [
-        "NEUTRAL · VIX 15.2 · US10Y 4.79%",
-        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
-      ],
-      "filing": [],
-      "value": []
-    }
-  },
-  {
-    "t": "IHE",
-    "n": "iShares U.S. Pharmaceuticals ETF",
-    "m": "US",
-    "sec": "제약/바이오",
-    "at": "ETF",
-    "ex": "AMEX",
-    "tech": 69,
-    "flow": 72,
-    "macro": 65,
-    "filing": null,
-    "value": null,
-    "total": 70,
-    "consensus": 1,
-    "signal": "WATCH",
-    "ev": 0.88,
-    "target": 11,
-    "hitl": false,
-    "regime": "NEUTRAL",
-    "aum": 1193053531,
-    "turnover": 21243327,
-    "atr_pct": 1.7,
-    "reasons": {
-      "tech": [
-        "이동평균 완벽 정배열 (P>104.7>102.4>91.0)",
-        "RSI 59 · 강세 지속 구간",
-        "MACD 데드크로스 · 히스토 -0.28",
-        "3개월 수익률 +14.1%"
-      ],
-      "flow": [
-        "가격·OBV 동반 상승 · 수급 확인",
-        "상승일 거래량 1.64배 · 매수 집중"
-      ],
-      "macro": [
-        "NEUTRAL · VIX 15.2 · US10Y 4.79%",
-        "DXY 99.0 약세 · 성장주 유리",
+        "NEUTRAL · VIX 14.3 · US10Y 4.77%",
         "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
       ],
       "filing": [],
@@ -1729,35 +1815,36 @@ window.LIVE_STOCKS_ETF = [
     "sec": "미분류",
     "at": "ETF",
     "ex": "AMEX",
-    "tech": 73,
+    "tech": 70,
     "flow": 80,
     "macro": 60,
     "filing": null,
     "value": null,
-    "total": 76,
+    "total": 74,
     "consensus": 2,
     "signal": "BUY",
-    "ev": 1.08,
-    "target": 13,
+    "ev": 1.0,
+    "target": 12,
     "hitl": false,
     "regime": "NEUTRAL",
-    "aum": 1116223956,
-    "turnover": 26275986,
-    "atr_pct": 0.91,
+    "aum": 1125338646,
+    "turnover": 26350568,
+    "atr_pct": 0.89,
     "reasons": {
       "tech": [
-        "이동평균 완벽 정배열 (P>33.8>32.3>29.0)",
-        "RSI 59 · 강세 지속 구간",
-        "MACD 데드크로스 · 히스토 -0.06",
-        "3개월 수익률 +21.8% · 강한 상승"
+        "이동평균 완벽 정배열 (P>33.9>32.4>29.0)",
+        "RSI 60 · 강세 지속 구간",
+        "MACD 데드크로스 · 히스토 -0.04",
+        "3개월 수익률 +22.7% · 강한 상승",
+        "Bollinger 상단 접근 (100%)"
       ],
       "flow": [
-        "CMF +0.08 · 매수 우위",
+        "CMF +0.09 · 매수 우위",
         "가격·OBV 동반 상승 · 수급 확인",
-        "상승일 거래량 1.58배 · 매수 집중"
+        "상승일 거래량 1.67배 · 매수 집중"
       ],
       "macro": [
-        "NEUTRAL · VIX 15.2 · US10Y 4.79%",
+        "NEUTRAL · VIX 14.3 · US10Y 4.77%",
         "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
       ],
       "filing": [],
@@ -1765,41 +1852,39 @@ window.LIVE_STOCKS_ETF = [
     }
   },
   {
-    "t": "IMCV",
-    "n": "iShares Morningstar Mid-Cap Value ETF",
+    "t": "EIPI",
+    "n": "FT Energy Income Partners Enhanced Incom",
     "m": "US",
-    "sec": "미분류",
+    "sec": "에너지",
     "at": "ETF",
-    "ex": "NASDAQ",
-    "tech": 62,
-    "flow": 85,
+    "ex": "AMEX",
+    "tech": 91,
+    "flow": 40,
     "macro": 60,
     "filing": null,
     "value": null,
     "total": 71,
     "consensus": 1,
     "signal": "WATCH",
-    "ev": 0.78,
-    "target": 9,
+    "ev": 0.97,
+    "target": 12,
     "hitl": false,
     "regime": "NEUTRAL",
-    "aum": 1113160297,
-    "turnover": 2225682,
-    "atr_pct": 0.78,
+    "aum": 1067952584,
+    "turnover": 1555595,
+    "atr_pct": 0.92,
     "reasons": {
       "tech": [
-        "이동평균 완벽 정배열 (P>97.7>95.6>88.1)",
-        "RSI 48 · 중립",
-        "MACD 데드크로스 · 히스토 -0.22",
-        "3개월 수익률 +9.1%"
+        "이동평균 완벽 정배열 (P>22.6>22.3>21.2)",
+        "RSI 57 · 강세 지속 구간",
+        "MACD 골든크로스 · 히스토 +0.00",
+        "3개월 수익률 +5.1%"
       ],
       "flow": [
-        "CMF +0.17 · 강한 매집",
-        "가격·OBV 동반 상승 · 수급 확인",
-        "상승일 거래량 1.54배 · 매수 집중"
+        "거래대금 $1.54M · 수급 판정 불가"
       ],
       "macro": [
-        "NEUTRAL · VIX 15.2 · US10Y 4.79%",
+        "NEUTRAL · VIX 14.3 · US10Y 4.77%",
         "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
       ],
       "filing": [],
@@ -1807,42 +1892,41 @@ window.LIVE_STOCKS_ETF = [
     }
   },
   {
-    "t": "SLVR",
-    "n": "Sprott Silver Miners & Physical Silver E",
+    "t": "QEFA",
+    "n": "State Street SPDR MSCI EAFE StrategicFac",
     "m": "US",
     "sec": "미분류",
     "at": "ETF",
-    "ex": "NASDAQ",
-    "tech": 66,
-    "flow": 81,
+    "ex": "AMEX",
+    "tech": 69,
+    "flow": 78,
     "macro": 60,
     "filing": null,
     "value": null,
-    "total": 72,
+    "total": 73,
     "consensus": 1,
     "signal": "WATCH",
-    "ev": 0.92,
-    "target": 11,
+    "ev": 0.86,
+    "target": 10,
     "hitl": false,
     "regime": "NEUTRAL",
-    "aum": 1053377056,
-    "turnover": 10286515,
-    "atr_pct": 4.17,
+    "aum": 1056430702,
+    "turnover": 3442984,
+    "atr_pct": 0.71,
     "reasons": {
       "tech": [
-        "단기 정배열 (P>61.7>54.5)",
-        "RSI 62 · 강세 지속 구간",
-        "MACD 데드크로스 · 히스토 -0.17",
-        "3개월 수익률 +24.0% · 강한 상승"
+        "이동평균 완벽 정배열 (P>101.4>99.2>94.6)",
+        "RSI 57 · 강세 지속 구간",
+        "MACD 데드크로스 · 히스토 -0.15",
+        "3개월 수익률 +7.6%"
       ],
       "flow": [
-        "CMF +0.05 · 매수 우위",
+        "CMF +0.09 · 매수 우위",
         "가격·OBV 동반 상승 · 수급 확인",
-        "상승일 거래량 1.50배 · 매수 집중",
-        "거래대금 증가 1.2배 · 관심 유입"
+        "상승일 거래량 1.84배 · 매수 집중"
       ],
       "macro": [
-        "NEUTRAL · VIX 15.2 · US10Y 4.79%",
+        "NEUTRAL · VIX 14.3 · US10Y 4.77%",
         "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
       ],
       "filing": [],
@@ -1868,68 +1952,25 @@ window.LIVE_STOCKS_ETF = [
     "target": 12,
     "hitl": false,
     "regime": "NEUTRAL",
-    "aum": 1044853604,
-    "turnover": 4554742,
-    "atr_pct": 1.73,
+    "aum": 1033867545,
+    "turnover": 4310991,
+    "atr_pct": 1.74,
     "reasons": {
       "tech": [
-        "이동평균 완벽 정배열 (P>41.2>39.7>35.3)",
-        "RSI 67 · 강세 지속 구간",
-        "MACD 데드크로스 · 히스토 -0.06",
-        "3개월 수익률 +19.4%"
+        "이동평균 완벽 정배열 (P>41.3>39.8>35.4)",
+        "RSI 61 · 강세 지속 구간",
+        "MACD 데드크로스 · 히스토 -0.08",
+        "3개월 수익률 +19.2%"
       ],
       "flow": [
-        "CMF +0.29 · 강한 매집",
+        "CMF +0.27 · 강한 매집",
         "가격·OBV 동반 상승 · 수급 확인",
         "상승일 거래량 10.00배 · 매수 집중",
         "거래대금 감소 0.2배 · 관심 이탈"
       ],
       "macro": [
-        "NEUTRAL · VIX 15.2 · US10Y 4.79%",
-        "DXY 99.0 약세 · 성장주 유리",
-        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
-      ],
-      "filing": [],
-      "value": []
-    }
-  },
-  {
-    "t": "PPH",
-    "n": "VanEck Pharmaceutical ETF",
-    "m": "US",
-    "sec": "제약/바이오",
-    "at": "ETF",
-    "ex": "NASDAQ",
-    "tech": 69,
-    "flow": 74,
-    "macro": 65,
-    "filing": null,
-    "value": null,
-    "total": 71,
-    "consensus": 1,
-    "signal": "WATCH",
-    "ev": 0.85,
-    "target": 10,
-    "hitl": false,
-    "regime": "NEUTRAL",
-    "aum": 1005827936,
-    "turnover": 27154085,
-    "atr_pct": 1.79,
-    "reasons": {
-      "tech": [
-        "이동평균 완벽 정배열 (P>114.0>111.4>105.1)",
-        "RSI 63 · 강세 지속 구간",
-        "MACD 데드크로스 · 히스토 -0.12",
-        "3개월 수익률 +10.1%"
-      ],
-      "flow": [
-        "CMF +0.08 · 매수 우위",
-        "가격·OBV 동반 상승 · 수급 확인",
-        "상승일 거래량 1.24배"
-      ],
-      "macro": [
-        "NEUTRAL · VIX 15.2 · US10Y 4.79%",
-        "DXY 99.0 약세 · 성장주 유리",
+        "NEUTRAL · VIX 14.3 · US10Y 4.77%",
+        "DXY 99.2 약세 · 성장주 유리",
         "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
       ],
       "filing": [],
@@ -1937,4 +1978,4 @@ window.LIVE_STOCKS_ETF = [
     }
   }
 ];
-window.LIVE_DUPES_ETF = {"threshold": 0.99, "universe": 555, "kept": 441, "excluded": 114, "by_kept": {"AVUS": ["AVLC"], "DFAC": ["DCOR", "JHML"], "DFSV": ["DFAT"], "EEM": ["AAXJ", "AVEM", "DFAE", "DFEM", "GEM", "IEMG", "JEMA", "XSOE"], "EFA": ["DFAI", "ESGD", "IDEV", "JIRE"], "EWJ": ["FLJP"], "EWT": ["FLTW"], "EWY": ["FLKR"], "FNDF": ["PXF"], "FNDX": ["FNDB", "PRF"], "GDX": ["RING"], "IJH": ["IVOO", "MDY", "SPMD"], "IJJ": ["IVOV", "MDYV"], "IJK": ["IVOG", "MDYG"], "IJR": ["SPSM", "VIOO"], "IJS": ["SLYV", "VIOV"], "IJT": ["SLYG", "VIOG"], "IVE": ["IUSV", "VOOV"], "IWD": ["VONV"], "IWF": ["FELG", "IWY", "VONG"], "IWM": ["RSSL", "VTWO"], "IWN": ["VTWV"], "IWO": ["VTWG"], "KRE": ["KBE"], "QQQ": ["GPIQ", "QQQM"], "SMH": ["SOXQ"], "SNPE": ["EFIV"], "SPY": ["APUE", "BKLC", "CATH", "DFAU", "DFUS", "ESGU", "FELC", "GPIX", "GUSA", "ILCB", "ITOT", "IVV", "IWB", "IWL", "IWV", "IYY", "MGC", "SCHB", "SCHK", "SCHX", "SPTM", "SPYM", "SPYX", "USPX", "VONE", "VOO", "VOTE", "VTHR", "VTI", "VV"], "SPYG": ["IUSG", "IVW", "VOOG"], "USCA": ["USCL"], "VDC": ["FSTA"], "VEA": ["SPDW"], "VGK": ["IEUR", "IEV"], "VHT": ["FHLC"], "VOX": ["FCOM"], "VT": ["ACWI", "SPGM"], "VUG": ["MGK"], "VWO": ["SCHE", "SPEM"], "VXUS": ["ACWX", "CWI", "DFAX", "VEU"], "XLE": ["FENY", "IYE", "VDE"], "XLF": ["FNCL", "VFH"], "XLI": ["VIS"], "XLK": ["FTEC", "VGT"], "XLU": ["FUTY", "IDU", "VPU"], "XLV": ["IYH"], "XLY": ["FDIS", "VCR"]}};
+window.LIVE_DUPES_ETF = {"threshold": 0.99, "universe": 554, "kept": 440, "excluded": 114, "by_kept": {"AVUS": ["AVLC"], "DFAC": ["DCOR", "JHML"], "DFSV": ["DFAT"], "EEM": ["AAXJ", "AVEM", "DFAE", "DFEM", "GEM", "IEMG", "JEMA", "XSOE"], "EFA": ["DFAI", "ESGD", "IDEV", "JIRE"], "EWJ": ["FLJP"], "EWT": ["FLTW"], "EWY": ["FLKR"], "FNDF": ["PXF"], "FNDX": ["FNDB", "PRF"], "GDX": ["RING"], "IJH": ["IVOO", "MDY", "SPMD"], "IJJ": ["IVOV", "MDYV"], "IJK": ["IVOG", "MDYG"], "IJR": ["SPSM", "VIOO"], "IJS": ["SLYV", "VIOV"], "IJT": ["SLYG", "VIOG"], "IVE": ["IUSV", "VOOV"], "IWD": ["VONV"], "IWF": ["FELG", "IWY", "VONG"], "IWM": ["RSSL", "VTWO"], "IWN": ["VTWV"], "IWO": ["VTWG"], "KRE": ["KBE"], "QQQ": ["GPIQ", "QQQM"], "SMH": ["SOXQ"], "SNPE": ["EFIV"], "SPY": ["APUE", "BKLC", "CATH", "DFAU", "DFUS", "ESGU", "FELC", "GPIX", "GUSA", "ILCB", "ITOT", "IVV", "IWB", "IWL", "IWV", "IYY", "MGC", "SCHB", "SCHK", "SCHX", "SPTM", "SPYM", "SPYX", "USPX", "VONE", "VOO", "VOTE", "VTHR", "VTI", "VV"], "SPYG": ["IUSG", "IVW", "VOOG"], "USCA": ["USCL"], "VDC": ["FSTA"], "VEA": ["SPDW"], "VGK": ["IEUR", "IEV"], "VHT": ["FHLC"], "VOX": ["FCOM"], "VT": ["ACWI", "SPGM"], "VUG": ["MGK"], "VWO": ["SCHE", "SPEM"], "VXUS": ["ACWX", "CWI", "DFAX", "VEU"], "XLE": ["FENY", "IYE", "VDE"], "XLF": ["FNCL", "VFH"], "XLI": ["VIS"], "XLK": ["FTEC", "VGT"], "XLU": ["FUTY", "IDU", "VPU"], "XLV": ["IYH"], "XLY": ["FDIS", "VCR"]}};

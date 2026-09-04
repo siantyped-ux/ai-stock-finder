@@ -7,3 +7,4 @@ kst_date,event,target_utc,finished_utc,late_minutes
 2026-09-02,workflow_dispatch,2026-09-01T23:15:00Z,2026-09-01T23:09:05Z,-6
 2026-09-03,workflow_dispatch,2026-09-02T23:15:00Z,2026-09-02T23:07:12Z,-8
 2026-09-04,workflow_dispatch,2026-09-03T23:15:00Z,2026-09-03T23:13:25Z,-2
+2026-09-05,workflow_dispatch,2026-09-04T23:15:00Z,2026-09-04T23:05:20Z,-10
