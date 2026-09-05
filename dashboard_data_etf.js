@@ -1,12 +1,12 @@
 // AI 3-Month Stock Finder - Live Data (etf)
-// Generated: 2026-09-04 23:05:19
+// Generated: 2026-09-05 23:05:05
 // Macro: VIX=14.32, DXY=99.16, US10Y=4.77%
 // FMP: active · FRED: active
 window.LIVE_MACRO_ETF = {
   vix: 14.32,
   dxy: 99.16,
   us10y: 4.77,
-  generated_at: "2026-09-04T23:05:19.877034",
+  generated_at: "2026-09-05T23:05:05.030381",
   fmp_active: true,
   fred_active: true,
   fred: {"available": true, "vix": 14.32, "us10y": 4.77, "yield_curve": 0.41, "fed_funds": 3.63, "unemployment": 4.1, "dxy_broad": 118.7479, "core_cpi_yoy": 2.47, "unemp_3m_change": -0.2}
@@ -33,7 +33,7 @@ window.LIVE_STOCKS_ETF = [
     "hitl": false,
     "regime": "NEUTRAL",
     "aum": 171532097556,
-    "turnover": 362875782,
+    "turnover": 362876006,
     "atr_pct": 0.89,
     "reasons": {
       "tech": [
@@ -77,7 +77,7 @@ window.LIVE_STOCKS_ETF = [
     "hitl": false,
     "regime": "NEUTRAL",
     "aum": 99597778176,
-    "turnover": 782038476,
+    "turnover": 782204298,
     "atr_pct": 0.92,
     "reasons": {
       "tech": [
@@ -120,7 +120,7 @@ window.LIVE_STOCKS_ETF = [
     "hitl": false,
     "regime": "NEUTRAL",
     "aum": 44038494581,
-    "turnover": 1265721044,
+    "turnover": 1265843639,
     "atr_pct": 1.59,
     "reasons": {
       "tech": [
@@ -163,7 +163,7 @@ window.LIVE_STOCKS_ETF = [
     "hitl": true,
     "regime": "NEUTRAL",
     "aum": 42192941938,
-    "turnover": 1645181998,
+    "turnover": 1645801974,
     "atr_pct": 1.76,
     "reasons": {
       "tech": [
@@ -206,7 +206,7 @@ window.LIVE_STOCKS_ETF = [
     "hitl": false,
     "regime": "NEUTRAL",
     "aum": 32146260773,
-    "turnover": 1101981952,
+    "turnover": 1102674502,
     "atr_pct": 1.39,
     "reasons": {
       "tech": [
@@ -250,7 +250,7 @@ window.LIVE_STOCKS_ETF = [
     "hitl": false,
     "regime": "NEUTRAL",
     "aum": 21133381104,
-    "turnover": 87495730,
+    "turnover": 87495955,
     "atr_pct": 0.72,
     "reasons": {
       "tech": [
@@ -293,7 +293,7 @@ window.LIVE_STOCKS_ETF = [
     "hitl": false,
     "regime": "NEUTRAL",
     "aum": 20557096219,
-    "turnover": 78784860,
+    "turnover": 78784956,
     "atr_pct": 0.98,
     "reasons": {
       "tech": [
@@ -336,7 +336,7 @@ window.LIVE_STOCKS_ETF = [
     "hitl": false,
     "regime": "NEUTRAL",
     "aum": 12265497391,
-    "turnover": 66590763,
+    "turnover": 66591529,
     "atr_pct": 1.14,
     "reasons": {
       "tech": [
@@ -379,7 +379,7 @@ window.LIVE_STOCKS_ETF = [
     "hitl": false,
     "regime": "NEUTRAL",
     "aum": 12058932578,
-    "turnover": 425470959,
+    "turnover": 425471817,
     "atr_pct": 1.78,
     "reasons": {
       "tech": [
@@ -424,7 +424,7 @@ window.LIVE_STOCKS_ETF = [
     "hitl": false,
     "regime": "NEUTRAL",
     "aum": 10468809854,
-    "turnover": 331142483,
+    "turnover": 331199172,
     "atr_pct": 2.15,
     "reasons": {
       "tech": [
@@ -468,7 +468,7 @@ window.LIVE_STOCKS_ETF = [
     "hitl": false,
     "regime": "NEUTRAL",
     "aum": 10455967209,
-    "turnover": 73086307,
+    "turnover": 73086370,
     "atr_pct": 0.89,
     "reasons": {
       "tech": [
@@ -510,7 +510,7 @@ window.LIVE_STOCKS_ETF = [
     "hitl": false,
     "regime": "NEUTRAL",
     "aum": 9613168754,
-    "turnover": 60299664,
+    "turnover": 60299722,
     "atr_pct": 0.84,
     "reasons": {
       "tech": [
@@ -554,7 +554,7 @@ window.LIVE_STOCKS_ETF = [
     "hitl": false,
     "regime": "NEUTRAL",
     "aum": 8665421214,
-    "turnover": 73006846,
+    "turnover": 73007806,
     "atr_pct": 0.49,
     "reasons": {
       "tech": [
@@ -597,7 +597,7 @@ window.LIVE_STOCKS_ETF = [
     "hitl": false,
     "regime": "NEUTRAL",
     "aum": 8628822184,
-    "turnover": 120507519,
+    "turnover": 120509808,
     "atr_pct": 1.28,
     "reasons": {
       "tech": [
@@ -641,7 +641,7 @@ window.LIVE_STOCKS_ETF = [
     "hitl": false,
     "regime": "NEUTRAL",
     "aum": 8564874814,
-    "turnover": 1317465489,
+    "turnover": 1317889945,
     "atr_pct": 2.68,
     "reasons": {
       "tech": [
@@ -685,7 +685,7 @@ window.LIVE_STOCKS_ETF = [
     "hitl": false,
     "regime": "NEUTRAL",
     "aum": 7492096980,
-    "turnover": 31006497,
+    "turnover": 31006622,
     "atr_pct": 0.97,
     "reasons": {
       "tech": [
@@ -727,7 +727,7 @@ window.LIVE_STOCKS_ETF = [
     "hitl": false,
     "regime": "NEUTRAL",
     "aum": 7365350013,
-    "turnover": 31683934,
+    "turnover": 31683904,
     "atr_pct": 1.37,
     "reasons": {
       "tech": [
@@ -770,7 +770,7 @@ window.LIVE_STOCKS_ETF = [
     "hitl": false,
     "regime": "NEUTRAL",
     "aum": 7324886622,
-    "turnover": 44165412,
+    "turnover": 44165538,
     "atr_pct": 1.08,
     "reasons": {
       "tech": [
@@ -810,7 +810,7 @@ window.LIVE_STOCKS_ETF = [
     "hitl": false,
     "regime": "NEUTRAL",
     "aum": 6163410679,
-    "turnover": 41444063,
+    "turnover": 41443685,
     "atr_pct": 1.34,
     "reasons": {
       "tech": [
@@ -850,7 +850,7 @@ window.LIVE_STOCKS_ETF = [
     "hitl": false,
     "regime": "NEUTRAL",
     "aum": 6139655673,
-    "turnover": 19758869,
+    "turnover": 19758968,
     "atr_pct": 0.75,
     "reasons": {
       "tech": [
@@ -892,7 +892,7 @@ window.LIVE_STOCKS_ETF = [
     "hitl": false,
     "regime": "NEUTRAL",
     "aum": 5665084878,
-    "turnover": 137114669,
+    "turnover": 137117008,
     "atr_pct": 4.34,
     "reasons": {
       "tech": [
@@ -936,7 +936,7 @@ window.LIVE_STOCKS_ETF = [
     "hitl": false,
     "regime": "NEUTRAL",
     "aum": 5268473045,
-    "turnover": 53669267,
+    "turnover": 53677150,
     "atr_pct": 1.38,
     "reasons": {
       "tech": [
@@ -979,7 +979,7 @@ window.LIVE_STOCKS_ETF = [
     "hitl": true,
     "regime": "NEUTRAL",
     "aum": 5239457253,
-    "turnover": 67944382,
+    "turnover": 67944461,
     "atr_pct": 1.69,
     "reasons": {
       "tech": [
@@ -1022,7 +1022,7 @@ window.LIVE_STOCKS_ETF = [
     "hitl": false,
     "regime": "NEUTRAL",
     "aum": 4883576889,
-    "turnover": 19184222,
+    "turnover": 19184254,
     "atr_pct": 1.35,
     "reasons": {
       "tech": [
@@ -1063,7 +1063,7 @@ window.LIVE_STOCKS_ETF = [
     "hitl": false,
     "regime": "NEUTRAL",
     "aum": 4477673059,
-    "turnover": 134300368,
+    "turnover": 134510112,
     "atr_pct": 4.38,
     "reasons": {
       "tech": [
@@ -1075,7 +1075,7 @@ window.LIVE_STOCKS_ETF = [
       "flow": [
         "CMF +0.06 · 매수 우위",
         "가격·OBV 동반 상승 · 수급 확인",
-        "상승일 거래량 1.30배",
+        "상승일 거래량 1.29배",
         "거래대금 $132M · 유동성 충분"
       ],
       "macro": [
@@ -1106,7 +1106,7 @@ window.LIVE_STOCKS_ETF = [
     "hitl": false,
     "regime": "NEUTRAL",
     "aum": 4285185560,
-    "turnover": 19826861,
+    "turnover": 19826624,
     "atr_pct": 1.49,
     "reasons": {
       "tech": [
@@ -1149,7 +1149,7 @@ window.LIVE_STOCKS_ETF = [
     "hitl": false,
     "regime": "NEUTRAL",
     "aum": 3653011773,
-    "turnover": 29887256,
+    "turnover": 29887391,
     "atr_pct": 0.84,
     "reasons": {
       "tech": [
@@ -1192,7 +1192,7 @@ window.LIVE_STOCKS_ETF = [
     "hitl": false,
     "regime": "NEUTRAL",
     "aum": 3500689997,
-    "turnover": 27756106,
+    "turnover": 27756053,
     "atr_pct": 1.68,
     "reasons": {
       "tech": [
@@ -1232,7 +1232,7 @@ window.LIVE_STOCKS_ETF = [
     "hitl": false,
     "regime": "NEUTRAL",
     "aum": 3236656260,
-    "turnover": 17109237,
+    "turnover": 17109345,
     "atr_pct": 0.29,
     "reasons": {
       "tech": [
@@ -1276,7 +1276,7 @@ window.LIVE_STOCKS_ETF = [
     "hitl": true,
     "regime": "NEUTRAL",
     "aum": 3132012975,
-    "turnover": 509337026,
+    "turnover": 509556142,
     "atr_pct": 2.1,
     "reasons": {
       "tech": [
@@ -1319,7 +1319,7 @@ window.LIVE_STOCKS_ETF = [
     "hitl": false,
     "regime": "NEUTRAL",
     "aum": 3005279019,
-    "turnover": 25515874,
+    "turnover": 25518745,
     "atr_pct": 1.56,
     "reasons": {
       "tech": [
@@ -1362,7 +1362,7 @@ window.LIVE_STOCKS_ETF = [
     "hitl": false,
     "regime": "NEUTRAL",
     "aum": 2967084528,
-    "turnover": 19384645,
+    "turnover": 19392885,
     "atr_pct": 1.13,
     "reasons": {
       "tech": [
@@ -1403,7 +1403,7 @@ window.LIVE_STOCKS_ETF = [
     "hitl": false,
     "regime": "NEUTRAL",
     "aum": 2345465044,
-    "turnover": 6555635,
+    "turnover": 6555868,
     "atr_pct": 1.21,
     "reasons": {
       "tech": [
@@ -1447,7 +1447,7 @@ window.LIVE_STOCKS_ETF = [
     "hitl": true,
     "regime": "NEUTRAL",
     "aum": 2180687487,
-    "turnover": 8987378,
+    "turnover": 8987476,
     "atr_pct": 1.2,
     "reasons": {
       "tech": [
@@ -1489,7 +1489,7 @@ window.LIVE_STOCKS_ETF = [
     "hitl": false,
     "regime": "NEUTRAL",
     "aum": 1948080688,
-    "turnover": 5075353,
+    "turnover": 5075402,
     "atr_pct": 0.96,
     "reasons": {
       "tech": [
@@ -1532,8 +1532,8 @@ window.LIVE_STOCKS_ETF = [
     "hitl": false,
     "regime": "NEUTRAL",
     "aum": 1866704137,
-    "turnover": 18462235,
-    "atr_pct": 1.13,
+    "turnover": 18462247,
+    "atr_pct": 1.14,
     "reasons": {
       "tech": [
         "이동평균 완벽 정배열 (P>19.8>19.5>18.2)",
@@ -1574,7 +1574,7 @@ window.LIVE_STOCKS_ETF = [
     "hitl": false,
     "regime": "NEUTRAL",
     "aum": 1614949757,
-    "turnover": 9961477,
+    "turnover": 9961625,
     "atr_pct": 0.88,
     "reasons": {
       "tech": [
@@ -1617,7 +1617,7 @@ window.LIVE_STOCKS_ETF = [
     "hitl": false,
     "regime": "NEUTRAL",
     "aum": 1594206599,
-    "turnover": 7958038,
+    "turnover": 7958085,
     "atr_pct": 1.32,
     "reasons": {
       "tech": [
@@ -1660,7 +1660,7 @@ window.LIVE_STOCKS_ETF = [
     "hitl": false,
     "regime": "NEUTRAL",
     "aum": 1549499117,
-    "turnover": 111483236,
+    "turnover": 111519063,
     "atr_pct": 2.49,
     "reasons": {
       "tech": [
@@ -1701,7 +1701,7 @@ window.LIVE_STOCKS_ETF = [
     "hitl": false,
     "regime": "NEUTRAL",
     "aum": 1502628760,
-    "turnover": 6596919,
+    "turnover": 6596987,
     "atr_pct": 0.83,
     "reasons": {
       "tech": [
@@ -1743,7 +1743,7 @@ window.LIVE_STOCKS_ETF = [
     "hitl": false,
     "regime": "NEUTRAL",
     "aum": 1241026939,
-    "turnover": 17847838,
+    "turnover": 17847777,
     "atr_pct": 0.88,
     "reasons": {
       "tech": [
@@ -1785,7 +1785,7 @@ window.LIVE_STOCKS_ETF = [
     "hitl": true,
     "regime": "NEUTRAL",
     "aum": 1206833656,
-    "turnover": 9566216,
+    "turnover": 9566282,
     "atr_pct": 0.88,
     "reasons": {
       "tech": [
@@ -1828,7 +1828,7 @@ window.LIVE_STOCKS_ETF = [
     "hitl": false,
     "regime": "NEUTRAL",
     "aum": 1125338646,
-    "turnover": 26350568,
+    "turnover": 26352365,
     "atr_pct": 0.89,
     "reasons": {
       "tech": [
@@ -1871,7 +1871,7 @@ window.LIVE_STOCKS_ETF = [
     "hitl": false,
     "regime": "NEUTRAL",
     "aum": 1067952584,
-    "turnover": 1555595,
+    "turnover": 1555636,
     "atr_pct": 0.92,
     "reasons": {
       "tech": [
@@ -1911,7 +1911,7 @@ window.LIVE_STOCKS_ETF = [
     "hitl": false,
     "regime": "NEUTRAL",
     "aum": 1056430702,
-    "turnover": 3442984,
+    "turnover": 3443035,
     "atr_pct": 0.71,
     "reasons": {
       "tech": [
@@ -1953,7 +1953,7 @@ window.LIVE_STOCKS_ETF = [
     "hitl": false,
     "regime": "NEUTRAL",
     "aum": 1033867545,
-    "turnover": 4310991,
+    "turnover": 4311077,
     "atr_pct": 1.74,
     "reasons": {
       "tech": [
