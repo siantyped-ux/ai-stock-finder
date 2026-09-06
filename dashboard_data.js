@@ -1,17 +1,17 @@
 // AI 3-Month Stock Finder - Live Data (stocks)
-// Generated: 2026-09-05 23:03:17
+// Generated: 2026-09-06 23:02:37
 // Macro: VIX=14.32, DXY=99.16, US10Y=4.77%
 // FMP: active · FRED: active
 window.LIVE_MACRO = {
   vix: 14.32,
   dxy: 99.16,
   us10y: 4.77,
-  generated_at: "2026-09-05T23:03:17.199405",
+  generated_at: "2026-09-06T23:02:37.310141",
   fmp_active: true,
   fred_active: true,
   fred: {"available": true, "vix": 14.32, "us10y": 4.77, "yield_curve": 0.41, "fed_funds": 3.63, "unemployment": 4.1, "dxy_broad": 118.7479, "core_cpi_yoy": 2.47, "unemp_3m_change": -0.2}
 };
-window.LIVE_SUMMARY = {"scanned": 963, "shown": 62, "strong_buy": 0, "buy": 14, "watch": 136, "avoid": 150, "hitl": 150};
+window.LIVE_SUMMARY = {"scanned": 955, "shown": 60, "strong_buy": 0, "buy": 14, "watch": 134, "avoid": 148, "hitl": 148};
 window.LIVE_STOCKS = [
   {
     "t": "JNJ",
@@ -117,7 +117,7 @@ window.LIVE_STOCKS = [
       "value": [
         "PER 30.5 · 적정",
         "Forward PER 18.3 · 이익 성장 반영",
-        "PEG 0.85 · 성장률 대비 저평가"
+        "PEG 0.62 · 성장률 대비 저평가"
       ]
     }
   },
@@ -219,7 +219,7 @@ window.LIVE_STOCKS = [
       ],
       "value": [
         "PER 11.4 · 극심 저평가",
-        "PEG 3.36 · 성장률 대비 부담",
+        "PEG 3.30 · 성장률 대비 부담",
         "FCF Yield 18.3% · 우수"
       ]
     }
@@ -324,7 +324,7 @@ window.LIVE_STOCKS = [
         "* FMP 실시간 공시 반영"
       ],
       "value": [
-        "PER 37.9 · 적정",
+        "PER 37.4 · 적정",
         "Forward PER 9.8 · 이익 성장 반영",
         "FCF Yield 7.7% · 우수"
       ]
@@ -634,7 +634,7 @@ window.LIVE_STOCKS = [
         "13F: 보유기관 1670곳 · 지분율 149.1% (2026Q3)"
       ],
       "value": [
-        "PER 18.3 · 적정",
+        "PER 18.0 · 적정",
         "Forward PER 13.8 · 이익 성장 반영"
       ]
     }
@@ -790,10 +790,10 @@ window.LIVE_STOCKS = [
         "* FMP 실시간 공시 반영"
       ],
       "value": [
-        "PER 25.1 · 적정",
+        "PER 24.6 · 적정",
         "Forward PER 16.7 · 이익 성장 반영",
         "PBR 20.7 · 부담",
-        "PEG 0.71 · 성장률 대비 저평가"
+        "PEG 0.69 · 성장률 대비 저평가"
       ]
     }
   },
@@ -1060,7 +1060,7 @@ window.LIVE_STOCKS = [
         "* FMP 실시간 공시 반영"
       ],
       "value": [
-        "PER 15.0 · 저평가",
+        "PER 14.6 · 저평가",
         "Forward PER 11.0 · 이익 성장 반영",
         "PEG 0.78 · 성장률 대비 저평가",
         "FCF Yield 7.2% · 우수"
@@ -1525,7 +1525,7 @@ window.LIVE_STOCKS = [
       ],
       "value": [
         "PER 12.6 · 저평가",
-        "PEG 0.82 · 성장률 대비 저평가",
+        "PEG 0.81 · 성장률 대비 저평가",
         "FCF Yield 29.1% · 우수"
       ]
     }
@@ -1683,7 +1683,7 @@ window.LIVE_STOCKS = [
       ],
       "value": [
         "PER 12.5 · 저평가",
-        "PEG 3.28 · 성장률 대비 부담",
+        "PEG 3.35 · 성장률 대비 부담",
         "FCF Yield 11.5% · 우수"
       ]
     }
@@ -1993,59 +1993,6 @@ window.LIVE_STOCKS = [
     }
   },
   {
-    "t": "YPF",
-    "n": "YPF Sociedad Anónima",
-    "m": "US",
-    "sec": "에너지",
-    "at": "STOCK",
-    "ex": "NYSE",
-    "tech": 80,
-    "flow": 66,
-    "macro": 60,
-    "filing": 67,
-    "value": 74,
-    "total": 72,
-    "consensus": 2,
-    "signal": "WATCH",
-    "ev": 0.77,
-    "target": 9,
-    "hitl": false,
-    "regime": "NEUTRAL",
-    "aum": null,
-    "turnover": 55567246,
-    "atr_pct": 3.4,
-    "reasons": {
-      "tech": [
-        "이동평균 완벽 정배열 (P>51.0>49.8>43.3)",
-        "RSI 50 · 중립",
-        "MACD 골든크로스 · 히스토 +0.22"
-      ],
-      "flow": [
-        "가격·OBV 동반 상승 · 수급 확인",
-        "상승일 거래량 1.47배",
-        "거래대금 $54M · 유동성 충분",
-        "거래대금 감소 0.6배 · 관심 이탈"
-      ],
-      "macro": [
-        "NEUTRAL · VIX 14.3 · US10Y 4.77%",
-        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
-      ],
-      "filing": [
-        "13F: 기관지분율 +3.68%p",
-        "P/C비율 급등 +32% (헤지 강화)",
-        "13F: 보유기관 202곳 · 지분율 15.4% (2026Q3)",
-        "Form 4: 실제매수 클러스터 P3/S1 (90일)",
-        "8-K: 최근 60일 이벤트 없음"
-      ],
-      "value": [
-        "PER 27.8 · 적정",
-        "Forward PER 9.6 · 이익 성장 반영",
-        "PEG 0.10 · 성장률 대비 저평가",
-        "FCF Yield 6030.3% · 우수"
-      ]
-    }
-  },
-  {
     "t": "CF",
     "n": "CF Industries Holdings, Inc.",
     "m": "US",
@@ -2092,7 +2039,7 @@ window.LIVE_STOCKS = [
       ],
       "value": [
         "PER 9.9 · 극심 저평가",
-        "PEG 0.62 · 성장률 대비 저평가",
+        "PEG 0.60 · 성장률 대비 저평가",
         "FCF Yield 6.3% · 우수"
       ]
     }
@@ -2245,8 +2192,8 @@ window.LIVE_STOCKS = [
         "* FMP 실시간 공시 반영"
       ],
       "value": [
-        "PER 14.6 · 저평가",
-        "FCF Yield 6.7% · 우수"
+        "PER 15.0 · 저평가",
+        "FCF Yield 7.4% · 우수"
       ]
     }
   },
@@ -2296,7 +2243,7 @@ window.LIVE_STOCKS = [
         "8-K: 최근 60일 이벤트 5건 (활발)"
       ],
       "value": [
-        "PER 10.1 · 극심 저평가",
+        "PER 10.0 · 극심 저평가",
         "FCF Yield 10.9% · 우수"
       ]
     }
@@ -2312,11 +2259,11 @@ window.LIVE_STOCKS = [
     "flow": 90,
     "macro": 60,
     "filing": 53,
-    "value": 66,
-    "total": 71,
-    "consensus": 2,
-    "signal": "WATCH",
-    "ev": 1.0,
+    "value": 76,
+    "total": 73,
+    "consensus": 3,
+    "signal": "BUY",
+    "ev": 1.04,
     "target": 12,
     "hitl": false,
     "regime": "NEUTRAL",
@@ -2347,7 +2294,7 @@ window.LIVE_STOCKS = [
         "* FMP 실시간 공시 반영"
       ],
       "value": [
-        "PER 18.4 · 적정",
+        "PER 17.9 · 저평가",
         "Forward PER 9.3 · 이익 성장 반영",
         "FCF Yield 8.4% · 우수"
       ]
@@ -2812,60 +2759,6 @@ window.LIVE_STOCKS = [
     }
   },
   {
-    "t": "GDDY",
-    "n": "GoDaddy Inc.",
-    "m": "US",
-    "sec": "IT",
-    "at": "STOCK",
-    "ex": "NYSE",
-    "tech": 88,
-    "flow": 83,
-    "macro": 60,
-    "filing": 53,
-    "value": 76,
-    "total": 74,
-    "consensus": 3,
-    "signal": "BUY",
-    "ev": 1.09,
-    "target": 13,
-    "hitl": false,
-    "regime": "NEUTRAL",
-    "aum": null,
-    "turnover": 181157476,
-    "atr_pct": 3.62,
-    "reasons": {
-      "tech": [
-        "단기 정배열 (P>97.3>93.5)",
-        "RSI 67 · 강세 지속 구간",
-        "MACD 골든크로스 · 히스토 +0.36",
-        "3개월 수익률 +25.5% · 강한 상승"
-      ],
-      "flow": [
-        "CMF +0.12 · 매수 우위",
-        "가격·OBV 동반 상승 · 수급 확인",
-        "상승일 거래량 1.78배 · 매수 집중",
-        "거래대금 $174M · 유동성 충분"
-      ],
-      "macro": [
-        "NEUTRAL · VIX 14.3 · US10Y 4.77%",
-        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
-      ],
-      "filing": [
-        "13F: 기관지분율 +11.50%p",
-        "P/C비율 하락 -32% (헤지 완화)",
-        "13F: 보유기관 651곳 · 지분율 111.6% (2026Q3)",
-        "Form 4: 매도 우세 P0/S15",
-        "* FMP 실시간 공시 반영"
-      ],
-      "value": [
-        "PER 15.1 · 저평가",
-        "Forward PER 9.2 · 이익 성장 반영",
-        "PBR 1911.5 · 부담",
-        "PEG 0.68 · 성장률 대비 저평가"
-      ]
-    }
-  },
-  {
     "t": "ALLY",
     "n": "Ally Financial Inc.",
     "m": "US",
@@ -2963,7 +2856,7 @@ window.LIVE_STOCKS = [
       "value": [
         "PER 88.4 · 극심 프리미엄",
         "Forward PER 14.9 · 이익 성장 반영",
-        "PEG 0.31 · 성장률 대비 저평가",
+        "PEG 0.30 · 성장률 대비 저평가",
         "FCF Yield 5.3% · 우수"
       ]
     }

@@ -1,17 +1,17 @@
 // AI 3-Month Stock Finder - Live Data (etf)
-// Generated: 2026-09-05 23:05:05
+// Generated: 2026-09-06 23:07:53
 // Macro: VIX=14.32, DXY=99.16, US10Y=4.77%
 // FMP: active · FRED: active
 window.LIVE_MACRO_ETF = {
   vix: 14.32,
   dxy: 99.16,
   us10y: 4.77,
-  generated_at: "2026-09-05T23:05:05.030381",
+  generated_at: "2026-09-06T23:07:53.861163",
   fmp_active: true,
   fred_active: true,
   fred: {"available": true, "vix": 14.32, "us10y": 4.77, "yield_curve": 0.41, "fed_funds": 3.63, "unemployment": 4.1, "dxy_broad": 118.7479, "core_cpi_yoy": 2.47, "unemp_3m_change": -0.2}
 };
-window.LIVE_SUMMARY_ETF = {"scanned": 439, "shown": 46, "strong_buy": 6, "buy": 6, "watch": 67, "avoid": 138, "hitl": 143};
+window.LIVE_SUMMARY_ETF = {"scanned": 426, "shown": 46, "strong_buy": 6, "buy": 6, "watch": 66, "avoid": 132, "hitl": 137};
 window.LIVE_STOCKS_ETF = [
   {
     "t": "VWO",
