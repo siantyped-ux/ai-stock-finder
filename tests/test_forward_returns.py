@@ -147,3 +147,33 @@ def test_spearman_needs_two_points():
 def test_spearman_rejects_mismatched_lengths():
     with pytest.raises(ValueError):
         fr.spearman([1, 2, 3], [1, 2])
+
+
+def test_ranks_handles_ties_at_the_boundaries():
+    """맨 앞·맨 뒤 동점. 가운데 동점만 테스트하면 경계에서 어긋나도 통과한다."""
+    assert fr._ranks([5, 5, 8, 9]) == [1.5, 1.5, 3.0, 4.0]
+    assert fr._ranks([1, 2, 9, 9]) == [1.0, 2.0, 3.5, 3.5]
+
+
+def test_ranks_handles_several_tie_groups():
+    assert fr._ranks([1, 1, 2, 2, 3]) == [1.5, 1.5, 3.5, 3.5, 5.0]
+
+
+def test_spearman_with_ties_is_pearson_on_ranks():
+    """동점이 있을 때 축약식과 갈리는 값을 고정한다.
+
+    흔히 쓰는 축약식 1 - 6*sum(d^2)/(n*(n^2-1)) 은 동점이 없을 때만 맞는다.
+    아래 입력에서 축약식은 0.95 를 내고 순위에 피어슨을 적용한 올바른 값은
+    0.9487 이다. 이 테스트가 그 차이를 잡는다 - 축 점수가 0~100 정수라
+    동점은 예외가 아니라 기본이다.
+
+    손계산:
+      순위 xs [1, 2.5, 2.5, 4]   ys [1, 2, 3, 4]   평균 둘 다 2.5
+      분자   (-1.5)(-1.5) + 0(-0.5) + 0(0.5) + (1.5)(1.5) = 4.5
+      분모   sqrt(4.5 * 5.0) = sqrt(22.5)
+      rho    4.5 / sqrt(22.5) = 3/sqrt(10) = 0.9486832980505138
+    """
+    got = fr.spearman([1, 2, 2, 3], [10, 20, 30, 40])
+    assert got == pytest.approx(3 / 10 ** 0.5)
+    # 축약식이었다면 0.95 가 나온다. 그 값과 구별되어야 한다.
+    assert got != pytest.approx(0.95, abs=1e-9)
