@@ -118,8 +118,25 @@ def test_etf_total_returns_int():
 
 # ─── 주식 종합점수 (macro 제거 · flow 신설) ──────────────────
 def test_stock_total_matches_hand_calculation():
-    # 80*0.30 + 60*0.20 + 70*0.30 + 50*0.20 = 24 + 12 + 21 + 10 = 67
-    assert sf.calc_total(80, 60, 70, 50) == 67
+    # 80*0.30 + 60*0.20 + 70*0.20 + 50*0.30 = 24 + 12 + 14 + 15 = 65
+    assert sf.calc_total(80, 60, 70, 50) == 65
+
+
+def test_stock_weights_sum_to_one():
+    """합이 1 이 아니면 ETF 와 척도가 어긋나 70 문턱의 의미가 갈린다."""
+    assert (sf.STOCK_TECH_WEIGHT + sf.STOCK_FLOW_WEIGHT
+            + sf.STOCK_FILING_WEIGHT
+            + sf.STOCK_VALUE_WEIGHT) == pytest.approx(1.0)
+
+
+def test_value_outweighs_filing():
+    """value 가 filing 보다 무겁다. 이 부등호가 2026-09-07 변경의 전부다.
+
+    설계: docs/superpowers/specs/2026-09-07-stock-axis-reweight-design.md
+    """
+    assert sf.STOCK_VALUE_WEIGHT > sf.STOCK_FILING_WEIGHT
+    # 같은 점수를 filing 이 아니라 value 가 들고 있을 때 총점이 더 높다
+    assert sf.calc_total(50, 50, 80, 50) < sf.calc_total(50, 50, 50, 80)
 
 
 def test_stock_total_weights_sum_to_one():
