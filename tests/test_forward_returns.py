@@ -274,3 +274,66 @@ def test_median_date_splits_an_even_count_evenly():
     assert cut == "2026-08-03"
     assert len([d for d in dates if d < cut]) == 2
     assert len([d for d in dates if d >= cut]) == 2
+
+
+# ─── 축 판정 ────────────────────────────────────────────────
+def _axis_rows(n_each, early_sign, late_sign, cut="2026-08-15"):
+    """전·후반 각각 지정한 부호의 완전 단조 표본을 만든다."""
+    rows = []
+    for i in range(n_each):
+        rows.append(("2026-08-01", 5, "tech", i, i * early_sign))
+        rows.append(("2026-08-20", 5, "tech", i, i * late_sign))
+    return rows, cut
+
+
+def test_axis_verdict_reports_rho_for_each_period():
+    rows, cut = _axis_rows(200, +1, +1)
+    got = fr.axis_verdict(rows, "tech", 5, cut)
+    assert got["all"] == pytest.approx(1.0)
+    assert got["early"] == pytest.approx(1.0)
+    assert got["late"] == pytest.approx(1.0)
+    assert got["flip"] is False
+    assert got["n_early"] == 200 and got["n_late"] == 200
+
+
+def test_axis_verdict_flags_a_sign_flip():
+    """전·후반 부호가 다르면 신호로 보지 않는다. 이 표시가 판정의 핵심이다."""
+    rows, cut = _axis_rows(200, +1, -1)
+    got = fr.axis_verdict(rows, "tech", 5, cut)
+    assert got["early"] > 0 and got["late"] < 0
+    assert got["flip"] is True
+
+
+def test_axis_verdict_returns_none_below_the_sample_floor():
+    rows, cut = _axis_rows(5, +1, +1)
+    got = fr.axis_verdict(rows, "tech", 5, cut)
+    assert got["all"] is None
+    assert got["flip"] is False
+
+
+def test_axis_verdict_ignores_other_axes_and_horizons():
+    rows = [("2026-08-01", 5, "tech", 1, 1.0),
+            ("2026-08-01", 5, "flow", 1, 1.0),
+            ("2026-08-01", 10, "tech", 1, 1.0)]
+    got = fr.axis_verdict(rows, "tech", 5, "2026-08-01")
+    assert got["n_all"] == 1
+
+
+# ─── rho 하한 ───────────────────────────────────────────────
+def test_rho_floor_shrinks_as_the_sample_grows():
+    """표본이 클수록 0 과 구별할 수 있는 rho 가 작아진다."""
+    assert fr._rho_floor(101) == pytest.approx(0.1)
+    assert fr._rho_floor(10001) == pytest.approx(0.01)
+
+
+def test_rho_floor_of_a_thin_sample_is_none():
+    assert fr._rho_floor(1) is None
+    assert fr._rho_floor(0) is None
+
+
+def test_axis_verdict_reports_a_floor_for_each_period():
+    """얇은 후반의 부호를 얼마나 믿을지 사람이 가늠할 재료를 함께 낸다."""
+    rows, cut = _axis_rows(200, +1, +1)
+    got = fr.axis_verdict(rows, "tech", 5, cut)
+    assert got["floor_early"] == pytest.approx(199 ** -0.5)
+    assert got["floor_late"] == pytest.approx(199 ** -0.5)
