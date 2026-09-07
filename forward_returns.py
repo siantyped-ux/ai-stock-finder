@@ -188,6 +188,18 @@ def _rho_floor(n_rows: int):
     return (n_rows - 1) ** -0.5 if n_rows > 1 else None
 
 
+def _part_rho(part: list):
+    """표본이 충분할 때만 그 부분의 순위상관. 아니면 None.
+
+    axis_verdict 와 sign_census 가 같은 규칙을 써야 해서 밖으로 뺐다.
+    한쪽에만 문턱이 걸리면 단일 기준일 표와 census 표가 서로 다른 것을
+    말하게 된다.
+    """
+    if len(part) < MIN_AXIS_SAMPLE:
+        return None
+    return spearman([r[3] for r in part], [r[4] for r in part])
+
+
 def axis_verdict(rows: list, axis: str, n: int, cut: str) -> dict:
     """한 축·한 horizon 의 전체·전반·후반 순위상관과 부호 뒤집힘 여부.
 
@@ -203,12 +215,7 @@ def axis_verdict(rows: list, axis: str, n: int, cut: str) -> dict:
     early = [r for r in got if r[0] < cut]
     late = [r for r in got if r[0] >= cut]
 
-    def rho(part):
-        if len(part) < MIN_AXIS_SAMPLE:
-            return None
-        return spearman([r[3] for r in part], [r[4] for r in part])
-
-    r_all, r_early, r_late = rho(got), rho(early), rho(late)
+    r_all, r_early, r_late = _part_rho(got), _part_rho(early), _part_rho(late)
     flip = (r_early is not None and r_late is not None
             and r_early * r_late < 0)
     return {"all": r_all, "early": r_early, "late": r_late, "flip": flip,
@@ -220,25 +227,36 @@ def axis_verdict(rows: list, axis: str, n: int, cut: str) -> dict:
 def sign_census(rows: list, axis: str, n: int) -> dict:
     """모든 기준일로 갈라 전·후반 부호가 몇 번씩 나왔는지 센다.
 
-    기준일 하나로 부호를 읽으면 결과가 그 하루에 걸린다. 2026-09-07 실측이
-    그랬다 - value 는 08-15 이전에서 자르면 전반이 음수, 이후에서 자르면
-    양수였다. 반면 filing 은 어디서 잘라도 음수였다. 그 차이가 이 도구가
-    내려야 할 판정이고, 기준일 하나로는 둘을 구별할 수 없다.
+    기준일 하나의 부호는 그 하루에 걸린다. 2026-09-07 실측이 그랬다 -
+    value 는 08-15 이전에서 자르면 전반이 음수, 이후에서 자르면 양수였다.
+    반면 filing 은 어디서 잘라도 음수였다. 그 차이가 이 도구가 내려야 할
+    판정이고, 기준일 하나로는 둘을 구별할 수 없다.
 
     자기 하한(_rho_floor)을 못 넘는 칸은 unreadable 로 센다 - 부호가 있어도
     읽지 않는다는 뜻이다. 한쪽이 MIN_AXIS_SAMPLE 에 못 미치는 기준일은 rho
     가 None 이라 아예 세지 않는다. 그래서 훑을 기준일 범위를 손으로 정할
     필요가 없다.
+
+    axis_verdict 를 부르지 않고 직접 도는 것은 비용 때문이다. 그쪽은 기준일과
+    무관한 전체 rho 를 매번 다시 계산하고 행 목록 전체를 매번 다시 거른다.
+    기준일이 26개면 그 둘이 26배로 붙는다 (실측 33초 -> 아래 방식으로 크게
+    줄어든다).
     """
-    dates = sorted({r[0] for r in rows if r[2] == axis and r[1] == n})
+    got = [r for r in rows if r[2] == axis and r[1] == n]
+    dates = sorted({r[0] for r in got})
     out = {side: {"neg": 0, "pos": 0, "unreadable": 0}
            for side in ("early", "late")}
     for cut in dates:
-        v = axis_verdict(rows, axis, n, cut)
-        for side in ("early", "late"):
-            rho, floor = v[side], v[f"floor_{side}"]
+        parts = (("early", [r for r in got if r[0] < cut]),
+                 ("late", [r for r in got if r[0] >= cut]))
+        for side, part in parts:
+            rho = _part_rho(part)
+            floor = _rho_floor(len(part))
             if rho is None or floor is None:
                 continue
+            # 하한과 정확히 같은 값은 읽는 쪽에 넣는다. rho 는 순위합의 비,
+            # 하한은 무리수라 실제로 같아지는 일은 없다 - 경계를 어느 쪽에
+            # 두든 결과가 같으므로 굳이 <= 로 쓰지 않는다.
             if abs(rho) < floor:
                 out[side]["unreadable"] += 1
             elif rho < 0:

@@ -341,6 +341,36 @@ def test_sign_census_skips_cuts_that_starve_one_side():
     assert got["early"] == {"neg": 0, "pos": 0, "unreadable": 0}
 
 
+def test_sign_census_counts_a_weak_correlation_as_unreadable():
+    """|rho| 가 제 하한보다 작으면 부호가 있어도 세지 않는다.
+
+    축 값과 수익률을 홀짝으로 엇갈리게 두면 순위상관이 0 근처로 눌린다.
+    표본은 MIN_AXIS_SAMPLE 을 넘기에 충분하지만 rho 가 하한에 못 미친다.
+    """
+    rows = []
+    for day in ("2026-08-01", "2026-08-02", "2026-08-03", "2026-08-04"):
+        for i in range(300):
+            rows.append((day, 5, "tech", i, 1.0 if i % 2 == 0 else -1.0))
+    got = fr.sign_census(rows, "tech", 5)
+    assert got["early"]["unreadable"] > 0
+    assert got["late"]["unreadable"] > 0
+    assert got["early"]["neg"] == 0 and got["early"]["pos"] == 0
+    assert got["late"]["neg"] == 0 and got["late"]["pos"] == 0
+
+
+def test_axis_verdict_does_not_flip_when_one_side_is_too_thin():
+    """한쪽만 표본이 있으면 뒤집힘을 말할 수 없다.
+
+    부호가 반대인 것처럼 보여도 얇은 쪽은 rho 가 None 이다.
+    """
+    rows = ([("2026-08-01", 5, "tech", i, float(i)) for i in range(300)]
+            + [("2026-08-20", 5, "tech", i, -float(i)) for i in range(10)])
+    got = fr.axis_verdict(rows, "tech", 5, "2026-08-15")
+    assert got["early"] == pytest.approx(1.0)
+    assert got["late"] is None
+    assert got["flip"] is False
+
+
 # ─── rho 하한 ───────────────────────────────────────────────
 def test_rho_floor_shrinks_as_the_sample_grows():
     """표본이 클수록 0 과 구별할 수 있는 rho 가 작아진다."""
