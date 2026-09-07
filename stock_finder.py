@@ -1183,8 +1183,13 @@ def calc_total(tech, flow_, filing, value):
 # 되었다. tech·flow 로 바꾸면 두 축의 자산군 편향이 부호가 반대라 상쇄된다 -
 # 실측 격차 tech +7.7 · flow -8.0, 그 결과 총점 평균이 ETF 57.2 · 주식 56.7 로
 # 맞는다.
-ETF_TECH_WEIGHT = 0.30 / 0.50
-ETF_FLOW_WEIGHT = 0.20 / 0.50
+# 2026-09-07 까지는 위 두 줄도 0.30/0.50, 0.20/0.50 처럼 리터럴이었다.
+# 그러면 STOCK_TECH_WEIGHT·STOCK_FLOW_WEIGHT 가 바뀌어도 여기는 조용히
+# 안 따라간다. STOCK_* 를 직접 참조해서 나누면 재정규화가 자기가
+# 재정규화하는 축에서 벗어날 수 없다.
+_ETF_AXIS_SUM = STOCK_TECH_WEIGHT + STOCK_FLOW_WEIGHT
+ETF_TECH_WEIGHT = STOCK_TECH_WEIGHT / _ETF_AXIS_SUM
+ETF_FLOW_WEIGHT = STOCK_FLOW_WEIGHT / _ETF_AXIS_SUM
 
 
 def calc_total_etf(tech, flow_):

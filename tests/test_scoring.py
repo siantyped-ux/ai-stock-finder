@@ -116,6 +116,18 @@ def test_etf_total_returns_int():
     assert isinstance(sf.calc_total_etf(71, 63), int)
 
 
+def test_etf_weights_follow_the_stock_axes():
+    """ETF 가중치는 주식 tech·flow 를 재정규화한 것이다. 따로 적지 않는다.
+
+    2026-09-07 까지는 0.30/0.50 처럼 리터럴로 적혀 있었다. 주식 tech 나
+    flow 를 바꾸면 여기가 조용히 어긋나는데 어떤 테스트도 잡지 못했다.
+    """
+    s = sf.STOCK_TECH_WEIGHT + sf.STOCK_FLOW_WEIGHT
+    assert sf.ETF_TECH_WEIGHT == pytest.approx(sf.STOCK_TECH_WEIGHT / s)
+    assert sf.ETF_FLOW_WEIGHT == pytest.approx(sf.STOCK_FLOW_WEIGHT / s)
+    assert sf.ETF_TECH_WEIGHT + sf.ETF_FLOW_WEIGHT == pytest.approx(1.0)
+
+
 # ─── 주식 종합점수 (macro 제거 · flow 신설) ──────────────────
 def test_stock_total_matches_hand_calculation():
     # 80*0.30 + 60*0.20 + 70*0.20 + 50*0.30 = 24 + 12 + 14 + 15 = 65

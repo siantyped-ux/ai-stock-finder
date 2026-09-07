@@ -587,8 +587,8 @@ Expected: FAIL — `assert 67 == 65` 와 `AttributeError: ... 'STOCK_TECH_WEIGHT
 # 주식 축 가중치. 2026-09-07 에 filing 과 value 의 몫을 맞바꿨다.
 #
 # 기준일 20개로 갈라 센 결과(forward_returns.py --by-axis 의 census 표),
-# filing 은 읽을 수 있는 71칸이 전부 음수로 **어떤 분할에서도 양수를 내지
-# 않는 유일한 축**이다. value 는 후반 36칸이 전부 양수이고 견고한 음수를
+# filing 은 읽을 수 있는 82칸이 전부 음수로 **어떤 분할에서도 양수를 내지
+# 않는 유일한 축**이다. value 는 후반 44칸이 전부 양수이고 견고한 음수를
 # 한 번도 내지 않는다. tech 는 전반 40칸이 전부 음수이고 후반은 양수 우세라
 # 시점에 따라 방향이 바뀐다.
 #
