@@ -40,6 +40,14 @@ CACHE = Path(".cache/recompute_frames.json")
 BUY_SIGNALS = ("BUY", "STRONG_BUY")
 SIGNAL_ORDER = ("STRONG_BUY", "BUY", "WATCH", "HOLD", "AVOID")
 
+# 축별 상관을 잴 대상. total 을 함께 넣는 것은 의도다 - 축을 어떻게 섞었을 때
+# 총점이 나아지는지가 이 기능을 만든 이유다.
+AXES = ("tech", "flow", "filing", "value", "total")
+
+# 이 아래로는 순위상관을 내지 않는다. 축 점수가 정수라 표본이 작으면 동점이
+# 상관을 지배한다.
+MIN_AXIS_SAMPLE = 200
+
 
 def load_prices(cache: Path = CACHE) -> dict:
     """티커 -> (날짜 목록, 종가 목록). 둘 다 날짜 오름차순이다."""
@@ -122,6 +130,41 @@ def spearman(xs: list, ys: list):
     den = (sum((a - mx) ** 2 for a in rx)
            * sum((b - my) ** 2 for b in ry)) ** 0.5
     return num / den if den else None
+
+
+def collect_axes(pattern: str, prices: dict, horizons: tuple) -> list:
+    """(날짜, horizon, 축 이름, 축 값, 선행수익률) 튜플 목록.
+
+    축 값이 빈 행은 그 축에서만 빠진다. 빈 값을 0 으로 읽으면 ETF 의
+    filing·value 가 최저점으로 들어가 상관이 통째로 오염된다.
+    """
+    out = []
+    for path in sorted(glob.glob(pattern)):
+        with open(path, encoding="utf-8", newline="") as f:
+            for r in csv.DictReader(f):
+                bar_date = r.get("bar_date")
+                if not bar_date:
+                    continue
+                for n in horizons:
+                    ret = forward_return(prices, r["ticker"], bar_date, n)
+                    if ret is None:
+                        continue
+                    for ax in AXES:
+                        raw = r.get(ax)
+                        if not raw:
+                            continue
+                        out.append((r["date"], n, ax, int(raw), ret))
+    return out
+
+
+def median_date(rows: list) -> str:
+    """고유 날짜의 중앙값. 기간을 반으로 가르는 기준일이다.
+
+    고정 날짜를 기본값으로 두지 않는 것은 아카이브가 매일 자라기 때문이다.
+    한 번 적어 둔 날짜는 시간이 갈수록 후반을 비대칭으로 키운다.
+    """
+    dates = sorted({r[0] for r in rows})
+    return dates[len(dates) // 2] if dates else ""
 
 
 def collect(pattern: str, prices: dict, horizons: tuple) -> dict:

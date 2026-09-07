@@ -177,3 +177,56 @@ def test_spearman_with_ties_is_pearson_on_ranks():
     assert got == pytest.approx(3 / 10 ** 0.5)
     # 축약식이었다면 0.95 가 나온다. 그 값과 구별되어야 한다.
     assert got != pytest.approx(0.95, abs=1e-9)
+
+
+# ─── 축별 수집 ──────────────────────────────────────────────
+AXIS_CSV_HEADER = ("date,ticker,bar_date,tech,flow,filing,value,total\n")
+
+
+def _write_axis_archive(tmp_path, rows):
+    """축 열만 가진 최소 아카이브를 만든다."""
+    p = tmp_path / "2026-08-03.csv"
+    p.write_text(AXIS_CSV_HEADER + "".join(rows), encoding="utf-8")
+    return str(tmp_path / "*.csv")
+
+
+def test_collect_axes_pairs_each_axis_with_its_return(tmp_path):
+    pattern = _write_axis_archive(tmp_path, [
+        "2026-08-03,AAA,2026-08-03,70,60,50,40,58\n",
+    ])
+    got = fr.collect_axes(pattern, PRICES, (1,))
+    # 축 다섯 개 × horizon 하나
+    assert len(got) == 5
+    assert ("2026-08-03", 1, "tech", 70, pytest.approx(10.0)) in got
+    assert ("2026-08-03", 1, "total", 58, pytest.approx(10.0)) in got
+
+
+def test_collect_axes_skips_blank_axis_values(tmp_path):
+    """ETF 행은 filing·value 가 비어 있다. 0 으로 읽으면 상관이 오염된다."""
+    pattern = _write_axis_archive(tmp_path, [
+        "2026-08-03,AAA,2026-08-03,70,60,,,65\n",
+    ])
+    got = fr.collect_axes(pattern, PRICES, (1,))
+    assert sorted(r[2] for r in got) == ["flow", "tech", "total"]
+
+
+def test_collect_axes_skips_rows_without_a_forward_return(tmp_path):
+    """마지막 봉 뒤의 행은 잴 수 없다. 마지막 값으로 대체하지 않는다."""
+    pattern = _write_axis_archive(tmp_path, [
+        "2026-08-07,AAA,2026-08-07,70,60,50,40,58\n",
+    ])
+    assert fr.collect_axes(pattern, PRICES, (1,)) == []
+
+
+# ─── 기간 분할 ──────────────────────────────────────────────
+def test_median_date_splits_distinct_dates():
+    rows = [("2026-08-01", 1, "tech", 70, 1.0),
+            ("2026-08-01", 1, "flow", 60, 1.0),
+            ("2026-08-02", 1, "tech", 70, 1.0),
+            ("2026-08-03", 1, "tech", 70, 1.0)]
+    # 고유 날짜 3개의 가운데
+    assert fr.median_date(rows) == "2026-08-02"
+
+
+def test_median_date_of_nothing_is_empty():
+    assert fr.median_date([]) == ""
