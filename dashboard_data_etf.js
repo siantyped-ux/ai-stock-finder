@@ -1,17 +1,17 @@
 // AI 3-Month Stock Finder - Live Data (etf)
-// Generated: 2026-09-06 23:07:53
-// Macro: VIX=14.32, DXY=99.16, US10Y=4.77%
+// Generated: 2026-09-07 23:09:34
+// Macro: VIX=14.32, DXY=99.18, US10Y=4.77%
 // FMP: active · FRED: active
 window.LIVE_MACRO_ETF = {
   vix: 14.32,
-  dxy: 99.16,
+  dxy: 99.18,
   us10y: 4.77,
-  generated_at: "2026-09-06T23:07:53.861163",
+  generated_at: "2026-09-07T23:09:34.028756",
   fmp_active: true,
   fred_active: true,
   fred: {"available": true, "vix": 14.32, "us10y": 4.77, "yield_curve": 0.41, "fed_funds": 3.63, "unemployment": 4.1, "dxy_broad": 118.7479, "core_cpi_yoy": 2.47, "unemp_3m_change": -0.2}
 };
-window.LIVE_SUMMARY_ETF = {"scanned": 426, "shown": 46, "strong_buy": 6, "buy": 6, "watch": 66, "avoid": 132, "hitl": 137};
+window.LIVE_SUMMARY_ETF = {"scanned": 427, "shown": 42, "strong_buy": 6, "buy": 6, "watch": 63, "avoid": 137, "hitl": 142};
 window.LIVE_STOCKS_ETF = [
   {
     "t": "VWO",
@@ -307,49 +307,6 @@ window.LIVE_STOCKS_ETF = [
         "가격·OBV 동반 상승 · 수급 확인",
         "상승일 거래량 2.10배 · 매수 집중",
         "거래대금 $77M · 유동성 충분"
-      ],
-      "macro": [
-        "NEUTRAL · VIX 14.3 · US10Y 4.77%",
-        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
-      ],
-      "filing": [],
-      "value": []
-    }
-  },
-  {
-    "t": "AMLP",
-    "n": "Alerian MLP ETF",
-    "m": "US",
-    "sec": "에너지",
-    "at": "ETF",
-    "ex": "AMEX",
-    "tech": 69,
-    "flow": 83,
-    "macro": 60,
-    "filing": null,
-    "value": null,
-    "total": 75,
-    "consensus": 1,
-    "signal": "WATCH",
-    "ev": 0.92,
-    "target": 11,
-    "hitl": false,
-    "regime": "NEUTRAL",
-    "aum": 12265497391,
-    "turnover": 66591529,
-    "atr_pct": 1.14,
-    "reasons": {
-      "tech": [
-        "이동평균 완벽 정배열 (P>55.0>53.7>50.0)",
-        "RSI 62 · 강세 지속 구간",
-        "MACD 데드크로스 · 히스토 -0.01",
-        "3개월 수익률 +8.0%"
-      ],
-      "flow": [
-        "CMF +0.13 · 매수 우위",
-        "가격·OBV 동반 상승 · 수급 확인",
-        "상승일 거래량 1.63배 · 매수 집중",
-        "거래대금 $66M · 유동성 충분"
       ],
       "macro": [
         "NEUTRAL · VIX 14.3 · US10Y 4.77%",
@@ -1087,49 +1044,6 @@ window.LIVE_STOCKS_ETF = [
     }
   },
   {
-    "t": "IXJ",
-    "n": "iShares Global Healthcare ETF",
-    "m": "US",
-    "sec": "제약/바이오",
-    "at": "ETF",
-    "ex": "AMEX",
-    "tech": 69,
-    "flow": 87,
-    "macro": 65,
-    "filing": null,
-    "value": null,
-    "total": 76,
-    "consensus": 1,
-    "signal": "WATCH",
-    "ev": 1.0,
-    "target": 12,
-    "hitl": false,
-    "regime": "NEUTRAL",
-    "aum": 4285185560,
-    "turnover": 19826624,
-    "atr_pct": 1.49,
-    "reasons": {
-      "tech": [
-        "이동평균 완벽 정배열 (P>104.9>101.9>96.9)",
-        "RSI 59 · 강세 지속 구간",
-        "MACD 데드크로스 · 히스토 -0.25",
-        "3개월 수익률 +11.3%"
-      ],
-      "flow": [
-        "CMF +0.29 · 강한 매집",
-        "가격·OBV 동반 상승 · 수급 확인",
-        "상승일 거래량 1.63배 · 매수 집중"
-      ],
-      "macro": [
-        "NEUTRAL · VIX 14.3 · US10Y 4.77%",
-        "DXY 99.2 약세 · 성장주 유리",
-        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
-      ],
-      "filing": [],
-      "value": []
-    }
-  },
-  {
     "t": "JIVE",
     "n": "JPMorgan International Value ETF",
     "m": "US",
@@ -1545,92 +1459,6 @@ window.LIVE_STOCKS_ETF = [
         "CMF +0.28 · 강한 매집",
         "가격·OBV 동반 상승 · 수급 확인",
         "상승일 거래량 1.36배"
-      ],
-      "macro": [
-        "NEUTRAL · VIX 14.3 · US10Y 4.77%",
-        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
-      ],
-      "filing": [],
-      "value": []
-    }
-  },
-  {
-    "t": "PWV",
-    "n": "Invesco Large Cap Value ETF",
-    "m": "US",
-    "sec": "미분류",
-    "at": "ETF",
-    "ex": "AMEX",
-    "tech": 69,
-    "flow": 81,
-    "macro": 60,
-    "filing": null,
-    "value": null,
-    "total": 74,
-    "consensus": 1,
-    "signal": "WATCH",
-    "ev": 0.93,
-    "target": 11,
-    "hitl": false,
-    "regime": "NEUTRAL",
-    "aum": 1614949757,
-    "turnover": 9961625,
-    "atr_pct": 0.88,
-    "reasons": {
-      "tech": [
-        "이동평균 완벽 정배열 (P>81.9>80.0>72.2)",
-        "RSI 59 · 강세 지속 구간",
-        "MACD 데드크로스 · 히스토 -0.04",
-        "3개월 수익률 +10.5%"
-      ],
-      "flow": [
-        "CMF +0.07 · 매수 우위",
-        "가격·OBV 동반 상승 · 수급 확인",
-        "상승일 거래량 1.98배 · 매수 집중",
-        "거래대금 증가 1.5배 · 관심 유입"
-      ],
-      "macro": [
-        "NEUTRAL · VIX 14.3 · US10Y 4.77%",
-        "Core CPI 2.47% · 인플레 안정 (Fed 목표 근접)"
-      ],
-      "filing": [],
-      "value": []
-    }
-  },
-  {
-    "t": "INFL",
-    "n": "Horizon Kinetics Inflation Beneficiaries",
-    "m": "US",
-    "sec": "미분류",
-    "at": "ETF",
-    "ex": "AMEX",
-    "tech": 69,
-    "flow": 82,
-    "macro": 60,
-    "filing": null,
-    "value": null,
-    "total": 74,
-    "consensus": 1,
-    "signal": "WATCH",
-    "ev": 0.93,
-    "target": 11,
-    "hitl": false,
-    "regime": "NEUTRAL",
-    "aum": 1594206599,
-    "turnover": 7958085,
-    "atr_pct": 1.32,
-    "reasons": {
-      "tech": [
-        "이동평균 완벽 정배열 (P>54.4>52.1>50.3)",
-        "RSI 69 · 강세 지속 구간",
-        "MACD 데드크로스 · 히스토 -0.06",
-        "3개월 수익률 +9.9%"
-      ],
-      "flow": [
-        "CMF +0.27 · 강한 매집",
-        "가격·OBV 동반 상승 · 수급 확인",
-        "상승일 거래량 2.41배 · 매수 집중",
-        "거래대금 감소 0.6배 · 관심 이탈"
       ],
       "macro": [
         "NEUTRAL · VIX 14.3 · US10Y 4.77%",
