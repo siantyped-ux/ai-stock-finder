@@ -153,6 +153,11 @@ def collect_axes(pattern: str, prices: dict, horizons: tuple) -> list:
                         raw = r.get(ax)
                         if not raw:
                             continue
+                        # int(raw) 는 stock_finder.py 의 calc_*_score 가 정수만
+                        # 내고 history.py 가 그대로 적는다는 것을 믿는다. 그
+                        # 약속이 깨져 셀이 "70.0" 같은 값이면 여기서 죽는 것이
+                        # 맞다 - 조용히 건너뛰면 축 하나가 통째로 빠진 채
+                        # 상관을 낸다.
                         out.append((r["date"], n, ax, int(raw), ret))
     return out
 

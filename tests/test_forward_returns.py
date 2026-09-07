@@ -190,6 +190,14 @@ def _write_axis_archive(tmp_path, rows):
     return str(tmp_path / "*.csv")
 
 
+def _write_axis_archives(tmp_path, by_date):
+    """날짜별로 여러 파일을 쓴다. glob 이 전부를 읽는지 보기 위한 것이다."""
+    for date, rows in by_date.items():
+        (tmp_path / f"{date}.csv").write_text(
+            AXIS_CSV_HEADER + "".join(rows), encoding="utf-8")
+    return str(tmp_path / "*.csv")
+
+
 def test_collect_axes_pairs_each_axis_with_its_return(tmp_path):
     pattern = _write_axis_archive(tmp_path, [
         "2026-08-03,AAA,2026-08-03,70,60,50,40,58\n",
@@ -218,6 +226,32 @@ def test_collect_axes_skips_rows_without_a_forward_return(tmp_path):
     assert fr.collect_axes(pattern, PRICES, (1,)) == []
 
 
+def test_collect_axes_reads_every_matched_file(tmp_path):
+    """glob 이 잡은 파일을 전부 읽는다. 첫 파일만 읽으면 아카이브가 하루로 줄어든다."""
+    pattern = _write_axis_archives(tmp_path, {
+        "2026-08-03": ["2026-08-03,AAA,2026-08-03,70,60,50,40,58\n"],
+        "2026-08-04": ["2026-08-04,AAA,2026-08-04,71,61,51,41,59\n"],
+    })
+    got = fr.collect_axes(pattern, PRICES, (1,))
+    assert sorted({r[0] for r in got}) == ["2026-08-03", "2026-08-04"]
+    assert len(got) == 10   # 2일 × 축 5
+
+
+def test_collect_axes_keeps_each_horizon_separate(tmp_path):
+    """horizon 마다 제 수익률이 붙어야 한다. 실제 실행은 늘 (5, 10) 두 개다.
+
+    PRICES 는 매일 10% 오르므로 1일 뒤 +10%, 2일 뒤 +21% 다. 두 값이
+    구별되므로 horizon 을 섞으면 이 테스트가 걸린다.
+    """
+    pattern = _write_axis_archive(tmp_path, [
+        "2026-08-03,AAA,2026-08-03,70,60,50,40,58\n",
+    ])
+    got = fr.collect_axes(pattern, PRICES, (1, 2))
+    tech = {r[1]: r[4] for r in got if r[2] == "tech"}
+    assert tech[1] == pytest.approx(10.0)
+    assert tech[2] == pytest.approx(21.0)
+
+
 # ─── 기간 분할 ──────────────────────────────────────────────
 def test_median_date_splits_distinct_dates():
     rows = [("2026-08-01", 1, "tech", 70, 1.0),
@@ -230,3 +264,13 @@ def test_median_date_splits_distinct_dates():
 
 def test_median_date_of_nothing_is_empty():
     assert fr.median_date([]) == ""
+
+
+def test_median_date_splits_an_even_count_evenly():
+    """고유 날짜가 짝수면 전·후반 날짜 수가 같아야 한다."""
+    dates = ["2026-08-01", "2026-08-02", "2026-08-03", "2026-08-04"]
+    rows = [(d, 1, "tech", 70, 1.0) for d in dates]
+    cut = fr.median_date(rows)
+    assert cut == "2026-08-03"
+    assert len([d for d in dates if d < cut]) == 2
+    assert len([d for d in dates if d >= cut]) == 2
