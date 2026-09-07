@@ -334,6 +334,26 @@ def test_axis_verdict_ignores_other_axes_and_horizons():
             ("2026-08-01", 10, "tech", 1, 1.0)]
     got = fr.axis_verdict(rows, "tech", 5, "2026-08-01")
     assert got["n_all"] == 1
+
+
+# ─── rho 하한 ───────────────────────────────────────────────
+def test_rho_floor_shrinks_as_the_sample_grows():
+    """표본이 클수록 0 과 구별할 수 있는 rho 가 작아진다."""
+    assert fr._rho_floor(101) == pytest.approx(0.1)
+    assert fr._rho_floor(10001) == pytest.approx(0.01)
+
+
+def test_rho_floor_of_a_thin_sample_is_none():
+    assert fr._rho_floor(1) is None
+    assert fr._rho_floor(0) is None
+
+
+def test_axis_verdict_reports_a_floor_for_each_period():
+    """얇은 후반의 부호를 얼마나 믿을지 사람이 가늠할 재료를 함께 낸다."""
+    rows, cut = _axis_rows(200, +1, +1)
+    got = fr.axis_verdict(rows, "tech", 5, cut)
+    assert got["floor_early"] == pytest.approx(199 ** -0.5)
+    assert got["floor_late"] == pytest.approx(199 ** -0.5)
 ```
 
 - [ ] **Step 2: 실패를 확인한다**
@@ -346,12 +366,32 @@ Expected: FAIL — `AttributeError: module 'forward_returns' has no attribute 'a
 `median_date` 정의 뒤에 추가:
 
 ```python
+def _rho_floor(n_rows: int):
+    """그 표본에서 0 과 구별할 수 있는 rho 의 하한. 표본이 없으면 None.
+
+    1/sqrt(n-1) 은 순위상관 표준오차의 통상 근사다. 이 값을 함께 내는 것은
+    전·후반 표본 크기가 구조적으로 다르기 때문이다 - 아카이브 끝 2주는
+    10거래일 선행 봉이 아직 없어 후반이 늘 얇다. 실측(2026-09-07): 5일은
+    전반 15,073 / 후반 11,572 인데 10일은 15,034 / 4,649 다. 양쪽 다
+    MIN_AXIS_SAMPLE 을 넘어서 표본 수만으로는 이 차이가 드러나지 않는다.
+
+    **이 하한은 낙관적이다.** 같은 종목의 연속일 행이 겹쳐 실효 표본이 n
+    보다 작으므로 진짜 오차는 이보다 크다. 판정을 자동화하는 데 쓰지 말고,
+    얇은 쪽의 부호를 얼마나 믿을지 사람이 가늠하는 데만 쓴다.
+    """
+    return (n_rows - 1) ** -0.5 if n_rows > 1 else None
+
+
 def axis_verdict(rows: list, axis: str, n: int, cut: str) -> dict:
     """한 축·한 horizon 의 전체·전반·후반 순위상관과 부호 뒤집힘 여부.
 
     부호 뒤집힘을 따로 내는 것은 이 도구의 판정이 상관의 크기가 아니라
     방향의 안정성이기 때문이다. 아카이브가 짧고 같은 종목의 연속일 행이
     겹쳐서 rho 의 절대값에는 의미를 두지 않는다.
+
+    그래도 `floor_early` · `floor_late` 를 함께 내는 것은, 부호가 뒤집혔을
+    때 그것이 신호인지 얇은 표본의 잡음인지를 사람이 구별해야 하기
+    때문이다. rho 가 제 하한보다 작으면 그 부호는 읽지 않는다.
     """
     got = [r for r in rows if r[2] == axis and r[1] == n]
     early = [r for r in got if r[0] < cut]
@@ -366,7 +406,9 @@ def axis_verdict(rows: list, axis: str, n: int, cut: str) -> dict:
     flip = (r_early is not None and r_late is not None
             and r_early * r_late < 0)
     return {"all": r_all, "early": r_early, "late": r_late, "flip": flip,
-            "n_all": len(got), "n_early": len(early), "n_late": len(late)}
+            "n_all": len(got), "n_early": len(early), "n_late": len(late),
+            "floor_early": _rho_floor(len(early)),
+            "floor_late": _rho_floor(len(late))}
 
 
 def show_axes(rows: list, horizons: tuple, cut: str) -> None:
@@ -377,17 +419,32 @@ def show_axes(rows: list, horizons: tuple, cut: str) -> None:
     print("  부호가 전·후반 모두 유지되는 축만 신호로 본다. 크기는 보지 않는다 -")
     print(f"  같은 종목의 연속일 행이 겹쳐 실효 표본이 n 보다 훨씬 작다.")
     print(f"  표본 {MIN_AXIS_SAMPLE} 미만인 칸은 '-' 다.")
+    print("  하한은 1/sqrt(n-1) 이다. rho 가 제 하한보다 작으면 그 부호는")
+    print("  읽지 않는다 - 아카이브 끝 2주는 긴 horizon 의 선행 봉이 없어")
+    print("  후반 표본이 구조적으로 얇다.")
     for n in horizons:
         print(f"\n  [{n}거래일]")
         print(f"    {'축':<8}{'전체':>10}{'전반':>10}{'후반':>10}"
-              f"   {'표본(전/후)':<16}")
+              f"   {'표본(전/후)':<18}{'하한(전/후)':<18}")
         for ax in AXES:
             v = axis_verdict(rows, ax, n, cut)
             cells = "".join(
                 f"{x:>+10.4f}" if x is not None else f"{'-':>10}"
                 for x in (v["all"], v["early"], v["late"]))
-            note = "  <- 부호 뒤집힘" if v["flip"] else ""
-            print(f"    {ax:<8}{cells}   {v['n_early']}/{v['n_late']}{note}")
+            floors = "/".join(
+                f"{x:.4f}" if x is not None else "-"
+                for x in (v["floor_early"], v["floor_late"]))
+            note = ""
+            if v["flip"]:
+                thin = [side for side in ("early", "late")
+                        if v[side] is not None
+                        and v[f"floor_{side}"] is not None
+                        and abs(v[side]) < v[f"floor_{side}"]]
+                note = ("  <- 부호 뒤집힘 (한쪽이 하한 미만 · 판정 보류)"
+                        if thin else "  <- 부호 뒤집힘")
+            print(f"    {ax:<8}{cells}   "
+                  f"{str(v['n_early']) + '/' + str(v['n_late']):<18}"
+                  f"{floors:<18}{note}")
 ```
 
 `main()` 의 `p.add_argument("--horizons", ...)` 뒤에 추가:
@@ -422,7 +479,15 @@ Expected: PASS, 전체 통과 (기존 테스트 포함)
 - [ ] **Step 5: 실제 아카이브에서 돌려 본다**
 
 Run: `python forward_returns.py --history "history/*.csv" --by-axis`
-Expected: 5·10거래일 표가 나오고, `filing` 행의 전체·전반·후반이 셋 다 음수, `value` 행이 셋 다 양수, `tech`·`flow`·`total` 의 5거래일 행에 "부호 뒤집힘" 표시.
+Expected: 5·10거래일 표가 나오고, `filing` 행의 전체·전반·후반이 셋 다 음수,
+`value` 행이 셋 다 양수, `tech`·`flow`·`total` 의 5거래일 행에 "부호 뒤집힘"
+표시.
+
+**10거래일 표본이 후반에서 얇은 것은 정상이다.** 실측 15,034 / 4,649 로
+3배 넘게 차이 난다 — 아카이브 끝 2주는 10거래일 선행 봉이 아직 없기
+때문이고, 봉 캐시가 2026-09-02 자라 더 두드러진다. 이것이 하한 열을 낸
+이유다. filing 의 10일 후반은 rho -0.118 에 하한 약 0.0147 이라 하한을
+넉넉히 넘으므로 그 부호는 읽어도 된다.
 
 이와 다르면 멈추고 보고할 것. 설계 문서의 근거가 재현되지 않는다는 뜻이다.
 
@@ -521,14 +586,17 @@ Expected: FAIL — `assert 67 == 65` 와 `AttributeError: ... 'STOCK_TECH_WEIGHT
 ```python
 # 주식 축 가중치. 2026-09-07 에 filing 과 value 의 몫을 맞바꿨다.
 #
-# filing 은 잰 네 칸(5·10거래일 × 전·후반) 전부에서 선행 수익률과 음의
-# 순위상관이었고 value 는 네 칸 전부 양수였다. tech·flow 는 부호가 뒤집혀
-# 신호로 볼 수 없다. 확인: forward_returns.py --by-axis
+# 기준일 20개로 갈라 센 결과(forward_returns.py --by-axis 의 census 표),
+# filing 은 읽을 수 있는 82칸이 전부 음수로 **어떤 분할에서도 양수를 내지
+# 않는 유일한 축**이다. value 는 후반 44칸이 전부 양수이고 견고한 음수를
+# 한 번도 내지 않는다. tech 는 전반 40칸이 전부 음수이고 후반은 양수 우세라
+# 시점에 따라 방향이 바뀐다.
 #
-# 0.20/0.30 은 아카이브에서 고른 값이 아니다. "일관되게 해로운 축의 몫을
-# 일관되게 이로운 축에 준다" 는 규칙이 부르는 숫자다. .15/.35 가 네 칸 전부
-# 조금 더 좋았지만 차이가 노이즈와 구분되지 않아 쓰지 않는다 - 아카이브를
-# 보고 소수점을 정하면 exit_total 45 처럼 판정 불가 상태가 된다.
+# 0.20/0.30 은 아카이브에서 고른 값이 아니다. "어떤 분할에서도 양수를 내지
+# 않는 축의 몫을, 견고한 음수를 내지 않는 축에 준다" 는 규칙이 부르는
+# 숫자다. .15/.35 가 조금 더 좋았지만 차이가 노이즈와 구분되지 않아 쓰지
+# 않는다 - 아카이브를 보고 소수점을 정하면 exit_total 45 처럼 판정 불가
+# 상태가 된다.
 #
 # 이 변경은 BUY 개수를 줄이지 않고(69 -> 71종목) 총점에 우위를 만들지도
 # 않는다. 목적은 해로운 입력의 몫을 줄이는 것 하나다.

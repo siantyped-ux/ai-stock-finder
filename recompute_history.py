@@ -1,13 +1,17 @@
 """아카이브 스코어를 신 산식으로 재계산한다.
 
-2026-08-24 에 축 구성이 바뀌었다 (docs/superpowers/specs/2026-08-24-flow-axis-design.md).
+2026-08-24 에 축 구성이 바뀌었고 (docs/superpowers/specs/2026-08-24-flow-axis-design.md),
+2026-09-07 에는 축 구성은 그대로 두고 filing·value 의 몫만 맞바꿨다
+(docs/superpowers/specs/2026-09-07-stock-axis-reweight-design.md).
 
-    이전  주식 tech .35 + macro .20 + filing .30 + value .15
-          ETF  tech .636 + macro .364
-    이후  주식 tech .30 + flow .20 + filing .30 + value .20
-          ETF  tech .60 + flow .40
+    2026-08-24 이전  주식 tech .35 + macro .20 + filing .30 + value .15
+                     ETF  tech .636 + macro .364
+    2026-08-24       주식 tech .30 + flow .20 + filing .30 + value .20
+                     ETF  tech .60 + flow .40
+    2026-09-07       주식 tech .30 + flow .20 + filing .20 + value .30
+                     ETF  그대로
 
-재계산하지 않으면 아카이브에 두 척도가 섞인다. exit_rules.evaluate() 는 보유
+재계산하지 않으면 아카이브에 서로 다른 척도가 섞인다. exit_rules.evaluate() 는 보유
 종목의 그날 total 이 exit_total 미만이면 청산하는데, 진입일은 구 척도 · 청산
 판정일은 신 척도가 되어 서로 다른 자로 잰 값을 비교하게 된다. backtest.py 도
 아카이브 전체를 재생하므로 같은 문제를 겪는다.

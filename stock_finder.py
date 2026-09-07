@@ -1131,6 +1131,30 @@ def calc_consensus_etf(tech, flow_):
     return sum(1 for v in (tech, flow_) if v >= 70)
 
 
+# 주식 축 가중치. 2026-09-07 에 filing 과 value 의 몫을 맞바꿨다.
+#
+# 기준일 20개로 갈라 센 결과(forward_returns.py --by-axis 의 census 표),
+# filing 은 읽을 수 있는 82칸이 전부 음수로 **어떤 분할에서도 양수를 내지
+# 않는 유일한 축**이다. value 는 후반 44칸이 전부 양수이고 견고한 음수를
+# 한 번도 내지 않는다. tech 는 전반 45칸이 전부 음수이고 후반은 양수 우세라
+# 시점에 따라 방향이 바뀐다.
+#
+# 0.20/0.30 은 아카이브에서 고른 값이 아니다. "어떤 분할에서도 양수를 내지
+# 않는 축의 몫을, 견고한 음수를 내지 않는 축에 준다" 는 규칙이 부르는
+# 숫자다. .15/.35 가 조금 더 좋았지만 차이가 노이즈와 구분되지 않아 쓰지
+# 않는다 - 아카이브를 보고 소수점을 정하면 exit_total 45 처럼 판정 불가
+# 상태가 된다.
+#
+# 이 변경은 BUY 개수를 줄이지 않고(69 -> 71종목) 총점에 우위를 만들지도
+# 않는다. 목적은 해로운 입력의 몫을 줄이는 것 하나다.
+#
+# 설계·트립와이어: docs/superpowers/specs/2026-09-07-stock-axis-reweight-design.md
+STOCK_TECH_WEIGHT = 0.30
+STOCK_FLOW_WEIGHT = 0.20
+STOCK_FILING_WEIGHT = 0.20
+STOCK_VALUE_WEIGHT = 0.30
+
+
 def calc_total(tech, flow_, filing, value):
     """주식 종합점수. 네 축 모두 실측값이다.
 
@@ -1138,11 +1162,17 @@ def calc_total(tech, flow_, filing, value):
     아카이브 1,520행에서 macro >= 70 인 행이 한 건도 없었다. 국면 판정은
     매매 계층의 게이트로 쓰고 점수에서는 뺀다.
     """
-    return int(round(tech * 0.30 + flow_ * 0.20 + filing * 0.30 + value * 0.20))
+    return int(round(tech * STOCK_TECH_WEIGHT + flow_ * STOCK_FLOW_WEIGHT
+                     + filing * STOCK_FILING_WEIGHT
+                     + value * STOCK_VALUE_WEIGHT))
 
 
-# ETF 가중치. 주식 가중치에서 filing(0.30)·value(0.20) 를 빼고 남은 0.50 으로
-# 나눈 값이다. ETF 에는 개별기업 재무·공시 데이터가 없어 두 축을 계산할 수 없다.
+# ETF 가중치. 주식 가중치에서 filing·value 를 빼고 남은 0.50 으로 나눈 값이다.
+# ETF 에는 개별기업 재무·공시 데이터가 없어 두 축을 계산할 수 없다.
+#
+# 두 축의 개별 몫은 여기에 적지 않는다. 2026-09-07 에 filing 0.30 ·
+# value 0.20 이 서로 맞바뀌었는데 합이 그대로 0.50 이라 ETF 가중치는 바뀌지
+# 않았다. 숫자를 적어 두면 다음에 또 낡는다 - 중요한 것은 합이다.
 #
 # 재정규화를 유지하는 근거는 실측이다. 결측 축을 상수 50 으로 채우면 총점
 # 분산이 압축되어 ETF 총점 최대가 66점에 그친다 - 70점 문턱에 영원히 닿지
@@ -1153,8 +1183,13 @@ def calc_total(tech, flow_, filing, value):
 # 되었다. tech·flow 로 바꾸면 두 축의 자산군 편향이 부호가 반대라 상쇄된다 -
 # 실측 격차 tech +7.7 · flow -8.0, 그 결과 총점 평균이 ETF 57.2 · 주식 56.7 로
 # 맞는다.
-ETF_TECH_WEIGHT = 0.30 / 0.50
-ETF_FLOW_WEIGHT = 0.20 / 0.50
+# 2026-09-07 까지는 위 두 줄도 0.30/0.50, 0.20/0.50 처럼 리터럴이었다.
+# 그러면 STOCK_TECH_WEIGHT·STOCK_FLOW_WEIGHT 가 바뀌어도 여기는 조용히
+# 안 따라간다. STOCK_* 를 직접 참조해서 나누면 재정규화가 자기가
+# 재정규화하는 축에서 벗어날 수 없다.
+_ETF_AXIS_SUM = STOCK_TECH_WEIGHT + STOCK_FLOW_WEIGHT
+ETF_TECH_WEIGHT = STOCK_TECH_WEIGHT / _ETF_AXIS_SUM
+ETF_FLOW_WEIGHT = STOCK_FLOW_WEIGHT / _ETF_AXIS_SUM
 
 
 def calc_total_etf(tech, flow_):

@@ -590,9 +590,9 @@ if (MACRO) {
 // 점수·컨센서스·시그널은 stock_finder.py 가 계산해서 준 값을 그대로 쓴다.
 // 여기서 다시 계산하지 않는다.
 //
-// 현재 축은 tech 30 · flow 20 · filing 30 · value 20 이고 ETF 는 tech 60 ·
-// flow 40 이다. 그 숫자를 여기 적어 두는 것은 참고용이며, 이 파일은 계산에
-// 쓰지 않는다.
+// 축의 가중치는 여기 적지 않는다. 참고용으로 적어 두었던 숫자가 2026-09-07
+// filing·value 맞바꿈 때 낡았다 - 계산에 쓰지 않는 값이라 아무도 못 알아챈다.
+// 지금 값은 stock_finder.py 의 STOCK_*_WEIGHT 와 ETF_*_WEIGHT 상수를 볼 것.
 //
 // 예전에는 이 자리에 4축 공식(당시 tech 35 · macro 20 · filing 30 · value 15)을
 // 복사해 두고 STOCKS 를 순회하며 total/consensus/signal 을 덮어썼다. 데모
