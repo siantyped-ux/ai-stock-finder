@@ -114,3 +114,36 @@ def test_stat_line_reports_sample_size_and_win_rate():
 def test_stat_line_flags_a_thin_sample():
     assert "표본 부족" in fr.stat_line("BUY", [1.0])
     assert "표본 부족" in fr.stat_line("BUY", [])
+
+
+# ─── 순위상관 ───────────────────────────────────────────────
+def test_ranks_handles_ties_with_average():
+    """동점은 평균 순위를 나눠 갖는다. 안 그러면 입력 순서가 상관을 흔든다."""
+    assert fr._ranks([10, 20, 20, 30]) == [1.0, 2.5, 2.5, 4.0]
+
+
+def test_spearman_of_a_perfect_increase_is_one():
+    assert fr.spearman([1, 2, 3, 4], [10, 20, 30, 40]) == pytest.approx(1.0)
+
+
+def test_spearman_of_a_perfect_decrease_is_minus_one():
+    assert fr.spearman([1, 2, 3, 4], [40, 30, 20, 10]) == pytest.approx(-1.0)
+
+
+def test_spearman_uses_rank_not_magnitude():
+    """단조증가면 값의 크기와 무관하게 1 이다. 이것이 피어슨과의 차이다."""
+    assert fr.spearman([1, 2, 3, 4], [1, 2, 3, 1000]) == pytest.approx(1.0)
+
+
+def test_spearman_of_a_constant_is_none():
+    """한쪽이 상수면 분모가 0 이다. 0.0 을 내면 '무상관' 과 구별되지 않는다."""
+    assert fr.spearman([5, 5, 5, 5], [1, 2, 3, 4]) is None
+
+
+def test_spearman_needs_two_points():
+    assert fr.spearman([1], [2]) is None
+
+
+def test_spearman_rejects_mismatched_lengths():
+    with pytest.raises(ValueError):
+        fr.spearman([1, 2, 3], [1, 2])

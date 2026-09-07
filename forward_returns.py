@@ -81,6 +81,49 @@ def forward_return(prices: dict, ticker: str, bar_date: str, n: int):
     return (closes[i + n] / base - 1) * 100
 
 
+def _ranks(values: list) -> list:
+    """동점을 평균 순위로 묶은 순위 목록.
+
+    동점 처리를 직접 하는 것은 축 점수가 정수라 동점이 흔하기 때문이다.
+    입력 순서대로 순위를 매기면 같은 데이터가 파일 정렬에 따라 다른 상관을
+    낸다.
+    """
+    order = sorted(range(len(values)), key=lambda i: values[i])
+    out = [0.0] * len(values)
+    i = 0
+    while i < len(order):
+        j = i
+        while j + 1 < len(order) and values[order[j + 1]] == values[order[i]]:
+            j += 1
+        avg = (i + j) / 2 + 1
+        for k in range(i, j + 1):
+            out[order[k]] = avg
+        i = j + 1
+    return out
+
+
+def spearman(xs: list, ys: list):
+    """순위상관. 잴 수 없으면 None.
+
+    피어슨이 아니라 순위상관인 것은 축 점수가 0~100 로 잘린 값이고 수익률에
+    꼬리가 두껍기 때문이다. 크기가 아니라 순서만 본다.
+
+    None 을 내는 경우가 둘이다 - 표본이 2 미만이거나 한쪽이 상수다. 0.0 으로
+    뭉개면 '무상관' 과 '못 쟀음' 이 구별되지 않고, 이 도구의 판정이 전부
+    부호를 보는 것이라 그 구별이 필요하다.
+    """
+    if len(xs) != len(ys):
+        raise ValueError(f"두 목록의 길이가 다르다: {len(xs)} vs {len(ys)}")
+    if len(xs) < 2:
+        return None
+    rx, ry = _ranks(xs), _ranks(ys)
+    mx, my = st.mean(rx), st.mean(ry)
+    num = sum((a - mx) * (b - my) for a, b in zip(rx, ry))
+    den = (sum((a - mx) ** 2 for a in rx)
+           * sum((b - my) ** 2 for b in ry)) ** 0.5
+    return num / den if den else None
+
+
 def collect(pattern: str, prices: dict, horizons: tuple) -> dict:
     """신호·자산군별 선행 수익률을 모은다."""
     out = defaultdict(lambda: defaultdict(list))
