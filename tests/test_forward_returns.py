@@ -319,6 +319,28 @@ def test_axis_verdict_ignores_other_axes_and_horizons():
     assert got["n_all"] == 1
 
 
+def test_sign_census_counts_a_stable_axis_on_one_side():
+    """어디서 잘라도 같은 부호면 한쪽에만 쌓인다."""
+    rows = []
+    for day in range(1, 9):
+        for i in range(300):
+            rows.append((f"2026-08-{day:02d}", 5, "tech", i, -float(i)))
+    got = fr.sign_census(rows, "tech", 5)
+    assert got["early"]["pos"] == 0
+    assert got["late"]["pos"] == 0
+    assert got["early"]["neg"] + got["late"]["neg"] > 0
+
+
+def test_sign_census_skips_cuts_that_starve_one_side():
+    """한쪽이 MIN_AXIS_SAMPLE 에 못 미치는 기준일은 세지 않는다.
+
+    가장 이른 기준일은 전반이 비므로 어느 칸도 늘지 않아야 한다.
+    """
+    rows = [("2026-08-01", 5, "tech", i, float(i)) for i in range(300)]
+    got = fr.sign_census(rows, "tech", 5)
+    assert got["early"] == {"neg": 0, "pos": 0, "unreadable": 0}
+
+
 # ─── rho 하한 ───────────────────────────────────────────────
 def test_rho_floor_shrinks_as_the_sample_grows():
     """표본이 클수록 0 과 구별할 수 있는 rho 가 작아진다."""

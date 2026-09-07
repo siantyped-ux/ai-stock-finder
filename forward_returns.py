@@ -217,6 +217,60 @@ def axis_verdict(rows: list, axis: str, n: int, cut: str) -> dict:
             "floor_late": _rho_floor(len(late))}
 
 
+def sign_census(rows: list, axis: str, n: int) -> dict:
+    """모든 기준일로 갈라 전·후반 부호가 몇 번씩 나왔는지 센다.
+
+    기준일 하나로 부호를 읽으면 결과가 그 하루에 걸린다. 2026-09-07 실측이
+    그랬다 - value 는 08-15 이전에서 자르면 전반이 음수, 이후에서 자르면
+    양수였다. 반면 filing 은 어디서 잘라도 음수였다. 그 차이가 이 도구가
+    내려야 할 판정이고, 기준일 하나로는 둘을 구별할 수 없다.
+
+    자기 하한(_rho_floor)을 못 넘는 칸은 unreadable 로 센다 - 부호가 있어도
+    읽지 않는다는 뜻이다. 한쪽이 MIN_AXIS_SAMPLE 에 못 미치는 기준일은 rho
+    가 None 이라 아예 세지 않는다. 그래서 훑을 기준일 범위를 손으로 정할
+    필요가 없다.
+    """
+    dates = sorted({r[0] for r in rows if r[2] == axis and r[1] == n})
+    out = {side: {"neg": 0, "pos": 0, "unreadable": 0}
+           for side in ("early", "late")}
+    for cut in dates:
+        v = axis_verdict(rows, axis, n, cut)
+        for side in ("early", "late"):
+            rho, floor = v[side], v[f"floor_{side}"]
+            if rho is None or floor is None:
+                continue
+            if abs(rho) < floor:
+                out[side]["unreadable"] += 1
+            elif rho < 0:
+                out[side]["neg"] += 1
+            else:
+                out[side]["pos"] += 1
+    return out
+
+
+def show_sign_census(rows: list, horizons: tuple) -> None:
+    """기준일을 전부 훑은 부호 census. 판정은 이 표로 한다.
+
+    위의 단일 기준일 표는 기록용이다. 한 축을 신호로 볼지 말지는 여기서
+    한쪽 부호가 몰리는지로 본다.
+    """
+    print("\n" + "=" * 74)
+    print("  기준일을 전부 훑은 부호 census")
+    print("=" * 74)
+    print("  기준일 하나의 부호는 그 하루에 걸린다. 아래는 양쪽이 다 표본을")
+    print(f"  갖는 모든 기준일로 갈라 센 것이다. 0 은 |rho| 가 제 하한 미만이라")
+    print("  부호를 읽지 않은 칸이다.")
+    for n in horizons:
+        print(f"\n  [{n}거래일]")
+        print(f"    {'축':<8}{'전반 -':>8}{'전반 +':>8}{'전반 0':>8}"
+              f"   {'후반 -':>8}{'후반 +':>8}{'후반 0':>8}")
+        for ax in AXES:
+            c = sign_census(rows, ax, n)
+            e, l = c["early"], c["late"]
+            print(f"    {ax:<8}{e['neg']:>8}{e['pos']:>8}{e['unreadable']:>8}"
+                  f"   {l['neg']:>8}{l['pos']:>8}{l['unreadable']:>8}")
+
+
 def show_axes(rows: list, horizons: tuple, cut: str) -> None:
     """축별 판정표. 부호가 전·후반 모두 유지되는 축만 신호로 본다."""
     print("\n" + "=" * 74)
@@ -359,6 +413,7 @@ def main() -> None:
                   "가장 흔한 원인이다 - recompute_history.py --refresh 를 볼 것")
             return
         show_axes(rows, horizons, args.cut or median_date(rows))
+        show_sign_census(rows, horizons)
         print("\n  주의: 전략은 3개월 보유인데 여기서 재는 것은 위 거래일 수다.")
         return
 
