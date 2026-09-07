@@ -92,6 +92,41 @@ def session_now() -> tuple[str, datetime]:
     return "휴장(야간)", now_et
 
 
+def market_open_now():
+    """거래소가 지금 열려 있는가. 못 물어봤으면 None.
+
+    session_now 의 머리말이 isMarketOpen 을 못 믿는다고 적은 것은 그 값이
+    프리마켓·애프터마켓을 구분해 주지 않아서다. 여기서는 그 반론이 걸리지
+    않는다 - 이 값은 시계가 이미 09:30~16:00 안이라고 판정한 뒤에만 쓰이고,
+    그 구간에 닫혀 있는 이유는 공휴일뿐이다.
+    """
+    data, err = get("exchange-market-hours", exchange="NYSE")
+    if err or not data:
+        return None
+    row = data[0] if isinstance(data, list) else data
+    return row.get("isMarketOpen") if isinstance(row, dict) else None
+
+
+def resolve_session(clock_sess: str, market_open) -> str:
+    """시계 판정과 거래소 개장 여부를 합쳐 최종 세션을 낸다.
+
+    2026-09-07 미국 노동절에 이 구분이 없어서, 평일 15:17 ET 를 정규장으로
+    읽고 직전 거래일 종가를 "호가가 4,037분 전 값" 이라며 실패로 올렸다.
+    이슈와 메일까지 나갔다. 미국 증시 공휴일은 연 9~10일이라 그대로 두면
+    그만큼 오탐이 쌓이고, 매일 오는 알림은 곧 무시된다.
+
+    거래소 캘린더를 들이지 않는 것은 의도다. 휴일 규칙(부활절 앞 금요일까지)
+    을 직접 구현하면 그 표가 또 하나의 유지 대상이 된다.
+
+    `market_open` 이 None(못 물어봄)이면 시계 판정을 그대로 둔다. 판정을
+    못 했다는 이유로 실패를 조용히 삼키면, 엔드포인트가 진짜 죽은 날에도
+    보류로 넘어간다.
+    """
+    if clock_sess == "정규장" and market_open is False:
+        return "휴장(공휴일)"
+    return clock_sess
+
+
 def universe_symbols(path: str) -> tuple[list, list]:
     """아카이브에서 실제 스캔 대상 티커를 꺼낸다. (주식, ETF)
 
@@ -261,11 +296,17 @@ def main() -> int:
             return 1
         archive = files[-1]
 
-    sess, now_et = session_now()
+    clock_sess, now_et = session_now()
+    # 거래소에 물어보는 것은 시계가 정규장이라고 할 때뿐이다. 그 밖에는
+    # 이미 보류로 끝나므로 호출을 아낀다.
+    open_now = market_open_now() if clock_sess == "정규장" else None
+    sess = resolve_session(clock_sess, open_now)
     print("=" * 68)
     print("  FMP 호가 엔드포인트 검증")
     print("=" * 68)
-    print(f"  세션: {sess}")
+    print(f"  세션: {sess}" +
+          (f" (시계는 {clock_sess} · 거래소 isMarketOpen={open_now})"
+           if sess != clock_sess else ""))
     print(f"  ET  {now_et:%Y-%m-%d %H:%M:%S}  |  "
           f"KST {now_et.astimezone(KST):%Y-%m-%d %H:%M:%S}")
     print(f"  아카이브: {archive}")

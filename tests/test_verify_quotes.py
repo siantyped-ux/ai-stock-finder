@@ -64,3 +64,40 @@ def _exit_code(monkeypatch, tmp_path, want):
     monkeypatch.setattr("sys.argv",
                         ["verify_quotes.py", "--archive", str(archive)])
     return verify_quotes.main()
+
+
+# ─── 공휴일 (2026-09-07 노동절 오탐) ─────────────────────────
+def test_a_holiday_in_regular_hours_becomes_a_closed_session():
+    """평일 정규장 시간인데 거래소가 닫혀 있으면 공휴일이다.
+
+    2026-09-07 노동절에 이 구분이 없어 직전 거래일 종가가 "4,037분 전
+    호가" 로 읽혀 실패 이슈와 메일이 나갔다.
+    """
+    assert verify_quotes.resolve_session("정규장", False) == "휴장(공휴일)"
+
+
+def test_a_holiday_verdict_holds_rather_than_fails():
+    """공휴일은 보류다. 실패로 올리면 연 9~10회 오탐이 쌓인다."""
+    sess = verify_quotes.resolve_session("정규장", False)
+    assert verify_quotes.verdict(sess, {"age_median": 4037.0}, {}) == "hold"
+
+
+def test_an_open_market_stays_a_regular_session():
+    assert verify_quotes.resolve_session("정규장", True) == "정규장"
+
+
+def test_an_unknown_market_state_keeps_the_clock_verdict():
+    """못 물어봤다고 보류로 넘기지 않는다. 진짜 고장을 삼키게 된다."""
+    assert verify_quotes.resolve_session("정규장", None) == "정규장"
+    assert verify_quotes.verdict("정규장", {"age_median": 4037.0}, {}) == "fail"
+
+
+def test_the_market_state_cannot_promote_a_closed_session():
+    """시계가 장외라고 하면 거래소가 열려 있어도 정규장이 되지 않는다.
+
+    isMarketOpen 은 프리·애프터마켓을 구분해 주지 않는다. 그 값으로 세션을
+    올리면 시간외를 정규장으로 잘못 읽는다 - session_now 가 경계한 바로 그
+    문제다.
+    """
+    for sess in ("프리마켓", "애프터마켓", "휴장(주말)", "휴장(야간)"):
+        assert verify_quotes.resolve_session(sess, True) == sess
